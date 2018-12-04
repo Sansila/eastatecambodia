@@ -1,0 +1,317 @@
+@media screen and (min-width: 320px){
+    	.container{
+    		padding: 0 1% !important;
+    	}
+    	#socialblock{
+    		width: 100% !important;
+    		float: right !important;
+    		padding-left: 0 !important;
+    	}
+    	#socialblock .socialbtn{
+    		float: right !important;
+    		
+    	}
+    	#socialblock div{
+    		float: right !important;
+    		/*width: 50% !important;*/
+    	}
+    	.searchbox{
+
+    	}
+    	.log{
+    		margin-top: -3% !important;
+    		width: 10% !important;
+    	}
+    	.lang{
+    		margin-right: 0 !important;
+    	}
+        #undermenubar{
+            margin-right: 0 !important;
+        }
+        #slidewrap{
+            width: 100% !important;
+            margin-right: 0 !important;
+        }
+        #slidewrap img{
+            width: 100% !important;
+        }
+        #welcome_text{
+            padding: 5%;
+        }
+        #information_boardbox #ti{
+            width: 100% !important;
+        }
+        #contactdiv{
+            width: 100% !important;
+        }
+        #contactdiv h4{
+            width: 30% !important;
+            margin-top: -4% !important;
+        }
+        #contact_infodiv{
+            width: 100% !important;
+        }
+         #contact_infodiv h4{
+            width: 38% !important;
+            margin-top: -4% !important;
+        }
+}
+
+@media screen and (max-width: 640px){
+	.container{
+    	padding: 0 1% !important;
+    }
+    #socialblock{
+    	/*width: 80% !important;*/
+    	float: right !important;
+    	padding-left: 0 !important;
+    }
+    #socialblock .socialbtn{
+    	float: right !important;
+    	margin-left: 0%;
+    		
+    }
+    #socialblock div{
+    	float: right !important;
+    	/*width: 50% !important;*/
+    }
+    .searchbox{
+        margin-left: 5%;
+    }
+    .log{
+    	margin-top: -5% !important;
+    	width: 19% !important;
+    }
+    .lang{
+    	margin-right: 0 !important;
+    }	
+    #undermenubar{
+            margin-right: 0 !important;
+    }
+    #slidewrap{
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+    #slidewrap img{
+            width: 100% !important;
+    }
+    #welcome_text{
+            padding: 1%;
+    }
+    #inofrmation_boardbox #ti{
+        width: 100%;
+    }
+    #contactdiv{
+        width: 100% !important;
+    }
+    #contactdiv h4{
+        width: 30% !important;
+        margin-top: -4% !important;
+    }
+    #contact_infodiv{
+        width: 100% !important;
+    }
+    #contact_infodiv h4{
+        width: 38% !important;
+        margin-top: -4% !important;
+    }
+    #articlecont{
+        width: 100%;
+    }
+    #articlecont img{
+        width: 100%;
+    }
+    #photogallery #gallery li{
+        width: 100%;
+        margin:0 !important;
+    }
+    #contentlist{
+        width: 100%;
+        float: left;
+        padding: 1%;
+        margin-left: 0;
+    }
+    #contentlist li{
+        border: 1px solid grey;
+        padding: 3% !important;
+        margin-top: -1px;
+    }
+    #each_event{
+        width: 100% !important;
+    }
+    #each_event #event_date{
+        width: 30px !important;
+        line-height: 5px !important;
+        background-size: 100% !important;
+        height: 46px !important;
+    }
+    #each_event #event_date #date_font h3{
+        line-height: 15px;
+        font-size: 10px;
+        margin: 0;
+    }
+    #date_font p{
+        font-size: 10px;
+        margin: 0;
+        line-height: 12px;
+    }
+    #each_event #event_img{
+        background-size: 100% 250% !important;
+        background-position: center !important;
+        height:100px !important;
+        width:320px !important;
+    }
+
+}
+@media (min-width: 1100px){
+    .container{
+        padding: 0 1% !important;
+    }
+    #socialblock{
+        width: 50% !important;
+        float: right !important;
+        padding-left: 0 !important;
+    }
+    #socialblock .socialbtn{
+        float:left !important;
+        margin-left: 28%;
+        margin-top: 0.3%;
+            
+    }
+    #socialblock .searchbox{
+        float: right !important;
+        margin-left: 0;
+    }
+    .log{
+        margin-top: -2% !important;
+        width: 9% !important;
+    }
+    .lang{
+        margin-right: 2% !important;
+        width: 100% !important;
+    }   
+    #undermenubar{
+            margin-right: 0px !important;
+    }
+    
+    #welcome_text{
+            padding: 0 5%;
+    }
+    #langbox{
+
+    }
+    #navdiv{
+        margin-left: -2%;
+    }
+    #menubpop{
+        width: 100%;
+        margin: 0;
+        margin-top: -3%;
+    }
+    .b_pop1,
+    .b_pop2,
+    .b_pop3{
+        width: 32% !important;
+        margin: 0 !important;
+    }
+    .b_pop2{
+        margin: 0 2% !important;
+    }
+    events{
+        margin-left: 0 !important;
+        width: 34%;
+    }
+    .yt_holder{
+            width: 60% !important;
+    }
+    .thumb{
+        float: right !important;
+    }
+    .event-galley .thumb{
+        float: left !important;
+    }
+    #event_gallerybox{
+        width: 32%;
+    }
+    #information_boardbox{
+        width: 62.8%;
+    }
+     #information_boardbox #ti{
+        width: 40% !important;
+    }
+    #information_boardbox .box{
+        min-height: 540px;
+        width: 99%;
+    }
+    #footwrap{
+        /*width: 84.8%;*/
+        
+    }
+    .bottom-footer .container{
+        width: 87%;
+    }
+
+    #slidewrap{
+        width: 100% !important;
+        margin-right: 0px !important;
+        margin-left: 0;
+        padding: 0;
+
+    }
+    
+    #slidewrap img{
+            /*width: 2000px !important;*/
+            /*height: 100px;*/
+            z-index: 99999999;
+    }
+    #jssor_1{
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    .follow-us .container{
+        width: 90%;
+    }
+    #contactdiv{
+        width: 48% !important;
+    }
+    #contactdiv h4{
+        width: 15% !important;
+        margin-top: -2.6% !important;
+    }
+    #contact_infodiv{
+        width: 50% !important;
+    }
+    #contact_infodiv h4{
+        width: 23% !important;
+        margin-top: -2.6% !important;
+    }
+    .right_banner{
+        width: 25%;
+        float: left;
+        padding: 1%;
+        margin-left: 5%;
+        padding-top: 0;
+    }
+    #contentlist{
+        width: 25%;
+        float: left;
+        padding: 1%;
+        margin-left: 5%;
+    }
+    #contentlist li{
+        border: 1px solid grey;
+        padding: 3% !important;
+        margin-top: -1px;
+    }
+    .contact_form{
+        width: 50%;
+    }
+    .contact_form div{
+        width: 50%;
+    }
+    .contact_form div *{
+        width: 100%;
+        text-align: left;
+
+    }
+}

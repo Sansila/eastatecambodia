@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from www.realestate.com.kh/prince-international-plaza/77086/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 26 Nov 2018 07:14:14 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+
+
+    <link rel="stylesheet" type="text/css" href="../../static/css/main19c7.css?20181119234200">
+
+
+</head>
+
+<body class="language-en listing-detail featured">
+
+    <main>
+
+        <section class="property-extra">
+            <div class="row collapse-for-small">
+                <div class="columns">
+                    <div class="panel accordion" data-accordion data-allow-all-closed="true" data-multi-expand="true">
+
+                        <div class="accordion-item" data-accordion-item>
+                            <a class="accordion-title"><h2>Nearby Amenities</h2></a>
+
+                            <div class="location-map accordion-content" data-tab-content>
+                                <div class="location-map-wrapper">
+                                    <div id="map" class="listing-detail-page"></div>
+                                    <div class="map-controls">
+                                        <ul class="row">
+                                            <li class="column smallport-24"><i class="icon-eye"></i> Show</li>
+                                            <li class="column smallport-12 mediumport-24">
+                                                <label for="transport">
+                                                    <input class="map-places" id="transport" data-label-name="bus" type="checkbox"> Transport</label>
+                                            </li>
+                                            <li class="column smallport-12 mediumport-24">
+                                                <label for="shopping">
+                                                    <input class="map-places" id="shopping" data-label-name="shopping" type="checkbox"> Shopping</label>
+                                            </li>
+                                            <li class="column smallport-12 mediumport-24">
+                                                <label for="food">
+                                                    <input class="map-places" id="food" data-label-name="cafe" type="checkbox"> Food</label>
+                                            </li>
+                                            <li class="column smallport-12 mediumport-24">
+                                                <label for="hotels">
+                                                    <input class="map-places" id="hotels" data-label-name="lodging" type="checkbox"> Hotels</label>
+                                            </li>
+                                            <li class="column smallport-12 mediumport-24">
+                                                <label for="schools">
+                                                    <input class="map-places" id="schools" data-label-name="school" type="checkbox"> Schools</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <a class="accordion-close-button"></a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="large reveal" id="overlay-media-box" data-reveal>
+            <div class="row collapse expanded">
+                <div id="media-map" class="media-panel"></div>
+                <div id="overlay-media-map" class="overlay-media-panel"></div>
+                <div id="overlay-right" class="large-6 columns"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../../static/js/jquery-2.2.4.min.js"></script>
+    <script src="../../static/js/body19c7.js?20181119234200"></script>
+
+
+
+
+    <script src='../../../api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+    <link href='../../../api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='../../../api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='../../../api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
+    <script src='../../../npmcdn.com/mapbox-gl-circle%401.6.5/dist/mapbox-gl-circle.min.js'></script>
+    <script>
+        // Mapping
+        var google;
+        var media_map, map, overlay_map;
+        var places = [];
+        var service;
+        var listing_lat = "11.5647702612";
+        var listing_lng = "104.884416487";
+        listing_lat = parseFloat(listing_lat.replace(",", "."));
+        listing_lng = parseFloat(listing_lng.replace(",", "."));
+        var listing = {
+            lat: listing_lat,
+            lng: listing_lng
+        };
+        var placeMarkers = [];
+        var mapCenter;
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGNnbWFwIiwiYSI6ImNqbTVobHhzZTEwZGwzcW4ybzFxNWR5b2MifQ.zoxB1OyMeYBca8jllXFIog';
+
+        function initMap() {
+            map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v9',
+                center: [listing_lng, listing_lat],
+                zoom: 12
+            });
+            var geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                placeholder: "Enter an address or location"
+            });
+            map.addControl(geocoder);
+            map.addControl(new mapboxgl.NavigationControl());
+            map.on('load', function() {
+                map.addSource('single-point', {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": []
+                    }
+                });
+                map.addLayer({
+                    "id": "point",
+                    "source": "single-point",
+                    "type": "circle",
+                    "paint": {
+                        "circle-radius": 10,
+                        "circle-color": "#88c940"
+                    }
+                });
+                geocoder.on('result', function(ev) {
+                    map.getSource('single-point').setData(ev.result.geometry);
+                    new mapboxgl.Popup()
+                        .setLngLat(ev.result.center)
+                        .setHTML(ev.result.place_name)
+                        .addTo(map);
+                });
+            });
+            media_map = new mapboxgl.Map({
+                container: 'media-map',
+                style: 'mapbox://styles/mapbox/streets-v9',
+                center: [listing_lng, listing_lat],
+                zoom: 14
+            })
+
+            overlay_map = new mapboxgl.Map({
+                container: 'overlay-media-map',
+                style: 'mapbox://styles/mapbox/streets-v9',
+                center: [listing_lng, listing_lat],
+                zoom: 14
+            })
+
+            var marker = new mapboxgl.Marker().setLngLat([listing_lng, listing_lat]).addTo(map);
+            var marker_2 = new mapboxgl.Marker().setLngLat([listing_lng, listing_lat]).addTo(media_map);
+            var marker_3 = new mapboxgl.Marker().setLngLat([listing_lng, listing_lat]).addTo(overlay_map);
+
+        }
+
+        $('.map-places').click(function(event) {
+            if ($(this).is(':checked')) {
+                places.push($(this).data('label-name'));
+            } else {
+                places.splice(places.indexOf($(this).data('label-name')), 1);
+            }
+            clearMarkers();
+            if (places.length > 0) {
+                places.forEach(function(place) {
+                    let coordinates = [];
+                    var URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + place + '.json?' +
+                        'access_token=' + mapboxgl.accessToken + '&proximity=' + listing_lng + ',' + listing_lat + '&' +
+                        'types=poi,poi.landmark&limit=10&country=kh';
+                    fetch(URL)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json()
+                            } else new Promises.reject('Failed request')
+                        })
+                        .then(data => {
+                            data.features.forEach(function(coor) {
+                                coordinates.push(coor.geometry.coordinates)
+                            });
+                            coordinates.forEach(function(coor) {
+                                var el = document.createElement('div');
+                                el.style.background = 'url(https://maps.gstatic.com/mapfiles/place_api/icons/' + place + '-71.png) no-repeat center 100%/100%';
+                                el.style.width = '30px';
+                                el.style.height = '30px';
+                                const mark = new mapboxgl.Marker(el)
+                                    .setLngLat(coor)
+                                    .addTo(map);
+                                placeMarkers.push(mark)
+                            })
+                        })
+                });
+            }
+            map.setCenter(listing);
+        });
+
+        $(window).ready(initMap());
+
+        function clearMarkers() {
+            for (var i = 0; i < placeMarkers.length; i++) {
+                placeMarkers[i].remove();
+            }
+            placeMarkers = new Array();
+        }
+    </script>
+</body>
+</html>

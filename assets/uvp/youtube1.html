@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from creativeinteractivemedia.com/player/CCUltra_Video_Player/youtube1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Aug 2016 08:07:23 GMT -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="description" content="Video Player"/>
+  <meta property="og:title" content="Video Player by _zac_"/>
+  <meta property="og:image" content="../imgFB/preview3.png"/>
+  <link rel="stylesheet" href="css/classic_DarkTheme.css" type="text/css" media="screen"/>
+  <link rel="stylesheet" href="css/font-awesome.css" type="text/css">
+  <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+  <script src="js/froogaloop.js" type="text/javascript"></script>
+  <script src="js/IScroll4Custom.js" type="text/javascript"></script>
+  <script src='js/THREEx.FullScreen.js'></script>
+  <script src="js/videoPlayer.js" type="text/javascript"></script>
+  <script src="js/Playlist.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/ZeroClipboard.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function($)
+    {
+        videoPlayer = $("#video").Video({           //ALL PLUGIN OPTIONS
+            autohideControls:4,                     //autohide HTML5 player controls
+            hideControlsOnMouseOut:"no",           //hide HTML5 player controls on mouse out of the player: "yes","no"
+            videoPlayerWidth:1006,                   //total player width
+            videoPlayerHeight:420,                  //total player height
+			fitToParentContainer:false,
+			playlist:"Right playlist",              //choose playlist type: "Right playlist","Bottom playlist", "Off"
+			autoplay:false,                         //autoplay when webpage loads
+            vimeoColor:"F11116",                    //set "hexadecimal value", default vimeo color is "00adef"
+            youtubeSkin:"dark",                     //youtube theme: light,dark
+            youtubeColor:"red",                     //youtube color: red, white
+            videoPlayerShadow:"effect1",            //choose player shadow:  "effect1" , "effect2", "effect3", "effect4", "effect5", "effect6", "off"
+            posterImg:"images/preview_images/6.jpg",//player poster image
+            onFinish:"Play next video",             //"Play next video","Restart video", "Stop video",
+			nowPlayingText:"Yes",                   //enable disable now playing title: "Yes","No"
+            fullscreen:"Fullscreen native",         //choose fullscreen type: "Fullscreen native","Fullscreen browser"
+            rightClickMenu:true,                    //enable/disable right click over player: true/false
+            infoShow:"Yes",                         //enable/disable info option: "Yes","No"
+            shareShow:"Yes",                        //enable/disable all share options: "Yes","No"
+            facebookShow:"Yes",                     //enable/disable facebook option individually: "Yes","No"
+            twitterShow:"Yes",                      //enable/disable twitter option individually: "Yes","No"
+            mailShow:"Yes",                         //enable/disable mail option individually: "Yes","No"
+            facebookLink:"https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcreativeinteractivemedia.com%2Fplayer%2Fplayers_share%2Fultra_video_player%2Findex.html",  //link to go when facebook button clicked
+            twitterLink:"https://twitter.com/intent/tweet?source=webclient&text=Ultra+video+player+by+zac+http%3A%2F%2Fcreativeinteractivemedia.com%2Fplayer%2Fplayers_share%2Fultra_video_player%2Findex.html",   //link to go when twitter button clicked
+            mailToLink:"mailto:mailTo@yourFriendEmail.com", //share over mail
+            logoShow:"Yes",                         //"Yes","No"
+            logoClickable:"Yes",                    //"Yes","No"
+            logoPath:"images/logo/logo.png",        //path to logo image
+            logoGoToLink:"http://codecanyon.net/",  //redirect to page when logo clicked
+            logoPosition:"bottom-left",            //choose logo position: "bottom-right","bottom-left"
+            embedShow:"Yes",                        //enable/disable embed option: "Yes","No"
+            embedCodeSrc:"www.yourwebsite.com/player/index.html", //path to your video player on server
+            embedCodeW:"746",                       //embed player code width
+            embedCodeH:"420",                       //embed player code height
+            embedShareLink:"www.yoursite.com/player/index.html", //direct link to your site (or any other URL) you want to be "shared"
+            videos:[
+                {
+                    videoType:"youtube",                                              //choose video type: "HTML5", "youtube", "vimeo"
+                    title:"Swimwear Spring Summer",                                            //video title
+                    youtubeID:"0dJO0HyE8xE",                                          //https://www.youtube.com/watch?v=NTttuFRJPrw
+                    vimeoID:"46515976",                                               //http://vimeo.com/46515976
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",//HTML5 video mp4 url
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",//HTML5 video webm url
+                    videoAdShow:"no",                                                 //show pre-roll "yes","no"
+                    videoAdGotoLink:"http://codecanyon.net/",                          //pre-roll goto link
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.mp4",   //pre-roll video mp4 format
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.webm", //pre-roll video webm format
+                    description:"Video description goes here.",                        //video description
+                    thumbImg:"images/thumbnail_images/pic1.jpg",                       //path to playlist thumbnail image
+                    info:"Video info goes here."                                       //video info
+                },
+                {
+                    videoType:"youtube",
+                    title:"Miami Fashion Week",
+                    youtubeID:"fZBxUqwLjfU",
+                    vimeoID:"46515976",
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",
+                    videoAdShow:"no",
+                    videoAdGotoLink:"http://codecanyon.net/",
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/video3.mp4",
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/video3.webm",
+                    description:"Video description goes here.",
+                    thumbImg:"images/thumbnail_images/pic5.jpg",
+                    info:"Video info goes here."
+                },{
+                    videoType:"youtube",                                              //choose video type: "HTML5", "youtube", "vimeo"
+                    title:"Swimwear Spring Summer",                                            //video title
+                    youtubeID:"0dJO0HyE8xE",                                          //https://www.youtube.com/watch?v=NTttuFRJPrw
+                    vimeoID:"46515976",                                               //http://vimeo.com/46515976
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",//HTML5 video mp4 url
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",//HTML5 video webm url
+                    videoAdShow:"no",                                                 //show pre-roll "yes","no"
+                    videoAdGotoLink:"http://codecanyon.net/",                          //pre-roll goto link
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.mp4",   //pre-roll video mp4 format
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.webm", //pre-roll video webm format
+                    description:"Video description goes here.",                        //video description
+                    thumbImg:"images/thumbnail_images/pic1.jpg",                       //path to playlist thumbnail image
+                    info:"Video info goes here."                                       //video info
+                },
+                {
+                    videoType:"youtube",
+                    title:"Miami Fashion Week",
+                    youtubeID:"fZBxUqwLjfU",
+                    vimeoID:"46515976",
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",
+                    videoAdShow:"no",
+                    videoAdGotoLink:"http://codecanyon.net/",
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/video3.mp4",
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/video3.webm",
+                    description:"Video description goes here.",
+                    thumbImg:"images/thumbnail_images/pic5.jpg",
+                    info:"Video info goes here."
+                },{
+                    videoType:"youtube",                                              //choose video type: "HTML5", "youtube", "vimeo"
+                    title:"Swimwear Spring Summer",                                            //video title
+                    youtubeID:"0dJO0HyE8xE",                                          //https://www.youtube.com/watch?v=NTttuFRJPrw
+                    vimeoID:"46515976",                                               //http://vimeo.com/46515976
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",//HTML5 video mp4 url
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",//HTML5 video webm url
+                    videoAdShow:"no",                                                 //show pre-roll "yes","no"
+                    videoAdGotoLink:"http://codecanyon.net/",                          //pre-roll goto link
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.mp4",   //pre-roll video mp4 format
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.webm", //pre-roll video webm format
+                    description:"Video description goes here.",                        //video description
+                    thumbImg:"images/thumbnail_images/pic1.jpg",                       //path to playlist thumbnail image
+                    info:"Video info goes here."                                       //video info
+                },
+                {
+                    videoType:"youtube",
+                    title:"Miami Fashion Week",
+                    youtubeID:"fZBxUqwLjfU",
+                    vimeoID:"46515976",
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",
+                    videoAdShow:"no",
+                    videoAdGotoLink:"http://codecanyon.net/",
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/video3.mp4",
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/video3.webm",
+                    description:"Video description goes here.",
+                    thumbImg:"images/thumbnail_images/pic5.jpg",
+                    info:"Video info goes here."
+                },{
+                    videoType:"youtube",                                              //choose video type: "HTML5", "youtube", "vimeo"
+                    title:"Swimwear Spring Summer",                                            //video title
+                    youtubeID:"0dJO0HyE8xE",                                          //https://www.youtube.com/watch?v=NTttuFRJPrw
+                    vimeoID:"46515976",                                               //http://vimeo.com/46515976
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",//HTML5 video mp4 url
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",//HTML5 video webm url
+                    videoAdShow:"no",                                                 //show pre-roll "yes","no"
+                    videoAdGotoLink:"http://codecanyon.net/",                          //pre-roll goto link
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.mp4",   //pre-roll video mp4 format
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.webm", //pre-roll video webm format
+                    description:"Video description goes here.",                        //video description
+                    thumbImg:"images/thumbnail_images/pic1.jpg",                       //path to playlist thumbnail image
+                    info:"Video info goes here."                                       //video info
+                },
+                {
+                    videoType:"youtube",
+                    title:"Miami Fashion Week",
+                    youtubeID:"fZBxUqwLjfU",
+                    vimeoID:"46515976",
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",
+                    videoAdShow:"no",
+                    videoAdGotoLink:"http://codecanyon.net/",
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/video3.mp4",
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/video3.webm",
+                    description:"Video description goes here.",
+                    thumbImg:"images/thumbnail_images/pic5.jpg",
+                    info:"Video info goes here."
+                },{
+                    videoType:"youtube",                                              //choose video type: "HTML5", "youtube", "vimeo"
+                    title:"Swimwear Spring Summer",                                            //video title
+                    youtubeID:"0dJO0HyE8xE",                                          //https://www.youtube.com/watch?v=NTttuFRJPrw
+                    vimeoID:"46515976",                                               //http://vimeo.com/46515976
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",//HTML5 video mp4 url
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",//HTML5 video webm url
+                    videoAdShow:"no",                                                 //show pre-roll "yes","no"
+                    videoAdGotoLink:"http://codecanyon.net/",                          //pre-roll goto link
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/video3.mp4",   //pre-roll video mp4 format
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/video3.webm", //pre-roll video webm format
+                    description:"Video description goes here.",                        //video description
+                    thumbImg:"images/thumbnail_images/pic1.jpg",                       //path to playlist thumbnail image
+                    info:"Video info goes here."                                       //video info
+                },
+                {
+                    videoType:"youtube",
+                    title:"Miami Fashion Week",
+                    youtubeID:"fZBxUqwLjfU",
+                    vimeoID:"46515976",
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",
+                    videoAdShow:"no",
+                    videoAdGotoLink:"http://codecanyon.net/",
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.mp4",
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.webm",
+                    description:"Video description goes here.",
+                    thumbImg:"images/thumbnail_images/pic5.jpg",
+                    info:"Video info goes here."
+                },{
+                    videoType:"youtube",                                              //choose video type: "HTML5", "youtube", "vimeo"
+                    title:"Swimwear Spring Summer",                                            //video title
+                    youtubeID:"0dJO0HyE8xE",                                          //https://www.youtube.com/watch?v=NTttuFRJPrw
+                    vimeoID:"46515976",                                               //http://vimeo.com/46515976
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",//HTML5 video mp4 url
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",//HTML5 video webm url
+                    videoAdShow:"no",                                                 //show pre-roll "yes","no"
+                    videoAdGotoLink:"http://codecanyon.net/",                          //pre-roll goto link
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/video3.mp4",   //pre-roll video mp4 format
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/video3.webm", //pre-roll video webm format
+                    description:"Video description goes here.",                        //video description
+                    thumbImg:"images/thumbnail_images/pic1.jpg",                       //path to playlist thumbnail image
+                    info:"Video info goes here."                                       //video info
+                },
+                {
+                    videoType:"youtube",
+                    title:"Miami Fashion Week",
+                    youtubeID:"fZBxUqwLjfU",
+                    vimeoID:"46515976",
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",
+                    videoAdShow:"no",
+                    videoAdGotoLink:"http://codecanyon.net/",
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.mp4",
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.webm",
+                    description:"Video description goes here.",
+                    thumbImg:"images/thumbnail_images/pic5.jpg",
+                    info:"Video info goes here."
+                },{
+                    videoType:"youtube",                                              //choose video type: "HTML5", "youtube", "vimeo"
+                    title:"Swimwear Spring Summer",                                            //video title
+                    youtubeID:"0dJO0HyE8xE",                                          //https://www.youtube.com/watch?v=NTttuFRJPrw
+                    vimeoID:"46515976",                                               //http://vimeo.com/46515976
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",//HTML5 video mp4 url
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",//HTML5 video webm url
+                    videoAdShow:"no",                                                 //show pre-roll "yes","no"
+                    videoAdGotoLink:"http://codecanyon.net/",                          //pre-roll goto link
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/video3.mp4",   //pre-roll video mp4 format
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/video3.webm", //pre-roll video webm format
+                    description:"Video description goes here.",                        //video description
+                    thumbImg:"images/thumbnail_images/pic1.jpg",                       //path to playlist thumbnail image
+                    info:"Video info goes here."                                       //video info
+                },
+                {
+                    videoType:"youtube",
+                    title:"Miami Fashion Week",
+                    youtubeID:"fZBxUqwLjfU",
+                    vimeoID:"46515976",
+                    mp4:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.mp4",
+                    webm:"http://creativeinteractivemedia.com/player/videos/Big_Buck_Bunny_Trailer.webm",
+                    videoAdShow:"no",
+                    videoAdGotoLink:"http://codecanyon.net/",
+                    mp4AD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.mp4",
+                    webmAD:"http://creativeinteractivemedia.com/player/videos/Sintel_Trailer.webm",
+                    description:"Video description goes here.",
+                    thumbImg:"images/thumbnail_images/pic5.jpg",
+                    info:"Video info goes here."
+                }
+
+            ]
+        });
+    });
+
+  </script>
+    <style type="text/css" media="screen">
+        body
+        {
+            background: #000 url(images/patterns/px_by_Gre3g.png) repeat;
+        }
+
+        #video
+        {
+            margin: 10% auto;
+            width: 1006px;
+            height: 420px;
+        }
+
+    </style>
+</head>
+<body>
+  <div id="video"></div>
+</body>
+
+
+<!-- Mirrored from creativeinteractivemedia.com/player/CCUltra_Video_Player/youtube1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Aug 2016 08:07:30 GMT -->
+</html>
