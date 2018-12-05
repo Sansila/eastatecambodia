@@ -88,7 +88,7 @@
 
 	                            <div class="search-field-wrapper search-location">
 	                                <div class="search-field">
-	                                    <span class="text-label"><input id="id_location_autocomplete" class="location-autocomplete" type="text" name="locations" placeholder="Enter any location" value=""></span>
+	                                    <span class="text-label"><input id="id_location_autocomplete" class="location-autocomplete" type="text" name="locations" placeholder="Enter any location, Property name" value=""></span>
 	                                    <button data-toggle="location-dropdown" class="float-right icon-down"></button>
 	                                </div>
 	                                <div class="dropdown-pane" id="location-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
@@ -477,7 +477,7 @@
 
 	                            <div class="search-field-wrapper search-location">
 	                                <div class="search-field">
-	                                    <span class="text-label"><input id="id_mobile_location_autocomplete" class="location-autocomplete" type="text" name="locations" placeholder="Enter any location" value=""></span>
+	                                    <span class="text-label"><input id="id_mobile_location_autocomplete" class="location-autocomplete" type="text" name="locations" placeholder="Enter any location, Property name" value=""></span>
 	                                    <button data-toggle="mobile-location-dropdown" class="float-right icon-down"></button>
 	                                </div>
 	                                <div class="dropdown-pane" id="mobile-location-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">

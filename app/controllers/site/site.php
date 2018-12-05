@@ -182,14 +182,20 @@ class Site extends CI_Controller {
                 $num = count($arr);$i=0;
                 $where.= " AND (";
                 foreach ($arr as $arr) {
-                    $lid = $this->db->query("SELECT * FROM tblpropertylocation WHERE locationname = '$arr' ")->row();
+                    $lid = $this->db->query("SELECT * FROM tblpropertylocation WHERE locationname LIKE '%$arr%' ")->row();
                     $and = "AND";
+                    $or = "OR";
                     if(++$i == $num)
                     {
                         $and = "";
+                        $or = "";
                     }
-                    
-                    $where.= " lp.lineage LIKE '%$lid->propertylocationid%' $and ";
+                    if($lid)
+                    {
+                        $where.= " lp.lineage LIKE '%$lid->propertylocationid%' $and ";
+                    }else{
+                        $where.= " p.property_name LIKE '%$arr%' $and ";
+                    }    
                 }
                 $where.= ")";
             }
