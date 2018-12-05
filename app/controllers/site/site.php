@@ -2,15 +2,15 @@
 
 class Site extends CI_Controller {
 
-	public function __construct(){
-		parent::__construct();
+    public function __construct(){
+        parent::__construct();
         $this->load->library('pagination');
         $this->load->library('encrypt');
-		$this->load->helper(array('form', 'url'));
-		$this->load->model("site/modsite","site");	
-	}
-	public function index()
-	{	
+        $this->load->helper(array('form', 'url'));
+        $this->load->model("site/modsite","site");  
+    }
+    public function index()
+    {   
         $datas['profile'] = $this->site->getSiteprofile();
         // $datas['menu'] = $this->site->get_menu();
         $data['type'] = $this->site->getPropertyType();
@@ -45,10 +45,10 @@ class Site extends CI_Controller {
         $config['num_tag_close'] = '</li>';
 
         $query = " SELECT * FROM tblproperty as p
-        		left join tblpropertytype as pt on p.type_id = pt.typeid 
-        		left join tblgallery as g on p.pid = g.pid
-        		WHERE p.p_status = 1 GROUP bY p.pid ORDER BY p.pid desc
-        		";
+                left join tblpropertytype as pt on p.type_id = pt.typeid 
+                left join tblgallery as g on p.pid = g.pid
+                WHERE p.p_status = 1 GROUP bY p.pid ORDER BY p.pid desc
+                ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
         $this->pagination->initialize($config);
@@ -58,7 +58,7 @@ class Site extends CI_Controller {
         $query.= " {$limit}";
         $data['lists'] = $this->db->query($query)->result();
 
-		$this->load->view('site/contain/header',$datas);
+        $this->load->view('site/contain/header',$datas);
         $this->load->view('site/index',$data);
         $this->load->view('site/contain/footer',$datas);
     }
@@ -66,17 +66,17 @@ class Site extends CI_Controller {
     {
         $datas['profile'] = $this->site->getSiteprofile();
         $data['profile'] = $this->site->getSiteprofile();
-    	$data['detail'] = $this->site->getPropertyByID($pid);
-		$data['image'] = $this->site->getImageByID($pid);
+        $data['detail'] = $this->site->getPropertyByID($pid);
+        $data['image'] = $this->site->getImageByID($pid);
         $data['type'] = $this->site->getPropertyType();
         $data['location'] = $this->site->getPropertyLocation();
-    	$this->load->view('site/contain/header',$datas);
+        $this->load->view('site/contain/header',$datas);
         $this->load->view('site/detail',$data);
         $this->load->view('site/contain/footer',$datas);
     }
     function search()
     {
-    	$datas['profile'] = $this->site->getSiteprofile();
+        $datas['profile'] = $this->site->getSiteprofile();
         $data['type'] = $this->site->getPropertyType();
         $data['location'] = $this->site->getPropertyLocation();
         $data['data'] = $this->site->getItemLocation();
@@ -102,7 +102,7 @@ class Site extends CI_Controller {
             $short = $_GET['sort'];
         if(isset($_GET['list_type']))
             $list_type = $_GET['list_type'];
-
+    
         if($location != "")
         {
             $location = trim($location, ';');
@@ -183,18 +183,13 @@ class Site extends CI_Controller {
                 $where.= " AND (";
                 foreach ($arr as $arr) {
                     $lid = $this->db->query("SELECT * FROM tblpropertylocation WHERE locationname = '$arr' ")->row();
-                    $or = "OR";
+                    $and = "AND";
                     if(++$i == $num)
                     {
-                        $or = "";
+                        $and = "";
                     }
                     
-                    $arr->lineage = trim($arr->lineage, '-');
-                    $arrs = explode('-', $arr->lineage);
-
-                    
-                    $where.= " lp.locationname = '$arr' OR lp.propertylocationid = '$lid->propertylocationid' OR lp.parent_id = '$lid->propertylocationid' $or ";
-
+                    $where.= " lp.lineage LIKE '%$lid->propertylocationid%' $and ";
                 }
                 $where.= ")";
             }
@@ -250,7 +245,7 @@ class Site extends CI_Controller {
             $limit = " LIMIT $page, ".$config['per_page'];
         $query.= " {$limit}";
         $data['result'] = $this->db->query($query)->result();
-		$this->load->view('site/contain/header',$datas);
+        $this->load->view('site/contain/header',$datas);
         $this->load->view('site/search',$data);
         $this->load->view('site/contain/footer',$datas);
     }
