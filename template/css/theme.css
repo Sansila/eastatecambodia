@@ -78,7 +78,7 @@ body {
 
 /* line 73, ../sass/theme.scss */
 .pgl-navbar-main {
-  background-color: white;
+  background-color: #173851;
   border-color: transparent;
   border-width: 0;
   border-radius: 0;
@@ -139,7 +139,7 @@ body {
 }
 /* line 126, ../sass/theme.scss */
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #333;
+  background-color: white;
   width: 20px;
 }
 /* line 130, ../sass/theme.scss */
@@ -285,7 +285,7 @@ body {
 
 /* line 243, ../sass/theme.scss */
 #contact-map {
-  height: 305px;
+  height: 340px;
   margin-bottom: 37px;
   width: 100%;
 }

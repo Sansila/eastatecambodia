@@ -2,11 +2,11 @@
 		<!-- Begin Main -->
 		<div role="main" class="main">
 			<!-- Begin Main Slide -->
-			<section class="main-slide">
+			<!-- <section class="main-slide">
 				<div id="owl-main-slide" class="owl-carousel pgl-main-slide" data-plugin-options='{"autoPlay": true}'>
 					<?php
-						$i = 1;
-						foreach ($slide as $slide) {
+						//$i = 1;
+						//foreach ($slide as $slide) {
 					?>
 					<div class="item" id="item<?php echo $i;?>"><img src="<?php echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>" alt="Photo" class="img-responsive">
 						<div class="item-caption">
@@ -25,9 +25,9 @@
 						</div>
 					</div>
 					<?php 
-						$i++;
-						}
-					?>
+						//$i++;
+						//}
+					?> -->
 					<!-- <div class="item" id="item2"><img src="<?php echo site_url('template')?>/images/slides/slider2.jpg" alt="Photo" class="img-responsive">
 						<div class="item-caption">
 							<div class="container">
@@ -60,12 +60,12 @@
 							</div>
 						</div>
 					</div> -->
-				</div>
-			</section>
+				<!-- </div>
+			</section> -->
 			<!-- End Main Slide -->
 
 
-	        <section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto">
+	        <section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto" style="background-image: url('<?php echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>');">
 	            <div class="overlay"></div>
 	            <div class="rows align-center collapse">
 	                <div class="columns smallport-24 small-22 large-18">

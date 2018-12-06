@@ -7,12 +7,12 @@ class Site extends CI_Controller {
         $this->load->library('pagination');
         $this->load->library('encrypt');
         $this->load->helper(array('form', 'url'));
-        $this->load->model("site/modsite","site");  
+        $this->load->model("site/modsite","site");
     }
     public function index()
     {   
         $datas['profile'] = $this->site->getSiteprofile();
-        // $datas['menu'] = $this->site->get_menu();
+        $datas['menu'] = $this->site->get_menu();
         $data['type'] = $this->site->getPropertyType();
         $data['location'] = $this->site->getPropertyLocation();
         $data['data'] = $this->site->getItemLocation();
@@ -65,6 +65,7 @@ class Site extends CI_Controller {
     function detail($pid)
     {
         $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
         $data['profile'] = $this->site->getSiteprofile();
         $data['detail'] = $this->site->getPropertyByID($pid);
         $data['image'] = $this->site->getImageByID($pid);
@@ -77,9 +78,11 @@ class Site extends CI_Controller {
     function search()
     {
         $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
         $data['type'] = $this->site->getPropertyType();
         $data['location'] = $this->site->getPropertyLocation();
         $data['data'] = $this->site->getItemLocation();
+        $data['slide'] = $this->site->getSlide();
 
         $status = ''; $location = ''; $category = ''; $firstprice = ''; $lastprice = ''; 
         $available = ''; $order =''; $sort=''; $return_cat = ""; $return_loc = ""; $list_type = '';
@@ -261,13 +264,66 @@ class Site extends CI_Controller {
         header('Content-Type: application/json');
         echo json_encode($data);
     }
-    function test() {
-        $items  = $this->site->get_items();
-        $menu   = $this->site->generateTrees($items); 
-        // $data = array(
-        //     'menu' => $menu,
-        // );
-        print_r($menu);
+    function about($menu_id)
+    {
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $data['desc'] = $this->site->getArticleAbout($menu_id);
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/about',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function contact($menu_id)
+    {
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/contact',$data,$datas);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function send_contact()
+    {
+        $this->load->library('email');  
+
+        $email = $this->input->post('customer_mail');
+        $name = $this->input->post('name');
+        $coment = $this->input->post('comments');
+
+         $config = Array(
+            'protocol' => 'sendmail',
+            'mailpath' => '/usr/sbin/sendmail',
+            'smtp_host' => 'ssl://mail.cabs-international.com',
+            'smtp_port' => 587,
+            'smtp_user' => 'sila@cabs-international.com', // change it to yours
+            'smtp_pass' => '@sila.com', // change it to yours
+            'mailtype' => 'html',
+            'charset' => 'iso-8859-1',
+            'wordwrap' => TRUE
+        );
+
+        $message = $coment;
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from($email); // change it to yours
+            $this->email->to('sila@cabs-international.com');// change it to yours
+            $this->email->subject('Comments from customer');
+            $this->email->message($message);
+        if($this->email->send())
+        {
+            $datas['profile'] = $this->site->getSiteprofile();
+            $datas['menu'] = $this->site->get_menu();
+            $data['slide'] = $this->site->getSlide();
+            $this->load->view('site/contain/header',$datas);
+            $this->load->view('site/contact',$data,$datas);
+            $this->load->view('site/contain/footer',$datas);
+        }
+        else
+        {
+         show_error($this->email->print_debugger());
+        }
+
     }
 }
 ?>

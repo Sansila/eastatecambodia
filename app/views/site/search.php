@@ -74,7 +74,8 @@
 			<!-- End page top -->
 			
 			<!-- Begin Advanced Search -->
-			<section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto">
+			<!-- <section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto" style="background-image: url('<?php //echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>'); padding-top:4rem;     padding-bottom: 3rem; height: auto !important;"> -->
+			<section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto" style="background-image: url('<?php echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>'); ">
 	            <div class="overlay"></div>
 	            <div class="rows align-center collapse">
 	                <div class="columns smallport-24 small-22 large-18">
@@ -1006,7 +1007,7 @@
 			<!-- Begin Properties -->
 			<section class="pgl-properties pgl-bg-grey">
 				<div class="container">
-					<h2>Search Result<?php echo '('.count($result).')';?></h2>
+					<h3>Search Result<?php echo '('.count($result).')';?></h3>
 					<div class="properties-full properties-listing properties-listfull">
 						<div class="listing-header clearfix">
 							<ul class="list-inline list-icons pull-left">

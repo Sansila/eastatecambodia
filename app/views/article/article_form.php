@@ -81,7 +81,7 @@
                         </div>
                          
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Category Name</label>
+                            <label class='col-lg-2 control-label'>Location Name</label>
                             <div class="col-lg-5"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="location_id">
@@ -279,7 +279,7 @@
             success:function(data){
                 toasmsg('success',msg);
                 //location.reload();
-                //location.href="<?php echo site_url('article/index/?m='.$m.'&p='.$p) ?>";
+                location.href="<?php echo site_url('article/index/?m='.$m.'&p='.$p) ?>";
                 console.log("success");
                 console.log(data);
             },
@@ -287,7 +287,7 @@
                 console.log("error");
                 console.log(data);
                 //location.reload();
-                //location.href="<?php echo site_url('article/index/?m='.$m.'&p='.$p) ?>";
+                location.href="<?php echo site_url('article/index/?m='.$m.'&p='.$p) ?>";
 
             }
         });

@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "site/site";
-$route['404_override'] = '';
+$route['404_override'] = 'my404';
 
 $route['gallery/(:any)'] = "site/gallery/$1";
 $route['admineshop'] = "greenadmin/home";

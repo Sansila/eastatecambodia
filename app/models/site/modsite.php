@@ -86,7 +86,7 @@
         }
         function get_menu()
         {
-            $query = $this->db->query("SELECT * FROM tblmenus ORDER BY lineage asc");
+            $query = $this->db->query("SELECT * FROM tblmenus as m INNER JOIN tbllocation as l ON m.menu_type = l.location_id ORDER BY menu_id asc");
             $cat = array(
                 'items' => array(),
                 'parents' => array()
@@ -106,53 +106,37 @@
         {
             $html = "";
             if (isset($menu['parents'][$parent])) {
-                $html .= "<ul class='nav navbar-nav pull-right'>";
                 foreach ($menu['parents'][$parent] as $menu_s) {
                     if (!isset($menu['parents'][$menu_s])) {
-                        $html .= "<li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='" . $menu['items'][$menu_s]->menu_id . "'>" . $menu['items'][$menu_s]->menu_name . "</a>";
-                        $html .="<ul class='dropdown-menu'>";
-                        $html .= "<li><a href='ouragents.html'>Our Agents</a></li>";
-                        $html .= "<li><a href='agentprofile.html'>Agent Profile</a></li>";
-                        $html .= "</ul>";
+                        $html .= "<li>";
+                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id) . "'>" . $menu['items'][$menu_s]->menu_name . "</a>"; //no sub
                         $html .= "</li>";
                     }
                     if (isset($menu['parents'][$menu_s])) {
-                        $html .= "<li><a href='" . $menu['items'][$menu_s]->menu_id . "'>" . $menu['items'][$menu_s]->menu_name . "</a>";
+                        $html .= "<li class='dropdown'>";
+                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id)  . "'>" . $menu['items'][$menu_s]->menu_name . "</a>";
+                        $html .= "<ul class='dropdown-menu'>";
                         $html .= $this->generateTree($menu_s,$menu);
                         $html .= "</li>";
+                        $html .= "</ul>";
+                    }else{
+                        $html .= $this->generateTree($menu_s,$menu);
                     }
                 }
-                $html .= "</ul>";
             }
             return $html;
 
         }
         function getSlide()
         {
-            $sql = $this->db->query("SELECT * FROM tblbanner ")->result();
+            $sql = $this->db->query("SELECT * FROM tblbanner ")->row();
             return $sql;
         }
-        function get_items() {
-            $this->db->select('*');
-            $this->db->from('tblpropertylocation');
-            $this->db->where('propertylocationid','40');
-            $this->db->order_by('parent_id');
-            $query = $this->db->get();
-            return $query->result_array();
-        }    
-        function generateTrees($items = array(), $parent_id = 0){
-            $tree = '<ul>';
-            for($i=0, $ni=count($items); $i < $ni; $i++){
-                if($items[$i]['parent_id'] == $parent_id){
-                    $tree .= '<li>';
-                    $tree .= $items[$i]['locationname'];
-                    $tree .= $this->generateTrees($items, $items[$i]['propertylocationid']);
-                    $tree .= '</li>';
-                }
-            }
-            $tree .= '</ul>';
-            return $tree;
-        } 
+        function getArticleAbout($menu_id)
+        {
+            $sql = $this->db->query("SELECT * FROM tblarticle WHERE menu_id = '$menu_id' ")->row();
+            return $sql;
+        }
 }
 
 

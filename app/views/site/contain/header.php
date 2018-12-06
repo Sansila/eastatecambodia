@@ -67,6 +67,11 @@
 							<li><a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
 							<li><a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
 							<li><a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li>
+							<li>
+								<a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+">
+									<div id="google_translate_element"></div>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -79,8 +84,9 @@
 						<div class="navbar-collapse collapse width">
 							<ul class="nav navbar-nav pull-right">
 								<li><a href="<?php echo site_url()?>">Home</a></li>
-								<li><a href="<?php echo site_url()?>">Properties</a></li>
-								<li><a href="<?php echo site_url()?>">Agents</a></li>
+								<?php echo $menu;?>
+								<!-- <li><a href="<?php echo site_url()?>">Properties</a></li>
+								<li><a href="<?php echo site_url()?>">Agents</a></li> -->
 								<!-- <li class="dropdown hide"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Properties</a>
 									<ul class="dropdown-menu">
 										<li class="dropdown"><a href="grid-fullwidth-3-column.html" class="dropdown-toggle" data-target="#" data-toggle="dropdown">Grid full width 3 column</a>
@@ -104,7 +110,8 @@
 										<li><a href="property-detail.html">Property Detail</a></li>
 									</ul>
 								</li>
-								<li class="dropdown hide"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Agents</a>
+								<li class="dropdown hide">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Agents</a>
 									<ul class="dropdown-menu">
 										<li><a href="ouragents.html">Our Agents</a></li>
 										<li><a href="agentprofile.html">Agent Profile</a></li>
@@ -125,7 +132,7 @@
 										<li><a href="blog-single.html">Article detail</a></li>
 									</ul>
 								</li> -->
-								<li><a href="contact.html">Contact Us</a></li>
+								<!-- <li><a href="contact.html">Contact Us</a></li> -->
 							</ul>
 						</div><!--/.nav-collapse --> 
 					</div><!--/.container-fluid --> 

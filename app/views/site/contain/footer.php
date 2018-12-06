@@ -95,7 +95,11 @@
 	<!-- <script src="<?php echo site_url('template')?>/js/selectize.js"></script> -->
 	<!-- <script src="<?php echo site_url('template')?>/js/index.js"></script> -->
 	<script type="text/javascript" src="<?php echo site_url('template')?>/style-switcher/js/switcher.js"></script>
-
+	<script type="text/javascript">
+	function googleTranslateElementInit() {
+	  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+	}
+	</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 <!-- Mirrored from pixelgeeklab.com/html/realestast/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Nov 2018 02:56:31 GMT -->

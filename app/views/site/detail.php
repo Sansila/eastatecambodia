@@ -773,8 +773,8 @@
 		</div>
 		<!-- End Main -->
 
-		<script type="text/javascript">
-			window.onload=function(){
+<script type="text/javascript">
+	window.onload=function(){
       var map;
       function initialize() {
           var myLatlng = new google.maps.LatLng('<?php if($detail->latitude !="") echo $detail->latitude; else echo "11.570516523819823"?>', '<?php if($detail->longtitude !="") echo $detail->longtitude; else echo "104.92183668505857";?>');
@@ -801,4 +801,4 @@
       }
       google.maps.event.addDomListener(window, "load", initialize());
     }//]]> 
-		</script>
+</script>

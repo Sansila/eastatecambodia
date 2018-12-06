@@ -12403,7 +12403,7 @@ body.noscroll {
 @media screen and (min-width:64em) {
     .hero {
         padding-bottom: 0;
-        height: 24.0625rem
+        height: 24.0625rem !important;
     }
 }
 
@@ -14219,7 +14219,7 @@ input.range {
 
 .home-search {
     padding-top: 16px;
-    padding-top: 1rem;
+    padding-top: 8rem;
     height: auto;
     padding-bottom: 0
 }
@@ -14229,7 +14229,14 @@ input.range {
         padding: 2.5rem 0 0
     }
 }*/
-
+@media screen and (max-width: 568px) {
+    .home-search {
+        padding-top: 16px;
+        padding-top: 2rem !important;
+        height: auto;
+        padding-bottom: 0;
+    }
+}
 .home-search .rows {
     position: relative
 }
