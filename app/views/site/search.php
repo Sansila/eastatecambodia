@@ -1,7 +1,34 @@
 <?php 
-	$status = ''; $location = ''; $category = ''; $firstprice = ''; 
-	$lastprice = ''; $available = ''; $order = ''; $sort =''; $return_cat = ''; 
-	$return_loc = ''; $list_type = ""; $activelist = ''; $activegrid = ''; $hideg =""; $hidel = "hide";
+	$status = ''; 
+	$location = ''; 
+	$category = ''; 
+	$firstprice = ''; 
+	$lastprice = ''; 
+	$available = ''; 
+	$order = ''; 
+	$sort =''; 
+	$return_cat = ''; 
+	$return_loc = ''; 
+	$list_type = ""; 
+	$activelist = ''; 
+	$activegrid = ''; 
+	$hideg =""; 
+	$hidel = "hide";
+	$floorarea_first = "";
+	$floorarea_last = "";
+	$floorlevel_first = "";
+	$floorlevel_last = "";
+	$landarea_first = "";
+	$landarea_last = "";
+	$land_title = "";
+	$bedroom_first = "";
+	$bedroom_last = "";
+	$bathroom_first = "";
+	$bathroom_last = "";
+	$park_first = "";
+	$park_last = "";
+	$features = "";
+
 	if(isset($_GET['status']))
 		$status = $_GET['status'];
 	if(isset($_GET['q']))
@@ -20,6 +47,34 @@
 		$sort = $_GET['sort'];
 	if(isset($_GET['list_type']))
 		$list_type = $_GET['list_type'];
+	if(isset($_GET['building_area_total__gte']))
+		$floorarea_first = $_GET['building_area_total__gte'];
+	if(isset($_GET['building_area_total__lte']))
+		$floorarea_last = $_GET['building_area_total__lte'];
+	if(isset($_GET['address_floor_level__gte']))
+		$floorlevel_first = $_GET['address_floor_level__gte'];
+	if(isset($_GET['address_floor_level__lte']))
+		$floorlevel_last = $_GET['address_floor_level__lte'];
+	if(isset($_GET['land_area_total__gte']))
+		$landarea_first = $_GET['land_area_total__gte'];
+	if(isset($_GET['land_area_total__lte']))
+		$landarea_last = $_GET['land_area_total__lte'];
+	if(isset($_GET['land_title']))
+		$land_title = $_GET['land_title'];
+	if(isset($_GET['bedrooms__gte']))
+		$bedroom_first = $_GET['bedrooms__gte'];
+	if(isset($_GET['bedrooms__lte']))
+		$bedroom_last = $_GET['bedrooms__lte'];
+	if(isset($_GET['bathrooms__gte']))
+		$bathroom_first = $_GET['bathrooms__gte'];
+	if(isset($_GET['bathrooms__lte']))
+		$bathroom_last = $_GET['bathrooms__lte'];
+	if(isset($_GET['garages__gte']))
+		$park_first = $_GET['garages__gte'];
+	if(isset($_GET['garages__lte']))
+		$park_last = $_GET['garages__lte'];
+	if(isset($_GET['features']))
+		$features = $_GET['features'];
 
 	if($location != "")
 	{
@@ -61,20 +116,10 @@
 	}else{
 		$return_cat .= "categories=&";
 	}
+
+
 ?>
 		<div role="main" class="main pgl-bg-grey">
-			<!-- Begin page top -->
-			<!-- <section class="page-top">
-				<div class="container">
-					<div class="page-top-in">
-						<h2><span>List rows</span></h2>
-					</div>
-				</div>
-			</section> -->
-			<!-- End page top -->
-			
-			<!-- Begin Advanced Search -->
-			<!-- <section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto" style="background-image: url('<?php //echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>'); padding-top:4rem;     padding-bottom: 3rem; height: auto !important;"> -->
 			<section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto" style="background-image: url('<?php echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>'); ">
 	            <div class="overlay"></div>
 	            <div class="rows align-center collapse">
@@ -413,8 +458,7 @@
 	                                                </button>
 	                                                <div class="dropdown-pane" id="land-title-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
 	                                                    <div class="dropdown-item" data-refine-dropdown-changer data-target-button=".search-title" data-target-field="#id_land_title" data-target-value="">Any</div>
-	                                                    <div class="dropdown-item" data-refine-dropdown-changer data-target-button=".search-title" data-target-field="#id_land_title" data-target-value="hard">Hard Title/Freehold</div>
-	                                                    <div class="dropdown-item" data-refine-dropdown-changer data-target-button=".search-title" data-target-field="#id_land_title" data-target-value="long">Long-Term Leasehold</div>
+	                                                    <div class="dropdown-item" data-refine-dropdown-changer data-target-button=".search-title" data-target-field="#id_land_title" data-target-value="hard">Hard Title</div>
 	                                                    <div class="dropdown-item" data-refine-dropdown-changer data-target-button=".search-title" data-target-field="#id_land_title" data-target-value="soft">Soft Title</div>
 	                                                </div>
 	                                            </div>
@@ -909,40 +953,46 @@
 					</optgroup>
 		        </select>
 
-		        <!-- <select multiple="multiple" id="id_features" name="features">
-		            <option value="swimmingpool">Swimming Pool</option>
-		            <option value="gym">Gym/Fitness center</option>
-		            <option value="lift">Lift</option>
-		            <option value="garden">Garden</option>
-		            <option value="furnished">Furnished</option>
-		            <option value="balcony">Balcony</option>
-		            <option value="airconditioning">Air Conditioning</option>
-		            <option value="carparking">Car Parking</option>
-		            <option value="nonflooding">Non-Flooding</option>
-		            <option value="onmainroad">On main road</option>
-		            <option value="internet">Internet</option>
-		            <option value="paytv">Pay TV</option>
-		            <option value="petfriendly">Pet Friendly</option>
-		            <option value="jacuzzi">Jacuzzi</option>
-		            <option value="sauna">Sauna</option>
-		            <option value="tenniscourt">Tennis Court</option>
-		            <option value="alarmsystem">Alarm System</option>
-		            <option value="videosecurity">Video Security</option>
-		            <option value="reception247">Reception 24/7</option>
-		            <option value="firesprinkler">Fire sprinkler system</option>
-		            <option value="oceanviews">Ocean Views</option>
-		            <option value="cityviews">City Views</option>
+		        <select multiple="multiple" id="id_features" name="features[]">
+		        	<?php 
+		        		$f_title = array();
+		        		foreach ($features as $feat) {
+		        			$f_title[$feat] = $feat;
+		        		}
+		        	?>
+		            <option <?php if(isset($f_title['swimmingpool'])) echo "selected"; else echo "";?> value="swimmingpool">Swimming Pool</option>
+		            <option <?php if(isset($f_title['gym']))echo "selected"; else echo "";?> value="gym">Gym/Fitness center</option>
+		            <option <?php if(isset($f_title['lift'])) echo "selected"; else echo "";?> value="lift">Lift</option>
+		            <option <?php if(isset($f_title['garden'])) echo "selected"; else echo "";?> value="garden">Garden</option>
+		            <option <?php if(isset($f_title['furnished'])) echo "selected"; else echo "";?> value="furnished">Furnished</option>
+		            <option <?php if(isset($f_title['balcony'])) echo "selected"; else echo "";?> value="balcony">Balcony</option>
+		            <option <?php if(isset($f_title['airconditioning'])) echo "selected"; else echo "";?> value="airconditioning">Air Conditioning</option>
+		            <option <?php if(isset($f_title['carparking'])) echo "selected"; else echo "";?> value="carparking">Car Parking</option>
+		            <option <?php if(isset($f_title['nonflooding'])) echo "selected"; else echo "";?> value="nonflooding">Non-Flooding</option>
+		            <option <?php if(isset($f_title['onmainroad'])) echo "selected"; else echo "";?> value="onmainroad">On main road</option>
+		            <option <?php if(isset($f_title['internet'])) echo "selected"; else echo "";?> value="internet">Internet</option>
+		            <option <?php if(isset($f_title['paytv'])) echo "selected"; else echo "";?> value="paytv">Pay TV</option>
+		            <option <?php if(isset($f_title['petfriendly'])) echo "selected"; else echo "";?> value="petfriendly">Pet Friendly</option>
+		            <option <?php if(isset($f_title['jacuzzi'])) echo "selected"; else echo "";?> value="jacuzzi">Jacuzzi</option>
+		            <option <?php if(isset($f_title['sauna'])) echo "selected"; else echo "";?> value="sauna">Sauna</option>
+		            <option <?php if(isset($f_title['tenniscourt'])) echo "selected"; else echo "";?> value="tenniscourt">Tennis Court</option>
+		            <option <?php if(isset($f_title['alarmsystem'])) echo "selected"; else echo "";?> value="alarmsystem">Alarm System</option>
+		            <option <?php if(isset($f_title['videosecurity'])) echo "selected"; else echo "";?> value="videosecurity">Video Security</option>
+		            <option <?php if(isset($f_title['reception247'])) echo "selected"; else echo "";?> value="reception247">Reception 24/7</option>
+		            <option <?php if(isset($f_title['firesprinkler'])) echo "selected"; else echo "";?> value="firesprinkler">Fire sprinkler system</option>
+		            <option <?php if(isset($f_title['oceanviews'])) echo "selected"; else echo "";?> value="oceanviews">Ocean Views</option>
+		            <option <?php if(isset($f_title['cityviews'])) echo "selected"; else echo "";?> value="cityviews">City Views</option>
 		        </select>
 
-		        <input id="id_car_spaces__lte" min="0" name="car_spaces__lte" type="number" />
+		        <input id="id_car_spaces__lte" min="0" name="car_spaces__lte" type="number" value="<?php echo $park_last;?>" />
 
-		        <input id="id_car_spaces__gte" min="0" name="car_spaces__gte" type="number" />
+		        <input id="id_car_spaces__gte" min="0" name="car_spaces__gte" type="number" value="<?php echo $park_first;?>" />
 
-		        <input id="id_garages__lte" min="0" name="garages__lte" type="number" />
+		        <input id="id_garages__lte" min="0" name="garages__lte" type="number" value="<?php echo $park_last;?>" />
 
-		        <input id="id_garages__gte" min="0" name="garages__gte" type="number" />
+		        <input id="id_garages__gte" min="0" name="garages__gte" type="number" value="<?php echo $park_first;?>" />
 
-		        <input id="id_rent__lte" name="rent__lte" type="number" />
+		        <!-- <input id="id_rent__lte" name="rent__lte" type="number" />
 
 		        <input id="id_rent__gte" name="rent__gte" type="number" /> -->
 
@@ -950,37 +1000,37 @@
 
 		        <input id="id_price__gte" name="price__gte" type="number" value="<?php echo $firstprice;?>"/>
 
-		        <!-- <input id="id_bedrooms__lte" min="0" name="bedrooms__lte" type="number" />
+		        <input id="id_bedrooms__lte" min="0" name="bedrooms__lte" type="number" value="<?php echo $bedroom_first;?>" />
 
-		        <input id="id_bedrooms__gte" min="0" name="bedrooms__gte" type="number" />
+		        <input id="id_bedrooms__gte" min="0" name="bedrooms__gte" type="number" value="<?php echo $bedroom_last;?>" />
 
-		        <input id="id_bathrooms__lte" min="0" name="bathrooms__lte" type="number" />
+		        <input id="id_bathrooms__lte" min="0" name="bathrooms__lte" type="number" value="<?php echo $bathroom_last;?>" />
 
-		        <input id="id_bathrooms__gte" min="0" name="bathrooms__gte" type="number" />
+		        <input id="id_bathrooms__gte" min="0" name="bathrooms__gte" type="number" value="<?php echo $bathroom_first?>" />
 
-		        <input id="id_building_area_total__lte" name="building_area_total__lte" step="any" type="number" />
+		        <input id="id_building_area_total__lte" name="building_area_total__lte" step="any" type="number" value="<?php echo $floorarea_first;?>" />
 
-		        <input id="id_building_area_total__gte" name="building_area_total__gte" step="any" type="number" />
+		        <input id="id_building_area_total__gte" name="building_area_total__gte" step="any" type="number" value="<?php echo $floorarea_last;?>" />
 
-		        <input id="id_land_area_total__lte" name="land_area_total__lte" step="any" type="number" />
+		        <input id="id_land_area_total__lte" name="land_area_total__lte" step="any" type="number" value="<?php echo $landarea_last;?>" />
 
-		        <input id="id_land_area_total__gte" name="land_area_total__gte" step="any" type="number" />
+		        <input id="id_land_area_total__gte" name="land_area_total__gte" step="any" type="number" value="<?php echo $landarea_first;?>" />
 
 		        <select id="id_land_title" name="land_title">
 		            <option value="" selected="selected">All</option>
-		            <option value="hard">Hard Title</option>
-		            <option value="soft">Soft Title</option>
+		            <option <?php if($land_title == "hard") echo "selected"; else echo "";?> value="hard">Hard Title</option>
+		            <option <?php if($land_title == "soft") echo "selected"; else echo "";?> value="soft">Soft Title</option>
 		        </select>
 
-		        <input id="id_year_built__lte" name="year_built__lte" type="number" />
+		        <!-- <input id="id_year_built__lte" name="year_built__lte" type="number" />
 
-		        <input id="id_year_built__gte" name="year_built__gte" type="number" />
+		        <input id="id_year_built__gte" name="year_built__gte" type="number" /> -->
 
-		        <input id="id_address_floor_level__lte" name="address_floor_level__lte" type="number" />
+		        <input id="id_address_floor_level__lte" name="address_floor_level__lte" type="number" value="<?php echo $floorlevel_last;?>" />
 
-		        <input id="id_address_floor_level__gte" name="address_floor_level__gte" type="number" />
+		        <input id="id_address_floor_level__gte" name="address_floor_level__gte" type="number" value="<?php echo $floorlevel_first;?>" />
 
-		        <input id="id_price_per_sqm__lte" name="price_per_sqm__lte" type="number" />
+		        <!-- <input id="id_price_per_sqm__lte" name="price_per_sqm__lte" type="number" />
 
 		        <input id="id_price_per_sqm__gte" name="price_per_sqm__gte" type="number" /> -->
 

@@ -84,8 +84,32 @@ class Site extends CI_Controller {
         $data['data'] = $this->site->getItemLocation();
         $data['slide'] = $this->site->getSlide();
 
-        $status = ''; $location = ''; $category = ''; $firstprice = ''; $lastprice = ''; 
-        $available = ''; $order =''; $sort=''; $return_cat = ""; $return_loc = ""; $list_type = '';
+        $status = ''; 
+        $location = ''; 
+        $category = ''; 
+        $firstprice = ''; 
+        $lastprice = ''; 
+        $available = ''; 
+        $order =''; 
+        $sort=''; 
+        $return_cat = ""; 
+        $return_loc = ""; 
+        $list_type = '';
+        $floorarea_first = "";
+        $floorarea_last = "";
+        $floorlevel_first = "";
+        $floorlevel_last = "";
+        $landarea_first = "";
+        $landarea_last = "";
+        $land_title = "";
+        $bedroom_first = "";
+        $bedroom_last = "";
+        $bathroom_first = "";
+        $bathroom_last = "";
+        $park_first = "";
+        $park_last = "";
+        $features = "";
+        $return_feature = "";
         
         if(isset($_GET['status']))
             $status = $_GET['status'];
@@ -105,6 +129,34 @@ class Site extends CI_Controller {
             $short = $_GET['sort'];
         if(isset($_GET['list_type']))
             $list_type = $_GET['list_type'];
+        if(isset($_GET['building_area_total__gte']))
+            $floorarea_first = $_GET['building_area_total__gte'];
+        if(isset($_GET['building_area_total__lte']))
+            $floorarea_last = $_GET['building_area_total__lte'];
+        if(isset($_GET['address_floor_level__gte']))
+            $floorlevel_first = $_GET['address_floor_level__gte'];
+        if(isset($_GET['address_floor_level__lte']))
+            $floorlevel_last = $_GET['address_floor_level__lte'];
+        if(isset($_GET['land_area_total__gte']))
+            $landarea_first = $_GET['land_area_total__gte'];
+        if(isset($_GET['land_area_total__lte']))
+            $landarea_last = $_GET['land_area_total__lte'];
+        if(isset($_GET['land_title']))
+            $land_title = $_GET['land_title'];
+        if(isset($_GET['bedrooms__gte']))
+            $bedroom_first = $_GET['bedrooms__gte'];
+        if(isset($_GET['bedrooms__lte']))
+            $bedroom_last = $_GET['bedrooms__lte'];
+        if(isset($_GET['bathrooms__gte']))
+            $bathroom_first = $_GET['bathrooms__gte'];
+        if(isset($_GET['bathrooms__lte']))
+            $bathroom_last = $_GET['bathrooms__lte'];
+        if(isset($_GET['garages__gte']))
+            $park_first = $_GET['garages__gte'];
+        if(isset($_GET['garages__lte']))
+            $park_last = $_GET['garages__lte'];
+        if(isset($_GET['features']))
+            $features = $_GET['features'];
     
         if($location != "")
         {
@@ -131,10 +183,21 @@ class Site extends CI_Controller {
             $return_cat .= "categories=&";
         }
 
+        if($features !="")
+        {
+            $ar = urlencode('[]');
+            foreach ($features as $f) {
+                $return_feature .= "features".$ar."=".$f."&";
+            }
+        }else{
+            $return_feature .= "features=&";
+        }
+
         $page = 0;
         if(isset($_GET['per_page']))
             $page = $_GET['per_page'];
-        $config['base_url'] = site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort);
+        $config['base_url'] = site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first);
+
         $config['per_page'] = 8;
         $config['num_link'] = 3;
         $config['page_query_string'] = TRUE;
@@ -219,6 +282,80 @@ class Site extends CI_Controller {
             }
         }else{
             $where.= "";
+        }
+
+        if($floorarea_first !="" && $floorarea_last !="")
+        {
+            $where.= " AND p.housesize BETWEEN $floorarea_first AND $floorarea_last";
+        }else if($floorarea_first !="")
+        {
+            $where.= " AND p.housesize BETWEEN 0 AND $floorarea_first";
+        }else if($floorarea_last !="")
+        {
+            $where.= " AND p.housesize BETWEEN 0 AND $floorarea_last";
+        }
+
+        if($floorlevel_first !="" && $floorlevel_last !="")
+        {
+            $where.= " AND p.floor BETWEEN $floorlevel_first AND $floorlevel_last";
+        }else if($floorlevel_first !="")
+        {
+            $where.= " AND p.floor BETWEEN 0 AND $floorlevel_first";
+        }else if($floorlevel_last !="")
+        {
+            $where.= " AND p.floor BETWEEN 0 AND $floorlevel_last";
+        }
+
+        if($landarea_first !="" && $landarea_last !="")
+        {
+            $where.= " AND p.housesize BETWEEN $landarea_first AND $landarea_last";
+        }else if($landarea_first !="")
+        {
+            $where.= " AND p.housesize BETWEEN 0 AND $landarea_first";
+        }else if($landarea_last !="")
+        {
+            $where.= " AND p.housesize BETWEEN 0 AND $landarea_last";
+        }
+
+        if($land_title != "")
+        {
+            if($land_title == "hard")
+                $where.= " AND p.title = 2 ";
+            if($land_title == "soft")
+                $where.= " ANd p.title = 1 ";
+        }
+
+        if($bedroom_first !="" && $bedroom_last !="")
+        {
+            $where.= " AND p.bedroom BETWEEN $bedroom_first AND $bedroom_last";
+        }else if($bedroom_first !="")
+        {
+            $where.= " AND p.bedroom BETWEEN 0 AND $bedroom_first";
+        }else if($bedroom_last !="")
+        {
+            $where.= " AND p.bedroom BETWEEN 0 AND $bedroom_last";
+        }
+
+        if($bathroom_first !="" && $bathroom_last !="")
+        {
+            $where.= " AND p.bathroom BETWEEN $bathroom_first AND $bathroom_last";
+        }else if($bathroom_first !="")
+        {
+            $where.= " AND p.bathroom BETWEEN 0 AND $bathroom_first";
+        }else if($bathroom_last !="")
+        {
+            $where.= " AND p.bathroom BETWEEN 0 AND $bathroom_last";
+        }
+
+        if($park_first !="" && $park_first !="")
+        {
+            $where.= " AND p.parking BETWEEN $park_first AND $park_last";
+        }else if($park_first !="")
+        {
+            $where.= " AND p.parking BETWEEN 0 AND $park_first";
+        }else if($park_first !="")
+        {
+            $where.= " AND p.parking BETWEEN 0 AND $park_first";
         }
 
         // ============= Order by =============//

@@ -575,27 +575,26 @@
             }
         ?>
 
-        // var myLatlng = new google.maps.LatLng(11.570516523819823,104.92183668505857);
-
-          var myOptions = {
+        var myOptions = {
               zoom: 12,
               center: myLatlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              gestureHandling: 'greedy'
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-          var marker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
               draggable: true,
               position: myLatlng,
               map: map,
               title: "Your location"
-          });
+        });
 
-          google.maps.event.addListener(marker, 'dragend', function (event) {
-              document.getElementById("latitude").value = event.latLng.lat();
-              document.getElementById("longtitude").value = event.latLng.lng();
-              infoWindow.open(map, marker);
-          });
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById("latitude").value = event.latLng.lat();
+            document.getElementById("longtitude").value = event.latLng.lng();
+            infoWindow.open(map, marker);
+        });
       }
       google.maps.event.addDomListener(window, "load", initialize());
     }//]]> 
