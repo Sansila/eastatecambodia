@@ -79,60 +79,12 @@
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-							<a class="logo" href="<?php echo site_url()?>"><img src="<?php echo site_url('template')?>/images/logo.png" alt="Flatize"></a> </div>
+							<a class="logo" href="<?php echo site_url();?>"><img src="<?php echo site_url('template');?>/images/logo.png" alt="Flatize"></a> </div>
 						
 						<div class="navbar-collapse collapse width">
 							<ul class="nav navbar-nav pull-right">
-								<li><a href="<?php echo site_url()?>">Home</a></li>
-								<?php echo $menu;?>
-								<!-- <li><a href="<?php echo site_url()?>">Properties</a></li>
-								<li><a href="<?php echo site_url()?>">Agents</a></li> -->
-								<!-- <li class="dropdown hide"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Properties</a>
-									<ul class="dropdown-menu">
-										<li class="dropdown"><a href="grid-fullwidth-3-column.html" class="dropdown-toggle" data-target="#" data-toggle="dropdown">Grid full width 3 column</a>
-											<ul class="dropdown-menu">
-												<li class="dropdown"><a class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="grid-fullwidth-3-column.html">Submenu level 2</a>
-													<ul class="dropdown-menu">
-														<li><a href="grid-fullwidth-3-column.html">Submenu level 3</a></li>
-														<li><a h ref="grid-fullwidth-3-column.html">Submenu level 3</a></li>
-														<li><a href="grid-fullwidth-3-column.html">Submenu level 3</a></li>
-													</ul>
-												</li>
-												<li><a href="grid-fullwidth-3-column.html">Submenu level 2</a></li>
-												<li><a href="grid-fullwidth-3-column.html">Submenu level 2</a></li>
-											</ul>
-										</li>
-										<li><a href="grid-fullwidth-4-column.html">Grid full width 4 column</a></li>
-										<li><a href="grid-masonry-4-column.html">Grid masonry 4 column</a></li>
-										<li><a href="grid-sidebar.html">Grid with sidebar</a></li>
-										<li><a href="list-fullwidth.html">List rows</a></li>
-										<li><a href="list-map.html">List map</a></li>
-										<li><a href="property-detail.html">Property Detail</a></li>
-									</ul>
-								</li>
-								<li class="dropdown hide">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Agents</a>
-									<ul class="dropdown-menu">
-										<li><a href="ouragents.html">Our Agents</a></li>
-										<li><a href="agentprofile.html">Agent Profile</a></li>
-									</ul>
-								</li>
-								<li class="dropdown hide"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages</a>
-									<ul class="dropdown-menu">
-										<li><a href="about-us.html">About Us</a></li>
-										<li><a href="faq-sidebar.html">FAQs</a></li>
-										<li><a href="page-404.html">404-page</a></li>
-									</ul>
-								</li>
-								<li class="dropdown hide"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
-									<ul class="dropdown-menu">
-										<li><a href="blog.html">Blog Large With Sidebar</a></li>
-										<li><a href="blog-2-cols.html">Blog 2 Columns</a></li>
-										<li><a href="blog-2-cols-sidebar.html">Blog 2 Columns With Sidebar</a></li>
-										<li><a href="blog-single.html">Article detail</a></li>
-									</ul>
-								</li> -->
-								<!-- <li><a href="contact.html">Contact Us</a></li> -->
+								<li><a href="<?php echo site_url(); ?>">Home</a></li>
+								<?php echo $menu; ?>
 							</ul>
 						</div><!--/.nav-collapse --> 
 					</div><!--/.container-fluid --> 

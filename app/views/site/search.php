@@ -1095,6 +1095,7 @@
 										<div class="amenities clearfix">
 											<ul class="pull-left">
 												<li><strong>Area:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
+												<li><strong>Post Date:</strong> <?php if($list->create_date != null) echo $list->create_date; else echo "";?></li>
 											</ul>
 											<ul class="pull-right">
 												<li class="<?php if($list->bedroom == "") echo "hide"; ?>"><i class="icons icon-bedroom"></i> <?php echo $list->bedroom;?></li>

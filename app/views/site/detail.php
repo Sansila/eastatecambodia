@@ -112,6 +112,7 @@
 								<div class="row">
 									<div class="col-sm-4">
 										<ul class="list-unstyled amenities amenities-detail">
+											<li><strong>Post Date:</strong> <?php echo $detail->create_date?></li>
 											<li><strong>Type:</strong> <?php echo $detail->typename?></li>
 											<li><strong>Area:</strong> <?php if($detail->housesize !="") echo $detail->housesize;else echo 0;?><sup>m2</sup></li>
 											<li><address><i class="fa fa-map-marker"></i> <?php if($detail->locationname !="") echo $detail->locationname; else echo ""; echo $detail->address;?></address></li>
