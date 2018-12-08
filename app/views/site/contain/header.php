@@ -37,9 +37,9 @@
 	<!-- Theme Responsive-->
 	<link href="<?php echo site_url('template')?>/css/theme-responsive.css" rel="stylesheet">
 	<link href="<?php echo site_url('template')?>/css/main19c7.css" rel="stylesheet">
-	<!-- <link href="<?php echo site_url('template')?>/css/multiple-select.css" rel="stylesheet"> -->
-	<!-- <link href="<?php echo site_url('template')?>/css/normalize.css" rel="stylesheet"> -->
-	<!-- <link href="<?php echo site_url('template')?>/css/stylesheet.css" rel="stylesheet"> -->
+	<!-- <link href="<?php //echo site_url('template')?>/css/multiple-select.css" rel="stylesheet"> -->
+	<!-- <link href="<?php //echo site_url('template')?>/css/normalize.css" rel="stylesheet"> -->
+	<!-- <link href="<?php //echo site_url('template')?>/css/stylesheet.css" rel="stylesheet"> -->
 
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,11 +62,11 @@
 					<div class="container">
 						<p class="pull-left text-note hidden-xs"><i class="fa fa-phone"></i> Need Support? <?php echo $profile->phone?></p>
 						<ul class="nav nav-pills nav-top navbar-right">
-							<li class="login"><a href="javascript:void(0);"><i class="fa fa-user"></i></a></li>
-							<li><a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Email"><i class="fa fa-envelope-o"></i></a></li>
-							<li><a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li>
+							<li class=""><a href="<?php echo site_url('/login')?>"><i class="fa fa-user"></i></a></li>
+							<li><a href="<?php echo $profile->email?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Email"><i class="fa fa-envelope-o"></i></a></li>
+							<li><a href="<?php echo $profile->twitter?>" title="" data-facebook="bottom" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="<?php echo $profile->facebook?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="<?php echo $profile->google_plus?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li>
 							<li>
 								<a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+">
 									<div id="google_translate_element"></div>

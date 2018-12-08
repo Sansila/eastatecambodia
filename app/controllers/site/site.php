@@ -8,6 +8,7 @@ class Site extends CI_Controller {
         $this->load->library('encrypt');
         $this->load->helper(array('form', 'url'));
         $this->load->model("site/modsite","site");
+        header('Content-Type: application/json; charset=utf-8');
     }
     public function index()
     {   
@@ -461,6 +462,13 @@ class Site extends CI_Controller {
          show_error($this->email->print_debugger());
         }
 
+    }
+    function test()
+    {
+        header("content-type:text/x-json");
+        $result = $this->site->getItemLocation();
+        // print_r($result); die;
+        echo json_encode($result);
     }
 }
 ?>

@@ -52,8 +52,27 @@
             } else {
                 return FALSE;
             }
+
+            // $query = $this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc");
+            
+            // $cat = array(
+            //     'items' => array(),
+            //     'parents' => array()
+            // );
+
+            // foreach ($query->result() as $cats) {
+            //     $cat['items'][$cats->propertylocationid] = $cats;
+            //     $cat['parents'][$cats->parent_id][] = $cats->propertylocationid;
+            // }
+
+            // if ($cat) {
+            //     $result = $this->getSubItem(0,$cat);
+            //     return $result;
+            // } else {
+            //     return FALSE;
+            // }
         }
-        function getSubItem($parent,$menu)
+        function getSubItem($parent,$menu,$loop=0)
         {
             $html = "";
             $title = ""; $gettitle = "";
@@ -73,6 +92,42 @@
                 }
                 $html.= '</ul>';
             }
+
+            // $html = array();
+            // $loop++;
+
+            // $title = ""; $gettitle = "";
+            // if (isset($menu['parents'][$parent])) {
+            //     foreach ($menu['parents'][$parent] as $itemId) {
+            //         if (!isset($menu['parents'][$itemId])) {
+            //             if($loop==3){
+            //                 $html[] = $menu['items'][$itemId]->locationname;
+
+            //             }else{
+            //                 if($loop==1){
+            //                   $html[$menu['items'][$itemId]->locationname] = array();
+
+            //                 }else{
+            //                   $html[$menu['items'][$itemId]->locationname] = array();
+
+            //                 }
+
+            //             }
+            //         }
+            //         if (isset($menu['parents'][$itemId])) {
+            //             if($loop==3){
+            //                 $html[] = $menu['items'][$itemId]->locationname;
+            //                 $html[] = $this->getSubItem($itemId,$menu);
+                    
+            //             }else{
+            //                 $html[$menu['items'][$itemId]->locationname] = $menu['items'][$itemId]->locationname;
+            //                 $html[$menu['items'][$itemId]->locationname] = $this->getSubItem($itemId,$menu,$loop);
+
+            //             }
+            //         }
+            //     }
+            // }
+            // $html=array('test'=>array('test1'=>array('sub-test1','sub-test2'),'test2'=>array('sub-test2','sub-test2')));
             return $html;
         }
         function getRelatedProperty($pid,$agent_id)
