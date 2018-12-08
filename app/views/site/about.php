@@ -8,7 +8,7 @@
 		<div class="container">
 			<div class="container">
 				<h2>About US</h2>
-				<div class="lead pgl-bg-light text-center">
+				<div class="lead pgl-bg-light">
 					<?php echo $desc->content?>
 				</div>
 			</div>

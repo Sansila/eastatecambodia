@@ -8,7 +8,7 @@ class Site extends CI_Controller {
         $this->load->library('encrypt');
         $this->load->helper(array('form', 'url'));
         $this->load->model("site/modsite","site");
-        //header('Content-Type: application/json; charset=utf-8');
+        
     }
     public function index()
     {   
@@ -259,7 +259,7 @@ class Site extends CI_Controller {
                     }
                     if($lid)
                     {
-                        $where.= " lp.lineage LIKE '%$lid->propertylocationid%' $and ";
+                        $where.= " lp.lineage LIKE '%$lid->propertylocationid%' OR p.property_name LIKE '%$arr%' $and ";
                     }else{
                         $where.= " p.property_name LIKE '%$arr%' $and ";
                     }    
@@ -423,31 +423,27 @@ class Site extends CI_Controller {
     }
     function send_contact()
     {
-        $this->load->library('email');  
-
-        $email = $this->input->post('customer_mail');
-        $name = $this->input->post('name');
-        $coment = $this->input->post('comments');
-
-         $config = Array(
-            'protocol' => 'sendmail',
-            'mailpath' => '/usr/sbin/sendmail',
-            'smtp_host' => 'ssl://mail.cabs-international.com',
-            'smtp_port' => 587,
-            'smtp_user' => 'sila@cabs-international.com', // change it to yours
-            'smtp_pass' => '@sila.com', // change it to yours
-            'mailtype' => 'html',
-            'charset' => 'iso-8859-1',
-            'wordwrap' => TRUE
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'sansila2222@gmail.com',
+            'smtp_pass' => 'sansila123456789'
         );
 
-        $message = $coment;
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
-            $this->email->from($email); // change it to yours
-            $this->email->to('sila@cabs-international.com');// change it to yours
-            $this->email->subject('Comments from customer');
-            $this->email->message($message);
+        $name  = $this->input->post('name');
+        $email = $this->input->post('customer_mail');
+        $desc  = $this->input->post('comments');
+        $owner = $this->input->post('owner');
+
+        $this->load->library('email',$config);
+        $this->email->set_newline("\r\n");
+
+        $this->email->from($email,$name);
+        $this->email->to($owner);
+        $this->email->subject('This is an email test');
+        $this->email->message($desc);
+
         if($this->email->send())
         {
             $datas['profile'] = $this->site->getSiteprofile();
@@ -459,7 +455,7 @@ class Site extends CI_Controller {
         }
         else
         {
-         show_error($this->email->print_debugger());
+            show_error($this->email->print_debugger());
         }
 
     }
