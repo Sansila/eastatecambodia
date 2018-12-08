@@ -62,13 +62,13 @@
 					<div class="container">
 						<p class="pull-left text-note hidden-xs"><i class="fa fa-phone"></i> Need Support? <?php echo $profile->phone?></p>
 						<ul class="nav nav-pills nav-top navbar-right">
-							<li class=""><a href="<?php echo site_url('/login')?>"><i class="fa fa-user"></i></a></li>
-							<li><a href="<?php echo $profile->email?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Email"><i class="fa fa-envelope-o"></i></a></li>
-							<li><a href="<?php echo $profile->twitter?>" title="" data-facebook="bottom" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="<?php echo $profile->facebook?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="<?php echo $profile->google_plus?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li>
+							<li><a target="_blank" href="<?php echo site_url('/login')?>"><i class="fa fa-user"></i></a></li>
+							<li><a target="_blank" href="<?php echo $profile->email?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Email"><i class="fa fa-envelope-o"></i></a></li>
+							<li><a target="_blank" href="<?php echo $profile->twitter?>" title="" data-facebook="bottom" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a target="_blank" href="<?php echo $profile->facebook?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a target="_blank" href="<?php echo $profile->google_plus?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li>
 							<li>
-								<a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+">
+								<a>
 									<div id="google_translate_element"></div>
 								</a>
 							</li>

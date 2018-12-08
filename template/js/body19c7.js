@@ -28524,20 +28524,21 @@ if ("function" != typeof gettext) var gettext = function(str) {
                 })
             },
             setupLocations: function(el, options) {
+                var origin   = window.location.origin;
                 if ($.ajax({
-                    url: "/site/site/test",
+                    url: origin+"/site/site/location",
                     type: "GET",
                     dataType: "json",
                     success: function(locations) {
                         var key, obj, prop, owns = Object.prototype.hasOwnProperty,
                             checkboxes = '<div class="location-content"><ul>';
                         for (key in locations) {
-                            if (checkboxes += '<li><label><input type="checkbox" name="location" value="location:' + key + '" data-checkbox-changer data-target-field="#id_location_autocomplete" data-target-value="location:' + key + '">' + gettext(key) + "</label>", owns.call(locations, key)) {
+                            if (checkboxes += '<li><label><input type="checkbox" name="location" value="' + key + '" data-checkbox-changer data-target-field="#id_location_autocomplete" data-target-value="' + key + '">' + gettext(key) + "</label>", owns.call(locations, key)) {
                                 obj = locations[key], checkboxes += "<ul>";
                                 for (prop in obj) {
-                                    if (checkboxes += '<li><label><input type="checkbox" name="location" value="location:' + prop + '" data-checkbox-changer data-target-field="#id_location_autocomplete" data-target-value="location:' + key + " > " + prop + '">' + gettext(prop) + "</label>", owns.call(obj, prop)) {
+                                    if (checkboxes += '<li><label><input type="checkbox" name="location" value="' + prop + '" data-checkbox-changer data-target-field="#id_location_autocomplete" data-target-value="' + prop + '">' + gettext(prop) + "</label>", owns.call(obj, prop)) {
                                         checkboxes += "<ul>";
-                                        for (val in obj[prop]) checkboxes += '<li><label><input type="checkbox" name="location" value="location:' + obj[prop][val] + '" data-checkbox-changer data-target-field="#id_location_autocomplete" data-target-value="location:' + key + " > " + prop + " > " + obj[prop][val] + '">' + gettext(obj[prop][val]) + "</label></li>";
+                                        for (val in obj[prop]) checkboxes += '<li><label><input type="checkbox" name="location" value="' + obj[prop][val] + '" data-checkbox-changer data-target-field="#id_location_autocomplete" data-target-value="' + obj[prop][val] + '">' + gettext(obj[prop][val]) + "</label></li>";
                                         checkboxes += "</ul>"
                                     }
                                     checkboxes += "</li>"
@@ -28547,16 +28548,6 @@ if ("function" != typeof gettext) var gettext = function(str) {
                             checkboxes += "</li>"
                         }
                         checkboxes += "</ul></div>", $(el).hasClass("js-mobile-search") ? $(checkboxes).appendTo($("#mobile-location-dropdown .location-panel")) : $(checkboxes).appendTo($("#location-dropdown .location-panel"))
-                    }
-                }), $.ajax({
-                    url: "/api/portal/landmarks/",
-                    type: "GET",
-                    dataType: "json",
-                    success: function(locations) {
-                        var city = "",
-                            radiobuttons = '<div class="location-content"><ul>';
-                        for (key in locations) locations[key].get_city_display != city && (city = locations[key].get_city_display, radiobuttons += "<li><b>" + gettext(city) + "</b></li>"), radiobuttons += '<li><label><input type="radio" name="landmark:" value="landmark:' + locations[key].name + '" data-radiobutton-changer data-target-field="#id_location_autocomplete" data-target-value="landmark:' + locations[key].name + '">' + gettext(locations[key].name) + "</label>", radiobuttons += "</li>";
-                        radiobuttons += "</ul></div>", $(el).hasClass("js-mobile-search") ? $(radiobuttons).appendTo($("#mobile-location-dropdown .landmark-panel")) : $(radiobuttons).appendTo($("#location-dropdown .landmark-panel"))
                     }
                 }),$("body").on("change", "[data-checkbox-changer]", function() {
                         var targetField = $(this).data("target-field"),
@@ -28651,6 +28642,60 @@ if ("function" != typeof gettext) var gettext = function(str) {
                                 this._updating = !0, this.setValue(value), this._updating = !1
                             };
                             /landmark:/.test(value) && this.items.length > 0 && !this._updating && window.setTimeout(clear.bind(this), 10)
+                        },
+                        load: function(h, g) {
+                            var origin   = window.location.origin;
+                            $.ajax({
+                                url:origin+"/site/site/getAutoLocation",
+                                type: "GET",
+                                headers: {
+                                    Accept: "application/json",
+                                    "Content-Type": "application/json"
+                                },
+                                dataType: "json",
+                                data: {
+                                    q: h,
+                                    autocomplete: 1
+                                },
+                                error: function() {
+                                    g()
+                                },
+                                success: function(locations) {
+                                    var key, obj, prop, owns = Object.prototype.hasOwnProperty,
+                                        choices = [];
+                                    for (key in locations)
+                                        if (owns.call(locations, key)) {
+                                            obj = locations[key];
+                                            for (prop in obj) {
+                                                switch (choiceVal = obj[prop].full_name, choiceName = obj[prop].full_name, key) {
+                                                    case "locations":
+                                                        choiceVal = obj[prop].full_name;
+                                                        break;
+                                                    case "agents":
+                                                        choiceVal = "agent:" + obj[prop].full_name;
+                                                        break;
+                                                    case "offices":
+                                                        choiceVal = "office:" + obj[prop].full_name;
+                                                        break;
+                                                    case "landmarks":
+                                                        choiceVal = "landmark:" + obj[prop].name, choiceName = obj[prop].name;
+                                                        break;
+                                                    case "condos":
+                                                    case "boreys":
+                                                    case "plot_land":
+                                                    case "projects":
+                                                        choiceVal = "project:" + obj[prop].full_name, choiceName = obj[prop].full_name
+                                                }
+                                                choices.push({
+                                                    Name: choiceName,
+                                                    Value: choiceVal,
+                                                    Group: key
+                                                })
+                                            }
+                                        }
+                                    0 == choices.length && (choices[0] = "No results found"), g(choices)
+                                }
+                            })
                         }
                     };
                     if ($("#id_location_autocomplete").length > 0) {

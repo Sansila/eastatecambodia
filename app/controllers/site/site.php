@@ -8,7 +8,7 @@ class Site extends CI_Controller {
         $this->load->library('encrypt');
         $this->load->helper(array('form', 'url'));
         $this->load->model("site/modsite","site");
-        header('Content-Type: application/json; charset=utf-8');
+        //header('Content-Type: application/json; charset=utf-8');
     }
     public function index()
     {   
@@ -249,7 +249,7 @@ class Site extends CI_Controller {
                 $num = count($arr);$i=0;
                 $where.= " AND (";
                 foreach ($arr as $arr) {
-                    $lid = $this->db->query("SELECT * FROM tblpropertylocation WHERE locationname LIKE '%$arr%' ")->row();
+                    $lid = $this->db->query("SELECT * FROM tblpropertylocation WHERE locationname = '$arr' ")->row();
                     $and = "AND";
                     $or = "OR";
                     if(++$i == $num)
@@ -463,11 +463,17 @@ class Site extends CI_Controller {
         }
 
     }
-    function test()
+    function location()
     {
         header("content-type:text/x-json");
         $result = $this->site->getItemLocation();
-        // print_r($result); die;
+        echo json_encode($result);
+    }
+    function getAutoLocation()
+    {
+        $q = $this->input->get('q');
+        header("content-type:text/x-json");
+        $result = $this->site->autoLocation($q);
         echo json_encode($result);
     }
 }

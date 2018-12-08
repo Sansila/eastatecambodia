@@ -30,7 +30,7 @@
 	                                <div class="dropdown-pane" id="location-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
 	                                    <div class="tabs-content" data-tabs-content="desktop-location-tabs">
 	                                        <div class="tabs-panel is-active location-panel" id="desktop-location-panel">
-											<div class="location-content"><?php echo $data;?></div>
+											<!-- <div class="location-content"><?php //echo $data;?></div> -->
 	                                        </div>
 	                                        <div class="tabs-panel landmark-panel" id="desktop-landmark-panel"></div>
 	                                    </div>
@@ -419,7 +419,7 @@
 	                                <div class="dropdown-pane" id="mobile-location-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
 	                                    <div class="tabs-content" data-tabs-content="mobile-location-tabs">
 	                                        <div class="tabs-panel is-active location-panel" id="mobile-location-panel">
-												<div class="location-content"><?php echo $data;?></div>
+												<!-- <div class="location-content"><?php //echo $data;?></div> -->
 	                                        </div>
 	                                        <div class="tabs-panel landmark-panel" id="mobile-landmark-panel"></div>
 	                                    </div>
@@ -780,6 +780,11 @@
 	                                        <div class="dropdown-item" data-refine-dropdown-changer data-target-button=".mobile-search-title" data-target-field="#id_land_title" data-target-value="soft">Soft Title</div>
 	                                    </div>
 	                                </div>
+	                                
+	                                <label class="checkbox">
+	                                    <!-- <input type="checkbox" name="certified"> Realestate.com.kh Certified Properties Only</label> -->
+	                                <label class="checkbox">
+	                                    <!-- <input type="checkbox" name="private"> Show Private user properties only</label> -->
 
 	                                <div class="mobile-refine-buttons">
 	                                    <button type="button" class="button hollow mobile-reset" data-reset-button>Reset</button>

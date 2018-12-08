@@ -74,60 +74,60 @@
         }
         function getSubItem($parent,$menu,$loop=0)
         {
-            $html = "";
-            $title = ""; $gettitle = "";
-            if (isset($menu['parents'][$parent])) {
-                $html.= '<ul>';
-                foreach ($menu['parents'][$parent] as $itemId) {
-                    if (!isset($menu['parents'][$itemId])) {
-                        $html.= '<label><input type="checkbox" name="location" value="'.$menu['items'][$itemId]->locationname.'" data-checkbox-changer="" data-target-field="#id_location_autocomplete" data-target-value="'.$menu['items'][$itemId]->locationname.'">'.$menu['items'][$itemId]->locationname.'</label>';
-                    }
-                    if (isset($menu['parents'][$itemId])) {
-                        $html.= '<li>';
-                        $html.= '<label><input type="checkbox" name="location" value="'.$menu['items'][$itemId]->locationname.'" data-checkbox-changer="" data-target-field="#id_location_autocomplete" data-target-value="'.$menu['items'][$itemId]->locationname.'">'.$menu['items'][$itemId]->locationname.'</label>';
-                        $html.= '<ul></ul>';
-                        $html.= $this->getSubItem($itemId,$menu);
-                        $html.= '</li>';
-                    }
-                }
-                $html.= '</ul>';
-            }
-
-            // $html = array();
-            // $loop++;
-
+            // $html = "";
             // $title = ""; $gettitle = "";
             // if (isset($menu['parents'][$parent])) {
+            //     $html.= '<ul>';
             //     foreach ($menu['parents'][$parent] as $itemId) {
             //         if (!isset($menu['parents'][$itemId])) {
-            //             if($loop==3){
-            //                 $html[] = $menu['items'][$itemId]->locationname;
-
-            //             }else{
-            //                 if($loop==1){
-            //                   $html[$menu['items'][$itemId]->locationname] = array();
-
-            //                 }else{
-            //                   $html[$menu['items'][$itemId]->locationname] = array();
-
-            //                 }
-
-            //             }
+            //             $html.= '<label><input type="checkbox" name="location" value="'.$menu['items'][$itemId]->locationname.'" data-checkbox-changer="" data-target-field="#id_location_autocomplete" data-target-value="'.$menu['items'][$itemId]->locationname.'">'.$menu['items'][$itemId]->locationname.'</label>';
             //         }
             //         if (isset($menu['parents'][$itemId])) {
-            //             if($loop==3){
-            //                 $html[] = $menu['items'][$itemId]->locationname;
-            //                 $html[] = $this->getSubItem($itemId,$menu);
-                    
-            //             }else{
-            //                 $html[$menu['items'][$itemId]->locationname] = $menu['items'][$itemId]->locationname;
-            //                 $html[$menu['items'][$itemId]->locationname] = $this->getSubItem($itemId,$menu,$loop);
-
-            //             }
+            //             $html.= '<li>';
+            //             $html.= '<label><input type="checkbox" name="location" value="'.$menu['items'][$itemId]->locationname.'" data-checkbox-changer="" data-target-field="#id_location_autocomplete" data-target-value="'.$menu['items'][$itemId]->locationname.'">'.$menu['items'][$itemId]->locationname.'</label>';
+            //             $html.= '<ul></ul>';
+            //             $html.= $this->getSubItem($itemId,$menu);
+            //             $html.= '</li>';
             //         }
             //     }
+            //     $html.= '</ul>';
             // }
-            // $html=array('test'=>array('test1'=>array('sub-test1','sub-test2'),'test2'=>array('sub-test2','sub-test2')));
+
+            $html = array();
+            $loop++;
+
+            $title = ""; $gettitle = "";
+            if (isset($menu['parents'][$parent])) {
+                foreach ($menu['parents'][$parent] as $itemId) {
+                    if (!isset($menu['parents'][$itemId])) {
+                        if($loop==3){
+                            $html[] = $menu['items'][$itemId]->locationname;
+
+                        }else{
+                            if($loop==1){
+                              $html[$menu['items'][$itemId]->locationname] = array();
+
+                            }else{
+                              $html[$menu['items'][$itemId]->locationname] = array();
+
+                            }
+
+                        }
+                    }
+                    if (isset($menu['parents'][$itemId])) {
+                        if($loop==3){
+                            $html[] = $menu['items'][$itemId]->locationname;
+                            $html[] = $this->getSubItem($itemId,$menu);
+                    
+                        }else{
+                            $html[$menu['items'][$itemId]->locationname] = $menu['items'][$itemId]->locationname;
+                            $html[$menu['items'][$itemId]->locationname] = $this->getSubItem($itemId,$menu,$loop);
+
+                        }
+                    }
+                }
+            }
+
             return $html;
         }
         function getRelatedProperty($pid,$agent_id)
@@ -191,6 +191,17 @@
         {
             $sql = $this->db->query("SELECT * FROM tblarticle WHERE menu_id = '$menu_id' ")->row();
             return $sql;
+        }
+        function autoLocation($q)
+        {
+            $data = array(); $all = array();
+            $row = $this->db->query("SELECT count(*) as coun_all FROM tblpropertylocation WHERE locationname LIKE '%$q%' ")->row();
+            $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE locationname LIKE '%$q%' ")->result();
+            foreach ($sql as $val) {
+                $all[] = array('count'=>$row->coun_all,'full_name'=>$val->locationname);
+            }
+            $data = array('locations' => $all);
+            return $data;
         }
 }
 
