@@ -978,7 +978,7 @@
 												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid)?>"><?php echo $list->property_name?></a></h3>
 												<address class="module line-clamp"><?php echo $list->address?></address>
 											</div>
-											<div class="amenities clearfix">
+											<div class="amenities clearfix" style="height: 40px;">
 												<ul class="pull-left">
 													<li><strong>Area:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
 												</ul>

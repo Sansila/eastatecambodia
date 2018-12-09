@@ -40,9 +40,10 @@ class Propertytype extends CI_Controller {
 		$input = $this->input->post();
 		$protype_id = $input['protype_id'];
 		$data = array(
+			'menu' => $input['menu_id'],
 			'typename' => $input['protype_name'],
 			'type_note' => $input['protype_note'],
-			'type_status' => $input['is_active']
+			'type_status' => $input['is_active'],
 		);
 		$count = $this->prop->vaidate($input['protype_name'],$protype_id);
 		$msg = '';

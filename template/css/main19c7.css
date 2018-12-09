@@ -8084,7 +8084,7 @@ button.swiper-pagination-bullet {
     width: 100%;
     overflow: hidden;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
     box-sizing: border-box;
     border-radius: 3px
 }

@@ -141,7 +141,9 @@
         }
         function get_menu()
         {
-            $query = $this->db->query("SELECT * FROM tblmenus as m INNER JOIN tbllocation as l ON m.menu_type = l.location_id ORDER BY menu_id asc");
+            $query = $this->db->query("SELECT * FROM tblmenus as m 
+                                       INNER JOIN tbllocation as l ON m.menu_type = l.location_id 
+                                       ORDER BY m.menu_id asc");
             $cat = array(
                 'items' => array(),
                 'parents' => array()
@@ -164,12 +166,12 @@
                 foreach ($menu['parents'][$parent] as $menu_s) {
                     if (!isset($menu['parents'][$menu_s])) {
                         $html .= "<li>";
-                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id) . "'>" . $menu['items'][$menu_s]->menu_name . "</a>"; //no sub
+                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id).'?type='.$menu['items'][$menu_s]->menu_id. "'>" . $menu['items'][$menu_s]->menu_name . "</a>"; //no sub
                         $html .= "</li>";
                     }
                     if (isset($menu['parents'][$menu_s])) {
                         $html .= "<li class='dropdown'>";
-                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id)  . "'>" . $menu['items'][$menu_s]->menu_name . "</a>";
+                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id). "'>" . $menu['items'][$menu_s]->menu_name . "</a>";
                         $html .= "<ul class='dropdown-menu'>";
                         $html .= $this->generateTree($menu_s,$menu);
                         $html .= "</li>";

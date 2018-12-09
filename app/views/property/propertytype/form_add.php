@@ -13,7 +13,7 @@ if(isset($_GET['p'])){
 }
 if(isset($id))
 {
-  $row = $this->db->query(" SELECT * FROM tblpropertytype WHERE typeid='$id' ")->row();
+  $row = $this->db->query(" SELECT * FROM tblpropertytype as pt left join tblmenus as m ON pt.menu = m.menu_id WHERE pt.typeid='$id' ")->row();
 }
 
 
@@ -70,7 +70,28 @@ a{
                               <input type="text"  class="form-control input-sm hide" name="protype_id" value='<?php echo isset($row->typeid)?$row->typeid:""; ?>' id="protype_id">
                             </div>                   
                           </div>
-
+                        </div>
+                        <div class="form-group">
+                          <label class='col-lg-2 control-label'>Addon Menu</label>
+                          <div class="col-lg-5"> 
+                            <div class="col-md-12">
+                              <select class="form-control" id="id_menu">
+                                <option value="">-select-</option>
+                                <?php 
+                                  $query = $this->db->query("SELECT * FROM tblmenus where is_active = 1")->result();
+                                  foreach($query as $val)
+                                  {
+                                    $sel = "";
+                                    if($row->menu == $val->menu_id)
+                                      $sel = "selected";
+                                ?>
+                                  <option <?php echo $sel;?> value="<?php echo $val->menu_id?>"><?php echo $val->menu_name?></option>
+                                <?php
+                                  }
+                                ?>
+                              </select>
+                            </div>                   
+                          </div>
                         </div>
                         <div class="form-group">
                           <label class='col-lg-2 control-label'>Note</label>
@@ -170,6 +191,7 @@ a{
             protype_id:$("#protype_id").val(),
             protype_name:$("#protype_name").val(),
             protype_note:$("#protype_note").val(),
+            menu_id:$('#id_menu').val(),
             is_active:is_active
           },
           success:function(data) {

@@ -11,7 +11,7 @@
 	$return_loc = ''; 
 	$list_type = ""; 
 	$activelist = ''; 
-	$activegrid = ''; 
+	$activegrid = 'active'; 
 	$hideg =""; 
 	$hidel = "hide";
 	$floorarea_first = "";
@@ -27,7 +27,8 @@
 	$bathroom_last = "";
 	$park_first = "";
 	$park_last = "";
-	$features = "";
+    $features = "";
+    $type = "";
 
 	if(isset($_GET['status']))
 		$status = $_GET['status'];
@@ -74,7 +75,9 @@
 	if(isset($_GET['garages__lte']))
 		$park_last = $_GET['garages__lte'];
 	if(isset($_GET['features']))
-		$features = $_GET['features'];
+        $features = $_GET['features'];
+    if(isset($_GET['type']))
+        $type = $_GET['type'];
 
 	if($location != "")
 	{
@@ -95,13 +98,15 @@
 	{
 		if($list_type == "grid")
 		{
-			$activegrid = "active";
+            $activegrid = "active";
+            $activelist = "";
 			$hideg = "";
 			$hidel = "hide";
 		}
 		if($list_type == "lists")
 		{
-			$activelist = "active";
+            $activelist = "active";
+            $activegrid = "";
 			$hidel = "";
 			$hideg = "hide";
 		}
@@ -924,7 +929,7 @@
 		    
 
 
-		    <form id="hidden-search-form" class="search_all_form" action="<?php echo site_url('site/site/search')?>" data-view-type="">
+		    <form id="hidden-search-form" class="search_all_form" action="<?php echo site_url('site/site/properties/'.$id)?>" data-view-type="">
 
 				<select id="available" name="available">
 		            <option value="0">Sale</option>
@@ -1054,7 +1059,8 @@
 					<option <?php if($sort == 'Area') echo "selected"; else echo "";?> value="Area">Area</option>
 					<option <?php if($sort == 'Date') echo "selected"; else echo "";?> value="Date">Date</option>
 				</select>
-
+                
+                <input id="type" name="type" type="text" value="<?php echo $type?>" />
 		        
 		    </form>
 			<!-- End Advanced Search -->
@@ -1062,17 +1068,17 @@
 			<!-- Begin Properties -->
 			<section class="pgl-properties pgl-bg-grey">
 				<div class="container">
-					<h3>Search Result<?php echo '('.count($result).')';?></h3>
+					<h2>Properties</h2>
 					<div class="properties-full properties-listing properties-listfull">
 						<div class="listing-header clearfix">
 							<ul class="list-inline list-icons pull-left">
 								<li class="<?php echo $activegrid;?>">
-									<a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
+									<a href="<?php echo site_url('site/site/properties/'.$id.'/?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
 										<i class="fa fa-th"></i>
 									</a>
 								</li>
 								<li class="<?php echo $activelist;?>">
-									<a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
+									<a href="<?php echo site_url('site/site/properties/'.$id.'/?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
 										<i class="fa fa-th-list"></i>
 									</a>
 								</li>
@@ -1237,5 +1243,3 @@
 			<!-- End Properties -->
 			
 		</div>
-	
-

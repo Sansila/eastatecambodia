@@ -87,8 +87,11 @@ class Property extends CI_Controller {
 			'title'=> $this->input->post('title'),
 			'type_id'=> $this->input->post('category'),
 			'latitude'=> $this->input->post('latitude'),
-			'longtitude'=> $this->input->post('longtitude'),
-			'create_date'=> date('Y-m-d'),
+			'longtitude'=> $this->input->post('longtitude')
+			
+		);
+		$data1 = array(
+			'create_date'=> date('Y-m-d')
 		);
 
 		$msg='';
@@ -102,7 +105,7 @@ class Property extends CI_Controller {
 			if($count > 0) {
 				$msg = "Property Is already Exist...!";
 			} else {
-				$pro_id = $this->pro->save($data, $pro_id);
+				$pro_id = $this->pro->save(array_merge($data,$data1), $pro_id);
 				$msg="Property Has Created...!";
 			}
 
