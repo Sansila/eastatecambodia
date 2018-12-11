@@ -237,6 +237,8 @@ class Property extends CI_Controller {
 		$s_id=$this->input->post('s_id');
 		$p_type = $this->input->post('p_type');
 		$user_add = $this->input->post('user_add');
+		$p_status = $this->input->post('p_status');
+		$pro_loc = $this->input->post('pro_loc');
 
 		$where = "";
 		$var = $this->session->all_userdata();
@@ -252,6 +254,10 @@ class Property extends CI_Controller {
 			$where.= " AND pl.pid = '$s_id' ";
 		if($user_add !="")
 			$where.= " AND u.user_name LIKE '%$user_add%' ";
+		if($p_status !="")
+			$where.= " AND pl.p_type = '$p_status' ";
+		if($pro_loc !="")
+			$where.= " AND l.lineage LIKE '%$pro_loc%' ";
 
 		$sql="SELECT *
 		FROM tblproperty pl
@@ -259,6 +265,8 @@ class Property extends CI_Controller {
 		on pl.type_id = pt.typeid
 		left join admin_user as u
 		on u.userid = pl.agent_id
+		left join tblpropertylocation l 
+		on pl.lp_id = l.propertylocationid
 		WHERE pl.p_status=1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.pid asc";
 		$table='';
 		$pagina='';
@@ -273,7 +281,7 @@ class Property extends CI_Controller {
 			$visibled='No';
 			$typ='';
 			$lay='';
-			$property_type;
+			$property_type ="";
 			if($row->p_status==1)
 				$visibled="Yes";
 			if($row->p_type == 1)

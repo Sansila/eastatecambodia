@@ -122,7 +122,7 @@
 										</ul>
 									</div>
 									<div class="col-sm-8">
-										<h2><?php echo $detail->property_name;?></h2>
+										<h2 style="font-size: 1.5em"><?php echo $detail->property_name;?></h2>
 										<?php 
 											echo $detail->description;
 										?>

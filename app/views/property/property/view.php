@@ -96,7 +96,28 @@
 												?>
 										   </select>
 										</th>
+										<th >
+											<select class="form-control" id="pro_loc" onchange="getdata(1);">
+												<option value="">-select-</option>
+												<?php 
+													$myloc = $this->db->query("SELECT * FROM tblpropertylocation WHERE parent_id = 0")->result();
+													foreach ($myloc as $val) {
+												?>
+													<option value="<?php echo $val->propertylocationid?>"><?php echo $val->locationname;?></option>
+												<?php
+													}
+												?>
+											</select>
+										</th>
 										<th ></th>
+										<th >
+											<select class="form-control" id="pro_status" onchange="getdata(1);">
+												<option value="">-select-</option>
+												<option value="1">Sale</option>
+												<option value="2">Rent</option>
+												<option value="3">Rent & Sale</option>
+											</select>
+										</th>
 										<th ></th>
 										<th width='150'>
 										</th>
@@ -261,6 +282,8 @@
 			var s_id = $('#s_store_id').val();
 			var p_type = $('#pro_type').val();
 			var user = $('#s_user_name').val();
+			var p_status = $("#pro_status").val();
+			var pro_loc = $("#pro_loc").val();
           	
           	var perpage=$('#perpage').val();
 			$.ajax({
@@ -275,7 +298,9 @@
 		            		'perpage':perpage,
 							's_id': s_id,
 							'p_type': p_type,
-							'user_add' : user
+							'user_add' : user,
+							'p_status': p_status,
+							'pro_loc': pro_loc
 		            	},
 		            success:function(data) {
 		              $(".list").html(data.data); console.log(data);

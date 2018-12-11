@@ -9,7 +9,7 @@
 
 	 ?>
 
-			<div id="content-header" class="mini">
+			<div id="content-header" class="mini hide">
 				<h1>Dashboard</h1>
 				<ul class="mini-stats box-3">
 					<li>

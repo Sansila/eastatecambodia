@@ -129,13 +129,13 @@
 
 	                            <div class="search-field-wrapper search-type desktop-search-type">
 	                                <button data-toggle="search-type-dropdown" class="search-field  expanded desktop-search-field">
-	                                    <span class="text-label" style="text-transform: capitalize;"><?php if($status == "all") echo "Property Status"; else echo $status;?></span>
+	                                    <span class="text-label" style="text-transform: capitalize;"><?php if($status == "all") echo "Sale"; else echo $status;?></span>
 	                                    <span class="icon-down"></span>
 	                                </button>
 	                                <div class="dropdown-pane search-type" id="search-type-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
-	                                	<div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="all">Property Status</div>
+	                                	<!-- <div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="all">Property Status</div> -->
+	                                	<div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="sale">Sale</div>
 	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="rent">Rent</div>
-	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="sale">Sale</div>
 	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="both">Rent & Sale</div>
 	                                    <!--<div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="condo">Condo</div>-->
 	                                </div>
@@ -434,7 +434,7 @@
 	                                            </div>
 
 	                                        </div>
-	                                        <div class="columns">
+	                                        <div class="columns hide">
 
 	                                            <div class="search-field-wrapper search-features">
 	                                                <button data-toggle="features-dropdown" class="search-field  expanded">
@@ -547,13 +547,13 @@
 	                             <div class="search-field-wrapper search-type mobile-search-type">
 	                                <button data-toggle="mobile-search-type-dropdown" class="search-field hollow expanded mobile-search-field">
 	                                    <span class="text-label">Looking to</span>
-	                                    <span class="text-label-selected" style="text-transform: capitalize;"><?php if($status == "all") echo "Property Status"; else echo $status;?></span>
+	                                    <span class="text-label-selected" style="text-transform: capitalize;"><?php if($status == "all") echo "Sale"; else echo $status;?></span>
 	                                    <span class="icon-down"></span>
 	                                </button>
 	                                <div class="dropdown-pane search-type" id="mobile-search-type-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
-	                                	<div class="dropdown-item" data-dropdown-changer data-target-button=".mobile-search-type" data-target-field="#id_property_type" data-target-value="all">Property Status</div>
+	                                	<!-- <div class="dropdown-item" data-dropdown-changer data-target-button=".mobile-search-type" data-target-field="#id_property_type" data-target-value="all">Property Status</div> -->
+	                                	<div class="dropdown-item" data-dropdown-changer data-target-button=".mobile-search-type" data-target-field="#id_property_type" data-target-value="sale">Sale</div>
 	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".mobile-search-type" data-target-field="#id_property_type" data-target-value="rent">Rent</div>
-	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".mobile-search-type" data-target-field="#id_property_type" data-target-value="sale">Sale</div>
 	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".mobile-search-type" data-target-field="#id_property_type" data-target-value="both">Rent & Sale</div>
 	                                    <!--<div class="dropdown-item" data-dropdown-changer data-target-button=".mobile-search-type" data-target-field="#id_property_type" data-target-value="condo">Condo</div>-->
 	                                </div>
@@ -703,7 +703,7 @@
 	                                    </div>
 	                                </div>
 
-	                                <div class="search-field-wrapper search-features">
+	                                <div class="search-field-wrapper search-features hide">
 	                                    <button data-toggle="mobile-features-dropdown" class="search-field hollow expanded">
 	                                        <span class="text-label">Main Features</span>
 	                                        <span class="text-label-selected">Any</span>
@@ -932,7 +932,7 @@
 
 		        <select multiple="multiple" method="get" id="id_property_type" name="status">
 		            <option value="">---------</option>
-		            <option <?php if($status == "all") echo "selected"; else echo "";?> value="all">Property Status</option>
+		            <!-- <option <?php if($status == "all") //echo "selected"; else echo "";?> value="all">Property Status</option> -->
 		            <option <?php if($status == "sale") echo "selected"; else echo "";?> value="sale">Sale</option>
 		            <option <?php if($status == "rent") echo "selected"; else echo "";?> value="rent">Rent</option>
 		            <option <?php if($status == "both") echo "selected"; else echo "";?> value="both">Both</option>
@@ -958,7 +958,7 @@
 					</optgroup>
 		        </select>
 
-		        <select multiple="multiple" id="id_features" name="features[]">
+		        <!-- <select multiple="multiple" id="id_features" name="features[]">
 		        	<?php 
 		        		$f_title = array();
 		        		foreach ($features as $feat) {
@@ -987,7 +987,7 @@
 		            <option <?php if(isset($f_title['firesprinkler'])) echo "selected"; else echo "";?> value="firesprinkler">Fire sprinkler system</option>
 		            <option <?php if(isset($f_title['oceanviews'])) echo "selected"; else echo "";?> value="oceanviews">Ocean Views</option>
 		            <option <?php if(isset($f_title['cityviews'])) echo "selected"; else echo "";?> value="cityviews">City Views</option>
-		        </select>
+		        </select> -->
 
 		        <input id="id_car_spaces__lte" min="0" name="car_spaces__lte" type="number" value="<?php echo $park_last;?>" />
 
