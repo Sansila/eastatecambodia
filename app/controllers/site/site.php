@@ -72,6 +72,7 @@ class Site extends CI_Controller {
         $data['image'] = $this->site->getImageByID($pid);
         $data['type'] = $this->site->getPropertyType();
         $data['location'] = $this->site->getPropertyLocation();
+        $this->site->updateHit($pid);
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/detail',$data);
         $this->load->view('site/contain/footer',$datas);
@@ -246,7 +247,8 @@ class Site extends CI_Controller {
             {
                 $location = trim($location, ';');
                 $arr = explode(';', $location);
-                $num = count($arr);$i=0;
+                $num = count($arr);
+                $i=0;
                 $where.= " AND (";
                 foreach ($arr as $arr) {
                     $lid = $this->db->query("SELECT * FROM tblpropertylocation WHERE locationname = '$arr' ")->row();

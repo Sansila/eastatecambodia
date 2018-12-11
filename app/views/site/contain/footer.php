@@ -7,9 +7,7 @@
 							<h2>Contact detail</h2>
 							<p><?php echo $profile->address?></p>
 							<address>
-								<i class="fa fa-map-marker"></i> Office : <?php echo $profile->phone?><br>
 								<i class="fa fa-phone"></i> Mobile : <?php echo $profile->phone?><br>
-								<i class="fa fa-fax"></i> Fax : <?php echo $profile->phone?><br>
 								<i class="fa fa-envelope-o"></i> Mail: <?php echo $profile->email?><!-- <a href="mailto:pixelgeklab@gmail.com">Pixelgeklab@gmail.com</a> -->
 							</address>
 						</div>

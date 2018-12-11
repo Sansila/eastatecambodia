@@ -28,7 +28,7 @@
 	$park_first = "";
 	$park_last = "";
     $features = "";
-    $type = "";
+    $types = "";
 
 	if(isset($_GET['status']))
 		$status = $_GET['status'];
@@ -77,7 +77,7 @@
 	if(isset($_GET['features']))
         $features = $_GET['features'];
     if(isset($_GET['type']))
-        $type = $_GET['type'];
+        $types = $_GET['type'];
 
 	if($location != "")
 	{
@@ -1060,7 +1060,7 @@
 					<option <?php if($sort == 'Date') echo "selected"; else echo "";?> value="Date">Date</option>
 				</select>
                 
-                <input id="type" name="type" type="text" value="<?php echo $type?>" />
+                <input id="type" name="type" type="text" value="<?php echo $types?>" />
 		        
 		    </form>
 			<!-- End Advanced Search -->
@@ -1142,6 +1142,7 @@
 														echo "Rent & Sale";	
 												?>
 											</span>
+											<span class="label price"><?php echo 'P'.$list->pid; ?></span>
 										</span>
 									</div>
 								</div>
@@ -1211,6 +1212,7 @@
 															echo "Rent & Sale";	
 													?>
 												</span>
+												<span class="label price"><?php echo 'P'.$grid->pid ?></span>
 											</span>
 										</div>
 										<div class="property-thumb-info-content" style="height: 120px;">

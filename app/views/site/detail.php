@@ -80,6 +80,7 @@
 														echo "Rent & Sale";
 												?>
 											</span>
+											<span class="label price"><?php echo 'P'.$img->pid;?></span>
 										</span>
 									</li>
 									<?php

@@ -76,8 +76,27 @@
 									<tr class='remove_tag'>
 										<th></th>
 										<th>
-											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/> 
+											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_user_name'/>
 										</th>
+										<th><input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_id'/></th>
+										<th>
+											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/>
+										</th>
+										<th >
+										   <select class="form-control input-sm" id="pro_type" name="pro_type" onchange="getdata(1);">
+										   		<option value="">-select-</option>
+												<?php 
+													$sql = $this->db->query("SELECT * FROM tblpropertytype where type_status =1 ")->result();
+													foreach($sql as $val)
+													{
+												?>
+													<option value="<?php echo $val->typeid?>"><?php echo $val->typename?></option>
+												<?php
+													}
+												?>
+										   </select>
+										</th>
+										<th ></th>
 										<th ></th>
 										<th width='150'>
 										</th>
@@ -239,6 +258,9 @@
           	var m="<?PHP echo $m?>";
           	var p="<?PHP echo $p?>";
           	var s_name=$('#s_store_name').val();
+			var s_id = $('#s_store_id').val();
+			var p_type = $('#pro_type').val();
+			var user = $('#s_user_name').val();
           	
           	var perpage=$('#perpage').val();
 			$.ajax({
@@ -250,7 +272,10 @@
 		            		'p':p,
 		            		'page':page,
 		            		's_name':s_name,
-		            		'perpage':perpage
+		            		'perpage':perpage,
+							's_id': s_id,
+							'p_type': p_type,
+							'user_add' : user
 		            	},
 		            success:function(data) {
 		              $(".list").html(data.data); console.log(data);

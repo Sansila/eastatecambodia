@@ -10,11 +10,15 @@ class Property extends CI_Controller {
 		//$this->lang->load('stock', 'english');
 		$this->load->model("property/modproperty","pro");			
 		$this->thead=array("No"=>'no',
-							 "Property Name"=>'Property Name',
-							 "Category"=> "Category",
-							 "Property Type" => "Property Type",
-							 "Visibled"=>'visibled',
-							 "Action"=>'Action'							 	
+							"User Name"=>'User Name',
+							"Pro_Number"=>'Pro_Number',
+							"Property Name"=>'Property Name',
+							"Category"=> "Category",
+							"Location"=> "Location",
+							"Hit" => "Hit",
+							"Property Type" => "Property Type",
+							"Visibled"=>'visibled',
+							"Action"=>'Action'							 	
 							);
 		$this->idfield="categoryid";
 		
@@ -230,12 +234,32 @@ class Property extends CI_Controller {
 	function getdata(){
 		$perpage=$this->input->post('perpage');
 		$s_name=$this->input->post('s_name');
-		
+		$s_id=$this->input->post('s_id');
+		$p_type = $this->input->post('p_type');
+		$user_add = $this->input->post('user_add');
+
+		$where = "";
+		$var = $this->session->all_userdata();
+		$user = $var['userid'];
+
+		if($user == 4)
+			$where.= "";
+		else
+			$where.= " AND pl.agent_id = '$user' ";
+		if($p_type !="")
+			$where.= " AND pt.typeid = '$p_type' ";
+		if($s_id !="")
+			$where.= " AND pl.pid = '$s_id' ";
+		if($user_add !="")
+			$where.= " AND u.user_name LIKE '%$user_add%' ";
+
 		$sql="SELECT *
 		FROM tblproperty pl
 		left join tblpropertytype pt
 		on pl.type_id = pt.typeid
-		WHERE pl.p_status=1 AND pl.property_name LIKE '%$s_name%' order by pl.pid asc";
+		left join admin_user as u
+		on u.userid = pl.agent_id
+		WHERE pl.p_status=1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.pid asc";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
@@ -258,11 +282,25 @@ class Property extends CI_Controller {
 				$property_type = "Rent";
 			if($row->p_status == 3)
 				$property_type = "Rent & Sale";
-			
+				
+			if($row->lp_id > 0)
+			{
+				$loc = $this->pro->getPropertyLocation($row->lp_id);
+				if($loc)
+					$loc = $loc;
+				else
+					$loc = "";
+			}else{
+				$loc = "";
+			}
 			$table.= "<tr>
 				 <td class='no'>".$i."</td>
+				 <td class='user'>".$row->user_name."</td>
+				 <td class='id'>P".$row->pid."</td>	
 				 <td class='name'>".$row->property_name."</td>	
 				 <td class='name'>".$row->typename."</td>	
+				 <td class='name'>".$loc."</td>
+				 <td class='hit'>".$row->hit."</td>
 				 <td class='name'>".$property_type."</td>		
 				 <td class='type'>".$visibled."</td>
 				 <td class='remove_tag no_wrap'>";

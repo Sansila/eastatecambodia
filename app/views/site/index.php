@@ -972,6 +972,7 @@
 																echo "Rent & Sale";	
 														?>
 													</span>
+													<span class="label price"><?php echo 'P'.$list->pid; ?></span>
 												</span>
 											</div>
 											<div class="property-thumb-info-content" style="height: 120px;">

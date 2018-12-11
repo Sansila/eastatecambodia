@@ -16,4 +16,23 @@
             }
             return $pro_id;
         }
+        function getPropertyLocation($lpid)
+        {
+            $row = $this->db->query("SELECT * FROM tblpropertylocation where propertylocationid = $lpid ")->row();
+
+            $row->lineage = trim($row->lineage, '-');
+            $arr = explode('-', $row->lineage);
+            $num = count($arr);
+            $i = 1; $main_id = "";;
+            foreach($arr as $l)
+            {
+                if($i == 1)
+                {
+                    $main_id .= $l;
+                }
+                $i++;
+            }
+            $result = $this->db->query("SELECT * FROM tblpropertylocation where propertylocationid = $main_id ")->row();
+            return $result->locationname;
+        }
     }       

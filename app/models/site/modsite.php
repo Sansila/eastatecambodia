@@ -171,8 +171,11 @@
                     }
                     if (isset($menu['parents'][$menu_s])) {
                         $html .= "<li class='dropdown'>";
-                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id). "'>" . $menu['items'][$menu_s]->menu_name . "</a>";
+                        $html .= "<a class='dropdown-toggle' data-toggle='dropdown'>" . $menu['items'][$menu_s]->menu_name . "</a>";
                         $html .= "<ul class='dropdown-menu'>";
+                        $html .= "<li>";
+                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id)."'>All</a>"; //no sub
+                        $html .= "</li>";
                         $html .= $this->generateTree($menu_s,$menu);
                         $html .= "</li>";
                         $html .= "</ul>";
@@ -204,6 +207,15 @@
             }
             $data = array('locations' => $all);
             return $data;
+        }
+        function updateHit($pid)
+        {
+            $row = $this->db->query("SELECT hit FROM tblproperty where pid = '$pid' ")->row();
+            $hit = $row->hit + 1;
+            $data = array(
+                'hit' => $hit
+            );
+            $this->db->where('pid',$pid)->update('tblproperty',$data);
         }
 }
 
