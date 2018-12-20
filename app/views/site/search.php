@@ -1076,7 +1076,7 @@
 										<i class="fa fa-th-list"></i>
 									</a>
 								</li>
-								<li><a href="#"><i class="fa fa-map-marker"></i></a></li>
+								<li><a href="list-map.html"><i class="fa fa-map-marker"></i></a></li>
 							</ul>
 
 							<ul class="list-inline list-sort pull-right">
