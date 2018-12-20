@@ -291,11 +291,28 @@ class Property extends CI_Controller {
 			if($row->p_status == 3)
 				$property_type = "Rent & Sale";
 				
-			if($row->lp_id > 0)
+			if($row->lp_id != 0)
 			{
-				$loc = $this->pro->getPropertyLocation($row->lp_id);
-				if($loc)
-					$loc = $loc;
+				//$locs = $this->pro->getPropertyLocation($row->lp_id);
+				$arr = ""; $lineage = "";
+				//$row_id = $this->db->query("select * from tblpropertylocation where propertylocationid = '$row->lp_id")->row()->lineage;
+				$lineage = $row->lineage;
+				$lineage = trim($lineage, '-');
+				$arr = explode('-', $lineage);
+				$num = count($arr);
+				$a = 1; $main_id = "";;
+				foreach($arr as $l)
+				{
+					if($a == 1)
+					{
+						$main_id.= $l;
+					}
+					$a++;
+				}
+				$result = $this->db->query("select * from tblpropertylocation where propertylocationid = '$main_id' ")->row();
+
+				if($result)
+					$loc = $result->locationname;
 				else
 					$loc = "";
 			}else{
