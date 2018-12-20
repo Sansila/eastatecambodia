@@ -63,8 +63,18 @@
 
             <div class="widget-content nopadding">
                 <form enctype="multipart/form-data" name="basic_validate" id="basic_validate" method="POST" action="" class="form-horizontal basic_validate">
-                    
-                        <div class="form-group">
+
+                    <div class="accordion" id="accordionExample">
+                      <div class="card">
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></button>
+                          </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="form-group">
                             <label class='col-lg-2 control-label'>Property Title</label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
@@ -228,266 +238,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Floor</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="floor" value='<?php echo isset($row->floor)?"$row->floor":""; ?>' id="floor">
-                                </div>                   
-                            </div>
-
-                            <label class='col-lg-2 control-label hide'>Land Size</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12 hide">
-                                    <input type="text"  class="form-control input-sm" name="land_size" value='<?php echo isset($row->landsize)?"$row->landsize":""; ?>' id="land_size">
-                                </div>                   
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Story</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="story" value='<?php echo isset($row->story)?"$row->story":""; ?>' id="story">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Pool</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="pool" value='<?php echo isset($row->pool)?"$row->pool":""; ?>' id="pool">
-                                </div>                   
-                            </div>
-                            
-                        </div>
-
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Direction</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="direction" value='<?php echo isset($row->direction)?"$row->direction":""; ?>' id="direction">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Bedroom</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="bedroom" value='<?php echo isset($row->bedroom)?"$row->bedroom":""; ?>' id="bedroom">
-                                </div>                   
-                            </div>
-                            
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Bathroom</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="bathroom" value='<?php echo isset($row->bathroom)?"$row->bathroom":""; ?>' id="bathroom">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Living Room</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="living_room" value='<?php echo isset($row->livingroom)?"$row->livingroom":""; ?>' id="living_room">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Kitchen</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="kitchen" value='<?php echo isset($row->kitchen)?"$row->kitchen":""; ?>' id="kitchen">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Dining Room</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="dining_room" value='<?php echo isset($row->dinning_room)?"$row->dinning_room":""; ?>' id="dining_room">
-                                  
-                                </div>                   
-                            </div>
-                        </div>
-
-                        <!-- <div class="form-group">
-                            <label class='col-lg-2 control-label'>Is Active</label>
-                            <div class=" col-lg-3"> 
-                                <div class="col-md-2">
-                                    <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->is_active)){ if($row->is_active==1) echo 'checked'; }else{ echo "checked"; } ?>>
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Is Active</label>
-                            <div class=" col-lg-3"> 
-                                <div class="col-md-2">
-                                    <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->is_active)){ if($row->is_active==1) echo 'checked'; }else{ echo "checked"; } ?>>
-                                </div>                   
-                            </div>
-                        </div> -->
-                        
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Furniture</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="furniture" value='<?php echo isset($row->furniture)?"$row->furniture":""; ?>' id="furniture">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Airconditioner</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="aircon" value='<?php echo isset($row->air_conditional)?"$row->air_conditional":""; ?>' id="aircon">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Parking</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="parking" value='<?php echo isset($row->parking)?"$row->parking":""; ?>' id="parking">
-                                  
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Steam & Sauna</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="st_sa" value='<?php echo isset($row->steamandsouna)?"$row->steamandsouna":""; ?>' id="st_sa">
-                                  
-                                </div>                   
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Garden</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="garden" value='<?php echo isset($row->garden)?"$row->garden":""; ?>' id="garden">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Balcony</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="balcony" value='<?php echo isset($row->balcony)?"$row->balcony":""; ?>' id="balcony">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Terrace</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="terrace" value='<?php echo isset($row->terrace)?"$row->terrace":""; ?>' id="terrace">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Elevator</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="elevator" value='<?php echo isset($row->elevator)?"$row->elevator":""; ?>' id="elevator">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Stairs</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="stairs" value='<?php echo isset($row->stairs)?"$row->stairs":""; ?>' id="stairs">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Title</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <select class="form-control" id="pro_title">
-                                        <option value="0">Please Select</option>
-                                        <option value="1" <?php if(isset($row->title)){ if($row->title == 1) echo "selected"; }?> >Soft Title</option>
-                                        <option value="2" <?php if(isset($row->title)){ if($row->title == 2) echo "selected"; }?> >Hard Title</option>
-                                    </select>
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Contract Allowed</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control input-sm" name="contract_allowed" value='<?php echo isset($row->contract)?"$row->contract":""; ?>' id="contract_allowed">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Commission</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="commission" value='<?php echo isset($row->commision)?"$row->commision":""; ?>' id="commission">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Urgent Sale</label>
-                            <div class=" col-lg-4"> 
-                                <div class="col-md-2">
-                                    <input type="checkbox"  class="form-control input-sm " name="urgent" id="urgent" <?php if (isset($row->urgent)){ if($row->urgent==1) echo 'checked'; }else{ echo "checked"; } ?>>
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Service Provided</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="provider" value='<?php echo isset($row->service_provided)?"$row->service_provided":""; ?>' id="provider">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Gym</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="gym" value='<?php echo isset($row->gym)?"$row->gym":""; ?>' id="gym">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Advantage</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="advantage" value='<?php echo isset($row->advantage)?"$row->advantage":""; ?>' id="advantage">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Email Owner</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="email_owner" value='<?php echo isset($row->email_owner)?"$row->email_owner":""; ?>' id="email_owner">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Owner Name</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="owner_name" value='<?php echo isset($row->ownername)?"$row->ownername":""; ?>' id="owner_name">
-                                </div>                   
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Contact Owner</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="owner_contact" value='<?php echo isset($row->contact_owner)?"$row->contact_owner":""; ?>' id="owner_contact">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>Available Property</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <select class="form-control" id="available_pro">
-                                        <option value="1" <?php if(isset($row->available)){ if($row->available == 1) echo "selected"; }?> >Avialable</option>
-                                        <option value="0" <?php if(isset($row->available)){ if($row->available == 0) echo "selected"; }?> >Unavialable</option>
-                                    </select>
-                                </div>                   
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class='col-lg-2 control-label'>Start Date</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="start_date" value='<?php echo isset($row->add_date)?"$row->add_date":date('Y-m-d'); ?>' id="start_date">
-                                </div>                   
-                            </div>
-                            <label class='col-lg-2 control-label'>End Date</label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="end_date" value='<?php echo isset($row->end_date)?"$row->end_date":date('Y-m-d'); ?>' id="end_date">
-                                </div>                   
-                            </div>
-                        </div>
-
-                        
-
-                        <div class="form-group">
                             <label class='col-lg-2 control-label'>Images</label>
                             <div class=" col-lg-12"> 
                                 <div class="col-md-12">
@@ -533,21 +283,296 @@
                                      }
                                     ?>
                                     <input id="file-4" type="file" name="userfile[]" class="file" multiple data-upload-url="#">
-                                    <p><b>Note : <span style="color:red;">maximum size 960 x 600px</span></b></p>
+                                    <!-- <p><b>Note : <span style="color:red;">maximum size 960 x 600px</span></b></p> -->
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label"></label>                      
-                              <div class="col-md-10">
-                                <div class="col-lg-1">
-                                  <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
-                                </div>
-                                <div class="col-lg-1">
-                                  <!-- <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button> -->
-                                </div>
-                              </div>
+                          </div>
                         </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <p><b><span style="color:red; padding-left: 20px;">Add More Info</span></b></p>
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Floor</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="floor" value='<?php echo isset($row->floor)?"$row->floor":""; ?>' id="floor">
+                                    </div>                   
+                                </div>
+
+                                <label class='col-lg-2 control-label hide'>Land Size</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12 hide">
+                                        <input type="text"  class="form-control input-sm" name="land_size" value='<?php echo isset($row->landsize)?"$row->landsize":""; ?>' id="land_size">
+                                    </div>                   
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Story</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="story" value='<?php echo isset($row->story)?"$row->story":""; ?>' id="story">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Pool</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="pool" value='<?php echo isset($row->pool)?"$row->pool":""; ?>' id="pool">
+                                    </div>                   
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Direction</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="direction" value='<?php echo isset($row->direction)?"$row->direction":""; ?>' id="direction">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Bedroom</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="bedroom" value='<?php echo isset($row->bedroom)?"$row->bedroom":""; ?>' id="bedroom">
+                                    </div>                   
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Bathroom</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="bathroom" value='<?php echo isset($row->bathroom)?"$row->bathroom":""; ?>' id="bathroom">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Living Room</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="living_room" value='<?php echo isset($row->livingroom)?"$row->livingroom":""; ?>' id="living_room">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Kitchen</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="kitchen" value='<?php echo isset($row->kitchen)?"$row->kitchen":""; ?>' id="kitchen">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Dining Room</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="dining_room" value='<?php echo isset($row->dinning_room)?"$row->dinning_room":""; ?>' id="dining_room">
+                                      
+                                    </div>                   
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label class='col-lg-2 control-label'>Is Active</label>
+                                <div class=" col-lg-3"> 
+                                    <div class="col-md-2">
+                                        <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->is_active)){ if($row->is_active==1) echo 'checked'; }else{ echo "checked"; } ?>>
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Is Active</label>
+                                <div class=" col-lg-3"> 
+                                    <div class="col-md-2">
+                                        <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->is_active)){ if($row->is_active==1) echo 'checked'; }else{ echo "checked"; } ?>>
+                                    </div>                   
+                                </div>
+                            </div> -->
+                            
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Furniture</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="furniture" value='<?php echo isset($row->furniture)?"$row->furniture":""; ?>' id="furniture">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Airconditioner</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="aircon" value='<?php echo isset($row->air_conditional)?"$row->air_conditional":""; ?>' id="aircon">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Parking</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="parking" value='<?php echo isset($row->parking)?"$row->parking":""; ?>' id="parking">
+                                      
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Steam & Sauna</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="st_sa" value='<?php echo isset($row->steamandsouna)?"$row->steamandsouna":""; ?>' id="st_sa">
+                                      
+                                    </div>                   
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Garden</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="garden" value='<?php echo isset($row->garden)?"$row->garden":""; ?>' id="garden">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Balcony</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="balcony" value='<?php echo isset($row->balcony)?"$row->balcony":""; ?>' id="balcony">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Terrace</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="terrace" value='<?php echo isset($row->terrace)?"$row->terrace":""; ?>' id="terrace">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Elevator</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="elevator" value='<?php echo isset($row->elevator)?"$row->elevator":""; ?>' id="elevator">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Stairs</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="stairs" value='<?php echo isset($row->stairs)?"$row->stairs":""; ?>' id="stairs">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Title</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="pro_title">
+                                            <option value="0">Please Select</option>
+                                            <option value="1" <?php if(isset($row->title)){ if($row->title == 1) echo "selected"; }?> >Soft Title</option>
+                                            <option value="2" <?php if(isset($row->title)){ if($row->title == 2) echo "selected"; }?> >Hard Title</option>
+                                        </select>
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Contract Allowed</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control input-sm" name="contract_allowed" value='<?php echo isset($row->contract)?"$row->contract":""; ?>' id="contract_allowed">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Commission</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="commission" value='<?php echo isset($row->commision)?"$row->commision":""; ?>' id="commission">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Urgent Sale</label>
+                                <div class=" col-lg-4"> 
+                                    <div class="col-md-2">
+                                        <input type="checkbox"  class="form-control input-sm " name="urgent" id="urgent" <?php if (isset($row->urgent)){ if($row->urgent==1) echo 'checked'; }else{ echo "checked"; } ?>>
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Service Provided</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="provider" value='<?php echo isset($row->service_provided)?"$row->service_provided":""; ?>' id="provider">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Gym</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="gym" value='<?php echo isset($row->gym)?"$row->gym":""; ?>' id="gym">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Advantage</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="advantage" value='<?php echo isset($row->advantage)?"$row->advantage":""; ?>' id="advantage">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Email Owner</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="email_owner" value='<?php echo isset($row->email_owner)?"$row->email_owner":""; ?>' id="email_owner">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Owner Name</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="owner_name" value='<?php echo isset($row->ownername)?"$row->ownername":""; ?>' id="owner_name">
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Contact Owner</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="owner_contact" value='<?php echo isset($row->contact_owner)?"$row->contact_owner":""; ?>' id="owner_contact">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>Available Property</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="available_pro">
+                                            <option value="1" <?php if(isset($row->available)){ if($row->available == 1) echo "selected"; }?> >Avialable</option>
+                                            <option value="0" <?php if(isset($row->available)){ if($row->available == 0) echo "selected"; }?> >Unavialable</option>
+                                        </select>
+                                    </div>                   
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class='col-lg-2 control-label'>Start Date</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="start_date" value='<?php echo isset($row->add_date)?"$row->add_date":date('Y-m-d'); ?>' id="start_date">
+                                    </div>                   
+                                </div>
+                                <label class='col-lg-2 control-label'>End Date</label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <input type="text"  class="form-control input-sm" name="end_date" value='<?php echo isset($row->end_date)?"$row->end_date":date('Y-m-d'); ?>' id="end_date">
+                                    </div>                   
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>                      
+                          <div class="col-md-10">
+                            <div class="col-lg-1">
+                              <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                            <div class="col-lg-1">
+                              <!-- <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button> -->
+                            </div>
+                          </div>
+                    </div>
                 </form>                
               </div>
             </div>
