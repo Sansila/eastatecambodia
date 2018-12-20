@@ -563,15 +563,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-2 control-label"></label>                      
-                          <div class="col-md-10">
-                            <div class="col-lg-1">
-                              <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
+                        <!-- <label class="col-lg-2 control-label"></label>                       -->
+                        <div class="col-md-12">
+                            <div class="col-lg-3">
+                              <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 150px;">Save</button>
                             </div>
                             <div class="col-lg-1">
                               <!-- <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button> -->
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </form>                
               </div>
