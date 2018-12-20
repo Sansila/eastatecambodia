@@ -37,7 +37,7 @@
  </div>
  <div id="breadcrumb">
       <a href="<?php echo base_url('/sys/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-      <a href='#' class="current">Menu list</a>
+      <a href='#' class="current">Propert list  <?php echo $this->pro->countAllproperty();?></a>
  </div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
