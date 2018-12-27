@@ -267,7 +267,7 @@ class Property extends CI_Controller {
 		on u.userid = pl.agent_id
 		left join tblpropertylocation l 
 		on pl.lp_id = l.propertylocationid
-		WHERE pl.p_status=1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.pid asc";
+		WHERE pl.p_status=1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.pid DESC";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
