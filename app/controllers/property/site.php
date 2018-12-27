@@ -47,7 +47,7 @@ class Site extends CI_Controller {
 
         $query = " SELECT * FROM tblproperty as p
                 left join tblpropertytype as pt on p.type_id = pt.typeid 
-                -- left join tblgallery as g on p.pid = g.pid
+                left join tblgallery as g on p.pid = g.pid
                 WHERE p.p_status = 1 GROUP bY p.pid ORDER BY p.pid desc
                 ";
 
@@ -384,7 +384,8 @@ class Site extends CI_Controller {
                                     ON p.lp_id = lp.propertylocationid
                                     LEFT JOIN tblpropertytype as pt
                                     ON p.type_id = pt.typeid
-                                    -- LEFT JOIN tblgallery as g on p.pid = g.pid
+                                    LEFT JOIN tblgallery as g 
+                                    on p.pid = g.pid
                                     WHERE p.p_status = 1 {$where} GROUP BY p.pid {$order_by}
             ";
 
@@ -790,7 +791,8 @@ class Site extends CI_Controller {
                                     ON p.lp_id = lp.propertylocationid
                                     LEFT JOIN tblpropertytype as pt
                                     ON p.type_id = pt.typeid
-                                    -- LEFT JOIN tblgallery as g on p.pid = g.pid
+                                    LEFT JOIN tblgallery as g 
+                                    on p.pid = g.pid
                                     WHERE p.p_status = 1 {$where} GROUP BY p.pid {$order_by}
             ";
 

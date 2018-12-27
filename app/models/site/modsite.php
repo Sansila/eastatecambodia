@@ -134,7 +134,7 @@
         {
             $query = $this->db->query(" SELECT * FROM tblproperty as p
                 left join tblpropertytype as pt on p.type_id = pt.typeid 
-                left join tblgallery as g on p.pid = g.pid
+                -- left join tblgallery as g on p.pid = g.pid
                 WHERE p.p_status = 1 AND p.agent_id = $agent_id AND p.pid <> $pid GROUP bY p.pid
                 ")->result();
             return $query;
@@ -216,6 +216,13 @@
                 'hit' => $hit
             );
             $this->db->where('pid',$pid)->update('tblproperty',$data);
+        }
+        function getImage($pid)
+        {
+            $sql = $this->db->query("SELECT * FROM tblgallery as g 
+                                    right join tblproperty as p on p.pid = g.pid
+                                    WHERE p.pid = '$pid' AND p.p_status = 1 ")->row();
+            return $sql;
         }
 }
 

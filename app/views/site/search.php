@@ -1107,19 +1107,22 @@
 							<div class="row">
 								<div class="col-sm-6 col-md-3">
 									<div class="property-thumb-info-image">
+										<?php 
+											$img = $this->site->getImage($list->pid);
+										?>
 										<a href="<?php echo site_url('site/site/detail/'.$list->pid)?>">
 											<?php
-												$extends = pathinfo($list->url, PATHINFO_EXTENSION);
+												$extends = pathinfo($img->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 														{
 											?>
 												<video style="height: 176px;" class="img-responsive" controls>
-												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$list->pid.'_'.$list->url))) echo base_url('assets/upload/property/'.$list->pid.'_'.$list->url); else echo base_url('assets/upload/noimage.jpg')?>">
+												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
 												</video>
 											<?php 
 												}else{
 											?>
-											<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$list->pid.'_'.$list->url))) echo base_url('assets/upload/property/thumb/'.$list->pid.'_'.$list->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+											<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
 											<?php 
 												}
 											?>
@@ -1176,19 +1179,22 @@
 								<div class="pgl-property">
 									<div class="property-thumb-info">
 										<div class="property-thumb-info-image">
+											<?php 
+												$imggrid = $this->site->getImage($grid->pid);
+											?>
 											<a href="<?php echo site_url('site/site/detail/'.$grid->pid)?>">
 											<?php
-												$extends = pathinfo($grid->url, PATHINFO_EXTENSION);
+												$extends = pathinfo($imggrid->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 														{
 											?>
 												<video style="height: 176px;" class="img-responsive" controls>
-												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$grid->pid.'_'.$grid->url))) echo base_url('assets/upload/property/'.$grid->pid.'_'.$grid->url); else echo base_url('assets/upload/noimage.jpg')?>">
+												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$imggrid->pid.'_'.$imggrid->url))) echo base_url('assets/upload/property/'.$imggrid->pid.'_'.$imggrid->url); else echo base_url('assets/upload/noimage.jpg')?>">
 												</video>
 											<?php 
 												}else{
 											?>
-												<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$grid->pid.'_'.$grid->url))) echo base_url('assets/upload/property/thumb/'.$grid->pid.'_'.$grid->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+												<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$imggrid->pid.'_'.$imggrid->url))) echo base_url('assets/upload/property/thumb/'.$imggrid->pid.'_'.$imggrid->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
 											<?php 
 												}
 											?>

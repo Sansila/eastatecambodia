@@ -271,19 +271,22 @@
 										<div class="pgl-property">
 											<div class="property-thumb-info">
 												<div class="property-thumb-info-image">
+													<?php 
+														$imgrelated = $this->site->getImage($related->pid);
+													?>
 													<a href="<?php echo site_url('site/site/detail/'.$related->pid)?>">
 														<?php
-															$extends = pathinfo($related->url, PATHINFO_EXTENSION);
+															$extends = pathinfo($imgrelated->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 																	{
 														?>
 															<video style="height: 176px;" class="img-responsive" controls>
-															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$related->pid.'_'.$related->url))) echo base_url('assets/upload/property/'.$related->pid.'_'.$related->url); else echo base_url('assets/upload/noimage.jpg')?>">
+															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>">
 															</video>
 														<?php 
 															}else{
 														?>
-															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$related->pid.'_'.$related->url))) echo base_url('assets/upload/property/thumb/'.$related->pid.'_'.$related->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
 														<?php 
 															}
 														?>

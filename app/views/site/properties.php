@@ -28,7 +28,7 @@
 	$park_first = "";
 	$park_last = "";
     $features = "";
-    $types = "";
+	$types = "";
 
 	if(isset($_GET['status']))
 		$status = $_GET['status'];
@@ -1073,12 +1073,12 @@
 						<div class="listing-header clearfix">
 							<ul class="list-inline list-icons pull-left">
 								<li class="<?php echo $activegrid;?>">
-									<a href="<?php echo site_url('site/site/properties/'.$id.'/?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
+									<a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
 										<i class="fa fa-th"></i>
 									</a>
 								</li>
 								<li class="<?php echo $activelist;?>">
-									<a href="<?php echo site_url('site/site/properties/'.$id.'/?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
+									<a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
 										<i class="fa fa-th-list"></i>
 									</a>
 								</li>
@@ -1113,19 +1113,22 @@
 							<div class="row">
 								<div class="col-sm-6 col-md-3">
 									<div class="property-thumb-info-image">
+											<?php 
+												$imgproerty = $this->site->getImage($list->pid);
+											?>
 										<a href="<?php echo site_url('site/site/detail/'.$list->pid)?>">
 											<?php
-												$extends = pathinfo($list->url, PATHINFO_EXTENSION);
+												$extends = pathinfo($imgproerty->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 														{
 											?>
 												<video style="height: 176px;" class="img-responsive" controls>
-												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$list->pid.'_'.$list->url))) echo base_url('assets/upload/property/'.$list->pid.'_'.$list->url); else echo base_url('assets/upload/noimage.jpg')?>">
+												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$imgproerty->pid.'_'.$imgproerty->url))) echo base_url('assets/upload/property/'.$imgproerty->pid.'_'.$imgproerty->url); else echo base_url('assets/upload/noimage.jpg')?>">
 												</video>
 											<?php 
 												}else{
 											?>
-											<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$list->pid.'_'.$list->url))) echo base_url('assets/upload/property/thumb/'.$list->pid.'_'.$list->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+											<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$imgproerty->pid.'_'.$imgproerty->url))) echo base_url('assets/upload/property/thumb/'.$imgproerty->pid.'_'.$imgproerty->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
 											<?php 
 												}
 											?>
@@ -1182,19 +1185,22 @@
 								<div class="pgl-property">
 									<div class="property-thumb-info">
 										<div class="property-thumb-info-image">
+											<?php 
+												$imgproertyrow = $this->site->getImage($grid->pid);
+											?>
 											<a href="<?php echo site_url('site/site/detail/'.$grid->pid)?>">
 											<?php
-												$extends = pathinfo($grid->url, PATHINFO_EXTENSION);
+												$extends = pathinfo($imgproertyrow->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 														{
 											?>
 												<video style="height: 176px;" class="img-responsive" controls>
-												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$grid->pid.'_'.$grid->url))) echo base_url('assets/upload/property/'.$grid->pid.'_'.$grid->url); else echo base_url('assets/upload/noimage.jpg')?>">
+												  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$imgproertyrow->pid.'_'.$imgproertyrow->url))) echo base_url('assets/upload/property/'.$imgproertyrow->pid.'_'.$imgproertyrow->url); else echo base_url('assets/upload/noimage.jpg')?>">
 												</video>
 											<?php 
 												}else{
 											?>
-												<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$grid->pid.'_'.$grid->url))) echo base_url('assets/upload/property/thumb/'.$grid->pid.'_'.$grid->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+												<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$imgproertyrow->pid.'_'.$imgproertyrow->url))) echo base_url('assets/upload/property/thumb/'.$imgproertyrow->pid.'_'.$imgproertyrow->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
 											<?php 
 												}
 											?>
