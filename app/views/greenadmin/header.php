@@ -304,7 +304,7 @@
 				</div>	
 				<ul>
 					<li class="submenu"><a href="<?php echo site_url("sys/dashboard") ?>"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-					<li class=""><a href="<?php echo site_url("site-profile") ?>"><i class="fa fa-cog"></i> <span>Site Profile</span></a></li>
+					<!-- <li class=""><a href="<?php echo site_url("site-profile") ?>"><i class="fa fa-cog"></i> <span>Site Profile</span></a></li> -->
 					<?php echo $menu ?>
 				</ul>			
 			</div>			

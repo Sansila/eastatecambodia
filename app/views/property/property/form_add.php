@@ -109,7 +109,14 @@
                                     <select class="form-control" id="agent_id">
                                         <option value="0">Please Select</option>
                                         <?php
-                                        $locat=$this->db->query("SELECT * FROM admin_user WHERE is_active='1'")->result();
+                                        $locat = "";
+                                        $userid = $this->session->userdata('userid');
+                                        if($userid == 4)
+                                        {
+                                            $locat=$this->db->query("SELECT * FROM admin_user WHERE is_active='1'")->result();
+                                        }else{
+                                            $locat=$this->db->query("SELECT * FROM admin_user WHERE is_active='1' AND userid = '$userid' ")->result();
+                                        }
                                             foreach ($locat as $me) {
                                                 $se='';
                                                 if($var['user_name'] == $me->user_name)
@@ -119,7 +126,7 @@
                                                         $se='selected';
                                                 echo "<option value='$me->userid' $se>$me->user_name</option>";
                                             }
-                                         ?>
+                                        ?>
                                     </select>
                                 </div>                   
                             </div>
@@ -153,7 +160,7 @@
                             </div>
                             
                         </div>
-
+                        
                         <div class="form-group">
                             <label class='col-lg-2 control-label'>Location(auto select)</label>
                             <div class="col-lg-4"> 

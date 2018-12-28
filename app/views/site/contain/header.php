@@ -4,11 +4,11 @@
 <!-- Mirrored from pixelgeeklab.com/html/realestast/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Nov 2018 02:55:25 GMT -->
 <head>
 	<meta charset="utf-8">
-	<meta name="keywords" content="HTML5 Template" />
-	<meta name="description" content="Flatize - Shop HTML5 Responsive Template">
-	<meta name="author" content="pixelgeeklab.com">
+	<meta name="keywords" content="Real estate, Cambodia, Phnom penh, Property, House, Condo, Land, Hotel, Resort, Sale, Rent, Buy" />
+	<meta name="description" content="Estate Cambodia provides property listing services for people who are looking to buy, sell or rent the properties such as land, house, condo, commercial unit in Cambodia">
+	<meta name="author" content="estatecambodia.com">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Estatecambodia</title>
+	<title>Estate Cambodia - Real Estate - Phnom Penh - Investment - Property - Land</title>
 
 	<!-- Google Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>

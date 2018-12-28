@@ -113,9 +113,11 @@
 								<div class="row">
 									<div class="col-sm-4">
 										<ul class="list-unstyled amenities amenities-detail">
+											<li><strong>PropertyID:</strong> <?php echo 'P'.$detail->pid?></li>
 											<li><strong>Post Date:</strong> <?php echo $detail->create_date?></li>
 											<li><strong>Type:</strong> <?php echo $detail->typename?></li>
 											<li><strong>Area:</strong> <?php if($detail->housesize !="") echo $detail->housesize;else echo 0;?><sup>m2</sup></li>
+											<li><strong>Price:</strong> <?php echo '$'.number_format($detail->price)?></li>
 											<li><address><i class="fa fa-map-marker"></i> <?php if($detail->locationname !="") echo $detail->locationname; else echo "";?></address></li>
 											<li class="<?php echo $bedroom?>"><i class="icons icon-bedroom"></i> <?php echo $detail->bedroom;?> Bedrooms</li>
 											<li class="<?php echo $bathroom?>"><i class="icons icon-bathroom"></i> <?php echo $detail->bathroom;?> Bathrooms</li>

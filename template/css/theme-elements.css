@@ -1437,8 +1437,8 @@ hr {
 }
 /* line 1176, ../sass/theme-elements.scss */
 .properties-listing .property-thumb-info-image .property-thumb-info-label {
-  bottom: auto;
-  top: 20px;
+  bottom: 0px;
+  /*top: 20px;*/
 }
 
 /* grid-agents */
