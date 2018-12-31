@@ -123,8 +123,6 @@ class Property extends CI_Controller {
 	    $this->load->library('upload');
 	    $orders=$this->input->post('order');
 	    $updimg=$this->input->post('updimg');
-	    // $this->unlinkpic($productid);
-	    // print_r($updimg);
 	    $files = $_FILES;
 	    $cpt = count($_FILES['userfile']['name']);
 	    for($i=0; $i<$cpt; $i++)
@@ -135,9 +133,6 @@ class Property extends CI_Controller {
 	        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
 	        $_FILES['userfile']['error']= $files['userfile']['error'][$i];
 	        $_FILES['userfile']['size']= $files['userfile']['size'][$i];
-	        //$file_ext = pathinfo($_FILES["userfile"]["name"][$i], PATHINFO_EXTENSION);    
-
-	        //$this->upload->initialize($this->set_upload_options($pid,$_FILES['userfile']['name']));
 
 	        if($extends == "mp4" || $extends == "movie" || $extends == "mpe" || $extends == "qt" || $extends == "mov" || $extends == "avi" || $extends == "mpg" || $extends == "mpeg")
 	        {
@@ -145,12 +140,10 @@ class Property extends CI_Controller {
 	        	if ( ! $this->upload->do_upload()){
 					$error = array('error' => $this->upload->display_errors());			
 				}else{
-					//$this->creatthumb_video($pid,$_FILES['userfile']['name'],$orders[$i]);
 					$this->saveimg($pid,$_FILES['userfile']['name']);
 				}
 	        }else{
 	        	$this->upload->initialize($this->set_upload_options($pid,$_FILES['userfile']['name']));
-	        	// $this->upload->do_upload();
 		        if ( ! $this->upload->do_upload()){
 					$error = array('error' => $this->upload->display_errors());			
 				}else{	
@@ -169,7 +162,8 @@ class Property extends CI_Controller {
         $config2['create_thumb'] = "$pid".'_'."$imagename";
         $config2['thumb_marker'] = false;
         $config2['height'] = 564;
-        $config2['width'] = 848;
+		$config2['width'] = 848;
+		$config2['quality'] = "90%";
         $this->load->library('image_lib');
         $this->image_lib->initialize($config2); 
         if ( ! $this->image_lib->resize()){
@@ -182,7 +176,6 @@ class Property extends CI_Controller {
 
 	private function set_upload_options($pid,$imagename)
 	{   
-	    //upload an image options
 	    if(!file_exists('./assets/upload/property/')){
 		    if(mkdir('./assets/upload/property/',0755,true)){
 		        return true;
@@ -202,7 +195,6 @@ class Property extends CI_Controller {
 	}
 	private function set_upload_options_video($pid,$imagename)
 	{   
-	    //upload an image options
 	    if(!file_exists('./assets/upload/property/')){
 		    if(mkdir('./assets/upload/property/',0755,true)){
 		        return true;

@@ -20,53 +20,74 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/icheck/flat/blue.css') ?>" />		
 	</head>
 	<body>	    
-	  
-		<div class="container-fluid"> 
-		    <div class="row-fluid">
-		        <div class="loginform text-center">	
-		        	<div class="dv_login">
-		        		<div class="dv_login_icon">
-		        			<img src="<?php echo base_url('assets/img/icons/login.png') ?>"/>
-		        		</div> 
-		        		<div class="dv_login_form">
-		        			<form action="<?php echo site_url('greenadmin/login/getLogin')?>" method="post" id="loginform">
-		        				<table class="">
-			        				<tr>	     
-			        				  					
-			        					<td colspan="3" align="left" class="login_title"> 
-			        						<span class="">LOG IN </span>
-			        					</td>
-			        				</tr>			        				
-			        				<tr>
-			        					<td>User name</td>
-			        					<td>:</td>
-			        					<td>
-			        						<input type="text" name="user_name" id="user_name" class="form-control col-sm-4" required data-parsley-required-message="Enter User Name"/>
-			        					</td>
-			        				</tr>
-			        				<tr>
-			        					<td>Password</td>
-			        					<td>:</td>
-			        					<td>
-			        						<input type="password" name="password" id="password"  class="form-control col-sm-4" required data-parsley-required-message="Enter Password"/>
-			        					</td>
-			        				</tr>
-			        				<tr>		        					
-			        					<td colspan="3" style="text-align: center!import">
-			        						<input type="submit" name="login" id="login"  class="form-control btn-primary" value="Login"/>
-			        					</td>
-			        				</tr>
-			        			</table>		        				
-		        			</form>		        					        			
-		        		</div>    		
-		        	</div>		        	
-		        </div>
-		    </div>
+
+		<div class="container">
+			<div class="card card-container">
+				<p class="title-header">Estatecambodia Login</p>
+				<img id="profile-img" class="profile-img-card" src="<?php echo base_url('assets/images/avatar_2x.png') ?>" />
+				<p id="profile-name" class="profile-name-card"></p>
+				<form class="form-signin" action="<?php echo site_url('greenadmin/login/getLogin')?>" method="post">
+					<span id="reauth-email" class="reauth-email"></span>
+					<input type="text" name="user_name" id="inputEmail" class="form-control" placeholder="User name" required autofocus>
+					<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+					<div id="remember" class="checkbox">
+						<label>
+							<input type="checkbox" value="remember-me"> Remember me
+						</label>
+					</div>
+					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+				</form><!-- /form -->
+				
+			</div><!-- /card-container -->
 		</div>
+		
+		<!-- <div class="container-fluid"> 
+			<div class="row-fluid">
+				<div class="loginform text-center">	
+					<div class="dv_login">
+						<div class="dv_login_icon">
+							<img src="<?php echo base_url('assets/img/icons/login.png') ?>"/>
+						</div> 
+						<div class="dv_login_form">
+							<form action="<?php echo site_url('greenadmin/login/getLogin')?>" method="post" id="loginform">
+								<table class="">
+									<tr>	     
+														
+										<td colspan="3" align="left" class="login_title"> 
+											<span class="">LOG IN </span>
+										</td>
+									</tr>			        				
+									<tr>
+										<td>User name</td>
+										<td>:</td>
+										<td>
+											<input type="text" name="user_name" id="user_name" class="form-control col-sm-4" required data-parsley-required-message="Enter User Name"/>
+										</td>
+									</tr>
+									<tr>
+										<td>Password</td>
+										<td>:</td>
+										<td>
+											<input type="password" name="password" id="password"  class="form-control col-sm-4" required data-parsley-required-message="Enter Password"/>
+										</td>
+									</tr>
+									<tr>		        					
+										<td colspan="3" style="text-align: center!import">
+											<input type="submit" name="login" id="login"  class="form-control btn-primary" value="Login"/>
+										</td>
+									</tr>
+								</table>		        				
+							</form>		        					        			
+						</div>
+					</div>
+				</div>
+			</div>    		
+		</div>		        	 -->
+		        
 	  
 	</body>
 	<style>
-		html, body{height:100%; margin:0;padding:0}
+		/* html, body{height:100%; margin:0;padding:0}
 		
 		body {		  
 		    background-repeat: no-repeat;
@@ -103,8 +124,7 @@
 			height:250px;
 			margin: 0 auto; 			
 			background: none repeat scroll 0 0 #f8f8f8;
-		    border: 1px solid #DBD4D4;		 		   	
-		    /*box-shadow: 1px 5px 5px 2px #E2DEDE;*/
+		    border: 1px solid #DBD4D4;
 		    border-radius: 4px;
 		    padding-top: 15px;		    
 			
@@ -119,7 +139,152 @@
 		}
 		#login{
 			width: 100px;
+		} */
+
+		body, html {
+			height: 100%;
+			background-repeat: no-repeat;
+			background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
 		}
+
+		.title-header{
+			text-align: center;
+			font-size: 20px;
+			font-weight: 900;
+			color: #d84949;
+			text-transform: uppercase;
+		}
+
+		.card-container.card {
+			max-width: 350px;
+			padding: 40px 40px;
+		}
+
+		.btn {
+			font-weight: 700;
+			height: 36px;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			user-select: none;
+			cursor: default;
+		}
+
+		/*
+		* Card component
+		*/
+		.card {
+			background-color: #F7F7F7;
+			/* just in case there no content*/
+			padding: 20px 25px 30px;
+			margin: 0 auto 25px;
+			margin-top: 70px;
+			/* shadows and rounded borders */
+			-moz-border-radius: 2px;
+			-webkit-border-radius: 2px;
+			border-radius: 2px;
+			-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		}
+
+		.profile-img-card {
+			width: 96px;
+			height: 96px;
+			margin: 0 auto 10px;
+			display: block;
+			-moz-border-radius: 50%;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+		}
+
+		/*
+		* Form styles
+		*/
+		.profile-name-card {
+			font-size: 16px;
+			font-weight: bold;
+			text-align: center;
+			margin: 10px 0 0;
+			min-height: 1em;
+		}
+
+		.reauth-email {
+			display: block;
+			color: #404040;
+			line-height: 2;
+			margin-bottom: 10px;
+			font-size: 14px;
+			text-align: center;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		.form-signin #inputEmail,
+		.form-signin #inputPassword {
+			direction: ltr;
+			height: 44px;
+			font-size: 16px;
+		}
+
+		.form-signin input[type=email],
+		.form-signin input[type=password],
+		.form-signin input[type=text],
+		.form-signin button {
+			width: 100%;
+			display: block;
+			margin-bottom: 10px;
+			z-index: 1;
+			position: relative;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		.form-signin .form-control:focus {
+			border-color: rgb(104, 145, 162);
+			outline: 0;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+			box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+		}
+
+		.btn.btn-signin {
+			/*background-color: #4d90fe; */
+			background-color: rgb(104, 145, 162);
+			/* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+			padding: 0px;
+			font-weight: 700;
+			font-size: 14px;
+			height: 36px;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			border: none;
+			-o-transition: all 0.218s;
+			-moz-transition: all 0.218s;
+			-webkit-transition: all 0.218s;
+			transition: all 0.218s;
+		}
+
+		.btn.btn-signin:hover,
+		.btn.btn-signin:active,
+		.btn.btn-signin:focus {
+			background-color: rgb(12, 97, 33);
+		}
+
+		.forgot-password {
+			color: rgb(104, 145, 162);
+		}
+
+		.forgot-password:hover,
+		.forgot-password:active,
+		.forgot-password:focus{
+			color: rgb(12, 97, 33);
+		}
+
 	</style>
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="<?php echo base_url('assets/js/respond.min.js') ?>"></script>

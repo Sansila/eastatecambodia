@@ -12,6 +12,7 @@ class Site extends CI_Controller {
     }
     public function index()
     {   
+        $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['type'] = $this->site->getPropertyType();
@@ -65,6 +66,11 @@ class Site extends CI_Controller {
     }
     function detail($pid)
     {
+        $name = "";
+        if(isset($_GET['name']))
+            $name = $_GET['name'];
+
+        $datas['name'] = $name;
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['profile'] = $this->site->getSiteprofile();
@@ -79,6 +85,7 @@ class Site extends CI_Controller {
     }
     function search()
     {
+        $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['type'] = $this->site->getPropertyType();
@@ -112,6 +119,7 @@ class Site extends CI_Controller {
         $park_last = "";
         $features = "";
         $return_feature = "";
+        $agent = "";
         
         if(isset($_GET['status']))
             $status = $_GET['status'];
@@ -159,6 +167,8 @@ class Site extends CI_Controller {
             $park_last = $_GET['garages__lte'];
         if(isset($_GET['features']))
             $features = $_GET['features'];
+        if(isset($_GET['agent']))
+            $agent = $_GET['agent'];
     
         if($location != "")
         {
@@ -198,7 +208,7 @@ class Site extends CI_Controller {
         $page = 0;
         if(isset($_GET['per_page']))
             $page = $_GET['per_page'];
-        $config['base_url'] = site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first);
+        $config['base_url'] = site_url('site/site/search?available='.$available.'&agent='.$agent.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first);
 
         $config['per_page'] = 8;
         $config['num_link'] = 3;
@@ -361,6 +371,11 @@ class Site extends CI_Controller {
             $where.= " AND p.parking BETWEEN 0 AND $park_first";
         }
 
+        if($agent !="")
+        {
+            $where.= " AND p.agent_id = '$agent' ";
+        }
+
         // ============= Order by =============//
 
         if($order != "" && $sort == null)
@@ -407,6 +422,7 @@ class Site extends CI_Controller {
     }
     function about($menu_id)
     {
+        $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
@@ -417,6 +433,7 @@ class Site extends CI_Controller {
     }
     function contact($menu_id)
     {
+        $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
@@ -449,6 +466,7 @@ class Site extends CI_Controller {
 
         if($this->email->send())
         {
+            $datas['name'] = "";
             $datas['profile'] = $this->site->getSiteprofile();
             $datas['menu'] = $this->site->get_menu();
             $data['slide'] = $this->site->getSlide();
@@ -477,6 +495,7 @@ class Site extends CI_Controller {
     }
     function properties($id)
     {
+        $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['type'] = $this->site->getPropertyType();
