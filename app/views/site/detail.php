@@ -67,7 +67,7 @@
 											}else{
 									?>
 									<li>
-										<img aly="" class="img-responsive <?php echo $hide;?>" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+										<img aly="" class="img-responsive pixelated <?php echo $hide;?>" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
 										<span class="property-thumb-info-label">
 											<span class="label price">$<?php echo number_format($img->price)?></span>
 											<span class="label forrent <?php if($img->p_type == 0) echo "hide"; else echo "";?>">
@@ -276,7 +276,7 @@
 													<?php 
 														$imgrelated = $this->site->getImage($related->pid);
 													?>
-													<a href="<?php echo site_url('site/site/detail/'.$related->pid)?>">
+													<a href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>">
 														<?php
 															$extends = pathinfo($imgrelated->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
@@ -309,7 +309,7 @@
 												</span>
 												</div>
 												<div class="property-thumb-info-content" style="height: 120px;">
-													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$related->pid)?>"><?php echo $related->property_name;?></a></h3>
+													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>"><?php echo $related->property_name;?></a></h3>
 													<address class="module line-clamp"><?php echo $related->address;?></address>
 												</div>
 												<div class="amenities clearfix">
@@ -353,7 +353,8 @@
 											<!-- <i class="fa fa-map-marker"></i> Office : 1-800-666-8888<br> -->
 											<i class="fa fa-phone"></i> Mobile : <?php echo $detail->phone;?><br>
 											<!-- <i class="fa fa-fax"></i> Fax : 1-800-666-8888<br> -->
-											<i class="fa fa-envelope-o"></i> Mail: <?php echo $detail->email;?>
+											<i class="fa fa-envelope-o"></i> Mail: <?php echo $detail->email;?><br>
+											<i><a href="<?php echo site_url('site/site/search?available=0&agent='.$detail->userid.'&list_type=lists&order=Desc')?>">View all Property</a></i>
 										</address>
 									</div>	
 								</div>

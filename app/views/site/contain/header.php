@@ -8,7 +8,14 @@
 	<meta name="description" content="Estate Cambodia provides property listing services for people who are looking to buy, sell or rent the properties such as land, house, condo, commercial unit in Cambodia">
 	<meta name="author" content="estatecambodia.com">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Estate Cambodia - Real Estate - Phnom Penh - Investment - Property - Land</title>
+	<title>
+		<?php 
+			if($name !="")
+				echo 'Estate Cambodia - '.$name;
+			else
+				echo 'Estate Cambodia - Real Estate - Phnom Penh - Investment - Property - Land';
+		?>
+	</title>
 
 	<!-- Google Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>

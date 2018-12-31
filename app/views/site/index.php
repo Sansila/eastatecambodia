@@ -941,7 +941,7 @@
 									<div class="pgl-property">
 										<div class="property-thumb-info">
 											<div class="property-thumb-info-image">
-												<a href="<?php echo site_url('site/site/detail/'.$list->pid)?>">
+												<a href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>">
 													<?php 
 														$img = $this->site->getImage($list->pid);
 													?>
@@ -978,7 +978,7 @@
 												</span>
 											</div>
 											<div class="property-thumb-info-content" style="height: 120px;">
-												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid)?>"><?php echo $list->property_name?></a></h3>
+												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>"><?php echo $list->property_name?></a></h3>
 												<address class="module line-clamp"><?php echo $list->address?></address>
 											</div>
 											<div class="amenities clearfix" style="height: 40px;">

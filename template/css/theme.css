@@ -361,3 +361,11 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;  
 } */
+ .pixelated {
+  -ms-interpolation-mode: nearest-neighbor; 
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-crisp-edges; 
+  image-rendering: -moz-crisp-edges; 
+  image-rendering: -o-crisp-edges;
+  image-rendering: pixelated; 
+}

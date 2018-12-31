@@ -28,6 +28,7 @@
 	$park_first = "";
 	$park_last = "";
 	$features = "";
+	$agent = "";
 
 	if(isset($_GET['status']))
 		$status = $_GET['status'];
@@ -75,6 +76,8 @@
 		$park_last = $_GET['garages__lte'];
 	if(isset($_GET['features']))
 		$features = $_GET['features'];
+	if(isset($_GET['agent']))
+		$agent = $_GET['agent'];
 
 	if($location != "")
 	{
@@ -938,6 +941,8 @@
 		            <option <?php if($status == "both") echo "selected"; else echo "";?> value="both">Both</option>
 		        </select>
 
+				<input type="text" name="agent" id="agent" value="<?php if($agent!="") echo $agent; else echo "";?>">
+
 		        <select multiple="multiple" id="id_categories" name="categories[]">
 		            <optgroup label="Residential">
 						<?php
@@ -1110,7 +1115,7 @@
 										<?php 
 											$img = $this->site->getImage($list->pid);
 										?>
-										<a href="<?php echo site_url('site/site/detail/'.$list->pid)?>">
+										<a href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>">
 											<?php
 												$extends = pathinfo($img->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
@@ -1147,7 +1152,7 @@
 									<div class="property-thumb-info">
 											
 										<div class="property-thumb-info-content">
-											<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid)?>"><?php echo $list->property_name;?></a></h3>
+											<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>"><?php echo $list->property_name;?></a></h3>
 											<address class="module line-clamp"><?php echo $list->address?></address>
 											<p class="module line-clamps"><?php echo $list->description;?></p>
 										</div>
@@ -1182,7 +1187,7 @@
 											<?php 
 												$imggrid = $this->site->getImage($grid->pid);
 											?>
-											<a href="<?php echo site_url('site/site/detail/'.$grid->pid)?>">
+											<a href="<?php echo site_url('site/site/detail/'.$grid->pid.'/?name='.$grid->property_name)?>">
 											<?php
 												$extends = pathinfo($imggrid->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
@@ -1216,7 +1221,7 @@
 											</span>
 										</div>
 										<div class="property-thumb-info-content" style="height: 120px;">
-											<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$grid->pid)?>"><?php echo $grid->property_name;?></a></h3>
+											<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$grid->pid.'/?name='.$grid->property_name)?>"><?php echo $grid->property_name;?></a></h3>
 											<address class="module line-clamp"><?php echo $grid->address;?></address>
 										</div>
 										<div class="amenities clearfix" style="height: 40px;">
