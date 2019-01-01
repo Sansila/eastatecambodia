@@ -151,6 +151,7 @@ h3{
         <h3 style="padding-left: 15px;">
           <select class="optday" id="txtshowby">
             <option value="1">Today</option>
+            <option value="2">Yesterday</option>
             <option value="3">Last 3 days</option>
             <option value="7">Last 7 days</option>
             <option value="15">Last 15 days</option>

@@ -57,15 +57,15 @@ class user extends CI_Controller {
 	}
 	function do_upload($id)
 	{
-		// if($id=='')
-		// 	$id=$this->session->userdata('userid');
+		if($id=='')
+			$id=$this->session->userdata('userid');
 		if(!file_exists('./assets/upload/adminuser/')){
 		    if(mkdir('./assets/upload/adminuser/',0755,true)){
 		        return true;
 		    }
 		}
 		$config['upload_path'] ='./assets/upload/adminuser/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|';
 		$config['file_name']  = "$id.png";
 		$config['overwrite']=true;
 		$config['file_type']='image/png';
@@ -255,6 +255,7 @@ class user extends CI_Controller {
 		$gender=$this->input->post('gender');
 		$address=$this->input->post('address');
 		$approve = $this->input->post('txtapprove');
+		$modify_date=date('Y-m-d H:i:s');
 		$count=$this->user->getuservalidateup($username,$email,$userid);
 
 		if($count!=0){
@@ -270,6 +271,7 @@ class user extends CI_Controller {
 				$admin=1;
 			else
 				$admin=0;
+
 			$u_row=$this->user->getuserrow($userid);
 			if($u_row->password!=$this->input->post('txtpwd')){
 				$datas=array(
@@ -283,7 +285,9 @@ class user extends CI_Controller {
 					'password'=>$pwd,
 					'roleid'=>$role,
 					'is_admin'=>$admin,
-					'is_active'=>1
+					'is_active'=>1,
+					'modified_date' => $modify_date,
+					'modified_by' => $this->session->userdata('userid'),
 				);
 			}else{
 					$datas=array(
@@ -296,11 +300,14 @@ class user extends CI_Controller {
 					'address'=>$address,
 					'roleid'=>$role,
 					'is_admin'=>$admin,
-					'is_active'=>1
+					'is_active'=>1,
+					'modified_date'=> $modify_date,
+					'modified_by' => $this->session->userdata('userid'),
 				);
 			}
 			$this->db->where('userid',$userid);
 			$this->db->update('admin_user',$datas);
+
 			//$this->do_upload($userid);
 			$this->sendEmail($username,$realpwd,$email,$approve,$userid);
 		}

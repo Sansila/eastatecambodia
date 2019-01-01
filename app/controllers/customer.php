@@ -416,7 +416,7 @@ class Customer extends CI_Controller {
                                     <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: green;color: white;">
                                         <p class="lead" >
                                             <a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="color:white; text-decoration: none;">
-                                                Detail
+                                                Details
                                             </a>
                                         </p>
                                     </div>
@@ -445,7 +445,7 @@ class Customer extends CI_Controller {
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
         $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-        $mail->Subject = "Estate Cambodia - Customer looking for properties";
+        $mail->Subject = "Estate Cambodia - Properties Information Sharing";
         $mail->AddAddress($email);
         $logo = "http://estatecambodia.com/assets/img/logo.png";
         $description = '<div style="width: 100%">
@@ -457,7 +457,8 @@ class Customer extends CI_Controller {
                             <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
                                 <img src="'.$logo.'" style="width: 140px;">
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                    Dear customer thank you for finding properties in our website : 
+                                    <p>Dear customer,</p>
+                                    <p>The following are the properties that Estate Cambodia would like to share and you may review for your interest: </p> 
                                     '.$list.'
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 

@@ -170,7 +170,7 @@
               <label class='col-lg-2 control-label'>Property Result</label>
               <div class=" col-lg-4"> 
                 <div class="col-md-12">
-                  <select class="form-control select2-property txtproperty required" name="txtproperty" id="txtproperty" multiple="">
+                  <select class="form-control select2-property txtproperty" name="txtproperty" id="txtproperty" multiple="">
                     <?php 
                       if(isset($row->pid))
                       {
