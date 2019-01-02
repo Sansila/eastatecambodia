@@ -49,7 +49,7 @@ class Site extends CI_Controller {
         $query = " SELECT * FROM tblproperty as p
                 left join tblpropertytype as pt on p.type_id = pt.typeid 
                 -- left join tblgallery as g on p.pid = g.pid
-                WHERE p.p_status = 1 GROUP bY p.pid ORDER BY p.pid desc
+                WHERE p.p_status = 1 ORDER BY p.create_date desc
                 ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
@@ -380,7 +380,7 @@ class Site extends CI_Controller {
 
         if($order != "" && $sort == null)
         {
-            $order_by.= " ORDER BY p.pid $order";
+            $order_by.= " ORDER BY p.create_date $order";
         }else if($sort !="" && $order != ""){
             if($sort == "Price")
                 $order_by.= " ORDER BY p.price $order ";
@@ -389,7 +389,7 @@ class Site extends CI_Controller {
             if($sort == "Date")
                 $order_by.= " ORDER BY p.create_date $order ";
         }else{
-            $order_by.= " ORDER BY p.pid desc";
+            $order_by.= " ORDER BY p.create_date desc";
         }
 
         // ============ configure pagination =====//
@@ -400,7 +400,7 @@ class Site extends CI_Controller {
                                     LEFT JOIN tblpropertytype as pt
                                     ON p.type_id = pt.typeid
                                     -- LEFT JOIN tblgallery as g on p.pid = g.pid
-                                    WHERE p.p_status = 1 {$where} GROUP BY p.pid {$order_by}
+                                    WHERE p.p_status = 1 {$where} {$order_by}
             ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
@@ -619,7 +619,7 @@ class Site extends CI_Controller {
         $page = 0;
         if(isset($_GET['per_page']))
             $page = $_GET['per_page'];
-        $config['base_url'] = site_url('site/site/properties/'.$id.'/?type='.$type.'/available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first);
+        $config['base_url'] = site_url('site/site/properties/'.$id.'/?type='.$type.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first);
 
         $config['per_page'] = 16;
         $config['num_link'] = 3;
@@ -790,7 +790,7 @@ class Site extends CI_Controller {
 
         if($order != "" && $sort == null)
         {
-            $order_by.= " ORDER BY p.pid $order";
+            $order_by.= " ORDER BY p.create_date $order";
         }else if($sort !="" && $order != ""){
             if($sort == "Price")
                 $order_by.= " ORDER BY p.price $order ";
@@ -799,7 +799,7 @@ class Site extends CI_Controller {
             if($sort == "Date")
                 $order_by.= " ORDER BY p.create_date $order ";
         }else{
-            $order_by.= " ORDER BY p.pid desc";
+            $order_by.= " ORDER BY p.create_date desc";
         }
 
         // ============ configure pagination =====//
@@ -809,8 +809,7 @@ class Site extends CI_Controller {
                                     ON p.lp_id = lp.propertylocationid
                                     LEFT JOIN tblpropertytype as pt
                                     ON p.type_id = pt.typeid
-                                    -- LEFT JOIN tblgallery as g on p.pid = g.pid
-                                    WHERE p.p_status = 1 {$where} GROUP BY p.pid {$order_by}
+                                    WHERE p.p_status = 1 {$where} {$order_by}
             ";
 
         $config['total_rows'] = count($this->db->query($query)->result());

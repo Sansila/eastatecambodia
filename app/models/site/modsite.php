@@ -52,47 +52,9 @@
             } else {
                 return FALSE;
             }
-
-            // $query = $this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc");
-            
-            // $cat = array(
-            //     'items' => array(),
-            //     'parents' => array()
-            // );
-
-            // foreach ($query->result() as $cats) {
-            //     $cat['items'][$cats->propertylocationid] = $cats;
-            //     $cat['parents'][$cats->parent_id][] = $cats->propertylocationid;
-            // }
-
-            // if ($cat) {
-            //     $result = $this->getSubItem(0,$cat);
-            //     return $result;
-            // } else {
-            //     return FALSE;
-            // }
         }
         function getSubItem($parent,$menu,$loop=0)
         {
-            // $html = "";
-            // $title = ""; $gettitle = "";
-            // if (isset($menu['parents'][$parent])) {
-            //     $html.= '<ul>';
-            //     foreach ($menu['parents'][$parent] as $itemId) {
-            //         if (!isset($menu['parents'][$itemId])) {
-            //             $html.= '<label><input type="checkbox" name="location" value="'.$menu['items'][$itemId]->locationname.'" data-checkbox-changer="" data-target-field="#id_location_autocomplete" data-target-value="'.$menu['items'][$itemId]->locationname.'">'.$menu['items'][$itemId]->locationname.'</label>';
-            //         }
-            //         if (isset($menu['parents'][$itemId])) {
-            //             $html.= '<li>';
-            //             $html.= '<label><input type="checkbox" name="location" value="'.$menu['items'][$itemId]->locationname.'" data-checkbox-changer="" data-target-field="#id_location_autocomplete" data-target-value="'.$menu['items'][$itemId]->locationname.'">'.$menu['items'][$itemId]->locationname.'</label>';
-            //             $html.= '<ul></ul>';
-            //             $html.= $this->getSubItem($itemId,$menu);
-            //             $html.= '</li>';
-            //         }
-            //     }
-            //     $html.= '</ul>';
-            // }
-
             $html = array();
             $loop++;
 
@@ -185,6 +147,13 @@
             }
             return $html;
 
+        }
+        function get_menu_footer()
+        {
+            $query = $this->db->query("SELECT * FROM tblmenus as m 
+                                       INNER JOIN tbllocation as l ON m.menu_type = l.location_id 
+                                       WHERE l.location_id = 17 ORDER BY m.menu_id asc")->result();
+            return $query;
         }
         function getSlide()
         {

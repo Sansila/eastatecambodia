@@ -1,3 +1,10 @@
+		<style type="text/css">
+			.custom_menu{
+			    padding-top: 10px;
+			    padding-bottom: 10px;
+			    text-align: center;
+			}
+		</style>
 		<!-- Begin footer -->
 		<footer class="pgl-footer">
 			<div class="container">
@@ -23,17 +30,30 @@
 								<li><a href="#">Community Guidelines</a></li>
 							</ul>
 						</div>
-						<div class="col-sm-2 hide">
-							<h2>Pages</h2>
-							<ul class="list-unstyled">
-								<li><a href="#">Font &amp; Color</a></li>
-								<li><a href="#">Blogs</a></li>
-								<li><a href="#">Contact Us</a></li>
-								<li><a href="#">404 Page</a></li>
-								<li><a href="#">Advanced Search</a></li>
-								<li><a href="#">Property Custom Field</a></li>
-								<li><a href="#">Google Map</a></li>
-							</ul>
+						<div class="col-sm-8">
+							<h2>Properties</h2>
+							<div class="row">
+								<?php 
+									$footer = $this->site->get_menu_footer();
+									$name = "";
+									$url = "";
+									foreach ($footer as $key) {
+										if($key->parentid == 0)
+										{
+											$name = 'All';
+											$url = site_url('site/site/'.$key->location_name.'/'.$key->menu_id);
+										}
+										else
+										{
+											$name = $key->menu_name;
+											$url = site_url('site/site/'.$key->location_name.'/'.$key->menu_id.'?type='.$key->menu_id);
+										}
+								?>
+									<div class="col-sm-2 custom_menu" style="width:17.6%"><a href="<?php echo $url;?>"><?php echo $name;?></a></div>
+								<?php
+									}
+								?>
+							</div>
 						</div>
 						<div class="col-sm-4 hide">
 							<h2>Don’t miss out</h2>
@@ -49,7 +69,7 @@
 					</div>
 				</div>
 				<div class="pgl-copyrights">
-					<p>Copyright © 2018 RealEstast. Designed by <a href="http://cambodiasoft.com/">CambodiaSoft</a></p>
+					<p>Copyright © <?php echo Date('Y')?> RealEstast. Designed by <a href="http://cambodiasoft.com/">CambodiaSoft</a></p>
 				</div>
 			</div>
 		</footer>

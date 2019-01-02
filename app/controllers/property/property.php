@@ -10,6 +10,7 @@ class Property extends CI_Controller {
 		//$this->lang->load('stock', 'english');
 		$this->load->model("property/modproperty","pro");			
 		$this->thead=array("No"=>'no',
+							"Date"=>"Date",
 							"User Name"=>'User Name',
 							"Pro_Number"=>'Pro_Number',
 							"Property Name"=>'Property Name',
@@ -259,7 +260,7 @@ class Property extends CI_Controller {
 		on u.userid = pl.agent_id
 		left join tblpropertylocation l 
 		on pl.lp_id = l.propertylocationid
-		WHERE pl.p_status=1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.pid DESC";
+		WHERE pl.p_status=1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
@@ -312,6 +313,7 @@ class Property extends CI_Controller {
 			}
 			$table.= "<tr>
 				 <td class='no'>".$i."</td>
+				 <td class='no'>".$row->create_date."</td>
 				 <td class='user'>".$row->user_name."</td>
 				 <td class='id'>P".$row->pid."</td>	
 				 <td class='name'>".$row->property_name."</td>	
@@ -325,8 +327,12 @@ class Property extends CI_Controller {
 				 if($this->green->gAction("D")){
 					$table.= "<a><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
 				 }
+
 				 if($this->green->gAction("U")){
 					$table.= "<a><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+				 }
+				 if($this->green->gAction("U")){
+					$table.= "<a><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/renew.png')."'/></a>";
 				 }
 			$table.= " </td>
 				 </tr>
@@ -344,6 +350,19 @@ class Property extends CI_Controller {
 		$data['page_header']="New Property Type";			
 		$this->parser->parse('greenadmin/header', $data);
 		$this->parser->parse('property/property/form_add',$datas);
+		$this->parser->parse('greenadmin/footer', $data);
+	}
+	function renew($pid)
+	{
+		$date = date('Y-m-d');
+		$this->db->query("UPDATE tblproperty SET create_date = '$date' WHERE pid='$pid'");
+		
+		$data['idfield']=$this->idfield;		
+		$data['thead']=	$this->thead;
+		$data['page_header']="List Property";
+
+		$this->parser->parse('greenadmin/header', $data);
+		$this->parser->parse('property/property/view',$data);
 		$this->parser->parse('greenadmin/footer', $data);
 	}
 	function delete($pid)

@@ -97,3 +97,4 @@
 					</div><!--/.container-fluid --> 
 				</nav>
 			</header>
+			<?php //echo Date('Y-m-d H:i:s A')?>

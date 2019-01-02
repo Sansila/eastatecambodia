@@ -75,6 +75,7 @@
 									</tr>
 									<tr class='remove_tag'>
 										<th></th>
+										<th></th>
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_user_name'/>
 										</th>
@@ -312,6 +313,11 @@
 		function update(event){
 			    var storeid=jQuery(event.target).attr("rel");
 				location.href="<?PHP echo site_url('property/property/edit');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
+			
+		}
+		function renew(event){
+			    var storeid=jQuery(event.target).attr("rel");
+				location.href="<?PHP echo site_url('property/property/renew');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
 			
 		}
 		function previewstore(event){
