@@ -823,5 +823,15 @@ class Site extends CI_Controller {
         $this->load->view('site/properties',$data);
         $this->load->view('site/contain/footer',$datas);
     }
+    function postproperty()
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/postproperty',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
 }
 ?>

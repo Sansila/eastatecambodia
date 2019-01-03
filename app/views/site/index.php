@@ -14,11 +14,9 @@
 	                                    <span class="icon-down"></span>
 	                                </button>
 	                                <div class="dropdown-pane search-type" id="search-type-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
-	                                	<!-- <div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="all">Property Status</div> -->
 	                                	<div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="sale">Sale</div>
 	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="rent">Rent</div>
 	                                    <div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="both">Rent & Sale</div>
-	                                    <!--<div class="dropdown-item" data-dropdown-changer data-target-button=".desktop-search-type" data-target-field="#id_property_type" data-target-value="condo">Condo</div>-->
 	                                </div>
 	                            </div>
 
@@ -30,7 +28,6 @@
 	                                <div class="dropdown-pane" id="location-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
 	                                    <div class="tabs-content" data-tabs-content="desktop-location-tabs">
 	                                        <div class="tabs-panel is-active location-panel" id="desktop-location-panel">
-											<!-- <div class="location-content"><?php //echo $data;?></div> -->
 	                                        </div>
 	                                        <div class="tabs-panel landmark-panel" id="desktop-landmark-panel"></div>
 	                                    </div>
@@ -428,7 +425,7 @@
 
 	                            <div class="search-field-wrapper search-type mobile-search-type">
 	                                <button data-toggle="mobile-search-type-dropdown" class="search-field hollow expanded mobile-search-field">
-	                                    <span class="text-label">Looking to</span>
+	                                    <span class="text-label">Looking for</span>
 	                                    <span class="text-label-selected">Sale</span>
 	                                    <span class="icon-down"></span>
 	                                </button>
@@ -801,9 +798,28 @@
 	                    </div>
 	                </div>
 	            </div>
-	        </section>
-		    
 
+	            <div class="rows align-center collapse">
+	            	<div class="columns smallport-24 small-22 large-18">
+	                    <div class="search-form-wrapper clearfix rows show-for-medium" style="top:50px">
+	                        <div class="smallport-24 medium-24">
+	                        	<div class="wizard">
+								    <a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+								    <a class="current">Join Us</a>
+								</div>
+							</div>
+	                    </div>
+	                    <div class="search-form-wrapper clearfix rows hide-for-medium js-mobile-search align-center">
+	                        <div class="smallport-22 medium-24">
+	                        	<div class="wizard">
+								    <a class="current">Post Property</a>
+								    <a class="current">Join Us</a>
+								</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
 
 		    <form id="hidden-search-form" action="<?php echo site_url('site/site/search')?>" data-view-type="">
 

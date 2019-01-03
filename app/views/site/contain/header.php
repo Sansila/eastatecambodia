@@ -36,6 +36,7 @@
 	<link href="<?php echo site_url('template')?>/css/theme-elements.css" rel="stylesheet">
 	<link href="<?php echo site_url('template')?>/css/theme-blog.css" rel="stylesheet">
 	<link href="<?php echo site_url('template')?>/css/theme.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/css/gstyle.css') ?>" /> -->
 	
 	<!-- Style Switcher-->
 	<link rel="stylesheet" href="<?php echo site_url('template')?>/style-switcher/css/style-switcher.css">
