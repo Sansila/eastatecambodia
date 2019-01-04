@@ -862,25 +862,25 @@ class Site extends CI_Controller {
             'is_active' => 0
         );
 
-        $insert = $this->site->save($data);
+        $id = $this->site->save($data);
 
-        if($insert == true)
-        {
-            $this->post();
-        }   
+        $this->post($id,$type);
+          
     }
-    function post(){
+    function post($id,$type){
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
-        //$data['type'] = $type;
+        $data['id'] = $id;
+        $data['owner'] = $type;
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/post',$data);
         $this->load->view('site/contain/footer',$datas);
     }
     function savepost()
     {
+        $uid = $this->input->post('txtid');
         $title = $this->input->post('txttitle');
         $price = $this->input->post('txtprice');
         $size = $this->input->post('txtprice');
@@ -892,6 +892,7 @@ class Site extends CI_Controller {
         $long = $this->input->post('longtitude');
 
         $data = array(
+            'agent_id' => $uid,
             'property_name' => $title,
             'price' => $price,
             'p_type' => $ptype,
@@ -910,38 +911,38 @@ class Site extends CI_Controller {
         $orders=0;
         $files = $_FILES;
         $cpt = count($_FILES['userfile']['name']);
-        
+        $count = 0;
         for($i=0; $i<$cpt; $i++)
-        {         
-            // $extends = pathinfo($files["userfile"]["name"][$i], PATHINFO_EXTENSION);
-            // $_FILES['userfile']['name']= $files['userfile']['name'][$i];
-            // $_FILES['userfile']['type']= $files['userfile']['type'][$i];
-            // $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
-            // $_FILES['userfile']['error']= $files['userfile']['error'][$i];
-            // $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+        {        
+            $extends = pathinfo($files["userfile"]["name"][$i], PATHINFO_EXTENSION);
+            $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+            $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+            $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+            $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+            $_FILES['userfile']['size']= $files['userfile']['size'][$i];
 
-            // if($extends == "mp4" || $extends == "movie" || $extends == "mpe" || $extends == "qt" || $extends == "mov" || $extends == "avi" || $extends == "mpg" || $extends == "mpeg")
-            // {
-            //     $this->upload->initialize($this->set_upload_options_video($pid,$_FILES['userfile']['name']));
-            //     if ( ! $this->upload->do_upload()){
-            //         $error = array('error' => $this->upload->display_errors());         
-            //     }else{
-            //         $this->saveimg($pid,$_FILES['userfile']['name']);
-            //     }
-            // }else{
-            //     $this->upload->initialize($this->set_upload_options($pid,$_FILES['userfile']['name']));
-            //     if ( ! $this->upload->do_upload()){
-            //         $error = array('error' => $this->upload->display_errors());         
-            //     }else{  
-            //         $this->creatthumb($pid,$_FILES['userfile']['name'],$orders[$i]);
-            //     }
-            // }
-            if($i === $cpt)
+            if($extends == "mp4" || $extends == "movie" || $extends == "mpe" || $extends == "qt" || $extends == "mov" || $extends == "avi" || $extends == "mpg" || $extends == "mpeg")
             {
-                //redirect('site/', 'refresh');
-                print_r($cpt);
+                $this->upload->initialize($this->set_upload_options_video($pid,$_FILES['userfile']['name']));
+                if ( ! $this->upload->do_upload()){
+                    $error = array('error' => $this->upload->display_errors());         
+                }else{
+                    $this->saveimg($pid,$_FILES['userfile']['name']);
+                }
+            }else{
+                $this->upload->initialize($this->set_upload_options($pid,$_FILES['userfile']['name']));
+                if ( ! $this->upload->do_upload()){
+                    $error = array('error' => $this->upload->display_errors());         
+                }else{  
+                    $this->creatthumb($pid,$_FILES['userfile']['name'],$orders[$i]);
+                }
             }
+            $count += ++$i;
         }
+        if($count != 0)
+        {
+            redirect('/', 'refresh');
+        } 
     }
     
     function creatthumb($pid,$imagename,$order){

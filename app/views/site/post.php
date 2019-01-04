@@ -1,3 +1,4 @@
+
 <style type="text/css">
 .txtName{
 	border-radius: 36px;
@@ -129,6 +130,12 @@
 			        <form enctype="multipart/form-data" method="POST" action="<?php echo site_url('site/site/savepost')?>">
 		               <div class="row">
 		                    <div class="col-md-6">
+								<div class="form-group">
+		                            <label class='col-lg-4 control-label'>Property Title <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <input type="text" name="txtid" class="form-control txtName" value="<?php echo $id;?>" id="txtid"/>                  
+	                                </div>
+		                        </div>
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'>Property Title <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
@@ -154,7 +161,7 @@
 		                            <label class='col-lg-4 control-label'>Categories <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <select class="form-control txtName" required="" name="txtcategory" id="txtcategory" style="max-width: 100%;">
-                                        	<option value="0">Please Select</option>
+                                        	<option value="">Please Select</option>
 	                                        <?php
 	                                        $locat=$this->db->query("SELECT * FROM tblpropertytype WHERE type_status = '1' ")->result();
 	                                            foreach ($locat as $me) {
@@ -172,7 +179,7 @@
 						        	<label class='col-lg-4 control-label'>Property Type <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 									    <select class="form-control txtName" required="" name="txttype" id="txttype" style="max-width: 100%;" required="">
-									    	<option value="0">Please Select</option>
+									    	<option value="">Please Select</option>
 	                                        <option value="1">Sale</option>
 	                                        <option value="2">Rent</option>
 	                                        <option value="3">Sale & Rent</option>
@@ -183,7 +190,7 @@
 		                            <label class='col-lg-4 control-label'>Location <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <select class="form-control txtName select2-single" required="" name="txtlocation" id="txtlocation" style="max-width: 100%;" required="">
-									    	<option value="0">Please Select</option>
+									    	<option value="">Please Select</option>
 	                                        <?php
 	                                            $location=$this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc")->result();
 	                                            foreach ($location as $menu) {
@@ -244,7 +251,7 @@
 			                	<div class="form-group">
 		                            <label class='col-lg-2 control-label'>Who I am? <span class="text-danger">*</span></label>
 	                                <div class="col-lg-10">
-                                        <input type="text" name="txtwho" required="" value="123" disabled="" class="form-control txtName" id="txtwho"/>      
+                                        <input type="text" name="txtwho" required="" value="<?php echo $owner?>" disabled="" class="form-control txtName" id="txtwho"/>      
 	                                </div>
 		                        </div>
 			                </div>
@@ -266,25 +273,15 @@
 	</section>
 </div>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
-  type="text/javascript"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
+  type="text/javascript"></script> -->
 <script type="text/javascript">//<![CDATA[
     window.onload=function(){
       var map;
       function initialize() {
-
-        <?php 
-            if(isset($id)){
-        ?>
-            var myLatlng = new google.maps.LatLng('<?php if($row->latitude !="") echo $row->latitude; else echo "11.570516523819823"?>', '<?php if($row->longtitude !="") echo $row->longtitude; else echo "104.92183668505857";?>');
-        <?php
-            }else{
-        ?>
-            var myLatlng = new google.maps.LatLng(11.570516523819823,104.92183668505857);
-        <?php
-            }
-        ?>
-
+ 
+    	var myLatlng = new google.maps.LatLng(11.570516523819823,104.92183668505857);
+        
         var myOptions = {
               zoom: 12,
               center: myLatlng,

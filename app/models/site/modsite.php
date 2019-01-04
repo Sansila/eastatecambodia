@@ -195,12 +195,9 @@
         function save($data)
         {
             $insert = $this->db->insert('admin_user',$data);
-
-            if ($insert) {
-                return true;
-            }else{
-                return false;
-            }
+            $id = $this->db->insert_id();
+            
+            return $id;
         }
         function savepost($data)
         {
