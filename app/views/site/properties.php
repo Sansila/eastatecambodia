@@ -925,6 +925,26 @@
 	                    </div>
 	                </div>
 	            </div>
+	            <div class="rows align-center collapse">
+	            	<div class="columns smallport-24 small-22 large-18">
+	                    <div class="search-form-wrapper clearfix rows show-for-medium" style="top:50px">
+	                        <div class="smallport-24 medium-24">
+	                        	<div class="wizard">
+								    <a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+								    <a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+								</div>
+							</div>
+	                    </div>
+	                    <div class="search-form-wrapper clearfix rows hide-for-medium js-mobile-search align-center">
+	                        <div class="smallport-22 medium-24">
+	                        	<div class="wizard">
+								    <a class="current" href="<?php echo site_url('site/site/postproperty')?>">Post Property</a>
+								    <a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+								</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
 	        </section>
 		    
 

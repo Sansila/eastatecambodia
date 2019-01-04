@@ -833,5 +833,186 @@ class Site extends CI_Controller {
         $this->load->view('site/postproperty',$data);
         $this->load->view('site/contain/footer',$datas);
     }
+    function join()
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/joinus',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function save()
+    {
+        $name = $this->input->post('txtname');
+        $email = $this->input->post('txtemail');
+        $phone = $this->input->post('txtphone');
+        $address = $this->input->post('txtaddress');
+        $type = $this->input->post('txttype_post');
+        $date = Date('y-m-d');
+
+        $data = array(
+            'user_name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address,
+            'created_date' => $date,
+            'type_post' => $type,
+            'is_active' => 0
+        );
+
+        $insert = $this->site->save($data);
+
+        if($insert == true)
+        {
+            $this->post();
+        }   
+    }
+    function post(){
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        //$data['type'] = $type;
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/post',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function savepost()
+    {
+        $title = $this->input->post('txttitle');
+        $price = $this->input->post('txtprice');
+        $size = $this->input->post('txtprice');
+        $cate = $this->input->post('txtcategory');
+        $ptype = $this->input->post('txttype');
+        $location = $this->input->post('txtlocation');
+        $content = $this->input->post('txtcontent');
+        $lat = $this->input->post('latitude');
+        $long = $this->input->post('longtitude');
+
+        $data = array(
+            'property_name' => $title,
+            'price' => $price,
+            'p_type' => $ptype,
+            'lp_id' => $location,
+            'housesize' => $size,
+            'description' => $content,
+            'type_id'=> $cate,
+            'latitude'=> $lat,
+            'longtitude'=> $long,
+            'create_date'=> date('Y-m-d')
+        );
+
+        $pid = $this->site->savepost($data);
+        
+        $this->load->library('upload');
+        $orders=0;
+        $files = $_FILES;
+        $cpt = count($_FILES['userfile']['name']);
+        
+        for($i=0; $i<$cpt; $i++)
+        {         
+            // $extends = pathinfo($files["userfile"]["name"][$i], PATHINFO_EXTENSION);
+            // $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+            // $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+            // $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+            // $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+            // $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+
+            // if($extends == "mp4" || $extends == "movie" || $extends == "mpe" || $extends == "qt" || $extends == "mov" || $extends == "avi" || $extends == "mpg" || $extends == "mpeg")
+            // {
+            //     $this->upload->initialize($this->set_upload_options_video($pid,$_FILES['userfile']['name']));
+            //     if ( ! $this->upload->do_upload()){
+            //         $error = array('error' => $this->upload->display_errors());         
+            //     }else{
+            //         $this->saveimg($pid,$_FILES['userfile']['name']);
+            //     }
+            // }else{
+            //     $this->upload->initialize($this->set_upload_options($pid,$_FILES['userfile']['name']));
+            //     if ( ! $this->upload->do_upload()){
+            //         $error = array('error' => $this->upload->display_errors());         
+            //     }else{  
+            //         $this->creatthumb($pid,$_FILES['userfile']['name'],$orders[$i]);
+            //     }
+            // }
+            if($i === $cpt)
+            {
+                //redirect('site/', 'refresh');
+                print_r($cpt);
+            }
+        }
+    }
+    
+    function creatthumb($pid,$imagename,$order){
+        $data = array('upload_data' => $this->upload->data());
+        $config2['image_library'] = 'gd2';
+        $config2['source_image'] = $this->upload->upload_path.$this->upload->file_name;
+        $config2['new_image'] = './assets/upload/property/thumb';
+        $config2['maintain_ratio'] = false;
+        $config2['create_thumb'] = "$pid".'_'."$imagename";
+        $config2['thumb_marker'] = false;
+        $config2['height'] = 564;
+        $config2['width'] = 848;
+        $config2['quality'] = 100;
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config2); 
+        if ( ! $this->image_lib->resize()){
+            echo $this->image_lib->display_errors();
+        }else{
+            $this->saveimg($pid,$imagename);
+        }
+        
+    }
+
+    private function set_upload_options($pid,$imagename)
+    {   
+        if(!file_exists('./assets/upload/property/')){
+            if(mkdir('./assets/upload/property/',0755,true)){
+                return true;
+            }
+            if(mkdir('./assets/upload/property/thumb',0755,true)){
+                return true;
+            }
+        }
+        $config = array();
+        $config['upload_path'] = './assets/upload/property/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|mpeg|mpg|mp4|mpe|qt|avi|mov';
+        $config['max_size']      = '0';
+        $config['file_name']     = "$pid".'_'."$imagename";
+        $config['overwrite']     = true;
+
+        return $config;
+    }
+    private function set_upload_options_video($pid,$imagename)
+    {   
+        if(!file_exists('./assets/upload/property/')){
+            if(mkdir('./assets/upload/property/',0755,true)){
+                return true;
+            }
+            if(mkdir('./assets/upload/property/thumb',0755,true)){
+                return true;
+            }
+        }
+        $config = array();
+        $config['upload_path'] = './assets/upload/property/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|mpeg|mpg|mp4|mpe|qt|avi|mov';
+        $config['max_size']      = '0';
+        $config['file_name']     = "$pid".'_'."$imagename";
+        $config['overwrite']     = true;
+
+        return $config;
+    }
+    function saveimg($pid,$imagename){
+        $date=date('Y-m-d H:i:s');
+        $user=$this->session->userdata('user_name');
+        $count=$this->db->query("SELECT count(*) as count FROM tblgallery where pid='$pid' AND url='$imagename'")->row()->count;
+        if($count==0){
+            $data=array('pid'=>$pid,
+                        'url'=>$imagename,
+                        'gallery_type'=>'0');
+            $this->db->insert('tblgallery',$data);
+        }
+    }
 }
 ?>

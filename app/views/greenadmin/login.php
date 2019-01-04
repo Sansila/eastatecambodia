@@ -21,25 +21,6 @@
 	</head>
 	<body>	    
 
-		<div class="container">
-			<div class="card card-container">
-				<p class="title-header">Estatecambodia Login</p>
-				<img id="profile-img" class="profile-img-card" src="<?php echo base_url('assets/images/avatar_2x.png') ?>" />
-				<p id="profile-name" class="profile-name-card"></p>
-				<form class="form-signin" action="<?php echo site_url('greenadmin/login/getLogin')?>" method="post">
-					<span id="reauth-email" class="reauth-email"></span>
-					<input type="text" name="user_name" id="inputEmail" class="form-control" placeholder="User name" required autofocus>
-					<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-					<div id="remember" class="checkbox">
-						<label>
-							<input type="checkbox" value="remember-me"> Remember me
-						</label>
-					</div>
-					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-				</form><!-- /form -->
-				
-			</div><!-- /card-container -->
-		</div>
 		
 		<!-- <div class="container-fluid"> 
 			<div class="row-fluid">
@@ -144,12 +125,19 @@
 		body, html {
 			height: 100%;
 			background-repeat: no-repeat;
-			background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+			background-image:url(<?php echo site_url('assets/img/bg-01.jpg')?>);
+			position: fixed;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    left: 0;
+		    background-size: cover;
+		    background-position: 50% 50%;
 		}
 
 		.title-header{
 			text-align: center;
-			font-size: 20px;
+			font-size: 16px;
 			font-weight: 900;
 			color: #d84949;
 			text-transform: uppercase;
@@ -158,6 +146,7 @@
 		.card-container.card {
 			max-width: 350px;
 			padding: 40px 40px;
+			border-radius: 15px;
 		}
 
 		.btn {
@@ -226,8 +215,10 @@
 		.form-signin #inputEmail,
 		.form-signin #inputPassword {
 			direction: ltr;
-			height: 44px;
+			height: 35px;
 			font-size: 16px;
+			border-radius: 36px;
+			font-size: 14px;
 		}
 
 		.form-signin input[type=email],
@@ -253,7 +244,7 @@
 
 		.btn.btn-signin {
 			/*background-color: #4d90fe; */
-			background-color: rgb(104, 145, 162);
+			background-color: #dc3545;
 			/* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
 			padding: 0px;
 			font-weight: 700;
@@ -261,7 +252,7 @@
 			height: 36px;
 			-moz-border-radius: 3px;
 			-webkit-border-radius: 3px;
-			border-radius: 3px;
+			border-radius: 36px;
 			border: none;
 			-o-transition: all 0.218s;
 			-moz-transition: all 0.218s;
@@ -269,11 +260,11 @@
 			transition: all 0.218s;
 		}
 
-		.btn.btn-signin:hover,
+		/*.btn.btn-signin:hover,
 		.btn.btn-signin:active,
 		.btn.btn-signin:focus {
 			background-color: rgb(12, 97, 33);
-		}
+		}*/
 
 		.forgot-password {
 			color: rgb(104, 145, 162);
@@ -286,6 +277,26 @@
 		}
 
 	</style>
+	<div class="container">
+		<div class="card card-container">
+			<p class="title-header">Estatecambodia</p>
+			<img id="profile-img" class="profile-img-card" src="<?php echo base_url('assets/images/avatar_2x.png') ?>" />
+			<p id="profile-name" class="profile-name-card"></p>
+			<form class="form-signin" action="<?php echo site_url('greenadmin/login/getLogin')?>" method="post">
+				<span id="reauth-email" class="reauth-email"></span>
+				<input type="text" name="user_name" id="inputEmail" class="form-control" placeholder="User name" required autofocus>
+				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+				<div id="remember" class="checkbox">
+					<label>
+						<input type="checkbox" value="remember-me"> Remember me
+					</label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+			</form><!-- /form -->
+			
+		</div><!-- /card-container -->
+	</div>
+	
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="<?php echo base_url('assets/js/respond.min.js') ?>"></script>
 		<![endif]-->

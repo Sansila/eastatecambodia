@@ -805,15 +805,15 @@
 	                        <div class="smallport-24 medium-24">
 	                        	<div class="wizard">
 								    <a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
-								    <a class="current">Join Us</a>
+								    <a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
 								</div>
 							</div>
 	                    </div>
 	                    <div class="search-form-wrapper clearfix rows hide-for-medium js-mobile-search align-center">
 	                        <div class="smallport-22 medium-24">
 	                        	<div class="wizard">
-								    <a class="current">Post Property</a>
-								    <a class="current">Join Us</a>
+								    <a class="current" href="<?php echo site_url('site/site/postproperty')?>">Post Property</a>
+								    <a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
 								</div>
 	                        </div>
 	                    </div>

@@ -192,6 +192,23 @@
                                     WHERE p.pid = '$pid' AND p.p_status = 1 ")->row();
             return $sql;
         }
+        function save($data)
+        {
+            $insert = $this->db->insert('admin_user',$data);
+
+            if ($insert) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function savepost($data)
+        {
+            $this->db->insert('tblproperty',$data);
+            $id = $this->db->insert_id();
+
+            return $id;
+        }
 }
 
 

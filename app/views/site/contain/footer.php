@@ -99,7 +99,7 @@
 	</div>
 	<!-- Begin Style Switcher -->
 	<!-- Include all compiled plugins (below), or include individual files as needed --> 
-	<script src="<?php echo site_url('template')?>/bootstrap/js/bootstrap.min.js"></script>
+	
 	<script src="<?php echo site_url('template')?>/vendor/owl-carousel/owl.carousel.js"></script>
 	<script src="<?php echo site_url('template')?>/vendor/flexslider/jquery.flexslider-min.js"></script>
 	<script src="<?php echo site_url('template')?>/vendor/chosen/chosen.jquery.min.js"></script>

@@ -37,7 +37,10 @@
 	<link href="<?php echo site_url('template')?>/css/theme-blog.css" rel="stylesheet">
 	<link href="<?php echo site_url('template')?>/css/theme.css" rel="stylesheet">
 	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/css/gstyle.css') ?>" /> -->
-	
+	<link rel="stylesheet" href="<?php echo base_url('assets/js/editor/summernote.css') ?>" />
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/fileinput.css') ?>" />
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/select2.css') ?>" />
+
 	<!-- Style Switcher-->
 	<link rel="stylesheet" href="<?php echo site_url('template')?>/style-switcher/css/style-switcher.css">
 	<!-- <link href="css/colors/red/style.html" rel="stylesheet" id="layoutstyle"> -->
@@ -59,6 +62,11 @@
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="<?php echo site_url('template')?>/vendor/jquery.min.js"></script>
+	<script src="<?php echo site_url('template')?>/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url('assets/js/jquery.validate.js')?>"></script>
+	<script src="<?php echo base_url();?>ckeditor/ckeditor.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="<?php echo base_url();?>assets/js/fileinput.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="<?php echo base_url('assets/js/select2.js')?>"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
   type="text/javascript"></script>
 	
