@@ -97,9 +97,12 @@
     top: -10px;
     position: relative;
 }
+.main{
+	background-color: #eee;
+}
 </style>
-<div role="main" class="main pgl-bg-grey">
-	<section class="pgl-intro" style="padding-top: 30px;">
+<div role="main" class="main">
+	<section class="pgl-intro" style="padding-top: 30px; margin-bottom:0px;">
 		<div class="container">
 			<div class="container">
 				<!-- <h2>Post Property</h2> -->

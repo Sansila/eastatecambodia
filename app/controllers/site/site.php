@@ -880,6 +880,8 @@ class Site extends CI_Controller {
     }
     function savepost()
     {
+        $this->load->library('upload');
+
         $uid = $this->input->post('txtid');
         $title = $this->input->post('txttitle');
         $price = $this->input->post('txtprice');
@@ -906,12 +908,11 @@ class Site extends CI_Controller {
         );
 
         $pid = $this->site->savepost($data);
-        
-        $this->load->library('upload');
+
         $orders=0;
         $files = $_FILES;
         $cpt = count($_FILES['userfile']['name']);
-        $count = 0;
+
         for($i=0; $i<$cpt; $i++)
         {        
             $extends = pathinfo($files["userfile"]["name"][$i], PATHINFO_EXTENSION);
@@ -937,12 +938,10 @@ class Site extends CI_Controller {
                     $this->creatthumb($pid,$_FILES['userfile']['name'],$orders[$i]);
                 }
             }
-            $count += ++$i;
+            if($i==$cpt-1){
+               redirect('site/site/message', 'refresh');
+            }
         }
-        if($count != 0)
-        {
-            redirect('/', 'refresh');
-        } 
     }
     
     function creatthumb($pid,$imagename,$order){
@@ -1014,6 +1013,16 @@ class Site extends CI_Controller {
                         'gallery_type'=>'0');
             $this->db->insert('tblgallery',$data);
         }
+    }
+    function message()
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/messageafterpost',$data);
+        $this->load->view('site/contain/footer',$datas);
     }
 }
 ?>
