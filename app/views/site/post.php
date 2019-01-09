@@ -119,9 +119,18 @@
 .text-danger {
     color: #e31713;
 }
+.fileinput-remove-button{
+	display: none;
+}
+.fileinput-upload-button{
+	display: none;
+}
+.main{
+	background-color: #eee;
+}
 </style>
-<div role="main" class="main pgl-bg-grey">
-	<section class="pgl-intro" style="padding-top: 30px;">
+<div role="main" class="main">
+	<section class="pgl-intro" style="padding-top: 30px; margin-bottom: 0px;">
 		<div class="container">
 			<div class="container">
 				<!-- <h2>Post Property</h2> -->
@@ -130,7 +139,7 @@
 			        <form enctype="multipart/form-data" method="POST" action="<?php echo site_url('site/site/savepost')?>">
 		               <div class="row">
 		                    <div class="col-md-6">
-								<div class="form-group">
+								<div class="form-group hide">
 		                            <label class='col-lg-4 control-label'>Property Title <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtid" class="form-control txtName" value="<?php echo $id;?>" id="txtid"/>                  
@@ -145,13 +154,13 @@
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'>Price <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
-	                                    <input type="text" name="txtprice" required="" class="form-control txtName" id="txtprice" />                 
+	                                    <input type="number" name="txtprice" required="" class="form-control txtName" id="txtprice" style="max-width: 100%" />                 
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'>Size(Land, House) <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
-	                                    <input type="text" name="txtsize" required="" class="form-control txtName" id="txtsize" />                 
+	                                    <input type="number" name="txtsize" required="" class="form-control txtName" id="txtsize" style="max-width: 100%"/>                 
 	                                </div>
 		                        </div>
 		                        

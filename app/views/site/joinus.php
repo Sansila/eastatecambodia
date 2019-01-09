@@ -1,3 +1,4 @@
+
 <style type="text/css">
 .txtName{
 	border-radius: 36px;
@@ -89,40 +90,76 @@
 	margin: 0px;
 	color: #ffffff;
 }
+.main{
+	background-color: #eee;
+}
+.text-danger {
+    color: #e31713;
+}
 </style>
-<div role="main" class="main pgl-bg-grey">
-	<section class="pgl-intro" style="padding-top: 30px;">
+<div role="main" class="main">
+	<section class="pgl-intro" style="padding-top: 30px; margin-bottom: 0px;">
 		<div class="container">
 			<div class="container">
 				<!-- <h2>Post Property</h2> -->
+				<?php 
+					$m = "";
+					if(isset($_GET['m']))
+						$m = $_GET['m'];
+
+					if($m == "error")
+					{
+				?>
+					<div class="alert alert-danger" role="alert">
+					  	You has been join failed.
+					</div>
+				<?php
+					}
+				?>
 				<div class="txt-header"><h3>Join Us</h3></div>
 				<div class="lead pgl-bg-light">
-			        <form method="post">
+			        <form method="post" action="<?php echo site_url('site/site/savejoin')?>">
 		                <!-- <h3>Post Property</h3> -->
 		               <div class="row">
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <input type="text" name="txtName" class="form-control txtName" placeholder="Name *" value="" />
+		                            <label class='col-lg-4 control-label'>Name <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <input type="text" name="txtName" class="form-control txtName" required="" id="txtname" required="" id="username"/> 
+	                                </div>
 		                        </div>
-		                        
 		                        <div class="form-group">
-		                            <input type="text" name="txtPhone" class="form-control txtName" placeholder="Email *" value="" />
+		                            <label class='col-lg-4 control-label'>Email</label>
+	                                <div class="col-lg-8">
+	                                    <input type="text" name="txtPhone" class="form-control txtName" value="" />      
+	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <input type="text" name="txtEmail" class="form-control txtName" placeholder="Phone Number *" value="" />
+		                            <label class='col-lg-4 control-label'>Phone Number <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <input type="text" name="txtEmail" class="form-control txtName" value="" required="" />    
+	                                </div>
 		                        </div>
-
 		                        <div class="form-group">
-		                            <input type="text" name="txtPhone" class="form-control txtName" placeholder="Business Name *" value="" />
+		                            <label class='col-lg-4 control-label'>Business Name <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <input type="text" name="txtBusiness" class="form-control txtName" value="" required="" />
+	                                </div>
 		                        </div>
 		                        
 		                    </div>
 		                    <div class="col-md-6">
 		                    	<div class="form-group">
-		                            <textarea name="txtMsg" class="form-control txtMsg" placeholder="Address *" style="width: 100%; height: 95px;"></textarea>
+		                            <label class='col-lg-3 control-label'>Address <span class="text-danger">*</span></label>
+	                                <div class="col-lg-9">
+	                                    <textarea name="txtAddress" class="form-control txtMsg" required="" style="width: 100%; height: 95px;"></textarea>        
+	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <textarea name="txtMsg" class="form-control txtMsg" placeholder="Remark *" style="width: 100%; height: 95px;"></textarea>
+		                            <label class='col-lg-3 control-label'>Remark</label>
+	                                <div class="col-lg-9">
+	                                    <textarea name="txtRemark" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>       
+	                                </div>
 		                        </div>
 		                    </div>
 		                    <div class="col-md-4">
@@ -139,3 +176,9 @@
 	</section>
 
 </div>
+
+<script type="text/javascript">
+	setTimeout(function(){ 
+		$('.alert-danger').addClass('hide');
+	}, 3000);
+</script>

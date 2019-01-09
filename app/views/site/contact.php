@@ -10,8 +10,21 @@
 			<div class="container">
 				
 				<div class="row">
-					<div class="col-md-12 content">
-						<h2>Contact Us</h2>
+					<div class="col-md-12 content" style="padding-top: 30px;">
+						<!-- <h2>Contact Us</h2> -->
+						<div class="wizard row">
+							<div class="col-md-12">
+								<div class="col-md-2">
+									<a class="current">Contact Us</a>
+								</div>
+								<div class="col-md-2">
+									<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+								</div>
+								<div class="col-md-2">
+									<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="row">

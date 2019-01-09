@@ -880,6 +880,8 @@ class Site extends CI_Controller {
     }
     function savepost()
     {
+        $this->load->library('upload');
+
         $uid = $this->input->post('txtid');
         $title = $this->input->post('txttitle');
         $price = $this->input->post('txtprice');
@@ -906,12 +908,11 @@ class Site extends CI_Controller {
         );
 
         $pid = $this->site->savepost($data);
-        
-        $this->load->library('upload');
+
         $orders=0;
         $files = $_FILES;
         $cpt = count($_FILES['userfile']['name']);
-        $count = 0;
+
         for($i=0; $i<$cpt; $i++)
         {        
             $extends = pathinfo($files["userfile"]["name"][$i], PATHINFO_EXTENSION);
@@ -937,12 +938,10 @@ class Site extends CI_Controller {
                     $this->creatthumb($pid,$_FILES['userfile']['name'],$orders[$i]);
                 }
             }
-            $count += ++$i;
+            if($i==$cpt-1){
+               redirect('site/site/message?m=p', 'refresh');
+            }
         }
-        if($count != 0)
-        {
-            redirect('/', 'refresh');
-        } 
     }
     
     function creatthumb($pid,$imagename,$order){
@@ -1014,6 +1013,55 @@ class Site extends CI_Controller {
                         'gallery_type'=>'0');
             $this->db->insert('tblgallery',$data);
         }
+    }
+    function message()
+    {
+        $m = ""; $msg ="";
+        if(isset($_GET['m']))
+            $m = $_GET['m'];
+
+        if($m == "p")
+            $msg = "Thank you for uploading your property. Our team will review soon";
+        else
+            $msg = "Thank you for join us. Our team will review soon";
+
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $data['bodymsg'] = $msg;
+
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/messageafterpost',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function savejoin()
+    {
+        $name = $this->input->post('txtName');
+        $phone = $this->input->post('txtPhone');
+        $email = $this->input->post('txtEmail');
+        $business = $this->input->post('txtBusiness');
+        $address = $this->input->post('txtAddress');
+        $remark = $this->input->post('txtRemark');
+        $date = Date('y-m-d');
+
+        $data = array(
+            'user_name' => $name,
+            'email' => $phone,
+            'phone' => $email,
+            'business' => $business,
+            'address' => $address,
+            'remark' => $remark,
+            'created_date' => $date,
+            'is_active' => 0
+        );
+
+        $join = $this->site->savejoin($data);
+
+        if($join)
+            redirect('site/site/message?m=j', 'refresh');
+        else
+            redirect('site/site/join?m=error', 'refresh');
     }
 }
 ?>

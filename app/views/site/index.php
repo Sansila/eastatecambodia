@@ -415,9 +415,7 @@
 	                                </div>
 	                                <div class="dropdown-pane" id="mobile-location-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
 	                                    <div class="tabs-content" data-tabs-content="mobile-location-tabs">
-	                                        <div class="tabs-panel is-active location-panel" id="mobile-location-panel">
-												<!-- <div class="location-content"><?php //echo $data;?></div> -->
-	                                        </div>
+	                                        <div class="tabs-panel is-active location-panel" id="mobile-location-panel"></div>
 	                                        <div class="tabs-panel landmark-panel" id="mobile-landmark-panel"></div>
 	                                    </div>
 	                                </div>
@@ -799,9 +797,9 @@
 	                </div>
 	            </div>
 
-	            <div class="rows align-center collapse">
+	            <!-- <div class="rows align-center collapse">
 	            	<div class="columns smallport-24 small-22 large-18">
-	                    <div class="search-form-wrapper clearfix rows show-for-medium" style="top:50px">
+	                    <div class="search-form-wrappers clearfix rows show-for-medium" style="top:50px">
 	                        <div class="smallport-24 medium-24">
 	                        	<div class="wizard">
 								    <a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
@@ -809,7 +807,7 @@
 								</div>
 							</div>
 	                    </div>
-	                    <div class="search-form-wrapper clearfix rows hide-for-medium js-mobile-search align-center">
+	                    <div class="search-form-wrappers clearfix rows hide-for-medium js-mobile-search align-center">
 	                        <div class="smallport-22 medium-24">
 	                        	<div class="wizard">
 								    <a class="current" href="<?php echo site_url('site/site/postproperty')?>">Post Property</a>
@@ -818,7 +816,12 @@
 	                        </div>
 	                    </div>
 	                </div>
+<<<<<<< HEAD
+	            </div> -->
+=======
 	            </div>
+>>>>>>> 062f703d9c32a9d8e73cec62c0daead41265f946
+
 	        </section>
 
 		    <form id="hidden-search-form" action="<?php echo site_url('site/site/search')?>" data-view-type="">
@@ -936,7 +939,20 @@
 			<!-- Begin Properties -->
 			<section class="pgl-properties pgl-bg-grey">
 				<div class="container">
-					<h2>Properties</h2>
+					<!-- <h2>Properties</h2> -->
+					<div class="wizard row">
+						<div class="col-md-12">
+							<div class="col-md-2">
+								<a class="current">Properties</a>
+							</div>
+							<div class="col-md-2">
+								<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+							</div>
+							<div class="col-md-2">
+								<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+							</div>
+						</div>
+					</div>
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs pgl-pro-tabs text-center animation hide" role="tablist">
 						<li class="active"><a href="#all" role="tab" data-toggle="tab">All</a></li>

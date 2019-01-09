@@ -7,7 +7,20 @@
 	<section class="pgl-intro" style="padding-top: 30px;">
 		<div class="container">
 			<div class="container">
-				<h2>About US</h2>
+				<!-- <h2>About US</h2> -->
+				<div class="wizard row">
+					<div class="col-md-12">
+						<div class="col-md-2">
+							<a class="current">About US</a>
+						</div>
+						<div class="col-md-2">
+							<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+						</div>
+						<div class="col-md-2">
+							<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+						</div>
+					</div>
+				</div>
 				<div class="lead pgl-bg-light">
 					<?php echo $desc->content?>
 				</div>

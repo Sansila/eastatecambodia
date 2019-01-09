@@ -923,9 +923,9 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <div class="rows align-center collapse">
+	            <!-- <div class="rows align-center collapse">
 	            	<div class="columns smallport-24 small-22 large-18">
-	                    <div class="search-form-wrapper clearfix rows show-for-medium" style="top:50px">
+	                    <div class="search-form-wrappers clearfix rows show-for-medium" style="top:50px">
 	                        <div class="smallport-24 medium-24">
 	                        	<div class="wizard">
 								    <a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
@@ -933,7 +933,7 @@
 								</div>
 							</div>
 	                    </div>
-	                    <div class="search-form-wrapper clearfix rows hide-for-medium js-mobile-search align-center">
+	                    <div class="search-form-wrappers clearfix rows hide-for-medium js-mobile-search align-center">
 	                        <div class="smallport-22 medium-24">
 	                        	<div class="wizard">
 								    <a class="current" href="<?php echo site_url('site/site/postproperty')?>">Post Property</a>
@@ -942,7 +942,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-	            </div>
+	            </div> -->
 	        </section>
 		    
 
@@ -1087,7 +1087,20 @@
 			<!-- Begin Properties -->
 			<section class="pgl-properties pgl-bg-grey">
 				<div class="container">
-					<h3>Search Result<?php echo '('.count($result).')';?></h3>
+					<!-- <h3></h3> -->
+					<div class="wizard row">
+						<div class="col-md-12">
+							<div class="col-md-2">
+								<a class="current">Search Result<?php echo '('.count($result).')';?></a>
+							</div>
+							<div class="col-md-2">
+								<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+							</div>
+							<div class="col-md-2">
+								<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+							</div>
+						</div>
+					</div>
 					<div class="properties-full properties-listing properties-listfull">
 						<div class="listing-header clearfix">
 							<ul class="list-inline list-icons pull-left">

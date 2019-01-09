@@ -83,7 +83,7 @@
 		<title>Admin</title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/images/settings.png')?> ">
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/img/estatecambodiaicon.ico')?> ">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/font-awesome.css') ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/fullcalendar.css') ?>" />
@@ -173,7 +173,7 @@
 	<body data-color="grey" class="flat">
 		<div id="wrapper">
 			<div id="header">
-				<h1><a href="<?php echo base_url('/sys/dashboard'); ?>">Dashboard</a></h1>	
+				<h1><a href="<?php echo site_url('/sys/dashboard'); ?>">Dashboard</a></h1>	
 				<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>	
 			</div>
 		
@@ -293,7 +293,7 @@
 	                    <a data-option="flat" class="button " href="#">Flat</a>                
 	                </p>
 	            </div>
-	            <div id="switcher-button">
+	            <div id="switcher-button" style="display:none;">
 	                <i class="fa fa-cogs"></i>
 	            </div>
 	        </div>
@@ -303,8 +303,7 @@
 					<input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="fa fa-search"></i></button>
 				</div>	
 				<ul>
-					<li class="submenu"><a href="<?php echo site_url("sys/dashboard") ?>"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-					<!-- <li class=""><a href="<?php echo site_url("site-profile") ?>"><i class="fa fa-cog"></i> <span>Site Profile</span></a></li> -->
+					<li class="hide"><a href="<?php echo site_url("sys/dashboard") ?>"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
 					<?php echo $menu ?>
 				</ul>			
 			</div>			

@@ -9,28 +9,35 @@
 
 	 ?>
 
-			<div id="content-header" class="mini hide">
+			<div id="content-header" class="mini">
 				<h1>Dashboard</h1>
 				<ul class="mini-stats box-3">
 					<li>
-						<div class="left sparkline_bar_good"><span>2,4,9,7,12,10,12</span>+10%</div>
+						<div class="left sparkline_bar_good"><span>Inactive Post Properties</span></div>
 						<div class="right">
 							<strong>36094</strong>
-							Visits
+							Properties
 						</div>
 					</li>
 					<li>
-						<div class="left sparkline_bar_neutral"><span>20,15,18,14,10,9,9,9</span>0%</div>
+						<div class="left sparkline_bar_good"><span>Inactive Join Us</span></div>
 						<div class="right">
 							<strong>1433</strong>
 							Users
 						</div>
 					</li>
 					<li>
-						<div class="left sparkline_bar_bad"><span>3,5,9,7,12,20,10</span>+50%</div>
+						<div class="left sparkline_bar_bad"><span>Total Property</span></div>
 						<div class="right">
 							<strong>8650</strong>
-							Orders
+							Properties
+						</div>
+					</li>
+					<li>
+						<div class="left sparkline_bar_bad"><span>Total User</span></div>
+						<div class="right">
+							<strong>8650</strong>
+							Users
 						</div>
 					</li>
 				</ul>
