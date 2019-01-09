@@ -816,11 +816,11 @@
 	                        </div>
 	                    </div>
 	                </div>
-<<<<<<< HEAD
+
 	            </div> -->
-=======
+
 	            </div>
->>>>>>> 062f703d9c32a9d8e73cec62c0daead41265f946
+
 
 	        </section>
 
