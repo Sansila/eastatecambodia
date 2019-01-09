@@ -939,7 +939,7 @@ class Site extends CI_Controller {
                 }
             }
             if($i==$cpt-1){
-               redirect('site/site/message', 'refresh');
+               redirect('site/site/message?m=p', 'refresh');
             }
         }
     }
@@ -1016,13 +1016,52 @@ class Site extends CI_Controller {
     }
     function message()
     {
+        $m = ""; $msg ="";
+        if(isset($_GET['m']))
+            $m = $_GET['m'];
+
+        if($m == "p")
+            $msg = "Thank you for uploading your property. Our team will review soon";
+        else
+            $msg = "Thank you for join us. Our team will review soon";
+
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
+        $data['bodymsg'] = $msg;
+
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/messageafterpost',$data);
         $this->load->view('site/contain/footer',$datas);
+    }
+    function savejoin()
+    {
+        $name = $this->input->post('txtName');
+        $phone = $this->input->post('txtPhone');
+        $email = $this->input->post('txtEmail');
+        $business = $this->input->post('txtBusiness');
+        $address = $this->input->post('txtAddress');
+        $remark = $this->input->post('txtRemark');
+        $date = Date('y-m-d');
+
+        $data = array(
+            'user_name' => $name,
+            'email' => $phone,
+            'phone' => $email,
+            'business' => $business,
+            'address' => $address,
+            'remark' => $remark,
+            'created_date' => $date,
+            'is_active' => 0
+        );
+
+        $join = $this->site->savejoin($data);
+
+        if($join)
+            redirect('site/site/message?m=j', 'refresh');
+        else
+            redirect('site/site/join?m=error', 'refresh');
     }
 }
 ?>

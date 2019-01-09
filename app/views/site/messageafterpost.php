@@ -19,9 +19,10 @@ body {
 .txt-header h3{
 	margin: 0px;
 	color: #ffffff;
+	text-align: left;
 }
 h1 {
-    font-size: 1em;
+    font-size: 0.8em;
     margin: .67em 0;
     text-align: center;
 }
@@ -46,12 +47,12 @@ h1 {
 		<div class="container container-table">
 			<div class="row vertical-center-row">
 		        <div class="text-center col-md-12">
-		        	<div class="txt-header"><h3>COMING SOON</h3></div>
+		        	<div class="txt-header"><h3>Message</h3></div>
 					<div class="lead pgl-bg-light">
 				        
 				        <div class="bgimg">
 						  <div class="middle">
-						    <h1>Thank you for uploading your property. Our team will review soon</h1>
+						    <h1 style="font-size: 0.8em;"><?php echo $bodymsg;?></h1>
 						  </div>
 						</div>
 

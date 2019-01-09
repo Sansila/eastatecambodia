@@ -100,6 +100,9 @@
 .main{
 	background-color: #eee;
 }
+.text-danger {
+    color: #e31713;
+}
 </style>
 <div role="main" class="main">
 	<section class="pgl-intro" style="padding-top: 30px; margin-bottom:0px;">
@@ -112,7 +115,7 @@
 		               <div class="row">
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Name *</label>
+		                            <label class='col-lg-3 control-label'>Name <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
 	                                    <input type="text" name="txtname" class="form-control txtName" required="" id="txtname" required="" maxlength="15" minlength="4" pattern="^[a-zA-Z0-9_.-]*$" id="username"/>                  
 	                                </div>
@@ -124,22 +127,22 @@
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Phone *</label>
+		                            <label class='col-lg-3 control-label'>Phone <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
-	                                    <input type="text" name="txtphone" required="" class="form-control txtName" id="txtphone" />                 
+	                                    <input type="tel" name="txtphone" required="" class="form-control txtName" id="txtphone" style="max-width: 100%;" />                 
 	                                </div>
 		                        </div>
 		                        
 		                    </div>
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Address *</label>
+		                            <label class='col-lg-3 control-label'>Address <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9"> 
 	                                    <textarea name="txtaddress" id="txtaddress" required="" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>                 
 	                                </div>
 		                        </div>
 						        <div class="form-group">
-						        	<label class='col-lg-3 control-label'>Type Post *</label>
+						        	<label class='col-lg-3 control-label'>Type Post <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
 									    <select class="form-control txtName" name="txttype_post" style="max-width: 100%;" required="">
 									    	<option value="">-select-</option>

@@ -28530,6 +28530,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     type: "GET",
                     dataType: "json",
                     success: function(locations) {
+                        
                         var key, obj, prop, owns = Object.prototype.hasOwnProperty,
                             checkboxes = '<div class="location-content"><ul>';
                         for (key in locations) {
@@ -28547,7 +28548,8 @@ if ("function" != typeof gettext) var gettext = function(str) {
                             }
                             checkboxes += "</li>"
                         }
-                        checkboxes += "</ul></div>", $(el).hasClass("js-mobile-search") ? $(checkboxes).appendTo($("#mobile-location-dropdown .location-panel")) : $(checkboxes).appendTo($("#location-dropdown .location-panel"))
+                        checkboxes += "</ul></div>",
+                        $(el).hasClass("js-mobile-search") ? $(checkboxes).appendTo($("#mobile-location-dropdown .location-panel")) : $(checkboxes).appendTo($("#location-dropdown .location-panel"))
                     }
                 }),$("body").on("change", "[data-checkbox-changer]", function() {
                         var targetField = $(this).data("target-field"),

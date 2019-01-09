@@ -415,9 +415,7 @@
 	                                </div>
 	                                <div class="dropdown-pane" id="mobile-location-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
 	                                    <div class="tabs-content" data-tabs-content="mobile-location-tabs">
-	                                        <div class="tabs-panel is-active location-panel" id="mobile-location-panel">
-												<!-- <div class="location-content"><?php //echo $data;?></div> -->
-	                                        </div>
+	                                        <div class="tabs-panel is-active location-panel" id="mobile-location-panel"></div>
 	                                        <div class="tabs-panel landmark-panel" id="mobile-landmark-panel"></div>
 	                                    </div>
 	                                </div>
@@ -819,6 +817,7 @@
 	                    </div>
 	                </div>
 	            </div>
+
 	        </section>
 
 		    <form id="hidden-search-form" action="<?php echo site_url('site/site/search')?>" data-view-type="">
