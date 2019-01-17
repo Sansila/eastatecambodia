@@ -28,6 +28,34 @@ class usermodel extends CI_Model {
 		return $query->result();
 		
 	}
+
+	function getuser_inactive()
+	{	
+		$per_page='';
+		if(isset($_GET['per_page']))
+		$per_page=$_GET['per_page'];
+		$config['base_url']=site_url("setting/user/index?");
+		$config['per_page']=10;
+		$config['full_tag_open'] = '<li>';
+		$config['full_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<a><u>';
+		$config['cur_tag_close'] = '</u></a>';
+		$config['page_query_string']=TRUE;
+		$config['num_link']=3;
+		//$this->db->where('is_active',0);
+		$config['total_rows']=$this->db->where('is_active',0)->get('admin_user')->num_rows();
+		$this->pagination->initialize($config);
+		$this->db->select('*');
+		$this->db->from('admin_user u');
+		$this->db->join('z_role r','u.roleid=r.roleid','left');
+		$this->db->where('u.is_active',0);
+		$this->db->where('u.type_post is NOT NULL', NULL, FALSE);
+		$this->db->order_by("u.userid", "desc"); 
+		$this->db->limit($config['per_page'],$per_page);
+		$query=$this->db->get();
+		return $query->result();
+		
+	}
 	
 	function getLocalIp(){
 	    $output = shell_exec('/sbin/ifconfig');        
@@ -78,6 +106,17 @@ class usermodel extends CI_Model {
 		$this->db->from('admin_user u');
 		$this->db->join('z_role r','u.roleid=r.roleid','inner');
 		$this->db->where('u.is_active',1);
+		$this->db->where('u.userid',$id);
+		$this->db->order_by("u.userid", "desc"); 
+		$query=$this->db->get();
+		
+		return $query->row();
+	}
+	function getuserrowinactive($id){
+		$this->db->select('*');
+		$this->db->from('admin_user u');
+		$this->db->join('z_role r','u.roleid=r.roleid','left');
+		$this->db->where('u.is_active',0);
 		$this->db->where('u.userid',$id);
 		$this->db->order_by("u.userid", "desc"); 
 		$query=$this->db->get();

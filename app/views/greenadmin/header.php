@@ -173,7 +173,7 @@
 	<body data-color="grey" class="flat">
 		<div id="wrapper">
 			<div id="header">
-				<h1><a href="<?php echo site_url('/sys/dashboard'); ?>">Dashboard</a></h1>	
+				<h1><a>Dashboard</a></h1>	
 				<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>	
 			</div>
 		

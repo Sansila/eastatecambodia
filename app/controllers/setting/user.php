@@ -89,6 +89,15 @@ class user extends CI_Controller {
 		$this->load->view('setting/user/view',$data);
 		$this->load->view('greenadmin/footer');
 	}
+	function edit_isinactive($id)
+	{
+		$data1['query']=$this->user->getuserrowinactive($id);
+		$this->load->view('greenadmin/header');
+		$this->load->view('setting/user/edit',$data1);
+		$data['query']=$this->user->getuser();
+		$this->load->view('setting/user/view',$data);
+		$this->load->view('greenadmin/footer');
+	}
 	function search(){
 		
 		if(isset($_GET['f_name'])){
@@ -253,6 +262,11 @@ class user extends CI_Controller {
 		$this->db->update('admin_user',$data);
 		unlink('./assets/upload/'.$id.'.png');
 		redirect('setting/user/');
+	}
+	function delete_user($id)
+	{
+		$this->db->where('userid',$id);
+		$this->db->delete('admin_user');
 	}
 }
 

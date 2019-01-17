@@ -13,41 +13,43 @@ class Dashboard extends CI_Controller {
 	protected $searchrow;	
 
 	function __construct(){
-
-		
-
 		parent::__construct();
-
 		$this->load->library('pagination');			
-
 		$this->load->model('sys/ModDashBoard','dash');		
-
-
-
-		$this->idfield="studentid";
+		$this->load->model("property/modproperty","pro");
+		$this->load->model('setting/usermodel','user');
+		$this->load->model('setting/rolemodel','role');
+		$this->thead=array("No"=>'no',
+							"Date"=>"Date",
+							"User Name"=>'User Name',
+							"Pro_Number"=>'Pro_Number',
+							"Property Name"=>'Property Name',
+							"Category"=> "Category",
+							"Location"=> "Location",
+							"Hit" => "Hit",
+							"Property Type" => "Property Type",
+							"Visibled"=>'visibled',
+							"Action"=>'Action'							 	
+							);
+		$this->idfield="categoryid";
 
 	}
 
 	function index(){
 
 		$s_date=date('Y-m-d',strtotime("-3 months"));
-
 		$e_date=date('Y-m-d');
-
-
-
 		$data['data']="";		
-
-		
-
+		$data['idfield']=$this->idfield;		
 		$data['thead']=	$this->thead;
-
-		$data['page_header']="Disease List";	
-
+		$data['page_header']="Disease List";
+		$data['count_property'] = $this->dash->CountPropertyisInactive();
+		$data['count_inactive_user'] = $this->dash->CountInactiveUser();
+		$data['active_property'] = $this->dash->CountActiveProperty();
+		$data['active_user'] = $this->dash->CountActiveUser();
+		$data['query']=$this->user->getuser_inactive();
 		$this->parser->parse('greenadmin/header', $data);
-
 		$this->parser->parse('sys/dashboard_form', $data);
-
 		$this->parser->parse('greenadmin/footer', $data);
 
 	}
@@ -148,7 +150,4 @@ class Dashboard extends CI_Controller {
 		echo json_encode($arr);
 
 	}
-
-
-
 }

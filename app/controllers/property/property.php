@@ -381,4 +381,137 @@ class Property extends CI_Controller {
 		unlink("./assets/upload/property/".$row->pid.'_'.$row->url);
 		$this->db->where('gallery_id',$id)->delete('tblgallery');
 	}
+	function getdata_inactive()
+	{
+		$perpage=$this->input->post('perpage');
+		$s_name=$this->input->post('s_name');
+		$s_id=$this->input->post('s_id');
+		$p_type = $this->input->post('p_type');
+		$user_add = $this->input->post('user_add');
+		$p_status = $this->input->post('p_status');
+		$pro_loc = $this->input->post('pro_loc');
+
+		$where = "";
+		$var = $this->session->all_userdata();
+		$user = $var['userid'];
+
+		if($user == 4)
+			$where.= "";
+		else
+			$where.= " AND pl.agent_id = '$user' ";
+		if($p_type !="")
+			$where.= " AND pt.typeid = '$p_type' ";
+		if($s_id !="")
+			$where.= " AND pl.pid = '$s_id' ";
+		if($user_add !="")
+			$where.= " AND u.user_name LIKE '%$user_add%' ";
+		if($p_status !="")
+			$where.= " AND pl.p_type = '$p_status' ";
+		if($pro_loc !="")
+			$where.= " AND l.lineage LIKE '%$pro_loc%' ";
+
+		$sql="SELECT *
+		FROM tblproperty pl
+		inner join tblpropertytype pt
+		on pl.type_id = pt.typeid
+		inner join admin_user as u
+		on u.userid = pl.agent_id
+		inner join tblpropertylocation l 
+		on pl.lp_id = l.propertylocationid
+		WHERE pl.p_status= 0 and u.is_active = 0 AND u.type_post IS NOT NULL {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
+
+		$table='';
+		$pagina='';
+		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
+		$i=1;
+		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+		$sql.=" {$limit}";
+		$this->green->setActiveRole($this->session->userdata('roleid'));
+        $this->green->setActiveModule($this->input->post('m'));
+        $this->green->setActivePage($this->input->post('p')); 
+		foreach($this->db->query($sql)->result() as $row){
+			$visibled='No';
+			$typ='';
+			$lay='';
+			$property_type ="";
+			if($row->p_status==1)
+				$visibled="Yes";
+			if($row->p_type == 1)
+				$property_type = "Sale";
+			if($row->p_type == 2)
+				$property_type = "Rent";
+			if($row->p_status == 3)
+				$property_type = "Rent & Sale";
+				
+			if($row->lp_id != 0)
+			{
+				//$locs = $this->pro->getPropertyLocation($row->lp_id);
+				$arr = ""; $lineage = "";
+				//$row_id = $this->db->query("select * from tblpropertylocation where propertylocationid = '$row->lp_id")->row()->lineage;
+				$lineage = $row->lineage;
+				$lineage = trim($lineage, '-');
+				$arr = explode('-', $lineage);
+				$num = count($arr);
+				$a = 1; $main_id = "";;
+				foreach($arr as $l)
+				{
+					if($a == 1)
+					{
+						$main_id.= $l;
+					}
+					$a++;
+				}
+				$result = $this->db->query("select * from tblpropertylocation where propertylocationid = '$main_id' ")->row();
+
+				if($result)
+					$loc = $result->locationname;
+				else
+					$loc = "";
+			}else{
+				$loc = "";
+			}
+			$table.= "<tr>
+				 <td class='no'>".$i."</td>
+				 <td class='no'>".$row->create_date."</td>
+				 <td class='user'>".$row->user_name."</td>
+				 <td class='id'>P".$row->pid."</td>	
+				 <td class='name'>".$row->property_name."</td>	
+				 <td class='name'>".$row->typename."</td>	
+				 <td class='name'>".$loc."</td>
+				 <td class='hit'>".$row->hit."</td>
+				 <td class='name'>".$property_type."</td>		
+				 <td class='type'>".$visibled."</td>
+				 <td class='remove_tag no_wrap'>";
+				 
+				 if($this->green->gAction("D")){
+					$table.= "<a><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+				 }
+				 if($this->green->gAction("U")){
+					$table.= "<a><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+				 }
+				 // if($this->green->gAction("U")){
+					// $table.= "<a><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/renew.png')."'/></a>";
+				 // }
+			$table.= " </td>
+				 </tr>
+				 ";										 
+			$i++;	 
+		}
+		$arr['data']=$table;
+		$arr['pagina']=$paging;
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
+	}
+	function active_property($pid)
+	{
+		$data = array(
+			'p_status' => 1,
+			'create_date'=> date('Y-m-d'),
+		);
+		$this->db->where('pid',$pid)->update('tblproperty',$data);
+	}
+	function delete_pro($pid)
+	{
+		$this->db->where('pid',$pid)->delete('tblproperty');
+	}
 }

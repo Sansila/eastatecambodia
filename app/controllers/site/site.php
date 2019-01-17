@@ -904,7 +904,8 @@ class Site extends CI_Controller {
             'type_id'=> $cate,
             'latitude'=> $lat,
             'longtitude'=> $long,
-            'create_date'=> date('Y-m-d')
+            'create_date'=> date('Y-m-d'),
+            'p_status' => 0,
         );
 
         $pid = $this->site->savepost($data);
@@ -1053,7 +1054,7 @@ class Site extends CI_Controller {
             'address' => $address,
             'remark' => $remark,
             'created_date' => $date,
-            'is_active' => 0
+            'is_active' => 0,
         );
 
         $join = $this->site->savejoin($data);
