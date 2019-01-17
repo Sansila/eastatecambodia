@@ -361,10 +361,20 @@
 								
 							</div>
 						</aside>
-						<div class="wizard">
-							<a class="current">Detail</a>
+						<!-- <div class="wizard"> -->
+							<!-- <a class="current">Detail</a>
 							<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
-							<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+							<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a> -->
+						<!-- </div> -->
+						<div class="wizard row">
+							<div class="col-md-12">
+								<div class="col-md-12" style="border-radius: 3px;">
+									<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+								</div>
+								<div class="col-md-12" style="border-radius: 3px;">
+									<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+								</div>
+							</div>
 						</div>
 						<!-- End Our Agents -->
 						

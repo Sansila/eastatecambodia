@@ -1093,9 +1093,9 @@
 					<!-- <h2>Properties</h2> -->
 					<div class="wizard row">
 						<div class="col-md-12">
-							<div class="col-md-2">
+							<!-- <div class="col-md-2">
 								<a class="current">Properties</a>
-							</div>
+							</div> -->
 							<div class="col-md-2">
 								<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
 							</div>

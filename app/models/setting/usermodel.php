@@ -49,7 +49,7 @@ class usermodel extends CI_Model {
 		$this->db->from('admin_user u');
 		$this->db->join('z_role r','u.roleid=r.roleid','left');
 		$this->db->where('u.is_active',0);
-		$this->db->where('u.type_post is NOT NULL', NULL, FALSE);
+		$this->db->where('u.type_post IS NOT NULL', NULL, FALSE);
 		$this->db->order_by("u.userid", "desc"); 
 		$this->db->limit($config['per_page'],$per_page);
 		$query=$this->db->get();
@@ -156,6 +156,49 @@ class usermodel extends CI_Model {
 		if($roleid!=0)
 			$this->db->where('u.roleid',$roleid);	
 		$this->db->where('u.is_active',1);
+		$this->db->order_by("u.userid", "desc"); 
+		$this->db->limit($config['per_page'],$per_page);
+		$query=$this->db->get();
+		return $query->result();
+	}
+	function search_inactive($f_name,$l_name,$u_name,$email,$roleid){
+		$per_page='';
+		if(isset($_GET['per_page']))
+		$per_page=$_GET['per_page'];
+		 $config['base_url']=site_url("setting/user/search?f_name=$f_name&l_name=$l_name&u_name=$u_name&email=$email&roleid=$roleid");
+		 $config['per_page']=10;
+		 $config['full_tag_open'] = '<li>';
+		 $config['full_tag_close'] = '</li>';
+		 $config['cur_tag_open'] = '<a><u>';
+		 $config['cur_tag_close'] = '</u></a>';
+		 $config['page_query_string']=TRUE;
+		 $config['num_link']=3;
+		 $this->db->like('first_name',$f_name);
+		 $this->db->like('last_name',$l_name);
+		 $this->db->like('user_name',$u_name);
+		 $this->db->like('email',$email);
+		 if($roleid!=0)
+		 	$this->db->where('roleid',$roleid);	
+		 $this->db->where('is_active',1);
+		 $config['total_rows']=$this->db->get('admin_user')->num_rows();
+		 $this->pagination->initialize($config);
+		$this->db->select('*');
+		$this->db->from('admin_user u');
+		$this->db->join('z_role r','u.roleid=r.roleid','left');
+		if($f_name !="")
+			$this->db->like('u.first_name',$f_name);
+		if($l_name !="")
+			$this->db->like('u.last_name',$l_name);
+		if($u_name !="")
+			$this->db->like('u.user_name',$u_name);
+		if($email !="")
+			$this->db->like('u.email',$email);
+		//$this->db->like('u.schoolid',$school);
+		//$this->db->like('u.year',$year);	
+		if($roleid!=0)
+			$this->db->where('u.roleid',$roleid);	
+		$this->db->where('u.is_active',0);
+		$this->db->where('u.type_post IS NOT NULL', NULL, FALSE);
 		$this->db->order_by("u.userid", "desc"); 
 		$this->db->limit($config['per_page'],$per_page);
 		$query=$this->db->get();

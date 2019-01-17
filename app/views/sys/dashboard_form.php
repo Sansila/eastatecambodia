@@ -1,4 +1,15 @@
-	 <style type="text/css">
+<?php
+	$m='';
+	$p='';
+	if(isset($_GET['m'])){
+	    $m=$_GET['m'];
+	}
+	if(isset($_GET['p'])){
+	    $p=$_GET['p'];
+	}
+ ?>
+
+<style type="text/css">
 	table tbody tr td img{width: 20px; margin-right: 10px}
 	a,.sort{cursor: pointer;}
 
@@ -18,16 +29,6 @@
 	}
 	
 </style>
-<?php
-	$m='';
-	$p='';
-	if(isset($_GET['m'])){
-	    $m=$_GET['m'];
-	}
-	if(isset($_GET['p'])){
-	    $p=$_GET['p'];
-	}
- ?>
 
 	 <link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/images/logo.ico')?> ">
 	<?php
@@ -43,20 +44,24 @@
 			<div id="content-header" class="mini">
 				<h1>Dashboard</h1>
 				<ul class="mini-stats box-3">
-					<li class="InactivePro">
-						<div class="left sparkline_bar_good"><span>Inactive Post Properties</span></div>
-						<div class="right">
-							<strong><?php echo $count_property;?></strong>
-							Properties
-						</div>
-					</li>
-					<li class="InactiveUser">
-						<div class="left sparkline_bar_good"><span>Inactive Join Us</span></div>
-						<div class="right">
-							<strong><?php echo $count_inactive_user;?></strong>
-							Users
-						</div>
-					</li>
+					<a>
+						<li class="InactivePro">
+							<div class="left sparkline_bar_good"><span>Inactive Post Properties</span></div>
+							<div class="right">
+								<strong><?php echo $count_property;?></strong>
+								Properties
+							</div>
+						</li>
+					</a>
+					<a>
+						<li class="InactiveUser">
+							<div class="left sparkline_bar_good"><span>Inactive Join Us</span></div>
+							<div class="right">
+								<strong><?php echo $count_inactive_user;?></strong>
+								Users
+							</div>
+						</li>
+					</a>
 					<li class="hide">
 						<div class="left sparkline_bar_bad"><span>Total Property</span></div>
 						<div class="right">
@@ -308,7 +313,7 @@
 								<td></td>
 								<td></td>
 							</tbody>
-							<tbody id='listbody'>
+							<tbody id='listbody' class="listbody">
 							<?php
 							 $i=1;
 								foreach ($query as $row) {
@@ -522,6 +527,10 @@
 			}
 		}
 		function update(event){
+			var storeid=jQuery(event.target).attr("rel");
+			location.href="<?PHP echo site_url('property/property/edit');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
+		}
+		function approve(argument) {
 			var conf=confirm("Are you sure to Active this property");
 			if(conf==true){
 				var storeid=jQuery(event.target).attr("rel");
@@ -540,13 +549,6 @@
 		          })
 			}
 		}	
-	</script>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-
-			
-		})
 		function search(event){
 			
 				var f_name=jQuery('#txts_fname').val();
@@ -554,17 +556,21 @@
 				var email=jQuery('#txts_email').val();
 				var roleid=jQuery('#cbos_role').val();
 				var u_name=jQuery('#txts_uname').val();
-				//alert('f_name:'+f_name+"l_name"+l_name+"email:"+email+"roleid:"+roleid+"u_name:"+u_name+"schoolid:"+schoolid+"year:"+year);
+				//alert(roleid);
 				$.ajax({
-							url:"<?php echo base_url(); ?>index.php/setting/user/search",    
-							data: {'f_name':f_name,'l_name':l_name,'email':email,'roleid':roleid,'u_name':u_name},
-							type: "POST",
-							success: function(data){
-                               //alert(data);
-                               jQuery('#listbody').html(data);
-                           
-						}
-					});
+					url:"<?php echo base_url(); ?>index.php/setting/user/search_inactive",    
+					data: {'f_name':f_name,
+						   'l_name':l_name,
+						   'email':email,
+						   'roleid':roleid,
+						   'u_name':u_name},
+					type: "POST",
+					success: function(data){
+                       //alert(data);
+                       jQuery('#listbody').html(data);
+                       
+					}
+				});
 			}
 		function deleteuser(event){
 			var r = confirm("Are you sure to delete this User !");

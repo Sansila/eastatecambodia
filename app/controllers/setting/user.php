@@ -147,6 +147,54 @@ class user extends CI_Controller {
 				</tr>";
 		}
 	}
+	function search_inactive(){
+		
+		// if(isset($_GET['f_name'])){
+		// 	$f_name=$_GET['f_name'];
+		// 	$l_name=$_GET['l_name'];
+		// 	$u_name=$_GET['u_name'];
+		// 	$email=$_GET['email'];
+		// 	$roleid=$_GET['roleid'];
+		// 	$schoolid=$_GET['schoolid'];
+		// 	$year=$_GET['year'];
+		// 	$data['query']=$this->user->search_inactive($f_name,$l_name,$u_name,$email,$roleid,$schoolid,$year);
+		// 	$this->load->view('header');
+		// 	$this->load->view('setting/user/add');
+		// 	$this->load->view('setting/user/view',$data);
+		// 	$this->load->view('footer');
+		// }
+		$f_name=$this->input->post('f_name');
+		$l_name=$this->input->post('l_name');
+		$u_name=$this->input->post('u_name');
+		$email=$this->input->post('email');
+		$roleid=$this->input->post('roleid');
+	
+		$query=$this->user->search_inactive($f_name,$l_name,$u_name,$email,$roleid);
+			
+		$i=1;
+		foreach ($query as $row) {
+			echo "
+							<tr>
+								<td align='center'>$i</td>
+								<td>$row->first_name</td>
+								<td>$row->last_name</td>
+								<td>$row->user_name</td>
+								<td>$row->email</td>
+								<td>$row->role</td>
+								<td>".date("d-m-Y", strtotime($row->last_visit))."</td>
+								<td>".date("d-m-Y", strtotime($row->created_date))."</td>";
+								if($row->is_admin!='1')
+									echo "<td align='center'><a><img rel='$row->userid' onclick='deleteuser(event);' src='".base_url('assets/images/icons/delete.png')."'/></a> <a><img  rel='$row->userid' onclick='updateuser(event);' src='".base_url('assets/images/icons/edit.png')."'/></a></td>";
+								else
+									echo "<td></td>";
+							echo "</tr>";# code...
+						$i++;
+		}
+		echo "<tr>
+			<td colspan='12' id='pgt'><div style='text-align:center'><ul class='pagination' style='text-align:center'>".$this->pagination->create_links()."</ul></div></td>
+		</tr>";
+		
+	}
 	function saveuser(){
 
 		$creat_date=date('Y-m-d H:i:s');

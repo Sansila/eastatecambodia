@@ -117,7 +117,7 @@
 		                        <div class="form-group">
 		                            <label class='col-lg-3 control-label'>Name <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
-	                                    <input type="text" name="txtname" class="form-control txtName" required="" id="txtname" required="" maxlength="15" minlength="4" pattern="^[a-zA-Z0-9_.-]*$" id="username"/>                  
+	                                    <input type="text" name="txtname" class="form-control txtName" required="" id="txtname" required="" maxlength="15" minlength="4" id="username"/>                  
 	                                </div>
 		                        </div>
 		                        <div class="form-group">

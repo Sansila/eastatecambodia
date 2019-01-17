@@ -326,14 +326,14 @@ class Property extends CI_Controller {
 				 <td class='remove_tag no_wrap'>";
 				 
 				 if($this->green->gAction("D")){
-					$table.= "<a><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
 				 }
 
 				 if($this->green->gAction("U")){
-					$table.= "<a><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
-					$table.= "<a><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/renew.png')."'/></a>";
+					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/reload.png')."'/></a>";
 				 }
 			$table.= " </td>
 				 </tr>
@@ -484,14 +484,14 @@ class Property extends CI_Controller {
 				 <td class='remove_tag no_wrap'>";
 				 
 				 if($this->green->gAction("D")){
-					$table.= "<a><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
-					$table.= "<a><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
 				 }
-				 // if($this->green->gAction("U")){
-					// $table.= "<a><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/renew.png')."'/></a>";
-				 // }
+				 if($this->green->gAction("U")){
+					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='approve(event);' src='".base_url('assets/images/icons/checked.png')."'/></a>";
+				 }
 			$table.= " </td>
 				 </tr>
 				 ";										 
