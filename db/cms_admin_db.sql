@@ -1,14 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.10
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 11, 2018 at 03:27 AM
--- Server version: 5.5.42
--- PHP Version: 5.6.10
+-- Host: 127.0.0.1:3306
+-- Generation Time: Feb 11, 2019 at 04:01 PM
+-- Server version: 5.7.21
+-- PHP Version: 7.0.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `cms_admin_db`
@@ -20,15 +28,16 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin_user`
 --
 
-CREATE TABLE `admin_user` (
-  `userid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `admin_user`;
+CREATE TABLE IF NOT EXISTS `admin_user` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `gender` varchar(50) NOT NULL,
-  `dob` date NOT NULL,
-  `phone` varchar(200) NOT NULL,
-  `address` text NOT NULL,
+  `gender` varchar(50) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `phone` varchar(200) DEFAULT NULL,
+  `address` text,
   `last_visit` datetime DEFAULT NULL,
   `last_visit_ip` varchar(255) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
@@ -40,18 +49,30 @@ CREATE TABLE `admin_user` (
   `first_name` varchar(255) DEFAULT NULL,
   `is_admin` int(11) DEFAULT '0',
   `is_active` int(11) DEFAULT '1',
-  `def_storeid` int(11) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=1499 DEFAULT CHARSET=utf8;
+  `def_storeid` int(11) DEFAULT NULL,
+  `type_post` varchar(150) DEFAULT NULL,
+  `remark` text,
+  `business` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1509 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `admin_user`
 --
 
-INSERT INTO `admin_user` (`userid`, `user_name`, `password`, `email`, `gender`, `dob`, `phone`, `address`, `last_visit`, `last_visit_ip`, `created_date`, `created_by`, `modified_by`, `modified_date`, `roleid`, `last_name`, `first_name`, `is_admin`, `is_active`, `def_storeid`) VALUES
-(4, 'admin', '202cb962ac59075b964b07152d234b70', 'admin@gmail.com', '', '0000-00-00', '', '', '2018-12-10 07:03:54', '::1', '2015-01-29 15:10:34', NULL, NULL, NULL, 1, 'System', 'Administrator', 1, 1, NULL),
-(5, 'chetra', '202cb962ac59075b964b07152d234b70', 'eing.chetra@gmail.com', '', '0000-00-00', '', '', '2018-12-10 07:03:54', '::1', '2015-02-02 17:26:36', NULL, NULL, NULL, 2, 'eing', 'chetra', 0, 0, NULL),
-(1497, 'store', 'e10adc3949ba59abbe56e057f20f883e', 'store@green.com', '', '0000-00-00', '', '', '2018-12-10 07:03:54', '::1', '2015-06-26 08:10:54', NULL, NULL, NULL, 21, 'Green', 'Store', 0, 0, NULL),
-(1498, 'user', '202cb962ac59075b964b07152d234b70', 'user@gmail.com', '', '0000-00-00', '', '', '2018-12-10 07:03:54', '::1', '2018-11-20 04:42:55', NULL, NULL, NULL, 23, 'user', 'user', 0, 1, NULL);
+INSERT INTO `admin_user` (`userid`, `user_name`, `password`, `email`, `gender`, `dob`, `phone`, `address`, `last_visit`, `last_visit_ip`, `created_date`, `created_by`, `modified_by`, `modified_date`, `roleid`, `last_name`, `first_name`, `is_admin`, `is_active`, `def_storeid`, `type_post`, `remark`, `business`) VALUES
+(4, 'admin', '202cb962ac59075b964b07152d234b70', 'admin@gmail.com', '', '2019-01-04', '', '', '2019-02-11 15:59:11', '::1', '2015-01-29 15:10:34', NULL, NULL, NULL, 1, 'System', 'Administrator', 1, 1, NULL, NULL, '', ''),
+(5, 'chetra', '202cb962ac59075b964b07152d234b70', 'eing.chetra@gmail.com', '', '2019-01-04', '', '', '2019-02-11 15:59:11', '::1', '2015-02-02 17:26:36', NULL, NULL, NULL, 2, 'eing', 'chetra', 0, 0, NULL, NULL, '', ''),
+(1497, 'store', 'e10adc3949ba59abbe56e057f20f883e', 'store@green.com', '', '2019-01-04', '', '', '2019-02-11 15:59:11', '::1', '2015-06-26 08:10:54', NULL, NULL, NULL, 21, 'Green', 'Store', 0, 0, NULL, NULL, '', ''),
+(1498, 'user', '202cb962ac59075b964b07152d234b70', 'user@gmail.com', '', '2019-01-04', '', '', '2019-02-11 15:59:11', '::1', '2018-11-20 04:42:55', NULL, NULL, NULL, 23, 'user', 'user', 0, 1, NULL, NULL, '', ''),
+(1500, 'Sila', NULL, 'sila@yahoo.com', NULL, NULL, '0964464486', 'phnom penh', '2019-02-11 15:59:11', '::1', '2019-01-04 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, 'owner', '', ''),
+(1501, 'Sila', NULL, 'sila@yahoo.com', NULL, NULL, '0964464486', 'phnom penh', '2019-02-11 15:59:11', '::1', '2019-01-04 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, 'owner', '', ''),
+(1502, 'sdfdsfgdf', NULL, 'user@gmail.com', NULL, NULL, 'dfgdfg', 'dfgdfg', '2019-02-11 15:59:11', '::1', '2019-01-04 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, 'owner', '', ''),
+(1503, 'sdfdsfgdf', NULL, 'user@gmail.com', NULL, NULL, 'dfgdfg', 'dfgdfg', '2019-02-11 15:59:11', '::1', '2019-01-04 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 'owner', '', ''),
+(1504, 'Sila', '202cb962ac59075b964b07152d234b70', 'user@gmail.com', NULL, NULL, '0964464486', 'hello', '2019-02-11 15:59:11', '::1', '2019-01-05 00:00:00', NULL, NULL, NULL, 23, 'sila', 'sila', 0, 1, NULL, 'owner', '', ''),
+(1506, 'Retry', NULL, 'retry@gmail.com', NULL, NULL, '87987980', 'phnom penh', '2019-02-11 15:59:11', '::1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, NULL, 'the remark', 'Growup'),
+(1507, 'Retry New', NULL, 'retry@gmail.com', NULL, NULL, '87987980', 'cvdcgdfgh', '2019-02-11 15:59:11', '::1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, NULL, 'dfgfdhg', 'gtgrtyrtyrt'),
+(1508, 'Retry New', NULL, 'retry@gmail.com', NULL, NULL, '87987980', 'phnom penh', '2019-02-11 15:59:11', '::1', '2019-01-08 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 'phnom penh', 'Growup');
 
 -- --------------------------------------------------------
 
@@ -59,12 +80,15 @@ INSERT INTO `admin_user` (`userid`, `user_name`, `password`, `email`, `gender`, 
 -- Table structure for table `ci_sessions`
 --
 
-CREATE TABLE `ci_sessions` (
+DROP TABLE IF EXISTS `ci_sessions`;
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(45) NOT NULL DEFAULT '0',
   `user_agent` varchar(120) NOT NULL,
-  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL
+  `last_activity` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -72,35 +96,15 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('e1a406dd691a6a4a3e1cf9673f9387ba', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.3', 1544364468, 'a:13:{s:9:"user_data";s:0:"";s:6:"userid";s:1:"4";s:9:"user_name";s:5:"admin";s:8:"password";s:32:"202cb962ac59075b964b07152d234b70";s:6:"roleid";s:1:"1";s:9:"last_name";s:6:"System";s:10:"first_name";s:13:"Administrator";s:10:"last_visit";s:19:"2018-12-09 12:03:37";s:13:"last_visit_ip";s:3:"::1";s:9:"moduleids";a:7:{i:0;a:1:{s:8:"moduleid";s:2:"12";}i:1;a:1:{s:8:"moduleid";s:2:"11";}i:2;a:1:{s:8:"moduleid";s:1:"7";}i:3;a:1:{s:8:"moduleid";s:1:"1";}i:4;a:1:{s:8:"moduleid";s:2:"18";}i:5;a:1:{s:8:"moduleid";s:2:"19";}i:6;a:1:{s:8:"moduleid";s:2:"20";}}s:12:"ModuleInfors";a:7:{i:12;a:4:{s:8:"moduleid";s:2:"12";s:11:"module_name";s:6:"Banner";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:11;a:4:{s:8:"moduleid";s:2:"11";s:11:"module_name";s:7:"Article";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:7;a:4:{s:8:"moduleid";s:1:"7";s:11:"module_name";s:4:"Menu";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:1;a:4:{s:8:"moduleid";s:1:"1";s:11:"module_name";s:7:"Setting";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:18;a:4:{s:8:"moduleid";s:2:"18";s:11:"module_name";s:8:"Property";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:19;a:4:{s:8:"moduleid";s:2:"19";s:11:"module_name";s:16:"Propery Category";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:20;a:4:{s:8:"moduleid";s:2:"20";s:11:"module_name";s:17:"Property Location";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}}s:10:"PageInfors";a:7:{i:12;a:2:{i:69;a:14:{s:6:"pageid";s:2:"69";s:9:"page_name";s:11:"Banner List";s:4:"link";s:20:"setup/setupads/index";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:16:13";s:4:"icon";s:7:"fa-bars";}i:70;a:14:{s:6:"pageid";s:2:"70";s:9:"page_name";s:14:"Add New Banner";s:4:"link";s:18:"setup/setupads/add";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:15:42";s:4:"icon";s:7:"fa-bars";}}i:11;a:2:{i:65;a:14:{s:6:"pageid";s:2:"65";s:9:"page_name";s:12:"Article List";s:4:"link";s:13:"article/index";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"4";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:46:23";s:4:"icon";s:7:"fa-bars";}i:66;a:14:{s:6:"pageid";s:2:"66";s:9:"page_name";s:15:"Add New Article";s:4:"link";s:11:"article/add";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"5";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:47:08";s:4:"icon";s:7:"fa-bars";}}i:7;a:4:{i:63;a:14:{s:6:"pageid";s:2:"63";s:9:"page_name";s:9:"Menu List";s:4:"link";s:10:"menu/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"10";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:55";s:4:"icon";s:7:"fa-bars";}i:64;a:14:{s:6:"pageid";s:2:"64";s:9:"page_name";s:12:"Add New Menu";s:4:"link";s:8:"menu/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"11";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:41";s:4:"icon";s:7:"fa-bars";}i:75;a:14:{s:6:"pageid";s:2:"75";s:9:"page_name";s:16:"Add New Location";s:4:"link";s:12:"category/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"12";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:17";s:4:"icon";s:7:"fa-bars";}i:76;a:14:{s:6:"pageid";s:2:"76";s:9:"page_name";s:13:"Location List";s:4:"link";s:14:"category/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"13";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:06";s:4:"icon";s:7:"fa-bars";}}i:1;a:4:{i:5;a:14:{s:6:"pageid";s:1:"5";s:9:"page_name";s:4:"Page";s:4:"link";s:12:"setting/page";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"0";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 17:00:01";s:4:"icon";s:9:"fa-file-o";}i:6;a:14:{s:6:"pageid";s:1:"6";s:9:"page_name";s:12:"User Profile";s:4:"link";s:12:"setting/user";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:20";s:4:"icon";s:7:"fa-user";}i:7;a:14:{s:6:"pageid";s:1:"7";s:9:"page_name";s:9:"User Role";s:4:"link";s:12:"setting/role";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:57:09";s:4:"icon";s:7:"fa-user";}i:8;a:14:{s:6:"pageid";s:1:"8";s:9:"page_name";s:11:"Role Access";s:4:"link";s:18:"setting/permission";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"0";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:46";s:4:"icon";s:9:"fa-wrench";}}i:18;a:2:{i:78;a:14:{s:6:"pageid";s:2:"78";s:9:"page_name";s:16:"Add New Property";s:4:"link";s:21:"property/property/add";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:42";s:4:"icon";s:7:"fa-bars";}i:79;a:14:{s:6:"pageid";s:2:"79";s:9:"page_name";s:13:"Property List";s:4:"link";s:23:"property/property/index";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:26";s:4:"icon";s:7:"fa-bars";}}i:19;a:2:{i:80;a:14:{s:6:"pageid";s:2:"80";s:9:"page_name";s:25:"Add New Property Category";s:4:"link";s:25:"property/propertytype/add";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:36";s:4:"icon";s:7:"fa-bars";}i:81;a:14:{s:6:"pageid";s:2:"81";s:9:"page_name";s:23:"Property Category Lists";s:4:"link";s:27:"property/propertytype/index";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:15";s:4:"icon";s:7:"fa-bars";}}i:20;a:2:{i:82;a:14:{s:6:"pageid";s:2:"82";s:9:"page_name";s:17:"Property Location";s:4:"link";s:29:"property/propertylocation/add";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:14:32";s:4:"icon";s:7:"fa-bars";}i:83;a:14:{s:6:"pageid";s:2:"83";s:9:"page_name";s:22:"Property Location List";s:4:"link";s:31:"property/propertylocation/index";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:01:53";s:4:"icon";s:7:"fa-bars";}}}s:10:"PageAction";a:7:{i:12;a:2:{i:69;s:1:"1";i:70;s:1:"1";}i:11;a:2:{i:65;s:1:"1";i:66;s:1:"1";}i:7;a:4:{i:63;s:1:"1";i:64;s:1:"1";i:75;s:1:"1";i:76;s:1:"1";}i:1;a:4:{i:5;s:1:"1";i:6;s:1:"1";i:7;s:1:"1";i:8;s:1:"0";}i:18;a:2:{i:78;s:1:"1";i:79;s:1:"1";}i:19;a:2:{i:80;s:1:"1";i:81;s:1:"1";}i:20;a:2:{i:82;s:1:"1";i:83;s:1:"1";}}}'),
-('caae82be7bc349b035d1df82184073a8', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.3', 1544352065, 'a:13:{s:9:"user_data";s:0:"";s:6:"userid";s:1:"4";s:9:"user_name";s:5:"admin";s:8:"password";s:32:"202cb962ac59075b964b07152d234b70";s:6:"roleid";s:1:"1";s:9:"last_name";s:6:"System";s:10:"first_name";s:13:"Administrator";s:10:"last_visit";s:19:"2018-12-09 07:31:21";s:13:"last_visit_ip";s:3:"::1";s:9:"moduleids";a:7:{i:0;a:1:{s:8:"moduleid";s:2:"12";}i:1;a:1:{s:8:"moduleid";s:2:"11";}i:2;a:1:{s:8:"moduleid";s:1:"7";}i:3;a:1:{s:8:"moduleid";s:1:"1";}i:4;a:1:{s:8:"moduleid";s:2:"18";}i:5;a:1:{s:8:"moduleid";s:2:"19";}i:6;a:1:{s:8:"moduleid";s:2:"20";}}s:12:"ModuleInfors";a:7:{i:12;a:4:{s:8:"moduleid";s:2:"12";s:11:"module_name";s:6:"Banner";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:11;a:4:{s:8:"moduleid";s:2:"11";s:11:"module_name";s:7:"Article";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:7;a:4:{s:8:"moduleid";s:1:"7";s:11:"module_name";s:4:"Menu";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:1;a:4:{s:8:"moduleid";s:1:"1";s:11:"module_name";s:7:"Setting";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:18;a:4:{s:8:"moduleid";s:2:"18";s:11:"module_name";s:8:"Property";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:19;a:4:{s:8:"moduleid";s:2:"19";s:11:"module_name";s:16:"Propery Category";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:20;a:4:{s:8:"moduleid";s:2:"20";s:11:"module_name";s:17:"Property Location";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}}s:10:"PageInfors";a:7:{i:12;a:2:{i:69;a:14:{s:6:"pageid";s:2:"69";s:9:"page_name";s:11:"Banner List";s:4:"link";s:20:"setup/setupads/index";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:16:13";s:4:"icon";s:7:"fa-bars";}i:70;a:14:{s:6:"pageid";s:2:"70";s:9:"page_name";s:14:"Add New Banner";s:4:"link";s:18:"setup/setupads/add";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:15:42";s:4:"icon";s:7:"fa-bars";}}i:11;a:2:{i:65;a:14:{s:6:"pageid";s:2:"65";s:9:"page_name";s:12:"Article List";s:4:"link";s:13:"article/index";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"4";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:46:23";s:4:"icon";s:7:"fa-bars";}i:66;a:14:{s:6:"pageid";s:2:"66";s:9:"page_name";s:15:"Add New Article";s:4:"link";s:11:"article/add";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"5";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:47:08";s:4:"icon";s:7:"fa-bars";}}i:7;a:4:{i:63;a:14:{s:6:"pageid";s:2:"63";s:9:"page_name";s:9:"Menu List";s:4:"link";s:10:"menu/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"10";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:55";s:4:"icon";s:7:"fa-bars";}i:64;a:14:{s:6:"pageid";s:2:"64";s:9:"page_name";s:12:"Add New Menu";s:4:"link";s:8:"menu/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"11";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:41";s:4:"icon";s:7:"fa-bars";}i:75;a:14:{s:6:"pageid";s:2:"75";s:9:"page_name";s:16:"Add New Location";s:4:"link";s:12:"category/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"12";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:17";s:4:"icon";s:7:"fa-bars";}i:76;a:14:{s:6:"pageid";s:2:"76";s:9:"page_name";s:13:"Location List";s:4:"link";s:14:"category/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"13";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:06";s:4:"icon";s:7:"fa-bars";}}i:1;a:4:{i:5;a:14:{s:6:"pageid";s:1:"5";s:9:"page_name";s:4:"Page";s:4:"link";s:12:"setting/page";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"0";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 17:00:01";s:4:"icon";s:9:"fa-file-o";}i:6;a:14:{s:6:"pageid";s:1:"6";s:9:"page_name";s:12:"User Profile";s:4:"link";s:12:"setting/user";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:20";s:4:"icon";s:7:"fa-user";}i:7;a:14:{s:6:"pageid";s:1:"7";s:9:"page_name";s:9:"User Role";s:4:"link";s:12:"setting/role";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:57:09";s:4:"icon";s:7:"fa-user";}i:8;a:14:{s:6:"pageid";s:1:"8";s:9:"page_name";s:11:"Role Access";s:4:"link";s:18:"setting/permission";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"0";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:46";s:4:"icon";s:9:"fa-wrench";}}i:18;a:2:{i:78;a:14:{s:6:"pageid";s:2:"78";s:9:"page_name";s:16:"Add New Property";s:4:"link";s:21:"property/property/add";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:42";s:4:"icon";s:7:"fa-bars";}i:79;a:14:{s:6:"pageid";s:2:"79";s:9:"page_name";s:13:"Property List";s:4:"link";s:23:"property/property/index";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:26";s:4:"icon";s:7:"fa-bars";}}i:19;a:2:{i:80;a:14:{s:6:"pageid";s:2:"80";s:9:"page_name";s:25:"Add New Property Category";s:4:"link";s:25:"property/propertytype/add";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:36";s:4:"icon";s:7:"fa-bars";}i:81;a:14:{s:6:"pageid";s:2:"81";s:9:"page_name";s:23:"Property Category Lists";s:4:"link";s:27:"property/propertytype/index";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:15";s:4:"icon";s:7:"fa-bars";}}i:20;a:2:{i:82;a:14:{s:6:"pageid";s:2:"82";s:9:"page_name";s:17:"Property Location";s:4:"link";s:29:"property/propertylocation/add";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:14:32";s:4:"icon";s:7:"fa-bars";}i:83;a:14:{s:6:"pageid";s:2:"83";s:9:"page_name";s:22:"Property Location List";s:4:"link";s:31:"property/propertylocation/index";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:01:53";s:4:"icon";s:7:"fa-bars";}}}s:10:"PageAction";a:7:{i:12;a:2:{i:69;s:1:"1";i:70;s:1:"1";}i:11;a:2:{i:65;s:1:"1";i:66;s:1:"1";}i:7;a:4:{i:63;s:1:"1";i:64;s:1:"1";i:75;s:1:"1";i:76;s:1:"1";}i:1;a:4:{i:5;s:1:"1";i:6;s:1:"1";i:7;s:1:"1";i:8;s:1:"0";}i:18;a:2:{i:78;s:1:"1";i:79;s:1:"1";}i:19;a:2:{i:80;s:1:"1";i:81;s:1:"1";}i:20;a:2:{i:82;s:1:"1";i:83;s:1:"1";}}}'),
-('c95280032c617871f446638c71dbb475', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.3', 1544426458, 'a:13:{s:9:"user_data";s:0:"";s:6:"userid";s:1:"4";s:9:"user_name";s:5:"admin";s:8:"password";s:32:"202cb962ac59075b964b07152d234b70";s:6:"roleid";s:1:"1";s:9:"last_name";s:6:"System";s:10:"first_name";s:13:"Administrator";s:10:"last_visit";s:19:"2018-12-09 15:07:53";s:13:"last_visit_ip";s:3:"::1";s:9:"moduleids";a:7:{i:0;a:1:{s:8:"moduleid";s:2:"12";}i:1;a:1:{s:8:"moduleid";s:2:"11";}i:2;a:1:{s:8:"moduleid";s:1:"7";}i:3;a:1:{s:8:"moduleid";s:1:"1";}i:4;a:1:{s:8:"moduleid";s:2:"18";}i:5;a:1:{s:8:"moduleid";s:2:"19";}i:6;a:1:{s:8:"moduleid";s:2:"20";}}s:12:"ModuleInfors";a:7:{i:12;a:4:{s:8:"moduleid";s:2:"12";s:11:"module_name";s:6:"Banner";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:11;a:4:{s:8:"moduleid";s:2:"11";s:11:"module_name";s:7:"Article";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:7;a:4:{s:8:"moduleid";s:1:"7";s:11:"module_name";s:4:"Menu";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:1;a:4:{s:8:"moduleid";s:1:"1";s:11:"module_name";s:7:"Setting";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:18;a:4:{s:8:"moduleid";s:2:"18";s:11:"module_name";s:8:"Property";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:19;a:4:{s:8:"moduleid";s:2:"19";s:11:"module_name";s:16:"Propery Category";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:20;a:4:{s:8:"moduleid";s:2:"20";s:11:"module_name";s:17:"Property Location";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}}s:10:"PageInfors";a:7:{i:12;a:2:{i:69;a:14:{s:6:"pageid";s:2:"69";s:9:"page_name";s:11:"Banner List";s:4:"link";s:20:"setup/setupads/index";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:16:13";s:4:"icon";s:7:"fa-bars";}i:70;a:14:{s:6:"pageid";s:2:"70";s:9:"page_name";s:14:"Add New Banner";s:4:"link";s:18:"setup/setupads/add";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:15:42";s:4:"icon";s:7:"fa-bars";}}i:11;a:2:{i:65;a:14:{s:6:"pageid";s:2:"65";s:9:"page_name";s:12:"Article List";s:4:"link";s:13:"article/index";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"4";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:46:23";s:4:"icon";s:7:"fa-bars";}i:66;a:14:{s:6:"pageid";s:2:"66";s:9:"page_name";s:15:"Add New Article";s:4:"link";s:11:"article/add";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"5";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:47:08";s:4:"icon";s:7:"fa-bars";}}i:7;a:4:{i:63;a:14:{s:6:"pageid";s:2:"63";s:9:"page_name";s:9:"Menu List";s:4:"link";s:10:"menu/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"10";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:55";s:4:"icon";s:7:"fa-bars";}i:64;a:14:{s:6:"pageid";s:2:"64";s:9:"page_name";s:12:"Add New Menu";s:4:"link";s:8:"menu/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"11";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:41";s:4:"icon";s:7:"fa-bars";}i:75;a:14:{s:6:"pageid";s:2:"75";s:9:"page_name";s:16:"Add New Location";s:4:"link";s:12:"category/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"12";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:17";s:4:"icon";s:7:"fa-bars";}i:76;a:14:{s:6:"pageid";s:2:"76";s:9:"page_name";s:13:"Location List";s:4:"link";s:14:"category/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"13";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:06";s:4:"icon";s:7:"fa-bars";}}i:1;a:4:{i:5;a:14:{s:6:"pageid";s:1:"5";s:9:"page_name";s:4:"Page";s:4:"link";s:12:"setting/page";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"0";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 17:00:01";s:4:"icon";s:9:"fa-file-o";}i:6;a:14:{s:6:"pageid";s:1:"6";s:9:"page_name";s:12:"User Profile";s:4:"link";s:12:"setting/user";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:20";s:4:"icon";s:7:"fa-user";}i:7;a:14:{s:6:"pageid";s:1:"7";s:9:"page_name";s:9:"User Role";s:4:"link";s:12:"setting/role";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:57:09";s:4:"icon";s:7:"fa-user";}i:8;a:14:{s:6:"pageid";s:1:"8";s:9:"page_name";s:11:"Role Access";s:4:"link";s:18:"setting/permission";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"0";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:46";s:4:"icon";s:9:"fa-wrench";}}i:18;a:2:{i:78;a:14:{s:6:"pageid";s:2:"78";s:9:"page_name";s:16:"Add New Property";s:4:"link";s:21:"property/property/add";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:42";s:4:"icon";s:7:"fa-bars";}i:79;a:14:{s:6:"pageid";s:2:"79";s:9:"page_name";s:13:"Property List";s:4:"link";s:23:"property/property/index";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:26";s:4:"icon";s:7:"fa-bars";}}i:19;a:2:{i:80;a:14:{s:6:"pageid";s:2:"80";s:9:"page_name";s:25:"Add New Property Category";s:4:"link";s:25:"property/propertytype/add";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:36";s:4:"icon";s:7:"fa-bars";}i:81;a:14:{s:6:"pageid";s:2:"81";s:9:"page_name";s:23:"Property Category Lists";s:4:"link";s:27:"property/propertytype/index";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:15";s:4:"icon";s:7:"fa-bars";}}i:20;a:2:{i:82;a:14:{s:6:"pageid";s:2:"82";s:9:"page_name";s:17:"Property Location";s:4:"link";s:29:"property/propertylocation/add";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:14:32";s:4:"icon";s:7:"fa-bars";}i:83;a:14:{s:6:"pageid";s:2:"83";s:9:"page_name";s:22:"Property Location List";s:4:"link";s:31:"property/propertylocation/index";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:01:53";s:4:"icon";s:7:"fa-bars";}}}s:10:"PageAction";a:7:{i:12;a:2:{i:69;s:1:"1";i:70;s:1:"1";}i:11;a:2:{i:65;s:1:"1";i:66;s:1:"1";}i:7;a:4:{i:63;s:1:"1";i:64;s:1:"1";i:75;s:1:"1";i:76;s:1:"1";}i:1;a:4:{i:5;s:1:"1";i:6;s:1:"1";i:7;s:1:"1";i:8;s:1:"0";}i:18;a:2:{i:78;s:1:"1";i:79;s:1:"1";}i:19;a:2:{i:80;s:1:"1";i:81;s:1:"1";}i:20;a:2:{i:82;s:1:"1";i:83;s:1:"1";}}}'),
-('1b4d80579e703f45cfa6ca0958f4fdeb', '::1', '0', 1544421856, ''),
-('dac6e4959cc98656e3a09ebf48c5e0f9', '::1', '0', 1544421856, ''),
-('574197eda9456b23aff9ee7729d3d950', '::1', '0', 1544426458, ''),
-('aad60c92026b3319874a0305a92e87ea', '::1', '0', 1544426458, ''),
-('24604978cebd10f59a580fd925a21278', '::1', '0', 1544426566, ''),
-('fe9c0d7092311427db2521eea52b388d', '::1', '0', 1544426566, ''),
-('88efc3d72d03901d4d028a077d426d78', '::1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A3', 1544427977, ''),
-('7a2189bf04a0cefe1744a59c260c2277', '::1', '0', 1544427581, ''),
-('ed00bb3efa74745a6deea822710c757b', '::1', '0', 1544427581, ''),
-('98ebdf87e56c78ec4b82c78e1cb85305', '::1', '0', 1544427589, ''),
-('2069e8b5322a2c27588e98a02d531b09', '::1', '0', 1544427589, ''),
-('87757b6ef51ae230d543d7a8643ee730', '::1', '0', 1544427711, ''),
-('2079409e3a10d35c7ea8c49d61e4ee26', '::1', '0', 1544427711, ''),
-('b4486606f276ff2e695260101efec36e', '::1', '0', 1544427720, ''),
-('09aaedde3733158c350f480fd3f27e14', '::1', '0', 1544427720, ''),
-('972a61ddc8f5c331d5f549cfa9b71f80', '::1', '0', 1544427977, ''),
-('3564a5928e791012b15e7c366a31dbd3', '::1', '0', 1544427977, ''),
-('9d49966fd09ca0be02e34bb9d4736b60', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.3', 1544427981, ''),
-('be3400dd477093455f89a7bc99995d0a', '::1', '0', 1544427981, ''),
-('8eb8909abbf196339ed0ff849b02bc41', '::1', '0', 1544427981, ''),
-('8b53cb8d80e9aee9ac21194769577152', '::1', '0', 1544428236, ''),
-('966b0abad9578906576e7946a7c4205b', '::1', '0', 1544428236, ''),
-('11f5115cfe3976a9a915cac70c894cec', '::1', '0', 1544428236, ''),
-('0b133760a1012d1e971c7d2df942d8f1', '::1', '0', 1544428236, ''),
-('57320a60f1402fc740607c724b38202c', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.3', 1544352903, ''),
-('83cb5cbda7e40f440d514776e19b3c50', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.3', 1544353815, 'a:13:{s:9:"user_data";s:0:"";s:6:"userid";s:1:"4";s:9:"user_name";s:5:"admin";s:8:"password";s:32:"202cb962ac59075b964b07152d234b70";s:6:"roleid";s:1:"1";s:9:"last_name";s:6:"System";s:10:"first_name";s:13:"Administrator";s:10:"last_visit";s:19:"2018-12-09 09:23:50";s:13:"last_visit_ip";s:3:"::1";s:9:"moduleids";a:7:{i:0;a:1:{s:8:"moduleid";s:2:"12";}i:1;a:1:{s:8:"moduleid";s:2:"11";}i:2;a:1:{s:8:"moduleid";s:1:"7";}i:3;a:1:{s:8:"moduleid";s:1:"1";}i:4;a:1:{s:8:"moduleid";s:2:"18";}i:5;a:1:{s:8:"moduleid";s:2:"19";}i:6;a:1:{s:8:"moduleid";s:2:"20";}}s:12:"ModuleInfors";a:7:{i:12;a:4:{s:8:"moduleid";s:2:"12";s:11:"module_name";s:6:"Banner";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:11;a:4:{s:8:"moduleid";s:2:"11";s:11:"module_name";s:7:"Article";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:7;a:4:{s:8:"moduleid";s:1:"7";s:11:"module_name";s:4:"Menu";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:1;a:4:{s:8:"moduleid";s:1:"1";s:11:"module_name";s:7:"Setting";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:18;a:4:{s:8:"moduleid";s:2:"18";s:11:"module_name";s:8:"Property";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:19;a:4:{s:8:"moduleid";s:2:"19";s:11:"module_name";s:16:"Propery Category";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}i:20;a:4:{s:8:"moduleid";s:2:"20";s:11:"module_name";s:17:"Property Location";s:8:"sort_mod";N;s:12:"mod_position";s:1:"2";}}s:10:"PageInfors";a:7:{i:12;a:2:{i:69;a:14:{s:6:"pageid";s:2:"69";s:9:"page_name";s:11:"Banner List";s:4:"link";s:20:"setup/setupads/index";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:16:13";s:4:"icon";s:7:"fa-bars";}i:70;a:14:{s:6:"pageid";s:2:"70";s:9:"page_name";s:14:"Add New Banner";s:4:"link";s:18:"setup/setupads/add";s:8:"moduleid";s:2:"12";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2016-02-05 23:15:42";s:4:"icon";s:7:"fa-bars";}}i:11;a:2:{i:65;a:14:{s:6:"pageid";s:2:"65";s:9:"page_name";s:12:"Article List";s:4:"link";s:13:"article/index";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"4";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:46:23";s:4:"icon";s:7:"fa-bars";}i:66;a:14:{s:6:"pageid";s:2:"66";s:9:"page_name";s:15:"Add New Article";s:4:"link";s:11:"article/add";s:8:"moduleid";s:2:"11";s:5:"order";s:1:"5";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-09-11 16:47:08";s:4:"icon";s:7:"fa-bars";}}i:7;a:4:{i:63;a:14:{s:6:"pageid";s:2:"63";s:9:"page_name";s:9:"Menu List";s:4:"link";s:10:"menu/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"10";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:55";s:4:"icon";s:7:"fa-bars";}i:64;a:14:{s:6:"pageid";s:2:"64";s:9:"page_name";s:12:"Add New Menu";s:4:"link";s:8:"menu/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"11";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:41";s:4:"icon";s:7:"fa-bars";}i:75;a:14:{s:6:"pageid";s:2:"75";s:9:"page_name";s:16:"Add New Location";s:4:"link";s:12:"category/add";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"12";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:17";s:4:"icon";s:7:"fa-bars";}i:76;a:14:{s:6:"pageid";s:2:"76";s:9:"page_name";s:13:"Location List";s:4:"link";s:14:"category/index";s:8:"moduleid";s:1:"7";s:5:"order";s:2:"13";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-12-06 12:56:06";s:4:"icon";s:7:"fa-bars";}}i:1;a:4:{i:5;a:14:{s:6:"pageid";s:1:"5";s:9:"page_name";s:4:"Page";s:4:"link";s:12:"setting/page";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"0";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 17:00:01";s:4:"icon";s:9:"fa-file-o";}i:6;a:14:{s:6:"pageid";s:1:"6";s:9:"page_name";s:12:"User Profile";s:4:"link";s:12:"setting/user";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"0";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:20";s:4:"icon";s:7:"fa-user";}i:7;a:14:{s:6:"pageid";s:1:"7";s:9:"page_name";s:9:"User Role";s:4:"link";s:12:"setting/role";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:57:09";s:4:"icon";s:7:"fa-user";}i:8;a:14:{s:6:"pageid";s:1:"8";s:9:"page_name";s:11:"Role Access";s:4:"link";s:18:"setting/permission";s:8:"moduleid";s:1:"1";s:5:"order";N;s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"0";s:7:"is_show";s:1:"0";s:8:"is_print";s:1:"0";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2015-02-05 16:56:46";s:4:"icon";s:9:"fa-wrench";}}i:18;a:2:{i:78;a:14:{s:6:"pageid";s:2:"78";s:9:"page_name";s:16:"Add New Property";s:4:"link";s:21:"property/property/add";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:42";s:4:"icon";s:7:"fa-bars";}i:79;a:14:{s:6:"pageid";s:2:"79";s:9:"page_name";s:13:"Property List";s:4:"link";s:23:"property/property/index";s:8:"moduleid";s:2:"18";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 04:36:26";s:4:"icon";s:7:"fa-bars";}}i:19;a:2:{i:80;a:14:{s:6:"pageid";s:2:"80";s:9:"page_name";s:25:"Add New Property Category";s:4:"link";s:25:"property/propertytype/add";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:36";s:4:"icon";s:7:"fa-bars";}i:81;a:14:{s:6:"pageid";s:2:"81";s:9:"page_name";s:23:"Property Category Lists";s:4:"link";s:27:"property/propertytype/index";s:8:"moduleid";s:2:"19";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-20 02:26:15";s:4:"icon";s:7:"fa-bars";}}i:20;a:2:{i:82;a:14:{s:6:"pageid";s:2:"82";s:9:"page_name";s:17:"Property Location";s:4:"link";s:29:"property/propertylocation/add";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"0";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:14:32";s:4:"icon";s:7:"fa-bars";}i:83;a:14:{s:6:"pageid";s:2:"83";s:9:"page_name";s:22:"Property Location List";s:4:"link";s:31:"property/propertylocation/index";s:8:"moduleid";s:2:"20";s:5:"order";s:1:"1";s:9:"is_insert";s:1:"1";s:9:"is_update";s:1:"1";s:9:"is_delete";s:1:"1";s:7:"is_show";s:1:"1";s:8:"is_print";s:1:"1";s:9:"is_export";s:1:"1";s:10:"created_by";s:1:"1";s:12:"created_date";s:19:"2018-11-18 06:01:53";s:4:"icon";s:7:"fa-bars";}}}s:10:"PageAction";a:7:{i:12;a:2:{i:69;s:1:"1";i:70;s:1:"1";}i:11;a:2:{i:65;s:1:"1";i:66;s:1:"1";}i:7;a:4:{i:63;s:1:"1";i:64;s:1:"1";i:75;s:1:"1";i:76;s:1:"1";}i:1;a:4:{i:5;s:1:"1";i:6;s:1:"1";i:7;s:1:"1";i:8;s:1:"0";}i:18;a:2:{i:78;s:1:"1";i:79;s:1:"1";}i:19;a:2:{i:80;s:1:"1";i:81;s:1:"1";}i:20;a:2:{i:82;s:1:"1";i:83;s:1:"1";}}}');
+('76cf222c573dee5001cddbd108a86f5f', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 1549900744, 'a:13:{s:9:\"user_data\";s:0:\"\";s:6:\"userid\";s:1:\"4\";s:9:\"user_name\";s:5:\"admin\";s:8:\"password\";s:32:\"202cb962ac59075b964b07152d234b70\";s:6:\"roleid\";s:1:\"1\";s:9:\"last_name\";s:6:\"System\";s:10:\"first_name\";s:13:\"Administrator\";s:10:\"last_visit\";s:19:\"2019-01-22 05:08:07\";s:13:\"last_visit_ip\";s:3:\"::1\";s:9:\"moduleids\";a:8:{i:0;a:1:{s:8:\"moduleid\";s:2:\"19\";}i:1;a:1:{s:8:\"moduleid\";s:2:\"18\";}i:2;a:1:{s:8:\"moduleid\";s:2:\"13\";}i:3;a:1:{s:8:\"moduleid\";s:2:\"12\";}i:4;a:1:{s:8:\"moduleid\";s:2:\"11\";}i:5;a:1:{s:8:\"moduleid\";s:1:\"7\";}i:6;a:1:{s:8:\"moduleid\";s:1:\"1\";}i:7;a:1:{s:8:\"moduleid\";s:2:\"20\";}}s:12:\"ModuleInfors\";a:8:{i:19;a:4:{s:8:\"moduleid\";s:2:\"19\";s:11:\"module_name\";s:16:\"Propery Category\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}i:18;a:4:{s:8:\"moduleid\";s:2:\"18\";s:11:\"module_name\";s:8:\"Property\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}i:13;a:4:{s:8:\"moduleid\";s:2:\"13\";s:11:\"module_name\";s:9:\"Dashboard\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}i:12;a:4:{s:8:\"moduleid\";s:2:\"12\";s:11:\"module_name\";s:6:\"Banner\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}i:11;a:4:{s:8:\"moduleid\";s:2:\"11\";s:11:\"module_name\";s:7:\"Article\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}i:7;a:4:{s:8:\"moduleid\";s:1:\"7\";s:11:\"module_name\";s:4:\"Menu\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}i:1;a:4:{s:8:\"moduleid\";s:1:\"1\";s:11:\"module_name\";s:7:\"Setting\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}i:20;a:4:{s:8:\"moduleid\";s:2:\"20\";s:11:\"module_name\";s:17:\"Property Location\";s:8:\"sort_mod\";N;s:12:\"mod_position\";s:1:\"2\";}}s:10:\"PageInfors\";a:8:{i:19;a:2:{i:80;a:14:{s:6:\"pageid\";s:2:\"80\";s:9:\"page_name\";s:25:\"Add New Property Category\";s:4:\"link\";s:25:\"property/propertytype/add\";s:8:\"moduleid\";s:2:\"19\";s:5:\"order\";s:1:\"0\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-11-20 02:26:36\";s:4:\"icon\";s:7:\"fa-bars\";}i:81;a:14:{s:6:\"pageid\";s:2:\"81\";s:9:\"page_name\";s:23:\"Property Category Lists\";s:4:\"link\";s:27:\"property/propertytype/index\";s:8:\"moduleid\";s:2:\"19\";s:5:\"order\";s:1:\"1\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-11-20 02:26:15\";s:4:\"icon\";s:7:\"fa-bars\";}}i:18;a:2:{i:78;a:14:{s:6:\"pageid\";s:2:\"78\";s:9:\"page_name\";s:16:\"Add New Property\";s:4:\"link\";s:21:\"property/property/add\";s:8:\"moduleid\";s:2:\"18\";s:5:\"order\";s:1:\"0\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-11-18 04:36:42\";s:4:\"icon\";s:7:\"fa-bars\";}i:79;a:14:{s:6:\"pageid\";s:2:\"79\";s:9:\"page_name\";s:13:\"Property List\";s:4:\"link\";s:23:\"property/property/index\";s:8:\"moduleid\";s:2:\"18\";s:5:\"order\";s:1:\"1\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-11-18 04:36:26\";s:4:\"icon\";s:7:\"fa-bars\";}}i:13;a:1:{i:84;a:14:{s:6:\"pageid\";s:2:\"84\";s:9:\"page_name\";s:9:\"Dashboard\";s:4:\"link\";s:13:\"sys/dashboard\";s:8:\"moduleid\";s:2:\"13\";s:5:\"order\";s:1:\"1\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2019-01-12 11:09:31\";s:4:\"icon\";s:7:\"fa-bars\";}}i:12;a:2:{i:69;a:14:{s:6:\"pageid\";s:2:\"69\";s:9:\"page_name\";s:11:\"Banner List\";s:4:\"link\";s:20:\"setup/setupads/index\";s:8:\"moduleid\";s:2:\"12\";s:5:\"order\";s:1:\"0\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2016-02-05 23:16:13\";s:4:\"icon\";s:7:\"fa-bars\";}i:70;a:14:{s:6:\"pageid\";s:2:\"70\";s:9:\"page_name\";s:14:\"Add New Banner\";s:4:\"link\";s:18:\"setup/setupads/add\";s:8:\"moduleid\";s:2:\"12\";s:5:\"order\";s:1:\"1\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2016-02-05 23:15:42\";s:4:\"icon\";s:7:\"fa-bars\";}}i:11;a:2:{i:65;a:14:{s:6:\"pageid\";s:2:\"65\";s:9:\"page_name\";s:12:\"Article List\";s:4:\"link\";s:13:\"article/index\";s:8:\"moduleid\";s:2:\"11\";s:5:\"order\";s:1:\"4\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2015-09-11 16:46:23\";s:4:\"icon\";s:7:\"fa-bars\";}i:66;a:14:{s:6:\"pageid\";s:2:\"66\";s:9:\"page_name\";s:15:\"Add New Article\";s:4:\"link\";s:11:\"article/add\";s:8:\"moduleid\";s:2:\"11\";s:5:\"order\";s:1:\"5\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2015-09-11 16:47:08\";s:4:\"icon\";s:7:\"fa-bars\";}}i:7;a:4:{i:63;a:14:{s:6:\"pageid\";s:2:\"63\";s:9:\"page_name\";s:9:\"Menu List\";s:4:\"link\";s:10:\"menu/index\";s:8:\"moduleid\";s:1:\"7\";s:5:\"order\";s:2:\"10\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-12-06 12:56:55\";s:4:\"icon\";s:7:\"fa-bars\";}i:64;a:14:{s:6:\"pageid\";s:2:\"64\";s:9:\"page_name\";s:12:\"Add New Menu\";s:4:\"link\";s:8:\"menu/add\";s:8:\"moduleid\";s:1:\"7\";s:5:\"order\";s:2:\"11\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-12-06 12:56:41\";s:4:\"icon\";s:7:\"fa-bars\";}i:75;a:14:{s:6:\"pageid\";s:2:\"75\";s:9:\"page_name\";s:16:\"Add New Location\";s:4:\"link\";s:12:\"category/add\";s:8:\"moduleid\";s:1:\"7\";s:5:\"order\";s:2:\"12\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-12-06 12:56:17\";s:4:\"icon\";s:7:\"fa-bars\";}i:76;a:14:{s:6:\"pageid\";s:2:\"76\";s:9:\"page_name\";s:13:\"Location List\";s:4:\"link\";s:14:\"category/index\";s:8:\"moduleid\";s:1:\"7\";s:5:\"order\";s:2:\"13\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-12-06 12:56:06\";s:4:\"icon\";s:7:\"fa-bars\";}}i:1;a:4:{i:5;a:14:{s:6:\"pageid\";s:1:\"5\";s:9:\"page_name\";s:4:\"Page\";s:4:\"link\";s:12:\"setting/page\";s:8:\"moduleid\";s:1:\"1\";s:5:\"order\";N;s:9:\"is_insert\";s:1:\"0\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"0\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"0\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2015-02-05 17:00:01\";s:4:\"icon\";s:9:\"fa-file-o\";}i:6;a:14:{s:6:\"pageid\";s:1:\"6\";s:9:\"page_name\";s:12:\"User Profile\";s:4:\"link\";s:12:\"setting/user\";s:8:\"moduleid\";s:1:\"1\";s:5:\"order\";N;s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"0\";s:9:\"is_export\";s:1:\"0\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2015-02-05 16:56:20\";s:4:\"icon\";s:7:\"fa-user\";}i:7;a:14:{s:6:\"pageid\";s:1:\"7\";s:9:\"page_name\";s:9:\"User Role\";s:4:\"link\";s:12:\"setting/role\";s:8:\"moduleid\";s:1:\"1\";s:5:\"order\";N;s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2015-02-05 16:57:09\";s:4:\"icon\";s:7:\"fa-user\";}i:8;a:14:{s:6:\"pageid\";s:1:\"8\";s:9:\"page_name\";s:11:\"Role Access\";s:4:\"link\";s:18:\"setting/permission\";s:8:\"moduleid\";s:1:\"1\";s:5:\"order\";N;s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"0\";s:7:\"is_show\";s:1:\"0\";s:8:\"is_print\";s:1:\"0\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2015-02-05 16:56:46\";s:4:\"icon\";s:9:\"fa-wrench\";}}i:20;a:2:{i:82;a:14:{s:6:\"pageid\";s:2:\"82\";s:9:\"page_name\";s:17:\"Property Location\";s:4:\"link\";s:29:\"property/propertylocation/add\";s:8:\"moduleid\";s:2:\"20\";s:5:\"order\";s:1:\"0\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-11-18 06:14:32\";s:4:\"icon\";s:7:\"fa-bars\";}i:83;a:14:{s:6:\"pageid\";s:2:\"83\";s:9:\"page_name\";s:22:\"Property Location List\";s:4:\"link\";s:31:\"property/propertylocation/index\";s:8:\"moduleid\";s:2:\"20\";s:5:\"order\";s:1:\"1\";s:9:\"is_insert\";s:1:\"1\";s:9:\"is_update\";s:1:\"1\";s:9:\"is_delete\";s:1:\"1\";s:7:\"is_show\";s:1:\"1\";s:8:\"is_print\";s:1:\"1\";s:9:\"is_export\";s:1:\"1\";s:10:\"created_by\";s:1:\"1\";s:12:\"created_date\";s:19:\"2018-11-18 06:01:53\";s:4:\"icon\";s:7:\"fa-bars\";}}}s:10:\"PageAction\";a:8:{i:19;a:2:{i:80;s:1:\"1\";i:81;s:1:\"1\";}i:18;a:2:{i:78;s:1:\"1\";i:79;s:1:\"1\";}i:13;a:1:{i:84;s:1:\"1\";}i:12;a:2:{i:69;s:1:\"1\";i:70;s:1:\"1\";}i:11;a:2:{i:65;s:1:\"1\";i:66;s:1:\"1\";}i:7;a:4:{i:63;s:1:\"1\";i:64;s:1:\"1\";i:75;s:1:\"1\";i:76;s:1:\"1\";}i:1;a:4:{i:5;s:1:\"1\";i:6;s:1:\"1\";i:7;s:1:\"1\";i:8;s:1:\"0\";}i:20;a:2:{i:82;s:1:\"1\";i:83;s:1:\"1\";}}}'),
+('17337a49465cf860f6df10503738cb75', '::1', '', 1549900744, ''),
+('1928e41e00bbd13dc8e5cf5d1fa03379', '::1', '', 1549900744, ''),
+('c57c5077cdeefdc0833db068198b3164', '::1', '', 1549900762, ''),
+('4c979faf10c72e4b63eddc64d3c90f00', '::1', '', 1549900762, ''),
+('f4e7009cea4034224b31789f3c1a5c77', '::1', '', 1549900769, ''),
+('7693245f8ec4fe33665cfe93b395414b', '::1', '', 1549900769, ''),
+('62bb3d3aeabe1a814e900fff70e0349b', '::1', '', 1549900829, ''),
+('f76a22699c98a93255a1c7df6491063e', '::1', '', 1549900829, '');
 
 -- --------------------------------------------------------
 
@@ -108,13 +112,15 @@ INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activ
 -- Table structure for table `dashboard_item`
 --
 
-CREATE TABLE `dashboard_item` (
-  `dashid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `dashboard_item`;
+CREATE TABLE IF NOT EXISTS `dashboard_item` (
+  `dashid` int(11) NOT NULL AUTO_INCREMENT,
   `dash_item` varchar(255) DEFAULT NULL,
   `moduleid` int(11) DEFAULT NULL,
   `link_pageid` int(11) DEFAULT NULL,
   `is_show` int(11) NOT NULL DEFAULT '1',
-  `block` varchar(255) DEFAULT NULL COMMENT 'left_top,left_bottom'
+  `block` varchar(255) DEFAULT NULL COMMENT 'left_top,left_bottom',
+  PRIMARY KEY (`dashid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
@@ -130,8 +136,9 @@ INSERT INTO `dashboard_item` (`dashid`, `dash_item`, `moduleid`, `link_pageid`, 
 -- Table structure for table `site_profile`
 --
 
-CREATE TABLE `site_profile` (
-  `id` int(11) unsigned NOT NULL,
+DROP TABLE IF EXISTS `site_profile`;
+CREATE TABLE IF NOT EXISTS `site_profile` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `site_name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
@@ -143,7 +150,8 @@ CREATE TABLE `site_profile` (
   `linkedin` varchar(255) DEFAULT NULL,
   `weixin` varchar(255) DEFAULT NULL,
   `date_post` datetime DEFAULT NULL,
-  `is_active` tinyint(4) DEFAULT NULL
+  `is_active` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
@@ -159,8 +167,9 @@ INSERT INTO `site_profile` (`id`, `site_name`, `address`, `phone`, `email`, `fac
 -- Table structure for table `tblarticle`
 --
 
-CREATE TABLE `tblarticle` (
-  `article_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tblarticle`;
+CREATE TABLE IF NOT EXISTS `tblarticle` (
+  `article_id` int(11) NOT NULL AUTO_INCREMENT,
   `article_title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `article_title_kh` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `content_kh` text CHARACTER SET utf8,
@@ -172,7 +181,8 @@ CREATE TABLE `tblarticle` (
   `location_id` int(11) DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `article_date` date DEFAULT NULL,
-  `menu_id` int(11) DEFAULT NULL
+  `menu_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`article_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
@@ -180,7 +190,7 @@ CREATE TABLE `tblarticle` (
 --
 
 INSERT INTO `tblarticle` (`article_id`, `article_title`, `article_title_kh`, `content_kh`, `content`, `is_active`, `is_marguee`, `meta_keyword`, `meta_desc`, `location_id`, `icon`, `article_date`, `menu_id`) VALUES
-(1, 'about', 'about', '', '<p>\n	&nbsp;<span style="color: rgb(81, 87, 98); font-family: museo-sans, sans-serif; font-size: 17.99px; text-align: center;">Mauris elementum tempus nisi, vitae ullamcorper sem ultricies vitae. Nullam consectetur lacinia nisi, quis laoreet magna pulvinar in. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac habitasse platea dictumst. Cum sociis natoque penatibus et magnis dis parturient montes</span></p>\n', 1, 1, '', '', NULL, '', '2018-12-06', 103);
+(1, 'about', 'about', '', '<p>\n	&nbsp;<span style=\"color: rgb(81, 87, 98); font-family: museo-sans, sans-serif; font-size: 17.99px; text-align: center;\">Mauris elementum tempus nisi, vitae ullamcorper sem ultricies vitae. Nullam consectetur lacinia nisi, quis laoreet magna pulvinar in. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac habitasse platea dictumst. Cum sociis natoque penatibus et magnis dis parturient montes</span></p>\n', 1, 1, '', '', NULL, '', '2018-12-06', 103);
 
 -- --------------------------------------------------------
 
@@ -188,13 +198,15 @@ INSERT INTO `tblarticle` (`article_id`, `article_title`, `article_title_kh`, `co
 -- Table structure for table `tblbanner`
 --
 
-CREATE TABLE `tblbanner` (
-  `banner_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tblbanner`;
+CREATE TABLE IF NOT EXISTS `tblbanner` (
+  `banner_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8 NOT NULL,
   `banner_location` int(11) NOT NULL,
   `is_active` int(1) NOT NULL,
   `orders` int(11) NOT NULL,
-  `link` varchar(255) NOT NULL
+  `link` varchar(255) NOT NULL,
+  PRIMARY KEY (`banner_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
@@ -210,8 +222,9 @@ INSERT INTO `tblbanner` (`banner_id`, `title`, `banner_location`, `is_active`, `
 -- Table structure for table `tblcontact`
 --
 
-CREATE TABLE `tblcontact` (
-  `contact_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tblcontact`;
+CREATE TABLE IF NOT EXISTS `tblcontact` (
+  `contact_id` int(11) NOT NULL AUTO_INCREMENT,
   `nationality` varchar(55) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `family_name` varchar(255) NOT NULL,
@@ -229,7 +242,8 @@ CREATE TABLE `tblcontact` (
   `register_client` varchar(55) NOT NULL,
   `distributor` varchar(55) NOT NULL,
   `other` varchar(55) NOT NULL,
-  `region` varchar(55) NOT NULL
+  `region` varchar(55) NOT NULL,
+  PRIMARY KEY (`contact_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -238,8 +252,9 @@ CREATE TABLE `tblcontact` (
 -- Table structure for table `tblgallery`
 --
 
-CREATE TABLE `tblgallery` (
-  `gallery_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tblgallery`;
+CREATE TABLE IF NOT EXISTS `tblgallery` (
+  `gallery_id` int(11) NOT NULL AUTO_INCREMENT,
   `gallery_title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `gallery_type` int(1) DEFAULT NULL,
@@ -247,8 +262,9 @@ CREATE TABLE `tblgallery` (
   `pid` int(11) NOT NULL,
   `location_id` int(11) DEFAULT '0',
   `order` int(11) DEFAULT NULL,
-  `home` int(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+  `home` int(1) DEFAULT NULL,
+  PRIMARY KEY (`gallery_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblgallery`
@@ -274,7 +290,33 @@ INSERT INTO `tblgallery` (`gallery_id`, `gallery_title`, `url`, `gallery_type`, 
 (17, NULL, 'property-detail-s-5.jpg', 0, NULL, 4, 0, NULL, NULL),
 (18, NULL, 'property-5.jpg', 0, NULL, 4, 0, NULL, NULL),
 (20, NULL, 'property-detail-2.jpg', 0, NULL, 6, 0, NULL, NULL),
-(21, NULL, 'property-detail-2.jpg', 0, NULL, 7, 0, NULL, NULL);
+(21, NULL, 'property-detail-2.jpg', 0, NULL, 7, 0, NULL, NULL),
+(22, NULL, 'phnom-penh.jpg.jpg', 0, NULL, 9, 0, NULL, NULL),
+(23, NULL, 'Phnom-Penh-City-View.jpg', 0, NULL, 9, 0, NULL, NULL),
+(24, NULL, 'Phnom-Penh-City-View_a.jpg', 0, NULL, 10, 0, NULL, NULL),
+(25, NULL, 'Phnom-Penh-City-View_a.jpg', 0, NULL, 11, 0, NULL, NULL),
+(26, NULL, 'Phnom-Penh-City-View_a.jpg', 0, NULL, 12, 0, NULL, NULL),
+(101, NULL, 'ancient-70996_640.jpg', 0, NULL, 25, 0, NULL, NULL),
+(102, NULL, 'cat_small.jpg', 0, NULL, 25, 0, NULL, NULL),
+(103, NULL, 'dream.jpg', 0, NULL, 25, 0, NULL, NULL),
+(104, NULL, 'grand-staircase-escalante-boundary-3866228_640.jpg', 0, NULL, 25, 0, NULL, NULL),
+(105, NULL, 'home-1596607_640.jpg', 0, NULL, 25, 0, NULL, NULL),
+(122, NULL, 'ancient-70996_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(123, NULL, 'cat_small.jpg', 0, NULL, 27, 0, NULL, NULL),
+(124, NULL, 'dream.jpg', 0, NULL, 27, 0, NULL, NULL),
+(125, NULL, 'grand-staircase-escalante-boundary-3866228_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(126, NULL, 'home-1596607_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(127, NULL, 'house-740x530.png', 0, NULL, 27, 0, NULL, NULL),
+(128, NULL, 'house-186400_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(129, NULL, 'houses-984013_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(130, NULL, 'manor-3604684_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(131, NULL, 'money-2724235_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(132, NULL, 'neighborhood-802074_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(133, NULL, 'original.jpg', 0, NULL, 27, 0, NULL, NULL),
+(134, NULL, 'Residential_Property.jpg', 0, NULL, 27, 0, NULL, NULL),
+(135, NULL, 'villa-2059680_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(136, NULL, 'villa-3237114_640.jpg', 0, NULL, 27, 0, NULL, NULL),
+(137, NULL, 'woman-546207_640.jpg', 0, NULL, 27, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,10 +324,12 @@ INSERT INTO `tblgallery` (`gallery_id`, `gallery_title`, `url`, `gallery_type`, 
 -- Table structure for table `tbllayout`
 --
 
-CREATE TABLE `tbllayout` (
-  `layout_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbllayout`;
+CREATE TABLE IF NOT EXISTS `tbllayout` (
+  `layout_id` int(11) NOT NULL AUTO_INCREMENT,
   `layout_name` varchar(255) NOT NULL,
-  `is_active` int(1) NOT NULL
+  `is_active` int(1) NOT NULL,
+  PRIMARY KEY (`layout_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
@@ -302,11 +346,13 @@ INSERT INTO `tbllayout` (`layout_id`, `layout_name`, `is_active`) VALUES
 -- Table structure for table `tbllocation`
 --
 
-CREATE TABLE `tbllocation` (
-  `location_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbllocation`;
+CREATE TABLE IF NOT EXISTS `tbllocation` (
+  `location_id` int(11) NOT NULL AUTO_INCREMENT,
   `location_name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `is_active` int(1) NOT NULL,
-  `location_name_kh` varchar(255) CHARACTER SET utf8 DEFAULT NULL
+  `location_name_kh` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`location_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
@@ -324,8 +370,9 @@ INSERT INTO `tbllocation` (`location_id`, `location_name`, `is_active`, `locatio
 -- Table structure for table `tblmenus`
 --
 
-CREATE TABLE `tblmenus` (
-  `menu_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tblmenus`;
+CREATE TABLE IF NOT EXISTS `tblmenus` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(255) DEFAULT NULL,
   `description` text,
   `lineage` varchar(255) DEFAULT NULL,
@@ -341,7 +388,8 @@ CREATE TABLE `tblmenus` (
   `menu_name_kh` varchar(255) DEFAULT NULL,
   `article_id` int(11) DEFAULT NULL,
   `location_id` int(11) DEFAULT NULL,
-  `menu_type` varchar(255) DEFAULT NULL
+  `menu_type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`menu_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 
 --
@@ -367,13 +415,15 @@ INSERT INTO `tblmenus` (`menu_id`, `menu_name`, `description`, `lineage`, `paren
 -- Table structure for table `tblproduct`
 --
 
-CREATE TABLE `tblproduct` (
-  `product_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tblproduct`;
+CREATE TABLE IF NOT EXISTS `tblproduct` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `menu_id` int(11) NOT NULL,
   `content_desc` text CHARACTER SET utf8 NOT NULL,
   `content_bottom` text NOT NULL,
-  `is_active` int(1) NOT NULL
+  `is_active` int(1) NOT NULL,
+  PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -382,13 +432,14 @@ CREATE TABLE `tblproduct` (
 -- Table structure for table `tblproperty`
 --
 
-CREATE TABLE `tblproperty` (
-  `pid` int(10) NOT NULL,
+DROP TABLE IF EXISTS `tblproperty`;
+CREATE TABLE IF NOT EXISTS `tblproperty` (
+  `pid` int(10) NOT NULL AUTO_INCREMENT,
   `type_id` int(10) DEFAULT NULL,
   `agent_id` int(10) DEFAULT NULL,
   `lp_id` int(10) DEFAULT NULL,
   `property_name` varchar(250) DEFAULT NULL,
-  `price` int(10) NOT NULL,
+  `price` int(10) DEFAULT NULL,
   `story` varchar(250) DEFAULT NULL,
   `p_type` varchar(250) DEFAULT NULL,
   `floor` varchar(250) DEFAULT NULL,
@@ -414,7 +465,7 @@ CREATE TABLE `tblproperty` (
   `img_source` text,
   `contract` varchar(250) DEFAULT NULL,
   `commision` varchar(50) DEFAULT NULL,
-  `urgent` int(1) NOT NULL,
+  `urgent` int(1) DEFAULT NULL,
   `address` text,
   `advantage` text,
   `contact_owner` varchar(50) DEFAULT NULL,
@@ -425,16 +476,17 @@ CREATE TABLE `tblproperty` (
   `description` text,
   `description_kh` text,
   `p_status` int(1) DEFAULT NULL,
-  `available` int(1) NOT NULL,
+  `available` int(1) DEFAULT NULL,
   `p_location` varchar(250) DEFAULT NULL,
-  `add_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `title` int(10) NOT NULL,
+  `add_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `title` int(10) DEFAULT NULL,
   `latitude` varchar(250) DEFAULT NULL,
   `longtitude` varchar(250) DEFAULT NULL,
-  `create_date` date NOT NULL,
-  `hit` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `create_date` date DEFAULT NULL,
+  `hit` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblproperty`
@@ -444,11 +496,18 @@ INSERT INTO `tblproperty` (`pid`, `type_id`, `agent_id`, `lp_id`, `property_name
 (1, 0, 0, 40, 'Poolside character home on a wide 422sqm', 358000, '', '1', '0', '', '450', '', '3', '3', '0', '', '', '', '', '0', '', '', '', '', '', '', '', '', NULL, '0', 'ss', 0, 'Ferris Park, Jersey City Land in Sales', '', 'ss', 's', NULL, 's', '', '', '', 0, 0, NULL, '2011-11-01', '2011-11-01', 0, '', '', '0000-00-00', 0),
 (2, 0, 0, 51, 'Poolside2 character home on a wide 423sqm', 358000, '', '2', '0', '', '470', '', '3', '3', '0', '', '', '', '', '0', '', '', '', '', '', '', '', '', NULL, '0', 'df', 0, 'Ferris Park, Jersey City Land in Sales', '', 'df', 'df', NULL, 'df', '', '<p>\n	<strong>Aliquam vel egestas turpis. Proin sollicitudin imperdiet nisi ac rutrum. Sed imperdiet libero malesuada erat cursus eu pulvinar tellus rhoncus. Ut eget tellus neque, faucibus ornare odio. Fusce sagittis hendrerit mi a sollicitudin.</strong></p>\n<p>\n	Mauris elementum tempus nisi, vitae ullamcorper sem ultricies vitae. Nullam consectetur lacinia nisi, quis laoreet magna pulvinar in. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac habitasse platea dictumst. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>\n<p>\n	Vivamus quis dui ac nulla molestie blandit eu in nunc. In justo erat, lacinia in vulputate non, tristique eu mi. Aliquam tristique dapibus tempor. Vivamus malesuada tempor urna, in convallis massa lacinia sed. Phasellus gravida auctor vestibulum. Suspendisse potenti. In tincidunt felis bibendum nunc tempus sagittis. Praesent elit dolor, ultricies interdum porta sit amet, iaculis in neque.</p>\n', '', 0, 0, NULL, '2011-11-01', '2011-11-01', 0, '1', '1', '0000-00-00', 0),
 (3, 5, 4, 0, 'test', 12, '', '1', '2018-11-27', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 0, 0, NULL, '2018-11-27', '2018-11-27', 0, '', '', '0000-00-00', 0),
-(4, 5, 5, 40, 'new', 12, '', '1', '2018-11-27', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-11-27', '2018-11-27', 0, '', '', '0000-00-00', 0),
-(5, 5, 4, 0, 'Poolside character home on a wide 422sqm', 12324324, '', '1', '2018-11-27', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-11-27', '2018-11-27', 0, '', '', '0000-00-00', 0),
-(6, 5, 4, 0, 'Land for Sale in Prek Eng KK', 358000, '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '<p>\n	&nbsp;<span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">Note that headers should be sent&nbsp;</span><strong style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);"><em style="margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;">before</em></strong><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">&lt;?php</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;as well as ending tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">?&gt;</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;in your view.</span></p>\n<p>\n	&nbsp;<span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">Note that headers should be sent&nbsp;</span><strong style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);"><em style="margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;">before</em></strong><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">&lt;?php</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;as well as ending tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">?&gt;</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;in your view.</span></p>\n<p>\n	&nbsp;<span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">Note that headers should be sent&nbsp;</span><strong style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);"><em style="margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;">before</em></strong><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">&lt;?php</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;as well as ending tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">?&gt;</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;in your view.</span></p>\n<p>\n	&nbsp;<span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">Note that headers should be sent&nbsp;</span><strong style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);"><em style="margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;">before</em></strong><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">&lt;?php</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;as well as ending tag&nbsp;</span><code style="margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);">?&gt;</code><span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">&nbsp;in your view.</span></p>\n', '', 1, 1, NULL, '2018-12-04', '2018-12-04', 0, '11.52611534067639', '104.91394026171872', '2018-12-06', 0),
-(7, 2, 4, 51, 'test', 0, '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-12-09', '2018-12-09', 0, '', '', '2018-12-09', 4),
-(8, 6, 4, 0, 'hello', 0, '', '3', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-12-10', '2018-12-10', 0, '', '', '2018-12-10', 0);
+(4, 5, 5, 40, 'new', 12, '', '1', '2018-11-27', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-11-27', '2018-11-27', 0, '', '', '2018-12-31', 0),
+(5, 5, 4, 0, 'Poolside character home on a wide 422sqm', 12324324, '', '1', '2018-11-27', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-11-27', '2018-11-27', 0, '', '', '2018-12-31', 0),
+(6, 5, 4, 0, 'Land for Sale in Prek Eng KK', 358000, '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '<p>\n	&nbsp;<span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">Note that headers should be sent&nbsp;</span><strong style=\"margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);\"><em style=\"margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;\">before</em></strong><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">&lt;?php</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;as well as ending tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">?&gt;</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;in your view.</span></p>\n<p>\n	&nbsp;<span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">Note that headers should be sent&nbsp;</span><strong style=\"margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);\"><em style=\"margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;\">before</em></strong><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">&lt;?php</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;as well as ending tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">?&gt;</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;in your view.</span></p>\n<p>\n	&nbsp;<span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">Note that headers should be sent&nbsp;</span><strong style=\"margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);\"><em style=\"margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;\">before</em></strong><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">&lt;?php</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;as well as ending tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">?&gt;</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;in your view.</span></p>\n<p>\n	&nbsp;<span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">Note that headers should be sent&nbsp;</span><strong style=\"margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px; vertical-align: baseline; box-sizing: inherit; color: rgb(36, 39, 41);\"><em style=\"margin: 0px; padding: 0px; border: 0px; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; vertical-align: baseline; box-sizing: inherit;\">before</em></strong><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;anything else. Make sure that there is no code/html or even space/indentation before the header function and there is nothing before the first opening php tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">&lt;?php</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;as well as ending tag&nbsp;</span><code style=\"margin: 0px; padding: 1px 5px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: inherit; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: rgb(239, 240, 241); white-space: pre-wrap; color: rgb(36, 39, 41);\">?&gt;</code><span style=\"color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;\">&nbsp;in your view.</span></p>\n', '', 1, 1, NULL, '2018-12-04', '2018-12-04', 0, '11.52611534067639', '104.91394026171872', '2018-12-31', 0),
+(7, 2, 4, 51, 'test', 0, '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-12-09', '2018-12-09', 0, '', '', '2019-02-11', 4),
+(8, 6, 4, 0, 'hello', 0, '', '3', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '', '', 1, 1, NULL, '2018-12-10', '2018-12-10', 0, '', '', '2018-12-10', 0),
+(9, 2, 0, 40, 'sdfsdf', 4546, NULL, '1', NULL, NULL, '4546', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '<p>\r\n	fwetertgryr</p>\r\n', NULL, 1, NULL, NULL, NULL, NULL, NULL, '11.564125877780569', '104.90501387011716', '2019-01-04', 8),
+(10, 1, 0, 51, 'test new ', 4546, NULL, '1', NULL, NULL, '4546', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '<p>\r\n	fsdfdsfgdfgfdghf</p>\r\n', NULL, 1, NULL, NULL, NULL, NULL, NULL, '11.584642697122652', '105.05435926806638', '2019-01-04', 4),
+(14, 1, NULL, 51, 'asdas', 67868, NULL, '1', NULL, NULL, '67868', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '2019-01-04', NULL),
+(15, 1, NULL, 51, 'asdas', 67868, NULL, '1', NULL, NULL, '67868', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '2019-01-04', NULL),
+(16, 1, NULL, 51, 'asdas', 67868, NULL, '1', NULL, NULL, '67868', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '2019-01-04', NULL),
+(17, 1, 4, 40, 'try mew test', 4546, '', '1', '', '', '4546', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, '', '', 1, '', '', '', '', NULL, '', '', '<p>\n	hello</p>\n', '', 0, 1, NULL, '2019-01-05', '2019-01-05', 0, '11.585988009740875', '105.05298597705075', '2019-01-05', 4),
+(27, 1, 1505, 51, 'test new  for hidding', 4546, NULL, '1', NULL, NULL, '4546', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 0, NULL, NULL, NULL, NULL, NULL, '', '', '2019-01-05', 1);
 
 -- --------------------------------------------------------
 
@@ -456,14 +515,16 @@ INSERT INTO `tblproperty` (`pid`, `type_id`, `agent_id`, `lp_id`, `property_name
 -- Table structure for table `tblpropertylocation`
 --
 
-CREATE TABLE `tblpropertylocation` (
-  `propertylocationid` int(10) NOT NULL,
+DROP TABLE IF EXISTS `tblpropertylocation`;
+CREATE TABLE IF NOT EXISTS `tblpropertylocation` (
+  `propertylocationid` int(10) NOT NULL AUTO_INCREMENT,
   `locationname` varchar(250) DEFAULT NULL,
   `lineage` varchar(250) DEFAULT NULL,
   `parent_id` int(10) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `note` text,
-  `status` int(1) DEFAULT NULL
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`propertylocationid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 --
@@ -502,12 +563,14 @@ INSERT INTO `tblpropertylocation` (`propertylocationid`, `locationname`, `lineag
 -- Table structure for table `tblpropertytype`
 --
 
-CREATE TABLE `tblpropertytype` (
-  `typeid` int(10) NOT NULL,
+DROP TABLE IF EXISTS `tblpropertytype`;
+CREATE TABLE IF NOT EXISTS `tblpropertytype` (
+  `typeid` int(10) NOT NULL AUTO_INCREMENT,
   `menu` int(10) NOT NULL,
   `typename` varchar(250) DEFAULT NULL,
   `type_note` text,
-  `type_status` int(1) DEFAULT NULL
+  `type_status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`typeid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
@@ -530,9 +593,11 @@ INSERT INTO `tblpropertytype` (`typeid`, `menu`, `typename`, `type_note`, `type_
 -- Table structure for table `z_blog`
 --
 
-CREATE TABLE `z_blog` (
-  `site_show_blogid` int(11) NOT NULL,
-  `description` varchar(255) DEFAULT NULL
+DROP TABLE IF EXISTS `z_blog`;
+CREATE TABLE IF NOT EXISTS `z_blog` (
+  `site_show_blogid` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`site_show_blogid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
@@ -552,14 +617,16 @@ INSERT INTO `z_blog` (`site_show_blogid`, `description`) VALUES
 -- Table structure for table `z_currency`
 --
 
-CREATE TABLE `z_currency` (
-  `curid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `z_currency`;
+CREATE TABLE IF NOT EXISTS `z_currency` (
+  `curid` int(11) NOT NULL AUTO_INCREMENT,
   `currcode` varchar(255) DEFAULT NULL,
   `curr_name` varchar(255) DEFAULT NULL,
   `symbol` varchar(255) DEFAULT NULL,
   `is_default` int(11) DEFAULT NULL,
   `ex_rate` double DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL
+  `country` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`curid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
@@ -575,13 +642,15 @@ INSERT INTO `z_currency` (`curid`, `currcode`, `curr_name`, `symbol`, `is_defaul
 -- Table structure for table `z_module`
 --
 
-CREATE TABLE `z_module` (
-  `moduleid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `z_module`;
+CREATE TABLE IF NOT EXISTS `z_module` (
+  `moduleid` int(11) NOT NULL AUTO_INCREMENT,
   `module_name` varchar(255) DEFAULT NULL,
   `sort_mod` varchar(255) DEFAULT NULL,
   `order` int(11) DEFAULT NULL,
   `is_active` int(11) DEFAULT '1',
-  `mod_position` varchar(255) DEFAULT NULL
+  `mod_position` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`moduleid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
@@ -594,7 +663,7 @@ INSERT INTO `z_module` (`moduleid`, `module_name`, `sort_mod`, `order`, `is_acti
 (10, 'Product', NULL, NULL, 0, '2'),
 (11, 'Article', NULL, NULL, 1, '2'),
 (12, 'Banner', NULL, NULL, 1, '2'),
-(13, 'Contact', NULL, NULL, 0, '2'),
+(13, 'Dashboard', NULL, NULL, 1, '2'),
 (18, 'Property', NULL, NULL, 1, '2'),
 (19, 'Propery Category', NULL, NULL, 1, '2'),
 (20, 'Property Location', NULL, NULL, 1, '2');
@@ -605,8 +674,9 @@ INSERT INTO `z_module` (`moduleid`, `module_name`, `sort_mod`, `order`, `is_acti
 -- Table structure for table `z_page`
 --
 
-CREATE TABLE `z_page` (
-  `pageid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `z_page`;
+CREATE TABLE IF NOT EXISTS `z_page` (
+  `pageid` int(11) NOT NULL AUTO_INCREMENT,
   `page_name` varchar(255) DEFAULT NULL,
   `link` varchar(255) DEFAULT NULL,
   `moduleid` int(11) DEFAULT '1',
@@ -621,8 +691,9 @@ CREATE TABLE `z_page` (
   `created_date` datetime DEFAULT NULL,
   `is_active` int(11) DEFAULT '1',
   `icon` varchar(255) DEFAULT 'fa-bars',
-  `alias` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
+  `alias` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`pageid`)
+) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `z_page`
@@ -650,7 +721,7 @@ INSERT INTO `z_page` (`pageid`, `page_name`, `link`, `moduleid`, `order`, `is_in
 (68, 'Add New Products', 'product/add', 10, 2, 1, 1, 1, 1, 1, 1, 1, '2015-09-12 17:10:46', 1, 'fa-bars', NULL),
 (69, 'Banner List', 'setup/setupads/index', 12, 0, 1, 1, 1, 1, 1, 1, 1, '2016-02-05 23:16:13', 1, 'fa-bars', NULL),
 (70, 'Add New Banner', 'setup/setupads/add', 12, 1, 1, 1, 1, 1, 1, 1, 1, '2016-02-05 23:15:42', 1, 'fa-bars', NULL),
-(71, 'Contact List', 'article/contact_list', 13, 0, 1, 1, 1, 1, 1, 1, 1, '2015-09-15 14:32:25', 1, 'fa-bars', NULL),
+(71, 'Contact List', 'article/contact_list', 13, 0, 1, 1, 1, 1, 1, 1, 1, '2015-09-15 14:32:25', 0, 'fa-bars', NULL),
 (75, 'Add New Location', 'category/add', 7, 12, 1, 1, 1, 1, 1, 1, 1, '2018-12-06 12:56:17', 1, 'fa-bars', NULL),
 (76, 'Location List', 'category/index', 7, 13, 1, 1, 1, 1, 1, 1, 1, '2018-12-06 12:56:06', 1, 'fa-bars', NULL),
 (77, 'Module', 'setting/module', 1, 0, 1, 1, 1, 1, 1, 1, 1, '2018-11-17 11:53:41', 0, 'fa-bars', NULL),
@@ -659,7 +730,8 @@ INSERT INTO `z_page` (`pageid`, `page_name`, `link`, `moduleid`, `order`, `is_in
 (80, 'Add New Property Category', 'property/propertytype/add', 19, 0, 1, 1, 1, 1, 1, 1, 1, '2018-11-20 02:26:36', 1, 'fa-bars', NULL),
 (81, 'Property Category Lists', 'property/propertytype/index', 19, 1, 1, 1, 1, 1, 1, 1, 1, '2018-11-20 02:26:15', 1, 'fa-bars', NULL),
 (82, 'Property Location', 'property/propertylocation/add', 20, 0, 1, 1, 1, 1, 1, 1, 1, '2018-11-18 06:14:32', 1, 'fa-bars', NULL),
-(83, 'Property Location List', 'property/propertylocation/index', 20, 1, 1, 1, 1, 1, 1, 1, 1, '2018-11-18 06:01:53', 1, 'fa-bars', NULL);
+(83, 'Property Location List', 'property/propertylocation/index', 20, 1, 1, 1, 1, 1, 1, 1, 1, '2018-11-18 06:01:53', 1, 'fa-bars', NULL),
+(84, 'Dashboard', 'sys/dashboard', 13, 1, 1, 1, 1, 1, 1, 1, 1, '2019-01-12 11:09:31', 1, 'fa-bars', NULL);
 
 -- --------------------------------------------------------
 
@@ -667,11 +739,13 @@ INSERT INTO `z_page` (`pageid`, `page_name`, `link`, `moduleid`, `order`, `is_in
 -- Table structure for table `z_role`
 --
 
-CREATE TABLE `z_role` (
-  `roleid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `z_role`;
+CREATE TABLE IF NOT EXISTS `z_role` (
+  `roleid` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(255) DEFAULT NULL,
   `is_admin` int(11) DEFAULT NULL,
-  `is_active` int(11) DEFAULT '1'
+  `is_active` int(11) DEFAULT '1',
+  PRIMARY KEY (`roleid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 --
@@ -708,27 +782,30 @@ INSERT INTO `z_role` (`roleid`, `role`, `is_admin`, `is_active`) VALUES
 -- Table structure for table `z_role_module_detail`
 --
 
-CREATE TABLE `z_role_module_detail` (
-  `mod_rol_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `z_role_module_detail`;
+CREATE TABLE IF NOT EXISTS `z_role_module_detail` (
+  `mod_rol_id` int(11) NOT NULL AUTO_INCREMENT,
   `roleid` int(11) DEFAULT NULL,
   `moduleid` int(11) DEFAULT NULL,
-  `order` int(11) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=120 DEFAULT CHARSET=utf8;
+  `order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`mod_rol_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `z_role_module_detail`
 --
 
 INSERT INTO `z_role_module_detail` (`mod_rol_id`, `roleid`, `moduleid`, `order`) VALUES
-(114, 1, 12, NULL),
-(113, 1, 11, NULL),
-(112, 1, 7, NULL),
-(111, 1, 1, NULL),
-(115, 1, 18, NULL),
-(116, 1, 19, NULL),
-(117, 1, 20, NULL),
+(126, 1, 19, NULL),
+(125, 1, 18, NULL),
+(124, 1, 13, NULL),
+(123, 1, 12, NULL),
+(122, 1, 11, NULL),
+(121, 1, 7, NULL),
+(120, 1, 1, NULL),
 (118, 23, 7, NULL),
-(119, 23, 18, NULL);
+(119, 23, 18, NULL),
+(127, 1, 20, NULL);
 
 -- --------------------------------------------------------
 
@@ -736,8 +813,9 @@ INSERT INTO `z_role_module_detail` (`mod_rol_id`, `roleid`, `moduleid`, `order`)
 -- Table structure for table `z_role_page`
 --
 
-CREATE TABLE `z_role_page` (
-  `role_page_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `z_role_page`;
+CREATE TABLE IF NOT EXISTS `z_role_page` (
+  `role_page_id` int(11) NOT NULL AUTO_INCREMENT,
   `roleid` int(11) DEFAULT NULL,
   `pageid` int(11) DEFAULT NULL,
   `moduleid` int(11) DEFAULT NULL,
@@ -749,7 +827,8 @@ CREATE TABLE `z_role_page` (
   `is_update` int(1) DEFAULT '1',
   `is_print` int(1) DEFAULT '1',
   `is_export` int(1) DEFAULT '1',
-  `is_import` int(1) DEFAULT '1'
+  `is_import` int(1) DEFAULT '1',
+  PRIMARY KEY (`role_page_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 --
@@ -765,250 +844,8 @@ INSERT INTO `z_role_page` (`role_page_id`, `roleid`, `pageid`, `moduleid`, `crea
 (40, 23, 63, 7, '2018-11-20 04:43:40', '1', 1, 1, 1, 1, 1, 1, 1),
 (41, 23, 75, 7, '2018-11-20 04:43:55', '1', 1, 1, 1, 1, 1, 1, 1),
 (42, 23, 78, 18, '2018-11-27 02:13:14', '1', 1, 1, 1, 1, 1, 1, 1);
+COMMIT;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admin_user`
---
-ALTER TABLE `admin_user`
-  ADD PRIMARY KEY (`userid`);
-
---
--- Indexes for table `ci_sessions`
---
-ALTER TABLE `ci_sessions`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `last_activity_idx` (`last_activity`);
-
---
--- Indexes for table `dashboard_item`
---
-ALTER TABLE `dashboard_item`
-  ADD PRIMARY KEY (`dashid`);
-
---
--- Indexes for table `site_profile`
---
-ALTER TABLE `site_profile`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tblarticle`
---
-ALTER TABLE `tblarticle`
-  ADD PRIMARY KEY (`article_id`);
-
---
--- Indexes for table `tblbanner`
---
-ALTER TABLE `tblbanner`
-  ADD PRIMARY KEY (`banner_id`);
-
---
--- Indexes for table `tblcontact`
---
-ALTER TABLE `tblcontact`
-  ADD PRIMARY KEY (`contact_id`);
-
---
--- Indexes for table `tblgallery`
---
-ALTER TABLE `tblgallery`
-  ADD PRIMARY KEY (`gallery_id`);
-
---
--- Indexes for table `tbllayout`
---
-ALTER TABLE `tbllayout`
-  ADD PRIMARY KEY (`layout_id`);
-
---
--- Indexes for table `tbllocation`
---
-ALTER TABLE `tbllocation`
-  ADD PRIMARY KEY (`location_id`);
-
---
--- Indexes for table `tblmenus`
---
-ALTER TABLE `tblmenus`
-  ADD PRIMARY KEY (`menu_id`);
-
---
--- Indexes for table `tblproduct`
---
-ALTER TABLE `tblproduct`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indexes for table `tblproperty`
---
-ALTER TABLE `tblproperty`
-  ADD PRIMARY KEY (`pid`);
-
---
--- Indexes for table `tblpropertylocation`
---
-ALTER TABLE `tblpropertylocation`
-  ADD PRIMARY KEY (`propertylocationid`);
-
---
--- Indexes for table `tblpropertytype`
---
-ALTER TABLE `tblpropertytype`
-  ADD PRIMARY KEY (`typeid`);
-
---
--- Indexes for table `z_blog`
---
-ALTER TABLE `z_blog`
-  ADD PRIMARY KEY (`site_show_blogid`);
-
---
--- Indexes for table `z_currency`
---
-ALTER TABLE `z_currency`
-  ADD PRIMARY KEY (`curid`);
-
---
--- Indexes for table `z_module`
---
-ALTER TABLE `z_module`
-  ADD PRIMARY KEY (`moduleid`);
-
---
--- Indexes for table `z_page`
---
-ALTER TABLE `z_page`
-  ADD PRIMARY KEY (`pageid`);
-
---
--- Indexes for table `z_role`
---
-ALTER TABLE `z_role`
-  ADD PRIMARY KEY (`roleid`);
-
---
--- Indexes for table `z_role_module_detail`
---
-ALTER TABLE `z_role_module_detail`
-  ADD PRIMARY KEY (`mod_rol_id`);
-
---
--- Indexes for table `z_role_page`
---
-ALTER TABLE `z_role_page`
-  ADD PRIMARY KEY (`role_page_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin_user`
---
-ALTER TABLE `admin_user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1499;
---
--- AUTO_INCREMENT for table `dashboard_item`
---
-ALTER TABLE `dashboard_item`
-  MODIFY `dashid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `site_profile`
---
-ALTER TABLE `site_profile`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `tblarticle`
---
-ALTER TABLE `tblarticle`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `tblbanner`
---
-ALTER TABLE `tblbanner`
-  MODIFY `banner_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `tblcontact`
---
-ALTER TABLE `tblcontact`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tblgallery`
---
-ALTER TABLE `tblgallery`
-  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
---
--- AUTO_INCREMENT for table `tbllayout`
---
-ALTER TABLE `tbllayout`
-  MODIFY `layout_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `tbllocation`
---
-ALTER TABLE `tbllocation`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT for table `tblmenus`
---
-ALTER TABLE `tblmenus`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=113;
---
--- AUTO_INCREMENT for table `tblproduct`
---
-ALTER TABLE `tblproduct`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tblproperty`
---
-ALTER TABLE `tblproperty`
-  MODIFY `pid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `tblpropertylocation`
---
-ALTER TABLE `tblpropertylocation`
-  MODIFY `propertylocationid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
---
--- AUTO_INCREMENT for table `tblpropertytype`
---
-ALTER TABLE `tblpropertytype`
-  MODIFY `typeid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `z_blog`
---
-ALTER TABLE `z_blog`
-  MODIFY `site_show_blogid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `z_currency`
---
-ALTER TABLE `z_currency`
-  MODIFY `curid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `z_module`
---
-ALTER TABLE `z_module`
-  MODIFY `moduleid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `z_page`
---
-ALTER TABLE `z_page`
-  MODIFY `pageid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=84;
---
--- AUTO_INCREMENT for table `z_role`
---
-ALTER TABLE `z_role`
-  MODIFY `roleid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
---
--- AUTO_INCREMENT for table `z_role_module_detail`
---
-ALTER TABLE `z_role_module_detail`
-  MODIFY `mod_rol_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=120;
---
--- AUTO_INCREMENT for table `z_role_page`
---
-ALTER TABLE `z_role_page`
-  MODIFY `role_page_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

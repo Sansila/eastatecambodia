@@ -70,6 +70,8 @@
 	<script src="<?php echo base_url('assets/js/select2.js')?>"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
   type="text/javascript"></script>
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
+  type="text/javascript"></script> -->
 	
 </head>
 	<body>

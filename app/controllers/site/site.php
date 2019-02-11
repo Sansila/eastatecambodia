@@ -49,7 +49,7 @@ class Site extends CI_Controller {
         $query = " SELECT * FROM tblproperty as p
                 left join tblpropertytype as pt on p.type_id = pt.typeid 
                 -- left join tblgallery as g on p.pid = g.pid
-                WHERE p.p_status = 1 ORDER BY p.pid desc ,p.create_date desc
+                WHERE p.p_status = 1 ORDER BY p.create_date desc,p.pid desc
                 ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
@@ -799,7 +799,7 @@ class Site extends CI_Controller {
             if($sort == "Date")
                 $order_by.= " ORDER BY p.create_date $order ";
         }else{
-            $order_by.= " ORDER BY p.pid desc ,p.create_date desc";
+            $order_by.= " ORDER BY p.create_date desc,p.pid desc";
         }
 
         // ============ configure pagination =====//
