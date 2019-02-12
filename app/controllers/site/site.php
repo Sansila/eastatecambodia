@@ -389,7 +389,7 @@ class Site extends CI_Controller {
             if($sort == "Date")
                 $order_by.= " ORDER BY p.create_date $order ";
         }else{
-            $order_by.= " ORDER BY p.create_date desc";
+            $order_by.= " ORDER BY p.create_date desc, p.pid desc";
         }
 
         // ============ configure pagination =====//
