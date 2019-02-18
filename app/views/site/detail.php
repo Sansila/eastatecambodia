@@ -351,9 +351,9 @@
 										<h4><a href="#"><?php echo $detail->user_name?></a></h4>
 										<address>
 											<!-- <i class="fa fa-map-marker"></i> Office : 1-800-666-8888<br> -->
-											<i class="fa fa-phone"></i> Mobile : <?php echo $detail->phone;?><br>
+											<i class="fa fa-phone"></i> : <?php echo $detail->phone;?><br>
 											<!-- <i class="fa fa-fax"></i> Fax : 1-800-666-8888<br> -->
-											<i class="fa fa-envelope-o"></i> Mail: <?php echo $detail->email;?><br>
+											<i class="fa fa-envelope-o"></i>: <?php echo $detail->email;?><br>
 											<i><a href="<?php echo site_url('site/site/search?available=0&agent='.$detail->userid.'&list_type=lists&order=Desc')?>">View all Property</a></i>
 										</address>
 									</div>	
@@ -378,37 +378,73 @@
 						</div>
 						<!-- End Our Agents -->
 						
-						<!-- Begin Advanced Search -->
-						<aside class="block pgl-bg-dark pgl-testimonials hide">
-							<div class="owl-carousel pgl-testimonial" data-plugin-options='{"items": 1, "pagination": false, "autoHeight": true}'>
-								<div class="col-md-12">
-									<div class="testimonial-author">
-										<div class="img-thumbnail-small img-circle">
-											<img src="<?php echo site_url('template')?>/images/agents/agent-1.jpg" class="img-circle" alt="Andrew MCCarthy">
+						<div class="tab-pane active" id="all">
+								<div class="row">
+									<?php 
+										$level = 2;
+										$sponsored = $this->site->getListSponsored($detail->lp_id,$detail->p_type,$level);
+										foreach ($sponsored as $hot) {
+									?>
+									<div class="col-xs-12 animation">
+										<div class="pgl-property">
+											<div class="property-thumb-info">
+												<div class="property-thumb-info-image">
+													<a href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>">
+														<?php 
+															$img = $this->site->getImage($hot->pid);
+														?>
+														<?php 
+															$extends = pathinfo($img->url, PATHINFO_EXTENSION);
+															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
+															{
+														?>
+															<video style="height: 176px;" class="img-responsive" controls>
+															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+															</video>
+
+														<?php 
+															}else{
+														?>
+															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+														<?php
+															}
+														?>
+													</a>
+													<span class="property-thumb-info-label">
+														<span class="label price">$<?php echo number_format($hot->price) ?></span>
+														<span class="label forrent <?php if($hot->p_type !=0) echo ""; else echo "hide";?>">
+															<?php 
+																if($hot->p_type == 1)
+																	echo "Sale";
+																if($hot->p_type == 2)
+																	echo "Rent";
+																if($hot->p_type == 3)
+																	echo "Rent & Sale";	
+															?>
+														</span>
+														<span class="label price"><?php echo 'P'.$hot->pid; ?></span>
+													</span>
+												</div>
+												<div class="property-thumb-info-content" style="height: 120px;">
+													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>"><?php echo $hot->property_name?></a></h3>
+													<address class="module line-clamp"><?php echo $hot->address?></address>
+												</div>
+												<div class="amenities clearfix" style="height: 40px;">
+													<ul class="pull-left">
+														<li><strong>Area:</strong> <?php if($hot->housesize !="") echo $hot->housesize; else echo 0;?><sup>m2</sup></li>
+													</ul>
+													<ul class="pull-right">
+														<li class="<?php if($hot->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $hot->bedroom; ?></li>
+														<li class="<?php if($hot->bathroom == "" ) echo "hide";?>"><i class="icons icon-bathroom"></i> <?php echo $hot->bathroom; ?></li>
+													</ul>
+												</div>
+											</div>
 										</div>
-										<h4>Andrew MCCarthy</h4>
-										<p><strong>Selller</strong></p>
 									</div>
-									<div class="divider-quote-sign"><span>“</span></div>
-									<blockquote class="testimonial">
-										<p>Sed perspiciatis unde omnisiste natus error voluptatem remopa accusantium doloremque laudantium totam rem.</p>
-									</blockquote>
-								</div>
-								<div class="col-md-12">
-									<div class="testimonial-author">
-										<div class="img-thumbnail-small img-circle">
-											<img src="<?php echo site_url('template')?>/images/agents/agent-1.jpg" class="img-circle" alt="John Smith">
-										</div>
-										<h4>John Smith</h4>
-										<p><strong>Selller</strong></p>
-									</div>
-									<div class="divider-quote-sign"><span>“</span></div>
-									<blockquote class="testimonial">
-										<p>Sed perspiciatis unde omnisiste natus error voluptatem remopa accusantium doloremque laudantium totam rem.</p>
-									</blockquote>
+							<?php } ?>
+
 								</div>
 							</div>
-						</aside>
 						<!-- End Advanced Search -->
 						
 					</div>

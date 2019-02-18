@@ -77,12 +77,14 @@
 		}
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<title>Admin</title>
-		<meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/img/estatecambodiaicon.ico')?> ">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/font-awesome.css') ?>" />
@@ -102,16 +104,7 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/toastr/toastr.css') ?>" />
 		
 		<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">
-		<!-- <link href="<?php echo base_url('assets/css/bootstrap-timepicker.css') ?>" rel="stylesheet"> -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/fileinput.css') ?>" />
-		<!-- <link rel="stylesheet" href="<?php echo base_url();?>assets/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/> -->
-
-
-		
-		<!--[if lt IE 9]>
-
-		<script type="text/javascript" src="<?php echo base_url('assets/js/respond.min.js') ;?>"></script>
-		<![endif]-->
 		
 		<script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery-ui.custom.js')?>"></script>					
@@ -121,9 +114,7 @@
 		<script src="<?php echo base_url('assets/js/gecom.js')?>"></script>	
 
 		<!-- Ck editor-->
-		<script src="<?php echo base_url('assets/js/editor/summernote.js')?>"></script>				
-
-		<!--<script src="<?php echo base_url('assets/js/jquery.icheck.min.js')?>"></script>-->
+		<script src="<?php echo base_url('assets/js/editor/summernote.js')?>"></script>		
 		<script src="<?php echo base_url('assets/js/select2.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery.validate.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/form_validation.js')?>"></script>
@@ -148,28 +139,12 @@
 		<!-- jqprint -->
    	 	<script src="<?php echo base_url('assets/js/jquery.PrintArea.js')?>"></script>  
     	<script src="<?php echo base_url('assets/js/gScript.js')?>"></script>
-    	<!-- <script src="<?php echo base_url('assets/js/bootstrap-timepicker.js')?>"></script> -->
     	<script type="text/javascript" src="<?php echo base_url('assets/js/zoomable/zoomsl-3.0.min.js') ?>"></script>
-    	<!-- -----------------upload---------- -->
-    	<!-- <link href="<?php echo base_url('assets/js/upload/jquery.filer.css') ?>" type="text/css" rel="stylesheet" /> -->
-		<!-- <link href="<?php echo base_url('assets/js/upload/themes/jquery.filer-dragdropbox-theme.css') ?>" type="text/css" rel="stylesheet" /> -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/upload/jquery.filer.js') ?>"></script> -->
-		<!-- =====================export pdf=========== -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/jspdf.js') ?>"></script> -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/FileSaver.js') ?>"></script> -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/pdf/from_html.js') ?>"></script> -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/pdf/standard_fonts_metrics.js') ?>"></script> -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/pdf/split_text_to_size.js') ?>"></script> -->
 
-		<!-- ========================================Number slep================== -->
-		<!-- <link href="<?php echo base_url('assets/js/number_slep/jquery.stepper.min.css') ?>" type="text/css" rel="stylesheet" /> -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/number_slep/jquery.stepper.js') ?>"></script> -->
-		<!-- =============loding========== -->
-		<!-- <script type="text/javascript" src="<?php echo base_url('assets/js/loading/loading.js') ?>"></script> -->
 		<script src="<?php echo base_url();?>ckeditor/ckeditor.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 		<script src="<?php echo base_url();?>assets/js/fileinput.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
-		<!-- <script src="<?php echo base_url();?>assets/js/js_star/star-rating.js" type="text/javascript"></script> -->
 	</head>	
+	
 	<body data-color="grey" class="flat">
 		<div id="wrapper">
 			<div id="header">
@@ -256,8 +231,7 @@
 	                        </li>
 	                    </ul>
 	                </li>	                
-	                <li class="btn"><a title="" href="<?php echo site_url("greenadmin/login/logOut") ?>"><i class="fa fa-share"></i> <span class="text">Logout</span></a></li>
-	            </ul>
+	                <li class="btn"><a title="" href="<?php echo site_url("greenadmin/login/logOut") ?>"><i class="fa fa-share"></i> <span class="text">Logout</span></a></li>	            </ul>
 	        </div>
 	       
 	       <div id="switcher">

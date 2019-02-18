@@ -111,7 +111,8 @@
                                         <?php
                                         $locat = "";
                                         $userid = $this->session->userdata('userid');
-                                        if($userid == 4)
+                                        $role = $this->session->userdata('roleid');
+                                        if($role == 1)
                                         {
                                             $locat=$this->db->query("SELECT * FROM admin_user WHERE is_active='1'")->result();
                                         }else{
@@ -190,6 +191,48 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            
+                            <label class='col-lg-2 control-label'>Property Level</label>
+                            <div class="col-lg-4"> 
+                                <div class="col-md-12">
+                                    <select class="form-control" id="pro_level">    
+                                        <?php 
+                                        $sel = ""; $sel1 = ""; $sel2 = "";
+                                        if($row->level == 1)
+                                            $sel ="selected";
+                                        if($row->level == 2)
+                                            $sel1 ="selected";
+                                        if($row->level == 3)
+                                            $sel2 ="selected";
+
+                                        $userid = $this->session->userdata('roleid');
+                                            if($userid == 1)
+                                            {
+                                        ?>
+                                            <option value="">Please Select</option>
+                                            <option <?php echo $sel;?> value="1">Hot</option>
+                                            <option <?php echo $sel1;?> value="2">Sponsored</option>
+                                        <?php 
+                                            }
+                                        ?>
+                                        <option <?php echo $sel2;?> value="3">Free</option>
+                                    </select>
+                                </div>                   
+                            </div>
+                            <label class='col-lg-2 control-label'>Owner Relation</label>
+                            <div class="col-lg-4"> 
+                                <div class="col-md-12">
+                                    <select class="form-control" id="relative_owner">
+                                        <option value="">Please Select</option>
+                                        <option value="1">I am the owner</option>
+                                        <option value="2">I know owner directly</option>
+                                        <option value="3">I do not know owner</option>
+                                    </select>
+                                </div>                   
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
                             <label class='col-lg-2 control-label'>Content</label>
                             <div class=" col-lg-10"> 
@@ -794,7 +837,9 @@
                     story: $('#story').val(),
                     pool: $('#pool').val(),
                     latitude: $('#latitude').val(), 
-                    longtitude: $('#longtitude').val()
+                    longtitude: $('#longtitude').val(),
+                    level: $('#pro_level').val(),
+                    relative_owner: $('#relative_owner').val()
                 },
                 success:function(data) {
                     // $(".result_text").html(data.msg);

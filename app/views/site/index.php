@@ -74,7 +74,7 @@
 
 	                            <div class="search-field-wrapper search-refine">
 	                                <button data-toggle="refine-dropdown" class="search-field hollow expanded">
-	                                    <span class="text-label">Refine Search</span>
+	                                    <span class="text-label">Customize Your Search</span>
 	                                    <span class="icon-down"></span>
 	                                </button>
 	                                <div class="dropdown-pane search-refine" id="refine-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
@@ -786,7 +786,7 @@
 	                                    <button type="button" class="button highlight mobile-find" data-search-button>Find</button>
 	                                </div>
 	                            </div>
-	                            <div class="mobile-refine-search">Refine Search <span class="icon-down"></span></div>
+	                            <div class="mobile-refine-search">Customize Your Search <span class="icon-down"></span></div>
 	                        </div>
 	                        <div class="smallport-22 medium-4">
 	                            <div class="search-field-wrapper search-button">
@@ -961,6 +961,88 @@
 						<li><a href="#apartment" role="tab" data-toggle="tab">Apartment</a></li>
 						<li><a href="#residential" role="tab" data-toggle="tab">Residential</a></li>
 					</ul>
+					<?php 
+						if(!empty($hot)){
+					?>
+					<ul class="nav nav-tabs pgl-pro-tabs text-center animation " role="tablist">
+						<li class="active"><a href="#all" role="tab" data-toggle="tab">Hot Property</a></li>
+						<li></li>
+					</ul>
+					<?php } ?>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="all">
+							<div class="row">
+								<?php 
+									foreach ($hot as $hot) {
+								?>
+								<div class="col-xs-3 animation">
+									<div class="pgl-property">
+										<div class="property-thumb-info">
+											<div class="property-thumb-info-image">
+												<a href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>">
+													<?php 
+														$img = $this->site->getImage($hot->pid);
+													?>
+													<?php 
+														$extends = pathinfo($img->url, PATHINFO_EXTENSION);
+														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
+														{
+													?>
+														<video style="height: 176px;" class="img-responsive" controls>
+														  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+														</video>
+
+													<?php 
+														}else{
+													?>
+														<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+													<?php
+														}
+													?>
+												</a>
+												<span class="property-thumb-info-label">
+													<span class="label price">$<?php echo number_format($hot->price) ?></span>
+													<span class="label forrent <?php if($hot->p_type !=0) echo ""; else echo "hide";?>">
+														<?php 
+															if($hot->p_type == 1)
+																echo "Sale";
+															if($hot->p_type == 2)
+																echo "Rent";
+															if($hot->p_type == 3)
+																echo "Rent & Sale";	
+														?>
+													</span>
+													<span class="label price"><?php echo 'P'.$hot->pid; ?></span>
+												</span>
+											</div>
+											<div class="property-thumb-info-content" style="height: 120px;">
+												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>"><?php echo $hot->property_name?></a></h3>
+												<address class="module line-clamp"><?php echo $hot->address?></address>
+											</div>
+											<div class="amenities clearfix" style="height: 40px;">
+												<ul class="pull-left">
+													<li><strong>Area:</strong> <?php if($hot->housesize !="") echo $hot->housesize; else echo 0;?><sup>m2</sup></li>
+												</ul>
+												<ul class="pull-right">
+													<li class="<?php if($hot->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $hot->bedroom; ?></li>
+													<li class="<?php if($hot->bathroom == "" ) echo "hide";?>"><i class="icons icon-bathroom"></i> <?php echo $hot->bathroom; ?></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<?php 
+									}
+								?>
+						</div>
+					</div>
+
+					<ul class="nav nav-tabs pgl-pro-tabs text-center animation " role="tablist">
+						<li class="active"><a href="#all" role="tab" data-toggle="tab">All Property</a></li>
+						<li></li>
+					</ul>
 
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -1033,7 +1115,9 @@
 						<?php 
 							echo $this->pagination->create_links();
 						?>
-				</div>
+					</div>
+
+
 			</section>
 			<!-- End Properties -->
 

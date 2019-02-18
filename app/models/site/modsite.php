@@ -214,6 +214,20 @@
             else
                 return false;
         }
+        function getHotProperty()
+        {
+            $hot = $this->db->query("SELECT * FROM tblproperty as p
+                left join tblpropertytype as pt on p.type_id = pt.typeid
+                WHERE p.p_status = 1 AND p.level = 1 ORDER BY p.create_date desc,p.pid desc limit 8")->result();
+            return $hot;
+        }
+        function getListSponsored($lp_id,$p_type,$level)
+        {
+            $sponsored = $this->db->query("SELECT * FROM tblproperty as p
+                left join tblpropertytype as pt on p.type_id = pt.typeid
+                WHERE p.p_status = 1 AND p.level = $level AND p.lp_id = $lp_id AND p.p_type = $p_type ORDER BY p.create_date desc,p.pid desc limit 3")->result();
+            return $sponsored;
+        }
 }
 
 

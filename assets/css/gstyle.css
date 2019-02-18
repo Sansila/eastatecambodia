@@ -213,7 +213,7 @@ a:hover {
     top: auto;
     left: auto;
     margin: 7px auto;
-
+    width: 100%;
   }
   .fixed #header h1 {
     position: absolute;

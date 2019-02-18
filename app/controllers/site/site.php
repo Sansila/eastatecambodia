@@ -19,12 +19,13 @@ class Site extends CI_Controller {
         $data['location'] = $this->site->getPropertyLocation();
         $data['data'] = $this->site->getItemLocation();
         $data['slide'] = $this->site->getSlide();
+        $data['hot'] = $this->site->getHotProperty();
 
         $page = 0;
         if(isset($_GET['per_page']))
             $page = $_GET['per_page'];
         $config['base_url'] = site_url('?a=link');
-        $config['per_page'] = 8;
+        $config['per_page'] = 12;
         $config['num_link'] = 3;
         $config['page_query_string'] = TRUE;
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -49,8 +50,7 @@ class Site extends CI_Controller {
         $query = " SELECT * FROM tblproperty as p
                 left join tblpropertytype as pt on p.type_id = pt.typeid 
                 -- left join tblgallery as g on p.pid = g.pid
-                WHERE p.p_status = 1 ORDER BY p.create_date desc,p.pid desc
-                ";
+                WHERE p.p_status = 1  AND p.level <> 1 AND p.level <> 2 ORDER BY p.create_date desc,p.pid desc ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
         $this->pagination->initialize($config);
@@ -790,7 +790,7 @@ class Site extends CI_Controller {
 
         if($order != "" && $sort == null)
         {
-            $order_by.= " ORDER BY p.create_date $order";
+            $order_by.= " ORDER BY p.create_date $order, p.pid desc ";
         }else if($sort !="" && $order != ""){
             if($sort == "Price")
                 $order_by.= " ORDER BY p.price $order ";
@@ -799,7 +799,7 @@ class Site extends CI_Controller {
             if($sort == "Date")
                 $order_by.= " ORDER BY p.create_date $order ";
         }else{
-            $order_by.= " ORDER BY p.create_date desc,p.pid desc";
+            $order_by.= " ORDER BY p.create_date desc,p.pid desc ";
         }
 
         // ============ configure pagination =====//

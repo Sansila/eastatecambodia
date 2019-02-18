@@ -28,6 +28,7 @@
 	if(isset($_GET['p'])){
 	    $p=$_GET['p'];
 	}
+	$userid = $this->session->userdata('userid');
  ?>
  <div id="content-header" class="mini">
         <h1>PROPERTY LIST</h1>
@@ -37,7 +38,7 @@
  </div>
  <div id="breadcrumb">
       <a href="<?php echo base_url('/sys/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-      <a href='#' class="current">Propert list : <?php echo $this->pro->countAllproperty();?> records</a>
+      <a href='#' class="current">Propert list : <?php echo $this->pro->countAllproperty($userid);?> records</a>
  </div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
@@ -54,7 +55,7 @@
 							<span class="icon">
 								<i class="fa fa-th"></i>
 							</span>
-								<h5>Menu List</h5>
+								<h5>Records</h5>
 							<div style="text-align: right; width:130px; float:right">
 					      			      		
 					      	</div> 			    
@@ -75,7 +76,9 @@
 									</tr>
 									<tr class='remove_tag'>
 										<th></th>
-										<th></th>
+										<th>
+											<input type='text' onchange="getdata(1);" class='form-control input-sm' id='search_date' />
+										</th>
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_user_name'/>
 										</th>
@@ -212,6 +215,7 @@
 
 <script type="text/javascript">
 
+		$('#search_date').datepicker({ dateFormat: "yy-mm-dd" });
 		
 		$('#export').click(function(){
 			$('#exporttap').modal('show');
@@ -285,6 +289,7 @@
 			var user = $('#s_user_name').val();
 			var p_status = $("#pro_status").val();
 			var pro_loc = $("#pro_loc").val();
+			var search_date = $("#search_date").val();
           	
           	var perpage=$('#perpage').val();
 			$.ajax({
@@ -301,7 +306,8 @@
 							'p_type': p_type,
 							'user_add' : user,
 							'p_status': p_status,
-							'pro_loc': pro_loc
+							'pro_loc': pro_loc,
+							'date': search_date
 		            	},
 		            success:function(data) {
 		              $(".list").html(data.data); console.log(data);

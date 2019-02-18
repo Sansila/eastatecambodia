@@ -199,7 +199,7 @@
 
 	                            <div class="search-field-wrapper search-refine">
 	                                <button data-toggle="refine-dropdown" class="search-field hollow expanded">
-	                                    <span class="text-label">Refine Search</span>
+	                                    <span class="text-label">Customize Your Search</span>
 	                                    <span class="icon-down"></span>
 	                                </button>
 	                                <div class="dropdown-pane search-refine" id="refine-dropdown" data-dropdown data-close-on-click="true" data-v-offset="10">
@@ -913,7 +913,7 @@
 	                                    <button type="button" class="button highlight mobile-find" data-search-button>Find</button>
 	                                </div>
 	                            </div>
-	                            <div class="mobile-refine-search">Refine Search <span class="icon-down"></span></div>
+	                            <div class="mobile-refine-search">Customize Your Search <span class="icon-down"></span></div>
 	                        </div>
 	                        <div class="smallport-22 medium-4">
 	                            <div class="search-field-wrapper search-button">

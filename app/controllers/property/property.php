@@ -92,7 +92,9 @@ class Property extends CI_Controller {
 			'title'=> $this->input->post('title'),
 			'type_id'=> $this->input->post('category'),
 			'latitude'=> $this->input->post('latitude'),
-			'longtitude'=> $this->input->post('longtitude')
+			'longtitude'=> $this->input->post('longtitude'),
+			'level' => $this->input->post('level'),
+			'relative_owner' => $this->input->post('relative_owner')
 		);
 
 		
@@ -233,6 +235,7 @@ class Property extends CI_Controller {
 		$user_add = $this->input->post('user_add');
 		$p_status = $this->input->post('p_status');
 		$pro_loc = $this->input->post('pro_loc');
+		$sdate = $this->input->post('date');
 
 		$where = "";
 		$var = $this->session->all_userdata();
@@ -252,6 +255,8 @@ class Property extends CI_Controller {
 			$where.= " AND pl.p_type = '$p_status' ";
 		if($pro_loc !="")
 			$where.= " AND l.lineage LIKE '%$pro_loc%' ";
+		if($sdate !="")
+			$where.= " AND pl.create_date = '$sdate' ";
 
 		$sql="SELECT *
 		FROM tblproperty pl

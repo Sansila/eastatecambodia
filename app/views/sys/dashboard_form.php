@@ -92,10 +92,13 @@
             
         </ul>
  </div> -->
+ 	<?php 
+ 		$userid = $this->session->userdata('userid');
+ 	?>
  	<div class="List_property">
 		<div id="breadcrumb">
 		      <a href="<?php echo base_url('/sys/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-		      <a href='#' class="current">Propert list : <?php echo $this->pro->countAllproperty();?> records</a>
+		      <a href='#' class="current">Propert list : <?php echo $this->pro->countAllUnaproveProperty();?> records</a>
 		</div>
 		<div class="wrapper">
 			<div class="clearfix" id="main_content_outer">
@@ -112,7 +115,7 @@
 									<span class="icon">
 										<i class="fa fa-th"></i>
 									</span>
-										<h5>Menu List</h5>
+										<h5>Records</h5>
 									<div style="text-align: right; width:130px; float:right">
 							      			      		
 							      	</div> 			    

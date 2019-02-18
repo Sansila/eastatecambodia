@@ -3282,7 +3282,8 @@ p+.stat {
 }
 
 .button.highlight {
-    background-color: #ff5a59;
+    /*background-color: #ff5a59;*/
+    background: #88c940;
     color: #000
 }
 
