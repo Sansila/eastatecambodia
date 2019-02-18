@@ -210,7 +210,7 @@
                                             if($userid == 1)
                                             {
                                         ?>
-                                            <option value="">Please Select</option>
+                                            <option value="0">Please Select</option>
                                             <option <?php echo $sel;?> value="1">Hot</option>
                                             <option <?php echo $sel1;?> value="2">Sponsored</option>
                                         <?php 
@@ -224,10 +224,19 @@
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="relative_owner">
-                                        <option value="">Please Select</option>
-                                        <option value="1">I am the owner</option>
-                                        <option value="2">I know owner directly</option>
-                                        <option value="3">I do not know owner</option>
+                                        <?php
+                                            $sel = ""; $sel1 = ""; $sel2 = "";
+                                            if($row->relative_owner == 1)
+                                                $sel ="selected";
+                                            if($row->relative_owner == 2)
+                                                $sel1 ="selected";
+                                            if($row->relative_owner == 3)
+                                                $sel2 ="selected";
+                                        ?>
+                                        <option value="0">Please Select</option>
+                                        <option <?php echo $sel;?> value="1">I am the owner</option>
+                                        <option <?php echo $sel1;?> value="2">I know owner directly</option>
+                                        <option <?php echo $sel2;?> value="3">I do not know owner</option>
                                     </select>
                                 </div>                   
                             </div>
