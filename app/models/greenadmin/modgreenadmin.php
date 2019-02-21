@@ -41,5 +41,18 @@
             $row = $this->db->query("SELECT count(p.pid) as alls, p.pid,p.p_status,p.agent_id FROM tblproperty as p WHERE p.p_status = 1 {$where} ")->row();
             return $row->alls;
         }
+        function getCountStatus($userid,$roleid)
+        {
+            $where = "";
+            if($roleid == 1)
+                $where.= "";
+            else
+                $where.= " AND agent_id = $userid";
+            $return = $this->db->query("SELECT p_type,COUNT(*) as st_type
+                                        FROM tblproperty 
+                                        WHERE p_status = 1 {$where}
+                                        GROUP BY p_type")->result();
+            return $return;
+        }
     }
 ?>

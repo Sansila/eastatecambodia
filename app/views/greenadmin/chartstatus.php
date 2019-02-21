@@ -1,17 +1,41 @@
-<!-- Styles -->
 <style>
 #chartdiv {
   width: 100%;
   height: 500px;
 }
-
+.bd-example {
+    padding: 1rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: .2rem;
+}
+.btns {
+  width: 100%;
+}
 </style>
 <!-- HTML -->
 <?php 
   $userid = $this->session->userdata('userid');
   $roleid=$this->session->userdata('roleid'); 
 ?>
-<div id="chartdiv"></div>
+
+<div class="container-fluid">
+  <div class="bd-example">
+    <div class="row">
+      <div class="col-sm-4">
+        <button type="button" class="btns btn btn-primary">Add New Property</button>
+      </div>
+      <div class="col-sm-4">
+        <button type="button" class="btns btn btn-secondary">View Properties</button>
+      </div>
+      <div class="col-sm-4">
+        <button type="button" class="btns btn btn-success">Total: <?php echo $allproperty;?> Propeties</button>
+      </div>
+    </div>
+    <div id="chartdiv"></div>
+  </div>
+</div>
+
 <script type="text/javascript">
 
     am4core.useTheme(am4themes_animated);
@@ -21,7 +45,7 @@
 
     $.ajax({ 
         type: 'GET', 
-        url:"<?php echo site_url('greenadmin/home/getChart/'.$userid.'/'.$roleid)?>",
+        url:"<?php echo site_url('greenadmin/home/getCountStatus/'.$userid.'/'.$roleid)?>",
         dataType: 'json',
         success: function (data) { 
             chart.data = data;
