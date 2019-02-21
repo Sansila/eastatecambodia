@@ -7,75 +7,43 @@
 
 </style>
 <!-- HTML -->
-<!-- <div id="chartdiv"></div> -->
-<button id="postcontent">click</button>
-<!-- <script type="text/javascript"> 
-  // $(function(){
-  //     $("#postcontent").click(function(e) {
-  //       $.ajax({ 
-  //           type: 'GET', 
-  //           url:"<?php echo site_url('greenadmin/home/getChart')?>",
-  //           dataType: 'json',
-  //           success: function (data) { 
-  //               console.log(data);
-  //               alert("test");
-  //           }
-  //       });
-  //   });
-  // });
+<div id="chartdiv"></div>
+<script type="text/javascript">
 
-    
+    am4core.useTheme(am4themes_animated);
 
+    var chart = am4core.create("chartdiv", am4charts.PieChart);
+    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
+    $.ajax({ 
+        type: 'GET', 
+        url:"<?php echo site_url('greenadmin/home/getChart')?>",
+        dataType: 'json',
+        success: function (data) { 
+            chart.data = data;
+        }
+    });
 
-//     am4core.useTheme(am4themes_animated);
+    chart.radius = am4core.percent(70);
+    chart.innerRadius = am4core.percent(40);
+    chart.startAngle = 180;
+    chart.endAngle = 360;
+    chart.responsive.enabled = true;
 
-//     var chart = am4core.create("chartdiv", am4charts.PieChart);
-//     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+    var series = chart.series.push(new am4charts.PieSeries());
+    series.dataFields.value = "value";
+    series.dataFields.category = "country";
+    series.legendSettings.labelText = '{country}';
+    series.legendSettings.valueText = '{value}';
 
-//     chart.data = [
-//       {
-//         country: "Lithuania",
-//         value: 401
-//       },
-//       {
-//         country: "Czech Republic",
-//         value: 300
-//       },
-//       {
-//         country: "Ireland",
-//         value: 200
-//       },
-//       {
-//         country: "Germany",
-//         value: 165
-//       },
-//       {
-//         country: "Australia",
-//         value: 139
-//       },
-//       {
-//         country: "Austria",
-//         value: 128
-//       }
-//     ];
-//     chart.radius = am4core.percent(70);
-//     chart.innerRadius = am4core.percent(40);
-//     chart.startAngle = 180;
-//     chart.endAngle = 360;  
+    series.slices.template.cornerRadius = 10;
+    series.slices.template.innerCornerRadius = 7;
+    series.slices.template.draggable = true;
+    series.slices.template.inert = true;
+    series.alignLabels = false;
 
-//     var series = chart.series.push(new am4charts.PieSeries());
-//     series.dataFields.value = "value";
-//     series.dataFields.category = "country";
+    series.hiddenState.properties.startAngle = 90;
+    series.hiddenState.properties.endAngle = 90;
 
-//     series.slices.template.cornerRadius = 10;
-//     series.slices.template.innerCornerRadius = 7;
-//     series.slices.template.draggable = true;
-//     series.slices.template.inert = true;
-//     series.alignLabels = false;
-
-//     series.hiddenState.properties.startAngle = 90;
-//     series.hiddenState.properties.endAngle = 90;
-
-//     chart.legend = new am4charts.Legend();
-</script>-->
+    chart.legend = new am4charts.Legend();
+</script>

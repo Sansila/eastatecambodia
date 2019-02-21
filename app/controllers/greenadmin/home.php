@@ -16,13 +16,13 @@ class Home extends CI_Controller {
 	}
 	function getChart()
 	{
-		$arr = "";
+		$arr = array();
 		$test = $this->modgreen->getPropertyCategory();
 		foreach ($test as $t) {
-			$arr = $this->modgreen->getCountAllPropertyByCategoryID($t->typeid,$t->typename);
-			header("Content-type:text/x-json");
-			echo json_encode($arr);	
+			$arr[] = $this->modgreen->getCountAllPropertyByCategoryID($t->typeid,$t->typename);
 		}
+		header("Content-type:text/x-json");
+		echo json_encode($arr);	
 	}
 }
 

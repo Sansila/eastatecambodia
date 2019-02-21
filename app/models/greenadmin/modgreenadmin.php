@@ -17,7 +17,7 @@
 								    			FROM tblproperty as p
 								    			INNER JOIN tblpropertytype as pt 
 								    			ON p.type_id = pt.typeid
-								    			WHERE p.p_status = 1 AND p.type_id = $cid ")->row();
+								    			WHERE p.p_status = 1 AND p.type_id = $cid ORDER BY pro_count ASC")->row();
     		
 			$arr = array('country'=>$row->typename,'value'=>$row->pro_count);
 			return $arr;

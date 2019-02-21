@@ -4253,7 +4253,7 @@
                 }), e.prototype.createDataItem = function() {
                     return new g
                 }, e.prototype.initSlice = function(t) {}, e.prototype.initLabel = function(t) {
-                    t.text = "{category}: {value.percent.formatNumber('#.0')}%", t.isMeasured = !1, t.padding(5, 5, 5, 5)
+                    t.text = "{category}: {value}", t.isMeasured = !1, t.padding(5, 5, 5, 5)
                 }, e.prototype.initTick = function(t) {}, e.prototype.validateDataElement = function(e) {
                     var i = e.slice;
                     i && (void 0 == i.fill && (i.fill = this.colors.getIndex(e.index * this.colors.step)), void 0 == i.stroke && (i.stroke = this.colors.getIndex(e.index * this.colors.step))), t.prototype.validateDataElement.call(this, e), i && e.bullets.each(function(t, e) {
