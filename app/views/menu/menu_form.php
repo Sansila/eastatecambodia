@@ -32,7 +32,7 @@ a{
   </ul>
 </div>  
 <div id="breadcrumb">
-  <a href="<?php echo base_url('/sys/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
+  <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
   <a href="<?php echo base_url("index.php/store/store/index?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Category</a>
   <a href='#' class="current"><?php if(isset($row->menu_id)) echo 'Edit Category'; else echo 'New Category';?></a>
 </div>

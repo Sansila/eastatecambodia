@@ -39,7 +39,10 @@
         </ul>
     </div>  
     <div id="breadcrumb">
-      <a href="<?php echo base_url('/sys/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
+      <?php 
+        $roleid=$this->session->userdata('roleid'); 
+      ?>
+      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo ""; ?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
       <a href="<?php echo base_url("property/property/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Property</a>
       <a href='#' class="current"><?php if(isset($row->article_id)) echo 'Edit Property'; else echo 'New Property';?></a>
     </div>
@@ -85,8 +88,8 @@
                             <label class='col-lg-2 control-label'>Categories</label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
-                                    <select class="form-control" id="category_id">
-                                        <option value="0">Please Select</option>
+                                    <select class="form-control input-sm required" required="" name="category_id" id="category_id">
+                                        <option value="">Please Select</option>
                                         <?php
                                         $locat=$this->db->query("SELECT * FROM tblpropertytype WHERE type_status = '1' ")->result();
                                             foreach ($locat as $me) {
@@ -199,11 +202,11 @@
                                     <select class="form-control" id="pro_level">    
                                         <?php 
                                         $sel = ""; $sel1 = ""; $sel2 = "";
-                                        if($row->level == 1)
+                                        if($row->pro_level == 1)
                                             $sel ="selected";
-                                        if($row->level == 2)
+                                        if($row->pro_level == 2)
                                             $sel1 ="selected";
-                                        if($row->level == 3)
+                                        if($row->pro_level == 3)
                                             $sel2 ="selected";
 
                                         $userid = $this->session->userdata('roleid');
@@ -725,16 +728,21 @@
             success:function(data){
                 toasmsg('success',msg);
                 //location.reload();
-                location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
+                //location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
                 console.log("success");
                 console.log(data);
+                setTimeout(function(){ 
+                    location.reload();
+                }, 1000);
             },
             error: function(data){
                 console.log("error");
                 console.log(data);
                 //location.reload();
-                location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
-
+                //location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
+                setTimeout(function(){ 
+                    location.reload();
+                }, 1000);
             }
         });
        
@@ -772,6 +780,9 @@
           url:{
             required:true,
             url: true
+          },
+          category_id:{
+            required:true
           }
         },
         errorClass: "help-inline",

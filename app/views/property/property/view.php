@@ -37,7 +37,10 @@
         </ul>
  </div>
  <div id="breadcrumb">
-      <a href="<?php echo base_url('/sys/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
+ 	  <?php 
+        $roleid=$this->session->userdata('roleid'); 
+      ?>
+      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
       <a href='#' class="current">Propert list : <?php echo $this->pro->countAllproperty($userid);?> records</a>
  </div>
 <div class="wrapper">
@@ -114,7 +117,7 @@
 											</select>
 										</th>
 										<th>
-											<select class="form-control" id="pro_level"> 
+											<select class="form-control" id="pro_level" onchange="getdata(1);"> 
 		                                        <option value="0">Please Select</option>
 		                                        <option value="1">Hot</option>
 		                                      	<option value="2">Sponsored</option>
@@ -122,7 +125,7 @@
 		                                    </select>
 		                                </th>
 										<th>
-											<select class="form-control" id="relative_owner">
+											<select class="form-control" id="relative_owner" onchange="getdata(1);">
 		                                        <option value="0">Please Select</option>
 		                                        <option value="1">I am the owner</option>
 		                                        <option value="2">I know owner directly</option>

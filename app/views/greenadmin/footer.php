@@ -8,3 +8,18 @@
 		</div>
 	</body>
 </html>
+<script type="text/javascript">
+	$(function(){
+      $("#postcontent").click(function(e) {
+        $.ajax({ 
+            type: 'GET', 
+            url:"<?php echo site_url('greenadmin/home/getChart')?>",
+            dataType: 'json',
+            success: function (data) { 
+                console.log(data);
+                alert("test");
+            }
+        });
+    });
+  });
+</script>

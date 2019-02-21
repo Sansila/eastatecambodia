@@ -3,15 +3,12 @@
 			    padding-top: 10px;
 			    padding-bottom: 10px;
 			    text-align: center;
-			    background: #143852;
-			    border: 1px solid black;
-			    border-radius: 5px;
 			}
 			.custom_menu a{
-				color: white !important;
 			    display: -webkit-box;
 			    -webkit-line-clamp: 1;
 			    -webkit-box-orient: vertical;
+			    text-align: left;
 			}
 			.module {
 			    margin: 0;

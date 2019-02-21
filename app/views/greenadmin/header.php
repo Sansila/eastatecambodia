@@ -144,12 +144,22 @@
 		<script src="<?php echo base_url();?>ckeditor/ckeditor.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 		<script src="<?php echo base_url();?>assets/js/fileinput.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 		<script src="<?php echo base_url('assets/js/canvasjs.min.js')?>"></script>
+		<script src="<?php echo site_url('assets/amchart')?>/core.js"></script>
+	    <script src="<?php echo site_url('assets/amchart')?>/charts.js"></script>
+	    <script src="<?php echo site_url('assets/amchart')?>/animated.js"></script>
 	</head>	
 	
 	<body data-color="grey" class="flat">
 		<div id="wrapper">
 			<div id="header">
-				<h1><a>Dashboard</a></h1>	
+				<?php
+				$url = "";
+					if($roleid == 1)
+						$url = site_url('sys/dashboard');
+					else
+						$url = site_url('greenadmin/home');
+				?>
+				<h1><a href="<?php echo $url?>">Dashboard</a></h1>	
 				<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>	
 			</div>
 		

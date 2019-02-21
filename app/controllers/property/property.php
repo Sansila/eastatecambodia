@@ -95,7 +95,7 @@ class Property extends CI_Controller {
 			'type_id'=> $this->input->post('category'),
 			'latitude'=> $this->input->post('latitude'),
 			'longtitude'=> $this->input->post('longtitude'),
-			'level' => $this->input->post('level'),
+			'pro_level' => $this->input->post('level'),
 			'relative_owner' => $this->input->post('relative_owner')
 		);
 
@@ -238,6 +238,8 @@ class Property extends CI_Controller {
 		$p_status = $this->input->post('p_status');
 		$pro_loc = $this->input->post('pro_loc');
 		$sdate = $this->input->post('date');
+		$levels = $this->input->post('level');
+		$owner = $this->input->post('owner');
 
 		$where = "";
 		$var = $this->session->all_userdata();
@@ -259,6 +261,10 @@ class Property extends CI_Controller {
 			$where.= " AND l.lineage LIKE '%$pro_loc%' ";
 		if($sdate !="")
 			$where.= " AND pl.create_date = '$sdate' ";
+		if($levels != 0)
+			$where.= " AND pl.pro_level = '$levels' ";
+		if($owner != 0)
+			$where .= " AND pl.relative_owner = '$owner' ";
 
 		$sql="SELECT *
 		FROM tblproperty pl
@@ -294,12 +300,13 @@ class Property extends CI_Controller {
 				$property_type = "Rent";
 			if($row->p_status == 3)
 				$property_type = "Rent & Sale";
-			if($row->level == 1)
+			if($row->pro_level == 1)
 				$level = "Hot";
-			if($row->level == 2)
+			if($row->pro_level == 2)
 				$level = "Sponsored";
-			if($row->level == 3)
+			if($row->pro_level == 3)
 				$level = "Free";
+
 			if($row->relative_owner == 1)
 				$owner = "I am the owner";
 			if($row->relative_owner == 2)

@@ -36,7 +36,10 @@ a{
   </ul>
 </div>  
 <div id="breadcrumb">
-  <a href="<?php echo base_url('/sys/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
+  <?php 
+    $roleid=$this->session->userdata('roleid'); 
+  ?>
+  <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
   <a href="<?php echo base_url("property/propertylocation/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Property Location</a>
   <a href='#' class="current"><?php if(isset($row->propertylocationid)) echo 'Edit Property Location'; else echo 'New Property Location';?></a>
 </div>
