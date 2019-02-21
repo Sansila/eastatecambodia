@@ -66,7 +66,37 @@
 								</select>
 							</td>
 						</tr>
-						
+						<tr>
+							<td><label for="emailField">Phone</label></td>
+							<td> : </td>
+							<td class='control-group'><input type='text' class="form-control" name='txtphone' id='txtphone' required data-parsley-required-message="Enter Phone" placeholder="your Phone Number"/></td>
+							
+							<td><label for="emailField">Gender</label></td>
+							<td> : </td>
+							<td>
+								<select name='gender' id='gender' class="form-control ">
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><label for="emailField">Address</label></td>
+							<td> : </td>
+							<td class='control-group'>
+								<select class="form-control select2-single" id="address" name="address">
+                                    <option value="0">Please Select</option>
+                                    <?php
+                                        $location=$this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc")->result();
+                                        foreach ($location as $menu) {
+                                    ?>
+                                    <option value="<?php echo $menu->propertylocationid;?>"><?php echo str_repeat("---- &nbsp;",$menu->level).$menu->locationname;?></option>
+                                    <?php 
+                                        }
+                                    ?>
+                                </select>
+							</td>
+						</tr>
 						
 						<tr>
 							<td></td>
@@ -102,6 +132,10 @@
 		        };
 		    };
 			$(function(){
-				$('#defaultform').parsley();				
+				$('#defaultform').parsley();
+				$(".select2-single").select2({
+			        allowClear:true,
+			        placeholder: 'Location'
+			    });				
 			})
 		</script>

@@ -1,4 +1,35 @@
-		
+		<style type="text/css">
+			.home-tabs.hot-new {
+			    border-color: #d84949;
+			}
+			.home-tabs {
+			    border-bottom: 2px solid #555;
+			}
+			.nav {
+			    padding-left: 0;
+			    margin-bottom: 30px;
+			    list-style: none;
+			    max-width: 100%;
+			}
+			.home-tabs>li.title {
+			    float: left;
+			    max-width: 200px;
+			}
+			.nav>li, .nav>li>a {
+			    display: block;
+			    position: relative;
+			    color: white;
+			    text-transform: uppercase;
+			}
+			.home-tabs.hot-new>li.title a {
+			    background: #d84949;
+
+			}
+			.nav-tabs>li>a:hover {
+			    border-color: transparent;
+			    cursor: inherit;
+			}
+		</style>
 		<!-- Begin Main -->
 		<div role="main" class="main">
 	        <section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto" style="background-image: url('<?php echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>');">
@@ -964,10 +995,13 @@
 					<?php 
 						if(!empty($hot)){
 					?>
-					<ul class="nav nav-tabs pgl-pro-tabs text-center animation " role="tablist">
-						<li class="active"><a href="#all" role="tab" data-toggle="tab">Hot Property</a></li>
-						<li></li>
-					</ul>
+					<ul class="nav nav-tabs home-tabs hot-new" role="tablist">
+				        <li class="title font-strong">
+				        	<a>Hot Properties 
+				        		<div class="corner"></div>
+				        	</a>
+				    	</li><li></li>
+				     </ul>
 					<?php } ?>
 
 					<!-- Tab panes -->
@@ -978,6 +1012,7 @@
 									foreach ($hot as $hot) {
 								?>
 								<div class="col-xs-3 animation">
+
 									<div class="pgl-property">
 										<div class="property-thumb-info">
 											<div class="property-thumb-info-image">
@@ -1039,10 +1074,13 @@
 						</div>
 					</div>
 
-					<ul class="nav nav-tabs pgl-pro-tabs text-center animation " role="tablist">
-						<li class="active"><a href="#all" role="tab" data-toggle="tab">All Property</a></li>
-						<li></li>
-					</ul>
+					<ul class="nav nav-tabs home-tabs hot-new" role="tablist">
+				        <li class="title font-strong">
+				        	<a>Recent Properties 
+				        		<div class="corner"></div>
+				        	</a>
+				    	</li><li></li>
+				     </ul>
 
 					<!-- Tab panes -->
 					<div class="tab-content">

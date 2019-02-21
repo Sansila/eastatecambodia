@@ -3,6 +3,19 @@
 			    padding-top: 10px;
 			    padding-bottom: 10px;
 			    text-align: center;
+			    background: #143852;
+			    border: 1px solid black;
+			    border-radius: 5px;
+			}
+			.custom_menu a{
+				color: white !important;
+			    display: -webkit-box;
+			    -webkit-line-clamp: 1;
+			    -webkit-box-orient: vertical;
+			}
+			.module {
+			    margin: 0;
+			    overflow: hidden;
 			}
 		</style>
 		<!-- Begin footer -->
@@ -49,7 +62,7 @@
 											$url = site_url('site/site/'.$key->location_name.'/'.$key->menu_id.'?type='.$key->menu_id);
 										}
 								?>
-									<div class="col-sm-2 custom_menu" style="width:17.6%"><a href="<?php echo $url;?>"><?php echo $name;?></a></div>
+									<div class="col-sm-3 custom_menu"><a class="module" href="<?php echo $url;?>"><?php echo $name;?></a></div>
 								<?php
 									}
 								?>

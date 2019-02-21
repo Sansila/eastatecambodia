@@ -36,7 +36,7 @@
 			if($detail->gym == "" || $detail->gym == 0)
 				$gym = "hide";
 		?>
-		
+
 		<!-- Begin Main -->
 		<div role="main" class="main pgl-bg-grey">
 			<!-- Begin page top -->
@@ -121,6 +121,9 @@
 											<li><address><i class="fa fa-map-marker"></i> <?php if($detail->locationname !="") echo $detail->locationname; else echo "";?></address></li>
 											<li class="<?php echo $bedroom?>"><i class="icons icon-bedroom"></i> <?php echo $detail->bedroom;?> Bedrooms</li>
 											<li class="<?php echo $bathroom?>"><i class="icons icon-bathroom"></i> <?php echo $detail->bathroom;?> Bathrooms</li>
+											<!-- <li>
+												<div class="fb-share-button" data-href="<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Festatecambodia.com%2Fsite%2Fsite%2Fdetail%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+											</li> -->
 										</ul>
 									</div>
 									<div class="col-sm-8">
@@ -128,6 +131,19 @@
 										<?php 
 											echo $detail->description;
 										?>
+									</div>
+								</div>
+								<div class="tab-detail">
+									<div class="right" style="text-align: right;">
+										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php"
+  										target="_blank" >
+										</a>
+										<a href="#" class="fass fa fa-twitter"></a>
+										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>&text=<?php echo $detail->property_name?>" class="fass fa fa-paper-plane"></a>
+										
+										<a href="#" class="fas fa-line">
+											<img src="<?php echo site_url('assets/img/line.png')?>">
+										</a>
 									</div>
 								</div>
 							
@@ -263,7 +279,7 @@
 						
 						<!-- Begin Related properties -->
 						<section class="pgl-properties">
-							<h2>Related Properties</h2>
+							<h2 style="font-size: 1.571em;">Related Properties</h2>
 							<div class="row">
 								<div class="owl-carousel pgl-pro-slide" data-plugin-options='{"items": 3, "itemsDesktop": 3, "singleItem": false, "autoPlay": false, "pagination": false}'>
 									<?php 
@@ -382,7 +398,7 @@
 								<div class="row">
 									<?php 
 										$level = 2;
-										$sponsored = $this->site->getListSponsored($detail->lp_id,$detail->p_type,$level);
+										$sponsored = $this->site->getListSponsored($detail->pid,$detail->lp_id,$detail->p_type,$level);
 										foreach ($sponsored as $hot) {
 									?>
 									<div class="col-xs-12 animation">

@@ -84,6 +84,53 @@
 									</td>
 									
 								</tr>
+								<tr>
+									<td><label for="emailField">Phone</label></td>
+									<td> : </td>
+									<td class='control-group'>
+										<input type='text' class="form-control" name='txtphone' id='txtphone' required data-parsley-required-message="Enter Phone" placeholder="your Phone Number" value="<?php if(isset($query->phone)) echo $query->phone; else echo "";?>" />
+									</td>
+									
+									<td><label for="emailField">Gender</label></td>
+									<td> : </td>
+									<td>
+										<select name='gender' id='gender' class="form-control ">
+											<?php 
+												$sel =""; $sel1 ="";
+												// if(isset($query->gender))
+												// {
+													if($query->gender == "Male")
+														$sel = "selected";
+													if($query->gender == "Female")
+														$sel1 = "selected";
+												//}
+											?>
+											<option <?php echo $sel;?> value="Male">Male</option>
+											<option <?php echo $sel1;?> value="Female">Female</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td><label for="emailField">Address</label></td>
+									<td> : </td>
+									<td class='control-group'>
+										<select class="form-control select2-single" id="address" name="address">
+		                                    <option value="0">Please Select</option>
+		                                    <?php
+		                                        $location=$this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc")->result();
+		                                        foreach ($location as $menu) {
+		                                            $sel='';
+		                                            if(isset($query->address))
+		                                            if($query->address==$menu->propertylocationid)
+		                                            $sel='selected';
+		                                    ?>
+		                                    <option value="<?php echo $menu->propertylocationid;?>" <?php echo $sel; ?>><?php echo str_repeat("---- &nbsp;",$menu->level).$menu->locationname;?></option>
+		                                    <?php 
+		                                        }
+		                                    ?>
+		                                </select>
+									</td>
+								</tr>
 								
 								<tr>
 									<td></td>
@@ -127,7 +174,12 @@
 					} else {
 					   
 					}
-				})
+				});
+
+			$(".select2-single").select2({
+		        allowClear:true,
+		        placeholder: 'Location'
+		    });
 			
        });
 	</script>

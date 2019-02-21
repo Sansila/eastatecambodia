@@ -16,6 +16,8 @@ class Property extends CI_Controller {
 							"Property Name"=>'Property Name',
 							"Category"=> "Category",
 							"Location"=> "Location",
+							"Level" => "Level",
+							"Owner" => "Owner",
 							"Hit" => "Hit",
 							"Property Type" => "Property Type",
 							"Visibled"=>'visibled',
@@ -271,7 +273,8 @@ class Property extends CI_Controller {
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
 		$i=1;
-		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+		$lim = $paging['limit'] + 10;
+		$limit=" LIMIT {$paging['start']}, {$lim}";
 		$sql.=" {$limit}";
 		$this->green->setActiveRole($this->session->userdata('roleid'));
         $this->green->setActiveModule($this->input->post('m'));
@@ -280,6 +283,8 @@ class Property extends CI_Controller {
 			$visibled='No';
 			$typ='';
 			$lay='';
+			$level ="";
+			$owner ="";
 			$property_type ="";
 			if($row->p_status==1)
 				$visibled="Yes";
@@ -289,6 +294,18 @@ class Property extends CI_Controller {
 				$property_type = "Rent";
 			if($row->p_status == 3)
 				$property_type = "Rent & Sale";
+			if($row->level == 1)
+				$level = "Hot";
+			if($row->level == 2)
+				$level = "Sponsored";
+			if($row->level == 3)
+				$level = "Free";
+			if($row->relative_owner == 1)
+				$owner = "I am the owner";
+			if($row->relative_owner == 2)
+				$owner = "I know owner directly";
+			if($row->relative_owner == 3)
+				$owner = "I do not know owner";
 				
 			if($row->lp_id != 0)
 			{
@@ -325,6 +342,8 @@ class Property extends CI_Controller {
 				 <td class='name'>".$row->property_name."</td>	
 				 <td class='name'>".$row->typename."</td>	
 				 <td class='name'>".$loc."</td>
+				 <td class='name'>".$level."</td>	
+				 <td class='name'>".$owner."</td>
 				 <td class='hit'>".$row->hit."</td>
 				 <td class='name'>".$property_type."</td>		
 				 <td class='type'>".$visibled."</td>

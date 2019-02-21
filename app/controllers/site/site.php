@@ -50,7 +50,7 @@ class Site extends CI_Controller {
         $query = " SELECT * FROM tblproperty as p
                 left join tblpropertytype as pt on p.type_id = pt.typeid 
                 -- left join tblgallery as g on p.pid = g.pid
-                WHERE p.p_status = 1  AND p.level <> 1 AND p.level <> 2 ORDER BY p.create_date desc,p.pid desc ";
+                WHERE p.p_status = 1  AND p.level <> 1 ORDER BY p.create_date desc,p.pid desc ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
         $this->pagination->initialize($config);
@@ -76,10 +76,11 @@ class Site extends CI_Controller {
         $data['profile'] = $this->site->getSiteprofile();
         $data['detail'] = $this->site->getPropertyByID($pid);
         $data['image'] = $this->site->getImageByID($pid);
+        $data['imagelimit'] = $this->site->getImageLimitByID($pid);
         $data['type'] = $this->site->getPropertyType();
         $data['location'] = $this->site->getPropertyLocation();
         $this->site->updateHit($pid);
-        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/contain/headerdetail',array_merge($datas,$data));
         $this->load->view('site/detail',$data);
         $this->load->view('site/contain/footer',$datas);
     }

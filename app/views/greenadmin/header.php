@@ -143,6 +143,7 @@
 
 		<script src="<?php echo base_url();?>ckeditor/ckeditor.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 		<script src="<?php echo base_url();?>assets/js/fileinput.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+		<script src="<?php echo base_url('assets/js/canvasjs.min.js')?>"></script>
 	</head>	
 	
 	<body data-color="grey" class="flat">
@@ -273,9 +274,9 @@
 	        </div>
 
 			<div id="sidebar">
-				<div id="search">
+				<!-- <div id="search">
 					<input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="fa fa-search"></i></button>
-				</div>	
+				</div> -->	
 				<ul>
 					<li class="hide"><a href="<?php echo site_url("sys/dashboard") ?>"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
 					<?php echo $menu ?>

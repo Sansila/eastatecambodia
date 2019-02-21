@@ -207,6 +207,9 @@ class user extends CI_Controller {
 		$schlevel=$this->input->post('schlevelid');
 		$count=$this->user->getuservalidate($username,$email);
 		$store=$this->input->post('cbostore');
+		$phone=$this->input->post('txtphone');
+		$gender=$this->input->post('gender');
+		$address=$this->input->post('address');
 		//print_r($store);
 		if($count!=0){
 			$data1['error']='This username and your email has been created before Please choose other username ';
@@ -226,8 +229,10 @@ class user extends CI_Controller {
 					'user_name'=>$username,
 					'password'=>$pwd,
 					'email'=>$email,
-					
+					'phone'=>$phone,
+					'gender'=>$gender,
 					'roleid'=>$role,
+					'address'=>$address,
 					'created_date'=>$creat_date,
 					'is_admin'=>$admin,
 					'is_active'=>1
@@ -256,6 +261,9 @@ class user extends CI_Controller {
 		$email=$this->input->post('txtemail');
 		$role=$this->input->post('cborole');
 		$store=$this->input->post('cbostore');
+		$phone=$this->input->post('txtphone');
+		$gender=$this->input->post('gender');
+		$address=$this->input->post('address');
 		$count=$this->user->getuservalidateup($username,$email,$userid);
 		if($count!=0){
 			$data1['query']=$this->user->getuserrow($userid);
@@ -278,6 +286,9 @@ class user extends CI_Controller {
 					'last_name'=>$l_name,
 					'user_name'=>$username,
 					'email'=>$email,
+					'phone'=>$phone,
+					'gender'=>$gender,
+					'address'=>$address,
 					'password'=>$pwd,
 					'roleid'=>$role,
 					'is_admin'=>$admin,
@@ -289,6 +300,9 @@ class user extends CI_Controller {
 					'last_name'=>$l_name,
 					'user_name'=>$username,
 					'email'=>$email,
+					'phone'=>$phone,
+					'gender'=>$gender,
+					'address'=>$address,
 					'roleid'=>$role,
 					'is_admin'=>$admin,
 					'is_active'=>1

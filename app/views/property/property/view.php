@@ -113,7 +113,23 @@
 												?>
 											</select>
 										</th>
-										<th ></th>
+										<th>
+											<select class="form-control" id="pro_level"> 
+		                                        <option value="0">Please Select</option>
+		                                        <option value="1">Hot</option>
+		                                      	<option value="2">Sponsored</option>
+		                                        <option value="3">Free</option>
+		                                    </select>
+		                                </th>
+										<th>
+											<select class="form-control" id="relative_owner">
+		                                        <option value="0">Please Select</option>
+		                                        <option value="1">I am the owner</option>
+		                                        <option value="2">I know owner directly</option>
+		                                        <option value="3">I do not know owner</option>
+		                                    </select>
+										</th>
+										<th></th>
 										<th >
 											<select class="form-control" id="pro_status" onchange="getdata(1);">
 												<option value="">-select-</option>
@@ -141,10 +157,17 @@
 									
 									<select id='perpage' onchange='getdata(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
 										<?PHP
-										for ($i=10; $i < 500; $i+=10) { 
-											echo "<option value='$i'>$i</option>";
-										}
+											$j = 1; $num = 0; $all = 500;
+											$count = $this->db->query("SELECT * FROM tblproperty")->result();
+											foreach ($count as $key) {
+												$num = $j++;
+											}
+											$all = $num + $all;
+											for ($i=10; $i < $all; $i+=10) { 
+												echo "<option value='$i'>$i</option>";
+											}
 										 ?>
+										 
 									</select> 
 								</label>
 							</div>
@@ -290,6 +313,8 @@
 			var p_status = $("#pro_status").val();
 			var pro_loc = $("#pro_loc").val();
 			var search_date = $("#search_date").val();
+			var level = $('#pro_level').val();
+			var owner = $('#relative_owner').val();
           	
           	var perpage=$('#perpage').val();
 			$.ajax({
@@ -307,7 +332,9 @@
 							'user_add' : user,
 							'p_status': p_status,
 							'pro_loc': pro_loc,
-							'date': search_date
+							'date': search_date,
+							'level': level,
+							'owner': owner
 		            	},
 		            success:function(data) {
 		              $(".list").html(data.data); console.log(data);
