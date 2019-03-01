@@ -42,23 +42,23 @@
 	 ?>
 
 			<div id="content-header" class="mini">
-				<h1>Dashboard</h1>
+				<h1><?php echo $this->lang->line('dashboard')?></h1>
 				<ul class="mini-stats box-3">
 					<a>
 						<li class="InactivePro">
-							<div class="left sparkline_bar_good"><span>Inactive Post Properties</span></div>
+							<div class="left sparkline_bar_good"><span><?php echo $this->lang->line('inactive_post')?></span></div>
 							<div class="right">
 								<strong><?php echo $count_property;?></strong>
-								Properties
+								<?php echo $this->lang->line('property')?>
 							</div>
 						</li>
 					</a>
 					<a>
 						<li class="InactiveUser">
-							<div class="left sparkline_bar_good"><span>Inactive Join Us</span></div>
+							<div class="left sparkline_bar_good"><span><?php echo $this->lang->line('inactive_join')?></span></div>
 							<div class="right">
 								<strong><?php echo $count_inactive_user;?></strong>
-								Users
+								<?php echo $this->lang->line('user')?>
 							</div>
 						</li>
 					</a>
@@ -97,8 +97,8 @@
  	?>
  	<div class="List_property">
 		<div id="breadcrumb">
-		      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-		      <a href='#' class="current">Propert list : <?php echo $this->pro->countAllUnaproveProperty();?> records</a>
+		      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+		      <a href='#' class="current"><?php echo $this->lang->line('property_list')?> : <?php echo $this->pro->countAllUnaproveProperty();?> <?php echo $this->lang->line('record')?></a>
 		</div>
 		<div class="wrapper">
 			<div class="clearfix" id="main_content_outer">
@@ -115,7 +115,7 @@
 									<span class="icon">
 										<i class="fa fa-th"></i>
 									</span>
-										<h5>Records</h5>
+										<h5><?php echo $this->lang->line('record');?></h5>
 									<div style="text-align: right; width:130px; float:right">
 							      			      		
 							      	</div> 			    
@@ -195,7 +195,7 @@
 							</div>
 							<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
 									<div class='col-sm-3'>
-										<label>Show 
+										<label><?php echo $this->lang->line('show')?> 
 											
 											<select id='perpage' onchange='getdata(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
 												<?PHP

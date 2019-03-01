@@ -76,7 +76,14 @@ h3{
               if($this->green->gAction("C")){
               ?>
                     <div class="col-sm-4">
-                      <a href="<?php echo site_url($page->link).'?m='.$page->moduleid.'&p='.$page->pageid?>" type="button" class="<?php echo $class?>"><?php echo $page->page_name;?></a>
+                      <a href="<?php echo site_url($page->link).'?m='.$page->moduleid.'&p='.$page->pageid?>" type="button" class="<?php echo $class?>">
+                        <?php 
+                          if($this->session->userdata('site_lang') == "khmer")
+                            echo $page->page_namekh;
+                          else
+                            echo $page->page_name; 
+                        ?>
+                        </a>
                     </div>
               <?php
               }
@@ -85,7 +92,14 @@ h3{
               if($this->green->gAction("R")){
             ?>
                 <div class="col-sm-4">
-                  <a href="<?php echo site_url($page->link).'?m='.$page->moduleid.'&p='.$page->pageid?>" type="button" class="<?php echo $class?>"><?php echo 'View '.$page->page_name;?></a>
+                  <a href="<?php echo site_url($page->link).'?m='.$page->moduleid.'&p='.$page->pageid?>" type="button" class="<?php echo $class?>">
+                      <?php 
+                          if($this->session->userdata('site_lang') == "khmer")
+                            echo 'View '.$page->page_namekh;
+                          else
+                            echo $page->page_name; 
+                        ?>
+                    </a>
                 </div>
             <?php
             }
@@ -107,27 +121,27 @@ h3{
     </div>
     <div class="row">
       <div class="col-sm-6">
-        <h3 style="padding-left: 15px;">Property Analysis By Sale</h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('chart_sale')?></h3>
         <div id="chartdiv"></div>
       </div>
       <div class="col-sm-6">
-        <h3 style="padding-left: 15px;">Property Analysis By Rent</h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('chart_rent')?></h3>
         <div id="chartdivb"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
-        <h3 style="padding-left: 15px;">Property Analysis By Rent and Sale</h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('chart_sale_rent')?></h3>
         <div id="chartdivs"></div>
       </div>
       <div class="col-sm-6">
-        <h3 style="padding-left: 15px;">Property Analysis By All Category</h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('chart_cat')?></h3>
         <div id="chartdivcat"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <h3 style="padding-left: 15px;">Property Analysis By Location</h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('chart_loc')?></h3>
         <div id="chartdivloc"></div>
       </div>
     </div>

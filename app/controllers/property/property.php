@@ -3,6 +3,7 @@
 class Property extends CI_Controller {
 	
 	protected $thead;
+	protected $theadkh;
 	protected $idfield;
 	protected $searchrow;	
 	function __construct(){
@@ -23,14 +24,31 @@ class Property extends CI_Controller {
 							"Visibled"=>'visibled',
 							"Action"=>'Action'							 	
 							);
+		$this->theadkh=array("លេខរាង"=>'លេខរាង',
+							"ថ្ងៃខែ"=>"ថ្ងៃខែ",
+							"ឈ្មោះអ្នកប្រើ" => 'ឈ្មោះអ្នកប្រើ',
+							"លេខរាងអចនទ្រព្យ"=>'លេខរាងអចនទ្រព្យ',
+							"ឈ្មោះអចនទ្រព្យ"=>'ឈ្មោះអចនទ្រព្យ',
+							"ប្រភេទអចនទ្រព្យ"=> "ប្រភេទអចនទ្រព្យ",
+							"ទីតាំង"=> "ទីតាំង",
+							"កម្រិត" => "កម្រិត",
+							"ម្ចាស់អចលនៈទ្រព្យ" => "ម្ចាស់អចលនៈទ្រព្យ",
+							"មើល" => "មើល",
+							"ប្រភេទ" => "ប្រភេទ",
+							"បង្ហាញ"=>'បង្ហាញ',
+							"កំណត់"=>'កំណត់'							 	
+							);
 		$this->idfield="categoryid";
 		
 	}
 	
 	function index()
 	{
-		$data['idfield']=$this->idfield;		
-		$data['thead']=	$this->thead;
+		$data['idfield']=$this->idfield;
+		if($this->session->userdata('site_lang')=="khmer")
+			$data['thead']=	$this->theadkh;
+		else	
+			$data['thead']=	$this->thead;
 		$data['page_header']="List Property";
 
 		$this->parser->parse('greenadmin/header', $data);

@@ -31,7 +31,7 @@ a{
 </style>
 
 <div id="content-header" class="mini">
-  <h1>New Property Category</h1>
+  <h1><?php echo $this->lang->line('pc_header')?></h1>
   <ul class="mini-stats box-3">
 
   </ul>
@@ -40,9 +40,9 @@ a{
   <?php 
     $roleid=$this->session->userdata('roleid'); 
   ?>
-  <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-  <a href="<?php echo base_url("property/propertytype/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Property Type</a>
-  <a href='#' class="current"><?php if(isset($row->typeid)) echo 'Edit Property Type'; else echo 'New Property Type';?></a>
+  <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+  <a href="<?php echo base_url("property/propertytype/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom"><?php echo $this->lang->line('pc_header')?></a>
+  <a href='#' class="current"><?php if(isset($row->typeid)) echo 'Edit Property Type'; else echo $this->lang->line('pc_header');?></a>
 </div>
 <div class="col-sm-6" style="text-align: center">
   <strong>
@@ -58,7 +58,7 @@ a{
           <span class="icon">
             <i class="fa fa-align-justify"></i>                 
           </span>
-          <h5>Property Type</h5>
+          <h5><?php echo $this->lang->line('pc_header');?></h5>
           <h5 class="result_text" style='color:red;'></h5>
         </div>
 
@@ -66,7 +66,7 @@ a{
             <form enctype="multipart/form-data" name="basic_validate" id="basic_validate" method="POST" action="" class="form-horizontal basic_validate">
 
                         <div class="form-group">
-                          <label class='col-lg-2 control-label'>Property Type Name</label>
+                          <label class='col-lg-2 control-label'><?php echo $this->lang->line('pc_name')?></label>
                           <div class="col-lg-5"> 
                             <div class="col-md-12">
                               <input type="text"  class="form-control input-sm required" name="protype_name" value='<?php echo isset($row->typename)?$row->typename:""; ?>' id="protype_name">
@@ -75,7 +75,7 @@ a{
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class='col-lg-2 control-label'>Addon Menu</label>
+                          <label class='col-lg-2 control-label'><?php echo $this->lang->line('pc_addon')?></label>
                           <div class="col-lg-5"> 
                             <div class="col-md-12">
                               <select class="form-control" id="id_menu">
@@ -97,7 +97,7 @@ a{
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class='col-lg-2 control-label'>Note</label>
+                          <label class='col-lg-2 control-label'><?php echo $this->lang->line('pc_note')?></label>
                           <div class="col-lg-5"> 
                             <div class="col-md-12">
                               <input type="text"  class="form-control input-sm" name="protype_note" value='<?php echo isset($row->type_note)?$row->type_note:""; ?>' id="protype_note">
@@ -106,7 +106,7 @@ a{
 
                         </div>
                        <div class="form-group">
-                        <label class='col-lg-2 control-label'>Is Active</label>
+                        <label class='col-lg-2 control-label'><?php echo $this->lang->line('pc_active')?></label>
                         <div class=" col-lg-3"> 
                           <div class="col-md-2">
                             <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->type_status)){ if($row->type_status==1) echo 'checked'; }else{ echo "checked"; } ?>>
@@ -117,10 +117,10 @@ a{
                         <label class="col-lg-2 control-label"></label>                      
                         <div class="col-md-10">
                           <div class="col-lg-1">
-                            <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
+                            <button id="save" name="save" type="submit" class="btn btn-primary"><?php echo $this->lang->line('pc_save')?></button>
                           </div>
                           <div class="col-lg-1">
-                            <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button>
+                            <button id="cancel" name="cancel" type="button" class="btn btn-danger"><?php echo $this->lang->line('pc_cancel')?></button>
                           </div>
                         </div>
                       </div>

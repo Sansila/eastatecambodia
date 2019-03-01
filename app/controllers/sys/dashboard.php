@@ -1,24 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-
-
 class Dashboard extends CI_Controller {
-
-	
-
 	protected $thead;
-
+	protected $theadkh;
 	protected $idfield;
-
 	protected $searchrow;	
 
 	function __construct(){
 		parent::__construct();
-		$this->load->library('pagination');			
+		$this->load->library('pagination');	
+		$this->load->library('session');		
 		$this->load->model('sys/ModDashBoard','dash');		
 		$this->load->model("property/modproperty","pro");
 		$this->load->model('setting/usermodel','user');
 		$this->load->model('setting/rolemodel','role');
+
 		$this->thead=array("No"=>'no',
 							"Date"=>"Date",
 							"User Name"=>'User Name',
@@ -31,6 +26,18 @@ class Dashboard extends CI_Controller {
 							"Visibled"=>'visibled',
 							"Action"=>'Action'							 	
 							);
+		$this->theadkh=array("លេខរាង"=>'លេខរាង',
+							"ថ្ងៃខែ"=>"ថ្ងៃខែ",
+							"ឈ្មោះអ្នកប្រើ"=>'ឈ្មោះអ្នកប្រើ',
+							"លេខរាងអចនទ្រព្យ"=>'លេខរាងអចនទ្រព្យ',
+							"ឈ្មោះអចនទ្រព្យ"=>'ឈ្មោះអចនទ្រព្យ',
+							"ប្រភេទ"=> "ប្រភេទ",
+							"តំបន់"=> "តំបន់",
+							"មើល" => "មើល",
+							"ប្រភេទ" => "ប្រភេទ",
+							"បង្ហាញ"=>'បង្ហាញ',
+							"កំណត់"=>'កំណត់'							 	
+							);
 		$this->idfield="categoryid";
 
 	}
@@ -40,8 +47,15 @@ class Dashboard extends CI_Controller {
 		$s_date=date('Y-m-d',strtotime("-3 months"));
 		$e_date=date('Y-m-d');
 		$data['data']="";		
-		$data['idfield']=$this->idfield;		
-		$data['thead']=	$this->thead;
+		$data['idfield']=$this->idfield;
+
+		if($this->session->userdata('site_lang') == "khmer"){
+			$data['thead']=	$this->theadkh;
+		}
+		else{
+			$data['thead']=	$this->thead;
+		}
+
 		$data['page_header']="Disease List";
 		$data['count_property'] = $this->dash->CountPropertyisInactive();
 		$data['count_inactive_user'] = $this->dash->CountInactiveUser();

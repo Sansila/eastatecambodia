@@ -3,6 +3,7 @@
 class Propertytype extends CI_Controller {
 	
 	protected $thead;
+	protected $theadkh;
 	protected $idfield;
 	protected $searchrow;	
 	function __construct(){
@@ -14,16 +15,24 @@ class Propertytype extends CI_Controller {
 							"Visible"=>'Visible',
 							"Action"=>'Action'							 	
 							);
+		$this->theadkh=array("លេខរាង"=>'លេខរាង',
+							"ប្រភេទអចនទ្រព្យ"=>'ប្រភេទអចនទ្រព្យ',
+							"ពិពណ៌នា"=>'Pro-type Note',
+							"បង្ហាញ"=>'បង្ហាញ',
+							"កំណត់"=>'កំណត់'							 	
+							);
 		$this->idfield="propertytype_id";
 		
 	}
 	
 	function index()
 	{
-		$data['idfield']=$this->idfield;		
-		$data['thead']=	$this->thead;
+		if($this->session->userdata('site_lang') == "khmer")
+			$data['thead']=	$this->theadkh;
+		else
+			$data['thead']=	$this->thead;
+		$data['idfield']=$this->idfield;
 		$data['page_header']="Property type List";	
-
 		$this->parser->parse('greenadmin/header', $data);
 		$this->parser->parse('property/propertytype/lists_view', $data);
 		$this->parser->parse('greenadmin/footer', $data);

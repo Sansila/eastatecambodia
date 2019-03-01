@@ -50,8 +50,8 @@ $route['store/add'] = "store/store/add";
 $route['sys'] = "sys/sys";
 $route['category.html'] = "stock/category";
 $route['site-profile'] = "sys/dashboard/site_profile";
-$route['language/(:any)'] = "LanguageSwitcher/switchLanguage/$1";
-
+$route['en'] = "LanguageSwitcher/switchLanguage/english";
+$route['kh'] = "LanguageSwitcher/switchLanguage/khmer";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */ 

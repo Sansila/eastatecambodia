@@ -2,6 +2,7 @@
 
 class SetupAds extends CI_Controller {
 	protected $thead;
+	protected $theadkh;
 	protected $idfield;
 	protected $searchrow;		
 	public function __construct(){
@@ -13,12 +14,21 @@ class SetupAds extends CI_Controller {
 							 "Location Banner"=>'category',
 							 "Action"=>'Action'							 	
 							);
+		$this->theadkh=array("លេខរាង"=>'លេខរាង',
+							"រូបភាព"=>"រូបភាព",
+							 "ឈ្មោះផ្សព្វផ្សាយ"=>'ឈ្មោះផ្សព្វផ្សាយ',
+							 "ទីតាំង​ផ្សព្វផ្សាយ"=>'ទីតាំង​ផ្សព្វផ្សាយ',
+							 "កំណត់"=>'កំណត់'							 	
+							);
 		$this->idfield="categoryid";
 	}
 	
 	public function index(){
-		$data['idfield']=$this->idfield;		
-		$data['thead']=	$this->thead;
+		$data['idfield']=$this->idfield;
+		if($this->session->userdata('site_lang') == "khmer")
+			$data['thead']=	$this->theadkh;
+		else
+			$data['thead']=	$this->thead;
 		$data['page_header']="ADS List";	
 		$this->parser->parse('greenadmin/header', $data);
 		$this->parser->parse('setup/ads_list', $data);

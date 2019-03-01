@@ -196,6 +196,7 @@
 			$arrModule=$this->getOneRow("SELECT
 											z_module.moduleid,
 											z_module.module_name,
+											z_module.module_namekh,
 											z_module.sort_mod,
 											z_module.mod_position
 											FROM
@@ -216,6 +217,7 @@
 				$arrPages=$this->getTable("SELECT
 											page.pageid,
 											page.page_name,
+											page.page_namekh,
 											page.link,
 											page.moduleid,
 											page.`order`,
@@ -265,6 +267,7 @@
 			$arrPages=$this->getOneRow("SELECT
 											page.pageid,
 											page.page_name,
+											page.page_namekh,
 											page.link,
 											page.moduleid,
 											page.`order`,

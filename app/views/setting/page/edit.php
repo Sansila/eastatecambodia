@@ -40,6 +40,11 @@
 								</td>
 							</tr>
 							<tr>
+								<td><label for="emailField">Page Name kh</label></td>
+								<td> : </td>
+								<td><input value="<?php echo $query->page_namekh; ?>" type='text' class="form-control" name='txtp_namekh' id='txtp_namekh' required data-parsley-required-message="Enter Page Name Khmer" placeholder="Place Page name khmer"/>
+							</tr>
+							<tr>
 								<td><label for="emailField">Page Link</label></td>
 								<td> : </td>
 								<td><input type='text' class="form-control" value='<?php echo $query->link; ?>' name='txtp_link' id='txtp_link' required data-parsley-required-message="Enter Page Link" placeholder="Place Menu Link "/></td>

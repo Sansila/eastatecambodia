@@ -37,7 +37,7 @@
 	$userid = $this->session->userdata('userid');
  ?>
  <div id="content-header" class="mini">
-        <h1>PROPERTY LIST</h1>
+        <h1><?php echo $this->lang->line('p_header_list')?></h1>
         <ul class="mini-stats box-3">
             
         </ul>
@@ -46,8 +46,8 @@
  	  <?php 
         $roleid=$this->session->userdata('roleid'); 
       ?>
-      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-      <a href='#' class="current">Propert list : <?php echo $this->pro->countAllproperty($userid);?> records</a>
+      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+      <a href='#' class="current"><?php echo $this->lang->line('p_header_list')?> : <?php echo $this->pro->countAllproperty($userid);?> <?php echo $this->lang->line('record')?></a>
  </div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
@@ -64,7 +64,7 @@
 							<span class="icon">
 								<i class="fa fa-th"></i>
 							</span>
-								<h5>Records</h5>
+								<h5><?php echo $this->lang->line('record')?></h5>
 							<div style="text-align: right; width:130px; float:right">
 					      			      		
 					      	</div> 			    
@@ -162,7 +162,7 @@
 					</div>
 					<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
 							<div class='col-sm-3'>
-								<label>Show 
+								<label><?php echo $this->lang->line('show')?> 
 									
 									<select id='perpage' onchange='getdata(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
 										<?PHP

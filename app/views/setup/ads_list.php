@@ -32,12 +32,12 @@
 	}
 ?>
 <div id="content-header" class="mini">
-	<h1>Banner LIST</h1>
+	<h1><?php echo $this->lang->line('b_header_list');?> </h1>
 	<ul class="mini-stats box-3"></ul>
 </div>
 <div id="breadcrumb">
-	<a href="<?php echo base_url('index.php/system/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-	<a href='#' class="current">Banner</a>
+	<a href="<?php echo base_url('index.php/system/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home');?></a>
+	<a href='#' class="current"><?php echo $this->lang->line('b_header_list');?></a>
 </div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
@@ -47,7 +47,7 @@
 					<div class="widget-box table-responsive">
 						<div class="widget-title no_wrap" id='top-bar'>
 							<span class="icon"><i class="fa fa-th"></i></span>
-							<h5>Banner List</h5>
+							<h5><?php echo $this->lang->line('b_header_list');?></h5>
 							<div style="text-align: right; width:130px; float:right"></div>
 						</div>
 						<div class="widget-content nopadding" id='tap_print'>
@@ -99,7 +99,7 @@
 					</div>
 					<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
 						<div class='col-sm-3'>
-							<label>Show 
+							<label><?php echo $this->lang->line('show')?> 
 								<select id='perpage' onchange='getdata(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
 									<?php
 									for ($i=10; $i < 500; $i+=10) { 

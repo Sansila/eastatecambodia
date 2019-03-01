@@ -36,16 +36,21 @@
     	$p=$_GET['p'];
         $this->green->setActivePage($_GET['p']); 
     }          
-   
+   	
     if(count($modules)>0){
 
 		foreach ($modules as $row) {
 			$classMe='';
+			$mod = "";
             if(isset($row['mod_position']) && $row['mod_position']=='2'){
 				if(base64_decode($m)==$row['moduleid'])
 					$classMe='active open';
+					if($this->session->userdata('site_lang') == "khmer") 
+						$mod = $row['module_namekh']; 
+					else 
+						$mod = $row['module_name'];
 	    			$menu.='<li class="submenu '.$classMe.'">
-	    		                <a href="#"><i class="fa fa-flask"></i><span>'.$row['module_name'].'</span><i class="arrow fa fa-chevron-right"></i></a>';					
+	    		                <a href="#"><i class="fa fa-flask"></i><span>'.$mod.'</span><i class="arrow fa fa-chevron-right"></i></a>';					
 	    					if(count($pages)>0){
 
 	    						if(isset($pages[$row['moduleid']])){
@@ -55,14 +60,18 @@
 
 	        							$menu.='<ul class="">'; 
 	        							foreach($page_mod as $page){
-
+	        								$p = '';
 											$classSu='';
+											if($this->session->userdata('site_lang') == "khmer")
+												$p = $page['page_namekh'];
+											else
+												$p = $page['page_name'];
 	        								if(base64_decode($p)==$page['pageid'])
 												$classSu='active';
 	                                        $page_link='';
 	        								$page_link=$page['link'];
 	        								$menu.='<li class="'.$classSu.'">
-	        					                        <a href="'.site_url($page_link).'?m='.$row['moduleid'].'&p='.$page['pageid'].'"><i class="fa '.$page['icon'].' fa-fw"></i> '.$page['page_name'].'</a>
+	        					                        <a href="'.site_url($page_link).'?m='.$row['moduleid'].'&p='.$page['pageid'].'"><i class="fa '.$page['icon'].' fa-fw"></i> '.$p.'</a>
 	        					                    </li>';
 	        							}
 	        							$menu.='</ul>';							
@@ -159,90 +168,40 @@
 					else
 						$url = site_url('greenadmin/home');
 				?>
-				<h1><a href="<?php echo $url?>">Dashboard</a></h1>	
+				<h1><a href="<?php echo $url?>"><?php echo $this->lang->line('dashboard');?></a></h1>	
 				<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>	
 			</div>
 		
 			<div id="user-nav">
-	            <ul class="btn-group">	                
-	            	<li class="btn"><a href="<?php echo base_url(); ?>" target="_blank"><i class="fa fa-home"></i></a></li>
+	            <ul class="btn-group">
+	            	<li class="btn">
+	            		<a href="<?php echo base_url('en'); ?>">
+	            			<img src="<?php echo site_url('assets/img/en.png')?>"​ width="13">
+	            		</a>
+	            	</li> 
+	            	<li class="btn">
+	            		<a href="<?php echo base_url('kh'); ?>">
+	            			<img src="<?php echo site_url('assets/img/kh.png')?>"​ width="13">
+	            		</a>
+	            	</li>
 	                <li class="btn dropdown">
 	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                        <i class="fa fa-cog fa-fw"></i><span class="text">Settings</span>  <i class="fa fa-caret-down"></i>
+	                        <i class="fa fa-cog fa-fw"></i><span class="text"><?php echo $this->lang->line('setting');?></span>  <i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
 	                        <?php //if($roleid=='1'){?>
-	                        <li><a href="<?php echo site_url("setting/setting/profile")?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+	                        <li><a href="<?php echo site_url("setting/setting/profile")?>"><i class="fa fa-user fa-fw"></i>​​ ​<?php echo $this->lang->line('profile')?></a>
 	                        </li>
-	                        <li><a href="<?php echo site_url("setting/setting/changepwd")?>"><i class="fa fa-key fa-fw"></i> Change Password</a>
+	                        <li><a href="<?php echo site_url("setting/setting/changepwd")?>"><i class="fa fa-key fa-fw"></i> <?php echo $this->lang->line('ch_pwd')?></a>
 	                        </li>
 	                        <li class="divider"></li>
-	                        <li><a href="<?php echo site_url("setting/setting")?>"><i class="fa fa-gear fa-fw"></i> Settings</a>
+	                        <li><a href="<?php echo site_url("setting/setting")?>"><i class="fa fa-gear fa-fw"></i> <?php echo $this->lang->line('setting');?></a>
 	                        </li>
 	                        <?php //}?>	                        
 	                    </ul>
 	                    <!-- /.dropdown-user -->
-	                </li>
-
-	                <li class="btn dropdown hide" id="menu-messages">
-	                	<a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle">
-	                		<i class="fa fa-envelope"></i> <span class="text">Messages</span> 
-	                		<span class="label label-danger">5</span> <b class="caret"></b>
-	                	</a>
-	                    <ul class="dropdown-menu messages-menu">
-	                        <li class="title">
-	                        	<i class="fa fa-envelope-alt"></i>Messages<a class="title-btn" href="#" title="Write new message"><i class="fa fa-share"></i></a></li>
-	                        <li class="message-item">
-	                        	<a href="#">
-		                            <!-- <img alt="User Icon" src="img/demo/av1.jpg" /> -->
-		                            <div class="message-content">
-		                            	<span class="message-time">
-			                                3 mins ago
-			                            </span>
-		                                <span class="message-sender">
-		                                    Nunc Cenenatis
-		                                </span>
-		                                <span class="message">
-		                                    Hi, can you meet me at the office tomorrow morning?
-		                                </span>
-		                            </div>
-	                        	</a>
-	                        </li>
-	                        <li class="message-item">
-								<a href="#">
-		                            <!-- <img alt="User Icon" src="img/demo/av1.jpg" /> -->
-		                            <div class="message-content">
-		                            	<span class="message-time">
-			                                3 mins ago
-			                            </span>
-		                                <span class="message-sender">
-		                                    Nunc Cenenatis
-		                                </span>
-		                                <span class="message">
-		                                    Hi, can you meet me at the office tomorrow morning?
-		                                </span>
-		                            </div>
-	                        	</a>
-	                        </li>
-	                        <li class="message-item">
-								<a href="#">
-		                            <!-- <img alt="User Icon" src="img/demo/av1.jpg" /> -->
-		                            <div class="message-content">
-		                            	<span class="message-time">
-			                                3 mins ago
-			                            </span>
-		                                <span class="message-sender">
-		                                    Nunc Cenenatis
-		                                </span>
-		                                <span class="message">
-		                                    Hi, can you meet me at the office tomorrow morning?
-		                                </span>
-		                            </div>
-	                        	</a>
-	                        </li>
-	                    </ul>
 	                </li>	                
-	                <li class="btn"><a title="" href="<?php echo site_url("greenadmin/login/logOut") ?>"><i class="fa fa-share"></i> <span class="text">Logout</span></a></li>	            </ul>
+	                <li class="btn"><a title="" href="<?php echo site_url("greenadmin/login/logOut") ?>"><i class="fa fa-share"></i> <span class="text"><?php echo $this->lang->line('logout');?></span></a></li>	            </ul>
 	        </div>
 	       
 	       <div id="switcher">
@@ -288,7 +247,12 @@
 					<input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="fa fa-search"></i></button>
 				</div> -->	
 				<ul>
-					<li class="hide"><a href="<?php echo site_url("sys/dashboard") ?>"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+					<li class="hide">
+						<a href="<?php echo site_url("sys/dashboard") ?>">
+							<i class="fa fa-home"></i> 
+							<span>Dashboard</span>
+						</a>
+					</li>
 					<?php echo $menu ?>
 				</ul>			
 			</div>			

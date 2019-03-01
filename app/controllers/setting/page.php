@@ -101,6 +101,7 @@ class page extends CI_Controller {
 			$max_order=$this->green->getValue("SELECT MAX(`order`)+1 orders FROM z_page WHERE moduleid='".$this->input->post('cbomodule')."'");
 			$data=array(
 					'page_name'=>$this->input->post('txtp_name'),
+					'page_namekh'=>$this->input->post('txtp_namekh'),
 					'link'=>$this->input->post('txtp_link'),
 					'moduleid'=>$this->input->post('cbomodule'),
 					'is_insert'=>$is_insert,
@@ -153,6 +154,7 @@ class page extends CI_Controller {
 			
 			$data=array(
 					'page_name'=>$this->input->post('txtp_name'),
+					'page_namekh'=>$this->input->post('txtp_namekh'),
 					'link'=>$this->input->post('txtp_link'),
 					'moduleid'=>$this->input->post('cbomodule'),
 					'is_insert'=>$is_insert,

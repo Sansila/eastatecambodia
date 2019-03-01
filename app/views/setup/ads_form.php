@@ -33,15 +33,15 @@
 </style>
 
     <div id="content-header" class="mini">
-        <h1>NEW BANNER</h1>
+        <h1><?php echo $this->lang->line('b_header')?></h1>
         <ul class="mini-stats box-3">
             
         </ul>
     </div>  
     <div id="breadcrumb">
-      <a href="<?php echo base_url('index.php/system/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-      <a href="<?php echo base_url("index.php/Setup/setupads/index?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Banner</a>
-      <a href='#' class="current"><?php if(isset($data->adsid)) echo 'Edit Banner'; else echo 'New Banner';?></a>
+      <a href="<?php echo base_url('index.php/system/dashboard')?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+      <a href="<?php echo base_url("index.php/Setup/setupads/index?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom"><?php echo $this->lang->line('b_header')?></a>
+      <a href='#' class="current"><?php if(isset($data->adsid)) echo 'Edit Banner'; else echo $this->lang->line('b_header');?></a>
     </div>
     <div class="col-sm-6" style="text-align: center">
         <strong>
@@ -57,7 +57,7 @@
                 <span class="icon">
                   <i class="fa fa-align-justify"></i>                 
                 </span>
-                <h5>Banner Detail.</h5>
+                <h5><?php echo $this->lang->line('b_header')?></h5>
                 <h5 class="result_text" style='color:red;'></h5>
             </div>
 
@@ -66,7 +66,7 @@
                     
                         
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Banner Title</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('b_name')?></label>
                             <div class=" col-lg-3"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm required" name="banner_title" value='<?php echo isset($data->title)?$data->title:""; ?>' id="banner_title">
@@ -74,7 +74,7 @@
                                 </div>                   
                             </div>
                             
-                            <label class='col-lg-2 control-label'>Banner Location</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('b_loc')?></label>
                             <div class=" col-lg-3"> 
                                 <div class="col-md-12">
                                     <select id='location_id' class='form-control'>
@@ -107,7 +107,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Orders</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('b_order')?></label>
                             <div class=" col-lg-3"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="orders" value='<?php echo isset($data->orders)?$data->orders:""; ?>' id="orders">
@@ -116,13 +116,13 @@
                         </div>
                        
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Link</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('b_link')?></label>
                             <div class=" col-lg-3"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="link" value='<?php echo isset($data->link)?$data->link:""; ?>' id="link">
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'>Images</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('b_image')?></label>
                             <div class="col-lg-3"> 
                                 <div class="col-md-10">
                                     <img  onclick="$('#uploadImage').click();" src="<?php echo $image_part?>" id="uploadPreview" style='width:100%; border:solid 1px #CCCCCC; padding:3px;'>
@@ -136,10 +136,10 @@
                             <label class="col-lg-2 control-label"></label>                      
                             <div class="col-md-10">
                                 <div class="col-lg-1">
-                                    <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
+                                    <button id="save" name="save" type="submit" class="btn btn-primary"><?php echo $this->lang->line('b_save')?></button>
                                 </div>
                                 <div class="col-lg-1">
-                                    <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button>
+                                    <button id="cancel" name="cancel" type="button" class="btn btn-danger"><?php echo $this->lang->line('b_cancel')?></button>
                                 </div>
                             </div>
                         </div>

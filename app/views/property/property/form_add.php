@@ -34,7 +34,7 @@
 </style>
 
     <div id="content-header" class="mini">
-        <h1>New Property</h1>
+        <h1><?php echo $this->lang->line('p_header')?></h1>
         <ul class="mini-stats box-3">
         </ul>
     </div>  
@@ -42,9 +42,9 @@
       <?php 
         $roleid=$this->session->userdata('roleid'); 
       ?>
-      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo ""; ?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-      <a href="<?php echo base_url("property/property/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Property</a>
-      <a href='#' class="current"><?php if(isset($row->article_id)) echo 'Edit Property'; else echo 'New Property';?></a>
+      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo ""; ?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+      <a href="<?php echo base_url("property/property/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom"><?php echo $this->lang->line('p_header')?></a>
+      <a href='#' class="current"><?php if(isset($row->article_id)) echo 'Edit Property'; else echo $this->lang->line('p_header');?></a>
     </div>
     <div class="col-sm-6" style="text-align: center">
         <strong>
@@ -60,7 +60,7 @@
                 <span class="icon">
                   <i class="fa fa-align-justify"></i>                 
                 </span>
-                <h5>Article Detail.</h5>
+                <h5><?php echo $this->lang->line('p_header')?></h5>
                 <h5 class="result_text" style='color:red;'></h5>
             </div>
 
@@ -78,14 +78,14 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                           <div class="card-body">
                             <div class="form-group">
-                            <label class='col-lg-2 control-label'>Property Title</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_name')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm required" name="property_name" value='<?php echo isset($row->property_name)?"$row->property_name":""; ?>' id="property_name">
                                     <input type="text"  class="form-control input-sm hide" name="property_id" value='<?php echo isset($row->pid)?$row->pid:""; ?>' id="property_id">
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'>Categories</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_cat')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control input-sm required" required="" name="category_id" id="category_id">
@@ -106,7 +106,7 @@
                             
                         </div>
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Agent Name</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_agent')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="agent_id">
@@ -134,7 +134,7 @@
                                     </select>
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'>Property Type</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_type')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control input-sm required" name="property_type" id="property_type">
@@ -149,14 +149,14 @@
                         </div>
                          
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Price</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_price')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="price" value='<?php echo isset($row->price)?"$row->price":"" ?>' id="price">
                                 </div>                   
                             </div>
                             
-                            <label class='col-lg-2 control-label'>Size(House & Land)</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_size')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="house_size" value='<?php echo isset($row->housesize)?"$row->housesize":""; ?>' id="house_size">
@@ -166,7 +166,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Location(auto select)</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_loc')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control select2-single input-sm required" id="location_id" name="location_id">
@@ -186,7 +186,7 @@
                                     </select>
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'>Address</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_address')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <textarea class="form-control" id="address" style="margin: 0px; width: 100%; height: 75px; resize: none;"><?php echo isset($row->address)?"$row->address":""; ?></textarea>
@@ -196,7 +196,7 @@
 
                         <div class="form-group">
                             
-                            <label class='col-lg-2 control-label'>Property Level</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_level')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="pro_level">    
@@ -214,16 +214,16 @@
                                             {
                                         ?>
                                             <option value="0">Please Select</option>
-                                            <option <?php echo $sel;?> value="1">Hot</option>
-                                            <option <?php echo $sel1;?> value="2">Sponsored</option>
+                                            <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_hot')?></option>
+                                            <option <?php echo $sel1;?> value="2"><?php echo $this->lang->line('p_spon')?></option>
                                         <?php 
                                             }
                                         ?>
-                                        <option <?php echo $sel2;?> value="3">Free</option>
+                                        <option <?php echo $sel2;?> value="3"><?php echo $this->lang->line('p_free')?></option>
                                     </select>
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'>Owner Relation</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_owner')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="relative_owner">
@@ -237,16 +237,16 @@
                                                 $sel2 ="selected";
                                         ?>
                                         <option value="0">Please Select</option>
-                                        <option <?php echo $sel;?> value="1">I am the owner</option>
-                                        <option <?php echo $sel1;?> value="2">I know owner directly</option>
-                                        <option <?php echo $sel2;?> value="3">I do not know owner</option>
+                                        <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_amo')?></option>
+                                        <option <?php echo $sel1;?> value="2"><?php echo $this->lang->line('p_owd')?></option>
+                                        <option <?php echo $sel2;?> value="3"><?php echo $this->lang->line('p_dko')?></option>
                                     </select>
                                 </div>                   
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Content</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_content')?></label>
                             <div class=" col-lg-10"> 
                                 <div class="col-md-12">
                                     <!-- <div class="tabbable inline">
@@ -276,7 +276,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Map</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_map')?></label>
                             <div class="col-lg-10"> 
                                 <div class="col-md-12">
                                     <div id="map_canvas" style="height: 500px;"></div>
@@ -285,13 +285,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Latitude</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_lat')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="latitude" value='<?php echo isset($row->latitude)?"$row->latitude":""; ?>' id="latitude">
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'>Longtitude</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_long')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="longtitude" value='<?php echo isset($row->longtitude)?"$row->longtitude":""; ?>' id="longtitude">
@@ -300,7 +300,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'>Images</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_image')?></label>
                             <div class=" col-lg-12"> 
                                 <div class="col-md-12">
                                     <?php
@@ -356,14 +356,14 @@
                         <div class="card-header" id="headingTwo">
                           <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              <p><b><span style="color:red; padding-left: 20px;">Add More Info</span></b></p>
+                              <p><b><span style="color:red; padding-left: 20px;"><?php echo $this->lang->line('p_moreinfo')?></span></b></p>
                             </button>
                           </h5>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                           <div class="card-body">
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Floor</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_floor')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="floor" value='<?php echo isset($row->floor)?"$row->floor":""; ?>' id="floor">
@@ -379,13 +379,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Story</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_story')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="story" value='<?php echo isset($row->story)?"$row->story":""; ?>' id="story">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Pool</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_pool')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="pool" value='<?php echo isset($row->pool)?"$row->pool":""; ?>' id="pool">
@@ -395,13 +395,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Direction</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_direction')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="direction" value='<?php echo isset($row->direction)?"$row->direction":""; ?>' id="direction">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Bedroom</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_bed')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="bedroom" value='<?php echo isset($row->bedroom)?"$row->bedroom":""; ?>' id="bedroom">
@@ -410,13 +410,13 @@
                                 
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Bathroom</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_bath')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="bathroom" value='<?php echo isset($row->bathroom)?"$row->bathroom":""; ?>' id="bathroom">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Living Room</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_live')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="living_room" value='<?php echo isset($row->livingroom)?"$row->livingroom":""; ?>' id="living_room">
@@ -424,13 +424,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Kitchen</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_kit')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="kitchen" value='<?php echo isset($row->kitchen)?"$row->kitchen":""; ?>' id="kitchen">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Dining Room</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_din')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="dining_room" value='<?php echo isset($row->dinning_room)?"$row->dinning_room":""; ?>' id="dining_room">
@@ -455,13 +455,13 @@
                             </div> -->
                             
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Furniture</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_fur')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="furniture" value='<?php echo isset($row->furniture)?"$row->furniture":""; ?>' id="furniture">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Airconditioner</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_air')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="aircon" value='<?php echo isset($row->air_conditional)?"$row->air_conditional":""; ?>' id="aircon">
@@ -469,14 +469,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Parking</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_park')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="parking" value='<?php echo isset($row->parking)?"$row->parking":""; ?>' id="parking">
                                       
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Steam & Sauna</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_stem')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="st_sa" value='<?php echo isset($row->steamandsouna)?"$row->steamandsouna":""; ?>' id="st_sa">
@@ -486,13 +486,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Garden</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_garden')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="garden" value='<?php echo isset($row->garden)?"$row->garden":""; ?>' id="garden">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Balcony</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_bal')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="balcony" value='<?php echo isset($row->balcony)?"$row->balcony":""; ?>' id="balcony">
@@ -500,13 +500,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Terrace</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_terr')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="terrace" value='<?php echo isset($row->terrace)?"$row->terrace":""; ?>' id="terrace">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Elevator</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ele')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="elevator" value='<?php echo isset($row->elevator)?"$row->elevator":""; ?>' id="elevator">
@@ -514,13 +514,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Stairs</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_stairs')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="stairs" value='<?php echo isset($row->stairs)?"$row->stairs":""; ?>' id="stairs">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Title</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_title')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <select class="form-control" id="pro_title">
@@ -532,13 +532,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Contract Allowed</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_contract')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text" class="form-control input-sm" name="contract_allowed" value='<?php echo isset($row->contract)?"$row->contract":""; ?>' id="contract_allowed">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Commission</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_com')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="commission" value='<?php echo isset($row->commision)?"$row->commision":""; ?>' id="commission">
@@ -546,13 +546,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Urgent Sale</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_urg')?></label>
                                 <div class=" col-lg-4"> 
                                     <div class="col-md-2">
                                         <input type="checkbox"  class="form-control input-sm " name="urgent" id="urgent" <?php if (isset($row->urgent)){ if($row->urgent==1) echo 'checked'; }else{ echo "checked"; } ?>>
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Service Provided</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_service')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="provider" value='<?php echo isset($row->service_provided)?"$row->service_provided":""; ?>' id="provider">
@@ -560,13 +560,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Gym</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_gym')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="gym" value='<?php echo isset($row->gym)?"$row->gym":""; ?>' id="gym">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Advantage</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_adv')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="advantage" value='<?php echo isset($row->advantage)?"$row->advantage":""; ?>' id="advantage">
@@ -574,13 +574,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Email Owner</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_email')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="email_owner" value='<?php echo isset($row->email_owner)?"$row->email_owner":""; ?>' id="email_owner">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Owner Name</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_on')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="owner_name" value='<?php echo isset($row->ownername)?"$row->ownername":""; ?>' id="owner_name">
@@ -588,13 +588,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Contact Owner</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_co')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="owner_contact" value='<?php echo isset($row->contact_owner)?"$row->contact_owner":""; ?>' id="owner_contact">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>Available Property</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ap')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <select class="form-control" id="available_pro">
@@ -606,13 +606,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label class='col-lg-2 control-label'>Start Date</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_sd')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="start_date" value='<?php echo isset($row->add_date)?"$row->add_date":date('Y-m-d'); ?>' id="start_date">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'>End Date</label>
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ed')?></label>
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <input type="text"  class="form-control input-sm" name="end_date" value='<?php echo isset($row->end_date)?"$row->end_date":date('Y-m-d'); ?>' id="end_date">
@@ -631,7 +631,7 @@
                                 <?php
                                     if($this->green->gAction("C")){
                                 ?>
-                                <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 150px;">Save</button>
+                                <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 150px;"><?php echo $this->lang->line('p_save')?></button>
                                 <?php 
                                     }
                                 ?>
