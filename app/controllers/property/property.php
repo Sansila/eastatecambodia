@@ -48,6 +48,19 @@ class Property extends CI_Controller {
 	{
 		$pro_id=$this->input->post('pro_id');
 		$title=$this->input->post('property_name');
+		$location = $this->input->post('location');
+
+		$row = $this->db->query("SELECT * FROM tblpropertylocation where status = 1 AND propertylocationid = $location ")->row();
+
+		$mp = trim($row->lineage, '-');
+        $mp = explode('-', $row->lineage);
+        $i=1;
+        $store = "";
+        foreach ($mp as $m) {
+        	if($i == 1)
+        		$store.= $m;
+        	$i++;
+        }
 
 		$data = array(
 			'address'=> $this->input->post('address'),
@@ -96,7 +109,8 @@ class Property extends CI_Controller {
 			'latitude'=> $this->input->post('latitude'),
 			'longtitude'=> $this->input->post('longtitude'),
 			'pro_level' => $this->input->post('level'),
-			'relative_owner' => $this->input->post('relative_owner')
+			'relative_owner' => $this->input->post('relative_owner'),
+			'p_parent' => $store
 		);
 
 		
@@ -274,12 +288,13 @@ class Property extends CI_Controller {
 		on u.userid = pl.agent_id
 		left join tblpropertylocation l 
 		on pl.lp_id = l.propertylocationid
-		WHERE pl.p_status=1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
+		WHERE pl.p_status = 1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
 		$i=1;
-		$lim = $paging['limit'] + 10;
+		$lim = $paging['limit'];
+		//echo $lim.'/'.$paging['start'];
 		$limit=" LIMIT {$paging['start']}, {$lim}";
 		$sql.=" {$limit}";
 		$this->green->setActiveRole($this->session->userdata('roleid'));
@@ -365,6 +380,12 @@ class Property extends CI_Controller {
 				 }
 				 if($this->green->gAction("U")){
 					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/reload.png')."'/></a>";
+				 }
+				 if($this->green->gAction("U")){
+					$table.= "<a style='padding:0px 10px;' href='".site_url('site/site/detail/'.$row->pid.'/?name='.$row->property_name)."' target='_blank'><img rel=".$row->pid." src='".base_url('assets/images/icons/view.png')."'/></a>";
+				 }
+				 if($this->green->gAction("U")){
+					$table.= "<a href='".site_url('property/property/analysis/'.$row->pid)."'><img rel=".$row->pid." src='".base_url('assets/images/icons/analytics.png')."'/></a>";
 				 }
 			$table.= " </td>
 				 </tr>
@@ -544,5 +565,43 @@ class Property extends CI_Controller {
 	function delete_pro($pid)
 	{
 		$this->db->where('pid',$pid)->delete('tblproperty');
+	}
+	function analysis($id)
+	{
+		$data['page_header']="New Property";
+		$data['id'] = $id;			
+		$this->parser->parse('greenadmin/header', $data);
+		$this->parser->parse('property/property/analysis',$data);
+		$this->parser->parse('greenadmin/footer', $data);
+	}
+	function analysisperday($id)
+	{
+		$date = Date('Y-m-d');
+		$perdate = $this->db->query("SELECT date_create as 'date', count(*) as 'value'
+									FROM tblvisitor 
+									WHERE month(date_create) = month('$date')
+									AND pid = $id
+									GROUP BY date(date_create) ")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($perdate);
+	}
+	function analysisperweek($id)
+	{
+		$name = $this->db->query("SELECT property_name FROM tblproperty WHERE pid = $id ")->row()->property_name;
+		$date = Date('Y-m-d');
+		$perdate = $this->db->query("SELECT count(id) as allhit FROM tblvisitor 
+						WHERE (DATE(date_create) <= date_sub(date(NOW()), INTERVAL -1 WEEK))
+						AND pid = $id ")->row()->allhit;
+		$arr[] = array('value'=>$perdate,'country'=>$name);
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
+	}
+	function analysispermonth($id)
+	{
+		$perdate = $this->db->query("SELECT date_create as 'date',count(*) as value
+									FROM tblvisitor WHERE pid = $id
+									GROUP BY YEAR(date_create), MONTH(date_create)")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($perdate);
 	}
 }

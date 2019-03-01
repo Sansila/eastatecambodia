@@ -26,7 +26,7 @@
 								    			WHERE p.p_status = 1 {$where} AND p.type_id = $cid ")->row();
     		
             if($row->pro_count > 0){
-                $arr = array('country'=>$row->typename,'value'=>$row->pro_count);
+                $arr = array('country'=>$row->typename,'value'=>$row->pro_count,'tid'=>$row->typeid);
                return $arr;
             }
     		
@@ -53,6 +53,50 @@
                                         WHERE p_status = 1 {$where}
                                         GROUP BY p_type")->result();
             return $return;
+        }
+        function getCountStatusBySale($userid,$roleid)
+        {
+            $where = "";
+            if($roleid == 1)
+                $where.= "";
+            else
+                $where.= " AND agent_id = $userid ";
+            $query = $this->db->query("SELECT p_type,COUNT(*) as st_type, typename
+                                        FROM tblproperty 
+                                        INNER JOIN tblpropertytype
+                                        ON tblproperty.type_id = tblpropertytype.typeid
+                                        WHERE p_status = 1 AND p_type = 1 {$where}
+                                        GROUP BY type_id")->result();
+            return $query;
+        }
+        function getCountStatusByRent($userid,$roleid)
+        {
+            $where = "";
+            if($roleid == 1)
+                $where.= "";
+            else
+                $where.= " AND agent_id = $userid ";
+            $query = $this->db->query("SELECT p_type,COUNT(*) as st_type, typename
+                                        FROM tblproperty 
+                                        INNER JOIN tblpropertytype
+                                        ON tblproperty.type_id = tblpropertytype.typeid
+                                        WHERE p_status = 1 AND p_type = 2 {$where}
+                                        GROUP BY type_id")->result();
+            return $query;
+        }
+        function getCountStatusByRentAndSale($userid,$roleid){
+            $where = "";
+            if($roleid == 1)
+                $where.= "";
+            else
+                $where.= " AND agent_id = $userid ";
+            $query = $this->db->query("SELECT p_type,COUNT(*) as st_type, typename
+                                        FROM tblproperty 
+                                        INNER JOIN tblpropertytype
+                                        ON tblproperty.type_id = tblpropertytype.typeid
+                                        WHERE p_status = 1 AND p_type = 3 {$where}
+                                        GROUP BY type_id")->result();
+            return $query;
         }
     }
 ?>

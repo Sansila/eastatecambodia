@@ -11662,7 +11662,7 @@
             ce = function(t) {
                 function e() {
                     var e = t.call(this) || this;
-                    e.className = "AmChartsLogo", e.valign = "bottom";
+                    //e.className = "AmChartsLogo", e.valign = "bottom";
                     var i = .3;
                     e.opacity = 0; //e.defaultState.properties.opacity = 0, e.url = "https://www.amcharts.com/", e.urlTarget = "_blank", e.showSystemTooltip = !0, e.readerTitle = "Chart created using amCharts library", e.width = 66, e.height = 21, e.background.opacity = 0;
                     var n = Object(Bt.c)("#474758");

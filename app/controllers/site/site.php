@@ -1065,5 +1065,31 @@ class Site extends CI_Controller {
         else
             redirect('site/site/join?m=error', 'refresh');
     }
+    function saveipaddress()
+    {
+        $data = array(
+            "ip" => $this->input->post('ip'),
+            "city" => $this->input->post('city'),
+            "region" => $this->input->post('region'),
+            "region_code" => $this->input->post('region_code'),
+            "country" => $this->input->post('country'),
+            "country_name" => $this->input->post('country_name'),
+            "continent_code" => $this->input->post('continent_code'),
+            "in_eu" => $this->input->post('in_eu'),
+            "postal" => $this->input->post('postal'),
+            "latitude" => $this->input->post('latitude'),
+            "longitude" => $this->input->post('longitude'),
+            "timezone" => $this->input->post('timezone'),
+            "utc_offset" => $this->input->post('utc_offset'),
+            "country_calling_code" => $this->input->post('country_calling_code'),
+            "currency" => $this->input->post('currency'),
+            "languages" => $this->input->post('languages'),
+            "asn" => $this->input->post('asn'),
+            "org" => $this->input->post('org'),
+            "pid" => $this->input->post('pid'),
+            "date_create" => Date('y-m-d')
+        );
+        $this->db->insert('tblvisitor',$data);
+    }
 }
 ?>

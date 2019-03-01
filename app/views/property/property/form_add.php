@@ -137,8 +137,8 @@
                             <label class='col-lg-2 control-label'>Property Type</label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
-                                    <select class="form-control" id="property_type">
-                                        <option value="0">Please Select</option>
+                                    <select class="form-control input-sm required" name="property_type" id="property_type">
+                                        <option value="">Please Select</option>
                                         <option value="1" <?php if(isset($row->p_type)){ if($row->p_type == 1) echo "selected"; }?> >Sale</option>
                                         <option value="2" <?php if(isset($row->p_type)){ if($row->p_type == 2) echo "selected"; }?> >Rent</option>
                                         <option value="3" <?php if(isset($row->p_type)){ if($row->p_type == 3) echo "selected"; }?> >Sale & Rent</option>
@@ -169,8 +169,8 @@
                             <label class='col-lg-2 control-label'>Location(auto select)</label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
-                                    <select class="form-control select2-single" id="location_id">
-                                        <option value="0">Please Select</option>
+                                    <select class="form-control select2-single input-sm required" id="location_id" name="location_id">
+                                        <option value="">Please Select</option>
                                         <?php
                                             $location=$this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc")->result();
                                             foreach ($location as $menu) {
@@ -628,7 +628,13 @@
                         <!-- <label class="col-lg-2 control-label"></label>                       -->
                         <div class="col-md-12">
                             <div class="col-lg-3">
-                              <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 150px;">Save</button>
+                                <?php
+                                    if($this->green->gAction("C")){
+                                ?>
+                                <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 150px;">Save</button>
+                                <?php 
+                                    }
+                                ?>
                             </div>
                             <div class="col-lg-1">
                               <!-- <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button> -->
@@ -783,7 +789,13 @@
           },
           category_id:{
             required:true
-          }
+          },
+          property_type:{
+            required:true
+          },
+          location_id:{
+            required:true
+          },
         },
         errorClass: "help-inline",
         errorElement: "span",

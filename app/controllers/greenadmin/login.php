@@ -78,7 +78,8 @@
 					$this->green->goToPage("sys/dashboard");
 				}
 				else{
-					$this->green->goToPage("greenadmin/home");	
+					$row = $this->db->query("SELECT * FROM z_page WHERE moduleid = 13 AND `order` = 2 ")->row();
+					$this->green->goToPage($row->link.'?m='.$row->moduleid.'&p='.$row->pageid);	
 				}
 					
 			}else{

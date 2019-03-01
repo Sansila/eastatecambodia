@@ -418,10 +418,10 @@
 			$page=1;
 		}
 		
-		if($page!=0) 
+		if($page!=0)
 			$start = ($page - 1) * $limit;
 		else
-			$start = 0;			
+			$start = 0;		
 		
 		$total_pages = $total_row;
 		

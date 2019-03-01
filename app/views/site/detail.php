@@ -500,4 +500,41 @@
       }
       google.maps.event.addDomListener(window, "load", initialize());
     }//]]> 
+
+
+    $.getJSON('https://ipapi.co/json/', function(data) {
+	  	//console.log(JSON.stringify(data, null, 2));
+	  	var url="<?php echo site_url('site/site/saveipaddress')?>";
+		$.ajax({
+            url:url,
+            type:"POST",
+            datatype:"Json",
+            async:false,
+            data:{
+            	"ip": data['ip'],
+				"city": data['city'],
+				"region": data['region'],
+				"region_code": data['region_code'],
+				"country": data['country'],
+				"country_name": data['country_name'],
+				"continent_code": data['continent_code'],
+				"in_eu": data['in_eu'],
+				"postal": data['postal'],
+				"latitude": data['latitude'],
+				"longitude": data['longitude'],
+				"timezone": data['timezone'],
+				"utc_offset": data['utc_offset'],
+				"country_calling_code": data['country_calling_code'],
+				"currency": data['currency'],
+				"languages": data['languages'],
+				"asn": data['asn'],
+				"org": data['org'],
+				'pid': <?php echo $detail->pid?>
+            },
+            success:function(data) {
+            }
+          });
+	});
+
+
 </script>

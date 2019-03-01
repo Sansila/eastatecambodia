@@ -17,7 +17,13 @@
 		background-repeat: no-repeat;
 		padding-left: 15px !important;
 	}
-	
+	.flat .widget-box {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: auto;
+    white-space: nowrap;
+    }
 </style>
 <?php
 	$m='';
@@ -166,7 +172,7 @@
 												$num = $j++;
 											}
 											$all = $num + $all;
-											for ($i=10; $i < $all; $i+=10) { 
+											for ($i=20; $i < $all; $i+=20) { 
 												echo "<option value='$i'>$i</option>";
 											}
 										 ?>
