@@ -95,4 +95,36 @@
     $lang['p_amo'] = "ខ្ញុំជាម្ចាស់";
     $lang['p_owd'] = "ខ្ញុំស្គាល់ម្ចាស់ផ្ទាល់";
     $lang['p_dko'] = "ខ្ញុំមិនស្គាល់ម្ចាស់ទេ";
+    // Login Page
+    $lang['lo_name'] = "ឈ្មោះ​អ្នកប្រើប្រាស់";
+    $lang['lo_pass'] = "ពាក្យសម្ងាត់";
+    $lang['lo_rem'] = "ចងចាំខ្ញុំ";
+    $lang['lo_login'] = "ចូលគណនីរបស់អ្នក";
+    $lang['lo_forget'] = "ភ្លេចពាក្យសម្ងាត់";
+    $lang['lo_lang'] = "ភាសា";
+    $lang['lo_lang_en'] = "ភាសាអង់គ្លេស";
+    $lang['lo_lang_kh'] = "ភាសាខ្មែរ";
+    // Property analysis
+    $lang['an_header'] = "ការវិភាគអចលនទ្រព្យ";
+    $lang['an_perday'] = "ការវិភាគអចលនទ្រព្យក្នុងមួយថ្ងៃនៃលេខសម្គាល់";
+    $lang['an_permonth'] = "ការវិភាគអចលនទ្រព្យក្នុងមួយខែនៃលេខសម្គាល់";
+    // Property Location
+    $lang['lp_header'] = "ទីតាំង";
+    $lang['lp_header_list'] = "បញ្ជីរាយនាមទីតាំង";
+    $lang['lp_lname'] = "ឈ្មោះទីតាំង";
+    $lang['lp_parent'] = "ជាគោល";
+    $lang['lp_active'] = "បង្ហាញ";
+    $lang['lp_save'] = "រក្សាទុក";
+    $lang['lp_cancel'] = "ប៉ោះបង់";
+    // Article Page
+    $lang['ar_header'] = "អត្ថបទ";
+    $lang['ar_header_list'] = "បញ្ជីរាយនាមអត្ថបទ";
+    $lang['ar_name'] = "ឈ្មោះអត្ថបទ";
+    $lang['ar_namekh'] = "ឈ្មោះអត្ថបទជាភាសាខ្មែរ";
+    $lang['ar_loc'] = "ឈ្មោះទីតាំង";
+    $lang['ar_content'] = "សេចក្ដីពិពណ៌នា";
+    $lang['ar_event'] = "កាលបរិច្ឆេទ";
+    $lang['ar_active'] = "បង្ហាញ";
+    $lang['ar_image'] = "រូបភាព";
+    $lang['ar_save'] = "រក្សាទុក";
 ?>

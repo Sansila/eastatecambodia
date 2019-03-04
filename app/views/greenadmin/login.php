@@ -275,6 +275,9 @@
 		.forgot-password:focus{
 			color: rgb(12, 97, 33);
 		}
+		.forget_pwd a:hover{
+			text-decoration: none;
+		}
 
 	</style>
 	<div class="container">
@@ -284,14 +287,22 @@
 			<p id="profile-name" class="profile-name-card"></p>
 			<form class="form-signin" action="<?php echo site_url('greenadmin/login/getLogin')?>" method="post">
 				<span id="reauth-email" class="reauth-email"></span>
-				<input type="text" name="user_name" id="inputEmail" class="form-control" placeholder="User name" required autofocus>
-				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+				<input type="text" name="user_name" id="inputEmail" class="form-control" placeholder="<?php echo $this->lang->line('lo_name')?>" required autofocus>
+				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="<?php echo $this->lang->line('lo_pass')?>" required>
+				<select class="form-control txtlang" name="txtlang">
+					<option><?php echo $this->lang->line('lo_lang')?></option>
+					<option value="en"><?php echo $this->lang->line('lo_lang_en')?></option>
+					<option value="kh"><?php echo $this->lang->line('lo_lang_kh')?></option>
+				</select>
 				<div id="remember" class="checkbox">
 					<label>
-						<input type="checkbox" value="remember-me"> Remember me
+						<input type="checkbox" value="remember-me"> <?php echo $this->lang->line('lo_rem')?>
 					</label>
 				</div>
-				<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+				<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"><?php echo $this->lang->line('lo_login')?></button>
+				<div class="forget_pwd">
+					<a href="#"><?php echo $this->lang->line('lo_forget')?></a>
+				</div>
 			</form><!-- /form -->
 			
 		</div><!-- /card-container -->
@@ -322,4 +333,12 @@
 		<script src="<?php echo base_url('assets/js/jui.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/tables.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js')?>"></script>	
+		<script type="text/javascript">
+			$('.txtlang').change(function(){
+				var val = $(this).val();
+				var url = '<?php echo site_url('/')?>' + val;
+				window.location = url;
+				//alert(url);
+			});
+		</script>
 </html>

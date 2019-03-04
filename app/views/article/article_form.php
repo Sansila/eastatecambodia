@@ -144,7 +144,7 @@
                             
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group hide">
                             <label class='col-lg-2 control-label'>Keyword</label>
                             <div class="col-lg-5"> 
                                 <div class="col-md-12">
@@ -153,7 +153,7 @@
                             </div>
                             
                         </div>
-                         <div class="form-group">
+                         <div class="form-group hide">
                             <label class='col-lg-2 control-label'>Meta Description</label>
                             <div class="col-lg-5"> 
                                 <div class="col-md-12">
@@ -162,7 +162,7 @@
                             </div>
                             
                         </div>
-                        <div class="form-group">
+                        <div class="form-group hide">
                             <label class='col-lg-2 control-label'>Icon (example : fa fa-user)</label>
                             <div class="col-lg-5"> 
                                 <div class="col-md-12">
@@ -179,7 +179,7 @@
                                 </div>                   
                             </div>
                         </div> 
-                        <div class="form-group">
+                        <div class="form-group hide">
                             <label class='col-lg-2 control-label'>Is Marguee</label>
                             <div class=" col-lg-3"> 
                                 <div class="col-md-2">

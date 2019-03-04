@@ -595,7 +595,7 @@ class Property extends CI_Controller {
 	function analysisperday($id)
 	{
 		$date = Date('Y-m-d');
-		$perdate = $this->db->query("SELECT date_create as 'date', count(*) as 'value'
+		$perdate = $this->db->query("SELECT DATE_FORMAT(date_create,'%M-%d') as 'year', count(*) as 'income'
 									FROM tblvisitor 
 									WHERE month(date_create) = month('$date')
 									AND pid = $id
@@ -616,7 +616,7 @@ class Property extends CI_Controller {
 	}
 	function analysispermonth($id)
 	{
-		$perdate = $this->db->query("SELECT date_create as 'date',count(*) as value
+		$perdate = $this->db->query("SELECT DATE_FORMAT(date_create,'%y-%m') as 'year',count(*) as 'income'
 									FROM tblvisitor WHERE pid = $id
 									GROUP BY YEAR(date_create), MONTH(date_create)")->result();
 		header("Content-type:text/x-json");

@@ -96,4 +96,36 @@
   $lang['p_amo'] = "I am the owner";
   $lang['p_owd'] = "I know owner directly";
   $lang['p_dko'] = "I do not know owner";
+  // Login Page
+  $lang['lo_name'] = "User Name";
+  $lang['lo_pass'] = "Password";
+  $lang['lo_rem'] = "Remember me";
+  $lang['lo_login'] = "Sign In";
+  $lang['lo_forget'] = "Forget Password";
+  $lang['lo_lang'] = "Language";
+  $lang['lo_lang_en'] = "English";
+  $lang['lo_lang_kh'] = "Khmer";
+  // Property analysis
+  $lang['an_header'] = "Property Analysis";
+  $lang['an_perday'] = "Property Analysis Per Day of PropertyID";
+  $lang['an_permonth'] = "Property Analysis Per Month of PropertyID";
+  // Property Location
+  $lang['lp_header'] = "Property Location";
+  $lang['lp_header_list'] = "Property Location List";
+  $lang['lp_lname'] = "Location Name";
+  $lang['lp_parent'] = "Parent";
+  $lang['lp_active'] = "Is Active";
+  $lang['lp_save'] = "Save";
+  $lang['lp_cancel'] = "Cancel";
+  // Article Page
+  $lang['ar_header'] = "Acticle";
+  $lang['ar_header_list'] = "Acticle List";
+  $lang['ar_name'] = "Article Name";
+  $lang['ar_namekh'] = "Article Name (Khmer)";
+  $lang['ar_loc'] = "Location Name";
+  $lang['ar_content'] = "Content";
+  $lang['ar_event'] = "Event Date";
+  $lang['ar_active'] = "Is Active";
+  $lang['ar_image'] = "Images";
+  $lang['ar_save'] = "Save";
 ?>

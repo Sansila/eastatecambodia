@@ -30,7 +30,7 @@ a{
 </style>
 
 <div id="content-header" class="mini">
-  <h1>New Property Location</h1>
+  <h1><?php echo $this->lang->line('lp_header')?></h1>
   <ul class="mini-stats box-3">
 
   </ul>
@@ -40,8 +40,8 @@ a{
     $roleid=$this->session->userdata('roleid'); 
   ?>
   <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-  <a href="<?php echo base_url("property/propertylocation/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Property Location</a>
-  <a href='#' class="current"><?php if(isset($row->propertylocationid)) echo 'Edit Property Location'; else echo 'New Property Location';?></a>
+  <a href="<?php echo base_url("property/propertylocation/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom"><?php echo $this->lang->line('lp_header')?></a>
+  <a href='#' class="current"><?php if(isset($row->propertylocationid)) echo 'Edit Property Location'; else echo $this->lang->line('lp_header');?></a>
 </div>
 <div class="col-sm-6" style="text-align: center">
   <strong>
@@ -57,7 +57,7 @@ a{
           <span class="icon">
             <i class="fa fa-align-justify"></i>                 
           </span>
-          <h5>Category Detail.</h5>
+          <h5><?php echo $this->lang->line('lp_header')?></h5>
           <h5 class="result_text" style='color:red;'></h5>
         </div>
 
@@ -65,7 +65,7 @@ a{
           <form enctype="multipart/form-data" name="basic_validate" id="basic_validate" method="POST" action="" class="form-horizontal basic_validate">
 
             <div class="form-group">
-              <label class='col-lg-2 control-label'>Location Name</label>
+              <label class='col-lg-2 control-label'><?php echo $this->lang->line('lp_lname')?></label>
               <div class="col-lg-5"> 
                 <div class="col-md-12">
                   <input type="text"  class="form-control input-sm required" name="loc_name" value='<?php echo isset($row->locationname)?"$row->locationname":""; ?>' id="loc_name">
@@ -75,7 +75,7 @@ a{
 
             </div>
                 <div class="form-group">
-                  <label class='col-lg-2 control-label'>Parent</label>
+                  <label class='col-lg-2 control-label'><?php echo $this->lang->line('lp_parent')?></label>
                   <div class="col-lg-5"> 
                     <div class="col-md-12">
                       <select class="form-control" id="parent">
@@ -97,7 +97,7 @@ a{
                       </div>
                     </div> 
                        <div class="form-group">
-                        <label class='col-lg-2 control-label'>Is Active</label>
+                        <label class='col-lg-2 control-label'><?php echo $this->lang->line('lp_active')?></label>
                         <div class=" col-lg-3"> 
                           <div class="col-md-2">
                             <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->status)){ if($row->status==1) echo 'checked'; }else{ echo "checked"; } ?>>
@@ -108,10 +108,10 @@ a{
                         <label class="col-lg-2 control-label"></label>                      
                         <div class="col-md-10">
                           <div class="col-lg-1">
-                            <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
+                            <button id="save" name="save" type="submit" class="btn btn-primary"><?php echo $this->lang->line('lp_save')?></button>
                           </div>
                           <div class="col-lg-1">
-                            <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button>
+                            <button id="cancel" name="cancel" type="button" class="btn btn-danger"><?php echo $this->lang->line('lp_cancel')?></button>
                           </div>
                         </div>
                       </div>

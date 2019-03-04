@@ -86,7 +86,7 @@ h3{
       <div class="col-sm-12">
         <ul class="nav nav-tabs home-tabs hot-new" role="tablist">
           <li class="title font-strong">
-            <a>Property Analysis 
+            <a><?php echo $this->lang->line('an_header')?> 
               <div class="corner"></div>
             </a>
         </li><li></li>
@@ -95,13 +95,13 @@ h3{
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <h3 style="padding-left: 15px;">Property Analysis Per Day of PropertyID: <?php echo 'P'.$id?></h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('an_perday')?>: <?php echo 'P'.$id?></h3>
         <div id="chartdivday"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <h3 style="padding-left: 15px;">Property Analysis Per Month of PropertyID: <?php echo 'P'.$id?></h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('an_permonth')?>: <?php echo 'P'.$id?></h3>
         <div id="chartdiv"></div>
       </div>
     </div>
@@ -125,59 +125,47 @@ $.ajax({
     }
 });
 
-// Set input format for the dates
-chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
-
 // Create axes
-var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "year";
+categoryAxis.numberFormatter.numberFormat = "#";
+categoryAxis.renderer.inversed = true;
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.cellStartLocation = 0.1;
+categoryAxis.renderer.cellEndLocation = 0.9;
+
+var  valueAxis = chart.xAxes.push(new am4charts.ValueAxis()); 
+valueAxis.renderer.opposite = true;
 
 // Create series
-var series = chart.series.push(new am4charts.LineSeries());
-series.dataFields.valueY = "value";
-series.dataFields.dateX = "date";
-series.tooltipText = "{value}"
-series.strokeWidth = 2;
-series.minBulletDistance = 15;
+function createSeries(field, name) {
+  var series = chart.series.push(new am4charts.ColumnSeries());
+  series.dataFields.valueX = field;
+  series.dataFields.categoryY = "year";
+  series.name = name;
+  series.columns.template.tooltipText = "View: [bold]{valueX}[/]";
+  series.columns.template.height = am4core.percent(100);
+  series.sequencedInterpolation = true;
 
-// Drop-shaped tooltips
-series.tooltip.background.cornerRadius = 20;
-series.tooltip.background.strokeOpacity = 0;
-series.tooltip.pointerOrientation = "vertical";
-series.tooltip.label.minWidth = 40;
-series.tooltip.label.minHeight = 40;
-series.tooltip.label.textAlign = "middle";
-series.tooltip.label.textValign = "middle";
+  var valueLabel = series.bullets.push(new am4charts.LabelBullet());
+  valueLabel.label.text = "{valueX}";
+  valueLabel.label.horizontalCenter = "left";
+  valueLabel.label.dx = 10;
+  valueLabel.label.hideOversized = false;
+  valueLabel.label.truncate = false;
 
-// Make bullets grow on hover
-var bullet = series.bullets.push(new am4charts.CircleBullet());
+  var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
+  categoryLabel.label.text = "View";
+  categoryLabel.label.horizontalCenter = "right";
+  categoryLabel.label.dx = -10;
+  categoryLabel.label.fill = am4core.color("#fff");
+  categoryLabel.label.hideOversized = false;
+  categoryLabel.label.truncate = false;
+}
 
-bullet.circle.strokeWidth = 2;
-bullet.circle.radius = 4;
-bullet.circle.fill = am4core.color("#fff");
+createSeries("income", "Income");
+//createSeries("expenses", "Expenses");
 
-var bullethover = bullet.states.create("hover");
-bullethover.properties.scale = 1.3;
-
-// Make a panning cursor
-chart.cursor = new am4charts.XYCursor();
-chart.cursor.behavior = "panXY";
-chart.cursor.xAxis = dateAxis;
-chart.cursor.snapToSeries = series;
-
-// Create vertical scrollbar and place it before the value axis
-chart.scrollbarY = new am4core.Scrollbar();
-chart.scrollbarY.parent = chart.leftAxesContainer;
-chart.scrollbarY.toBack();
-
-// Create a horizontal scrollbar with previe and place it underneath the date axis
-chart.scrollbarX = new am4charts.XYChartScrollbar();
-chart.scrollbarX.series.push(series);
-chart.scrollbarX.parent = chart.bottomAxesContainer;
-
-chart.events.on("ready", function () {
-  dateAxis.zoom({start:0, end:1});
-});
 
 
 var chart2 = am4core.create("chartdiv", am4charts.XYChart);
@@ -192,57 +180,44 @@ $.ajax({
     }
 });
 
-// Set input format for the dates
-chart2.dateFormatter.inputDateFormat = "yyyy-MM";
-
 // Create axes
-var dateAxis2 = chart2.xAxes.push(new am4charts.DateAxis());
-var valueAxis2 = chart2.yAxes.push(new am4charts.ValueAxis());
+var categoryAxis2 = chart2.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis2.dataFields.category = "year";
+categoryAxis2.numberFormatter.numberFormat = "#";
+categoryAxis2.renderer.inversed = true;
+categoryAxis2.renderer.grid.template.location = 0;
+categoryAxis2.renderer.cellStartLocation = 0.1;
+categoryAxis2.renderer.cellEndLocation = 0.9;
+
+var  valueAxis2 = chart2.xAxes.push(new am4charts.ValueAxis()); 
+valueAxis2.renderer.opposite = true;
 
 // Create series
-var series2 = chart2.series.push(new am4charts.LineSeries());
-series2.dataFields.valueY = "value";
-series2.dataFields.dateX = "date";
-series2.tooltipText = "{value}"
-series2.strokeWidth = 2;
-series2.minBulletDistance = 15;
+function createSeries2(field, name) {
+  var series2 = chart2.series.push(new am4charts.ColumnSeries());
+  series2.dataFields.valueX = field;
+  series2.dataFields.categoryY = "year";
+  series2.name = name;
+  series2.columns.template.tooltipText = "View: [bold]{valueX}[/]";
+  series2.columns.template.height = am4core.percent(100);
+  series2.sequencedInterpolation = true;
 
-// Drop-shaped tooltips
-series2.tooltip.background.cornerRadius = 20;
-series2.tooltip.background.strokeOpacity = 0;
-series2.tooltip.pointerOrientation = "vertical";
-series2.tooltip.label.minWidth = 40;
-series2.tooltip.label.minHeight = 40;
-series2.tooltip.label.textAlign = "middle";
-series2.tooltip.label.textValign = "middle";
+  var valueLabel2 = series2.bullets.push(new am4charts.LabelBullet());
+  valueLabel2.label.text = "{valueX}";
+  valueLabel2.label.horizontalCenter = "left";
+  valueLabel2.label.dx = 10;
+  valueLabel2.label.hideOversized = false;
+  valueLabel2.label.truncate = false;
 
-// Make bullets grow on hover
-var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
-bullet2.circle.strokeWidth = 2;
-bullet2.circle.radius = 4;
-bullet2.circle.fill = am4core.color("#fff");
+  var categoryLabel2 = series2.bullets.push(new am4charts.LabelBullet());
+  categoryLabel2.label.text = "View";
+  categoryLabel2.label.horizontalCenter = "right";
+  categoryLabel2.label.dx = -10;
+  categoryLabel2.label.fill = am4core.color("#fff");
+  categoryLabel2.label.hideOversized = false;
+  categoryLabel2.label.truncate = false;
+}
 
-var bullethover2 = bullet2.states.create("hover");
-bullethover2.properties.scale = 1.3;
-
-// Make a panning cursor
-chart2.cursor = new am4charts.XYCursor();
-chart2.cursor.behavior = "panXY";
-chart2.cursor.xAxis = dateAxis2;
-chart2.cursor.snapToSeries = series2;
-
-// Create vertical scrollbar and place it before the value axis
-chart2.scrollbarY = new am4core.Scrollbar();
-chart2.scrollbarY.parent = chart2.leftAxesContainer;
-chart2.scrollbarY.toBack();
-
-// Create a horizontal scrollbar with previe and place it underneath the date axis
-chart2.scrollbarX = new am4charts.XYChartScrollbar();
-chart2.scrollbarX.series.push(series2);
-chart2.scrollbarX.parent = chart2.bottomAxesContainer;
-
-chart2.events.on("ready", function () {
-  dateAxis2.zoom({start:0, end:1});
-});
+createSeries2("income", "Income");
 
 </script>

@@ -3,6 +3,7 @@
 class PropertyLocation extends CI_Controller {
 	
 	protected $thead;
+	protected $theadkh;
 	protected $idfield;
 	protected $searchrow;	
 	function __construct(){
@@ -14,14 +15,23 @@ class PropertyLocation extends CI_Controller {
 							 "Visibled"=>'visibled',
 							 "Action"=>'Action'							 	
 							);
+		$this->theadkh=array("លេខរាន"=>'លេខរាន',
+							"ឈ្មោះទីតាំង"=>'ឈ្មោះទីតាំង',
+							 "បង្ហាញ"=>'បង្ហាញ',
+							 "កំណត់"=>'កំណត់'							 	
+							);
 		$this->idfield="propertylocationid";
 		
 	}
 	
 	function index()
 	{
-		$data['idfield']=$this->idfield;		
-		$data['thead']=	$this->thead;
+		$data['idfield']=$this->idfield;
+		if($this->session->userdata('site_lang') == "khmer")
+			$data['thead']=	$this->theadkh;
+		else		
+			$data['thead']=	$this->thead;
+
 		$data['page_header']="Property type List";	
 
 		$this->parser->parse('greenadmin/header', $data);

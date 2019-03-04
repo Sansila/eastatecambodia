@@ -3,6 +3,7 @@
 class article extends CI_Controller {
 	
 	protected $thead;
+	protected $theadkh;
 	protected $thead2;
 	protected $idfield;
 	protected $searchrow;	
@@ -14,6 +15,11 @@ class article extends CI_Controller {
 							 "Title"=>'title',
 							 "Location"=>'location_name',							 
 							 "Action"=>'Action'							 	
+							);
+		$this->theadkh=array("លេខរាង"=>'លេខរាង',
+							 "ឈ្មោះអត្ថបទ"=>'ឈ្មោះអត្ថបទ',
+							 "ឈ្មោះទីតាំង"=>'ឈ្មោះទីតាំង',							 
+							 "កំណត់"=>'កំណត់'							 	
 							);
 		$this->thead2=array(
 							 "Nationality"=>'Nationality',
