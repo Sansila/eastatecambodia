@@ -101,7 +101,7 @@
     $lang['lo_rem'] = "ចងចាំខ្ញុំ";
     $lang['lo_login'] = "ចូលគណនីរបស់អ្នក";
     $lang['lo_forget'] = "ភ្លេចពាក្យសម្ងាត់";
-    $lang['lo_lang'] = "ភាសា";
+    $lang['lo_lang'] = "ជ្រើរើសភាសា";
     $lang['lo_lang_en'] = "ភាសាអង់គ្លេស";
     $lang['lo_lang_kh'] = "ភាសាខ្មែរ";
     // Property analysis
@@ -127,4 +127,20 @@
     $lang['ar_active'] = "បង្ហាញ";
     $lang['ar_image'] = "រូបភាព";
     $lang['ar_save'] = "រក្សាទុក";
+    // Menu Page
+    $lang['mn_header'] = "ប្រភេទមុឺនុយ";
+    $lang['mn_header_list'] = "បញ្ជីរាយនាមប្រភេទមុឺនុយ";
+    $lang['mn_name'] = "ឈ្មោះប្រភេទមុឺនុយ";
+    $lang['mn_active'] = "បង្ហាញ";
+    $lang['mn_save'] = "រក្សាទុក";
+    $lang['mn_cancel'] = "ប៉ោះបង់";
+    // Form Enter Email
+    $lang['em_header'] = "បំភ្លេចពាក្យសម្ងាត់?";
+    $lang['em_en_mail'] = "បញ្ចូលអ៊ីមែលរបស់អ្នកដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នក";
+    $lang['em_email'] = "អ៊ីមែល";
+    $lang['em_next'] = "បន្ទាប់";
+    $lang['em_smg'] = "<strong>បញ្ជាក់!</strong> សូមបញ្ចូលអ៊ីម៉ែលរបស់អ្នកម្តងទៀត";
+    $lang['em_en_pwd'] = "សូមបញ្ចូលពាក្យសម្ងាត់ថ្មីរបស់អ្នក";
+    $lang['em_txtpwd'] = "បញ្ចូលពាក្យសម្ងាត់ថ្មី";
+    $lang['em_txtconpwd'] = "បញ្ជាក់​លេខសំងាត់​ថ្មី";
 ?>

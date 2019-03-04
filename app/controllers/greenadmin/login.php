@@ -91,8 +91,6 @@
 			$this->session->sess_destroy();
 			$this->green->goToPage(site_url('greenadmin/login'));
 		}
-		   
-        
     }
     
 ?>

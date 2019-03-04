@@ -102,9 +102,9 @@
   $lang['lo_rem'] = "Remember me";
   $lang['lo_login'] = "Sign In";
   $lang['lo_forget'] = "Forget Password";
-  $lang['lo_lang'] = "Language";
-  $lang['lo_lang_en'] = "English";
-  $lang['lo_lang_kh'] = "Khmer";
+  $lang['lo_lang'] = "Language(ជ្រើរើសភាសា)";
+  $lang['lo_lang_en'] = "English(ភាសាអងគ្លេស)";
+  $lang['lo_lang_kh'] = "Khmer(ភាសាខ្មែរ)";
   // Property analysis
   $lang['an_header'] = "Property Analysis";
   $lang['an_perday'] = "Property Analysis Per Day of PropertyID";
@@ -128,4 +128,20 @@
   $lang['ar_active'] = "Is Active";
   $lang['ar_image'] = "Images";
   $lang['ar_save'] = "Save";
+  // Menu Page
+  $lang['mn_header'] = "Category Menu";
+  $lang['mn_header_list'] = "Category Menu List";
+  $lang['mn_name'] = "Category Menu Name";
+  $lang['mn_active'] = "Is Active";
+  $lang['mn_save'] = "Save";
+  $lang['mn_cancel'] = "Cancel";
+  // Form Enter Email
+  $lang['em_header'] = "Forget Password?";
+  $lang['em_en_mail'] = "Enter your email to reset your password.";
+  $lang['em_email'] = "Email Address";
+  $lang['em_next'] = "Next";
+  $lang['em_smg'] = "<strong>Warning!</strong> Please enter your email again.";
+  $lang['em_en_pwd'] = "Please enter your new password";
+  $lang['em_txtpwd'] = "Enter New Password";
+  $lang['em_txtconpwd'] = "Enter Confirm New Password";
 ?>

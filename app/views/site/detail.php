@@ -37,6 +37,16 @@
 				$gym = "hide";
 		?>
 
+		<style type="text/css">
+			iframe {
+			    display: block;
+			    position: relative!important;
+			    float: right;
+			    right: 37px;
+			    top: 21px;
+			}
+		</style>
+
 		<!-- Begin Main -->
 		<div role="main" class="main pgl-bg-grey">
 			<!-- Begin page top -->
@@ -138,10 +148,11 @@
 										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php"
   										target="_blank" >
 										</a>
-										<a href="#" class="fass fa fa-twitter"></a>
+										<a href="https://api.whatsapp.com://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" data-action="share/whatsapp/share" target="_blank" class="fass fa fa-whatsapp">
+											<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
+										</a>
 										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>&text=<?php echo $detail->property_name?>" class="fass fa fa-paper-plane"></a>
-										
-										<a href="#" class="fas fa-line">
+										<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" class="fas fa-line">
 											<img src="<?php echo site_url('assets/img/line.png')?>">
 										</a>
 									</div>
@@ -470,7 +481,6 @@
 			
 		</div>
 		<!-- End Main -->
-
 <script type="text/javascript">
 	window.onload=function(){
       var map;
@@ -501,7 +511,7 @@
       google.maps.event.addDomListener(window, "load", initialize());
     }//]]> 
 
-
+    //get device data
     $.getJSON('https://ipapi.co/json/', function(data) {
 	  	//console.log(JSON.stringify(data, null, 2));
 	  	var url="<?php echo site_url('site/site/saveipaddress')?>";

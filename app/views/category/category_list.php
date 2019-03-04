@@ -62,7 +62,7 @@
 
  <div id="content-header" class="mini">
 
-        <h1>Menu LIST</h1>
+        <h1><?php echo $this->lang->line('mn_header_list')?></h1>
 
         <ul class="mini-stats box-3">
 
@@ -74,9 +74,9 @@
 
  <div id="breadcrumb">
 
-      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
+      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
 
-      <a href='#' class="current">Menu list</a>
+      <a href='#' class="current"><?php echo $this->lang->line('mn_header_list')?></a>
 
  </div>
 
@@ -110,7 +110,7 @@
 
 							</span>
 
-								<h5>Menu List</h5>
+								<h5><?php echo $this->lang->line('mn_header_list')?></h5>
 
 							<div style="text-align: right; width:130px; float:right">
 
@@ -188,7 +188,7 @@
 
 							<div class='col-sm-3'>
 
-								<label>Show 
+								<label><?php echo $this->lang->line('show')?> 
 
 									
 

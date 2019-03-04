@@ -14,7 +14,7 @@ a{ cursor: pointer; }
 
 <div id="content-header" class="mini">
 
-  <h1>New Menu</h1>
+  <h1><?php echo $this->lang->line('mn_header')?></h1>
 
   <ul class="mini-stats box-3"></ul>
 
@@ -30,11 +30,11 @@ $p = $this->input->get('p');
 
 <div id="breadcrumb">
 
-  <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
+  <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
 
-  <a href="<?php echo base_url("index.php/store/store/index?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom">Menu</a>
+  <a href="<?php echo base_url("index.php/store/store/index?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom"><?php echo $this->lang->line('home')?></a>
 
-  <a href='#' class="current"><?php if(isset($row->location_id)) echo 'Edit Menu'; else echo 'New Menu';?></a>
+  <a href='#' class="current"><?php if(isset($row->location_id)) echo 'Edit Menu'; else echo $this->lang->line('mn_header');?></a>
 
 </div>
 
@@ -55,14 +55,14 @@ $p = $this->input->get('p');
           <span class="icon">
             <i class="fa fa-align-justify"></i>
           </span>
-          <h5>Menu Detail.</h5>
+          <h5><?php echo $this->lang->line('mn_header')?></h5>
           <h5 class="result_text" style='color:red;'></h5>
         </div>
 
         <div class="widget-content nopadding">
           <form enctype="multipart/form-data" name="basic_validate" id="basic_validate" method="POST" action="" class="form-horizontal basic_validate">
             <div class="form-group">
-              <label class='col-lg-2 control-label'>Menu Name</label>
+              <label class='col-lg-2 control-label'><?php echo $this->lang->line('mn_name')?></label>
               <div class="col-lg-5"> 
                 <div class="col-md-12">
                   <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->location_name)?"$row->location_name":""; ?>' id="location_name">
@@ -71,7 +71,7 @@ $p = $this->input->get('p');
               </div>
             </div>
             <div class="form-group">
-              <label class='col-lg-2 control-label'>Is Active</label>
+              <label class='col-lg-2 control-label'><?php echo $this->lang->line('mn_active')?></label>
               <div class=" col-lg-3"> 
                 <div class="col-md-2">
                   <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->is_active)){ if($row->is_active==1) echo 'checked'; }else{ echo "checked"; } ?>>
@@ -83,13 +83,13 @@ $p = $this->input->get('p');
               <div class="col-md-10">
                 <div class="col-lg-1">
 
-                  <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
+                  <button id="save" name="save" type="submit" class="btn btn-primary"><?php echo $this->lang->line('mn_save')?></button>
 
                 </div>
 
                 <div class="col-lg-1">
 
-                  <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button>
+                  <button id="cancel" name="cancel" type="button" class="btn btn-danger"><?php echo $this->lang->line('mn_cancel')?></button>
 
                 </div>
 

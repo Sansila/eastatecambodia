@@ -2,6 +2,7 @@
 
 class Category extends CI_Controller {
 	protected $thead;
+	protected $theadkh;
 	protected $idfield;
 	protected $searchrow;	
 	function __construct()
@@ -11,9 +12,15 @@ class Category extends CI_Controller {
 		$this->load->model("Modcategory","cat");
 		$this->thead = array(
 			"No"=>'no',
-			"Menu Name"=>'location_name',
+			"Category Name"=>'Category Name',
 			"Visibled"=>'visibled',
 			"Action"=>'Action'			
+		);
+		$this->theadkh = array(
+			"លេខរាង"=>'លេខរាង',
+			"ឈ្មោះ"=>'ឈ្មោះ',
+			"បង្ហាញ"=>'បង្ហាញ',
+			"កំណត់"=>'កំណត់'			
 		);
 		$this->idfield="categoryid";
 	}
@@ -21,7 +28,10 @@ class Category extends CI_Controller {
 	function index()
 	{
 		$data['idfield']=$this->idfield;
-		$data['thead']=	$this->thead;
+		if($this->session->userdata('site_lang') == "khmer")
+			$data['thead']=	$this->theadkh;
+		else
+			$data['thead']=	$this->thead;
 		$data['page_header']="Store List";
 
 		$this->parser->parse('greenadmin/header', $data);
