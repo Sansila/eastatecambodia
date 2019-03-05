@@ -45,28 +45,33 @@ class Forgetpassword extends CI_Controller {
 	}
 	function changpassword($id)
 	{
-		// if(empty($this->session->userdata("login_session_user")))
-  //    	{
-  //    		redirect(site_url('login'),'refresh');
-  //    	} 
-    	
 		$user = $this->db->query("SELECT * FROM admin_user where userid = $id")->row();
-		$data['id'] = $user->userid;
-		$data['email'] = $user->email;
-		$this->load->view('forget/header');
-		$this->load->view('forget/formforgetpassword',$data);
-		$this->load->view('forget/footer');
+
+        if($user->set_time >= time())
+        {
+            $data['id'] = $user->userid;
+            $data['email'] = $user->email;
+            $this->load->view('forget/header');
+            $this->load->view('forget/formforgetpassword',$data);
+            $this->load->view('forget/footer');
+        }else{
+            redirect(site_url('forgetpassword/enteremail'));
+        }
 	}
-	function sendEmail($id,$email)
+	function sendEmail()
 	{
 		$id = $this->input->post('token');
 		$email = $this->input->post('email');
+
+        $st = array('set_time'=>strtotime("+24 hours"));
+        $this->db->where('userid',$id);
+        $this->db->update('admin_user',$st);
 
 		$config = array(
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.sendgrid.net',
             'smtp_port' => 587,
-            'smtp_user' => 'estatecambodia',
+            'smtp_user' => 'estatecambodia.com',
             'smtp_pass' => '@Sila168.com.Dev',
             'mailtype'  => 'html',
             'charset'   => 'utf-8'
@@ -76,7 +81,7 @@ class Forgetpassword extends CI_Controller {
         $this->email->set_mailtype("html");
         $this->email->set_newline("\r\n");
         $logo = "http://estatecambodia.com/assets/img/logo.png";
-        $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 50%;">
+        $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                 <tbody>
                     <tr>
                         <td style="width:8px" width="8"></td>
@@ -101,14 +106,16 @@ class Forgetpassword extends CI_Controller {
                 </tbody>
             </table>';
             
-        $this->email->from('info@estatecambodia.com','Estatecambodia Property Agence');
+        $this->email->from('info@estatecambodia.com','Estate cambodia Property Agence');
         $this->email->to($email);
-        $this->email->subject('We are providing the best properties in cambodia');
+        $this->email->subject('Estate Cambodia - Requesting to reset account password');
         $this->email->message($description);
 
         if($this->email->send())
         {
-            redirect(site_url('login'));
+            $this->load->view('forget/header');
+            $this->load->view('forget/checkemail');
+            $this->load->view('forget/footer');
         }
         else
         {
