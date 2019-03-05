@@ -61,6 +61,7 @@
 													<div class="form-group">
 														<input type="submit" value="Submit" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 100%;">
 													</div>
+													<div><?php if(isset($send)) echo $send; else echo "";?></div>
 												</form>
 											</div>
 										</div>
@@ -77,6 +78,7 @@
 
 				</div>	
 			</div>
+
 			<!-- End content with sidebar -->
 			
 		</div>

@@ -27,7 +27,7 @@
                   <p><?php echo $this->lang->line('em_en_mail')?></p>
                   <div class="panel-body">
     
-                    <form id="register-form" role="form" autocomplete="off" class="form" method="post" action="<?php echo site_url('forgetpassword/resetpassword')?>">
+                    <form id="register-form" role="form" autocomplete="off" class="form" method="post" action="<?php echo site_url('forgetpassword/sendEmail')?>">
                       <div class="form-group">
                         <!-- <div class="input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
@@ -55,7 +55,7 @@
   $('#email').change(function(){
     $('#token').val('');
     $.ajax({
-        url:"<?php echo site_url('forgetpassword/getuserid/')?>",
+        url:"<?php echo site_url('forgetpassword/getuserid')?>",
         type:"POST",
         datatype:"Json",
         async:false,

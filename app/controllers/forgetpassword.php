@@ -32,16 +32,6 @@ class Forgetpassword extends CI_Controller {
 	}
 	function resetpassword()
 	{
-		$id = $this->input->post('token');
-		$email = $this->input->post('email');
-		$data['id'] = $id;
-		$data['email'] = $email;
-		$this->load->view('forget/header');
-		$this->load->view('forget/formforgetpassword',$data);
-		$this->load->view('forget/footer');
-	}
-	function changpassword()
-	{
 		$id = $this->input->post('id');
 		$email = $this->input->post('email');
 		$cnpwd = $this->input->post('confirm_password');
@@ -51,32 +41,68 @@ class Forgetpassword extends CI_Controller {
 		$this->db->where('userid',$id);
 		$this->db->update('admin_user',$data);
 
-		$this->sendEmail($id,$email);
+		redirect(site_url('login'));
+	}
+	function changpassword($id)
+	{
+    	if($this->session->sess_expiration == '60')
+    		redirect(site_url('forgetpassword/enteremail'));
+
+		$user = $this->db->query("SELECT * FROM admin_user where userid = $id")->row();
+		$data['id'] = $user->userid;
+		$data['email'] = $user->email;
+		$this->load->view('forget/header');
+		$this->load->view('forget/formforgetpassword',$data);
+		$this->load->view('forget/footer');
 	}
 	function sendEmail($id,$email)
 	{
+		$id = $this->input->post('token');
+		$email = $this->input->post('email');
+
 		$config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'sansila.dev@gmail.com',
-            'smtp_pass' => '@Sila.com.Dev'
+            'smtp_host' => 'smtp.sendgrid.net',
+            'smtp_port' => 587,
+            'smtp_user' => 'estatecambodia',
+            'smtp_pass' => '@Sila168.com.Dev',
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8'
         );
 
-        //$name  = $this->input->post('name');
-       // $email = $this->input->post('customer_mail');
-        //$desc  = $this->input->post('comments');
-        //$owner = $this->input->post('owner');
-
-        $desc = "<a>confirm password</a>";
-
         $this->load->library('email',$config);
+        $this->email->set_mailtype("html");
         $this->email->set_newline("\r\n");
-
-        $this->email->from('sansila.dev@gmail.com');
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 50%;">
+                <tbody>
+                    <tr>
+                        <td style="width:8px" width="8"></td>
+                        <td>
+                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                <img src="'.$logo.'" style="width: 140px;">
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                                    <div style="padding: 0px 10px 10px; text-align: center">
+                                    	By clicking on the following link, you are confirming your new password.
+                                    </div>
+                                    <div style="padding-top:32px;text-align:center">
+						            	<a href="http://estatecambodia.com/forgetpassword/changpassword/'.$id.'" style="font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;line-height:16px;color:#ffffff;font-weight:400;text-decoration:none;font-size:14px;display:inline-block;padding:5px 24px;background-color:#d94235;border-radius:5px;min-width:90px" data-saferedirecturl="http://estatecambodia.com/forgetpassword/changpassword/'.$id.'" target="_blank">
+						            	Reset password now
+						            	</a>
+						            </div>
+                                </div>
+                            </div>
+                                                    
+                        </td>
+                        <td style="width:8px" width="8"></td>
+                    </tr>
+                </tbody>
+            </table>';
+            
+        $this->email->from('info@estatecambodia.com','Estatecambodia Property Agence');
         $this->email->to($email);
-        $this->email->subject('Confirm New Password');
-        $this->email->message($desc);
+        $this->email->subject('We are providing the best properties in cambodia');
+        $this->email->message($description);
 
         if($this->email->send())
         {

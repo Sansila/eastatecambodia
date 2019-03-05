@@ -50,7 +50,7 @@
                   <p><?php echo $this->lang->line('em_en_pwd')?></p>
                   <div class="panel-body">
     
-                    <form id="register-form" class="form" method="post" oninput='confirm_password.setCustomValidity(confirm_password.value != password.value ? "Passwords do not match." : "")' action="<?php echo site_url('forgetpassword/changpassword')?>">
+                    <form id="register-form" class="form" method="post" oninput='confirm_password.setCustomValidity(confirm_password.value != password.value ? "Passwords do not match." : "")' action="<?php echo site_url('forgetpassword/resetpassword')?>">
                       <div class="form-group pass_show">
                         <input id="confirm" name="password"​ required="required" placeholder="<?php echo $this->lang->line('em_txtpwd')?>" class="form-control"  type="password">
                       </div>

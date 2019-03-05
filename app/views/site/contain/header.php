@@ -49,17 +49,6 @@
 	<!-- Theme Responsive-->
 	<link href="<?php echo site_url('template')?>/css/theme-responsive.css" rel="stylesheet">
 	<link href="<?php echo site_url('template')?>/css/main19c7.css" rel="stylesheet">
-	<!-- <link href="<?php //echo site_url('template')?>/css/multiple-select.css" rel="stylesheet"> -->
-	<!-- <link href="<?php //echo site_url('template')?>/css/normalize.css" rel="stylesheet"> -->
-	<!-- <link href="<?php //echo site_url('template')?>/css/stylesheet.css" rel="stylesheet"> -->
-
-
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="<?php echo site_url('template')?>/vendor/jquery.min.js"></script>
@@ -72,8 +61,6 @@
   type="text/javascript"></script>
 
   <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=316143172374700&autoLogAppEvents=1"></script>
-  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
-  type="text/javascript"></script> -->
 	
 </head>
 	<body>

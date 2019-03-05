@@ -446,24 +446,45 @@ class Site extends CI_Controller {
     {
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'sansila2222@gmail.com',
-            'smtp_pass' => 'sansila123456789'
+            'smtp_host' => 'smtp.sendgrid.net',
+            'smtp_port' => 587,
+            'smtp_user' => 'estatecambodia',
+            'smtp_pass' => '@Sila168.com.Dev',
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8'
         );
-
         $name  = $this->input->post('name');
         $email = $this->input->post('customer_mail');
         $desc  = $this->input->post('comments');
         $owner = $this->input->post('owner');
 
         $this->load->library('email',$config);
+        $this->email->set_mailtype("html");
         $this->email->set_newline("\r\n");
-
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 50%;">
+                <tbody>
+                    <tr>
+                        <td style="width:8px" width="8"></td>
+                        <td>
+                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                <img src="'.$logo.'" style="width: 140px;">
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                                    <div style="padding: 0px 10px 10px; text-align: left">Name: '.$name.'</div>
+                                    '.$desc.'
+                                </div>
+                            </div>
+                                                    
+                        </td>
+                        <td style="width:8px" width="8"></td>
+                    </tr>
+                </tbody>
+            </table>';
+        //$this->email->set_header('Welcome to estatecambodia');
         $this->email->from($email,$name);
         $this->email->to($owner);
-        $this->email->subject('This is an email test');
-        $this->email->message($desc);
+        $this->email->subject('We are providing the best properties in cambodia');
+        $this->email->message($description);
 
         if($this->email->send())
         {
@@ -471,6 +492,7 @@ class Site extends CI_Controller {
             $datas['profile'] = $this->site->getSiteprofile();
             $datas['menu'] = $this->site->get_menu();
             $data['slide'] = $this->site->getSlide();
+            $datas['send'] = "Sent";
             $this->load->view('site/contain/header',$datas);
             $this->load->view('site/contact',$data,$datas);
             $this->load->view('site/contain/footer',$datas);

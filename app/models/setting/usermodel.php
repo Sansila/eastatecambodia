@@ -73,21 +73,39 @@ class usermodel extends CI_Model {
 								WHERE sd.userid='$userid'")->result();
 	}
 	function getuservalidate($username,$email){
-		$this->db->select('count(*)');
-		$this->db->from('admin_user');
-		$this->db->where('user_name',$username);
-		$this->db->where('email',$email);
-		$this->db->where('is_active',1);
-		return $this->db->count_all_results();
+		// $this->db->select('count(*)');
+		// $this->db->from('admin_user');
+		// $this->db->where('is_active',1);
+		// $where = '(user_name = '.$username.' OR email = '.$email.')';
+		// $this->db->where($where);
+		// return $this->db->count_all_results();
+		$count = $this->db->query("SELECT count(*) as us FROM admin_user WHERE user_name = '$username' AND email = '$email' AND is_active = 1")->row();
+		if($count->us > 0){
+			return $count->us;
+		}
+		else
+		{
+			$counts = $this->db->query("SELECT count(*) as us FROM admin_user WHERE email = '$email' AND is_active = 1")->row();
+			return $counts->us;
+		}
 	}
 	function getuservalidateup($username,$email,$userid){
-		$this->db->select('count(*)');
-		$this->db->from('admin_user');
-		$this->db->where('user_name',$username);
-		$this->db->where('email',$email);
-		$this->db->where_not_in('userid',$userid);
-		$this->db->where('is_active',1);
-		return $this->db->count_all_results();
+		// $this->db->select('count(*)');
+		// $this->db->from('admin_user');
+		// $this->db->where('user_name',$username);
+		// $this->db->where('email',$email);
+		// $this->db->where_not_in('userid',$userid);
+		// $this->db->where('is_active',1);
+		// return $this->db->count_all_results();
+		$count = $this->db->query("SELECT count(*) as us FROM admin_user WHERE user_name = '$username' AND email = '$email' AND is_active = 1 AND userid <> '$userid' ")->row();
+		if($count->us > 0){
+			return $count->us;
+		}
+		else
+		{
+			$counts = $this->db->query("SELECT count(*) as us FROM admin_user WHERE email = '$email' AND is_active = 1 AND userid <> '$userid' ")->row();
+			return $counts->us;
+		}
 	}
 	function getuserstore($userid){
 		$data= $this->db->query("SELECT storeid FROM rela_adminuser_store_detail WHERE userid='$userid'")->result();

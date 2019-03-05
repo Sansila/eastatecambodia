@@ -146,6 +146,7 @@
 								</tr>
 							</table>
 						</form>
+						<span style='color:red'><?PHP if(isset($error)) echo $error; ?></span>
 					</div>
 				</div>
 			</div>

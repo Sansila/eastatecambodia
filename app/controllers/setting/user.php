@@ -250,8 +250,6 @@ class user extends CI_Controller {
 					'storeid'=>$storeid);
 		$this->db->insert('rela_adminuser_store_detail',$data);
 	}
-	
-	
 	function update(){
 		$userid=$this->input->post('txtuserid');
 		$f_name=$this->input->post('txtf_name');
@@ -267,12 +265,11 @@ class user extends CI_Controller {
 		$count=$this->user->getuservalidateup($username,$email,$userid);
 		if($count!=0){
 			$data1['query']=$this->user->getuserrow($userid);
-			$data1['error']=(object) array('error'=>"<div style='text-align:center; color:red;'>This username and your email has been created before Please choose other username </div>");
+			$data['error']=(object) array('error'=>"<div style='text-align:center; color:red;'>This username and your email has been created before Please choose other username </div>");
 			$this->load->view('greenadmin/header');
 			$data['query']=$this->user->getuser();
 			$this->load->view('setting/user/edit',$data1);
-			$data['query']=$this->user->getuser();
-			$this->load->view('setting/user/view');
+			$this->load->view('setting/user/view',$data);
 			$this->load->view('greenadmin/footer');
 		}else{
 			if($role==1)
@@ -308,13 +305,11 @@ class user extends CI_Controller {
 					'is_active'=>1
 				);
 			}
-			
 			$this->db->where('userid',$userid);
 			$this->db->update('admin_user',$data);
 			$this->do_upload($userid);
-			
 			redirect('setting/user/');
-			}
+		}
 		
 	}
 	
