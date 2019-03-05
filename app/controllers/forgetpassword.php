@@ -45,9 +45,11 @@ class Forgetpassword extends CI_Controller {
 	}
 	function changpassword($id)
 	{
-    	if($this->session->sess_expiration == '60')
-    		redirect(site_url('forgetpassword/enteremail'));
-
+		// if(empty($this->session->userdata("login_session_user")))
+  //    	{
+  //    		redirect(site_url('login'),'refresh');
+  //    	} 
+    	
 		$user = $this->db->query("SELECT * FROM admin_user where userid = $id")->row();
 		$data['id'] = $user->userid;
 		$data['email'] = $user->email;
