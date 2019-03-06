@@ -1090,8 +1090,8 @@
 					<!-- <h3></h3> -->
 					<div class="wizard row">
 						<div class="col-md-12">
-							<div class="col-md-2">
-								<a class="current">Search Result<?php echo '('.count($result).')';?></a>
+							<div class="col-md-3">
+								<a class="current">Search Result<?php echo '('.count($all).')';?></a>
 							</div>
 							<div class="col-md-2">
 								<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>

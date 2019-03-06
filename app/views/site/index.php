@@ -7,7 +7,6 @@
 			}
 			.nav {
 			    padding-left: 0;
-			    margin-bottom: 30px;
 			    list-style: none;
 			    max-width: 100%;
 			}
@@ -995,7 +994,7 @@
 					<?php 
 						if(!empty($hot)){
 					?>
-					<ul class="nav nav-tabs home-tabs hot-new" role="tablist">
+					<ul class="nav nav-tabs home-tabs hot-new" role="tablist" style="margin-bottom: 30px;">
 				        <li class="title font-strong">
 				        	<a>Hot Properties 
 				        		<div class="corner"></div>
@@ -1074,7 +1073,7 @@
 						</div>
 					</div>
 
-					<ul class="nav nav-tabs home-tabs hot-new" role="tablist">
+					<ul class="nav nav-tabs home-tabs hot-new" role="tablist" style="margin-bottom: 30px;">
 				        <li class="title font-strong">
 				        	<a>Recent Properties 
 				        		<div class="corner"></div>

@@ -395,14 +395,37 @@ class Site extends CI_Controller {
 
         // ============ configure pagination =====//
 
-        $query = "SELECT * FROM tblproperty as p
-                                    LEFT JOIN tblpropertylocation as lp 
-                                    ON p.lp_id = lp.propertylocationid
-                                    LEFT JOIN tblpropertytype as pt
-                                    ON p.type_id = pt.typeid
-                                    -- LEFT JOIN tblgallery as g on p.pid = g.pid
-                                    WHERE p.p_status = 1 {$where} {$order_by}
+        $query = "SELECT p.pid,
+                         p.type_id,
+                         p.lp_id,
+                         p.p_status,
+                         p.property_name,
+                         p.price,
+                         p.housesize,
+                         p.description,
+                         p.create_date,
+                         p.p_type,
+                         p.bedroom,
+                         p.bathroom,
+                         p.address,
+                         p.parking,
+                         p.title,
+                         p.floor,
+                         lp.propertylocationid,
+                         lp.locationname,
+                         lp.lineage,
+                         pt.typeid,
+                         pt.menu,
+                         pt.typename 
+                        FROM tblproperty as p
+                        LEFT JOIN tblpropertylocation as lp 
+                        ON p.lp_id = lp.propertylocationid
+                        LEFT JOIN tblpropertytype as pt
+                        ON p.type_id = pt.typeid
+                        WHERE p.p_status = 1 {$where} {$order_by}
             ";
+
+        $all = $this->db->query($query)->result();
 
         $config['total_rows'] = count($this->db->query($query)->result());
         $this->pagination->initialize($config);
@@ -410,6 +433,7 @@ class Site extends CI_Controller {
         if($page >0)
             $limit = " LIMIT $page, ".$config['per_page'];
         $query.= " {$limit}";
+        $data['all'] = $all;
         $data['result'] = $this->db->query($query)->result();
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/search',$data);
@@ -827,12 +851,34 @@ class Site extends CI_Controller {
 
         // ============ configure pagination =====//
 
-        $query = "SELECT * FROM tblproperty as p
-                                    LEFT JOIN tblpropertylocation as lp 
-                                    ON p.lp_id = lp.propertylocationid
-                                    LEFT JOIN tblpropertytype as pt
-                                    ON p.type_id = pt.typeid
-                                    WHERE p.p_status = 1 {$where} {$order_by}
+        $query = "SELECT p.pid,
+                         p.type_id,
+                         p.lp_id,
+                         p.p_status,
+                         p.property_name,
+                         p.price,
+                         p.housesize,
+                         p.description,
+                         p.create_date,
+                         p.p_type,
+                         p.bedroom,
+                         p.bathroom,
+                         p.address,
+                         p.parking,
+                         p.title,
+                         p.floor,
+                         lp.propertylocationid,
+                         lp.locationname,
+                         lp.lineage,
+                         pt.typeid,
+                         pt.menu,
+                         pt.typename        
+                        FROM tblproperty as p
+                        LEFT JOIN tblpropertylocation as lp 
+                        ON p.lp_id = lp.propertylocationid
+                        LEFT JOIN tblpropertytype as pt
+                        ON p.type_id = pt.typeid
+                        WHERE p.p_status = 1 {$where} {$order_by}
             ";
 
         $config['total_rows'] = count($this->db->query($query)->result());

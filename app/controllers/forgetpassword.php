@@ -67,19 +67,21 @@ class Forgetpassword extends CI_Controller {
         $this->db->where('userid',$id);
         $this->db->update('admin_user',$st);
 
-		$config = array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.sendgrid.net',
-            'smtp_port' => 587,
-            'smtp_user' => 'estatecambodia.com',
-            'smtp_pass' => '@Sila168.com.Dev',
-            'mailtype'  => 'html',
-            'charset'   => 'utf-8'
-        );
+		// $config = array(
+  //           'protocol' => 'smtp',
+  //           'smtp_host' => 'smtp.cambodiasoft.com',
+  //           'smtp_port' => 25,
+  //           'smtp_user' => 'info@estatecambodia.com',
+  //           'smtp_pass' => 'cbs6789+*',
+  //           'mailtype'  => 'html',
+  //           'charset'   => 'utf-8'
+  //       );
+  //       $this->load->library('email',$config);
+  //       $this->email->set_mailtype("html");
+  //       $this->email->set_newline("\r\n");
 
-        $this->load->library('email',$config);
-        $this->email->set_mailtype("html");
-        $this->email->set_newline("\r\n");
+        $this->load->library('mailgun');
+
         $logo = "http://estatecambodia.com/assets/img/logo.png";
         $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                 <tbody>
@@ -106,12 +108,12 @@ class Forgetpassword extends CI_Controller {
                 </tbody>
             </table>';
             
-        $this->email->from('info@estatecambodia.com','Estate cambodia Property Agence');
-        $this->email->to($email);
-        $this->email->subject('Estate Cambodia - Requesting to reset account password');
-        $this->email->message($description);
+        $this->mailgun->from('estatecambodia.dev@gmail.com','Estate cambodia Property Agence');
+        $this->mailgun->to($email);
+        $this->mailgun->subject('Estate Cambodia - Requesting to reset account password');
+        $this->mailgun->message($description);
 
-        if($this->email->send())
+        if($this->mailgun->send())
         {
             $this->load->view('forget/header');
             $this->load->view('forget/checkemail');
@@ -119,7 +121,7 @@ class Forgetpassword extends CI_Controller {
         }
         else
         {
-            show_error($this->email->print_debugger());
+            show_error($this->mailgun->print_debugger());
         }
 	}
 }

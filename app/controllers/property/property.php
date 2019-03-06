@@ -488,7 +488,7 @@ class Property extends CI_Controller {
 		on u.userid = pl.agent_id
 		inner join tblpropertylocation l 
 		on pl.lp_id = l.propertylocationid
-		WHERE pl.p_status= 0 and u.is_active = 0 AND u.type_post IS NOT NULL {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
+		WHERE pl.p_status= 0 AND u.type_post IS NOT NULL {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
 
 		$table='';
 		$pagina='';
