@@ -137,10 +137,12 @@
   $lang['mn_cancel'] = "Cancel";
   // Form Enter Email
   $lang['em_header'] = "Forget Password?";
+  $lang['em_ch_email'] = "Check Your Email";
+  $lang['em_ch_desc'] = "Please go to email account to reset your password.";
   $lang['em_en_mail'] = "Enter your email to reset your password.";
   $lang['em_email'] = "Email Address";
   $lang['em_next'] = "Next";
-  $lang['em_smg'] = "<strong>Warning!</strong> Please enter your email again.";
+  $lang['em_smg'] = "<strong>Warning!</strong> The invalid email account.";
   $lang['em_en_pwd'] = "Please enter your new password";
   $lang['em_txtpwd'] = "Enter New Password";
   $lang['em_txtconpwd'] = "Enter Confirm New Password";

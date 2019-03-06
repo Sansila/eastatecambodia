@@ -448,7 +448,7 @@ class Site extends CI_Controller {
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.sendgrid.net',
             'smtp_port' => 587,
-            'smtp_user' => 'estatecambodia',
+            'smtp_user' => 'estatecambodia.com',
             'smtp_pass' => '@Sila168.com.Dev',
             'mailtype'  => 'html',
             'charset'   => 'utf-8'
