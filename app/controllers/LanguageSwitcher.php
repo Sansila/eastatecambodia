@@ -15,4 +15,13 @@ class LanguageSwitcher extends CI_Controller{
         redirect($_SERVER['HTTP_REFERER']);
         //redirect(base_url());
     }
+    function switchLanguageLog($language = "",$land) {
+        if($language == "khmer"){
+            $this->session->set_userdata('site_lang', $language);
+        }else if($language == "english"){
+            $this->session->set_userdata('site_lang', $language);
+        }
+        //redirect($_SERVER['HTTP_REFERER']);
+        redirect(base_url('loginl/'.$land));
+    }
 }?>

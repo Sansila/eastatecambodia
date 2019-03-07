@@ -3,11 +3,27 @@
 		public function index()
 		{						
 			if($this->session->userdata('user_name')!=""){
+				$data['lang'] = "";
 				$data['page_header']="Angkorban.COM e-Commerce";
 				$this->load->view('greenadmin/header',$data);
 				$this->load->view('greenadmin/index',$data);
 				$this->load->view('greenadmin/footer');
 			}else{
+				$data['lang'] = "";
+				$data['page_header']="Angkorban.COM e-Commerce";
+				$this->load->view('greenadmin/login',$data);
+			}		
+		}
+		function loginlanguage($lang)
+		{						
+			if($this->session->userdata('user_name')!=""){
+				$data['lang'] = $lang;
+				$data['page_header']="Angkorban.COM e-Commerce";
+				$this->load->view('greenadmin/header',$data);
+				$this->load->view('greenadmin/index',$data);
+				$this->load->view('greenadmin/footer');
+			}else{
+				$data['lang'] = $lang;
 				$data['page_header']="Angkorban.COM e-Commerce";
 				$this->load->view('greenadmin/login',$data);
 			}		

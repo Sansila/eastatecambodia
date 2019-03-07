@@ -12,7 +12,7 @@
 		}
 		function CountPropertyisInactive()
 		{
-			$query = $this->db->query("SELECT COUNT(*) as total FROM tblproperty as p inner join admin_user as u on p.agent_id = u.userid where p.p_status = 0  and u.is_active = 0 AND u.type_post IS NOT NULL")->row();
+			$query = $this->db->query("SELECT COUNT(*) as total FROM tblproperty as p inner join admin_user as u on p.agent_id = u.userid where p.p_status = 0  and (u.is_active = 0 OR u.is_active = 1) AND u.type_post IS NOT NULL")->row();
 			return $query->total;
 		}
 		function CountInactiveUser()

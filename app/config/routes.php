@@ -52,6 +52,10 @@ $route['category.html'] = "stock/category";
 $route['site-profile'] = "sys/dashboard/site_profile";
 $route['en'] = "LanguageSwitcher/switchLanguage/english";
 $route['kh'] = "LanguageSwitcher/switchLanguage/khmer";
+$route['en/(:any)'] = "LanguageSwitcher/switchLanguageLog/english/$1";
+$route['kh/(:any)'] = "LanguageSwitcher/switchLanguageLog/khmer/$1";
+$route['loginl/(:any)'] = "greenadmin/login/loginlanguage/$1";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */ 

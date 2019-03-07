@@ -211,7 +211,7 @@ class Site extends CI_Controller {
             $page = $_GET['per_page'];
         $config['base_url'] = site_url('site/site/search?available='.$available.'&agent='.$agent.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first);
 
-        $config['per_page'] = 8;
+        $config['per_page'] = 16;
         $config['num_link'] = 3;
         $config['page_query_string'] = TRUE;
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -1117,6 +1117,8 @@ class Site extends CI_Controller {
 
         $data = array(
             'user_name' => $name,
+            'first_name' => $name,
+            'last_name' => $name,
             'email' => $phone,
             'phone' => $email,
             'business' => $business,

@@ -60,6 +60,19 @@ class Forgetpassword extends CI_Controller {
 	}
 	function sendEmail()
 	{
+        $this->load->library("phpmailer_library");
+        $mail = $this->phpmailer_library->load();
+
+        $mail->isSMTP();
+        $mail->SMTPDebug = 2;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        $mail->Username = "estatecambodia168.dev@gmail.com";
+        $mail->Password = "@Sila168.com.Dev";
+
+
 		$id = $this->input->post('token');
 		$email = $this->input->post('email');
 
@@ -69,18 +82,16 @@ class Forgetpassword extends CI_Controller {
 
 		// $config = array(
   //           'protocol' => 'smtp',
-  //           'smtp_host' => 'smtp.cambodiasoft.com',
-  //           'smtp_port' => 25,
-  //           'smtp_user' => 'info@estatecambodia.com',
-  //           'smtp_pass' => 'cbs6789+*',
+  //           'smtp_host' => 'smtp.gmail.com',
+  //           'smtp_port' => '587',
+  //           'smtp_user' => 'estatecambodia168.dev@gmail.com',
+  //           'smtp_pass' => '@Sila168.com.Dev',
   //           'mailtype'  => 'html',
   //           'charset'   => 'utf-8'
   //       );
-  //       $this->load->library('email',$config);
-  //       $this->email->set_mailtype("html");
-  //       $this->email->set_newline("\r\n");
-
-        $this->load->library('mailgun');
+        // $this->load->library('email',$config);
+        // $this->email->set_mailtype("html");
+        // $this->email->set_newline("\r\n");
 
         $logo = "http://estatecambodia.com/assets/img/logo.png";
         $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
@@ -108,20 +119,32 @@ class Forgetpassword extends CI_Controller {
                 </tbody>
             </table>';
             
-        $this->mailgun->from('estatecambodia.dev@gmail.com','Estate cambodia Property Agence');
-        $this->mailgun->to($email);
-        $this->mailgun->subject('Estate Cambodia - Requesting to reset account password');
-        $this->mailgun->message($description);
+        //$this->email->from('estatecambodia.dev@gmail.com','Estate cambodia Property Agence');
+        $mail->setFrom('estatecambodia168.dev@gmail.com','Estate cambodia Property Agence');
+        //$this->email->to($email);
+        //$mail->addReplyTo($email);
+        $mail->addAddress($email);
+        //$this->email->subject('Estate Cambodia - Requesting to reset account password');
+        $mail->Subject = 'Estate Cambodia - Requesting to reset account password';
+        //$this->email->message($description);
+        $mail->msgHTML($description, __DIR__);
 
-        if($this->mailgun->send())
-        {
+        // if($this->email->send())
+        // {
+        //     $this->load->view('forget/header');
+        //     $this->load->view('forget/checkemail');
+        //     $this->load->view('forget/footer');
+        // }
+        // else
+        // {
+        //     show_error($this->email->print_debugger());
+        // }
+        if (!$mail->send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
             $this->load->view('forget/header');
             $this->load->view('forget/checkemail');
             $this->load->view('forget/footer');
-        }
-        else
-        {
-            show_error($this->mailgun->print_debugger());
         }
 	}
 }

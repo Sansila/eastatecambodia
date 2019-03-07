@@ -186,9 +186,9 @@
 				<input type="text" name="user_name" id="inputEmail" class="form-control" placeholder="<?php echo $this->lang->line('lo_name')?>" required autofocus>
 				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="<?php echo $this->lang->line('lo_pass')?>" required>
 				<select class="form-control txtlang" name="txtlang">
-					<option><?php echo $this->lang->line('lo_lang')?></option>
-					<option value="en"><?php echo $this->lang->line('lo_lang_en')?></option>
-					<option value="kh"><?php echo $this->lang->line('lo_lang_kh')?></option>
+					<option value=""><?php echo $this->lang->line('lo_lang')?></option>
+					<option <?php if($lang == "en") echo "selected"; else echo "";?> value="en"><?php echo $this->lang->line('lo_lang_en')?></option>
+					<option <?php if($lang == "kh") echo "selected"; else echo "";?> value="kh"><?php echo $this->lang->line('lo_lang_kh')?></option>
 				</select>
 				<div id="remember" class="checkbox">
 					<label>
@@ -232,9 +232,11 @@
 		<script type="text/javascript">
 			$('.txtlang').change(function(){
 				var val = $(this).val();
-				var url = '<?php echo site_url('/')?>' + val;
-				window.location = url;
-				//alert(url);
+				if(val !="")
+				{
+					var url = '<?php echo site_url('/')?>' + val +'/'+ val;
+					window.location = url;
+				}
 			});
 		</script>
 </html>
