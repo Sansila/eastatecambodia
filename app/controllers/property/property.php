@@ -311,9 +311,7 @@ class Property extends CI_Controller {
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
 		$i=1;
-		$lim = $paging['limit'];
-		//echo $lim.'/'.$paging['start'];
-		$limit=" LIMIT {$paging['start']}, {$lim}";
+		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
 		$sql.=" {$limit}";
 		$this->green->setActiveRole($this->session->userdata('roleid'));
         $this->green->setActiveModule($this->input->post('m'));
@@ -587,7 +585,8 @@ class Property extends CI_Controller {
 	function analysis($id)
 	{
 		$data['page_header']="New Property";
-		$data['id'] = $id;			
+		$data['id'] = $id;
+		$data['pname'] = $this->pro->getPropertyName($id);			
 		$this->parser->parse('greenadmin/header', $data);
 		$this->parser->parse('property/property/analysis',$data);
 		$this->parser->parse('greenadmin/footer', $data);

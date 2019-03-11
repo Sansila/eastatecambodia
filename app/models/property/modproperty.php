@@ -53,4 +53,9 @@
                                     WHERE  u.is_active = 0 AND u.type_post IS NOT NULL ")->row();
             return $sql->approve;
         }
+        function getPropertyName($id)
+        {
+            $sql = $this->db->query("SELECT * FROM tblproperty where pid = $id ")->row();
+            return $sql->property_name;
+        }
     }

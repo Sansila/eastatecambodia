@@ -135,11 +135,53 @@ class Home extends CI_Controller {
 			WHERE p.p_status = 1 {$where}
 			GROUP BY p.p_parent
 			")->result();
-
-		
-
 		header("Content-type:text/x-json");
 		echo json_encode($last);
+	}
+	function view_property()
+	{
+		$data['page_header']="Here is Index Page";		
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('greenadmin/property_view_analysis');
+		$this->load->view('greenadmin/footer');	
+	}
+	function view_hot_month()
+	{
+		// $sql = $this->db->query("SELECT DATE_FORMAT(date_create,'%y-%m') as 'year',count(*) as 'income'
+		// 							FROM tblvisitor WHERE pid = $id
+		// 							GROUP BY YEAR(date_create), MONTH(date_create)")->result();
+		$date = Date('Y-m-d');
+		$sql = $this->db->query("SELECT
+								    DATE_FORMAT(tblvisitor.date_create,'%y-%m') as year, COUNT(*) AS income
+								FROM
+								    tblproperty
+								INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+								WHERE
+								    tblproperty.pro_level = 1 AND tblproperty.p_status = 1
+								GROUP BY YEAR(tblvisitor.date_create), MONTH(tblvisitor.date_create)")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($sql);
+	}
+	function view_sale_day()
+	{
+		$date = date('Y-m-d');
+		$sql = $this->db->query("SELECT
+								   DATE_FORMAT(tblvisitor.date_create, '%d') as 'year', COUNT(*) AS income, tblpropertytype.typename AS cate
+								FROM
+								    tblproperty
+								INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+								INNER JOIN tblpropertytype ON tblpropertytype.typeid = tblproperty.type_id
+								WHERE
+								    month(tblvisitor.date_create) = month('$date') AND tblproperty.p_type = 1 AND tblproperty.p_status = 1
+								GROUP BY tblvisitor.date_create")->result();
+		$data = array();
+		foreach ($sql as $row) {
+			$data[] = array('year' => $row->cate.'-'.$row->year,
+							'income' => $row->income,
+							'expenses' => $row->income);
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
 	}
 }
 

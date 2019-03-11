@@ -162,7 +162,7 @@ a:hover {
 }
 /* Header */
 #header {
-  height: 77px;
+  height: 90px;
   position: relative;
   width: 100%;
   z-index: 0;
@@ -269,7 +269,7 @@ a:hover {
     position: relative;
     left: 10%;
     right: 10%;
-    top: -39px;
+    top: -32px;
     width: 80%;
     margin-bottom: -25px;
     text-align: center;

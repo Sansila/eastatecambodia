@@ -168,7 +168,9 @@
 					else
 						$url = site_url('greenadmin/home');
 				?>
-				<h1><a href="<?php echo $url?>"><?php echo $this->lang->line('dashboard');?></a></h1>	
+				<h1><a href="<?php echo $url?>">
+						<img src="<?php echo site_url('assets/img/logo.png')?>" style="width: 105px;">
+					</a></h1>	
 				<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>	
 			</div>
 		
