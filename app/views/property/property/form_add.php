@@ -195,7 +195,6 @@
                         </div>
 
                         <div class="form-group">
-                            
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_level')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
@@ -244,7 +243,57 @@
                                 </div>                   
                             </div>
                         </div>
-                        
+                        <?php 
+                            $hidesold = "";
+                            $userid = $this->session->userdata('roleid');
+                            if($userid == 1)
+                               $hidesold = "";
+                            else
+                                $hidesold = "";             
+                        ?>
+                        <div class="form-group <?php echo $hidesold?>">
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_sold_rented');?></label>
+                            <div class="col-lg-4"> 
+                                <div class="col-md-12">
+                                    <select class="form-control" id="txt_sold">    
+                                        <?php 
+                                        $sel = ""; $sel1 = ""; $sel2 = "";
+                                        if($row->sold == 1)
+                                            $sel ="selected";
+                                        if($row->sold == 2)
+                                            $sel1 ="selected";
+                                        ?>
+                                            <option value="0">Please Select</option>
+                                            <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_sold')?></option>
+                                            <option <?php echo $sel1;?> value="2"><?php echo $this->lang->line('p_rented')?></option>
+                                    </select>
+                                </div>                   
+                            </div>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_directly');?></label>
+                            <div class="col-lg-4"> 
+                                <div class="col-md-12">
+                                    <select class="form-control" id="txt_directly">
+                                        <?php
+                                            $sel = ""; $sel1 = ""; $sel2 = ""; $sel3 = "";
+                                            if($row->direct_sale == 1)
+                                                $sel ="selected";
+                                            if($row->direct_sale == 2)
+                                                $sel1 ="selected";
+                                            if($row->direct_sale == 3)
+                                                $sel2 ="selected";
+                                            if($row->direct_sale == 4)
+                                                $sel3 ="selected";
+                                        ?>
+                                        <option value="0">Please Select</option>
+                                        <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_dir_sale')?></option>
+                                        <option <?php echo $sel1;?> value="2"><?php echo $this->lang->line('p_dir_agent')?></option>
+                                        <option <?php echo $sel2;?> value="3"><?php echo $this->lang->line('p_dir_stop')?></option>
+                                        <option <?php echo $sel3;?> value="4"><?php echo $this->lang->line('p_dir_other')?></option>
+                                    </select>
+                                </div>                   
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_content')?></label>
                             <div class=" col-lg-10"> 
@@ -598,8 +647,8 @@
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <select class="form-control" id="available_pro">
-                                            <option value="1" <?php if(isset($row->available)){ if($row->available == 1) echo "selected"; }?> >Avialable</option>
-                                            <option value="0" <?php if(isset($row->available)){ if($row->available == 0) echo "selected"; }?> >Unavialable</option>
+                                            <option value="1" <?php if(isset($row->p_status)){ if($row->p_status == 1) echo "selected"; }?> >Avialable</option>
+                                            <option value="0" <?php if(isset($row->p_status)){ if($row->p_status == 0) echo "selected"; }?> >Unavialable</option>
                                         </select>
                                     </div>                   
                                 </div>

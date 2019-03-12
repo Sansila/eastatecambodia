@@ -15,6 +15,7 @@ class Property extends CI_Controller {
 							"User Name"=>'User Name',
 							"Pro_Number"=>'Pro_Number',
 							"Property Name"=>'Property Name',
+							"Price"=>'Price',
 							"Category"=> "Category",
 							"Location"=> "Location",
 							"Level" => "Level",
@@ -29,6 +30,7 @@ class Property extends CI_Controller {
 							"ឈ្មោះអ្នកប្រើ" => 'ឈ្មោះអ្នកប្រើ',
 							"លេខរាងអចនទ្រព្យ"=>'លេខរាងអចនទ្រព្យ',
 							"ឈ្មោះអចនទ្រព្យ"=>'ឈ្មោះអចនទ្រព្យ',
+							"តម្លៃ"=>'តម្លៃ',
 							"ប្រភេទអចនទ្រព្យ"=> "ប្រភេទអចនទ្រព្យ",
 							"ទីតាំង"=> "ទីតាំង",
 							"កម្រិត" => "កម្រិត",
@@ -114,7 +116,7 @@ class Property extends CI_Controller {
 			'pool'=> $this->input->post('pool'),
 			'price'=> $this->input->post('price'),
 			'property_name'=> $this->input->post('property_name'),
-			'p_status'=> 1,
+			'p_status'=> $this->input->post('available'),
 			'available' => $this->input->post('available'),
 			'p_type'=> $this->input->post('type'),
 			'service_provided'=> $this->input->post('service_pro'),
@@ -379,8 +381,9 @@ class Property extends CI_Controller {
 				 <td class='no'>".$row->create_date."</td>
 				 <td class='user'>".$row->user_name."</td>
 				 <td class='id'>P".$row->pid."</td>	
-				 <td class='name'>".$row->property_name."</td>	
-				 <td class='name'>".$row->typename."</td>	
+				 <td class='name'>".$row->property_name."</td>
+				 <td class='name'>$".$row->price."</td>		
+				 <td class='name'>".$row->typename."</td>
 				 <td class='name'>".$loc."</td>
 				 <td class='name'>".$level."</td>	
 				 <td class='name'>".$owner."</td>
@@ -390,17 +393,17 @@ class Property extends CI_Controller {
 				 <td class='remove_tag no_wrap'>";
 				 
 				 if($this->green->gAction("D")){
-					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+					$table.= "<a style='padding:0px 5px;'><img rel=".$row->pid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
 				 }
 
 				 if($this->green->gAction("U")){
-					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+					$table.= "<a style='padding:0px 5px;'><img rel=".$row->pid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
-					$table.= "<a style='padding:0px 10px;'><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/reload.png')."'/></a>";
+					$table.= "<a style='padding:0px 5px;'><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/reload.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
-					$table.= "<a style='padding:0px 10px;' href='".site_url('site/site/detail/'.$row->pid.'/?name='.$row->property_name)."' target='_blank'><img rel=".$row->pid." src='".base_url('assets/images/icons/view.png')."'/></a>";
+					$table.= "<a style='padding:0px 5px;' href='".site_url('site/site/detail/'.$row->pid.'/?name='.$row->property_name)."' target='_blank'><img rel=".$row->pid." src='".base_url('assets/images/icons/view.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
 					$table.= "<a href='".site_url('property/property/analysis/'.$row->pid)."'><img rel=".$row->pid." src='".base_url('assets/images/icons/analytics.png')."'/></a>";

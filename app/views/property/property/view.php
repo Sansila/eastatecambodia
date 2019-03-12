@@ -17,13 +17,13 @@
 		background-repeat: no-repeat;
 		padding-left: 15px !important;
 	}
-	.flat .widget-box {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-radius: 0;
-    overflow: auto;
-    white-space: nowrap;
-    }
+	/*.flat .widget-box {
+    	-webkit-box-shadow: none;
+    	box-shadow: none;
+    	border-radius: 0;
+    	overflow: auto;
+    	white-space: nowrap;
+    }*/
 </style>
 <?php
 	$m='';
@@ -95,6 +95,7 @@
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/>
 										</th>
+										<th></th>
 										<th >
 										   <select class="form-control input-sm" id="pro_type" name="pro_type" onchange="getdata(1);">
 										   		<option value="">-select-</option>

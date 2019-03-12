@@ -96,6 +96,14 @@
   $lang['p_amo'] = "I am the owner";
   $lang['p_owd'] = "I know owner directly";
   $lang['p_dko'] = "I do not know owner";
+  $lang['p_sold_rented'] = "Property Sold / Rented";
+  $lang['p_sold'] = "Sold Out";
+  $lang['p_rented'] = "Rented Out";
+  $lang['p_directly'] = "Directly Sale / Rent";
+  $lang['p_dir_sale'] = "Directly Sale / Rent";
+  $lang['p_dir_agent'] = "Other Agency";
+  $lang['p_dir_stop'] = "Stop Sale";
+  $lang['p_dir_other'] = "Other";
   // Login Page
   $lang['lo_name'] = "User Name";
   $lang['lo_pass'] = "Password";

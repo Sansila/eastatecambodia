@@ -274,7 +274,7 @@ class Site extends CI_Controller {
                     {
                         $where.= " lp.lineage LIKE '%$lid->propertylocationid%' OR p.property_name LIKE '%$arr%' $and ";
                     }else{
-                        $where.= " p.property_name LIKE '%$arr%' $and ";
+                        $where.= " (p.property_name LIKE '%$arr%' OR p.pid = '".substr($arr,1)."') $and ";
                     }    
                 }
                 $where.= ")";
