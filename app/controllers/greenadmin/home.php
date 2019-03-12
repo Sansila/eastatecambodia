@@ -166,19 +166,108 @@ class Home extends CI_Controller {
 	{
 		$date = date('Y-m-d');
 		$sql = $this->db->query("SELECT
-								   DATE_FORMAT(tblvisitor.date_create, '%d') as 'year', COUNT(*) AS income, tblpropertytype.typename AS cate
+								   DATE_FORMAT(tblvisitor.date_create, '%m-%d') as 'year', COUNT(*) AS income, tblpropertytype.typename AS cate
 								FROM
 								    tblproperty
 								INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
 								INNER JOIN tblpropertytype ON tblpropertytype.typeid = tblproperty.type_id
 								WHERE
-								    month(tblvisitor.date_create) = month('$date') AND tblproperty.p_type = 1 AND tblproperty.p_status = 1
-								GROUP BY tblvisitor.date_create")->result();
+								    (tblvisitor.date_create between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) AND tblproperty.p_type = 1 AND tblproperty.p_status = 1
+								GROUP BY tblpropertytype.typeid, tblvisitor.date_create 
+								ORDER BY tblvisitor.date_create ASC
+								")->result();
 		$data = array();
+		$i = 1;
 		foreach ($sql as $row) {
-			$data[] = array('year' => $row->cate.'-'.$row->year,
-							'income' => $row->income,
-							'expenses' => $row->income);
+			$data[] = array('year' => $i.'('.$row->year.')',
+							'cate' => $row->cate,
+							'income' => $row->income);
+			$i++;
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function view_rent_day()
+	{
+		$date = date('Y-m-d');
+		$sql = $this->db->query("SELECT
+								   DATE_FORMAT(tblvisitor.date_create, '%m-%d') as 'year', COUNT(*) AS income, tblpropertytype.typename AS cate
+								FROM
+								    tblproperty
+								INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+								INNER JOIN tblpropertytype ON tblpropertytype.typeid = tblproperty.type_id
+								WHERE
+								    (tblvisitor.date_create between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) AND tblproperty.p_type = 2 AND tblproperty.p_status = 1
+								GROUP BY tblpropertytype.typeid, tblvisitor.date_create 
+								ORDER BY tblvisitor.date_create ASC 
+								")->result();
+		$data = array();
+		$i = 1;
+		foreach ($sql as $row) {
+			$data[] = array('year' => $i.'('.$row->year.')',
+							'cate' => $row->cate,
+							'income' => $row->income);
+			$i++;
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function view_sale_month()
+	{
+		$date = date('Y-m-d');
+		$sql = $this->db->query("SELECT
+								    DATE_FORMAT(tblvisitor.date_create, '%Y-%m') AS 'year',
+								    COUNT(*) AS income,
+								    tblpropertytype.typename AS cate
+								FROM
+								    tblproperty
+								INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+								INNER JOIN tblpropertytype ON tblpropertytype.typeid = tblproperty.type_id
+								WHERE
+								    (tblvisitor.date_create >= date_sub(now(), interval 3 month)) AND tblproperty.p_type = 1 AND tblproperty.p_status = 1
+								    GROUP BY
+								        tblpropertytype.typeid,
+								        YEAR(tblvisitor.date_create), MONTH(tblvisitor.date_create)
+								    ORDER BY
+								        tblvisitor.date_create ASC
+								")->result();
+		$data = array();
+		$i = 1;
+		foreach ($sql as $row) {
+			$data[] = array('year' => $i.'('.$row->year.')',
+							'cate' => $row->cate,
+							'income' => $row->income);
+			$i++;
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function view_rent_month()
+	{
+		$date = date('Y-m-d');
+		$sql = $this->db->query("SELECT
+								    DATE_FORMAT(tblvisitor.date_create, '%Y-%m') AS 'year',
+								    COUNT(*) AS income,
+								    tblpropertytype.typename AS cate
+								FROM
+								    tblproperty
+								INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+								INNER JOIN tblpropertytype ON tblpropertytype.typeid = tblproperty.type_id
+								WHERE
+								    (tblvisitor.date_create >= date_sub(now(), interval 3 month)) AND tblproperty.p_type = 2 AND tblproperty.p_status = 1
+								    GROUP BY
+								        tblpropertytype.typeid,
+								        YEAR(tblvisitor.date_create), MONTH(tblvisitor.date_create)
+								    ORDER BY
+								        tblvisitor.date_create ASC
+								")->result();
+		$data = array();
+		$i = 1;
+		foreach ($sql as $row) {
+			$data[] = array('year' => $i.'('.$row->year.')',
+							'cate' => $row->cate,
+							'income' => $row->income);
+			$i++;
 		}
 		header("Content-type:text/x-json");
 		echo json_encode($data);

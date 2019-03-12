@@ -143,13 +143,15 @@ class Property extends CI_Controller {
 			$this->db->where('pid',$pro_id)->update('tblproperty', $data);
 			$msg = "Property Has Update...!";
 		}else{ 
+			$pro_id = $this->pro->save(array_merge($data,$data1), $pro_id);
+			$msg="Property Has Created...!";
 
-			if($count > 0) {
-				$msg = "Property Is already Exist...!";
-			} else {
-				$pro_id = $this->pro->save(array_merge($data,$data1), $pro_id);
-				$msg="Property Has Created...!";
-			}
+			// if($count > 0) {
+			// 	$msg = "Property Is already Exist...!";
+			// } else {
+			// 	$pro_id = $this->pro->save(array_merge($data,$data1), $pro_id);
+			// 	$msg="Property Has Created...!";
+			// }
 
 		}
 		$arr=array('msg'=>$msg,'pid'=>$pro_id);

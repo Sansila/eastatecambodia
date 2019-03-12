@@ -107,8 +107,13 @@
   $lang['lo_lang_kh'] = "Khmer(ភាសាខ្មែរ)";
   // Property analysis
   $lang['an_header'] = "Property Analysis";
+  $lang['an_header_view'] = "Property View Analysis";
   $lang['an_perday'] = "Property Analysis Per Day of PropertyID";
   $lang['an_permonth'] = "Property Analysis Per Month of PropertyID";
+  $lang['an_header_view_day_sal'] = "Property View Analysis By Sale The Last 7 Days";
+  $lang['an_header_view_day_rent'] = "Property View Analysis By Rent The Last 7 Days";
+  $lang['an_header_view_month_sal'] = "Property View Analysis By Sale The Last 6 Months";
+  $lang['an_header_view_month_rent'] = "Property View Analysis By Rent The Last 6 Months";
   // Property Location
   $lang['lp_header'] = "Property Location";
   $lang['lp_header_list'] = "Property Location List";
