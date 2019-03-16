@@ -131,13 +131,13 @@
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'>Email</label>
 	                                <div class="col-lg-8">
-	                                    <input type="text" name="txtPhone" class="form-control txtName" value="" />      
+	                                    <input type="text" name="txtEmail" class="form-control txtName" value="" />      
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'>Phone Number <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
-	                                    <input type="text" name="txtEmail" class="form-control txtName" value="" required="" />    
+	                                    <input type="text" name="txtPhone" class="form-control txtName" value="" required="" />    
 	                                </div>
 		                        </div>
 		                        <div class="form-group">

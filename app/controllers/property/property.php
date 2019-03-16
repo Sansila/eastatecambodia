@@ -130,7 +130,8 @@ class Property extends CI_Controller {
 			'longtitude'=> $this->input->post('longtitude'),
 			'pro_level' => $this->input->post('level'),
 			'relative_owner' => $this->input->post('relative_owner'),
-			'p_parent' => $store
+			'p_parent' => $store,
+			'direct_sale' => $this->input->post('directly')
 		);
 
 		
@@ -276,6 +277,7 @@ class Property extends CI_Controller {
 		$sdate = $this->input->post('date');
 		$levels = $this->input->post('level');
 		$owner = $this->input->post('owner');
+		$avialable_pro = $this->input->post('avialable_pro');
 
 		$where = "";
 		$var = $this->session->all_userdata();
@@ -301,8 +303,28 @@ class Property extends CI_Controller {
 			$where.= " AND pl.pro_level = '$levels' ";
 		if($owner != 0)
 			$where .= " AND pl.relative_owner = '$owner' ";
+		if($avialable_pro !="")
+			$where .= " AND pl.p_status = '$avialable_pro' ";
 
-		$sql="SELECT *
+		$sql="SELECT pl.pid,
+					 pl.property_name,
+					 pl.type_id,
+					 pl.agent_id,
+					 pl.lp_id,
+					 pl.p_status,
+					 pl.create_date,
+					 pl.pro_level,
+					 pl.relative_owner,
+					 pl.price,
+					 pl.hit,
+					 pl.p_type,
+					 pl.direct_sale,
+					 pt.typeid,
+					 pt.typename,
+					 u.userid,
+					 u.user_name,
+					 l.propertylocationid,
+					 l.lineage
 		FROM tblproperty pl
 		left join tblpropertytype pt
 		on pl.type_id = pt.typeid
@@ -310,7 +332,7 @@ class Property extends CI_Controller {
 		on u.userid = pl.agent_id
 		left join tblpropertylocation l 
 		on pl.lp_id = l.propertylocationid
-		WHERE pl.p_status = 1 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
+		WHERE pl.p_status <> 0 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
@@ -328,7 +350,15 @@ class Property extends CI_Controller {
 			$owner ="";
 			$property_type ="";
 			if($row->p_status==1)
-				$visibled="Yes";
+				$visibled="Aviable";
+			if($row->p_status == 2)
+				$visibled="Draft";
+			if($row->p_status == 3)
+				$visibled="Sold";
+			if($row->p_status == 4)
+				$visibled="Rented";
+			if($row->p_status == 5)
+				$visibled="NA";
 			if($row->p_type == 1)
 				$property_type = "Sale";
 			if($row->p_type == 2)

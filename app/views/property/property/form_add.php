@@ -243,16 +243,8 @@
                                 </div>                   
                             </div>
                         </div>
-                        <?php 
-                            $hidesold = "";
-                            $userid = $this->session->userdata('roleid');
-                            if($userid == 1)
-                               $hidesold = "";
-                            else
-                                $hidesold = "";             
-                        ?>
-                        <div class="form-group <?php echo $hidesold?>">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_sold_rented');?></label>
+                        <div class="form-group">
+                            <!-- <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_sold_rented');?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="txt_sold">    
@@ -266,6 +258,18 @@
                                             <option value="0">Please Select</option>
                                             <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_sold')?></option>
                                             <option <?php echo $sel1;?> value="2"><?php echo $this->lang->line('p_rented')?></option>
+                                    </select>
+                                </div>                   
+                            </div> -->
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ap')?></label>
+                            <div class="col-lg-4"> 
+                                <div class="col-md-12">
+                                    <select class="form-control" id="available_pro">
+                                        <option value="1" <?php if(isset($row->p_status)){ if($row->p_status == 1) echo "selected"; }?> ><?php echo $this->lang->line('p_av')?></option>
+                                        <option value="2" <?php if(isset($row->p_status)){ if($row->p_status == 2) echo "selected"; }?>><?php echo $this->lang->line('p_draft')?></option>
+                                        <option value="3" <?php if(isset($row->p_status)){ if($row->p_status == 3) echo "selected"; }?>><?php echo $this->lang->line('p_sold')?></option>
+                                        <option value="4" <?php if(isset($row->p_status)){ if($row->p_status == 4) echo "selected"; }?>><?php echo $this->lang->line('p_rented')?></option>
+                                        <option value="5" <?php if(isset($row->p_status)){ if($row->p_status == 5) echo "selected"; }?>><?php echo $this->lang->line('p_na')?></option>
                                     </select>
                                 </div>                   
                             </div>
@@ -643,15 +647,15 @@
                                         <input type="text"  class="form-control input-sm" name="owner_contact" value='<?php echo isset($row->contact_owner)?"$row->contact_owner":""; ?>' id="owner_contact">
                                     </div>                   
                                 </div>
-                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ap')?></label>
-                                <div class="col-lg-4"> 
+                                <!-- <label class='col-lg-2 control-label hide'><?php echo $this->lang->line('p_ap')?></label>
+                                <div class="col-lg-4 hide"> 
                                     <div class="col-md-12">
                                         <select class="form-control" id="available_pro">
                                             <option value="1" <?php if(isset($row->p_status)){ if($row->p_status == 1) echo "selected"; }?> >Avialable</option>
                                             <option value="0" <?php if(isset($row->p_status)){ if($row->p_status == 0) echo "selected"; }?> >Unavialable</option>
                                         </select>
                                     </div>                   
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="form-group">
@@ -676,17 +680,23 @@
                     <div class="form-group">
                         <!-- <label class="col-lg-2 control-label"></label>                       -->
                         <div class="col-md-12">
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <?php
                                     if($this->green->gAction("C")){
                                 ?>
-                                <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 150px;"><?php echo $this->lang->line('p_save')?></button>
+                                <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 100%;"><?php echo $this->lang->line('p_save')?></button>
                                 <?php 
                                     }
                                 ?>
                             </div>
-                            <div class="col-lg-1">
-                              <!-- <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button> -->
+                            <div class="col-lg-2">
+                                <?php
+                                    if($this->green->gAction("C")){
+                                ?>
+                                <button id="save_draft" name="save_draft" type="button" class="btn btn-primary" style="width: 100%;"><?php echo $this->lang->line('p_save_draft')?></button>
+                                <?php 
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -746,6 +756,13 @@
     $(".select2-single").select2({
         allowClear:true,
         placeholder: 'Location'
+    });
+
+    $("#save_draft").click(function(){
+        $("#available_pro").val('2');
+        setTimeout(function(){
+            $('form[name=basic_validate]').submit();
+        },500);
     });
     
     function isNumberKey(evt){
@@ -812,9 +829,10 @@
             $("#article_tap").addClass("hide");
 
         }
-    })
+    });
+    
     $(function(){       
-    $('#article_date').datepicker({ dateFormat: "yy-mm-dd" });
+    $('#article_date').datepicker({ dateFormat: "yy-mm-dd" })
     // Form Validation
     $("#basic_validate").submit(function(e){
       e.preventDefault();
@@ -920,7 +938,8 @@
                     latitude: $('#latitude').val(), 
                     longtitude: $('#longtitude').val(),
                     level: $('#pro_level').val(),
-                    relative_owner: $('#relative_owner').val()
+                    relative_owner: $('#relative_owner').val(),
+                    directly: $('#txt_directly').val()
                 },
                 success:function(data) {
                     // $(".result_text").html(data.msg);

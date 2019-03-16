@@ -89,6 +89,7 @@
     $lang['p_sd'] = "ថ្ងៃ​ចាប់ផ្តើម";
     $lang['p_ed'] = "កាលបរិច្ឆេទបញ្ចប់";
     $lang['p_save'] = "រក្សាទុក";
+    $lang['p_save_draft'] = "រក្សាទុកដោយមិនបង្ហាញ";
     $lang['p_hot'] = "ប្រញាប់";
     $lang['p_spon'] = "ឧបត្ថម្ភ";
     $lang['p_free'] = "ឥតគិតថ្លៃ";
@@ -96,12 +97,15 @@
     $lang['p_owd'] = "ខ្ញុំស្គាល់ម្ចាស់ផ្ទាល់";
     $lang['p_dko'] = "ខ្ញុំមិនស្គាល់ម្ចាស់ទេ";
     $lang['p_sold_rented'] = "អចលនទ្រព្យដែលបានលក់ / ជួល";
+    $lang['p_av'] = "ដែលអាចរកបាន";
+    $lang['p_draft'] = "មិនទាន់បង្ហាញ";
     $lang['p_sold'] = "លក់ចេញ";
     $lang['p_rented'] = "បានជួល";
-    $lang['p_directly'] = "លក់ / ជួលដោយផ្ទាល់";
-    $lang['p_dir_sale'] = "លក់ / ជួលដោយផ្ទាល់";
+    $lang['p_na'] = "NA";
+    $lang['p_directly'] = "លក់ / ជួលដោយ";
+    $lang['p_dir_sale'] = "ដោយផ្ទាល់";
     $lang['p_dir_agent'] = "ដោយភ្នាក់ងារផ្សេងទៀត";
-    $lang['p_dir_stop'] = "បញ្ឈប់ការលក់";
+    $lang['p_dir_stop'] = "ពន្យាការលក់";
     $lang['p_dir_other'] = "ផ្សេងៗ";
     // Login Page
     $lang['lo_name'] = "ឈ្មោះ​អ្នកប្រើប្រាស់";

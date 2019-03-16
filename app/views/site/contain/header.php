@@ -41,7 +41,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/js/editor/summernote.css') ?>" />
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/fileinput.css') ?>" />
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/select2.css') ?>" />
-
+	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/css/BsMultiSelect.css') ?>" /> -->
 	<!-- Style Switcher-->
 	<link rel="stylesheet" href="<?php echo site_url('template')?>/style-switcher/css/style-switcher.css">
 	<!-- <link href="css/colors/red/style.html" rel="stylesheet" id="layoutstyle"> -->
@@ -57,6 +57,8 @@
 	<script src="<?php echo base_url();?>ckeditor/ckeditor.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 	<script src="<?php echo base_url();?>assets/js/fileinput.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 	<script src="<?php echo base_url('assets/js/select2.js')?>"></script>
+	<!-- <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
+	<script src="<?php echo base_url('assets/js/BsMultiSelect.js')?>"></script> -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
   type="text/javascript"></script>
 

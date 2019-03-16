@@ -1,12 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-
+	protected $thead;
+	protected $idfield;
+	protected $searchrow;
 	public function __construct(){
         parent::__construct();
         $this->load->model("greenadmin/Modgreenadmin","modgreen");
         $this->load->helper("url");
-        
+        $this->thead=array("No"=>'no',
+							 "Customer Name"=>'Customer Name',	 
+							 "Phone"=>'Phone',	
+							 "Email"=>'Email',	
+							 "Address"=>'Address',	
+							 "Property Category"=>'Property Category',
+							 "Property Type"=>'Property Type',
+							 "Action"=>'Action'							 	
+							);
+		$this->idfield="categoryid";
     }
 	public function index()
 	{
@@ -271,6 +282,105 @@ class Home extends CI_Controller {
 		}
 		header("Content-type:text/x-json");
 		echo json_encode($data);
+	}
+	function view_finding()
+	{
+		$data['page_header']="Here is Index Page";
+		$data['idfield']=$this->idfield;		
+		$data['thead']=	$this->thead;		
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('greenadmin/list_customer');
+		$this->load->view('greenadmin/footer');	
+	}
+	function getdata()
+	{
+		$perpage=$this->input->post('perpage');
+		$s_name=$this->input->post('s_name');
+		
+		$sql="SELECT * FROM tblfindproperty WHERE 1=1 AND fname LIKE '%$s_name%' ORDER BY fid DESC";
+		$table='';
+		$pagina='';
+		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("greenadmin/home/getdata"),$perpage);
+		$no=1;
+		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+		$sql.=" {$limit}";
+		$this->green->setActiveRole($this->session->userdata('roleid'));
+        $this->green->setActiveModule($this->input->post('m'));
+        $this->green->setActivePage($this->input->post('p')); 
+		foreach($this->db->query($sql)->result() as $row){
+			$location = $row->fpcategory;
+			$location = trim($location, ',');
+            $arr = explode(',', $location);
+            $i = 0; $wheres = ""; $cats = "";
+            $num = count($arr);
+            $wheres.= " AND (";
+            foreach ($arr as $r) {
+        		$or = "OR";
+                if(++$i == $num)
+                {
+                    $or = "";
+                }
+                $wheres.= "typeid = '$r' $or ";
+            }
+            $wheres.= ")";
+            $category = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1 {$wheres}")->result();
+            $s = count($category); $i=0;
+            foreach ($category as $cat) {
+            	$or = ",";
+                if(++$i == $s)
+                {
+                    $or = "";
+                }
+            	$cats.= $cat->typename.''.$or;
+            }
+            $type = $row->fpstatus;
+            $type = trim($type, ',');
+            $arrs = explode(',', $type);
+            $st = count($arrs); $i = 0;
+            $status = ""; $all = "";
+            foreach ($arrs as $ar) {
+            	if($ar == 1)
+            		$status = "Sale";
+            	else
+            		$status = "Rent";
+
+            	$or = ",";
+                if(++$i == $st)
+                {
+                    $or = "";
+                }
+            	$all.= $status.''.$or;
+            }	
+			$table.= "<tr>
+				 <td class='no'>".$no."</td>
+				 <td class='name'>".$row->fname."</td>											
+				 <td class='type'>".$row->fphone."</td>							 	
+				 <td class='type'>".$row->femail."</td>							 	
+				 <td class='type'>".$row->faddress."</td>							 	
+				 <td class='country'>".$cats."</td>
+				 <td class='country'>".$all."</td>
+				 <td class='remove_tag no_wrap'>";
+				 
+				 if($this->green->gAction("D")){
+					$table.= "<a><img rel=".$row->fid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+				 }
+				 // if($this->green->gAction("U")){
+					// $table.= "<a><img rel=".$row->fid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+				 // }
+			$table.= " </td>
+				 </tr>
+				 ";										 
+			$no++;	 
+		}
+		$arr['data']=$table;
+		$arr['pagina']=$paging;
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
+	}
+	function delete($id)
+	{
+		$this->db->where('fid',$id);
+		$this->db->delete('tblfindproperty');
 	}
 }
 
