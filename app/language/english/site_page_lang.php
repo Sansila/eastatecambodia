@@ -163,4 +163,6 @@
   $lang['em_en_pwd'] = "Please enter your new password";
   $lang['em_txtpwd'] = "Enter New Password";
   $lang['em_txtconpwd'] = "Enter Confirm New Password";
+  // Form List Customer 
+  $lang['cl_title'] = "Customer Lists Finding Property";
 ?>

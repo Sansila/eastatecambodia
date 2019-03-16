@@ -30,7 +30,7 @@
 	}
  ?>
  <div id="content-header" class="mini">
-        <h1><?php echo $this->lang->line('lp_header_list')?></h1>
+        <h1>LOCATION LIST</h1>
         <ul class="mini-stats box-3">
             
         </ul>
@@ -39,8 +39,8 @@
  	<?php 
         $roleid=$this->session->userdata('roleid'); 
     ?>
-    <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
-    <a href='#' class="current"><?php echo $this->lang->line('lp_header_list')?></a>
+    <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
+    <a href='#' class="current">Menu list</a>
  </div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
@@ -57,7 +57,7 @@
 							<span class="icon">
 								<i class="fa fa-th"></i>
 							</span>
-								<h5><?php echo $this->lang->line('lp_header_list')?></h5>
+								<h5>Menu List</h5>
 							<div style="text-align: right; width:130px; float:right">
 					      			      		
 					      	</div> 			    
@@ -96,7 +96,7 @@
 					</div>
 					<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
 							<div class='col-sm-3'>
-								<label><?php echo $this->lang->line('show')?> 
+								<label>Show 
 									
 									<select id='perpage' onchange='getdata(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
 										<?PHP

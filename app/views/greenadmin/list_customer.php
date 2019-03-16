@@ -17,7 +17,9 @@
 		background-repeat: no-repeat;
 		padding-left: 15px !important;
 	}
-	
+	.colorbg{
+		background: #d0adc7 !important;
+	}
 </style>
 <?php
 	$m='';
@@ -29,16 +31,16 @@
 	    $p=$_GET['p'];
 	}
  ?>
- <div id="content-header" class="mini">
-        <h1>Menu LIST</h1>
+<div id="content-header" class="mini">
+        <h1><?php echo $this->lang->line('cl_title')?></h1>
         <ul class="mini-stats box-3">
             
         </ul>
- </div>
- <div id="breadcrumb">
-      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-      <a href='#' class="current">Menu list</a>
- </div>
+</div>
+<div id="breadcrumb">
+      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+      <a href='#' class="current"><?php echo $this->lang->line('cl_title')?></a>
+</div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
 	    <div id="main_content">
@@ -54,7 +56,7 @@
 							<span class="icon">
 								<i class="fa fa-th"></i>
 							</span>
-								<h5>Menu List</h5>
+								<h5><?php echo $this->lang->line('cl_title')?></h5>
 							<div style="text-align: right; width:130px; float:right">
 					      			      		
 					      	</div> 			    
@@ -99,7 +101,7 @@
 					</div>
 					<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
 							<div class='col-sm-3'>
-								<label>Show 
+								<label><?php echo $this->lang->line('show')?>  
 									
 									<select id='perpage' onchange='getdata(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
 										<?PHP
@@ -276,7 +278,7 @@
 				window.open("<?PHP echo site_url('store/store/preview');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>",'_blank');
 			
 		}
-		function deletestore(event){
+		function deletefinding(event){
 			var conf=confirm("Are you Sure to delete this Finding");
 			if(conf==true){
 				var storeid=jQuery(event.target).attr("rel");

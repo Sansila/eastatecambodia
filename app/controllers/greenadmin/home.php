@@ -367,6 +367,31 @@ class Home extends CI_Controller {
 				 // if($this->green->gAction("U")){
 					// $table.= "<a><img rel=".$row->fid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
 				 // }
+            }
+            $color = "";
+            if($row->review == 1)
+            	$color = "colorbg";
+            else
+            	$color = "";
+			$table.= "<tr>
+				 <td class='no ".$color."'>".$no."</td>
+				 <td class='name ".$color."'>".$row->fname."</td>											
+				 <td class='type ".$color."'>".$row->fphone."</td>							 	
+				 <td class='type ".$color."'>".$row->femail."</td>							 	
+				 <td class='type ".$color."'>".$row->faddress."</td>							 	
+				 <td class='country ".$color."'>".$cats."</td>
+				 <td class='country ".$color."'>".$all."</td>
+				 <td class='remove_tag no_wrap ".$color."'>";
+				 
+				 if($this->green->gAction("D")){
+					$table.= "<a><img rel=".$row->fid." onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+				 }
+				 if($this->green->gAction("U")){
+				 	if($row->review == 1)
+						$table.= "<a>Reviewed</a>";
+					else
+						$table.= "<a href='".site_url('greenadmin/home/review/'.$row->fid)."'>Review</a>";
+				 }
 			$table.= " </td>
 				 </tr>
 				 ";										 
@@ -382,5 +407,23 @@ class Home extends CI_Controller {
 		$this->db->where('fid',$id);
 		$this->db->delete('tblfindproperty');
 	}
+
+	function review($id)
+	{
+		$data = array('review' => 1);
+		$this->db->where('fid',$id);
+		$this->db->update('tblfindproperty',$data);
+
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+	function analisys_post()
+	{
+		$sql = $this->db->query("SELECT count(*) as income, tblproperty.create_date as year FROM tblproperty
+								WHERE (tblproperty.create_date between (CURDATE() - INTERVAL 7 DAY) and CURDATE())
+								GROUP by create_date")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($sql);
+	}
+
 }
 

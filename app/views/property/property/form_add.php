@@ -244,20 +244,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_sold_rented');?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ap')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
-                                    <select class="form-control" id="txt_sold">    
-                                        <?php 
-                                        $sel = ""; $sel1 = ""; $sel2 = "";
-                                        if($row->sold == 1)
-                                            $sel ="selected";
-                                        if($row->sold == 2)
-                                            $sel1 ="selected";
-                                        ?>
-                                            <option value="0">Please Select</option>
-                                            <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_sold')?></option>
-                                            <option <?php echo $sel1;?> value="2"><?php echo $this->lang->line('p_rented')?></option>
+                                    <select class="form-control" id="available_pro">
+                                        <option value="1" <?php if(isset($row->p_status)){ if($row->p_status == 1) echo "selected"; }?> ><?php echo $this->lang->line('p_av')?></option>
+                                        <option value="2" <?php if(isset($row->p_status)){ if($row->p_status == 2) echo "selected"; }?>><?php echo $this->lang->line('p_draft')?></option>
+                                        <option value="3" <?php if(isset($row->p_status)){ if($row->p_status == 3) echo "selected"; }?>><?php echo $this->lang->line('p_sold')?></option>
+                                        <option value="4" <?php if(isset($row->p_status)){ if($row->p_status == 4) echo "selected"; }?>><?php echo $this->lang->line('p_rented')?></option>
+                                        <option value="5" <?php if(isset($row->p_status)){ if($row->p_status == 5) echo "selected"; }?>><?php echo $this->lang->line('p_na')?></option>
                                     </select>
                                 </div>                   
                             </div> -->

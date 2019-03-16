@@ -123,4 +123,10 @@ class Forgetpassword extends CI_Controller {
             show_error($this->email->print_debugger());
         }
 	}
+    function checkmessage()
+    {
+        $this->load->view('forget/header');
+        $this->load->view('forget/checkemail');
+        $this->load->view('forget/footer');
+    }
 }

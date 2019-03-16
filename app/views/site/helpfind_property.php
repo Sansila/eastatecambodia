@@ -192,7 +192,7 @@
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Property Type</label>
+		                            <label class='col-lg-4 control-label'>Property Type <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8" style="margin-bottom: 15px;">
 	                                    <!-- <select name="txtpro_type" class="form-control txtName" style="max-width: 100%;" required="">
 	                                    	<option value="">-Select-</option>
