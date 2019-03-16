@@ -255,7 +255,7 @@
                                         <option value="5" <?php if(isset($row->p_status)){ if($row->p_status == 5) echo "selected"; }?>><?php echo $this->lang->line('p_na')?></option>
                                     </select>
                                 </div>                   
-                            </div> -->
+                            </div>
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ap')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
