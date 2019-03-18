@@ -306,7 +306,8 @@ class Home extends CI_Controller {
 		$sql.=" {$limit}";
 		$this->green->setActiveRole($this->session->userdata('roleid'));
         $this->green->setActiveModule($this->input->post('m'));
-        $this->green->setActivePage($this->input->post('p')); 
+        $this->green->setActivePage($this->input->post('p'));
+
 		foreach($this->db->query($sql)->result() as $row){
 			$location = $row->fpcategory;
 			$location = trim($location, ',');
@@ -350,23 +351,6 @@ class Home extends CI_Controller {
                     $or = "";
                 }
             	$all.= $status.''.$or;
-            }	
-			$table.= "<tr>
-				 <td class='no'>".$no."</td>
-				 <td class='name'>".$row->fname."</td>											
-				 <td class='type'>".$row->fphone."</td>							 	
-				 <td class='type'>".$row->femail."</td>							 	
-				 <td class='type'>".$row->faddress."</td>							 	
-				 <td class='country'>".$cats."</td>
-				 <td class='country'>".$all."</td>
-				 <td class='remove_tag no_wrap'>";
-				 
-				 if($this->green->gAction("D")){
-					$table.= "<a><img rel=".$row->fid." onclick='deletestore(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
-				 }
-				 // if($this->green->gAction("U")){
-					// $table.= "<a><img rel=".$row->fid." onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
-				 // }
             }
             $color = "";
             if($row->review == 1)
@@ -397,6 +381,7 @@ class Home extends CI_Controller {
 				 ";										 
 			$no++;	 
 		}
+
 		$arr['data']=$table;
 		$arr['pagina']=$paging;
 		header("Content-type:text/x-json");
@@ -407,7 +392,6 @@ class Home extends CI_Controller {
 		$this->db->where('fid',$id);
 		$this->db->delete('tblfindproperty');
 	}
-
 	function review($id)
 	{
 		$data = array('review' => 1);
@@ -419,11 +403,9 @@ class Home extends CI_Controller {
 	function analisys_post()
 	{
 		$sql = $this->db->query("SELECT count(*) as income, tblproperty.create_date as year FROM tblproperty
-								WHERE (tblproperty.create_date between (CURDATE() - INTERVAL 7 DAY) and CURDATE())
+								WHERE (tblproperty.create_date between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) AND tblproperty.p_status = 1
 								GROUP by create_date")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($sql);
 	}
-
 }
-
