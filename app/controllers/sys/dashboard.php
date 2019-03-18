@@ -61,6 +61,7 @@ class Dashboard extends CI_Controller {
 		$data['count_inactive_user'] = $this->dash->CountInactiveUser();
 		$data['active_property'] = $this->dash->CountActiveProperty();
 		$data['active_user'] = $this->dash->CountActiveUser();
+		$data['counter_finder'] = $this->dash->CountFinderProperty();
 		$data['query']=$this->user->getuser_inactive();
 		$this->parser->parse('greenadmin/header', $data);
 		$this->parser->parse('sys/dashboard_form', $data);

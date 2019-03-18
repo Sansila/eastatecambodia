@@ -45,6 +45,42 @@
 			    right: 37px;
 			    top: 21px;
 			}
+			input.search-query {
+			    padding-left:30px;
+			    border: 1px solid #e9e4e4;
+    			border-radius: 20px;
+    			font-size: 14px;
+			}
+
+			form.form-search {
+			    position: relative;
+			}
+			
+			form.form-search:before {
+			    content:'';
+			    display: block;
+			    width: 14px;
+			    height: 14px;
+			    background-image: url(http://getbootstrap.com/2.3.2/assets/img/glyphicons-halflings.png);
+			    background-position: -48px 0;
+			    position: absolute;
+			    top:12px;
+			    left:12px;
+			    opacity: .5;
+			    z-index: 1000;
+			}
+			.btn-primarys {
+			    color: #ffffff;
+			    background-color: #006dcc !important;
+			    border-top-right-radius: 20px;
+			    border-bottom-right-radius: 20px;
+			    height: 38px;
+			    border:none;
+			    font-size: 12px;
+			}
+			.chosen-container{
+				display: none !important; 
+			}
 		</style>
 
 		<!-- Begin Main -->
@@ -362,6 +398,24 @@
 					</div>
 					<div class="col-md-3 sidebar">
 						<!-- Begin Our Agents -->
+						<div>
+							<div>
+							    <form class="form-search form-inline" method="get" action="<?php echo site_url('site/site/search')?>">
+							        <div class="input-append">
+							        	<select id="id_listing_type" name="available" class="hide">
+								            <option value="0">Sale</option>
+								        </select>
+							            <input type="text" class="search-query" name="q" placeholder="Search..." />
+							            <input id="list_type" class="hide" name="list_type" value="lists"/>
+							            <select id="order-status" name="order" data-placeholder="Order" class="chosen-select order_bys hide">
+											<option value="Desc">Descending</option>
+											<option value="Asc">Ascending</option>
+										</select>
+							            <button type="submit" class="btn btn-primary btn-primarys">Search</button>
+							        </div>
+							    </form>
+							</div>
+						</div>
 						<aside class="block pgl-agents pgl-bg-light">
 							<h3>Our Agents</h3>
 							<div class="owl-carousel pgl-pro-slide pgl-agent-item" data-plugin-options='{"items": false, "pagination": false, "autoHeight": true}'>

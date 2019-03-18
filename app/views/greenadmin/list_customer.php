@@ -17,7 +17,9 @@
 		background-repeat: no-repeat;
 		padding-left: 15px !important;
 	}
-	
+	.colorbg{
+		background: #d0adc7 !important;
+	}
 </style>
 <?php
 	$m='';
@@ -29,19 +31,16 @@
 	    $p=$_GET['p'];
 	}
  ?>
- <div id="content-header" class="mini">
-        <h1>LOCATION LIST</h1>
+<div id="content-header" class="mini">
+        <h1><?php echo $this->lang->line('cl_title')?></h1>
         <ul class="mini-stats box-3">
             
         </ul>
- </div>
- <div id="breadcrumb">
- 	<?php 
-        $roleid=$this->session->userdata('roleid'); 
-    ?>
-    <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-    <a href='#' class="current">Menu list</a>
- </div>
+</div>
+<div id="breadcrumb">
+      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+      <a href='#' class="current"><?php echo $this->lang->line('cl_title')?></a>
+</div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
 	    <div id="main_content">
@@ -57,7 +56,7 @@
 							<span class="icon">
 								<i class="fa fa-th"></i>
 							</span>
-								<h5>Menu List</h5>
+								<h5><?php echo $this->lang->line('cl_title')?></h5>
 							<div style="text-align: right; width:130px; float:right">
 					      			      		
 					      	</div> 			    
@@ -82,6 +81,12 @@
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/> 
 										</th>
 										<th ></th>
+										<th>
+											
+										</th>
+										<th>
+											
+										</th>
 										<th width='150'>
 										</th>
 										
@@ -96,7 +101,7 @@
 					</div>
 					<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
 							<div class='col-sm-3'>
-								<label>Show 
+								<label><?php echo $this->lang->line('show')?>  
 									
 									<select id='perpage' onchange='getdata(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
 										<?PHP
@@ -238,7 +243,7 @@
 			});
 		})
 		function getdata(page){
-          	var url="<?php echo site_url('property/propertylocation/getdata')?>";
+          	var url="<?php echo site_url('greenadmin/home/getdata')?>";
           	var m="<?PHP echo $m?>";
           	var p="<?PHP echo $p?>";
           	var s_name=$('#s_store_name').val();
@@ -253,6 +258,7 @@
 		            		'p':p,
 		            		'page':page,
 		            		's_name':s_name,
+		            		
 		            		'perpage':perpage
 		            	},
 		            success:function(data) {
@@ -264,7 +270,7 @@
 		
 		function update(event){
 			    var storeid=jQuery(event.target).attr("rel");
-				location.href="<?PHP echo site_url('property/propertylocation/edit');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
+				location.href="<?PHP echo site_url('greenadmin/home/edit');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
 			
 		}
 		function previewstore(event){
@@ -272,11 +278,11 @@
 				window.open("<?PHP echo site_url('store/store/preview');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>",'_blank');
 			
 		}
-		function deletestore(event){
-			var conf=confirm("Are you sure to delete this Location");
+		function deletefinding(event){
+			var conf=confirm("Are you Sure to delete this Finding");
 			if(conf==true){
 				var storeid=jQuery(event.target).attr("rel");
-				var url="<?php echo site_url('property/propertylocation/delete')?>/"+storeid;
+				var url="<?php echo site_url('greenadmin/home/delete')?>/"+storeid;
 				$.ajax({
 		            url:url,
 		            type:"POST",

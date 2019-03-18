@@ -1,12 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-
+	protected $thead;
+	protected $idfield;
+	protected $searchrow;
 	public function __construct(){
         parent::__construct();
         $this->load->model("greenadmin/Modgreenadmin","modgreen");
         $this->load->helper("url");
-        
+        $this->thead=array("No"=>'no',
+							 "Customer Name"=>'Customer Name',	 
+							 "Phone"=>'Phone',	
+							 "Email"=>'Email',	
+							 "Address"=>'Address',	
+							 "Property Category"=>'Property Category',
+							 "Property Type"=>'Property Type',
+							 "Action"=>'Action'							 	
+							);
+		$this->idfield="categoryid";
     }
 	public function index()
 	{
@@ -271,6 +282,129 @@ class Home extends CI_Controller {
 		}
 		header("Content-type:text/x-json");
 		echo json_encode($data);
+	}
+	function view_finding()
+	{
+		$data['page_header']="Here is Index Page";
+		$data['idfield']=$this->idfield;		
+		$data['thead']=	$this->thead;		
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('greenadmin/list_customer');
+		$this->load->view('greenadmin/footer');	
+	}
+	function getdata()
+	{
+		$perpage=$this->input->post('perpage');
+		$s_name=$this->input->post('s_name');
+		
+		$sql="SELECT * FROM tblfindproperty WHERE 1=1 AND fname LIKE '%$s_name%' ORDER BY fid DESC";
+		$table='';
+		$pagina='';
+		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("greenadmin/home/getdata"),$perpage);
+		$no=1;
+		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+		$sql.=" {$limit}";
+		$this->green->setActiveRole($this->session->userdata('roleid'));
+        $this->green->setActiveModule($this->input->post('m'));
+        $this->green->setActivePage($this->input->post('p')); 
+		foreach($this->db->query($sql)->result() as $row){
+			$location = $row->fpcategory;
+			$location = trim($location, ',');
+            $arr = explode(',', $location);
+            $i = 0; $wheres = ""; $cats = "";
+            $num = count($arr);
+            $wheres.= " AND (";
+            foreach ($arr as $r) {
+        		$or = "OR";
+                if(++$i == $num)
+                {
+                    $or = "";
+                }
+                $wheres.= "typeid = '$r' $or ";
+            }
+            $wheres.= ")";
+            $category = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1 {$wheres}")->result();
+            $s = count($category); $i=0;
+            foreach ($category as $cat) {
+            	$or = ",";
+                if(++$i == $s)
+                {
+                    $or = "";
+                }
+            	$cats.= $cat->typename.''.$or;
+            }
+            $type = $row->fpstatus;
+            $type = trim($type, ',');
+            $arrs = explode(',', $type);
+            $st = count($arrs); $i = 0;
+            $status = ""; $all = "";
+            foreach ($arrs as $ar) {
+            	if($ar == 1)
+            		$status = "Sale";
+            	else
+            		$status = "Rent";
+
+            	$or = ",";
+                if(++$i == $st)
+                {
+                    $or = "";
+                }
+            	$all.= $status.''.$or;
+            }
+            $color = "";
+            if($row->review == 1)
+            	$color = "colorbg";
+            else
+            	$color = "";
+			$table.= "<tr>
+				 <td class='no ".$color."'>".$no."</td>
+				 <td class='name ".$color."'>".$row->fname."</td>											
+				 <td class='type ".$color."'>".$row->fphone."</td>							 	
+				 <td class='type ".$color."'>".$row->femail."</td>							 	
+				 <td class='type ".$color."'>".$row->faddress."</td>							 	
+				 <td class='country ".$color."'>".$cats."</td>
+				 <td class='country ".$color."'>".$all."</td>
+				 <td class='remove_tag no_wrap ".$color."'>";
+				 
+				 if($this->green->gAction("D")){
+					$table.= "<a><img rel=".$row->fid." onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+				 }
+				 if($this->green->gAction("U")){
+				 	if($row->review == 1)
+						$table.= "<a>Reviewed</a>";
+					else
+						$table.= "<a href='".site_url('greenadmin/home/review/'.$row->fid)."'>Review</a>";
+				 }
+			$table.= " </td>
+				 </tr>
+				 ";										 
+			$no++;	 
+		}
+		$arr['data']=$table;
+		$arr['pagina']=$paging;
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
+	}
+	function delete($id)
+	{
+		$this->db->where('fid',$id);
+		$this->db->delete('tblfindproperty');
+	}
+	function review($id)
+	{
+		$data = array('review' => 1);
+		$this->db->where('fid',$id);
+		$this->db->update('tblfindproperty',$data);
+
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+	function analisys_post()
+	{
+		$sql = $this->db->query("SELECT count(*) as income, tblproperty.create_date as year FROM tblproperty
+								WHERE (tblproperty.create_date between (CURDATE() - INTERVAL 7 DAY) and CURDATE())
+								GROUP by create_date")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($sql);
 	}
 }
 

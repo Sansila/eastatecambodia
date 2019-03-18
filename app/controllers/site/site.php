@@ -274,7 +274,7 @@ class Site extends CI_Controller {
                     {
                         $where.= " lp.lineage LIKE '%$lid->propertylocationid%' OR p.property_name LIKE '%$arr%' $and ";
                     }else{
-                        $where.= " p.property_name LIKE '%$arr%' $and ";
+                        $where.= " (p.property_name LIKE '%$arr%' OR p.pid = '".substr($arr,1)."') $and ";
                     }    
                 }
                 $where.= ")";
@@ -1160,6 +1160,45 @@ class Site extends CI_Controller {
             "date_create" => Date('y-m-d')
         );
         $this->db->insert('tblvisitor',$data);
+    }
+    function helpmefindproperty($id)
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $data['id'] = $id;
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/helpfind_property',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function savefind()
+    {
+        $c = ""; $t = "";
+        $cates = $this->input->post('txtpro_cate');
+        foreach ($cates as $cate) {
+            $c.= $cate.',';
+        }
+        $types = $this->input->post('txtpro_type');
+        foreach ($types as $type) {
+            $t.= $type.',';
+        }
+        $id = $this->input->post("txtID");
+        $data = array(
+                    'fname' => $this->input->post('txtName'),
+                    'fphone' => $this->input->post('txtPhone'),
+                    'femail' => $this->input->post('txtEmail'),
+                    'faddress' => $this->input->post('txtAddress'),
+                    'fpcategory' => $c,
+                    'fpstatus' => $t,
+                    'fcreate_date' => date('Y-m-d'),
+                    'fdescription' => $this->input->post('txtDes')
+                    );
+        $this->db->insert('tblfindproperty',$data);
+        if($this->db->affected_rows() > 0)
+            redirect(site_url('site/site/helpmefindproperty/'.$id.'?type='.$id.'&m=success'),'refresh');
+        else
+            redirect(site_url('site/site/helpmefindproperty/'.$id.'?type='.$id.'&m=error'),'refresh');
     }
 }
 ?>

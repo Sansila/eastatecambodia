@@ -17,13 +17,13 @@
 		background-repeat: no-repeat;
 		padding-left: 15px !important;
 	}
-	.flat .widget-box {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-radius: 0;
-    overflow: auto;
-    white-space: nowrap;
-    }
+	/*.flat .widget-box {
+    	-webkit-box-shadow: none;
+    	box-shadow: none;
+    	border-radius: 0;
+    	overflow: auto;
+    	white-space: nowrap;
+    }*/
 </style>
 <?php
 	$m='';
@@ -95,6 +95,7 @@
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/>
 										</th>
+										<th></th>
 										<th >
 										   <select class="form-control input-sm" id="pro_type" name="pro_type" onchange="getdata(1);">
 										   		<option value="">-select-</option>
@@ -147,7 +148,16 @@
 												<option value="3">Rent & Sale</option>
 											</select>
 										</th>
-										<th ></th>
+										<th >
+											<select class="form-control" id="available_pro" onchange="getdata(1);">
+												<option value="">-Select-</option>
+		                                        <option value="1"><?php echo $this->lang->line('p_av')?></option>
+		                                        <option value="2"><?php echo $this->lang->line('p_draft')?></option>
+		                                        <option value="3"><?php echo $this->lang->line('p_sold')?></option>
+		                                        <option value="4"><?php echo $this->lang->line('p_rented')?></option>
+		                                        <option value="5"><?php echo $this->lang->line('p_na')?></option>
+		                                    </select>
+										</th>
 										<th width='150'>
 										</th>
 										
@@ -324,6 +334,7 @@
 			var search_date = $("#search_date").val();
 			var level = $('#pro_level').val();
 			var owner = $('#relative_owner').val();
+			var avialable_pro = $("#available_pro").val();
           	
           	var perpage=$('#perpage').val();
 			$.ajax({
@@ -343,7 +354,8 @@
 							'pro_loc': pro_loc,
 							'date': search_date,
 							'level': level,
-							'owner': owner
+							'owner': owner,
+							'avialable_pro': avialable_pro
 		            	},
 		            success:function(data) {
 		              $(".list").html(data.data); console.log(data);

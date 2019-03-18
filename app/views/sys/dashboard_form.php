@@ -27,7 +27,14 @@
 		background-repeat: no-repeat;
 		padding-left: 15px !important;
 	}
-	
+	.colorbg{
+		background: #d0adc7 !important;
+	}
+	#chartdiv {
+	  width: 100%;
+	  height: 500px;
+	  border: 1px solid #a6a6c1;
+	}
 </style>
 
 	 <link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/images/logo.ico')?> ">
@@ -44,6 +51,24 @@
 			<div id="content-header" class="mini">
 				<h1><?php echo $this->lang->line('dashboard')?></h1>
 				<ul class="mini-stats box-3">
+					<a>
+						<li class="list_post">
+							<div class="left sparkline_bar_good"><span>Post Property</span></div>
+							<div class="right">
+								<strong>last 7</strong>
+								days 
+							</div>
+						</li>
+					</a>
+					<a>
+						<li class="ListCustomer_view">
+							<div class="left sparkline_bar_good"><span>Customer Find Property</span></div>
+							<div class="right">
+								<strong><?php echo $counter_finder;?></strong>
+								finder
+							</div>
+						</li>
+					</a>
 					<a>
 						<li class="InactivePro">
 							<div class="left sparkline_bar_good"><span><?php echo $this->lang->line('inactive_post')?></span></div>
@@ -95,7 +120,97 @@
  	<?php 
  		$userid = $this->session->userdata('userid');
  	?>
- 	<div class="List_property">
+ 	<div class="chart_post_property">
+ 		<h3 style="padding-left: 15px;">Property Analysis Post The Last 7 Days</h3>
+ 		<div id="chartdiv"></div>
+ 	</div>
+ 	<div class="List_customer hide">
+ 		<div id="breadcrumb">
+		      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+		      <a href='#' class="current"><?php echo $this->lang->line('cl_title')?></a>
+		</div>
+		<div class="wrapper">
+			<div class="clearfix" id="main_content_outer">
+			    <div id="main_content">
+			      <div class="col-xs-12">
+				      	<div class="col-xs-6">
+				      	</div>
+				      	  
+				  </div>
+			      <div class="row">
+			      		<div class="col-sm-12">
+			      			<div class="widget-box table-responsive">
+								<div class="widget-title no_wrap" id='top-bar'>
+									<span class="icon">
+										<i class="fa fa-th"></i>
+									</span>
+										<h5><?php echo $this->lang->line('cl_title')?></h5>
+									<div style="text-align: right; width:130px; float:right">
+							      			      		
+							      	</div> 			    
+								</div>
+								<div class="widget-content nopadding" id='tap_print'>
+
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>Customer Name</th>
+												<th>Phone</th>
+												<th>Email</th>
+												<th>Address</th>
+												<th>Property Category</th>
+												<th>Property Type</th>
+												<th>Action</th>
+											</tr>
+											<tr class='remove_tag'>
+												<th></th>
+												<th>
+													<input type='text' onkeyup="getdatac(1);" class='form-control input-sm' id='s_store_name'/> 
+												</th>
+												<th ></th>
+												<th>
+													
+												</th>
+												<th>
+													
+												</th>
+												<th width='150'>
+												</th>
+												
+											</tr>
+										</thead>
+										<tbody class='lists'>
+
+										</tbody>
+									</table>  
+
+								</div>
+							</div>
+							<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+									<div class='col-sm-3'>
+										<label><?php echo $this->lang->line('show')?>  
+											
+											<select id='perpage' onchange='getdatac(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
+												<?PHP
+												for ($i=10; $i < 500; $i+=10) { 
+													echo "<option value='$i'>$i</option>";
+												}
+												 ?>
+											</select> 
+										</label>
+									</div>
+									<div class='dataTables_paginatec'>
+
+									</div>
+							</div>
+			      		</div>	      	
+			        </div> 
+			    </div>
+		   </div>
+		</div>
+ 	</div>
+ 	<div class="List_property hide">
 		<div id="breadcrumb">
 		      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
 		      <a href='#' class="current"><?php echo $this->lang->line('property_list')?> : <?php echo $this->pro->countAllUnaproveProperty();?> <?php echo $this->lang->line('record')?></a>
@@ -271,7 +386,6 @@
 		                                <!-- /.modal-dialog -->
 		</div>
 	</div>
-
 	<div class="List_user hide">
 		<div id="breadcrumb">
 			<a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
@@ -364,6 +478,64 @@
 	<!-- <script src="<?php echo base_url('assets/js/unicorn.dashboard.js')?>"></script> -->
 
 <script type="text/javascript">
+
+	am4core.useTheme(am4themes_animated);
+
+	var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+	$.ajax({ 
+	    type: 'GET', 
+	    url:"<?php echo site_url('greenadmin/home/analisys_post')?>",
+	    dataType: 'json',
+	    success: function (data) { 
+	        chart.data = data;
+	        console.log(data);
+	    }
+	});
+
+	//create category axis for years
+	var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+	categoryAxis.dataFields.category = "year";
+	categoryAxis.renderer.inversed = true;
+	categoryAxis.renderer.grid.template.location = 0;
+
+	//create value axis for income and expenses
+	var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+	valueAxis.renderer.opposite = true;
+
+
+	//create columns
+	var series = chart.series.push(new am4charts.ColumnSeries());
+	series.dataFields.categoryY = "year";
+	series.dataFields.valueX = "income";
+	series.name = "Income";
+	series.columns.template.fillOpacity = 1;
+	series.columns.template.strokeOpacity = 0;
+	series.tooltipText = "{cate}: {valueX.value}";
+
+	//create line
+	var lineSeries = chart.series.push(new am4charts.LineSeries());
+	lineSeries.dataFields.categoryY = "year";
+	lineSeries.dataFields.valueX = "expenses";
+	lineSeries.name = "Expenses";
+	lineSeries.strokeWidth = 3;
+	lineSeries.tooltipText = "Expenses in {categoryY}: {valueX.value}";
+
+	var valueLabel = series.bullets.push(new am4charts.LabelBullet());
+	  valueLabel.label.text = "{cate}({income})";
+	  valueLabel.label.horizontalCenter = "left";
+	  valueLabel.label.dx = 10;
+	  valueLabel.label.hideOversized = false;
+	  valueLabel.label.truncate = false;
+
+	//add bullets
+	var circleBullet = lineSeries.bullets.push(new am4charts.CircleBullet());
+	circleBullet.circle.fill = am4core.color("#fff");
+	circleBullet.circle.strokeWidth = 2;
+
+	//add chart cursor
+	chart.cursor = new am4charts.XYCursor();
+	chart.cursor.behavior = "zoomY";
 	
 	function gsPrint(emp_title,data){
 		 var element = "<div id='print_area'>"+data+"</div>";
@@ -394,212 +566,270 @@
 				window.open('data:application/vnd.ms-excel,' + encodeURIComponent(export_data));
     			e.preventDefault();
 		});
-	})
+	});
+
+	$('.list_post').click(function(){
+		$('.chart_post_property').removeClass('hide');
+		$('.List_customer').addClass('hide');
+		$('.List_property').addClass('hide');
+		$('.List_user').addClass('hide');
+	});
+	$('.ListCustomer_view').click(function(){
+		$('.List_customer').removeClass('hide');
+		$('.List_property').addClass('hide');
+		$('.List_user').addClass('hide');
+		$('.chart_post_property').addClass('hide');
+	});
+	$('.InactiveUser').click(function(){
+		$('.List_property').addClass('hide');
+		$('.List_customer').addClass('hide');
+		$('.List_user').removeClass('hide');
+		$('.chart_post_property').addClass('hide');
+	});
+	$('.InactivePro').click(function(){
+		$('.List_property').removeClass('hide');
+		$('.List_user').addClass('hide');
+		$('.List_customer').addClass('hide');
+		$('.chart_post_property').addClass('hide');
+	});
 	
-</script>
-
-<script type="text/javascript">
-
-		$('.InactiveUser').click(function(){
-			$('.List_property').addClass('hide');
-			$('.List_user').removeClass('hide');
+	$('#export').click(function(){
+		$('#exporttap').modal('show');
+		$('#btnprint').hide();
+		$('#btnexport').show();
+	})
+	$('#print').click(function(){
+		$('#exporttap').modal('show');
+		$('#btnprint').show();
+		$('#btnexport').hide();
+	})
+	function gsPrint(emp_title,data){
+		 var element = "<div>"+data+"</div>";
+		 $("<center><p style='padding-top:15px;text-align:center;'><b>"+emp_title+"</b></p><hr>"+element+"</center>").printArea({
+		  mode:"popup",  //printable window is either iframe or browser popup              
+		  popHt: 600 ,  // popup window height
+		  popWd: 500,  // popup window width
+		  popX: 0 ,  // popup window screen X position
+		  popY: 0 , //popup window screen Y position
+		  popTitle:"test", // popup window title element
+		  popClose: false,  // popup window close after printing
+		  strict: false 
+		  });
+	}
+	$('.colch').click(function(){
+		if($(this).is(':checked')){
+			var col=$(this).attr('rel');
+			$('.'+col).removeClass(' remove_tag');
+		}else{
+			var col=$(this).attr('rel');
+			$('.'+col).addClass(' remove_tag');
+		}
+	})
+	$(function(){	
+		getdata(1);	
+		getdatac(1);	
+		$(document).on('click', '.pagenav', function(){
+		    var page = $(this).attr("id");
+			getdata(page);
+			getdatac(page);			
+		});	
+		$("#btnprint").on("click",function(){
+				var htmlToPrint = '' +
+				        '<style type="text/css">' +
+				        'table th, table td {' +
+				        'border:1px solid #000 !important;' +
+				        'padding;0.5em;' +
+				        '}' +
+				        '</style>';				
+				var title="Store List";	
+			   	var data = $("#tap_print").html().replace(/<img[^>]*>/gi,"");
+			   	var export_data = $("<center>"+data+"</center>").clone().find(".remove_tag").remove().end().html();
+			   		export_data+=htmlToPrint;
+			   	gsPrint(title,export_data);
 		});
-		$('.InactivePro').click(function(){
-			$('.List_property').removeClass('hide');
-			$('.List_user').addClass('hide');
+		$("#btnexport").on("click",function(e){
+			var title="Store List";			
+			var data=$('.table').attr('border',1);
+				data = $("#tap_print").html().replace(/<img[^>]*>/gi,"");
+   			var export_data = $("<center><h3 align='center'>"+title+"</h3>"+data+"</center>").clone().find(".remove_tag").remove().end().html();
+			window.open('data:application/vnd.ms-excel,' + encodeURIComponent(export_data));
+			e.preventDefault();
+			$('.table').attr('border',0);
 		});
+	})
+	function getdata(page){
+      	var url="<?php echo site_url('property/property/getdata_inactive')?>";
+      	var m="<?PHP echo $m?>";
+      	var p="<?PHP echo $p?>";
+      	var s_name=$('#s_store_name').val();
+		var s_id = $('#s_store_id').val();
+		var p_type = $('#pro_type').val();
+		var user = $('#s_user_name').val();
+		var p_status = $("#pro_status").val();
+		var pro_loc = $("#pro_loc").val();
+      	
+      	var perpage=$('#perpage').val();
+		$.ajax({
+	            url:url,
+	            type:"POST",
+	            datatype:"Json",
+	            async:false,
+	            data:{'m':m,
+	            		'p':p,
+	            		'page':page,
+	            		's_name':s_name,
+	            		'perpage':perpage,
+						's_id': s_id,
+						'p_type': p_type,
+						'user_add' : user,
+						'p_status': p_status,
+						'pro_loc': pro_loc
+	            	},
+	            success:function(data) {
+	              $(".list").html(data.data); console.log(data);
+	              $('.dataTables_paginate').html(data.pagina.pagination);
+
+	            }
+	          })
+	}
+	function getdatac(page){
+	  	var url="<?php echo site_url('greenadmin/home/getdata')?>";
+	  	var m="<?PHP echo $m?>";
+	  	var p="<?PHP echo $p?>";
+	  	var s_name=$('#s_store_name').val();
+	  	
+	  	var perpage=$('#perpage').val();
+		$.ajax({
+            url:url,
+            type:"POST",
+            datatype:"Json",
+            async:false,
+            data:{'m':m,
+            		'p':p,
+            		'page':page,
+            		's_name':s_name,
+            		
+            		'perpage':perpage
+            	},
+            success:function(data) {
+              $(".lists").html(data.data); console.log(data);
+              $('.dataTables_paginatec').html(data.pagina.pagination);
+            }
+        })
+	}
+	function previewstore(event){
+		    var storeid=jQuery(event.target).attr("rel");
+			window.open("<?PHP echo site_url('store/store/preview');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>",'_blank');
 		
-		$('#export').click(function(){
-			$('#exporttap').modal('show');
-			$('#btnprint').hide();
-			$('#btnexport').show();
-		})
-		$('#print').click(function(){
-			$('#exporttap').modal('show');
-			$('#btnprint').show();
-			$('#btnexport').hide();
-		})
-		function gsPrint(emp_title,data){
-			 var element = "<div>"+data+"</div>";
-			 $("<center><p style='padding-top:15px;text-align:center;'><b>"+emp_title+"</b></p><hr>"+element+"</center>").printArea({
-			  mode:"popup",  //printable window is either iframe or browser popup              
-			  popHt: 600 ,  // popup window height
-			  popWd: 500,  // popup window width
-			  popX: 0 ,  // popup window screen X position
-			  popY: 0 , //popup window screen Y position
-			  popTitle:"test", // popup window title element
-			  popClose: false,  // popup window close after printing
-			  strict: false 
-			  });
-		}
-		$('.colch').click(function(){
-			if($(this).is(':checked')){
-				var col=$(this).attr('rel');
-				$('.'+col).removeClass(' remove_tag');
-			}else{
-				var col=$(this).attr('rel');
-				$('.'+col).addClass(' remove_tag');
-			}
-		})
-		$(function(){	
-			getdata(1);	
-			$(document).on('click', '.pagenav', function(){
-			    var page = $(this).attr("id");
-				getdata(page);			
-			});	
-			$("#btnprint").on("click",function(){
-					var htmlToPrint = '' +
-					        '<style type="text/css">' +
-					        'table th, table td {' +
-					        'border:1px solid #000 !important;' +
-					        'padding;0.5em;' +
-					        '}' +
-					        '</style>';				
-					var title="Store List";	
-				   	var data = $("#tap_print").html().replace(/<img[^>]*>/gi,"");
-				   	var export_data = $("<center>"+data+"</center>").clone().find(".remove_tag").remove().end().html();
-				   		export_data+=htmlToPrint;
-				   	gsPrint(title,export_data);
-			});
-			$("#btnexport").on("click",function(e){
-				var title="Store List";			
-				var data=$('.table').attr('border',1);
-					data = $("#tap_print").html().replace(/<img[^>]*>/gi,"");
-	   			var export_data = $("<center><h3 align='center'>"+title+"</h3>"+data+"</center>").clone().find(".remove_tag").remove().end().html();
-				window.open('data:application/vnd.ms-excel,' + encodeURIComponent(export_data));
-    			e.preventDefault();
-    			$('.table').attr('border',0);
-			});
-		})
-		function getdata(page){
-          	var url="<?php echo site_url('property/property/getdata_inactive')?>";
-          	var m="<?PHP echo $m?>";
-          	var p="<?PHP echo $p?>";
-          	var s_name=$('#s_store_name').val();
-			var s_id = $('#s_store_id').val();
-			var p_type = $('#pro_type').val();
-			var user = $('#s_user_name').val();
-			var p_status = $("#pro_status").val();
-			var pro_loc = $("#pro_loc").val();
-          	
-          	var perpage=$('#perpage').val();
-			$.ajax({
-		            url:url,
-		            type:"POST",
-		            datatype:"Json",
-		            async:false,
-		            data:{'m':m,
-		            		'p':p,
-		            		'page':page,
-		            		's_name':s_name,
-		            		'perpage':perpage,
-							's_id': s_id,
-							'p_type': p_type,
-							'user_add' : user,
-							'p_status': p_status,
-							'pro_loc': pro_loc
-		            	},
-		            success:function(data) {
-		              $(".list").html(data.data); console.log(data);
-		              $('.dataTables_paginate').html(data.pagina.pagination);
-
-		            }
-		          })
-		}
-		function previewstore(event){
-			    var storeid=jQuery(event.target).attr("rel");
-				window.open("<?PHP echo site_url('store/store/preview');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>",'_blank');
-			
-		}
-		function deletestore(event){
-			var conf=confirm("Are you sure to delete this property");
-			if(conf==true){
-				var storeid=jQuery(event.target).attr("rel");
-				var url="<?php echo site_url('property/property/delete_pro')?>/"+storeid;
-				$.ajax({
-		            url:url,
-		            type:"POST",
-		            datatype:"Json",
-		            async:false,
-		            data:{'storeid':storeid},
-		            success:function(data) {
-		             	//$(event.target).closest('tr').remove();
-		             	getdata(1);
-		            }
-		          })
-			}
-		}
-		function update(event){
+	}
+	function deletestore(event){
+		var conf=confirm("Are you sure to delete this property");
+		if(conf==true){
 			var storeid=jQuery(event.target).attr("rel");
-			location.href="<?PHP echo site_url('property/property/edit');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
+			var url="<?php echo site_url('property/property/delete_pro')?>/"+storeid;
+			$.ajax({
+	            url:url,
+	            type:"POST",
+	            datatype:"Json",
+	            async:false,
+	            data:{'storeid':storeid},
+	            success:function(data) {
+	             	//$(event.target).closest('tr').remove();
+	             	getdata(1);
+	            }
+	          })
 		}
-		function approve(argument) {
-			var conf=confirm("Are you sure to Active this property");
-			if(conf==true){
-				var storeid=jQuery(event.target).attr("rel");
-				var url="<?php echo site_url('property/property/active_property')?>/"+storeid;
-				$.ajax({
-		            url:url,
-		            type:"POST",
-		            datatype:"Json",
-		            async:false,
-		            data:{'storeid':storeid},
-		            success:function(data) {
-		             	//$(event.target).closest('tr').remove();
-		             	getdata(1);
-		             	window.location.reload();
-		            }
-		          })
-			}
-		}	
-		function search(event){
-			
-				var f_name=jQuery('#txts_fname').val();
-				var l_name=jQuery('#txts_lname').val();
-				var email=jQuery('#txts_email').val();
-				var roleid=jQuery('#cbos_role').val();
-				var u_name=jQuery('#txts_uname').val();
-				//alert(roleid);
-				$.ajax({
-					url:"<?php echo base_url(); ?>index.php/setting/user/search_inactive",    
-					data: {'f_name':f_name,
-						   'l_name':l_name,
-						   'email':email,
-						   'roleid':roleid,
-						   'u_name':u_name},
-					type: "POST",
-					success: function(data){
-                       //alert(data);
-                       jQuery('#listbody').html(data);
-                       
-					}
-				});
-			}
-		function deleteuser(event){
-			var r = confirm("Are you sure to delete this User !");
-			if (r == true) {
-			    var u_id=jQuery(event.target).attr("rel");
-				//location.href="<?PHP //echo site_url('setting/user/delete_user');?>/"+u_id;
-				// var storeid=jQuery(event.target).attr("rel");
-				var url="<?php echo site_url('setting/user/delete_user');?>/"+u_id;
-				$.ajax({
-		            url:url,
-		            type:"POST",
-		            datatype:"Json",
-		            async:false,
-		            success:function(data) {
-		             	//$(event.target).closest('tr').remove();
-		             	getdata(1);
-		             	window.location.reload();
-		            }
-		          })
-			} else {
-			    txt = "You pressed Cancel!";
-			}
-			
+	}
+	function update(event){
+		var storeid=jQuery(event.target).attr("rel");
+		location.href="<?PHP echo site_url('property/property/edit');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
+	}
+	function approve(argument) {
+		var conf=confirm("Are you sure to Active this property");
+		if(conf==true){
+			var storeid=jQuery(event.target).attr("rel");
+			var url="<?php echo site_url('property/property/active_property')?>/"+storeid;
+			$.ajax({
+	            url:url,
+	            type:"POST",
+	            datatype:"Json",
+	            async:false,
+	            data:{'storeid':storeid},
+	            success:function(data) {
+	             	//$(event.target).closest('tr').remove();
+	             	getdata(1);
+	             	window.location.reload();
+	            }
+	          })
 		}
-		function updateuser(event){
-			var u_id=jQuery(event.target).attr("rel");
-			location.href="<?PHP echo site_url('setting/user/edit_isinactive');?>/"+u_id;
+	}	
+	function search(event){
+		
+			var f_name=jQuery('#txts_fname').val();
+			var l_name=jQuery('#txts_lname').val();
+			var email=jQuery('#txts_email').val();
+			var roleid=jQuery('#cbos_role').val();
+			var u_name=jQuery('#txts_uname').val();
+			//alert(roleid);
+			$.ajax({
+				url:"<?php echo base_url(); ?>index.php/setting/user/search_inactive",    
+				data: {'f_name':f_name,
+					   'l_name':l_name,
+					   'email':email,
+					   'roleid':roleid,
+					   'u_name':u_name},
+				type: "POST",
+				success: function(data){
+                   //alert(data);
+                   jQuery('#listbody').html(data);
+                   
+				}
+			});
 		}
-	</script>
+	function deleteuser(event){
+		var r = confirm("Are you sure to delete this User !");
+		if (r == true) {
+		    var u_id=jQuery(event.target).attr("rel");
+			//location.href="<?PHP //echo site_url('setting/user/delete_user');?>/"+u_id;
+			// var storeid=jQuery(event.target).attr("rel");
+			var url="<?php echo site_url('setting/user/delete_user');?>/"+u_id;
+			$.ajax({
+	            url:url,
+	            type:"POST",
+	            datatype:"Json",
+	            async:false,
+	            success:function(data) {
+	             	//$(event.target).closest('tr').remove();
+	             	getdata(1);
+	             	window.location.reload();
+	            }
+	          })
+		} else {
+		    txt = "You pressed Cancel!";
+		}
+		
+	}
+	function updateuser(event){
+		var u_id=jQuery(event.target).attr("rel");
+		location.href="<?PHP echo site_url('setting/user/edit_isinactive');?>/"+u_id;
+	}
+	function deletefinding(event){
+		var conf=confirm("Are you Sure to delete this Finding");
+		if(conf==true){
+			var storeid=jQuery(event.target).attr("rel");
+			var url="<?php echo site_url('greenadmin/home/delete')?>/"+storeid;
+			$.ajax({
+	            url:url,
+	            type:"POST",
+	            datatype:"Json",
+	            async:false,
+	            data:{'storeid':storeid},
+	            success:function(data) {
+	             	//$(event.target).closest('tr').remove();
+	             	getdatac(1);
+	             	location.reload();
+	            }
+	          })
+		}
+	}
+</script>

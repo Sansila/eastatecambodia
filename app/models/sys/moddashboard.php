@@ -30,6 +30,11 @@
 			$query = $this->db->query("SELECT Count(*) as total_user FROM admin_user as u WHERE u.is_active = 1")->row();
 			return $query->total_user;
 		}
+		function CountFinderProperty()
+		{
+			$query = $this->db->query("SELECT count(*) as total_finder FROM tblfindproperty WHERE review is null ")->row();
+			return $query->total_finder;
+		}
 	}
 
 		

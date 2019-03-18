@@ -111,7 +111,6 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/js/editor/summernote.css') ?>" />
 		<!-- Notification -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/toastr/toastr.css') ?>" />
-		
 		<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/fileinput.css') ?>" />
 		
@@ -120,8 +119,7 @@
 		<script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>		
 		<script src="<?php echo base_url('assets/js/fullcalendar.min.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery.nicescroll.min.js')?>"></script>
-		<script src="<?php echo base_url('assets/js/gecom.js')?>"></script>	
-
+		<script src="<?php echo base_url('assets/js/gecom.js')?>"></script>
 		<!-- Ck editor-->
 		<script src="<?php echo base_url('assets/js/editor/summernote.js')?>"></script>		
 		<script src="<?php echo base_url('assets/js/select2.js')?>"></script>

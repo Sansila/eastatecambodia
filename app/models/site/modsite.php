@@ -133,8 +133,15 @@
             if (isset($menu['parents'][$parent])) {
                 foreach ($menu['parents'][$parent] as $menu_s) {
                     if (!isset($menu['parents'][$menu_s])) {
+                        $m="";
+                        $string = $menu['items'][$menu_s]->location_name;
+                        $string = trim($string, ' ');
+                        $arr = explode(' ', $string);
+                        foreach ($arr as $arr) {
+                            $m.=$arr;
+                        }
                         $html .= "<li>";
-                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id).'?type='.$menu['items'][$menu_s]->menu_id. "'>" . $menu['items'][$menu_s]->menu_name . "</a>"; //no sub
+                        $html .= "<a href='".site_url('site/site/'.strtolower($m).'/'.$menu['items'][$menu_s]->menu_id).'?type='.$menu['items'][$menu_s]->menu_id."'>".$menu['items'][$menu_s]->menu_name."</a>"; //no sub
                         $html .= "</li>";
                     }
                     if (isset($menu['parents'][$menu_s])) {
@@ -237,6 +244,11 @@
                 AND p.pid <> $pid
                 ORDER BY p.create_date desc,p.pid desc limit 3")->result();
             return $sponsored;
+        }
+        function getPropertyCategory()
+        {
+            $sql = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1")->result();
+            return $sql;
         }
 }
 
