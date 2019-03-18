@@ -244,23 +244,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_sold_rented');?></label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <select class="form-control" id="txt_sold">    
-                                        <?php 
-                                        $sel = ""; $sel1 = ""; $sel2 = "";
-                                        if($row->sold == 1)
-                                            $sel ="selected";
-                                        if($row->sold == 2)
-                                            $sel1 ="selected";
-                                        ?>
-                                            <option value="0">Please Select</option>
-                                            <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_sold')?></option>
-                                            <option <?php echo $sel1;?> value="2"><?php echo $this->lang->line('p_rented')?></option>
-                                    </select>
-                                </div>                   
-                            </div> -->
+                            
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ap')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
