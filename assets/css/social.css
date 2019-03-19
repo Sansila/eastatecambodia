@@ -1,7 +1,7 @@
 .fas {
   padding: 10px;
-  font-size: 25px;
-  width: 50px;
+  font-size: 19px;
+  width: 40px;
   border-radius: 50%;
   text-align: center;
   text-decoration: none;
@@ -9,9 +9,9 @@
 }
 .fass {
   padding: 12px;
-  font-size: 25px;
-  width: 50px;
-  border-radius: 50%;
+  font-size: 17px;
+  width: 40px;
+  border-radius: 91%;
   text-align: center;
   text-decoration: none;
   margin: 5px 2px;
@@ -55,7 +55,7 @@
 }
 
 .fa-line img{
-  width: 30px;
+  width: 23px;
 }
 
 .fa-youtube {

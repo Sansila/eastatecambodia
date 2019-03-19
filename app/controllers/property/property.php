@@ -131,12 +131,16 @@ class Property extends CI_Controller {
 			'pro_level' => $this->input->post('level'),
 			'relative_owner' => $this->input->post('relative_owner'),
 			'p_parent' => $store,
-			'direct_sale' => $this->input->post('directly')
+			'direct_sale' => $this->input->post('directly'),
+			'internal_remark' => $this->input->post('internal_remark'),
+			'property_tag' => $this->input->post('property_tag'),
 		);
 
 		
 		$data1 = array(
-			'create_date'=> date('Y-m-d')
+			'create_date'=> date('Y-m-d'),
+			'validate' => 1,
+			// 'validate_date' => DATE_ADD(date('Y-m-d'), INTERVAL 15 DAY)
 		);
 
 		$msg='';
@@ -350,7 +354,7 @@ class Property extends CI_Controller {
 			$owner ="";
 			$property_type ="";
 			if($row->p_status==1)
-				$visibled="Aviable";
+				$visibled="Available";
 			if($row->p_status == 2)
 				$visibled="Draft";
 			if($row->p_status == 3)
@@ -655,5 +659,11 @@ class Property extends CI_Controller {
 									GROUP BY YEAR(date_create), MONTH(date_create)")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($perdate);
+	}
+	function getPropertyTag()
+	{
+		$data = $this->db->query("SELECT property_tag as label FROM tblproperty WHERE property_tag is not null")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($data);
 	}
 }

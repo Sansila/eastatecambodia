@@ -404,7 +404,25 @@ class Home extends CI_Controller {
 	{
 		$sql = $this->db->query("SELECT count(*) as income, tblproperty.create_date as year FROM tblproperty
 								WHERE (tblproperty.create_date between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) AND tblproperty.p_status = 1
-								GROUP by create_date")->result();
+								GROUP by create_date
+								ORDER BY tblproperty.create_date DESC
+								")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($sql);
+	}
+	function analisys_view()
+	{
+		$sql = $this->db->query("SELECT
+								    COUNT(*) AS income,
+								    tblvisitor.date_create as year
+								FROM
+								    tblvisitor
+								WHERE
+								    (tblvisitor.date_create BETWEEN(CURDATE() - INTERVAL 7 DAY) AND CURDATE())
+								GROUP BY
+								    tblvisitor.date_create
+								ORDER BY tblvisitor.date_create DESC
+								    ")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($sql);
 	}

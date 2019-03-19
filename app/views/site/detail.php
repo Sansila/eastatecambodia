@@ -81,6 +81,22 @@
 			.chosen-container{
 				display: none !important; 
 			}
+			.left{
+				float: left;
+				font-size: 12px;
+				height: 35px;
+    			border-radius: 3px;
+			}
+			.modal-header .close {
+			    margin-top: -20px;
+			}
+			.txt{
+				border: 1px solid #eeeeee;
+			}
+			.txt-sel{
+				max-width: 100%;
+				border-radius: 3px;
+			}
 		</style>
 
 		<!-- Begin Main -->
@@ -181,6 +197,7 @@
 								</div>
 								<div class="tab-detail">
 									<div class="right" style="text-align: right;">
+										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning">Interest</a>
 										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php"
   										target="_blank" >
 										</a>
@@ -532,9 +549,143 @@
 				</div>	
 			</div>
 			<!-- End content with sidebar -->
+
+			<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			  aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header text-center">
+			        <h4 class="modal-title w-100 font-weight-bold">Interest</h4>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body mx-3">
+			        <form id="contact-form" enctype="multipart/form-data" method="POST" action="">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-6">
+									<input placeholder="Your Name" type="text" name="name" id="name" class="form-control txt" data-msg-required="Please enter your name." required>
+								</div>
+								<div class="col-sm-6">
+									<input placeholder="Your Email" type="email" name="customer_mail" id="customer_mail" class="form-control txt" required>
+								</div>
+								<div class="col-sm-6">
+									<input placeholder="Phone Number" type="text" name="phone" id="phone" class="form-control txt" required>
+								</div>
+								<div class="col-sm-6">
+									<select class="form-control txt-sel" name="in-status" required>
+										<option value="">Contact By</option>
+										<option value="1">Contact By Phone</option>
+										<option value="2">Contact By Email</option>
+										<option value="3">Contact Both</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<textarea placeholder="Commants" rows="5" name="comments" id="comments" class="form-control" data-msg-required="Please enter your message." required style="max-width: 100%;"></textarea>
+						</div>
+						<div class="form-group">
+							<input type="submit" name="button" value="Submit" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 20%;">
+						</div>
+					</form>
+
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<!-- <div class="text-center">
+			  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
+			    Modal Login Form</a>
+			</div> -->
 			
 		</div>
 		<!-- End Main -->
+
+		<?php
+			if(isset($_POST['button']))
+			{	
+				$name = $_POST['name'];
+				$phone = $_POST['phone'];
+				$email = $_POST['customer_mail'];
+				$contact = $_POST['in-status'];
+				$desc = $_POST['comments'];
+
+				$data = array(
+						'pid' => $detail->pid,
+						'inter_name' => $name,
+						'inter_email' => $email,
+						'inter_phone' => $phone,
+						'inter_status' => $contact,
+						'is_contact' => 1,
+						'inter_date' => date('Y-m-d')
+				);
+
+				if($contact == 2 || $contact == 3)
+				{
+					require('phpmailer/class.phpmailer.php');
+				    $mail = new PHPMailer();
+				    $mail->IsSMTP();
+				    $mail->SMTPDebug = 0;
+				    $mail->SMTPAuth = TRUE;
+				    $mail->SMTPSecure = "ssl";
+				    $mail->Port     = 465;  
+				    $mail->Username = "estatecambodia.dev@gmail.com";
+				    $mail->Password = "@Sila168.com.Dev";
+				    $mail->Host     = "smtp.gmail.com";
+				    $mail->Mailer   = "smtp";
+				    $mail->SetFrom($_POST["customer_mail"], $_POST["name"]);
+				    $mail->AddReplyTo($_POST["customer_mail"], $_POST["name"]);
+				    $mail->AddAddress("estatecambodia.dev@gmail.com");   
+				    $mail->Subject = "Interest From Customer";
+				    $mail->WordWrap   = 80;
+
+
+				    $logo = "http://estatecambodia.com/assets/img/logo.png";
+				    $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+				        <tbody>
+				            <tr>
+				                <td style="width:8px" width="8"></td>
+				                <td>
+				                    <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+				                        <img src="'.$logo.'" style="width: 140px;">
+				                        <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+				                            '.$_POST["comments"].'
+				                        </div>
+				                    </div>
+				                                            
+				                </td>
+				                <td style="width:8px" width="8"></td>
+				            </tr>
+				        </tbody>
+				    </table>';
+
+				    $mail->MsgHTML($description);
+
+				    $mail->IsHTML(true);
+
+				    if(!$mail->Send()) {
+				        echo "<p class='error'>Problem in Sending Mail.</p>";
+				    } else {
+				    	$this->db->insert('tblinterest',$data);
+				        if($this->db->affected_rows() > 0)
+							redirect($_SERVER['HTTP_REFERER']);
+						else
+							echo "<p class='error'>Problem in Save Interest.</p>";
+				    }
+				}else{
+					$this->db->insert('tblinterest',$data);
+					if($this->db->affected_rows() > 0)
+						redirect($_SERVER['HTTP_REFERER']);
+					else
+						echo "<p class='error'>Problem in Save Interest.</p>";
+				}
+
+			}
+		?>
+
 <script type="text/javascript">
 	window.onload=function(){
       var map;

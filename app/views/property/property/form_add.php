@@ -256,18 +256,6 @@
                                     </select>
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_ap')?></label>
-                            <div class="col-lg-4"> 
-                                <div class="col-md-12">
-                                    <select class="form-control" id="available_pro">
-                                        <option value="1" <?php if(isset($row->p_status)){ if($row->p_status == 1) echo "selected"; }?> ><?php echo $this->lang->line('p_av')?></option>
-                                        <option value="2" <?php if(isset($row->p_status)){ if($row->p_status == 2) echo "selected"; }?>><?php echo $this->lang->line('p_draft')?></option>
-                                        <option value="3" <?php if(isset($row->p_status)){ if($row->p_status == 3) echo "selected"; }?>><?php echo $this->lang->line('p_sold')?></option>
-                                        <option value="4" <?php if(isset($row->p_status)){ if($row->p_status == 4) echo "selected"; }?>><?php echo $this->lang->line('p_rented')?></option>
-                                        <option value="5" <?php if(isset($row->p_status)){ if($row->p_status == 5) echo "selected"; }?>><?php echo $this->lang->line('p_na')?></option>
-                                    </select>
-                                </div>                   
-                            </div>
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_directly');?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
@@ -320,6 +308,21 @@
                                     </div>
                                 </div> 
 
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_tag')?></label>
+                            <div class=" col-lg-4"> 
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" value="<?php echo isset($row->property_tag)?"$row->property_tag":""; ?>" name="property_tag" id="property_tag">
+                                </div>
+                            </div>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_content_internal')?></label>
+                            <div class=" col-lg-4"> 
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="internal_remark" id="internal_remark"><?php echo isset($row->internal_remark)?"$row->internal_remark":""; ?></textarea>
+                                </div>
                             </div>
                         </div>
 
@@ -747,7 +750,34 @@
     }//]]> 
 </script>
 <script type="text/javascript">
-    
+    var yerler = [];
+    var url="<?php echo site_url('property/property/getPropertyTag')?>";
+    $.ajax({
+        url:url,
+        type:"POST",
+        datatype:"Json",
+        async:false,
+        success:function(data) {
+            if(data)
+                yerler = data;
+            else  
+                yerler = [];
+        }
+    });
+
+    $("#property_tag").autocomplete({
+        source: yerler,
+        focus: function (event, ui) {
+            event.preventDefault();
+            $("#property_tag").val(ui.item.label);
+        },
+        select: function (event, ui) {
+            event.preventDefault();
+            //$("#projeKatmanRaporCbx").val(ui.item.value);
+            $("#property_tag").val(ui.item.label);
+        }
+    });
+
     $(".select2-single").select2({
         allowClear:true,
         placeholder: 'Location'
@@ -934,7 +964,9 @@
                     longtitude: $('#longtitude').val(),
                     level: $('#pro_level').val(),
                     relative_owner: $('#relative_owner').val(),
-                    directly: $('#txt_directly').val()
+                    directly: $('#txt_directly').val(),
+                    internal_remark: $('#internal_remark').val(),
+                    property_tag: $('#property_tag').val()
                 },
                 success:function(data) {
                     // $(".result_text").html(data.msg);

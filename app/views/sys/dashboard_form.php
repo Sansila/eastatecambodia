@@ -35,6 +35,11 @@
 	  height: 500px;
 	  border: 1px solid #a6a6c1;
 	}
+	#chartdivview {
+		width: 100%;
+	  	height: 500px;
+	  	border: 1px solid #a6a6c1;
+	}
 </style>
 
 	 <link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/images/logo.ico')?> ">
@@ -53,7 +58,7 @@
 				<ul class="mini-stats box-3">
 					<a>
 						<li class="list_post">
-							<div class="left sparkline_bar_good"><span>Post Property</span></div>
+							<div class="left sparkline_bar_good"><span>Post And View Property</span></div>
 							<div class="right">
 								<strong>last 7</strong>
 								days 
@@ -121,8 +126,10 @@
  		$userid = $this->session->userdata('userid');
  	?>
  	<div class="chart_post_property">
- 		<h3 style="padding-left: 15px;">Property Analysis Post The Last 7 Days</h3>
+ 		<h3 style="padding-left: 15px;">Property Post Analysis The Last 7 Days</h3>
  		<div id="chartdiv"></div>
+ 		<h3 style="padding-left: 15px;">Property View Analysis The Last 7 Days</h3>
+ 		<div id="chartdivview"></div>
  	</div>
  	<div class="List_customer hide">
  		<div id="breadcrumb">
@@ -536,6 +543,64 @@
 	//add chart cursor
 	chart.cursor = new am4charts.XYCursor();
 	chart.cursor.behavior = "zoomY";
+
+
+	var chart1 = am4core.create("chartdivview", am4charts.XYChart);
+
+	$.ajax({ 
+	    type: 'GET', 
+	    url:"<?php echo site_url('greenadmin/home/analisys_view')?>",
+	    dataType: 'json',
+	    success: function (data) { 
+	        chart1.data = data;
+	        console.log(data);
+	    }
+	});
+
+	//create category axis for years
+	var categoryAxis1 = chart1.yAxes.push(new am4charts.CategoryAxis());
+	categoryAxis1.dataFields.category = "year";
+	categoryAxis1.renderer.inversed = true;
+	categoryAxis1.renderer.grid.template.location = 0;
+
+	//create value axis for income and expenses
+	var valueAxis1 = chart1.xAxes.push(new am4charts.ValueAxis());
+	valueAxis1.renderer.opposite = true;
+
+
+	//create columns
+	var series1 = chart1.series.push(new am4charts.ColumnSeries());
+	series1.dataFields.categoryY = "year";
+	series1.dataFields.valueX = "income";
+	series1.name = "Income";
+	series1.columns.template.fillOpacity = 1;
+	series1.columns.template.strokeOpacity = 0;
+	series1.tooltipText = "{cate}: {valueX.value}";
+
+	//create line
+	var lineSeries1 = chart1.series.push(new am4charts.LineSeries());
+	lineSeries1.dataFields.categoryY = "year";
+	lineSeries1.dataFields.valueX = "expenses";
+	lineSeries1.name = "Expenses";
+	lineSeries1.strokeWidth = 3;
+	lineSeries1.tooltipText = "Expenses in {categoryY}: {valueX.value}";
+
+	var valueLabel1 = series1.bullets.push(new am4charts.LabelBullet());
+	  valueLabel1.label.text = "{cate}({income})";
+	  valueLabel1.label.horizontalCenter = "left";
+	  valueLabel1.label.dx = 10;
+	  valueLabel1.label.hideOversized = false;
+	  valueLabel1.label.truncate = false;
+
+	//add bullets
+	var circleBullet1 = lineSeries1.bullets.push(new am4charts.CircleBullet());
+	circleBullet1.circle.fill = am4core.color("#fff");
+	circleBullet1.circle.strokeWidth = 2;
+
+	//add chart cursor
+	chart1.cursor = new am4charts.XYCursor();
+	chart1.cursor.behavior = "zoomY";
+
 	
 	function gsPrint(emp_title,data){
 		 var element = "<div id='print_area'>"+data+"</div>";

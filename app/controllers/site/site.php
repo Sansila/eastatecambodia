@@ -8,7 +8,7 @@ class Site extends CI_Controller {
         $this->load->library('encrypt');
         $this->load->helper(array('form', 'url'));
         $this->load->model("site/modsite","site");
-        
+        date_default_timezone_set("Asia/Bangkok");
     }
     public function index()
     {   
@@ -274,7 +274,7 @@ class Site extends CI_Controller {
                     {
                         $where.= " lp.lineage LIKE '%$lid->propertylocationid%' OR p.property_name LIKE '%$arr%' $and ";
                     }else{
-                        $where.= " (p.property_name LIKE '%$arr%' OR p.pid = '".substr($arr,1)."') $and ";
+                        $where.= " (p.property_name LIKE '%$arr%' OR p.pid = '".substr($arr,1)."' OR p.property_tag LIKE '%$arr%') $and ";
                     }    
                 }
                 $where.= ")";
@@ -411,6 +411,7 @@ class Site extends CI_Controller {
                          p.parking,
                          p.title,
                          p.floor,
+                         p.property_tag,
                          lp.propertylocationid,
                          lp.locationname,
                          lp.lineage,
@@ -1199,6 +1200,54 @@ class Site extends CI_Controller {
             redirect(site_url('site/site/helpmefindproperty/'.$id.'?type='.$id.'&m=success'),'refresh');
         else
             redirect(site_url('site/site/helpmefindproperty/'.$id.'?type='.$id.'&m=error'),'refresh');
+    }
+    function autosendemail()
+    {
+        require('phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;  
+        $mail->Username = "estatecambodia.dev@gmail.com";
+        $mail->Password = "@Sila168.com.Dev";
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->AddReplyTo("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->AddAddress("sansila.dev@gmail.com"); 
+        $mail->Subject = "Check Property Info";
+        $mail->WordWrap   = 80;
+
+
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width:8px" width="8"></td>
+                    <td>
+                        <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                            <img src="'.$logo.'" style="width: 140px;">
+                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                                Please check your property info is correctly.
+                            </div>
+                        </div>
+                                                
+                    </td>
+                    <td style="width:8px" width="8"></td>
+                </tr>
+            </tbody>
+        </table>';
+
+        $mail->MsgHTML($description);
+        $mail->IsHTML(true);
+
+        if(!$mail->Send()) {
+            echo "<p class='error'>Problem in Sending Mail.</p>";
+        } else {
+            echo "<p class='success'>Mail Sent Successfully.</p>";
+        }
     }
 }
 ?>

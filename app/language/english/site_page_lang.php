@@ -98,7 +98,7 @@
   $lang['p_owd'] = "I know owner directly";
   $lang['p_dko'] = "I do not know owner";
   $lang['p_sold_rented'] = "Property Status";
-  $lang['p_av'] = "Aviable";
+  $lang['p_av'] = "Available";
   $lang['p_draft'] = "Draft";
   $lang['p_sold'] = "Sold";
   $lang['p_rented'] = "Rented";
@@ -108,6 +108,8 @@
   $lang['p_dir_agent'] = "Other Agency";
   $lang['p_dir_stop'] = "Postpone";
   $lang['p_dir_other'] = "Other";
+  $lang['p_content_internal'] = "Internal Remark";
+  $lang['p_tag'] = "Property Tag";
   // Login Page
   $lang['lo_name'] = "User Name";
   $lang['lo_pass'] = "Password";
