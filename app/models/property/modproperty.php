@@ -13,6 +13,7 @@
             }else{
                 $this->db->insert('tblproperty',$data);
                 $pro_id = $this->db->insert_id();
+                $this->db->query("UPDATE `tblproperty` SET `validate_date` = DATE_ADD(CURDATE(), INTERVAL 15 DAY) WHERE `pid` = $pro_id");
             }
             return $pro_id;
         }

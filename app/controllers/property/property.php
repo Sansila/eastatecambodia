@@ -140,7 +140,6 @@ class Property extends CI_Controller {
 		$data1 = array(
 			'create_date'=> date('Y-m-d'),
 			'validate' => 1,
-			// 'validate_date' => DATE_ADD(date('Y-m-d'), INTERVAL 15 DAY)
 		);
 
 		$msg='';

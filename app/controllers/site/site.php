@@ -1201,7 +1201,28 @@ class Site extends CI_Controller {
         else
             redirect(site_url('site/site/helpmefindproperty/'.$id.'?type='.$id.'&m=error'),'refresh');
     }
-    function autosendemail()
+    function getallproperty()
+    {
+        $data = $this->db->query("SELECT 
+                                        p.pid,
+                                        p.agent_id,
+                                        p.p_status,
+                                        p.property_name,
+                                        p.validate_date,
+                                        u.userid,
+                                        u.user_name,
+                                        u.email,
+                                        u.phone
+                                    FROM tblproperty as p
+                                    INNER JOIN admin_user u 
+                                    ON p.agent_id = u.userid
+                                    WHERE p.p_status = 1")->result();
+        foreach ($data as $check) {
+            if(date('Y-m-d') >= $check->validate_date)
+                $this->autosendemail($check->pid,$check->email,$check->property_name,$check->user_name);
+        }
+    }
+    function autosendemail($pid,$email,$pname,$uname)
     {
         require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
@@ -1216,7 +1237,7 @@ class Site extends CI_Controller {
         $mail->Mailer   = "smtp";
         $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
         $mail->AddReplyTo("estatecambodia.dev@gmail.com", "Estate Cambodia");
-        $mail->AddAddress("sansila.dev@gmail.com"); 
+        $mail->AddAddress($email); 
         $mail->Subject = "Check Property Info";
         $mail->WordWrap   = 80;
 
@@ -1230,7 +1251,13 @@ class Site extends CI_Controller {
                         <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
                             <img src="'.$logo.'" style="width: 140px;">
                             <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
-                                Please check your property info is correctly.
+                                P"'.$pid.'" - "'.$pname.'"
+                            </div>
+                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                                Kindly inform this property info is correct as
+                                    - Price
+                                    - available
+                                    - Description
                             </div>
                         </div>
                                                 
