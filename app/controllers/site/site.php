@@ -1216,10 +1216,73 @@ class Site extends CI_Controller {
                                     FROM tblproperty as p
                                     INNER JOIN admin_user u 
                                     ON p.agent_id = u.userid
-                                    WHERE p.p_status = 1")->result();
+                                    WHERE p.p_status = 1 AND DATE(p.validate_date) = CURDATE() ")->result();
+        require('phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;  
+        $mail->Username = "estatecambodia.dev@gmail.com";
+        $mail->Password = "@Sila168.com.Dev";
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->AddReplyTo("estatecambodia.dev@gmail.com", "Estate Cambodia");
         foreach ($data as $check) {
-            if(date('Y-m-d') >= $check->validate_date)
-                $this->autosendemail($check->pid,$check->email,$check->property_name,$check->user_name);
+            //$this->autosendemail($check->pid,$check->email,$check->property_name,$check->user_name);
+            $mail->AddAddress($check->email); 
+        }
+        $mail->Subject = "Check Your Property Info";
+        $mail->WordWrap   = 80;
+
+
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width:8px" width="8"></td>
+                    <td>
+                        <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                            <img src="'.$logo.'" style="width: 140px;">
+                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                P"'.$pid.'" - "'.$pname.'"
+                            </div>
+                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                Kindly inform this property info is correct as
+                                <ul style="list-style: none; text-align: left;">
+                                    <li>- Price</li>
+                                    <li>- Available</li>
+                                    <li>- Description</li>
+                                </ul>
+                            </div>
+                            <div style="text-align: left">
+                                <a href="http://estatecambodia.com/site/site/updateValidate/'.$pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px">
+                                    Property Info Is Correct
+                                </a>
+                                <a href="http://estatecambodia.com/property/property/edit/'.$pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px;">
+                                    Change Property Info
+                                </a>
+                                <a href="http://estatecambodia.com/site/site/changePropertyStatus/'.$pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none;">
+                                    Property Is Not Available Now
+                                </a>
+                            </div>
+                        </div>
+                                                
+                    </td>
+                    <td style="width:8px" width="8"></td>
+                </tr>
+            </tbody>
+        </table>';
+
+        $mail->MsgHTML($description);
+        $mail->IsHTML(true);
+
+        if(!$mail->Send()) {
+            echo "<p class='error'>Problem in Sending Mail.</p>";
+        } else {
+            echo "<p class='success'>Mail Sent Successfully.</p>";
         }
     }
     function autosendemail($pid,$email,$pname,$uname)
@@ -1238,7 +1301,7 @@ class Site extends CI_Controller {
         $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
         $mail->AddReplyTo("estatecambodia.dev@gmail.com", "Estate Cambodia");
         $mail->AddAddress($email); 
-        $mail->Subject = "Check Property Info";
+        $mail->Subject = "Check Your Property Info";
         $mail->WordWrap   = 80;
 
 
@@ -1250,14 +1313,27 @@ class Site extends CI_Controller {
                     <td>
                         <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
                             <img src="'.$logo.'" style="width: 140px;">
-                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                 P"'.$pid.'" - "'.$pname.'"
                             </div>
-                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                            <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                 Kindly inform this property info is correct as
-                                    - Price
-                                    - available
-                                    - Description
+                                <ul style="list-style: none; text-align: left;">
+                                    <li>- Price</li>
+                                    <li>- Available</li>
+                                    <li>- Description</li>
+                                </ul>
+                            </div>
+                            <div style="text-align: left">
+                                <a href="http://estatecambodia.com/site/site/updateValidate/'.$pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px">
+                                    Property Info Is Correct
+                                </a>
+                                <a href="http://estatecambodia.com/property/property/edit/'.$pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px;">
+                                    Change Property Info
+                                </a>
+                                <a href="http://estatecambodia.com/site/site/changePropertyStatus/'.$pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none;">
+                                    Property Is Not Available Now
+                                </a>
                             </div>
                         </div>
                                                 
