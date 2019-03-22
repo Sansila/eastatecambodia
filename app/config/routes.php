@@ -44,6 +44,7 @@ $route['404_override'] = 'my404';
 $route['gallery/(:any)'] = "site/gallery/$1";
 $route['admineshop'] = "greenadmin/home";
 $route['login'] = "greenadmin/login";
+$route['firstlogin/(:num)'] = "greenadmin/login/firstlogin/$1";
 $route['dashboard'] = "sys/dashboard";
 $route['store'] = "store/store";
 $route['store/add'] = "store/store/add";

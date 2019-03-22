@@ -250,6 +250,14 @@
             $sql = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1")->result();
             return $sql;
         }
+        function updateValidateProperty($pid)
+        {
+            $this->db->query("UPDATE `tblproperty` SET `validate_date` = DATE_ADD(CURDATE(), INTERVAL 15 DAY) WHERE `pid` = $pid");
+        }
+        function changePropertyStatus($pid)
+        {
+            $this->db->query("UPDATE `tblproperty` SET `p_status` = 5 WHERE `pid` = $pid AND validate = 0 ");
+        }
 }
 
 

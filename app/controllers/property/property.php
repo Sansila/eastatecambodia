@@ -147,6 +147,7 @@ class Property extends CI_Controller {
 
 		if($pro_id > 0){
 			$this->db->where('pid',$pro_id)->update('tblproperty', $data);
+			$this->db->query("UPDATE `tblproperty` SET `validate_date` = DATE_ADD(CURDATE(), INTERVAL 15 DAY) WHERE `pid` = $pro_id");
 			$msg = "Property Has Update...!";
 		}else{ 
 			$pro_id = $this->pro->save(array_merge($data,$data1), $pro_id);

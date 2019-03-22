@@ -14,10 +14,11 @@
 		#pgt{
 			border:solid 0px !important;
 		}
-		img{border:solid 1px #CCCCCC;);
+		img{
+			/*border:solid 1px #CCCCCC;);*/
 			background-position:center;
 			background-size:cover;
-			padding: 3px;
+			/*padding: 3px;*/
 		}
 		/*th{
 				background-color: #383547; 

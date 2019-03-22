@@ -644,14 +644,21 @@
 
 
 				    $logo = "http://estatecambodia.com/assets/img/logo.png";
-				    $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+				    $description = '<div style="width: 100%"><table border="0" cellpadding="0" cellspacing="0" style="width: 640px;">
 				        <tbody>
 				            <tr>
 				                <td style="width:8px" width="8"></td>
 				                <td>
 				                    <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
 				                        <img src="'.$logo.'" style="width: 140px;">
-				                        <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+				                        <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+					                        <ul style="list-style: none; text-align: left;">
+	                                            <li>- Name: '.$name.'</li>
+	                                            <li>- Phone: '.$phone.'</li>
+	                                            <li>- Email: '.$email.'</li>
+	                                        </ul>
+                                        </div>
+				                        <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
 				                            '.$_POST["comments"].'
 				                        </div>
 				                    </div>
@@ -660,7 +667,7 @@
 				                <td style="width:8px" width="8"></td>
 				            </tr>
 				        </tbody>
-				    </table>';
+				    </table></div>';
 
 				    $mail->MsgHTML($description);
 

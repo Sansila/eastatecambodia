@@ -204,7 +204,7 @@
 											WHERE
 												is_active = 1
 											{$where}
-											ORDER BY `order`;
+											-- ORDER BY `order`;
 										");
 			return $arrModule;
 		}

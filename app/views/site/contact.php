@@ -106,7 +106,7 @@ if(isset($_POST['button']))
 
 
     $logo = "http://estatecambodia.com/assets/img/logo.png";
-    $description = '<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+    $description = '<div style="width: 100%"><table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
         <tbody>
             <tr>
                 <td style="width:8px" width="8"></td>
@@ -122,7 +122,7 @@ if(isset($_POST['button']))
                 <td style="width:8px" width="8"></td>
             </tr>
         </tbody>
-    </table>';
+    </table></div>';
 
     $mail->MsgHTML($description);
 
@@ -135,7 +135,7 @@ if(isset($_POST['button']))
     if(!$mail->Send()) {
         echo "<p class='error'>Problem in Sending Mail.</p>";
     } else {
-        echo "<p class='success'>Mail Sent Successfully.</p>";
+        redirect($_SERVER['HTTP_REFERER']);
     }
 }   
 ?>

@@ -1229,10 +1229,10 @@ class Site extends CI_Controller {
                                     FROM tblproperty as p
                                     INNER JOIN admin_user u 
                                     ON p.agent_id = u.userid
-                                    WHERE p.p_status = 5 AND DATE(p.validate_date) = CURDATE() ")->result();
-        $mail->Subject = "Check Your Property Info";
+                                    WHERE p.p_status = 1 AND DATE(p.validate_date) = CURDATE() ")->result();
         $description = "";
         foreach ($data as $check) {
+            $mail->Subject = "Estate Cambodia P".$check->pid." - ".$check->property_name;
             $mail->AddAddress($check->email);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
             $description = '<div style="width: 100%">
@@ -1244,7 +1244,7 @@ class Site extends CI_Controller {
                                 <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
                                     <img src="'.$logo.'" style="width: 140px;">
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                        P'.$check->pid.' - '.$check->property_name.'
+                                        Estate Cambodia P'.$check->pid.' - '.$check->property_name.'
                                     </div>
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                         Kindly inform this property info is correct as
@@ -1258,7 +1258,7 @@ class Site extends CI_Controller {
                                         <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px">
                                             Property Info Is Correct
                                         </a>
-                                        <a target="_blank" href="http://estatecambodia.com/property/property/edit/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px;">
+                                        <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px;">
                                             Change Property Info
                                         </a>
                                         <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none;">
@@ -1281,7 +1281,31 @@ class Site extends CI_Controller {
     }
     function updateValidate($pid)
     {
-        
+        $this->site->updateValidateProperty($pid);
+        $msg = "Your Property has been reviewed.";
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $data['bodymsg'] = $msg;
+
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/messageafterpost',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function changePropertyStatus($pid)
+    {
+        $this->site->changePropertyStatus($pid);
+        $msg = "Your Property has been disabled​​ from our website.";
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['slide'] = $this->site->getSlide();
+        $data['bodymsg'] = $msg;
+
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/messageafterpost',$data);
+        $this->load->view('site/contain/footer',$datas);
     }
 }
 ?>
