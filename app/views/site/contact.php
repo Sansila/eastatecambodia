@@ -100,7 +100,8 @@ if(isset($_POST['button']))
     $mail->Mailer   = "smtp";
     $mail->SetFrom($_POST["customer_mail"], $_POST["name"]);
     $mail->AddReplyTo($_POST["customer_mail"], $_POST["name"]);
-    $mail->AddAddress($_POST["owner"]);   
+    $mail->AddAddress($_POST["owner"]);
+    $mail->AddCC("vireak.cambodia@gmail.com");   
     $mail->Subject = "Contact From Customer";
     $mail->WordWrap   = 80;
 

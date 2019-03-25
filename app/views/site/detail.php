@@ -86,6 +86,8 @@
 				font-size: 12px;
 				height: 35px;
     			border-radius: 3px;
+    			background-color: #d84949 !important;
+    			border-color: #d84949;
 			}
 			.modal-header .close {
 			    margin-top: -35px;
@@ -197,7 +199,7 @@
 								</div>
 								<div class="tab-detail">
 									<div class="right" style="text-align: right;">
-										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning">Interest</a>
+										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning">Contact Me Back</a>
 										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php"
   										target="_blank" >
 										</a>
@@ -640,13 +642,15 @@
 				    $mail->Mailer   = "smtp";
 				    $mail->SetFrom($_POST["customer_mail"], $_POST["name"]);
 				    $mail->AddReplyTo($_POST["customer_mail"], $_POST["name"]);
-				    $mail->AddAddress("estatecambodia.dev@gmail.com");   
+				    $mail->AddAddress("estatecambodia.dev@gmail.com");
+				    $mail->AddCC("vireak.cambodia@gmail.com");
+					$mail->AddCC("info@estatecambodia.com");   
 				    $mail->Subject = "Interest From Customer";
 				    $mail->WordWrap   = 80;
 
 
 				    $logo = "http://estatecambodia.com/assets/img/logo.png";
-				    $description = '<div style="width: 100%"><table border="0" cellpadding="0" cellspacing="0" style="width: 640px;">
+				    $description = '<div style="width: 100%"><table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
 				        <tbody>
 				            <tr>
 				                <td style="width:8px" width="8"></td>
@@ -654,6 +658,14 @@
 				                    <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
 				                        <img src="'.$logo.'" style="width: 140px;">
 				                        <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+				                        	Property Info: 
+				                        	<ul style="list-style: none; text-align: left;">
+	                                            <li>- PropertyID: P'.$detail->pid.'</li>
+	                                            <li>- Property Title: '.$detail->property_name.'</li>
+	                                            <li>- Price: '.$detail->price.'</li>
+	                                            <li>- Location: '.$detail->locationname.'</li>
+	                                        </ul>
+	                                        Customer Contact Info:
 					                        <ul style="list-style: none; text-align: left;">
 	                                            <li>- Name: '.$name.'</li>
 	                                            <li>- Phone: '.$phone.'</li>
