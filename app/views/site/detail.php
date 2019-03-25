@@ -88,7 +88,7 @@
     			border-radius: 3px;
 			}
 			.modal-header .close {
-			    margin-top: -20px;
+			    margin-top: -35px;
 			}
 			.txt{
 				border: 1px solid #eeeeee;
@@ -555,7 +555,9 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header text-center">
-			        <h4 class="modal-title w-100 font-weight-bold">Interest</h4>
+			        <h4 class="modal-title w-100 font-weight-bold">
+			        	<img src="<?php echo site_url('assets/img/logo.png')?>" width="100">
+			        </h4>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
@@ -565,7 +567,7 @@
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm-6">
-									<input placeholder="Your Name" type="text" name="name" id="name" class="form-control txt" data-msg-required="Please enter your name." required>
+									<input placeholder="Your Name" type="text" name="name" id="name" class="form-control txt">
 								</div>
 								<div class="col-sm-6">
 									<input placeholder="Your Email" type="email" name="customer_mail" id="customer_mail" class="form-control txt" required>
@@ -584,10 +586,10 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<textarea placeholder="Commants" rows="5" name="comments" id="comments" class="form-control" data-msg-required="Please enter your message." required style="max-width: 100%;"></textarea>
+							<textarea placeholder="Comments" rows="5" name="comments" id="comments" class="form-control" style="max-width: 100%;"></textarea>
 						</div>
 						<div class="form-group">
-							<input type="submit" name="button" value="Submit" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 20%;">
+							<input type="submit" name="button" value="Contact Me Back" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 20%;">
 						</div>
 					</form>
 

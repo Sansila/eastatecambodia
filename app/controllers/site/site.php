@@ -1222,57 +1222,110 @@ class Site extends CI_Controller {
                                         p.p_status,
                                         p.property_name,
                                         p.validate_date,
+                                        p.price,
+                                        p.lp_id,
+                                        p.p_type,
                                         u.userid,
                                         u.user_name,
                                         u.email,
-                                        u.phone
+                                        u.phone,
+                                        lp.propertylocationid,
+                                        lp.locationname
                                     FROM tblproperty as p
-                                    INNER JOIN admin_user u 
+                                    INNER JOIN admin_user u
                                     ON p.agent_id = u.userid
+                                    INNER JOIN tblpropertylocation lp
+                                    ON p.lp_id = lp.propertylocationid
                                     WHERE p.p_status = 1 AND DATE(p.validate_date) = CURDATE() ")->result();
         $description = "";
         foreach ($data as $check) {
+            $type = "";
+            if($check->p_type == 1)
+                $type = "Sale";
+            if($check->p_type == 2)
+                $type = "Rent";
+            if($check->p_type == 3)
+                $type = "Sale and Rent";
             $mail->Subject = "Estate Cambodia P".$check->pid." - ".$check->property_name;
             $mail->AddAddress($check->email);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
             $description = '<div style="width: 100%">
-                <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
                     <tbody>
                         <tr>
                             <td style="width:8px" width="8"></td>
                             <td>
-                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: 415px;">
                                     <img src="'.$logo.'" style="width: 140px;">
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                        Estate Cambodia P'.$check->pid.' - '.$check->property_name.'
-                                    </div>
-                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                        Kindly inform this property info is correct as
+                                        Dear Partner/Agent/Property Owner,Kindly verify and update the property information as follow: 
                                         <ul style="list-style: none; text-align: left;">
-                                            <li>- Price</li>
-                                            <li>- Available</li>
-                                            <li>- Description</li>
+                                            <li>- Property ID: P'.$check->pid.'</li>
+                                            <li>- Property Title: '.$check->property_name.' USD</li>
+                                            <li>- Price: '.$check->price.'</li>
+                                            <li>- Type: '.$type.'</li>
+                                            <li>- Location: '.$check->locationname.'</li>
+                                            <li>- Last Updated: '.$check->validate_date.'</li>
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
-                                        <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px">
+                                        <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
                                             Property Info Is Correct
                                         </a>
-                                        <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px;">
+                                        <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
                                             Change Property Info
                                         </a>
-                                        <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none;">
+                                        <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
                                             Property Is Not Available Now
                                         </a>
                                     </div>
+                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                        Property verification is very important to understand if the information is valid for our customers so that we can provide reliable information to them. Thanks for your collaboration. 
+                                        <p>Best regards,</p>
+                                        <p>Estate Cambodia Team</p>
+                                    </div>
                                 </div>
-                                                        
+                                                    
+                            <!-- </td>
+                            <td class="td-second"> -->
+                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: 415px; ">
+                                    <img src="'.$logo.'" style="width: 140px;">
+                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                        ដៃគូ / ភ្នាក់ងារ / ម្ចាស់អចលនទ្រព្យសូមបញ្ជាក់ពីព័ត៌មានអចលនទ្រព្បច្ចុប្បន្នមានដូចខាងក្រោម: 
+                                        <ul style="list-style: none; text-align: left;">
+                                            <li>- លេខសម្គាល់អចលនទ្រព្យ: P'.$check->pid.'</li>
+                                            <li>- ចំណងជើងអចលនទ្រព្យ: '.$check->property_name.' USD</li>
+                                            <li>- តម្លៃ: '.$check->price.'</li>
+                                            <li>- ប្រភេទ: '.$type.'</li>
+                                            <li>- ទីតាំង: '.$check->locationname.'</li>
+                                            <li>- កែប្រែចុងក្រោយ: '.$check->validate_date.'</li>
+                                        </ul>
+                                    </div>
+                                    <div style="text-align: left">
+                                        <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                            ព័ត៌មានអចនទ្រព្យគឺត្រឹមត្រូវ
+                                        </a>
+                                        <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                            ផ្លាស់ប្តូរព័ត៌មានអចនទ្រព្យ
+                                        </a>
+                                        <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
+                                            អចនទ្រព្យមិនអាចរកបានទេឥឡូវនេះ
+                                        </a>
+                                    </div>
+                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                        ការផ្ទៀងផ្ទាត់អចលនទ្រព្យគឺមានសារៈសំខាន់ខ្លាំងណាស់ក្នុងការយល់ដឹងថាតើព័ត៌មានមានសុពលភាពសម្រាប់អតិថិជនរបស់យើងដូច្នេះយើងអាចផ្តល់ព័ត៌មានដែលអាចទុកចិត្តបានដល់ពួកគេ។ សូមអរគុណសម្រាប់កិច្ចសហការរបស់អ្នក។ 
+                                        <p>Best regards,</p>
+                                        <p>Estate Cambodia Team</p>
+                                    </div>
+                                </div>
+                                <div style="clear: both;"></div>
                             </td>
                             <td style="width:8px" width="8"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>';
+
             $mail->MsgHTML($description);
             $mail->IsHTML(true);
             $mail->Send();
