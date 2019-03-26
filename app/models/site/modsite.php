@@ -242,7 +242,7 @@
                 WHERE p.p_status = 1 AND p.pro_level = $level 
                 AND p.lp_id = $lp_id AND p.p_type = $p_type 
                 AND p.pid <> $pid
-                ORDER BY p.create_date desc,p.pid desc limit 3")->result();
+                ORDER BY p.create_date desc,p.pid desc limit 5")->result();
             return $sponsored;
         }
         function getPropertyCategory()

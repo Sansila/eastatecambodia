@@ -142,7 +142,7 @@
 	                                </div>
 		                        </div>
 						        <div class="form-group">
-						        	<label class='col-lg-3 control-label'>Type Post <span class="text-danger">*</span></label>
+						        	<label class='col-lg-3 control-label'>Relation <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
 									    <select class="form-control txtName" name="txttype_post" style="max-width: 100%;" required="">
 									    	<option value="">-select-</option>

@@ -113,6 +113,16 @@
 			  		display: inline-block;
 			  	}
 			}
+			.line-clamps {
+			    display: -webkit-box;
+			    -webkit-line-clamp: 1 !important;
+			    -webkit-box-orient: vertical;
+			}
+			.line-clamp {
+			    display: -webkit-box;
+			    -webkit-line-clamp: 2 !important;
+			    -webkit-box-orient: vertical;
+			}
 		</style>
 
 		<!-- Begin Main -->
@@ -542,9 +552,9 @@
 														<span class="label price"><?php echo 'P'.$hot->pid; ?></span>
 													</span>
 												</div>
-												<div class="property-thumb-info-content" style="height: 120px;">
+												<div class="property-thumb-info-content" style="height: 90px;">
 													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>"><?php echo $hot->property_name?></a></h3>
-													<address class="module line-clamp"><?php echo $hot->address?></address>
+													<address class="module line-clamps"><?php echo $hot->address?></address>
 												</div>
 												<div class="amenities clearfix" style="height: 40px;">
 													<ul class="pull-left">

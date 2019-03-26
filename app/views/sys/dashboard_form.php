@@ -541,8 +541,8 @@
 	circleBullet.circle.strokeWidth = 2;
 
 	//add chart cursor
-	chart.cursor = new am4charts.XYCursor();
-	chart.cursor.behavior = "zoomY";
+	//chart.cursor = new am4charts.XYCursor();
+	//chart.cursor.behavior = "zoomY";
 
 
 	var chart1 = am4core.create("chartdivview", am4charts.XYChart);
@@ -598,8 +598,8 @@
 	circleBullet1.circle.strokeWidth = 2;
 
 	//add chart cursor
-	chart1.cursor = new am4charts.XYCursor();
-	chart1.cursor.behavior = "zoomY";
+	//chart1.cursor = new am4charts.XYCursor();
+	//chart1.cursor.behavior = "zoomY";
 
 	
 	function gsPrint(emp_title,data){

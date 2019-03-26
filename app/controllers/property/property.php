@@ -617,7 +617,7 @@ class Property extends CI_Controller {
 		);
 		$this->db->where('pid',$pid)->update('tblproperty',$data);
 
-		$data = $this->db->query("SELECT 
+		$pro = $this->db->query("SELECT 
                                         p.pid,
                                         p.agent_id,
                                         p.p_status,
@@ -637,9 +637,9 @@ class Property extends CI_Controller {
                                     ON p.agent_id = u.userid
                                     INNER JOIN tblpropertylocation lp
                                     ON p.lp_id = lp.propertylocationid
-                                    WHERE p.pid = $id ")->row();
+                                    WHERE p.pid = $pid ")->row();
 
-		require('../phpmailer/class.phpmailer.php');
+		require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;
@@ -651,9 +651,11 @@ class Property extends CI_Controller {
         $mail->Host     = "smtp.gmail.com";
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
+
         $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
-        $mail->Subject = "Estate Cambodia";
-        $mail->AddAddress($data->email);
+        $mail->Subject = "Estate Cambodia - Property Approved";
+        $mail->AddAddress($pro->email);
+
         $logo = "http://estatecambodia.com/assets/img/logo.png";
         $description = '<div style="width: 100%">
             <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
@@ -666,10 +668,10 @@ class Property extends CI_Controller {
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                     Your property post has been reviewed, approved, and listed in the portal.
                                     <ul style="list-style: none; text-align: left;">
-                                    	<li>- Property ID: P'.$data->pid.' USD</li>
-                                        <li>- Property Title: '.$data->property_name.' USD</li>
-                                        <li>- Price: '.$data->price.'USD</li>
-                                        <li>- Location: '.$data->locationname.'</li>
+                                    	<li>- Property ID: P'.$pro->pid.' USD</li>
+                                        <li>- Property Title: '.$pro->property_name.' USD</li>
+                                        <li>- Price: '.$pro->price.'USD</li>
+                                        <li>- Location: '.$pro->locationname.'</li>
                                     </ul>
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
@@ -690,10 +692,9 @@ class Property extends CI_Controller {
 
         $mail->MsgHTML($description);
         $mail->IsHTML(true);
-        if(!$mail->Send())
+        if(!$mail->Send()){
             echo "<p class='error'>Problem in Sending Mail.</p>";
-        else
-            $mail->Send();
+        }
 	}
 	function delete_pro($pid)
 	{
