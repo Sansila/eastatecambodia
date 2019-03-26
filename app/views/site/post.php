@@ -142,7 +142,8 @@
 								<div class="form-group hide">
 		                            <label class='col-lg-4 control-label'>Property Title <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
-	                                    <input type="text" name="txtid" class="form-control txtName" value="<?php echo $id;?>" id="txtid"/>                  
+	                                    <input type="text" name="txtid" class="form-control txtName" value="<?php echo $id;?>" id="txtid"/> 
+	                                    <input type="text" name="txtemail" class="form-control txtName" value="<?php echo $email;?>" id="txtemail"/>                  
 	                                </div>
 		                        </div>
 		                        <div class="form-group">

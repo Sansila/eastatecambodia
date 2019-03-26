@@ -705,6 +705,13 @@
     </div>
  </div>
 
+<div class="modal fade" id="myModal">
+    <div class="modal-body" style="text-align: center;">
+        <img src="<?php echo site_url('assets/img/ld.gif')?>">
+    </div>
+</div>
+
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
   type="text/javascript"></script>
 
@@ -898,7 +905,7 @@
           $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
         },        
         submitHandler: function(form) {
-
+          $('#myModal').modal('show');
           var url="<?php echo site_url('property/property/save')?>";
           var is_active=0;
           if($('#is_active').is(':checked'))

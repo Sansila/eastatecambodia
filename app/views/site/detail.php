@@ -99,6 +99,20 @@
 				max-width: 100%;
 				border-radius: 3px;
 			}
+			.destop{
+			  		display: inline-block;
+			  	}
+		  	.mobile{
+		  		display: none;
+		  	}
+			@media only screen and (max-width: 600px) {
+			  	.destop{
+			  		display: none;
+			  	}
+			  	.mobile{
+			  		display: inline-block;
+			  	}
+			}
 		</style>
 
 		<!-- Begin Main -->
@@ -200,10 +214,13 @@
 								<div class="tab-detail">
 									<div class="right" style="text-align: right;">
 										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning">Contact Me Back</a>
-										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php"
+										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php?u=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>"
   										target="_blank" >
 										</a>
-										<a href="https://api.whatsapp.com://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" data-action="share/whatsapp/share" target="_blank" class="fass fa fa-whatsapp">
+										<a href="https://api.whatsapp.com://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" data-action="share/whatsapp/share" target="_blank" class="fass fa fa-whatsapp destop">
+											<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
+										</a>
+										<a class="fass fa fa-whatsapp mobile" href="whatsapp://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" data-action="share/whatsapp/share">
 											<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
 										</a>
 										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>&text=<?php echo $detail->property_name?>" class="fass fa fa-paper-plane"></a>
@@ -579,10 +596,10 @@
 								</div>
 								<div class="col-sm-6">
 									<select class="form-control txt-sel" name="in-status" required>
-										<option value="">Contact By</option>
-										<option value="1">Contact By Phone</option>
-										<option value="2">Contact By Email</option>
-										<option value="3">Contact Both</option>
+										<option value="">Prefered Contact Mode</option>
+										<option value="1">Phone</option>
+										<option value="2">Email</option>
+										<option value="3">Both</option>
 									</select>
 								</div>
 							</div>

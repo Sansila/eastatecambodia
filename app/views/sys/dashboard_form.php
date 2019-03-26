@@ -126,9 +126,9 @@
  		$userid = $this->session->userdata('userid');
  	?>
  	<div class="chart_post_property">
- 		<h3 style="padding-left: 15px;">Property Post Analysis The Last 7 Days</h3>
+ 		<h5 style="padding-left: 15px;">Property Post Analysis The Last 7 Days</h5>
  		<div id="chartdiv"></div>
- 		<h3 style="padding-left: 15px;">Property View Analysis The Last 7 Days</h3>
+ 		<h5 style="padding-left: 15px;">Property View Analysis The Last 7 Days</h5>
  		<div id="chartdivview"></div>
  	</div>
  	<div class="List_customer hide">

@@ -616,6 +616,84 @@ class Property extends CI_Controller {
 			'create_date'=> date('Y-m-d'),
 		);
 		$this->db->where('pid',$pid)->update('tblproperty',$data);
+
+		$data = $this->db->query("SELECT 
+                                        p.pid,
+                                        p.agent_id,
+                                        p.p_status,
+                                        p.property_name,
+                                        p.validate_date,
+                                        p.price,
+                                        p.lp_id,
+                                        p.p_type,
+                                        u.userid,
+                                        u.user_name,
+                                        u.email,
+                                        u.phone,
+                                        lp.propertylocationid,
+                                        lp.locationname
+                                    FROM tblproperty as p
+                                    INNER JOIN admin_user u
+                                    ON p.agent_id = u.userid
+                                    INNER JOIN tblpropertylocation lp
+                                    ON p.lp_id = lp.propertylocationid
+                                    WHERE p.pid = $id ")->row();
+
+		require('../phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;  
+        $mail->Username = "estatecambodia.dev@gmail.com";
+        $mail->Password = "@Sila168.com.Dev";
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->WordWrap   = 80;
+        $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->Subject = "Estate Cambodia";
+        $mail->AddAddress($data->email);
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<div style="width: 100%">
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
+                <tbody>
+                    <tr>
+                        <td style="width:8px" width="8"></td>
+                        <td>
+                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                <img src="'.$logo.'" style="width: 140px;">
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    Your property post has been reviewed, approved, and listed in the portal.
+                                    <ul style="list-style: none; text-align: left;">
+                                    	<li>- Property ID: P'.$data->pid.' USD</li>
+                                        <li>- Property Title: '.$data->property_name.' USD</li>
+                                        <li>- Price: '.$data->price.'USD</li>
+                                        <li>- Location: '.$data->locationname.'</li>
+                                    </ul>
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    If you would like to join us as partner, please click the following link to request an account.
+                                    <a href="http://estatecambodia.com/site/site/join">http://estatecambodia.com/site/site/join</a>
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    <p>Best regards,</p>
+                                    <p>Estate Cambodia Team</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:8px" width="8"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>';
+
+        $mail->MsgHTML($description);
+        $mail->IsHTML(true);
+        if(!$mail->Send())
+            echo "<p class='error'>Problem in Sending Mail.</p>";
+        else
+            $mail->Send();
 	}
 	function delete_pro($pid)
 	{

@@ -933,17 +933,17 @@ class Site extends CI_Controller {
         );
 
         $id = $this->site->save($data);
-
-        $this->post($id,$type);
+        $this->post($id,$type,$email);
           
     }
-    function post($id,$type){
+    function post($id,$type,$email){
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
         $data['id'] = $id;
         $data['owner'] = $type;
+        $data['email'] = $email;
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/post',$data);
         $this->load->view('site/contain/footer',$datas);
@@ -962,6 +962,67 @@ class Site extends CI_Controller {
         $content = $this->input->post('txtcontent');
         $lat = $this->input->post('latitude');
         $long = $this->input->post('longtitude');
+        $email = $this->input->post('txtemail');
+
+        $lname = $this->site->getLocationNamebyID($location);
+
+        require('../phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;  
+        $mail->Username = "estatecambodia.dev@gmail.com";
+        $mail->Password = "@Sila168.com.Dev";
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->WordWrap   = 80;
+        $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->Subject = "Estate Cambodia";
+        $mail->AddAddress($email);
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<div style="width: 100%">
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
+                <tbody>
+                    <tr>
+                        <td style="width:8px" width="8"></td>
+                        <td>
+                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                <img src="'.$logo.'" style="width: 140px;">
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    Thank you for submitting your property to Estate Cambodia. We will review the property and get it approved to the list of the following property information:
+                                    <ul style="list-style: none; text-align: left;">
+                                        <li>- Property Title: '.$title.' USD</li>
+                                        <li>- Price: '.$price.'USD</li>
+                                        <li>- Location: '.$lname.'</li>
+                                    </ul>
+                                    Please contact to us if you wish to promote your property exclusively:
+                                    <p>Email: info@estatecambodia.com | 093 633 687</p>
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    If you would like to join us as partner, please click the following link to request an account.
+                                    <a href="http://estatecambodia.com/site/site/join">http://estatecambodia.com/site/site/join</a>
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    <p>Best regards,</p>
+                                    <p>Estate Cambodia Team</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:8px" width="8"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>';
+
+        $mail->MsgHTML($description);
+        $mail->IsHTML(true);
+        if(!$mail->Send())
+            echo "<p class='error'>Problem in Sending Mail.</p>";
+        else
+            $mail->Send();
+
 
         $data = array(
             'agent_id' => $uid,
@@ -1131,10 +1192,57 @@ class Site extends CI_Controller {
 
         $join = $this->site->savejoin($data);
 
-        if($join)
-            redirect('site/site/message?m=j', 'refresh');
-        else
+        if($join){
+            // redirect('site/site/message?m=j', 'refresh');
+            require('../phpmailer/class.phpmailer.php');
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+            $mail->SMTPDebug = 0;
+            $mail->SMTPAuth = TRUE;
+            $mail->SMTPSecure = "ssl";
+            $mail->Port     = 465;  
+            $mail->Username = "estatecambodia.dev@gmail.com";
+            $mail->Password = "@Sila168.com.Dev";
+            $mail->Host     = "smtp.gmail.com";
+            $mail->Mailer   = "smtp";
+            $mail->WordWrap   = 80;
+            $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+            $mail->Subject = "Estate Cambodia";
+            $mail->AddAddress($email);
+            $logo = "http://estatecambodia.com/assets/img/logo.png";
+            $description = '<div style="width: 100%">
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
+                    <tbody>
+                        <tr>
+                            <td style="width:8px" width="8"></td>
+                            <td>
+                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                    <img src="'.$logo.'" style="width: 140px;">
+                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                                        Thank you for join us, Our team will review soon.
+                                    </div>
+                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                        <p>Best regards,</p>
+                                        <p>Estate Cambodia Team</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width:8px" width="8"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>';
+
+            $mail->MsgHTML($description);
+            $mail->IsHTML(true);
+            if(!$mail->Send())
+                echo "<p class='error'>Problem in Sending Mail.</p>";
+            else
+                redirect('site/site/message?m=j', 'refresh');
+        }
+        else{
             redirect('site/site/join?m=error', 'refresh');
+        }
     }
     function saveipaddress()
     {
@@ -1203,7 +1311,7 @@ class Site extends CI_Controller {
     }
     function getallproperty()
     {
-        require('phpmailer/class.phpmailer.php');
+        require('../phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPDebug = 0;

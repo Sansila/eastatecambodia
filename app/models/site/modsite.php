@@ -258,6 +258,11 @@
         {
             $this->db->query("UPDATE `tblproperty` SET `p_status` = 5 WHERE `pid` = $pid AND validate = 0 ");
         }
+        function getLocationNamebyID($id)
+        {
+            $lname = $this->db->query("SELECT propertylocationid,locationname FROM tblpropertylocation WHERE propertylocationid = $id ")->row();
+            return $lname->locationname;
+        }
 }
 
 
