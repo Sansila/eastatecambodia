@@ -125,8 +125,8 @@
     $lang['an_permonth'] = "ការវិភាគអចលនទ្រព្យក្នុងមួយខែនៃលេខសម្គាល់";
     $lang['an_header_view_day_sal'] = "វិភាគមើលអចលនទ្រព្យតាមការលក់ 7 ថ្ងៃចុងក្រោយ";
     $lang['an_header_view_day_rent'] = "ការវិភាគទិដ្ឋភាពអចលនទ្រព្យតាមការជួលរយៈពេល 7 ថ្ងៃចុងក្រោយ";
-    $lang['an_header_view_month_sal'] = "វិភាគមើលអចលនទ្រព្យតាមការលក់ 6 ខែចុងក្រោយ";
-    $lang['an_header_view_month_rent'] = "វិភាគមើលអចលនទ្រព្យតាមការជួល 6 ខែចុងក្រោយ";
+    $lang['an_header_view_month_sal'] = "វិភាគមើលអចលនទ្រព្យតាមការលក់ 3 ខែចុងក្រោយ";
+    $lang['an_header_view_month_rent'] = "វិភាគមើលអចលនទ្រព្យតាមការជួល 3 ខែចុងក្រោយ";
     // Property Location
     $lang['lp_header'] = "ទីតាំង";
     $lang['lp_header_list'] = "បញ្ជីរាយនាមទីតាំង";

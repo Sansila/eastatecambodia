@@ -426,4 +426,20 @@ class Home extends CI_Controller {
 		header("Content-type:text/x-json");
 		echo json_encode($sql);
 	}
+	function mostview()
+	{
+		$thead=array("No"=>'no',
+					 "Category Name"=>'name',	 
+					 "Parent"=>'parent',	
+					 "MenuType"=>'location',	
+					 "Article"=>'article',	
+					 "Visibled"=>'visibled',
+					 "Action"=>'Action'							 	
+					);
+		$data['thead']=	$thead;
+		$data['page_header']="Here is Index Page";		
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('greenadmin/property_most_view',$data);
+		$this->load->view('greenadmin/footer');
+	}
 }

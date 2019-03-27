@@ -126,8 +126,8 @@
   $lang['an_permonth'] = "Property Analysis Per Month of PropertyID";
   $lang['an_header_view_day_sal'] = "Property View Analysis By Sale The Last 7 Days";
   $lang['an_header_view_day_rent'] = "Property View Analysis By Rent The Last 7 Days";
-  $lang['an_header_view_month_sal'] = "Property View Analysis By Sale The Last 6 Months";
-  $lang['an_header_view_month_rent'] = "Property View Analysis By Rent The Last 6 Months";
+  $lang['an_header_view_month_sal'] = "Property View Analysis By Sale The Last 3 Months";
+  $lang['an_header_view_month_rent'] = "Property View Analysis By Rent The Last 3 Months";
   // Property Location
   $lang['lp_header'] = "Property Location";
   $lang['lp_header_list'] = "Property Location List";

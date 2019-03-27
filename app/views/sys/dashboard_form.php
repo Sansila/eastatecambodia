@@ -40,6 +40,16 @@
 	  	height: 500px;
 	  	border: 1px solid #a6a6c1;
 	}
+	h3{
+	  padding-left: 15px;
+	  background: #64b5de;
+	  color: white;
+	  padding: 10px;
+	  text-align: center;
+	  margin-bottom: 0px;
+	  font-size: 14px;
+	  font-weight: normal;
+	}
 </style>
 
 	 <link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/images/logo.ico')?> ">
@@ -126,10 +136,18 @@
  		$userid = $this->session->userdata('userid');
  	?>
  	<div class="chart_post_property">
- 		<h5 style="padding-left: 15px;">Property Post Analysis The Last 7 Days</h5>
- 		<div id="chartdiv"></div>
- 		<h5 style="padding-left: 15px;">Property View Analysis The Last 7 Days</h5>
- 		<div id="chartdivview"></div>
+ 		<div class="row">
+      		<div class="col-sm-12">
+ 				<h3 style="padding-left: 15px;">Property Post Analysis The Last 7 Days</h3>
+ 				<div id="chartdiv"></div>
+ 			</div>
+ 		</div>
+ 		<div class="row">
+ 			<div class="col-sm-12">
+		 		<h3 style="padding-left: 15px;">Property View Analysis The Last 7 Days</h3>
+		 		<div id="chartdivview"></div>
+		 	</div>
+	 	</div>
  	</div>
  	<div class="List_customer hide">
  		<div id="breadcrumb">
