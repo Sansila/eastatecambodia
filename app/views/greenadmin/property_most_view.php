@@ -17,7 +17,15 @@
 		background-repeat: no-repeat;
 		padding-left: 15px !important;
 	}
-	
+	.Property{
+		width: 400px;
+	}
+	.sort{
+		border-top-right-radius: 0px !important;
+    	border-top-left-radius: 0px !important;
+    	background-color: #64b5de !important;
+    	color: white !important;
+	}
 </style>
 <?php
 	$m='';
@@ -30,31 +38,38 @@
 	}
  ?>
  <div id="content-header" class="mini">
-        <h1>Menu LIST</h1>
+        <h1>Property View List</h1>
         <ul class="mini-stats box-3">
             
         </ul>
  </div>
  <div id="breadcrumb">
       <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i>Home</a>
-      <a href='#' class="current">Menu list</a>
+      <a href='#' class="current">Property View list</a>
  </div>
 <div class="wrapper">
 	<div class="clearfix" id="main_content_outer">
 	    <div id="main_content">
 	      <div class="col-xs-12">
-		      	<div class="col-xs-6">
+	      		<div style="margin-top: 10px;"></div>
+	      		<label class='col-xs-2 control-label' style="text-align: right; margin-top: 7px;">Property View By</label>
+		      	<div class="col-xs-2">
+		      		<select class="form-control" onchange="getdata(1);" id="txtshowby">
+		      			<option value="">Select View</option>
+		      			<option value="day">Per Day</option>
+		      			<option value="week">Per Week</option>
+		      			<option value="month">Per Month</option>
+		      		</select>
 		      	</div>
-		      	  
 		  </div>
 	      <div class="row">
 	      		<div class="col-sm-12">
 	      			<div class="widget-box table-responsive">
-						<div class="widget-title no_wrap" id='top-bar'>
+						<div class="widget-title no_wrap hide" id='top-bar'>
 							<span class="icon">
 								<i class="fa fa-th"></i>
 							</span>
-								<h5>Menu List</h5>
+								<h5>Property View List</h5>
 							<div style="text-align: right; width:130px; float:right">
 					      			      		
 					      	</div> 			    
@@ -69,14 +84,14 @@
 					           				if($th=='Action')
 					           					echo "<th class='remove_tag'>".$th."</th>";
 					           				else
-					           					echo "<th class='sort $val no_wrap' onclick='sort(event);' rel='$val'>".$th."</th>";								
+					           					echo "<th class='sort $val no_wrap' onclick='sort(event);' rel='$val'>".$th."</th>";							
 					           			}
 									?>
 									</tr>
-									<tr class='remove_tag'>
+									<tr class='remove_tag hide'>
 										<th></th>
 										<th>
-											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/> 
+											<input type='text' onkeyup="getdata(1);" class='form-control hide input-sm' id='s_store_name'/> 
 										</th>
 										<th ></th>
 										<th>
@@ -97,7 +112,7 @@
 
 						</div>
 					</div>
-					<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+					<!-- <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
 							<div class='col-sm-3'>
 								<label>Show 
 									
@@ -113,7 +128,7 @@
 							<div class='dataTables_paginate'>
 
 							</div>
-					</div>
+					</div> -->
 	      		</div>	      	
 	        </div> 
 	    </div>
@@ -241,11 +256,11 @@
 			});
 		})
 		function getdata(page){
-          	var url="<?php echo site_url('menu/getdata')?>";
+          	var url="<?php echo site_url('greenadmin/home/getdata_proview')?>";
           	var m="<?PHP echo $m?>";
           	var p="<?PHP echo $p?>";
           	var s_name=$('#s_store_name').val();
-          	
+          	var perdate = $('#txtshowby').val();
           	var perpage=$('#perpage').val();
 			$.ajax({
 		            url:url,
@@ -256,7 +271,7 @@
 		            		'p':p,
 		            		'page':page,
 		            		's_name':s_name,
-		            		
+		            		'perdate':perdate,
 		            		'perpage':perpage
 		            	},
 		            success:function(data) {

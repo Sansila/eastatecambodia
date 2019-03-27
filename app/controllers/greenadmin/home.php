@@ -428,18 +428,104 @@ class Home extends CI_Controller {
 	}
 	function mostview()
 	{
-		$thead=array("No"=>'no',
-					 "Category Name"=>'name',	 
-					 "Parent"=>'parent',	
-					 "MenuType"=>'location',	
-					 "Article"=>'article',	
-					 "Visibled"=>'visibled',
-					 "Action"=>'Action'							 	
+		$thead=array("PropertyID"=>'PropertyID',
+					 "Property Name"=>'Property Name',
+					 "Viewed" => "Viewed",	 
+					 "Price"=>'Price',	
+					 "Type"=>'Type',	
+					 "Category"=>'Category',	
+					 "Location"=>'Location',
+					 //"Action"=>'Action'							 	
 					);
 		$data['thead']=	$thead;
 		$data['page_header']="Here is Index Page";		
 		$this->load->view('greenadmin/header',$data);
 		$this->load->view('greenadmin/property_most_view',$data);
 		$this->load->view('greenadmin/footer');
+	}
+	function getdata_proview()
+	{
+		$perpage=$this->input->post('perpage');
+		$s_name=$this->input->post('s_name');
+		$perdate = $this->input->post('perdate');
+		$userid = ""; $user = "";
+		$roleid = $this->session->userdata('roleid');
+		if($roleid == 1){
+			$userid = ""; $user = "";
+		}
+		else{
+			$userid = $this->session->userdata('userid');
+			$user = " AND p.agent_id = $userid";
+		}
+
+		$where = " AND (v.date_create >= date_sub(now(), interval 1 month)) $user";
+		$date = Date('Y-m-d');
+		if($perdate == "day")
+			$where.= " AND v.date_create = '$date' $user ";
+		if($perdate == "week")
+			$where.= " AND (v.date_create between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) $user ";
+		if($perdate == "month")
+			$where.= " AND (v.date_create >= date_sub(now(), interval 1 month)) $user ";
+		
+		$sql="SELECT 
+			count(*) as total_pro,
+			p.pid,
+			p.property_name,
+			p.p_type,
+			p.lp_id,
+			p.type_id,
+			p.p_status,
+			p.price,
+			p.agent_id,
+			pt.typeid,
+			pt.typename,
+			v.pid,
+			v.date_create,
+			pl.propertylocationid,
+			pl.locationname
+			FROM tblproperty as p
+			inner join tblvisitor as v 
+			on v.pid = p.pid 
+			inner join tblpropertytype as pt 
+			on pt.typeid = p.type_id
+			inner join tblpropertylocation as pl
+			on pl.propertylocationid = p.lp_id
+			where p.p_status = 1 {$where}
+			GROUP BY v.pid 
+			HAVING total_pro >= 10
+			ORDER BY v.pid ASC ";
+		$table='';
+		// $pagina='';
+		// $paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("greenadmin/home/getdata_proview"),$perpage);
+		$i=1;
+		// $limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+		// $sql.=" {$limit}";
+		$this->green->setActiveRole($this->session->userdata('roleid'));
+        $this->green->setActiveModule($this->input->post('m'));
+        $this->green->setActivePage($this->input->post('p')); 
+		foreach($this->db->query($sql)->result() as $row){
+			$type = "";
+			if($row->p_type == 1)
+				$type = "Sale";
+			if($row->p_type == 2)
+				$type = "Rent";
+			if($row->p_type == 3)
+				$type = "Rent & Sale";
+			
+			$table.= "<tr>
+				 <td class='no'>P".$row->pid."</td>
+				 <td class='name'>".$row->property_name."</td>	
+				 <td class='name'>".$row->total_pro."-View</td>											
+				 <td class='type'>$".$row->price."</td>							 	
+				 <td class='type'>".$type."</td>							 	
+				 <td class='type'>".$row->typename."</td>							 	
+				 <td class='country'>".$row->locationname."</td>";
+			$table.= "</tr>";										 
+			$i++;	 
+		}
+		$arr['data']=$table;
+		//$arr['pagina']=$paging;
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
 	}
 }
