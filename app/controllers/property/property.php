@@ -287,14 +287,10 @@ class Property extends CI_Controller {
 		$var = $this->session->all_userdata();
 		$user = $var['userid'];
 
-		// $role = $this->session->userdata('roleid');
-		// $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $role ")->row();
-		// if($rol->is_admin == 1)
-		// {
+		$role = $this->session->userdata('roleid');
+		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $role ")->row();
 
-		// }
-
-		if($user == 4)
+		if($rol->is_admin == 1)
 			$where.= "";
 		else
 			$where.= " AND pl.agent_id = '$user' ";
