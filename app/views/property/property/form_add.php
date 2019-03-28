@@ -115,7 +115,8 @@
                                         $locat = "";
                                         $userid = $this->session->userdata('userid');
                                         $role = $this->session->userdata('roleid');
-                                        if($role == 1)
+                                        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $role ")->row();
+                                        if($rol->is_admin == 1)
                                         {
                                             $locat=$this->db->query("SELECT * FROM admin_user WHERE is_active='1'")->result();
                                         }else{
@@ -209,7 +210,8 @@
                                             $sel2 ="selected";
 
                                         $userid = $this->session->userdata('roleid');
-                                            if($userid == 1)
+                                        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $userid ")->row();
+                                            if($rol->is_admin == 1)
                                             {
                                         ?>
                                             <option value="0">Please Select</option>
