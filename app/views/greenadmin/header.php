@@ -52,7 +52,6 @@
 	    			$menu.='<li class="submenu '.$classMe.'">
 	    		                <a href="#"><i class="fa fa-flask"></i><span>'.$mod.'</span><i class="arrow fa fa-chevron-right"></i></a>';					
 	    					if(count($pages)>0){
-
 	    						if(isset($pages[$row['moduleid']])){
 	    							$page_mod=$pages[$row['moduleid']];
 
@@ -77,10 +76,7 @@
 	        							$menu.='</ul>';							
 	        						}
 	                            }   
-	    						
 	    					}	
-	    										
-	    	                
 	    			$menu.='</li>';
 			}		
 		}
@@ -228,11 +224,7 @@
 	                <i class="fa fa-cogs"></i>
 	            </div>
 	        </div>
-
-			<div id="sidebar">
-				<!-- <div id="search">
-					<input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="fa fa-search"></i></button>
-				</div> -->	
+			<div id="sidebar">	
 				<ul>
 					<li class="hide">
 						<a href="<?php echo site_url("sys/dashboard") ?>">
@@ -243,12 +235,4 @@
 					<?php echo $menu ?>
 				</ul>			
 			</div>			
-			<div id="content">
-
-				
-
-				
-				
-					
-				
-			
+			<div id="content">		

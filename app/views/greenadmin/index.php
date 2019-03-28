@@ -68,34 +68,24 @@ h3{
   $userid = $this->session->userdata('userid');
   $roleid=$this->session->userdata('roleid'); 
 ?>
-<?php
-  $m='';
-  $p='';
-  if(isset($_GET['m'])){
-      $m=$_GET['m'];
-  }
-  if(isset($_GET['p'])){
-      $p=$_GET['p'];
-  }
- ?>
 <div class="container-fluid">
   <div class="bd-example">
     <div class="row" style="padding-bottom: 20px;">
       <?php
           $i = 1; $class = "";
-          $pages = $this->db->query("SELECT * FROM z_page p WHERE p.moduleid = 18  ")->result();
-          foreach ($pages as $page) {
+          $gmod = $this->db->query("SELECT * FROM z_page p WHERE p.moduleid = 18 ")->result();
+          foreach ($gmod as $gmod) {
             if($i == 1){
               $class = "btns btn btn-primary";
               if($this->green->gAction("C")){
               ?>
                     <div class="col-sm-4">
-                      <a href="<?php echo site_url($page->link).'?m='.$page->moduleid.'&p='.$page->pageid?>" type="button" class="<?php echo $class?>">
+                      <a href="<?php echo site_url($gmod->link).'?m='.$gmod->moduleid.'&p='.$gmod->pageid?>" type="button" class="<?php echo $class?>">
                         <?php 
                           if($this->session->userdata('site_lang') == "khmer")
-                            echo $page->page_namekh;
+                            echo $gmod->page_namekh;
                           else
-                            echo $page->page_name; 
+                            echo $gmod->page_name; 
                         ?>
                         </a>
                     </div>
@@ -106,12 +96,12 @@ h3{
               if($this->green->gAction("R")){
             ?>
                 <div class="col-sm-4">
-                  <a href="<?php echo site_url($page->link).'?m='.$page->moduleid.'&p='.$page->pageid?>" type="button" class="<?php echo $class?>">
+                  <a href="<?php echo site_url($gmod->link).'?m='.$gmod->moduleid.'&p='.$gmod->pageid?>" type="button" class="<?php echo $class?>">
                       <?php 
                           if($this->session->userdata('site_lang') == "khmer")
-                            echo 'View '.$page->page_namekh;
+                            echo 'View '.$gmod->page_namekh;
                           else
-                            echo $page->page_name; 
+                            echo $gmod->page_name; 
                         ?>
                     </a>
                 </div>
@@ -182,47 +172,25 @@ h3{
                   <div class="row">
                       <div class="col-sm-12">
                         <div class="widget-box table-responsive">
-                      <div class="widget-title no_wrap hide" id='top-bar'>
-                        <span class="icon">
-                          <i class="fa fa-th"></i>
-                        </span>
-                          <h5>Property View List</h5>
-                        <div style="text-align: right; width:130px; float:right">
-                                          
-                            </div>          
-                      </div>
-                      <div class="widget-content nopadding" id='tap_print'>
-
-                        <table class="table table-bordered table-striped table-hover">
-                          <thead>
-                            <tr>
-                            <?php 
-                              // $thead=array("PropertyID"=>'PropertyID',
-                              //  "Property Name"=>'Property Name',
-                              //  "Viewed" => "Viewed",   
-                              //  "Price"=>'Price',  
-                              //  "Type"=>'Type',  
-                              //  "Category"=>'Category',  
-                              //  "Location"=>'Location',
-                              //  //"Action"=>'Action'               
-                              // );
-                              // foreach($thead as $th=>$val){
-                              //         if($th=='Action')
-                              //           echo "<th class='remove_tag'>".$th."</th>";
-                              //         else
-                              //           echo "<th class='sort $val no_wrap' onclick='sort(event);' rel='$val'>".$th."</th>";              
-                              //       }
-                            ?>
-                            </tr>
-                          </thead>
-                          <tbody class='list'>
-
-                          </tbody>
-                        </table>  
-
-                      </div>
-                  </div>
-                    
+                            <div class="widget-title no_wrap hide" id='top-bar'>
+                              <span class="icon">
+                                <i class="fa fa-th"></i>
+                              </span>
+                                <h5>Property View List</h5>
+                              <div style="text-align: right; width:130px; float:right"></div>          
+                            </div>
+                            <div class="img-show hide">
+                              <img src="<?php echo site_url('assets/img/ld.gif')?>" style="position: absolute;z-index: 9999; width: 100px; left: 50%;">
+                            </div>
+                            <div class="widget-content nopadding" id='tap_print'>
+                              <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                </thead>
+                                <tbody class='list'>
+                                </tbody>
+                              </table> 
+                            </div>
+                        </div>
                       </div>          
                     </div> 
                 </div>
@@ -239,35 +207,25 @@ h3{
       getdata(1); 
     })
     function getdata(page){
-            var url="<?php echo site_url('greenadmin/home/getdata_proview')?>";
-            var m="<?PHP echo $m?>";
-            var p="<?PHP echo $p?>";
-            //var s_name=$('#s_store_name').val();
-            var perdate = $('#txtshowby').val();
-            var perpage=$('#perpage').val();
+      var url="<?php echo site_url('greenadmin/home/getdata_proview')?>";
+      $('.img-show').removeClass('hide');
       $.ajax({
-                url:url,
-                type:"POST",
-                datatype:"Json",
-                async:false,
-                data:{'m':m,
-                    'p':p,
-                    'page':page,
-                    // 's_name':s_name,
-                    'perdate':perdate,
-                    'perpage':perpage
-                  },
-                success:function(data) {
-                  $(".list").html(data.data); console.log(data);
-                  $('.dataTables_paginate').html(data.pagina.pagination);
-                }
-              })
+        url:url,
+        type:"POST",
+        datatype:"Json",
+        async:false,
+        data:{
+            'page':page,
+          },
+        success:function(data) {
+          $(".list").html(data.data); console.log(data);
+          setTimeout(function(){
+            $('.img-show').addClass('hide');
+          },2000);
+        }
+      });
     }
-    
-    
-    
-  </script>
-
+</script>
 <script type="text/javascript">
 
   am4core.useTheme(am4themes_animated);

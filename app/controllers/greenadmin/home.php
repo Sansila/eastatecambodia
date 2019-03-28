@@ -458,14 +458,16 @@ class Home extends CI_Controller {
 			$user = " AND p.agent_id = $userid";
 		}
 
-		$where = " AND (v.date_create >= date_sub(now(), interval 1 month)) $user";
+		$where = "";
 		$date = Date('Y-m-d');
 		if($perdate == "day")
-			$where.= " AND v.date_create = '$date' $user ";
-		if($perdate == "week")
-			$where.= " AND (v.date_create between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) $user ";
-		if($perdate == "month")
-			$where.= " AND (v.date_create >= date_sub(now(), interval 1 month)) $user ";
+			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC";
+		else if($perdate == "week")
+			$where.= " AND (v.date_create between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) $user GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC";
+		else if($perdate == "month")
+			$where.= " AND (v.date_create >= date_sub(now(), interval 1 month)) $user GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC";
+		else
+			$where.= " GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC LIMIT 15";
 		
 		$sql="SELECT 
 			count(*) as total_pro,
@@ -490,16 +492,9 @@ class Home extends CI_Controller {
 			on pt.typeid = p.type_id
 			inner join tblpropertylocation as pl
 			on pl.propertylocationid = p.lp_id
-			where p.p_status = 1 {$where}
-			GROUP BY v.pid 
-			HAVING total_pro >= 10
-			ORDER BY v.pid ASC ";
+			where p.p_status = 1 {$where} ";
 		$table='';
-		// $pagina='';
-		// $paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("greenadmin/home/getdata_proview"),$perpage);
 		$i=1;
-		// $limit=" LIMIT {$paging['start']}, {$paging['limit']}";
-		// $sql.=" {$limit}";
 		$this->green->setActiveRole($this->session->userdata('roleid'));
         $this->green->setActiveModule($this->input->post('m'));
         $this->green->setActivePage($this->input->post('p')); 
@@ -513,7 +508,8 @@ class Home extends CI_Controller {
 				$type = "Rent & Sale";
 			
 			$table.= "<tr>
-				 <td class='no'>P".$row->pid." - ".$row->property_name." - $".$row->price." - ".$row->total_pro." View</td>";
+				 <td class='no'>P".$row->pid." - ".$row->property_name." - $".$row->price."</td>
+				 <td class='no' style='width:10%;text-align: center;'>".$row->total_pro." View</td>";
 			$table.= "</tr>";										 
 			$i++;	 
 		}
