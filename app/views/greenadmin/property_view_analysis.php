@@ -25,6 +25,11 @@
   height: 500px;
   border: 1px solid #a6a6c1;
 }
+#chartdivperyear{
+  width: 100%;
+  height: 500px;
+  border: 1px solid #a6a6c1;
+}
 .bd-example {
     padding: 1rem;
     margin-right: 0;
@@ -123,6 +128,12 @@ h3{
           <div id="chartdivmonthrent"></div>
       </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+          <h3 style="padding-left: 15px;"><?php echo $this->lang->line('an_header_view_year')?></h3>
+          <div id="chartdivperyear"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -130,8 +141,46 @@ h3{
         // Themes begi
 am4core.useTheme(am4themes_animated);
 
-var chart = am4core.create("chartdivday", am4charts.XYChart);
 
+var chart4 = am4core.create("chartdivperyear", am4charts.PieChart);
+chart4.hiddenState.properties.opacity = 0; // this creates initial fade-in
+chart4.fontSize = 10;
+
+$.ajax({ 
+    type: 'GET', 
+    url:"<?php echo site_url('greenadmin/home/getViewPropertyPerYear/')?>",
+    dataType: 'json',
+    success: function (data) { 
+        chart4.data = data;
+        console.log(data);
+    }
+});
+
+chart4.radius = am4core.percent(70);
+chart4.innerRadius = am4core.percent(40);
+// chart.startAngle = 180;
+// chart.endAngle = 360;
+chart4.responsive.enabled = true;
+
+var series4 = chart4.series.push(new am4charts.PieSeries());
+series4.dataFields.value = "value";
+series4.dataFields.category = "country";
+series4.legendSettings.labelText = '{country}';
+series4.legendSettings.valueText = '{value}';
+
+series4.slices.template.cornerRadius = 10;
+series4.slices.template.innerCornerRadius = 7;
+series4.slices.template.draggable = true;
+series4.slices.template.inert = true;
+series4.alignLabels = false;
+
+series4.hiddenState.properties.startAngle = 90;
+series4.hiddenState.properties.endAngle = 90;
+
+chart4.legend = new am4charts.Legend();
+
+
+var chart = am4core.create("chartdivday", am4charts.XYChart);
 $.ajax({ 
     type: 'GET', 
     url:"<?php echo site_url('greenadmin/home/view_sale_day')?>",

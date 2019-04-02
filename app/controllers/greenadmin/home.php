@@ -460,14 +460,12 @@ class Home extends CI_Controller {
 
 		$where = "";
 		$date = Date('Y-m-d');
-		if($perdate == "day")
-			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC";
-		else if($perdate == "week")
-			$where.= " AND (v.date_create between (CURDATE() - INTERVAL 7 DAY) and CURDATE()) $user GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC";
-		else if($perdate == "month")
-			$where.= " AND (v.date_create >= date_sub(now(), interval 1 month)) $user GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC";
+		if($perdate == 1)
+			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
+		else if($perdate > 1)
+			$where.= " AND (v.date_create between (CURDATE() - INTERVAL $perdate DAY) and CURDATE()) $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
 		else
-			$where.= " GROUP BY v.pid HAVING total_pro >= 10 ORDER BY total_pro DESC LIMIT 15";
+			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid ORDER BY total_pro DESC LIMIT 15";
 		
 		$sql="SELECT 
 			count(*) as total_pro,
@@ -517,5 +515,33 @@ class Home extends CI_Controller {
 		//$arr['pagina']=$paging;
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
+	}
+	function getViewPropertyPerYear()
+	{
+		$date = date('Y-m-d');
+		$sql = $this->db->query("SELECT
+								    DATE_FORMAT(tblvisitor.date_create, '%M') AS 'year',
+								    COUNT(*) AS income
+								FROM
+								    tblproperty
+								INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+								WHERE
+								    (tblvisitor.date_create >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)) AND tblproperty.p_status = 1
+							    GROUP BY
+							        YEAR(tblvisitor.date_create),
+							        MONTH(tblvisitor.date_create)
+							    ORDER BY
+							        income
+							    DESC
+								")->result();
+		$data = array();
+		$i = 1;
+		foreach ($sql as $row) {
+			$data[] = array('country' => $row->year,
+							'value' => $row->income);
+			$i++;
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
 	}
 }

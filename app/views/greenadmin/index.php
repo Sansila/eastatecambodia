@@ -151,20 +151,24 @@ h3{
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <h3 style="padding-left: 15px;">View Top 10</h3>
+        <h3 style="padding-left: 15px;">Top 15 Property View</h3>
         <div class="chartdivcatd">
           <div class="wrapper">
             <div class="clearfix" id="main_content_outer">
                 <div id="main_content">
                     <div class="form-group" style="border-top: none; border-bottom: none;">
-                        <label class='col-lg-2 control-label'>View By</label>
+                        <label class='col-lg-2 control-label' style="text-align: right;padding-top: 10px;">Last</label>
                         <div class="col-lg-5"> 
                             <div class="col-md-12">
                                 <select class="form-control" onchange="getdata(1);" id="txtshowby">
-                                  <option value="">Select View</option>
-                                  <option value="day">Per Day</option>
-                                  <option value="week">Per Week</option>
-                                  <option value="month">Per Month</option>
+                                  <option value="1">1 day</option>
+                                  <option value="2">2 day</option>
+                                  <option value="3">3 day</option>
+                                  <option value="5">5 day</option>
+                                  <option value="7">7 day</option>
+                                  <option value="15">15 day</option>
+                                  <option value="30">30 day</option>
+                                  <option value="60">60 day</option>
                                 </select>
                             </div>                   
                         </div>
@@ -209,6 +213,7 @@ h3{
     function getdata(page){
       var url="<?php echo site_url('greenadmin/home/getdata_proview')?>";
       $('.img-show').removeClass('hide');
+      var perdate = $('#txtshowby').val();
       $.ajax({
         url:url,
         type:"POST",
@@ -216,6 +221,7 @@ h3{
         async:false,
         data:{
             'page':page,
+            'perdate': perdate
           },
         success:function(data) {
           $(".list").html(data.data); console.log(data);
