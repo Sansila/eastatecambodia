@@ -1526,5 +1526,40 @@ class Site extends CI_Controller {
         $this->load->view('site/listmap',$data);
         $this->load->view('site/contain/footer',$datas);
     }
+    function listing_property()
+    {
+        $property_list = $this->site->getPropertyListOnMap();
+        $arr = array();
+        foreach ($property_list as $list) {
+            $detail = site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name);
+            $type = ""; $imgs = "";
+            if($list->p_type == 1)
+                $type = "Sale";
+            elseif ($list->p_type == 2)
+                $type = "Rent";
+            else
+                $type = "Rent & Sale";
+
+            $img = $this->site->getImage($list->pid);
+
+            if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) 
+                $imgs =  base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); 
+            else 
+                $imgs = base_url('assets/upload/noimage.jpg');
+
+            $arr[] = array($list->property_name,
+                           $list->address,
+                           '$'.$list->price,
+                           (float)$list->latitude,
+                           (float)$list->longtitude,
+                           $detail,
+                           $imgs,
+                           "",
+                           $type
+                          );
+        }
+        header("Content-type:text/x-json");
+        echo json_encode($arr);
+    }
 }
 ?>

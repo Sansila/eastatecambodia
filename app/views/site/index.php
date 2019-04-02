@@ -829,7 +829,11 @@
 	                                <button class="button highlight expanded" data-search-button>Search</button>
 	                            </div>
 	                            <div class="search-field-wrapper search-button">
-	                                <button class="button highlight expanded" data-search-button>Search</button>
+	                                <a href="<?php echo site_url('site/site/listmap')?>">
+	                                	<button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
+	                                		Search by map
+	                                	</button>
+	                                </a>
 	                            </div>
 	                        </div>
 
