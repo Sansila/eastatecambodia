@@ -113,7 +113,7 @@ class page extends CI_Controller {
 					'created_by'=>1,
 					'created_date'=>date('Y-m-d H:i:s'),
 					'is_active'=>1,
-					'order'=>$max_order
+					//'order'=>$max_order
 				);
 
 			$this->db->insert('z_page',$data);
