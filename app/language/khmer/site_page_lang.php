@@ -109,6 +109,7 @@
     $lang['p_dir_other'] = "ផ្សេងៗ";
     $lang['p_content_internal'] = "ពត៌មានផ្ទាល់ខ្លួន";
     $lang['p_tag'] = "សម្គាល់អចលនទ្រព្យ";
+    $lang['p_project'] = "គម្រោង";
     // Login Page
     $lang['lo_name'] = "ឈ្មោះ​អ្នកប្រើប្រាស់";
     $lang['lo_pass'] = "ពាក្យសម្ងាត់";

@@ -134,6 +134,7 @@ class Property extends CI_Controller {
 			'direct_sale' => $this->input->post('directly'),
 			'internal_remark' => $this->input->post('internal_remark'),
 			'property_tag' => $this->input->post('property_tag'),
+			'projectid' => $this->input->post('projectid')
 		);
 
 		

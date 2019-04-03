@@ -110,6 +110,7 @@
   $lang['p_dir_other'] = "Other";
   $lang['p_content_internal'] = "Internal Remark";
   $lang['p_tag'] = "Property Tag";
+  $lang['p_project'] = "Project";
   // Login Page
   $lang['lo_name'] = "User Name";
   $lang['lo_pass'] = "Password";

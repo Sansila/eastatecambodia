@@ -194,7 +194,30 @@
                                 </div>                   
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_project')?></label>
+                            <div class="col-lg-4"> 
+                                <div class="col-md-12">
+                                    <select class="form-control select2-single-project input-sm" id="projectid" name="projectid">
+                                        <option value="">Please Select</option>
+                                        <?php
+                                            $project=$this->db->query("SELECT * FROM tblproject where is_active = 1 ORDER BY projectid asc")->result();
+                                            foreach ($project as $pro) {
+                                                $sel='';
+                                                if(isset($row->projectid))
+                                                    if($row->projectid==$pro->projectid)
+                                                        $sel='selected';
+                                        ?>
+                                        <option value="<?php echo $pro->projectid;?>" <?php echo $sel; ?>>
+                                            <?php echo $pro->projectname;?>
+                                        </option>
+                                        <?php 
+                                            }
+                                        ?>
+                                    </select>
+                                </div>                   
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_level')?></label>
                             <div class="col-lg-4"> 
@@ -791,7 +814,10 @@
         allowClear:true,
         placeholder: 'Location'
     });
-
+    $(".select2-single-project").select2({
+        allowClear:true,
+        placeholder: 'Project'
+    });
     $("#save_draft").click(function(){
         $("#available_pro").val('2');
         setTimeout(function(){
@@ -975,7 +1001,8 @@
                     relative_owner: $('#relative_owner').val(),
                     directly: $('#txt_directly').val(),
                     internal_remark: $('#internal_remark').val(),
-                    property_tag: $('#property_tag').val()
+                    property_tag: $('#property_tag').val(),
+                    projectid: $('#projectid').val(),
                 },
                 success:function(data) {
                     // $(".result_text").html(data.msg);
