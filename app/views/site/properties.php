@@ -528,7 +528,13 @@
 	                            <div class="search-field-wrapper search-button">
 	                                <button class="button highlight expanded" id="search-submit-button" data-search-button>Search</button>
 	                            </div>
-	                            
+	                            <div class="search-field-wrapper search-button">
+	                                <a href="<?php echo site_url('site/site/listmap')?>">
+	                                	<button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
+	                                		Search by map
+	                                	</button>
+	                                </a>
+	                            </div>
 	                        </div>
 	                    </div>
 	                    <div class="search-form-wrapper clearfix rows hide-for-medium js-mobile-search align-center">
@@ -920,6 +926,13 @@
 	                        <div class="smallport-22 medium-4">
 	                            <div class="search-field-wrapper search-button">
 	                                <button class="button highlight expanded" data-search-button>Search</button>
+	                            </div>
+	                            <div class="search-field-wrapper search-button">
+	                                <a href="<?php echo site_url('site/site/listmap')?>">
+	                                	<button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
+	                                		Search by map
+	                                	</button>
+	                                </a>
 	                            </div>
 	                        </div>
 	                    </div>

@@ -70,8 +70,13 @@
 	<script src="<?php echo base_url('assets/js/select2.js')?>"></script>
 	<!-- <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
 	<script src="<?php echo base_url('assets/js/BsMultiSelect.js')?>"></script> -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
-  type="text/javascript"></script>
+	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
+  type="text/javascript"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPZ-Erd-14Vf2AoPW2Pzlxssf6-2R3PPs"></script>
+  	<script src="<?php echo site_url('assets/js')?>/map/markerwithlabel_packed.js"></script>
+  	<script src="<?php echo site_url('assets/js')?>/map/infobox.js"></script>
+  	<script src="<?php echo site_url('assets/js')?>/map/markerclusterer_packed.js"></script>
+  	<script src="<?php echo site_url('assets/js')?>/map/custom-map.js"></script>
 
   <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=316143172374700&autoLogAppEvents=1"></script>
   <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWZfWaMa42KBMR5apqkTAyDdnAkemyCHY"
