@@ -654,7 +654,7 @@ class Property extends CI_Controller {
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
 
-        $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
         $mail->Subject = "Estate Cambodia - Property Approved";
         $mail->AddAddress($pro->email);
 

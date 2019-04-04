@@ -59,8 +59,7 @@ if(isset($_POST['button']))
     $mail->Port     = 465;
     $mail->Host     = "smtp.gmail.com";
     $mail->Mailer   = "smtp";
-    $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
-    $mail->AddReplyTo("estatecambodia.dev@gmail.com", "Estate Cambodia");
+    $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
     $mail->AddAddress($_POST["email"]);   
     $mail->Subject = "Reset New Password";
     $mail->WordWrap   = 80;

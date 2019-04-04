@@ -915,7 +915,7 @@ class Site extends CI_Controller {
         $mail->Host     = "smtp.gmail.com";
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
-        $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
         $mail->Subject = "Estate Cambodia - Submit";
         $mail->AddAddress($email);
         $logo = "http://estatecambodia.com/assets/img/logo.png";
@@ -1139,7 +1139,7 @@ class Site extends CI_Controller {
             $mail->Host     = "smtp.gmail.com";
             $mail->Mailer   = "smtp";
             $mail->WordWrap   = 80;
-            $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+            $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
             $mail->Subject = "Estate Cambodia";
             $mail->AddAddress($email);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
@@ -1250,7 +1250,7 @@ class Site extends CI_Controller {
             $mail->Host     = "smtp.gmail.com";
             $mail->Mailer   = "smtp";
             $mail->WordWrap   = 80;
-            $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+            $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
             $mail->Subject = "state Cambodia - Property Inquiry";
             $mail->AddAddress($email);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
@@ -1301,7 +1301,7 @@ class Site extends CI_Controller {
         $mail->Host     = "smtp.gmail.com";
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
-        $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
+        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
         $data = $this->db->query("SELECT 
                                         p.pid,
                                         p.agent_id,

@@ -8,8 +8,7 @@
     $mail->Port     = 465;
     $mail->Host     = "smtp.gmail.com";
     $mail->Mailer   = "smtp";
-    $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
-    $mail->AddReplyTo("estatecambodia.dev@gmail.com", "Estate Cambodia");
+    $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
     $mail->AddAddress("sansila.dev@gmail.com"); 
     $mail->Subject = "Check Property Info";
     $mail->WordWrap   = 80;

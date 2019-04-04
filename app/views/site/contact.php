@@ -97,12 +97,11 @@ if(isset($_POST['button']))
     $mail->Host     = "smtp.gmail.com";
     $mail->Mailer   = "smtp";
     $mail->SetFrom($_POST["customer_mail"], $_POST["name"]);
-    $mail->AddReplyTo($_POST["customer_mail"], $_POST["name"]);
-    $mail->AddAddress($_POST["owner"]);
-    $mail->AddCC("vireak.cambodia@gmail.com");   
+    $mail->AddAddress("estatecambodia168.dev@gmail.com");
+    $mail->AddCC("vireak.cambodia@gmail.com");  
+    $mail->AddCC($_POST["owner"]);  
     $mail->Subject = "Contact From Customer";
     $mail->WordWrap   = 80;
-
 
     $logo = "http://estatecambodia.com/assets/img/logo.png";
     $description = '<div style="width: 100%"><table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">

@@ -667,7 +667,7 @@
 				    $mail->Mailer   = "smtp";
 				    $mail->SetFrom($_POST["customer_mail"], $_POST["name"]);
 				    $mail->AddReplyTo($_POST["customer_mail"], $_POST["name"]);
-				    $mail->AddAddress("estatecambodia.dev@gmail.com");
+				    $mail->AddAddress("estatecambodia168.dev@gmail.com");
 				    $mail->AddCC("vireak.cambodia@gmail.com");
 					$mail->AddCC("info@estatecambodia.com");   
 				    $mail->Subject = "Interest From Customer";
