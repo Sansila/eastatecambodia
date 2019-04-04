@@ -1,31 +1,34 @@
 <?php 
 	$status = ''; 
-	$location = ''; 
-	$category = ''; 
-	$firstprice = ''; 
-	$lastprice = ''; 
-	$available = ''; 
-	$order =''; 
-	$sort=''; 
-	$list_type = '';
-	$floorarea_first = "";
-	$floorarea_last = "";
-	$floorlevel_first = "";
-	$floorlevel_last = "";
-	$landarea_first = "";
-	$landarea_last = "";
-	$land_title = "";
-	$bedroom_first = "";
-	$bedroom_last = "";
-	$bathroom_first = "";
-	$bathroom_last = "";
-	$park_first = "";
-	$park_last = "";
-	$features = "";
-	$return_feature = "";
-	$agent = "";
-	$type = "";
-    $cates = "";
+    $location = ''; 
+    $category = ''; 
+    $firstprice = ''; 
+    $lastprice = ''; 
+    $available = ''; 
+    $order = ''; 
+    $sort =''; 
+    $return_cat = ''; 
+    $return_loc = ''; 
+    $list_type = ""; 
+    $activelist = ''; 
+    $activegrid = 'active'; 
+    $hideg =""; 
+    $hidel = "hide";
+    $floorarea_first = "";
+    $floorarea_last = "";
+    $floorlevel_first = "";
+    $floorlevel_last = "";
+    $landarea_first = "";
+    $landarea_last = "";
+    $land_title = "";
+    $bedroom_first = "";
+    $bedroom_last = "";
+    $bathroom_first = "";
+    $bathroom_last = "";
+    $park_first = "";
+    $park_last = "";
+    $features = "";
+    $types = "";
 
     if(isset($_GET['status']))
         $status = $_GET['status'];
@@ -42,7 +45,7 @@
     if(isset($_GET['order']))
         $order = $_GET['order'];
     if(isset($_GET['sort']))
-        $short = $_GET['sort'];
+        $sort = $_GET['sort'];
     if(isset($_GET['list_type']))
         $list_type = $_GET['list_type'];
     if(isset($_GET['building_area_total__gte']))
@@ -73,10 +76,51 @@
         $park_last = $_GET['garages__lte'];
     if(isset($_GET['features']))
         $features = $_GET['features'];
-    if(isset($_GET['agent']))
-        $agent = $_GET['agent'];
     if(isset($_GET['type']))
-        $type = $_GET['type'];
+        $types = $_GET['type'];
+
+    if($location != "")
+    {
+        $location = trim($location, ';');
+        $arr = explode(';', $location);
+        $num = count($arr);$i=0;
+        foreach ($arr as $arr) {
+            $comma = urlencode(";");
+            if(++$i == $num)
+            {
+                $comma = "";
+            }
+            $return_loc.= $arr.''.$comma;
+        }
+    }
+
+    if($list_type !="")
+    {
+        if($list_type == "grid")
+        {
+            $activegrid = "active";
+            $activelist = "";
+            $hideg = "";
+            $hidel = "hide";
+        }
+        if($list_type == "lists")
+        {
+            $activelist = "active";
+            $activegrid = "";
+            $hidel = "";
+            $hideg = "hide";
+        }
+    }
+    
+    if($category !="")
+    {
+        $ar = urlencode('[]');
+        foreach ($category as $cat) {
+            $return_cat .= "categories".$ar."=".$cat."&";
+        }
+    }else{
+        $return_cat .= "categories=&";
+    }
 
     if($category !="")
     {
@@ -85,6 +129,7 @@
         }    
     }
 ?>
+
 <style type="text/css">
 	.homepage-map #map {
 	    width: 100%;
@@ -104,9 +149,40 @@
 		width: 200px;
 	}
 </style>
-<div role="main" class="main pgl-bg-grey">
+
+<div role="main" class="pgl-properties pgl-bg-grey">
 	<div class="container">
-		<div style="margin-top: 30px"></div>
+        <div class="wizard row">
+            <div class="col-md-12">
+                <!-- <div class="col-md-2">
+                    <a class="current">Properties</a>
+                </div> -->
+                <div class="col-md-2">
+                    <a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+                </div>
+                <div class="col-md-2">
+                    <a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+                </div>
+            </div>
+        </div>
+        <div class="properties-full properties-listing properties-listfull">
+            <div class="listing-header clearfix">
+                <ul class="list-inline list-icons pull-left">
+                    <li class="<?php echo $activegrid;?>">
+                        <a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
+                            <i class="fa fa-th"></i>
+                        </a>
+                    </li>
+                    <li class="<?php echo $activelist;?>">
+                        <a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
+                            <i class="fa fa-th-list"></i>
+                        </a>
+                    </li>
+                    <li><a href="<?php echo site_url('listmap/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
+                </ul>
+            </div>
+        </div>
+		<div style="margin-top: 20px"></div>
 		<div class="homepage-map">
 			<div id="map"></div>
 		</div>
@@ -141,7 +217,7 @@
     var park_last = "<?php echo $park_last?>";
     var features = "<?php echo $features?>";
     var return_feature = "<?php echo $return_feature?>";
-    var type = "<?php echo $type?>";
+    var type = "<?php echo $types?>";
 
 	createHomepageGoogleMapByCategory(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type);
 })(jQuery);
