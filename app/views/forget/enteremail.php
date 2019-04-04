@@ -56,9 +56,7 @@ if(isset($_POST['button']))
     $mail->SMTPDebug = 0;
     $mail->SMTPAuth = TRUE;
     $mail->SMTPSecure = "ssl";
-    $mail->Port     = 465;  
-    $mail->Username = "estatecambodia.dev@gmail.com";
-    $mail->Password = "@Sila168.com.Dev";
+    $mail->Port     = 465;
     $mail->Host     = "smtp.gmail.com";
     $mail->Mailer   = "smtp";
     $mail->SetFrom("estatecambodia.dev@gmail.com", "Estate Cambodia");
