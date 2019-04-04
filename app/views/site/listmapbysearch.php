@@ -28,7 +28,7 @@
 	$features = "";
 	$return_feature = "";
 	$agent = "";
-	$type = "";
+	$types = "";
     $cates = "";
 
     if(isset($_GET['status']))
@@ -80,7 +80,7 @@
     if(isset($_GET['agent']))
         $agent = $_GET['agent'];
     if(isset($_GET['type']))
-        $type = $_GET['type'];
+        $types = $_GET['type'];
 
     if($category !="")
     {
@@ -129,7 +129,6 @@
     }else{
         $return_cat .= "categories=&";
     }
-
     // =================== get all result
 
     $where = ""; $order_by = ""; $return_cat = ""; $return_loc = ""; $limit="";
@@ -1190,7 +1189,7 @@
                             foreach ($category as $arr) {
                                 $title[$arr] = $arr;
                             }
-                            foreach ($type as $type) {
+                            foreach ($typecate as $type) {
                                 if($title[$type->typename] == $type->typename)
                                     $sel = "selected";
                                 else
@@ -1336,6 +1335,7 @@
                 </div>
             </div>
         </div>
+        <?php echo "dfgdfgkdjfgkldfjgkdjflgkdjf".$return_cat;?>
         <div class="properties-full properties-listing properties-listfull">
             <div class="listing-header clearfix">
                 <ul class="list-inline list-icons pull-left">
@@ -1388,7 +1388,7 @@
     var park_last = "<?php echo $park_last?>";
     var features = "<?php echo $features?>";
     var return_feature = "<?php echo $return_feature?>";
-    var type = "<?php echo $type?>";
+    var type = "<?php echo $types?>";
 
 	createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type);
 })(jQuery);

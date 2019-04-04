@@ -21,6 +21,7 @@ class Listmap extends CI_Controller {
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
+        $data['typecate'] = $this->site->getPropertyType();
         
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/listmapbysearch',$data);
@@ -293,6 +294,7 @@ class Listmap extends CI_Controller {
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
+        $data['typecate'] = $this->site->getPropertyType();
         $data['id'] = $id;
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/listmapbycategory',$data);
