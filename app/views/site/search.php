@@ -119,8 +119,6 @@
 	}else{
 		$return_cat .= "categories=&";
 	}
-
-
 ?>
 		<div role="main" class="main pgl-bg-grey">
 			<section id="home-search-bg" class="home-search hero lazyload" data-sizes="auto" style="background-image: url('<?php echo site_url('assets/upload/banner/thumb'.'/'.$slide->banner_id.'.png')?>'); ">
@@ -1127,7 +1125,7 @@
 										<i class="fa fa-th-list"></i>
 									</a>
 								</li>
-								<li><a href="list-map.html"><i class="fa fa-map-marker"></i></a></li>
+								<li><a href="<?php echo site_url('listmap/searchmap?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
 							</ul>
 
 							<ul class="list-inline list-sort pull-right">

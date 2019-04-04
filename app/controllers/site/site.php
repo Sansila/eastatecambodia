@@ -427,7 +427,7 @@ class Site extends CI_Controller {
             ";
 
         $all = $this->db->query($query)->result();
-
+        
         $config['total_rows'] = count($this->db->query($query)->result());
         $this->pagination->initialize($config);
         $limit = " LIMIT ".$config['per_page'];
