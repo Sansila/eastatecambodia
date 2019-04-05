@@ -7,7 +7,7 @@
 	$available = ''; 
 	$order =''; 
 	$sort=''; 
-    $return_cat = ''; 
+    $return_cats = ''; 
     $return_loc = '';
     $activelist = ''; 
     $activegrid = '';
@@ -124,10 +124,10 @@
     {
         $ar = urlencode('[]');
         foreach ($category as $cat) {
-            $return_cat .= "categories".$ar."=".$cat."&";
+            $return_cats .= "categories".$ar."=".$cat."&";
         }
     }else{
-        $return_cat .= "categories=&";
+        $return_cats .= "categories=&";
     }
     // =================== get all result
 
@@ -732,12 +732,16 @@
                                 <div class="search-field-wrapper search-button">
                                     <button class="button highlight expanded" id="search-submit-button" data-search-button>Search</button>
                                 </div>
-                                <div class="search-field-wrapper search-button">
+                                <div class="search-field-wrapper search-button hide">
                                     <a href="<?php echo site_url('site/site/listmap')?>">
                                         <button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
                                             Search by map
                                         </button>
                                     </a>
+                                </div>
+                                <div class="search-field-wrapper search-button">
+                                    <button class="button highlight expanded btn-search-map">
+                                        Search map <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -1131,12 +1135,16 @@
                                 <div class="search-field-wrapper search-button">
                                     <button class="button highlight expanded" data-search-button>Search</button>
                                 </div>
-                                <div class="search-field-wrapper search-button">
+                                <div class="search-field-wrapper search-button hide">
                                     <a href="<?php echo site_url('site/site/listmap')?>">
                                         <button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
                                             Search by map
                                         </button>
                                     </a>
+                                </div>
+                                <div class="search-field-wrapper search-button">
+                                    <button class="button highlight expanded btn-search-map">
+                                        Search map <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -1299,7 +1307,7 @@
                     <option <?php if($sort == 'Date') echo "selected"; else echo "";?> value="Date">Date</option>
                 </select>
 
-                
+                <input id="search_map" name="search_map"/>
             </form>
 <style type="text/css">
 	.homepage-map #map {
@@ -1316,9 +1324,16 @@
 	}
 	.property-text{
 		background: white;
-		padding: 10px;
+		padding:3px 10px;
 		width: 200px;
+        height: 49px;
 	}
+    .marker-style {
+        width: 24px;
+        height: 20px;
+        margin-left: -12px !important;
+        margin-top: -50px !important;
+    }
 </style>
 <div role="main" class="pgl-properties pgl-bg-grey">
 	<div class="container">
@@ -1335,21 +1350,21 @@
                 </div>
             </div>
         </div>
-        <?php echo "dfgdfgkdjfgkldfjgkdjflgkdjf".$return_cat;?>
         <div class="properties-full properties-listing properties-listfull">
             <div class="listing-header clearfix">
                 <ul class="list-inline list-icons pull-left">
                     <li class="<?php echo $activegrid;?>">
-                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
+                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
                             <i class="fa fa-th"></i>
                         </a>
                     </li>
                     <li >
-                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
+                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
                             <i class="fa fa-th-list"></i>
                         </a>
                     </li>
-                    <li class="<?php echo $activelist;?>"><a href="<?php echo site_url('listmap/searchmap?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
+                    <li class="<?php echo $activelist;?>">
+                    	<a href="<?php echo site_url('listmap/searchmap?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -1362,6 +1377,10 @@
 </div>
 <script>
 (function($){	
+    $('.btn-search-map').click(function(){
+        $('#search_map').val('map');
+        $('#hidden-search-form').submit();
+    });
 	var _latitude = 11.583903035180196;
 	var _longitude = 104.90009201657483;
 	var status = '<?php echo $status?>';

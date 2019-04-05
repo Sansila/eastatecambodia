@@ -121,6 +121,7 @@ class Site extends CI_Controller {
         $features = "";
         $return_feature = "";
         $agent = "";
+        $search_map = "";
         
         if(isset($_GET['status']))
             $status = $_GET['status'];
@@ -170,7 +171,9 @@ class Site extends CI_Controller {
             $features = $_GET['features'];
         if(isset($_GET['agent']))
             $agent = $_GET['agent'];
-    
+        if(isset($_GET['search_map']))
+            $search_map = $_GET['search_map'];
+
         if($location != "")
         {
             $location = trim($location, ';');
@@ -204,6 +207,10 @@ class Site extends CI_Controller {
             }
         }else{
             $return_feature .= "features=&";
+        }
+
+        if($search_map == "map"){
+            redirect(site_url('listmap/searchmap?available='.$available.'&agent='.$agent.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first));
         }
 
         $page = 0;
@@ -518,6 +525,7 @@ class Site extends CI_Controller {
         $features = "";
         $return_feature = "";
         $type = "";
+        $search_map = "";
         
         if(isset($_GET['status']))
             $status = $_GET['status'];
@@ -567,6 +575,8 @@ class Site extends CI_Controller {
             $features = $_GET['features'];
         if(isset($_GET['type']))
             $type = $_GET['type'];
+        if(isset($_GET['search_map']))
+            $search_map = $_GET['search_map'];
     
         if($location != "")
         {
@@ -601,6 +611,10 @@ class Site extends CI_Controller {
             }
         }else{
             $return_feature .= "features=&";
+        }
+
+        if($search_map == "map"){
+            redirect(site_url('listmap/properties/'.$id.'?type='.$id.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first));
         }
 
         $page = 0;

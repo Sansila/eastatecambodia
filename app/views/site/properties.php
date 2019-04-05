@@ -528,12 +528,16 @@
 	                            <div class="search-field-wrapper search-button">
 	                                <button class="button highlight expanded" id="search-submit-button" data-search-button>Search</button>
 	                            </div>
-	                            <div class="search-field-wrapper search-button">
+	                            <div class="search-field-wrapper search-button hide">
 	                                <a href="<?php echo site_url('site/site/listmap')?>">
 	                                	<button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
 	                                		Search by map
 	                                	</button>
 	                                </a>
+	                            </div>
+	                            <div class="search-field-wrapper search-button">
+	                                <button class="button highlight expanded btn-search-map">
+	                                	Search map <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -927,12 +931,16 @@
 	                            <div class="search-field-wrapper search-button">
 	                                <button class="button highlight expanded" data-search-button>Search</button>
 	                            </div>
-	                            <div class="search-field-wrapper search-button">
+	                            <div class="search-field-wrapper search-button hide">
 	                                <a href="<?php echo site_url('site/site/listmap')?>">
 	                                	<button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
 	                                		Search by map
 	                                	</button>
 	                                </a>
+	                            </div>
+	                            <div class="search-field-wrapper search-button">
+	                                <button class="button highlight expanded btn-search-map">
+	                                	Search map <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -1096,7 +1104,7 @@
 				</select>
                 
                 <input id="type" name="type" type="text" value="<?php echo $types?>" />
-		        
+		        <input id="search_map" name="search_map"/>
 		    </form>
 			<!-- End Advanced Search -->
 			
@@ -1299,3 +1307,9 @@
 			<!-- End Properties -->
 			
 		</div>
+		<script type="text/javascript">
+			$('.btn-search-map').click(function(){
+				$('#search_map').val('map');
+				$('#hidden-search-form').submit();
+			});
+		</script>

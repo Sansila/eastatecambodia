@@ -392,9 +392,9 @@ function createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,ca
                                 '</div>' +
                                 '<div class="property-text p-3 module line-clamp">' +
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +
-                                    '<h5 class="property-title pb-2">' + locations[i][0] + '</h5>' +
+                                    '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1.5em;">' + locations[i][0] + '</h5>' +
                                     '</a>' +
-                                    // '<span><i class="fa fa-map-marker text_primary" aria-hidden="true"></i> ' + locations[i][1] + '</span>' +
+                                    '<span><i class="fa fa-map-marker text_primary" aria-hidden="true"></i> ' + locations[i][1] + '</span>' +
                                 '</div>' +
                             '</div>';
                         //Define the infobox
@@ -548,7 +548,7 @@ function createHomepageGoogleMapByCategory(_latitude,_longitude,status,location,
                                 '</div>' +
                                 '<div class="property-text p-3 module line-clamp">' +
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +
-                                    '<h5 class="property-title pb-2">' + locations[i][0] + '</h5>' +
+                                    '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1.5em;">' + locations[i][0] + '</h5>' +
                                     '</a>' +
                                     // '<span><i class="fa fa-map-marker text_primary" aria-hidden="true"></i> ' + locations[i][1] + '</span>' +
                                 '</div>' +

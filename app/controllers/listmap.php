@@ -274,6 +274,22 @@ class Listmap extends CI_Controller {
             else 
                 $imgs = base_url('assets/upload/noimage.jpg');
 
+            $imglast = "";
+            if($list->typeid == 1 || $list->typeid == 3 || $list->typeid == 6) //hotel,condo,commer unit
+                $imglast = base_url('assets/js/map/img/hotel.png');
+            if($list->typeid == 2) //villa
+                $imglast = base_url('assets/js/map/img/villa.png');
+            if($list->typeid == 4) //house
+                $imglast = base_url('assets/js/map/img/house.png');
+            if($list->typeid == 7) //office space
+                $imglast = base_url('assets/js/map/img/office.png');
+            if($list->typeid == 8) //wherehouse
+                $imglast = base_url('assets/js/map/img/office.png');
+            if($list->typeid == 5) //house
+                $imglast = base_url('assets/js/map/img/land.png');
+            if($list->typeid == 11) //agriculture Land
+                $imglast = base_url('assets/js/map/img/land.png');
+
             $arr[] = array($list->property_name,
                            $list->address,
                            '$'.$list->price,
@@ -281,7 +297,7 @@ class Listmap extends CI_Controller {
                            (float)$list->longtitude,
                            $detail,
                            $imgs,
-                           "",
+                           $imglast,
                            $type
                           );
         }
@@ -553,6 +569,22 @@ class Listmap extends CI_Controller {
             else 
                 $imgs = base_url('assets/upload/noimage.jpg');
 
+            $imglast = "";
+            if($list->typeid == 1 || $list->typeid == 3 || $list->typeid == 6) //hotel,condo,commer unit
+                $imglast = base_url('assets/js/map/img/hotel.png');
+            if($list->typeid == 2) //villa
+                $imglast = base_url('assets/js/map/img/villa.png');
+            if($list->typeid == 4) //house
+                $imglast = base_url('assets/js/map/img/house.png');
+            if($list->typeid == 7) //office space
+                $imglast = base_url('assets/js/map/img/office.png');
+            if($list->typeid == 8) //wherehouse
+                $imglast = base_url('assets/js/map/img/office.png');
+            if($list->typeid == 5) //house
+                $imglast = base_url('assets/js/map/img/land.png');
+            if($list->typeid == 11) //agriculture Land
+                $imglast = base_url('assets/js/map/img/land.png');
+
             $arr[] = array($list->property_name,
                            $list->address,
                            '$'.$list->price,
@@ -560,7 +592,7 @@ class Listmap extends CI_Controller {
                            (float)$list->longtitude,
                            $detail,
                            $imgs,
-                           "",
+                           $imglast,
                            $type
                           );
         }

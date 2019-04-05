@@ -28,7 +28,7 @@
     $features = "";
     $return_feature = "";
     $agent = "";
-    $type = "";
+    $types = "";
     $cates = "";
 
     if(isset($_GET['status']))
@@ -80,7 +80,7 @@
     if(isset($_GET['agent']))
         $agent = $_GET['agent'];
     if(isset($_GET['type']))
-        $type = $_GET['type'];
+        $types = $_GET['type'];
 
     if($category !="")
     {
@@ -534,12 +534,16 @@
                                 <div class="search-field-wrapper search-button">
                                     <button class="button highlight expanded" id="search-submit-button" data-search-button>Search</button>
                                 </div>
-                                <div class="search-field-wrapper search-button">
+                                <div class="search-field-wrapper search-button hide">
                                     <a href="<?php echo site_url('site/site/listmap')?>">
                                         <button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
                                             Search by map
                                         </button>
                                     </a>
+                                </div>
+                                <div class="search-field-wrapper search-button">
+                                    <button class="button highlight expanded btn-search-map">
+                                        Search map <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -933,12 +937,16 @@
                                 <div class="search-field-wrapper search-button">
                                     <button class="button highlight expanded" data-search-button>Search</button>
                                 </div>
-                                <div class="search-field-wrapper search-button">
+                                <div class="search-field-wrapper search-button hide">
                                     <a href="<?php echo site_url('site/site/listmap')?>">
                                         <button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
                                             Search by map
                                         </button>
                                     </a>
+                                </div>
+                                <div class="search-field-wrapper search-button">
+                                    <button class="button highlight expanded btn-search-map">
+                                        Search map <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -1102,7 +1110,7 @@
                 </select>
                 
                 <input id="type" name="type" type="text" value="<?php echo $types?>" />
-                
+                <input id="search_map" name="search_map"/>
             </form>
 <style type="text/css">
     .homepage-map #map {
@@ -1119,8 +1127,15 @@
     }
     .property-text{
         background: white;
-        padding: 10px;
+        padding: 3px 10px;
         width: 200px;
+        height: 49px;
+    }
+    .marker-style {
+        width: 24px;
+        height: 20px;
+        margin-left: -12px !important;
+        margin-top: -50px !important;
     }
 </style>
 <div role="main" class="pgl-properties pgl-bg-grey">
@@ -1139,17 +1154,17 @@
             <div class="listing-header clearfix">
                 <ul class="list-inline list-icons pull-left">
                     <li class="<?php echo $activegrid;?>">
-                        <a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$type.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
+                        <a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
                             <i class="fa fa-th"></i>
                         </a>
                     </li>
                     <li class="">
-                        <a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$type.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
+                        <a href="<?php echo site_url('site/site/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
                             <i class="fa fa-th-list"></i>
                         </a>
                     </li>
                     <li class="<?php echo $activelist;?>">
-                        <a href="<?php echo site_url('listmap/properties/'.$id.'/?type='.$type.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a>
+                        <a href="<?php echo site_url('listmap/properties/'.$id.'/?type='.$types.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a>
                     </li>
                 </ul>
             </div>
@@ -1189,7 +1204,7 @@
     var park_last = "<?php echo $park_last?>";
     var features = "<?php echo $features?>";
     var return_feature = "<?php echo $return_feature?>";
-    var type = "<?php echo $type?>";
+    var type = "<?php echo $types?>";
 
 	createHomepageGoogleMapByCategory(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type);
 })(jQuery);
