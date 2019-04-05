@@ -309,7 +309,7 @@ function createHomepageGoogleMap(_latitude,_longitude){
     }
 }
 
-function createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type){
+function createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type,agent){
     /* setMapHeight(); */
     if( document.getElementById('map') != null ){
         $(function(){
@@ -350,7 +350,8 @@ function createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,ca
                     park_first: park_first,
                     park_last: park_last,
                     features: features,
-                    return_feature: return_feature
+                    return_feature: return_feature,
+                    agent:agent
                 },
                 success:function(locations) {
                     var i;
@@ -388,11 +389,11 @@ function createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,ca
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +
                                     '<img src="' + locations[i][6] + '" alt="" width="200" height="100">' +
                                     '</a>' +
-                                    '<div class="sale_amount">' + locations[i][2] + '<span>  - ' + locations[i][8] + '</span></div>' +
+                                    '<div class="sale_amount"> <span class="m-price">' + locations[i][2] + '</span><span class="m-type">' + locations[i][8] + '</span></div>' +
                                 '</div>' +
                                 '<div class="property-text p-3 module line-clamp">' +
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +
-                                    '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1.5em;">' + locations[i][0] + '</h5>' +
+                                    '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1em; font-size:12px; height: 46px;">' + locations[i][0] + '</h5>' +
                                     '</a>' +
                                     '<span><i class="fa fa-map-marker text_primary" aria-hidden="true"></i> ' + locations[i][1] + '</span>' +
                                 '</div>' +
@@ -544,11 +545,11 @@ function createHomepageGoogleMapByCategory(_latitude,_longitude,status,location,
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +
                                     '<img src="' + locations[i][6] + '" alt="" width="200" height="100">' +
                                     '</a>' +
-                                    '<div class="sale_amount">' + locations[i][2] + '<span>  - ' + locations[i][8] + '</span></div>' +
+                                    '<div class="sale_amount"><span class="m-price">' + locations[i][2] + '</sapn><span class="m-type">  - ' + locations[i][8] + '</span></div>' +
                                 '</div>' +
                                 '<div class="property-text p-3 module line-clamp">' +
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +
-                                    '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1.5em;">' + locations[i][0] + '</h5>' +
+                                    '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1em; font-size:12px; height: 46px;">' + locations[i][0] + '</h5>' +
                                     '</a>' +
                                     // '<span><i class="fa fa-map-marker text_primary" aria-hidden="true"></i> ' + locations[i][1] + '</span>' +
                                 '</div>' +

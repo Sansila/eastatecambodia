@@ -79,9 +79,14 @@
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/> 
 										</th>
 										<th ></th>
+										<th ></th>
+										<th ></th>
+										<th ></th>
+										<th ></th>
+										<th ></th>
+										<th ></th>
 										<th width='150'>
 										</th>
-										
 									</tr>
 								</thead>
 								<tbody class='list'>

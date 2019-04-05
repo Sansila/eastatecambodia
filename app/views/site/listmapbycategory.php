@@ -1119,15 +1119,15 @@
     }
     .infobox-wrapper .sale_amount {
         position: absolute;
-        top: 37px;
-        left: 20px;
+        top: 30px;
+        left: 10px;
         z-index: 10;
         font-size: 16px;
         color: red;
     }
     .property-text{
         background: white;
-        padding: 3px 10px;
+        padding: 7px 10px;
         width: 200px;
         height: 49px;
     }
@@ -1136,6 +1136,28 @@
         height: 20px;
         margin-left: -12px !important;
         margin-top: -50px !important;
+    }
+    .m-price{
+        border-radius: 0;
+        color: white;
+        display: inline-block;
+        font-size: 12px;
+        padding: 6px;
+        background: #d84949;
+    }
+    .m-type{
+        border-radius: 0;
+        color: white;
+        display: inline-block;
+        font-size: 12px;
+        margin-right: -4px;
+        padding: 6px;
+        background: #333;
+    }
+    .line-clamp {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
 </style>
 <div role="main" class="pgl-properties pgl-bg-grey">

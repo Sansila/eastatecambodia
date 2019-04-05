@@ -275,6 +275,44 @@ class Modsite extends CI_Model {
                                          FROM tblproperty WHERE p_status = 1 AND latitude <> '' AND longtitude <> '' ")->result();
         return $sql;
     }
+    function getProject()
+    {
+        $sql = $this->db->query("SELECT * FROM tblproject p
+                                INNER JOIN tblpropertylocation l
+                                ON p.project_location = l.propertylocationid
+                                WHERE p.is_active = 1 ORDER BY p.projectid DESC LIMIT 8")->result();
+        return $sql;
+    }
+    function getImageProject($projectid)
+    {
+        $sql = $this->db->query("SELECT * FROM tblgallery as g 
+                                right join tblproject as p on p.projectid = g.projectid
+                                WHERE p.projectid = '$projectid' AND p.is_active = 1 ")->row();
+        return $sql;
+    }
+    function getDetailProject($id)
+    {
+        $sql = $this->db->query("SELECT * FROM tblproject p
+                                INNER JOIN tblpropertylocation l
+                                ON p.project_location = l.propertylocationid
+                                WHERE p.is_active = 1 AND p.projectid = $id ")->row();
+        return $sql;
+    }
+    function getImageProjectByID($id)
+    {
+        $sql = $this->db->query("SELECT * FROM tblgallery as g 
+                                right join tblproject as p on p.projectid = g.projectid
+                                WHERE g.projectid = '$id' AND p.is_active = 1 ")->result();
+        return $sql;
+    }
+    function getProjectID($id)
+    {
+        $sql = $this->db->query("SELECT * FROM tblproject p
+                                INNER JOIN tblpropertylocation l
+                                ON p.project_location = l.propertylocationid
+                                WHERE p.is_active = 1 AND p.projectid <> $id ORDER BY p.projectid DESC LIMIT 8")->result();
+        return $sql;
+    }
 }
 
 

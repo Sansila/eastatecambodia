@@ -209,7 +209,7 @@
                                                         $sel='selected';
                                         ?>
                                         <option value="<?php echo $pro->projectid;?>" <?php echo $sel; ?>>
-                                            <?php echo $pro->projectname;?>
+                                            <?php echo $pro->project_name;?>
                                         </option>
                                         <?php 
                                             }
@@ -847,7 +847,7 @@
                 }
               })
         $(this).closest('.saouy').remove();
-    })
+    });
     function uploads(pid,formdata,msg){
         //alert(visitid+'/'+familyid);
         $.ajax({

@@ -8,7 +8,7 @@
 	$order =''; 
 	$sort=''; 
     $return_cats = ''; 
-    $return_loc = '';
+    $return_locs = '';
     $activelist = ''; 
     $activegrid = '';
 	$list_type = '';
@@ -100,7 +100,7 @@
             {
                 $comma = "";
             }
-            $return_loc.= $arr.''.$comma;
+            $return_locs.= $arr.''.$comma;
         }
     }
 
@@ -1316,15 +1316,15 @@
 	}
 	.infobox-wrapper .sale_amount {
 	    position: absolute;
-	    top: 37px;
-	    left: 20px;
+	    top: 30px;
+	    left: 10px;
 	    z-index: 10;
 	    font-size: 16px;
 	    color: red;
 	}
 	.property-text{
 		background: white;
-		padding:3px 10px;
+		padding: 7px 10px;
 		width: 200px;
         height: 49px;
 	}
@@ -1333,6 +1333,28 @@
         height: 20px;
         margin-left: -12px !important;
         margin-top: -50px !important;
+    }
+    .m-price{
+        border-radius: 0;
+        color: white;
+        display: inline-block;
+        font-size: 12px;
+        padding: 6px;
+        background: #d84949;
+    }
+    .m-type{
+        border-radius: 0;
+        color: white;
+        display: inline-block;
+        font-size: 12px;
+        margin-right: -4px;
+        padding: 6px;
+        background: #333;
+    }
+    .line-clamp {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
 </style>
 <div role="main" class="pgl-properties pgl-bg-grey">
@@ -1354,17 +1376,17 @@
             <div class="listing-header clearfix">
                 <ul class="list-inline list-icons pull-left">
                     <li class="<?php echo $activegrid;?>">
-                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
+                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_locs.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
                             <i class="fa fa-th"></i>
                         </a>
                     </li>
                     <li >
-                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
+                        <a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_locs.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
                             <i class="fa fa-th-list"></i>
                         </a>
                     </li>
                     <li class="<?php echo $activelist;?>">
-                    	<a href="<?php echo site_url('listmap/searchmap?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
+                    	<a href="<?php echo site_url('listmap/searchmap?available='.$available.'&status='.$status.'&'.$return_cats.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_locs.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -1408,7 +1430,8 @@
     var features = "<?php echo $features?>";
     var return_feature = "<?php echo $return_feature?>";
     var type = "<?php echo $types?>";
+    var agent = "<?php echo $agent?>";
 
-	createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type);
+	createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type,agent);
 })(jQuery);
 </script>

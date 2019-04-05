@@ -59,6 +59,7 @@ class Site extends CI_Controller {
             $limit = " LIMIT $page, ".$config['per_page'];
         $query.= " {$limit}";
         $data['lists'] = $this->db->query($query)->result();
+        $data['project'] = $this->site->getProject();
 
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/index',$data);

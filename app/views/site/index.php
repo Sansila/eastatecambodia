@@ -1176,6 +1176,88 @@
 						?>
 					</div>
 
+					<?php 
+						$hide = "";
+						if(count($project) > 0)
+							$hide = "";
+						else
+							$hide = "hide";
+					?>
+					<ul class="nav nav-tabs home-tabs hot-new <?php echo $hide?>" role="tablist" style="margin-bottom: 30px;">
+				        <li class="title font-strong">
+				        	<a>New Project 
+				        		<div class="corner"></div>
+				        	</a>
+				    	</li><li></li>
+				     </ul>
+
+				     <div class="tab-content">
+						<div class="tab-pane active" id="all">
+							<div class="row">
+								<?php 
+									foreach ($project as $list) {
+								?>
+								<div class="col-xs-3 animation">
+									<div class="pgl-property">
+										<div class="property-thumb-info">
+											<div class="property-thumb-info-image">
+												<a href="<?php echo site_url('project/detail/'.$list->projectid.'/?name='.$list->project_name)?>">
+													<?php 
+														$img = $this->site->getImageProject($list->projectid);
+													?>
+													<?php 
+														$extends = pathinfo($img->url, PATHINFO_EXTENSION);
+														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
+														{
+													?>
+														<video style="height: 176px;" class="img-responsive" controls>
+														  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/project/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/'.$img->projectid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+														</video>
+
+													<?php 
+														}else{
+													?>
+														<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url); else echo base_url('assets/project/noimage.jpg')?>"/>
+													<?php
+														}
+													?>
+												</a>
+												<!-- <span class="property-thumb-info-label hide">
+													<span class="label price">$<?php echo number_format($list->price) ?></span>
+													<span class="label forrent <?php if($list->p_type !=0) echo ""; else echo "hide";?>">
+														<?php 
+															if($list->p_type == 1)
+																echo "Sale";
+															if($list->p_type == 2)
+																echo "Rent";
+															if($list->p_type == 3)
+																echo "Rent & Sale";	
+														?>
+													</span>
+													<span class="label price"><?php echo 'P'.$list->pid; ?></span>
+												</span> -->
+											</div>
+											<div class="property-thumb-info-content" style="height: 120px;">
+												<h3><a class="module line-clamp" href="<?php echo site_url('project/detail/'.$list->projectid.'/?name='.$list->project_name)?>"><?php echo $list->project_name?></a></h3>
+												<address class="module line-clamp"><?php echo $list->locationname?></address>
+											</div>
+											<!-- <div class="amenities clearfix" style="height: 40px;">
+												<ul class="pull-left">
+													<li><strong>Area:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
+												</ul>
+												<ul class="pull-right">
+													<li class="<?php if($list->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $list->bedroom; ?></li>
+													<li class="<?php if($list->bathroom == "" ) echo "hide";?>"><i class="icons icon-bathroom"></i> <?php echo $list->bathroom; ?></li>
+												</ul>
+											</div> -->
+										</div>
+									</div>
+								</div>
+								<?php 
+									}
+								?>
+						</div>
+					</div>
 
 			</section>
 			<!-- End Properties -->

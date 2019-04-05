@@ -1124,16 +1124,16 @@
 						<div class="listing-header clearfix">
 							<ul class="list-inline list-icons pull-left">
 								<li class="<?php echo $activegrid;?>">
-									<a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
+									<a href="<?php echo site_url('site/site/search?available='.$available.'&agent='.$agent.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=grid');?>">
 										<i class="fa fa-th"></i>
 									</a>
 								</li>
 								<li class="<?php echo $activelist;?>">
-									<a href="<?php echo site_url('site/site/search?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
+									<a href="<?php echo site_url('site/site/search?available='.$available.'&agent='.$agent.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>">
 										<i class="fa fa-th-list"></i>
 									</a>
 								</li>
-								<li><a href="<?php echo site_url('listmap/searchmap?available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
+								<li><a href="<?php echo site_url('listmap/searchmap?available='.$available.'&agent='.$agent.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&order='.$order.'&sort='.$sort.'&list_type=lists');?>"><i class="fa fa-map-marker"></i></a></li>
 							</ul>
 
 							<ul class="list-inline list-sort pull-right">
