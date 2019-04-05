@@ -215,17 +215,17 @@
 						<!-- Begin Our Agents -->
 						<div>
 							<div>
-							    <form class="form-search form-inline" method="get" action="http://localhost:81/eastatecambodia/site/site/search">
+							    <form class="form-search form-inline" method="get" action="<?php echo site_url('site/site/search')?>">
 							        <div class="input-append">
 							        	<select id="id_listing_type" name="available" class="hide">
 								            <option value="0">Sale</option>
 								        </select>
-							            <input type="text" class="search-query" name="q" placeholder="Search...">
-							            <input id="list_type" class="hide" name="list_type" value="lists">
-							            <select id="order-status" name="order" data-placeholder="Order" class="chosen-select order_bys hide" style="display: none;">
+							            <input type="text" class="search-query" name="q" placeholder="Search..." />
+							            <input id="list_type" class="hide" name="list_type" value="lists"/>
+							            <select id="order-status" name="order" data-placeholder="Order" class="chosen-select order_bys hide">
 											<option value="Desc">Descending</option>
 											<option value="Asc">Ascending</option>
-										</select><div class="chosen-container chosen-container-single" style="width: 0px;" title="" id="order_status_chosen"><a class="chosen-single" tabindex="-1"><span>Descending</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div><ul class="chosen-results"></ul></div></div>
+										</select>
 							            <button type="submit" class="btn btn-primary btn-primarys">Search</button>
 							        </div>
 							    </form>
