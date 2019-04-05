@@ -28,6 +28,12 @@
 			    border-color: transparent;
 			    cursor: inherit;
 			}
+			.btn-project-more{
+				font-style: italic;
+			    background: #d84949;
+			    border: 1px solid #d84949;
+			    float: right;
+			}
 		</style>
 		<!-- Begin Main -->
 		<div role="main" class="main">
@@ -1256,6 +1262,8 @@
 								<?php 
 									}
 								?>
+								<div class="col-sm-10"></div>
+								<div class="col-sm-2"><a type="button" class="btn btn-success btn-project-more">More...</a></div>
 						</div>
 					</div>
 

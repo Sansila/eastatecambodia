@@ -271,8 +271,8 @@ class Project extends CI_Controller {
         $data['slide'] = $this->site->getSlide();
         $data['image'] = $this->site->getImageProjectByID($id);
         $data['detail'] = $this->site->getDetailProject($id);
-        //$data['project'] = $this->site->getProjectID($id);
-        $data['project'] = $this->site->getProject();
+        $data['project'] = $this->site->getProjectID($id);
+        //$data['project'] = $this->site->getProject();
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/projectdetail',$data);
         $this->load->view('site/contain/footer',$datas);
