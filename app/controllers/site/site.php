@@ -685,7 +685,7 @@ class Site extends CI_Controller {
                     {
                         $where.= " lp.lineage LIKE '%$lid->propertylocationid%' OR p.property_name LIKE '%$arr%' $and ";
                     }else{
-                        $where.= " p.property_name LIKE '%$arr%' $and ";
+                        $where.= " (p.property_name LIKE '%$arr%' OR p.pid = '".substr($arr,1)."' OR p.property_tag LIKE '%$arr%') $and ";
                     }    
                 }
                 $where.= ")";
@@ -822,6 +822,7 @@ class Site extends CI_Controller {
                          p.parking,
                          p.title,
                          p.floor,
+                         p.property_tag,
                          lp.propertylocationid,
                          lp.locationname,
                          lp.lineage,
