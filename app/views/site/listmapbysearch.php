@@ -1401,6 +1401,8 @@
 (function($){	
     $('.btn-search-map').click(function(){
         $('#search_map').val('map');
+        var txtsearch = $('.location-autocomplete').val();
+        $('#id_q').val(txtsearch);
         $('#hidden-search-form').submit();
     });
 	var _latitude = 11.583903035180196;

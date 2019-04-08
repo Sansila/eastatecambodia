@@ -1306,6 +1306,8 @@
 		<script type="text/javascript">
 			$('.btn-search-map').click(function(){
 				$('#search_map').val('map');
+				var txtsearch = $('.location-autocomplete').val();
+				$('#id_q').val(txtsearch);
 				$('#hidden-search-form').submit();
 			});
 		</script>

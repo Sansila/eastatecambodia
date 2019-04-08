@@ -615,7 +615,7 @@ class Site extends CI_Controller {
         }
 
         if($search_map == "map"){
-            redirect(site_url('listmap/properties/'.$id.'?type='.$id.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first));
+            redirect(site_url('listmap/properties/'.$id.'/?type='.$type.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first));
         }
 
         $page = 0;
@@ -1539,7 +1539,7 @@ class Site extends CI_Controller {
         if(isset($_GET['per_page']))
             $page = $_GET['per_page'];
         $config['base_url'] = site_url('?a=link');
-        $config['per_page'] = 12;
+        $config['per_page'] = 8;
         $config['num_link'] = 3;
         $config['page_query_string'] = TRUE;
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -1561,10 +1561,10 @@ class Site extends CI_Controller {
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
 
-        $query = " SELECT * FROM tblproperty as p
-                left join tblpropertytype as pt on p.type_id = pt.typeid 
-                -- left join tblgallery as g on p.pid = g.pid
-                WHERE p.p_status = 1  AND p.pro_level <> 1 ORDER BY p.create_date desc,p.pid desc ";
+        $query = "  SELECT * FROM tblproject p
+                    INNER JOIN tblpropertylocation l
+                    ON p.project_location = l.propertylocationid
+                    WHERE p.is_active = 1 ORDER BY p.projectid DESC ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
         $this->pagination->initialize($config);
@@ -1573,7 +1573,6 @@ class Site extends CI_Controller {
             $limit = " LIMIT $page, ".$config['per_page'];
         $query.= " {$limit}";
         $data['lists'] = $this->db->query($query)->result();
-        $data['project'] = $this->site->getProject();
 
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/listproject',$data);
