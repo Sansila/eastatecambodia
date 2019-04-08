@@ -194,11 +194,11 @@ a{
             <div class="form-group">
               <label class="col-lg-2 control-label"></label>                      
               <div class="col-md-10">
-                <div class="col-lg-1">
-                  <button id="save" name="save" type="submit" class="btn btn-primary">Save</button>
+                <div class="col-lg-2">
+                  <button id="save" style="width: 100%;" name="save" type="submit" class="btn btn-primary">Save</button>
                 </div>
-                <div class="col-lg-1">
-                  <button id="cancel" name="cancel" type="button" class="btn btn-danger">Cancel</button>
+                <div class="col-lg-2">
+                  <button id="cancel" style="width: 100%;" name="cancel" type="button" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
@@ -207,6 +207,12 @@ a{
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-body" style="text-align: center;">
+        <img src="<?php echo site_url('assets/img/ld.gif')?>">
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -300,6 +306,7 @@ a{
         $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
       },        
       submitHandler: function(form) {
+        $('#myModal').modal('show');
         var url="<?php echo site_url('project/save')?>";
         if($('#is_active').is(':checked'))
           is_active=1;
