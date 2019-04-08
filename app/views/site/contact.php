@@ -56,7 +56,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<textarea placeholder="Commants" rows="5" name="comments" id="comments" class="form-control" data-msg-required="Please enter your message." required style="max-width: 100%;"></textarea>
+														<textarea placeholder="Comments" rows="5" name="comments" id="comments" class="form-control" data-msg-required="Please enter your message." required style="max-width: 100%;"></textarea>
 													</div>
 													<div class="form-group">
 														<input type="submit" name="button" value="Submit" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 100%;">

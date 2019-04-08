@@ -288,7 +288,7 @@ class Listmap extends CI_Controller {
             if($list->typeid == 5) //house
                 $imglast = base_url('assets/js/map/img/land.png');
             if($list->typeid == 11) //agriculture Land
-                $imglast = base_url('assets/js/map/img/land.png');
+                $imglast = base_url('assets/js/map/img/tree.png');
 
             $arr[] = array($list->property_name,
                            $list->address,
@@ -583,7 +583,7 @@ class Listmap extends CI_Controller {
             if($list->typeid == 5) //house
                 $imglast = base_url('assets/js/map/img/land.png');
             if($list->typeid == 11) //agriculture Land
-                $imglast = base_url('assets/js/map/img/land.png');
+                $imglast = base_url('assets/js/map/img/tree.png');
 
             $arr[] = array($list->property_name,
                            $list->address,

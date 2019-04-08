@@ -1347,7 +1347,7 @@ class Site extends CI_Controller {
                 $type = "Rent";
             if($check->p_type == 3)
                 $type = "Sale and Rent";
-            $mail->Subject = "Estate Cambodia P".$check->pid." - ".$check->property_name;
+            $mail->Subject = "<p>Estate Cambodia P".$check->pid." - ".$check->property_name."</p>";
             $mail->AddAddress($check->email);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
             $description = '<div style="width: 100%">
@@ -1356,7 +1356,7 @@ class Site extends CI_Controller {
                         <tr>
                             <td style="width:8px" width="8"></td>
                             <td>
-                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: 415px;">
+                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
                                     <img src="'.$logo.'" style="width: 140px;">
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                         Dear Partner/Agent/Property Owner,Kindly verify and update the property information as follow: 
@@ -1370,15 +1370,23 @@ class Site extends CI_Controller {
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
-                                        <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                            Property Info Is Correct
-                                        </a>
-                                        <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                            Change Property Info
-                                        </a>
-                                        <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
-                                            Property Is Not Available Now
-                                        </a>
+                                        <ul style="list-style: none; text-align: left;">
+                                            <li style="padding: 20px 0px;">
+                                                <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                                    Property Info Is Correct
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                                    Change Property Info
+                                                </a>
+                                            </li>
+                                            <li style="padding: 20px 0px;">
+                                                <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
+                                                    Property Is Not Available Now
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                         Property verification is very important to understand if the information is valid for our customers so that we can provide reliable information to them. Thanks for your collaboration. 
@@ -1389,7 +1397,7 @@ class Site extends CI_Controller {
                                                     
                             <!-- </td>
                             <td class="td-second"> -->
-                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: 415px; ">
+                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto; ">
                                     <img src="'.$logo.'" style="width: 140px;">
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                         ដៃគូ / ភ្នាក់ងារ / ម្ចាស់អចលនទ្រព្យសូមបញ្ជាក់ពីព័ត៌មានអចលនទ្រព្បច្ចុប្បន្នមានដូចខាងក្រោម: 
@@ -1403,15 +1411,23 @@ class Site extends CI_Controller {
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
-                                        <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                            ព័ត៌មានអចនទ្រព្យគឺត្រឹមត្រូវ
-                                        </a>
-                                        <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                            ផ្លាស់ប្តូរព័ត៌មានអចនទ្រព្យ
-                                        </a>
-                                        <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
-                                            អចនទ្រព្យមិនអាចរកបានទេឥឡូវនេះ
-                                        </a>
+                                        <ul style="list-style: none; text-align: left;">
+                                            <li style="padding: 20px 0px;">
+                                                <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                                    ព័ត៌មានអចនទ្រព្យគឺត្រឹមត្រូវ
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                                    ផ្លាស់ប្តូរព័ត៌មានអចនទ្រព្យ
+                                                </a>
+                                            </li>
+                                            <li style="padding: 20px 0px;">
+                                                <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
+                                                    អចនទ្រព្យមិនអាចរកបានទេឥឡូវនេះ
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                         ការផ្ទៀងផ្ទាត់អចលនទ្រព្យគឺមានសារៈសំខាន់ខ្លាំងណាស់ក្នុងការយល់ដឹងថាតើព័ត៌មានមានសុពលភាពសម្រាប់អតិថិជនរបស់យើងដូច្នេះយើងអាចផ្តល់ព័ត៌មានដែលអាចទុកចិត្តបានដល់ពួកគេ។ សូមអរគុណសម្រាប់កិច្ចសហការរបស់អ្នក។ 
@@ -1506,6 +1522,61 @@ class Site extends CI_Controller {
         }
         header("Content-type:text/x-json");
         echo json_encode($arr);
+    }
+    function listproject()
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['type'] = $this->site->getPropertyType();
+        $data['location'] = $this->site->getPropertyLocation();
+        $data['data'] = $this->site->getItemLocation();
+        $data['slide'] = $this->site->getSlide();
+        $data['hot'] = $this->site->getHotProperty();
+
+        $page = 0;
+        if(isset($_GET['per_page']))
+            $page = $_GET['per_page'];
+        $config['base_url'] = site_url('?a=link');
+        $config['per_page'] = 12;
+        $config['num_link'] = 3;
+        $config['page_query_string'] = TRUE;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = 'Prev';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = 'Next';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+
+        $query = " SELECT * FROM tblproperty as p
+                left join tblpropertytype as pt on p.type_id = pt.typeid 
+                -- left join tblgallery as g on p.pid = g.pid
+                WHERE p.p_status = 1  AND p.pro_level <> 1 ORDER BY p.create_date desc,p.pid desc ";
+
+        $config['total_rows'] = count($this->db->query($query)->result());
+        $this->pagination->initialize($config);
+        $limit = " LIMIT ".$config['per_page'];
+        if($page >0)
+            $limit = " LIMIT $page, ".$config['per_page'];
+        $query.= " {$limit}";
+        $data['lists'] = $this->db->query($query)->result();
+        $data['project'] = $this->site->getProject();
+
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/listproject',$data);
+        $this->load->view('site/contain/footer',$datas);
     }
 }
 ?>

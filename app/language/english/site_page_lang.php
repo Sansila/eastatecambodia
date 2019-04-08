@@ -117,7 +117,7 @@
   $lang['lo_rem'] = "Remember me";
   $lang['lo_login'] = "Sign In";
   $lang['lo_forget'] = "Forget Password";
-  $lang['lo_lang'] = "Language(ជ្រើរើសភាសា)";
+  $lang['lo_lang'] = "Language(ជ្រើសរើសភាសា)";
   $lang['lo_lang_en'] = "English(ភាសាអងគ្លេស)";
   $lang['lo_lang_kh'] = "Khmer(ភាសាខ្មែរ)";
   // Property analysis

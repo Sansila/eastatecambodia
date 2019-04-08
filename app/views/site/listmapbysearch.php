@@ -1331,7 +1331,7 @@
     .marker-style {
         width: 24px;
         height: 20px;
-        margin-left: -12px !important;
+        margin-left: -10px !important;
         margin-top: -50px !important;
     }
     .m-price{
