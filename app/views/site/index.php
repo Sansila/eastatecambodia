@@ -1223,7 +1223,7 @@
 													<?php 
 														}else{
 													?>
-														<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url); else echo base_url('assets/project/noimage.jpg')?>"/>
+														<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
 													<?php
 														}
 													?>
@@ -1263,7 +1263,7 @@
 									}
 								?>
 								<div class="col-sm-10"></div>
-								<div class="col-sm-2"><a type="button" class="btn btn-success btn-project-more">More...</a></div>
+								<div class="col-sm-2"><a type="button" class="btn btn-success btn-project-more <?php echo $hide?>">More...</a></div>
 						</div>
 					</div>
 
