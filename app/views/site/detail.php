@@ -35,6 +35,9 @@
 				$stairs = "hide";
 			if($detail->gym == "" || $detail->gym == 0)
 				$gym = "hide";
+			$name_view = "";
+			if(isset($_GET['name']))
+				$name_view = $_GET['name'];
 		?>
 
 		<style type="text/css">
@@ -790,7 +793,8 @@
 				"languages": data['languages'],
 				"asn": data['asn'],
 				"org": data['org'],
-				'pid': <?php echo $detail->pid?>
+				'pid': '<?php echo $detail->pid?>',
+				'view_from': '<?php echo $name_view?>',
             },
             success:function(data) {
             }

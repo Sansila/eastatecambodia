@@ -1215,7 +1215,8 @@ class Site extends CI_Controller {
             "asn" => $this->input->post('asn'),
             "org" => $this->input->post('org'),
             "pid" => $this->input->post('pid'),
-            "date_create" => Date('y-m-d')
+            "date_create" => Date('y-m-d'),
+            "view_from" => $this->input->post('view_from')
         );
         $this->db->insert('tblvisitor',$data);
     }
