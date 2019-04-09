@@ -17,6 +17,9 @@
       $row = $this->db->query(" SELECT * FROM tblproperty as p left join tblpropertytype as pt on p.type_id = pt.typeid WHERE p.pid = '$id' ")->row();
     }
     $var = $this->session->all_userdata();
+
+    $roleid = $this->session->userdata('roleid');
+    $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
 ?>
 
 <style type="text/css">
@@ -114,8 +117,6 @@
                                         <?php
                                         $locat = "";
                                         $userid = $this->session->userdata('userid');
-                                        $role = $this->session->userdata('roleid');
-                                        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $role ")->row();
                                         if($rol->is_admin == 1)
                                         {
                                             $locat=$this->db->query("SELECT * FROM admin_user WHERE is_active='1'")->result();
@@ -194,27 +195,42 @@
                                 </div>                   
                             </div>
                         </div>
+                        <?php 
+                            $hides = "hide";
+                            if($rol->is_admin == 1)
+                                $hides = "";
+                            else
+                                $hides = "hide";
+                        ?>
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_project')?></label>
+                            <div class="<?php echo $hides?>">
+                                <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_project')?></label>
+                                <div class="col-lg-4"> 
+                                    <div class="col-md-12">
+                                        <select class="form-control select2-single-project input-sm" id="projectid" name="projectid">
+                                            <option value="">Please Select</option>
+                                            <?php
+                                                $project=$this->db->query("SELECT * FROM tblproject where is_active = 1 ORDER BY projectid asc")->result();
+                                                foreach ($project as $pro) {
+                                                    $sel='';
+                                                    if(isset($row->projectid))
+                                                        if($row->projectid==$pro->projectid)
+                                                            $sel='selected';
+                                            ?>
+                                            <option value="<?php echo $pro->projectid;?>" <?php echo $sel; ?>>
+                                                <?php echo $pro->project_name;?>
+                                            </option>
+                                            <?php 
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>                   
+                                </div>
+                            </div>
+                            <label class='col-lg-2 control-label'>Verify Email</label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
-                                    <select class="form-control select2-single-project input-sm" id="projectid" name="projectid">
-                                        <option value="">Please Select</option>
-                                        <?php
-                                            $project=$this->db->query("SELECT * FROM tblproject where is_active = 1 ORDER BY projectid asc")->result();
-                                            foreach ($project as $pro) {
-                                                $sel='';
-                                                if(isset($row->projectid))
-                                                    if($row->projectid==$pro->projectid)
-                                                        $sel='selected';
-                                        ?>
-                                        <option value="<?php echo $pro->projectid;?>" <?php echo $sel; ?>>
-                                            <?php echo $pro->project_name;?>
-                                        </option>
-                                        <?php 
-                                            }
-                                        ?>
-                                    </select>
+                                    <input type="text"  class="form-control input-sm" name="verifyemail" value='<?php echo isset($row->ccemail)?"$row->ccemail":"" ?>' id="verifyemail">
                                 </div>                   
                             </div>
                         </div>
@@ -232,10 +248,7 @@
                                         if($row->pro_level == 3)
                                             $sel2 ="selected";
 
-                                        $userid = $this->session->userdata('roleid');
-                                        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $userid ")->row();
-                                            if($rol->is_admin == 1)
-                                            {
+                                        if($rol->is_admin == 1){
                                         ?>
                                             <option value="0">Please Select</option>
                                             <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_hot')?></option>
@@ -1003,6 +1016,7 @@
                     internal_remark: $('#internal_remark').val(),
                     property_tag: $('#property_tag').val(),
                     projectid: $('#projectid').val(),
+                    verifyemail: $('#verifyemail').val(),
                 },
                 success:function(data) {
                     // $(".result_text").html(data.msg);

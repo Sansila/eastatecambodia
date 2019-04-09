@@ -937,15 +937,8 @@
                                 <div class="search-field-wrapper search-button">
                                     <button class="button highlight expanded" data-search-button>Search</button>
                                 </div>
-                                <div class="search-field-wrapper search-button hide">
-                                    <a href="<?php echo site_url('site/site/listmap')?>">
-                                        <button data-search-button style="color: red;font-style: italic; text-decoration: underline red;">
-                                            Search by map
-                                        </button>
-                                    </a>
-                                </div>
                                 <div class="search-field-wrapper search-button">
-                                    <button class="button highlight expanded btn-search-map">
+                                    <button class="button highlight expanded btn-search-map btn-search-map-mobile">
                                         Search map <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
                                 </div>
                             </div>
@@ -1203,6 +1196,12 @@
     $('.btn-search-map').click(function(){
         $('#search_map').val('map');
         var txtsearch = $('.location-autocomplete').val();
+        $('#id_q').val(txtsearch);
+        $('#hidden-search-form').submit();
+    });
+    $('.btn-search-map-mobile').click(function(){
+        $('.search_map').val('map');
+        var txtsearch = $('#id_mobile_location_autocomplete').val();
         $('#id_q').val(txtsearch);
         $('#hidden-search-form').submit();
     });
