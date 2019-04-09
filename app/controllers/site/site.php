@@ -1327,6 +1327,7 @@ class Site extends CI_Controller {
                                         p.price,
                                         p.lp_id,
                                         p.p_type,
+                                        p.ccemail,
                                         u.userid,
                                         u.user_name,
                                         u.email,
@@ -1350,6 +1351,8 @@ class Site extends CI_Controller {
                 $type = "Sale and Rent";
             $mail->Subject = "<p>Estate Cambodia P".$check->pid." - ".$check->property_name."</p>";
             $mail->AddAddress($check->email);
+            if($check->ccemail != "")
+                $mail->AddCC($check->ccemail);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
             $description = '<div style="width: 100%">
                 <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">

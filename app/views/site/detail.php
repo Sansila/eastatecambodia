@@ -224,17 +224,17 @@
 								<div class="tab-detail">
 									<div class="right" style="text-align: right;">
 										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning">Contact Me Back</a>
-										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php?u=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>"
+										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php?u=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=facebook')?>"
   										target="_blank" >
 										</a>
-										<a href="https://api.whatsapp.com://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" data-action="share/whatsapp/share" target="_blank" class="fass fa fa-whatsapp destop">
+										<a href="https://api.whatsapp.com://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=whatsapp')?>" data-action="share/whatsapp/share" target="_blank" class="fass fa fa-whatsapp destop">
 											<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
 										</a>
-										<a class="fass fa fa-whatsapp mobile" href="whatsapp://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" data-action="share/whatsapp/share">
+										<a class="fass fa fa-whatsapp mobile" href="whatsapp://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=whatsapp')?>" data-action="share/whatsapp/share">
 											<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
 										</a>
-										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>&text=<?php echo $detail->property_name?>" class="fass fa fa-paper-plane"></a>
-										<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" class="fas fa-line">
+										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=telegram')?>&text=<?php echo $detail->property_name?>" class="fass fa fa-paper-plane"></a>
+										<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=line')?>" class="fas fa-line">
 											<img src="<?php echo site_url('assets/img/line.png')?>">
 										</a>
 									</div>
