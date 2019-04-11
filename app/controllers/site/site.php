@@ -1350,7 +1350,7 @@ class Site extends CI_Controller {
                 $type = "Rent";
             if($check->p_type == 3)
                 $type = "Sale and Rent";
-            $mail->Subject = "<p>Estate Cambodia P".$check->pid." - ".$check->property_name."</p>";
+            $mail->Subject = "Estate Cambodia P".$check->pid." - ".$check->property_name;
             $mail->AddAddress($check->email);
             if($check->ccemail != "")
                 $mail->AddCC($check->ccemail);
@@ -1372,6 +1372,7 @@ class Site extends CI_Controller {
                                             <li>- Type: '.$type.'</li>
                                             <li>- Location: '.$check->locationname.'</li>
                                             <li>- Last Updated: '.$check->validate_date.'</li>
+                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'">http://estatecambodia.com/detail/P'.$pid.'</a></li>
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
@@ -1405,7 +1406,7 @@ class Site extends CI_Controller {
                                 <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto; ">
                                     <img src="'.$logo.'" style="width: 140px;">
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                        ដៃគូ / ភ្នាក់ងារ / ម្ចាស់អចលនទ្រព្យសូមបញ្ជាក់ពីព័ត៌មានអចលនទ្រព្បច្ចុប្បន្នមានដូចខាងក្រោម: 
+                                        ដៃគូ / ភ្នាក់ងារ / ម្ចាស់អចលនទ្រព្យសូមបញ្ជាក់ពីព័ត៌មានអចលនទ្រព្យបច្ចុប្បន្នមានដូចខាងក្រោម: 
                                         <ul style="list-style: none; text-align: left;">
                                             <li>- លេខសម្គាល់អចលនទ្រព្យ: P'.$check->pid.'</li>
                                             <li>- ចំណងជើងអចលនទ្រព្យ: '.$check->property_name.' USD</li>
@@ -1413,6 +1414,7 @@ class Site extends CI_Controller {
                                             <li>- ប្រភេទ: '.$type.'</li>
                                             <li>- ទីតាំង: '.$check->locationname.'</li>
                                             <li>- កែប្រែចុងក្រោយ: '.$check->validate_date.'</li>
+                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'">http://estatecambodia.com/detail/P'.$pid.'</a></li>
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
@@ -1452,12 +1454,13 @@ class Site extends CI_Controller {
             $mail->IsHTML(true);
             $mail->Send();
             $mail->ClearAddresses();
+            $this->updateValidate($check->pid);
         }
     }
     function updateValidate($pid)
     {
         $this->site->updateValidateProperty($pid);
-        $msg = "Your Property has been reviewed.";
+        $msg = "Your Property has been verified.";
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
@@ -1471,7 +1474,7 @@ class Site extends CI_Controller {
     function changePropertyStatus($pid)
     {
         $this->site->changePropertyStatus($pid);
-        $msg = "Your Property has been disabled​​ from our website.";
+        $msg = "<p>Your Property has been disabled​​ from our website.</p> <p>Your Property status has been changed to not available.</p>";
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
