@@ -164,7 +164,7 @@
 						
 						<!-- Begin Related properties -->
 						<section class="pgl-properties">
-							<h2 style="font-size: 1.571em;">Related Project</h2>
+							<h2 style="font-size: 1.571em;">Properties in Project</h2>
 							<div class="row">
 								<div class="owl-carousel pgl-pro-slide owl-theme owl-carousel-init" data-plugin-options='{"items": 3, "itemsDesktop": 3, "singleItem": false, "autoPlay": false, "pagination": false}'>
 									<?php 
