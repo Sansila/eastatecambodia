@@ -307,11 +307,21 @@ class Modsite extends CI_Model {
     }
     function getProjectID($id)
     {
-        $sql = $this->db->query("SELECT * FROM tblproject p
-                                INNER JOIN tblpropertylocation l
-                                ON p.project_location = l.propertylocationid
-                                WHERE p.is_active = 1 AND p.projectid <> $id ORDER BY p.projectid DESC LIMIT 8")->result();
-        return $sql;
+        // $sql = $this->db->query("SELECT * FROM tblproject p
+        //                         INNER JOIN tblpropertylocation l
+        //                         ON p.project_location = l.propertylocationid
+        //                         WHERE p.is_active = 1 AND p.projectid <> $id ORDER BY p.projectid DESC LIMIT 8")->result();
+        // return $sql;
+
+        $query = $this->db->query(" SELECT * FROM tblproperty as p
+                                INNER JOIN tblproject as pro ON p.projectid = pro.projectid
+                                LEFT JOIN tblpropertytype as pt on p.type_id = pt.typeid 
+                                WHERE p.p_status = 1 
+                                AND pro.is_active = 1
+                                AND p.projectid = $id
+                                ORDER bY p.pid DESC
+                                LIMIT 20 ")->result();
+        return $query;
     }
 }
 

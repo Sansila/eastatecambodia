@@ -168,44 +168,66 @@
 							<div class="row">
 								<div class="owl-carousel pgl-pro-slide owl-theme owl-carousel-init" data-plugin-options='{"items": 3, "itemsDesktop": 3, "singleItem": false, "autoPlay": false, "pagination": false}'>
 									<?php 
-										foreach ($project as $list) {
+										foreach($project as $related){
 									?>
 									<div class="col-md-12 animation">
 										<div class="pgl-property">
 											<div class="property-thumb-info">
 												<div class="property-thumb-info-image">
-													<a href="<?php echo site_url('project/detail/'.$list->projectid.'/?name='.$list->project_name)?>">
-														<?php 
-															$img = $this->site->getImageProject($list->projectid);
-														?>
-														<?php 
-															$extends = pathinfo($img->url, PATHINFO_EXTENSION);
+													<?php 
+														$imgrelated = $this->site->getImage($related->pid);
+													?>
+													<a href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>">
+														<?php
+															$extends = pathinfo($imgrelated->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
-															{
+																	{
 														?>
 															<video style="height: 176px;" class="img-responsive" controls>
-															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/project/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/'.$img->projectid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>">
 															</video>
-
 														<?php 
 															}else{
 														?>
-															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
-														<?php
+															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+														<?php 
 															}
 														?>
+														
 													</a>
+													<span class="property-thumb-info-label" >
+													<span class="label price">$<?php echo number_format($related->price) ?></span>
+													<span class="label forrent <?php if($related->p_type !=0) echo ""; else echo "hide";?>">
+														<?php 
+															if($related->p_type == 1)
+																echo "Sale";
+															if($related->p_type == 2)
+																echo "Rent";
+															if($related->p_type == 3)
+																echo "Rent & Sale";	
+														?>
+													</span>
+												</span>
 												</div>
 												<div class="property-thumb-info-content" style="height: 120px;">
-													<h3><a class="module line-clamp" href="<?php echo site_url('project/detail/'.$list->projectid.'/?name='.$list->project_name)?>"><?php echo $list->project_name;?></a></h3>
-													<address class="module line-clamp"><?php echo $list->locationname?></address>
+													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>"><?php echo $related->property_name;?></a></h3>
+													<address class="module line-clamp"><?php echo $related->address;?></address>
+												</div>
+												<div class="amenities clearfix">
+													<ul class="pull-left">
+														<li><strong>Area:</strong> <?php if($related->housesize !="") echo $related->housesize; else echo 0;?><sup>m2</sup></li>
+													</ul>
+													<ul class="pull-right">
+														<li class="<?php if($related->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $related->bedroom;?></li>
+														<li class="<?php if($related->bedroom == "" ) echo "hide"?>"><i class="icons icon-bathroom"></i> <?php echo $related->bedroom;?></li>
+													</ul>
 												</div>
 											</div>
 										</div>
 									</div>
-									<?php 
-										}
-									?>
+								<?php 
+									}
+								?>
 								</div>
 							</div>
 						</div>
