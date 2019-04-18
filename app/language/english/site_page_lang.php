@@ -224,4 +224,31 @@
   $lang['home_page_hot'] = "HOT PROPERTIES";
   $lang['home_page_recent'] = "RECENT PROPERTIES";
   $lang['home_page_project'] = "NEW PROJECT";
+  // Site Contact Us
+  $lang['contact_name'] = "Name";
+  $lang['contact_mail'] = "Email Address";
+  $lang['contact_message'] = "Message";
+  $lang['contact_submit'] = "Submit";
+  // Site Help Us To find Property
+  $lang['help_us_title'] = "HELP ME FIND PROPERTY";
+  $lang['help_us_name'] = "Your Name";
+  $lang['help_us_pro_category'] = "Property Category";
+  $lang['help_us_phone'] = "Phone Number";
+  $lang['help_us_email'] = "Email";
+  $lang['help_us_address'] = "Address";
+  $lang['help_us_pro_type'] = "Property Type";
+  $lang['help_us_description'] = "Description";
+  $lang['help_us_sale'] = "Sale";
+  $lang['help_us_rent'] = "Rent";
+  $lang['help_us_continue'] = "Continue";
+  $lang['help_us_select'] = "Select";
+  $lang['help_us_message_false'] = "Failed please try again.";
+  $lang['help_us_message_success'] = "Thank you for finding in our website.";
+  // Site Footer
+  $lang['footer_property'] = "Properties";
+  $lang['footer_contact'] = "Contact detail";
+  // Site Join Us
+  $lang['join_title'] = "Join Us";
+  $lang['join_business'] = "Business Name";
+  $lang['join_message_false'] = "Your has been join failed";
 ?>

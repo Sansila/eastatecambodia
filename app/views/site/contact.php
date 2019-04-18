@@ -15,10 +15,10 @@
 						<div class="wizard row">
 							<div class="col-md-12">
 								<div class="col-md-2">
-									<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+									<a href="<?php echo site_url('site/site/postproperty')?>" class="current"><?php echo $this->lang->line('home_page_post')?></a>
 								</div>
 								<div class="col-md-2">
-									<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+									<a class="current" href="<?php echo site_url('site/site/join')?>"><?php echo $this->lang->line('home_page_join')?></a>
 								</div>
 							</div>
 						</div>
@@ -48,18 +48,18 @@
 																<input placeholder="Name" type="text" name="owner" id="owner" class="form-control" value="<?php echo $profile->email;?>">
 															</div>
 															<div class="col-sm-6">
-																<input placeholder="Name" type="text" name="name" id="name" class="form-control" data-msg-required="Please enter your name." required>
+																<input placeholder="<?php echo $this->lang->line('contact_name')?>" type="text" name="name" id="name" class="form-control" data-msg-required="Please enter your name." required>
 															</div>
 															<div class="col-sm-6">
-																<input placeholder="Email Address *" type="email" name="customer_mail" id="customer_mail" class="form-control" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." required>
+																<input placeholder="<?php echo $this->lang->line('contact_mail')?> *" type="email" name="customer_mail" id="customer_mail" class="form-control" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." required>
 															</div>
 														</div>
 													</div>
 													<div class="form-group">
-														<textarea placeholder="Comments" rows="5" name="comments" id="comments" class="form-control" data-msg-required="Please enter your message." required style="max-width: 100%;"></textarea>
+														<textarea placeholder="<?php echo $this->lang->line('contact_message')?>" rows="5" name="comments" id="comments" class="form-control" data-msg-required="Please enter your message." required style="max-width: 100%;"></textarea>
 													</div>
 													<div class="form-group">
-														<input type="submit" name="button" value="Submit" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 100%;">
+														<input type="submit" name="button" value="<?php echo $this->lang->line('contact_submit')?>" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 100%;">
 													</div>
 													<div><?php if(isset($send)) echo $send; else echo "";?></div>
 												</form>

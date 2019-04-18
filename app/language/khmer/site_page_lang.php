@@ -217,4 +217,37 @@
     $lang['search_btn_search_map'] = "ស្វែងរកលើផែនទី";
     $lang['search_text_search'] = "សូមវាយបញ្ចូល, ជ្រើសរើសទីតាំង ឬទីកន្លែងណាមួយ";
     $lang['search_looking_for'] = "កំពុងរកមើល";
+    // Site Home Page
+    $lang['home_page_post'] = " បញ្ចូលអចលនទ្រព្យថ្មី";
+    $lang['home_page_join'] = "ចូលរួមជាមួយយើង";
+    $lang['home_page_hot'] = "អចលនទ្រព្យលក់បន្ទាន់";
+    $lang['home_page_recent'] = "អចលនទ្រព្យថ្មី ៗ";
+    $lang['home_page_project'] = "គម្រោង​ថ្មី";
+    // Site Contact Us
+    $lang['contact_name'] = "ឈ្មោះរបស់អ្នក";
+    $lang['contact_mail'] = "អាស័យដ្ឋានអ៊ីម៉េល";
+    $lang['contact_message'] = "សារអត្ថបទ";
+    $lang['contact_submit'] = "បញ្ជូន";
+    // Site Help Us To find Property
+    $lang['help_us_title'] = "ជួយស្វែងរកអចលនទ្រព្យ";
+    $lang['help_us_name'] = "ឈ្មោះរបស់អ្នក";
+    $lang['help_us_pro_category'] = "ប្រភេទអចលនទ្រព្យ";
+    $lang['help_us_phone'] = "លេខទូរស័ព្ទ";
+    $lang['help_us_email'] = "អាស័យដ្ឋានអ៊ីម៉េល";
+    $lang['help_us_address'] = "អាស័យដ្ឋាន";
+    $lang['help_us_pro_type'] = "ប្រភេទ";
+    $lang['help_us_description'] = "ពិពណ៌នា";
+    $lang['help_us_sale'] = "លក់";
+    $lang['help_us_rent'] = "ជួល";
+    $lang['help_us_continue'] = "រក្សាទុក";
+    $lang['help_us_select'] = "ជ្រើសរើស";
+    $lang['help_us_message_false'] = "សូមព្យាយាមម្តងទៀត";
+    $lang['help_us_message_success'] = "សូមអរគុណអ្នកដែលបានរកឃើញនៅក្នុងគេហទំព័ររបស់យើង";
+    // Site Footer
+    $lang['footer_property'] = "ប្រភេទអចលនទ្រព្យ";
+    $lang['footer_contact'] = "ទំនាក់ទំនងពត៌មានលំអិត";
+    // Site Join Us
+    $lang['join_title'] = "ចូលរួមជាមួយយើង";
+    $lang['join_business'] = "ឈ្មោះអាជីវកម្ម";
+    $lang['join_message_false'] = "ការចូលរួមរបស់អ្នកបានបរាជ័យ";
 ?>

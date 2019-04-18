@@ -111,37 +111,37 @@
 					{
 				?>
 					<div class="alert alert-danger" role="alert">
-					  	You has been join failed.
+					  	<?php echo $this->lang->line('join_message_false')?>
 					</div>
 				<?php
 					}
 				?>
-				<div class="txt-header"><h3>Join Us</h3></div>
+				<div class="txt-header"><h3><?php echo $this->lang->line('join_title')?></h3></div>
 				<div class="lead pgl-bg-light">
 			        <form method="post" action="<?php echo site_url('site/site/savejoin')?>">
 		                <!-- <h3>Post Property</h3> -->
 		               <div class="row">
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Name <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_name')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtName" class="form-control txtName" required="" id="txtname" required="" id="username"/> 
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Email</label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_email')?></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtEmail" class="form-control txtName" value="" />      
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Phone Number <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_phone')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtPhone" class="form-control txtName" value="" required="" />    
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Business Name <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('join_business')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtBusiness" class="form-control txtName" value="" required="" />
 	                                </div>
@@ -150,13 +150,13 @@
 		                    </div>
 		                    <div class="col-md-6">
 		                    	<div class="form-group">
-		                            <label class='col-lg-3 control-label'>Address <span class="text-danger">*</span></label>
+		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_address')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
 	                                    <textarea name="txtAddress" class="form-control txtMsg" required="" style="width: 100%; height: 95px;"></textarea>        
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Remark</label>
+		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_description')?></label>
 	                                <div class="col-lg-9">
 	                                    <textarea name="txtRemark" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>       
 	                                </div>
@@ -164,7 +164,7 @@
 		                    </div>
 		                    <div class="col-md-4">
 			                    <div class="form-group">
-			                        <input type="submit" name="btnSubmit" class="btnContact" value="Continue" />
+			                        <input type="submit" name="btnSubmit" class="btnContact" value="<?php echo $this->lang->line('help_us_continue')?>" />
 			                    </div>
 			                </div>
 		                </div>

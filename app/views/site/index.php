@@ -1122,7 +1122,7 @@
 
 					<ul class="nav nav-tabs home-tabs hot-new" role="tablist" style="margin-bottom: 30px;">
 				        <li class="title font-strong">
-				        	<a>Recent Properties 
+				        	<a><?php echo $this->lang->line('home_page_recent')?>
 				        		<div class="corner"></div>
 				        	</a>
 				    	</li><li></li>
@@ -1210,7 +1210,7 @@
 					?>
 					<ul class="nav nav-tabs home-tabs hot-new <?php echo $hide?>" role="tablist" style="margin-bottom: 30px;">
 				        <li class="title font-strong">
-				        	<a>New Project 
+				        	<a><?php echo $this->lang->line('home_page_project')?>
 				        		<div class="corner"></div>
 				        	</a>
 				    	</li><li></li>

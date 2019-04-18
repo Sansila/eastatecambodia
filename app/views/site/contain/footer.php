@@ -21,7 +21,7 @@
 				<div class="pgl-upper-foot">
 					<div class="row">
 						<div class="col-sm-4">
-							<h2>Contact detail</h2>
+							<h2><?php echo $this->lang->line('footer_contact')?></h2>
 							<p><?php echo $profile->address?></p>
 							<address>
 								<i class="fa fa-phone"></i> Mobile : <?php echo $profile->phone?><br>
@@ -41,7 +41,7 @@
 							</ul>
 						</div>
 						<div class="col-sm-8">
-							<h2>Properties</h2>
+							<h2><?php echo $this->lang->line('footer_property')?></h2>
 							<div class="row">
 								<?php 
 									$footer = $this->site->get_menu_footer();
@@ -50,12 +50,18 @@
 									foreach ($footer as $key) {
 										if($key->parentid == 0)
 										{
-											$name = 'All';
+											if($this->session->userdata('site_lang')=="khmer")
+												$name = 'ទាំអស់';
+											else
+												$name = 'All';
 											$url = site_url('site/site/'.$key->location_name.'/'.$key->menu_id);
 										}
 										else
 										{
-											$name = $key->menu_name;
+											if($this->session->userdata('site_lang')=="khmer")
+												$name = $key->menu_name_kh;
+											else
+												$name = $key->menu_name;
 											$url = site_url('site/site/'.$key->location_name.'/'.$key->menu_id.'?type='.$key->menu_id);
 										}
 								?>

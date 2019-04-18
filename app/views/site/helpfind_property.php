@@ -131,18 +131,18 @@
 					{
 				?>
 					<div class="alert alerts alert-danger" role="alert">
-					  	Failed please dry again.
+					  	<?php echo $this->lang->line('help_us_message_false')?>
 					</div>
 				<?php
 					}else if($m == "success"){
 				?>
 					<div class="alert alerts alert-success" role="alert">
-					  	Thank you for finding in our website.
+					  	<?php echo $this->lang->line('help_us_message_success')?>
 					</div>
 				<?php
 					}
 				?>
-				<div class="txt-header"><h3>Help Me Find Property</h3></div>
+				<div class="txt-header"><h3><?php echo $this->lang->line('help_us_title')?></h3></div>
 				<div class="lead pgl-bg-light">
 			        <form method="post" action="<?php echo site_url('site/site/savefind')?>">
 		                <!-- <h3>Post Property</h3> -->
@@ -150,25 +150,25 @@
 		               <div class="row">
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Name <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_name')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtName" class="form-control txtName" required="" id="txtname" required="" id="username"/> 
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Phone Number <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_phone')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtPhone" class="form-control txtName" value="" required="" />    
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Email<span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_email')?><span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="email" required="" name="txtEmail" class="form-control txtName" value="" />      
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Address <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_address')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <textarea name="txtAddress" class="form-control txtAddress" required="" style="width: 100%; height: 95px;"></textarea>        
 	                                </div>
@@ -178,7 +178,7 @@
 		                    <div class="col-md-6">
 		                    	
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Property Category <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_pro_category')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <select class="form-control txtName select2-single" multiple="multiple" name="txtpro_cate[]" style="max-width: 100%;" required="">
 	                                    	<option value="">-Select-</option>
@@ -192,19 +192,19 @@
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Property Type <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_pro_type')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8" style="margin-bottom: 15px;">
 	                                    <!-- <select name="txtpro_type" class="form-control txtName" style="max-width: 100%;" required="">
 	                                    	<option value="">-Select-</option>
 	                                    	<option value="1">Sale</option>
 	                                    	<option value="2">Rent</option>
 	                                    </select> -->
-	                                    <input type="checkbox" value="1" name="txtpro_type[]"><spand style="font-size: 14px;">Sale</spand>
-	                                    <input type="checkbox" value="2" name="txtpro_type[]"><spand style="font-size: 14px;">Rent</spand>
+	                                    <input type="checkbox" value="1" name="txtpro_type[]"><spand style="font-size: 14px;"><?php echo $this->lang->line('help_us_sale')?></spand>
+	                                    <input type="checkbox" value="2" name="txtpro_type[]"><spand style="font-size: 14px;"><?php echo $this->lang->line('help_us_rent')?></spand>
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Description</label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_description')?></label>
 	                                <div class="col-lg-8">
 	                                    <textarea name="txtDes" class="form-control txtAddress" style="width: 100%; height: 139px;"></textarea>       
 	                                </div>
@@ -213,7 +213,7 @@
 		                    <div class="col-sm-12">
 		                    	<div class="col-md-4">
 				                    <div class="form-group">
-				                        <input type="submit" name="btnSubmit" class="btnContact" value="Continue" />
+				                        <input type="submit" name="btnSubmit" class="btnContact" value="<?php echo $this->lang->line('help_us_continue')?>" />
 				                    </div>
 				                </div>
 		                    </div>
@@ -233,6 +233,6 @@
 	}, 3000);
 	$('.select2-single').select2({
 		allowClear:false,
-		placeholder: 'Property Category'
+		placeholder: 'Select'
 	});
 </script>
