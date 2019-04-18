@@ -141,15 +141,30 @@ class Modsite extends CI_Model {
                         $m.=$arr;
                     }
                     $html .= "<li>";
-                    $html .= "<a href='".site_url('site/site/'.strtolower($m).'/'.$menu['items'][$menu_s]->menu_id).'?type='.$menu['items'][$menu_s]->menu_id."'>".$menu['items'][$menu_s]->menu_name."</a>"; //no sub
+                    if($this->session->userdata('site_lang')=="khmer")
+                    {
+                        $html .= "<a href='".site_url('site/site/'.strtolower($m).'/'.$menu['items'][$menu_s]->menu_id).'?type='.$menu['items'][$menu_s]->menu_id."'>".$menu['items'][$menu_s]->menu_name_kh."</a>"; //no sub
+                    }else{
+                        $html .= "<a href='".site_url('site/site/'.strtolower($m).'/'.$menu['items'][$menu_s]->menu_id).'?type='.$menu['items'][$menu_s]->menu_id."'>".$menu['items'][$menu_s]->menu_name."</a>"; //no sub
+                    }
                     $html .= "</li>";
                 }
                 if (isset($menu['parents'][$menu_s])) {
                     $html .= "<li class='dropdown'>";
-                    $html .= "<a class='dropdown-toggle' data-toggle='dropdown'>" . $menu['items'][$menu_s]->menu_name . "</a>";
+                    if($this->session->userdata('site_lang')=="khmer")
+                    {
+                        $html .= "<a class='dropdown-toggle' data-toggle='dropdown'>" . $menu['items'][$menu_s]->menu_name_kh. "</a>";
+                    }else{
+                        $html .= "<a class='dropdown-toggle' data-toggle='dropdown'>" . $menu['items'][$menu_s]->menu_name. "</a>";
+                    }
                     $html .= "<ul class='dropdown-menu'>";
                     $html .= "<li>";
-                    $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id)."'>All</a>"; //no sub
+                    if($this->session->userdata('site_lang')=="khmer")
+                    {
+                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id)."'>ទាំងអស់</a>";
+                    }else{
+                        $html .= "<a href='" . site_url('site/site/'.$menu['items'][$menu_s]->location_name.'/'.$menu['items'][$menu_s]->menu_id)."'>All</a>";
+                    }
                     $html .= "</li>";
                     $html .= $this->generateTree($menu_s,$menu);
                     $html .= "</li>";

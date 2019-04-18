@@ -170,7 +170,7 @@ series4.legendSettings.valueText = '{value}';
 
 series4.slices.template.cornerRadius = 10;
 series4.slices.template.innerCornerRadius = 7;
-series4.slices.template.draggable = true;
+series4.slices.template.draggable = false;
 series4.slices.template.inert = true;
 series4.alignLabels = false;
 

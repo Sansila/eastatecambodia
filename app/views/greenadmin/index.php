@@ -264,7 +264,7 @@ h3{
 
   series.slices.template.cornerRadius = 10;
   series.slices.template.innerCornerRadius = 7;
-  series.slices.template.draggable = true;
+  series.slices.template.draggable = false;
   series.slices.template.inert = true;
   series.alignLabels = false;
 
@@ -302,7 +302,7 @@ h3{
 
   series1.slices.template.cornerRadius = 10;
   series1.slices.template.innerCornerRadius = 7;
-  series1.slices.template.draggable = true;
+  series1.slices.template.draggable = false;
   series1.slices.template.inert = true;
   series1.alignLabels = false;
 
@@ -339,7 +339,7 @@ h3{
 
   series2.slices.template.cornerRadius = 10;
   series2.slices.template.innerCornerRadius = 7;
-  series2.slices.template.draggable = true;
+  series2.slices.template.draggable = false;
   series2.slices.template.inert = true;
   series2.alignLabels = false;
 
@@ -422,7 +422,7 @@ h3{
 
     series4.slices.template.cornerRadius = 10;
     series4.slices.template.innerCornerRadius = 7;
-    series4.slices.template.draggable = true;
+    series4.slices.template.draggable = false;
     series4.slices.template.inert = true;
     series4.alignLabels = false;
 

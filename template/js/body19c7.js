@@ -27300,7 +27300,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                 var priceRangeResidential = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "25000",
                             label: "$25,000"
@@ -27334,7 +27334,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "25000",
                             label: "$25,000"
@@ -27370,7 +27370,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeRental = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27401,7 +27401,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27434,7 +27434,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeComSale = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "25000",
                             label: "$25,000"
@@ -27474,7 +27474,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "25000",
                             label: "$25,000"
@@ -27516,7 +27516,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeComLease = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27559,7 +27559,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27604,7 +27604,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeCondoSale = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "50000",
                             label: "$50,000"
@@ -27635,7 +27635,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "50000",
                             label: "$50,000"
@@ -27668,7 +27668,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeCondoLease = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27699,7 +27699,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27732,7 +27732,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeBoreySale = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "25000",
                             label: "$25,000"
@@ -27766,7 +27766,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "25000",
                             label: "$25,000"
@@ -27802,7 +27802,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeBoreyLease = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27833,7 +27833,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "300",
                             label: "$300"
@@ -27866,7 +27866,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeLand = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "2500",
                             label: "$2,500"
@@ -27906,7 +27906,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "2500",
                             label: "$2,500"
@@ -27948,7 +27948,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     priceRangeProject = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "50000",
                             label: "$50,000"
@@ -27973,7 +27973,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "50000",
                             label: "$50,000"
@@ -28000,7 +28000,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     areaRange = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "50",
                             label: "$50"
@@ -28028,7 +28028,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "50",
                             label: "$50"
@@ -28058,7 +28058,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     areaRangeLease = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "5",
                             label: "$5"
@@ -28080,7 +28080,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "5",
                             label: "$5"
@@ -28104,7 +28104,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     areaRangeProject = {
                         min: [{
                             value: "0",
-                            label: gettext("No minimum")
+                            label: gettext($('.tem-lbl-price-no').text())
                         }, {
                             value: "50",
                             label: "$50"
@@ -28132,7 +28132,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         }],
                         max: [{
                             value: "0",
-                            label: gettext("No maximum")
+                            label: gettext($('.tem-lbl-price-no-max').text())
                         }, {
                             value: "50",
                             label: "$50"
@@ -28204,7 +28204,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
             syncFormData: function(el, options) {
                 var currentData = $("#hidden-search-form").serializeArray(),
                     propertyType = $("#id_property_type").val();
-                propertyType && (propertyType = propertyType.toString()), $(".search-completed-year").hide(), $(".search-completion-year").hide(), $(".search-field-wrapper.listing-type").hide(), propertyType || (propertyType = "residential"), propertyType && ("residential" == propertyType && ($(el).hasClass("js-mobile-search") ? $(".mobile-search-type .text-label-selected").text(gettext("Sale")) : $(".desktop-search-type .text-label").text(gettext("Sale")), formState = "residential"), "rental" == propertyType && ($(el).hasClass("js-mobile-search") ? $(".mobile-search-type .text-label-selected").text(gettext("Rent")) : $(".desktop-search-type .text-label").text(gettext("Rent")), formState = "rental", $("#id_listing_type").val("lease")), "project" == propertyType && ($(".search-field-wrapper.listing-type").hide(), $(".search-field-wrapper.search-type").hide(), $(".search-land-area").hide(), $(".search-completed-year").hide(), $(".search-categories").hide(), $(".search-completion-year").show(), formState = "project", $(el).hasClass("js-mobile-search") ? $(".mobile-search-year .text-label-selected").text(gettext("Any")) : $(".desktop-search-year .text-label-selected").text(gettext("Any"))), "condo" == propertyType && ($(".search-land-area").hide(), $(".search-completion-year").hide(), $(".search-completed-year").show(), $(".search-field-wrapper.listing-type").show(), $(".search-field-wrapper.search-type").hide(), formState = "lease" == $("#id_listing_type").val() ? "condo-lease" : "condo-sale", $(el).hasClass("js-mobile-search") ? $(".mobile-search-year .text-label-selected").text(gettext("Any")) : $(".search-year .text-label-selected").text(gettext("Any"))), "borey" == propertyType && ($(".search-land-area").hide(), $(".search-completion-year").hide(), $(".search-completed-year").show(), $(".search-field-wrapper.listing-type").show(), $(".search-field-wrapper.search-type").hide(), formState = "lease" == $("#id_listing_type").val() ? "borey-lease" : "borey-sale", $(el).hasClass("js-mobile-search") ? $(".mobile-search-year .text-label-selected").text(gettext("Any")) : $(".search-year .text-label-selected").text(gettext("Any"))), "commercial" == propertyType && ($(".search-field-wrapper.listing-type").show(), $(".search-field-wrapper.search-type").hide(), formState = "lease" == $("#id_listing_type").val() ? "commercial-lease" : "commercial-sale", $(".residential-tab").hide(), $(".residential-panel").hide(), $(".commercial-tab").addClass("is-active"), $(".commercial-panel").addClass("is-active")));
+                propertyType && (propertyType = propertyType.toString()), $(".search-completed-year").hide(), $(".search-completion-year").hide(), $(".search-field-wrapper.listing-type").hide(), propertyType || (propertyType = "residential"), propertyType && ("residential" == propertyType && ($(el).hasClass("js-mobile-search") ? $(".mobile-search-type .text-label-selected").text() : $(".desktop-search-type .text-label").text(), formState = "residential"), "rental" == propertyType && ($(el).hasClass("js-mobile-search") ? $(".mobile-search-type .text-label-selected").text(gettext("Rent")) : $(".desktop-search-type .text-label").text(gettext("Rent")), formState = "rental", $("#id_listing_type").val("lease")), "project" == propertyType && ($(".search-field-wrapper.listing-type").hide(), $(".search-field-wrapper.search-type").hide(), $(".search-land-area").hide(), $(".search-completed-year").hide(), $(".search-categories").hide(), $(".search-completion-year").show(), formState = "project", $(el).hasClass("js-mobile-search") ? $(".mobile-search-year .text-label-selected").text(gettext("Any")) : $(".desktop-search-year .text-label-selected").text(gettext("Any"))), "condo" == propertyType && ($(".search-land-area").hide(), $(".search-completion-year").hide(), $(".search-completed-year").show(), $(".search-field-wrapper.listing-type").show(), $(".search-field-wrapper.search-type").hide(), formState = "lease" == $("#id_listing_type").val() ? "condo-lease" : "condo-sale", $(el).hasClass("js-mobile-search") ? $(".mobile-search-year .text-label-selected").text(gettext("Any")) : $(".search-year .text-label-selected").text(gettext("Any"))), "borey" == propertyType && ($(".search-land-area").hide(), $(".search-completion-year").hide(), $(".search-completed-year").show(), $(".search-field-wrapper.listing-type").show(), $(".search-field-wrapper.search-type").hide(), formState = "lease" == $("#id_listing_type").val() ? "borey-lease" : "borey-sale", $(el).hasClass("js-mobile-search") ? $(".mobile-search-year .text-label-selected").text(gettext("Any")) : $(".search-year .text-label-selected").text(gettext("Any"))), "commercial" == propertyType && ($(".search-field-wrapper.listing-type").show(), $(".search-field-wrapper.search-type").hide(), formState = "lease" == $("#id_listing_type").val() ? "commercial-lease" : "commercial-sale", $(".residential-tab").hide(), $(".residential-panel").hide(), $(".commercial-tab").addClass("is-active"), $(".commercial-panel").addClass("is-active")));
                 for (key in currentData) switch (currentData[key].name) {
                     case "price__gte":
                         "" != currentData[key].value && $("[data-price-min-changer]").val(currentData[key].value).trigger("change");
@@ -28255,7 +28255,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         $('[name="maxland-area"]').val(currentData[key].value).trigger("change");
                         break;
                     case "land_title":
-                        currentData[key].value ? updateValue = currentData[key].value : updateValue = gettext("Any"), $(el).hasClass("js-mobile-search") ? $(".mobile-search-title .text-label-selected").text(updateValue) : $(".search-title .text-label-selected").text(updateValue);
+                        currentData[key].value ? updateValue = currentData[key].value : updateValue = gettext($('.tem-lbl-deed').text()), $(el).hasClass("js-mobile-search") ? $(".mobile-search-title .text-label-selected").text(updateValue) : $(".search-title .text-label-selected").text(updateValue);
                         break;
                     case "year_built__gte":
                         currentData[key].value ? updateValue = currentData[key].value : updateValue = gettext("Any"), $(el).hasClass("js-mobile-search") ? $(".mobile-search-year .text-label-selected").text(updateValue) : $(".search-year .text-label-selected").text(updateValue);
@@ -28356,7 +28356,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                 }), $(el).on("change", "[data-price-min-changer]", function() {
                     var targetField = run.determineMinPriceField(),
                         targetValue = $(this).val();
-                    $(targetField).val(targetValue), targetValue = "" != targetValue ? "$" + run.numberFormatter(targetValue) : gettext("Any"), $(this).parents().siblings("button").children(".text-label-selected").children(".min-label").text(targetValue)
+                    $(targetField).val(targetValue), targetValue = "" != targetValue ? "$" + run.numberFormatter(targetValue) : gettext($('.tem-lbl-price').text()), $(this).parents().siblings("button").children(".text-label-selected").children(".min-label").text(targetValue)
                 }), $(el).on("change", "[data-price-max-changer]", function() {
                     var targetField = run.determineMaxPriceField(),
                         targetValue = $(this).val();
@@ -28375,7 +28375,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                 }), $(el).on("change", "[data-area-min-changer]", function() {
                     var targetField = "#id_price_per_sqm__gte",
                         targetValue = $(this).val();
-                    $(targetField).val(targetValue), targetValue = "" != targetValue ? "$" + run.numberFormatter(targetValue) : gettext("Any"), $(this).parents().siblings("button").children(".text-label-selected").children(".min-label").text(targetValue)
+                    $(targetField).val(targetValue), targetValue = "" != targetValue ? "$" + run.numberFormatter(targetValue) : gettext($('.tem-lbl-floor').text()), $(this).parents().siblings("button").children(".text-label-selected").children(".min-label").text(targetValue)
                 }), $(el).on("change", "[data-area-max-changer]", function() {
                     $("[data-price-max-changer]").val("");
                     var targetField = "#id_price_per_sqm__lte",
@@ -28397,7 +28397,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                 }), $(el).on("change", "[data-range-min-changer]", function() {
                     var targetField = $(this).data("target-field"),
                         targetValue = $(this).val();
-                    $(targetField).val(targetValue), "" == targetValue && (targetValue = gettext("Any")), $(this).parents().siblings("button").children(".text-label-selected").children(".min-label").text(targetValue)
+                    $(targetField).val(targetValue), "" == targetValue && (targetValue = gettext($('.tem-lbl-floor').text())), $(this).parents().siblings("button").children(".text-label-selected").children(".min-label").text(targetValue)
                 }), $(el).on("change", "[data-range-max-changer]", function() {
                     var targetField = $(this).data("target-field"),
                         targetValue = $(this).val();
@@ -28486,10 +28486,11 @@ if ("function" != typeof gettext) var gettext = function(str) {
                     projectOnly = "Studio,Apartment,Condo,Offices,Retail",
                     boreyOnly = "House,Villa,Alpine,Terrace,Retreat,Unit",
                     toDisplay = "";
+
                 if (reset && $select.find("option:selected").prop("selected", !1), "commercial-sale" == formState || "commercial-lease" == formState) var selectedCount = $(options.categoriesField).children('optgroup[label="' + gettext("Commercial") + '"]').children("option:selected").length;
                 else var selectedCount = $(options.categoriesField).children('optgroup[label="' + gettext("Residential") + '"]').children("option:selected").length;
                 var selectedCount = $(options.categoriesField).children('optgroup[label="' + gettext("Residential") + '"]').children("option:selected").length + $(options.categoriesField).children('optgroup[label="' + gettext("Commercial") + '"]').children("option:selected").length;
-                selectedCount < 1 ? (selectedCount = gettext("All"), $(".search-categories .text-label-selected").text(selectedCount)) : $(".search-categories .text-label-selected").text(selectedCount + " " + gettext("selected")), $select.children('optgroup[label="' + gettext("Residential") + '"]').children("option").each(function() {
+                selectedCount < 1 ? (selectedCount = $('.lbl-cat').text(), $(".search-categories .text-label-selected").text(selectedCount)) : $(".search-categories .text-label-selected").text(selectedCount + " " + gettext("selected")), $select.children('optgroup[label="' + gettext("Residential") + '"]').children("option").each(function() {
                     var $option, checkbox;
                     return $option = $(this), "project" == formState || "borey" == formState ? (toDisplay = "project" == formState ? projectOnly : boreyOnly, checkbox = toDisplay.indexOf($option.val()) >= 0 ? '<label><input type="checkbox" value="' + $option.val() + '"' + ($option.is(":selected") ? "checked" : "") + " /> " + $option.text() + "</label>" : "") : checkbox = '<label><input type="checkbox" value="' + $option.val() + '"' + ($option.is(":selected") ? "checked" : "") + " /> " + $option.text() + "</label>", residentialCheckboxes += checkbox
                 }), $container = $('<div class="multicheckbox-container">\n <div class="category-heading">' + gettext("Residential Properties") + "</div>\n" + residentialCheckboxes + "\n</div>"), $(".residential-panel").empty(), $container = $container.appendTo($(".residential-panel")), $container.on("change", "input:checkbox", function(e) {
@@ -28504,7 +28505,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         })
                     }), "commercial-sale" == formState && (formState = "residential", $("#id_property_type").val("residential"), $("#id_commercial_listing_type").val(""), $('[name="minprice"]').val(), $('[name="maxprice"]').val()), "commercial-lease" == formState && (formState = "rental", $("#id_property_type").val("rental"), $("#id_commercial_listing_type").val(""), $('[name="minprice"]').val(), $('[name="maxprice"]').val());
                     var selectedCount = $(options.categoriesField + " :selected").length;
-                    selectedCount < 1 ? (selectedCount = gettext("All"), $(".search-categories .text-label-selected").text(selectedCount)) : $(".search-categories .text-label-selected").text(selectedCount + " " + gettext("selected")), run.getPriceRange()
+                    selectedCount < 1 ? (selectedCount = $('.tem-lbl-cat').text(), $(".search-categories .text-label-selected").text(selectedCount)) : $(".search-categories .text-label-selected").text(selectedCount + " " + gettext("selected")), run.getPriceRange()
                 }), $select.children('optgroup[label="' + gettext("Commercial") + '"]').children("option").each(function() {
                     var $option, checkbox;
                     return $option = $(this), "project" == formState || "borey" == formState ? (toDisplay = "project" == formState ? projectOnly : boreyOnly, checkbox = toDisplay.indexOf($option.val()) >= 0 ? '<label><input type="checkbox" value="' + $option.val() + '"' + ($option.is(":selected") ? "checked" : "") + " /> " + $option.text() + "</label>" : "") : checkbox = '<label><input type="checkbox" value="' + $option.val() + '"' + ($option.is(":selected") ? "checked" : "") + " /> " + $option.text() + "</label>", commercialCheckboxes += checkbox
@@ -28520,7 +28521,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         })
                     }), "residential" == formState && (formState = "commercial-sale", $("#id_property_type").val("commercial"), $("#id_listing_type").val("sale"), $('[name="minprice"]').val(), $('[name="maxprice"]').val()), "rental" == formState && (formState = "commercial-lease", $("#id_property_type").val("commercial"), $("#id_listing_type").val("lease"), $('[name="minprice"]').val(), $('[name="maxprice"]').val());
                     var selectedCount = $(options.categoriesField).children('optgroup[label="' + gettext("Residential") + '"]').children("option:selected").length + $(options.categoriesField).children('optgroup[label="' + gettext("Commercial") + '"]').children("option:selected").length;
-                    selectedCount < 1 ? (selectedCount = gettext("All"), $(".search-categories .text-label-selected").text(selectedCount)) : $(".search-categories .text-label-selected").text(selectedCount + " " + gettext("selected")), run.getPriceRange()
+                    selectedCount < 1 ? (selectedCount = $('.lbl-cat').text(), $(".search-categories .text-label-selected").text(selectedCount)) : $(".search-categories .text-label-selected").text(selectedCount + " " + gettext("selected")), run.getPriceRange()
                 })
             },
             setupLocations: function(el, options) {

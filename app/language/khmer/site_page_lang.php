@@ -166,6 +166,55 @@
     $lang['em_en_pwd'] = "សូមបញ្ចូលពាក្យសម្ងាត់ថ្មីរបស់អ្នក";
     $lang['em_txtpwd'] = "បញ្ចូលពាក្យសម្ងាត់ថ្មី";
     $lang['em_txtconpwd'] = "បញ្ជាក់​លេខសំងាត់​ថ្មី";
-    // 
+    // Form List Customer 
     $lang['cl_title'] = "អតិថិជនស្វែងរក";
+    // Search Home Page
+    $lang['search_sale'] = "លក់";
+    $lang['search_rent'] = "ជួល";
+    $lang['search_sale_rent'] = "ជួល & លក់";
+    $lang['search_type'] = "ប្រភេទអចលនទ្រព្យ";
+    $lang['search_type_all'] = "ទាំងអស់";
+    $lang['search_price'] = "តម្លៃចន្លោះពី";
+    $lang['search_price_any'] = "មិនកំណត់";
+    $lang['search_price_min'] = "តម្លៃអប្បបរមា";
+    $lang['search_price_max'] = "តម្លៃអតិបរមា";
+    $lang['search_price_no'] = "ចំនួនអប្បបរមា";
+    $lang['search_price_no_max'] = "មិនកំណត់";
+    $lang['search_customize'] = "បន្ថែមការស្វែងរករបស់អ្នក";
+    $lang['search_floor'] = "ទំហំជាន់";
+    $lang['search_floor_any'] = "មិនកំណត់";
+    $lang['search_floor_min'] = "ទំហំអប្បបរមា";
+    $lang['search_floor_max'] = "ទំហំអតិបរមា";
+    $lang['search_bedroom'] = "បន្ទប់គេង";
+    $lang['search_bedroom_any'] = "មិនកំណត់";
+    $lang['search_bedroom_min'] = "ចំនួនអប្បបរមា";
+    $lang['search_bedroom_max'] = "ចំនួនអតិបរមា";
+    $lang['search_floor_level'] = "កំពស់ជាន់";
+    $lang['search_floor_level_any'] = "មិនកំណត់";
+    $lang['search_floor_level_min'] = "កំពស់អបប្បបរមា";
+    $lang['search_floor_level_max'] = "កំពស់អតិបរមា";
+    $lang['search_floor_level_ground'] = "ជាន់ផ្ទាល់ដី";
+    $lang['search_bathroom'] = "បន្ទប់ទឹក";
+    $lang['search_bathroom_any'] = "មិនកំណត់";
+    $lang['search_bathroom_min'] = "ចំនួនអប្បបរមា";
+    $lang['search_bathroom_max'] = "ចំនួនអតិបរមា";
+    $lang['search_land_area'] = "ទំហំដី";
+    $lang['search_land_area_any'] = "មិនកំណត់";
+    $lang['search_land_area_min'] = "ទំហំអប្បបរមា";
+    $lang['search_land_area_max'] = "ទំហំអតិបរមា";
+    $lang['search_title_deed'] = "ប័ណ្ណកម្មសិទ្ធិ";
+    $lang['search_title_deed_any'] = "មិនកំណត់";
+    $lang['search_title_deed_hard'] = "ប្លង់រឹង/កម្មសិទ្ធិកាន់កាប់";
+    $lang['search_title_deed_long'] = "ការជួលរយៈពេលវែង";
+    $lang['search_title_deed_soft'] = "ប្លង់ទន់";
+    $lang['search_parking_space'] = "ចំណតរថយន្ត";
+    $lang['search_parking_any'] = "មិនកំណត់";
+    $lang['search_parking_min'] = "ចំនួនអប្បបរមា";
+    $lang['search_parking_max'] = "ចំនួនអតិបរមា";
+    $lang['search_btn_reset'] = "កំណត់ឡើងវិញ";
+    $lang['search_btn_find'] = "ស្វែងរក";
+    $lang['search_btn_search'] = "ស្វែងរក";
+    $lang['search_btn_search_map'] = "ស្វែងរកលើផែនទី";
+    $lang['search_text_search'] = "សូមវាយបញ្ចូល, ជ្រើសរើសទីតាំង ឬទីកន្លែងណាមួយ";
+    $lang['search_looking_for'] = "កំពុងរកមើល";
 ?>

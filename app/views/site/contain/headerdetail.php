@@ -104,9 +104,17 @@
 						<ul class="nav nav-pills nav-top navbar-right">
 							<li><a target="_blank" href="<?php echo site_url('/login')?>"><i class="fa fa-user"></i></a></li>
 							<!-- <li><a target="_blank" href="<?php //echo $profile->email?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Email"><i class="fa fa-envelope-o"></i></a></li> -->
-							<li><a target="_blank" href="<?php echo $profile->facebook?>" title="" data-facebook="bottom" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a target="_blank" href="<?php echo $profile->twitter?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-							<li><a target="_blank" href="<?php echo $profile->google_plus?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li>
+							<li>
+								<a href="<?php echo base_url('en'); ?>">
+									<img src="<?php echo site_url('assets/img/en.png')?>">
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo base_url('kh'); ?>">
+									<img src="<?php echo site_url('assets/img/kh.png')?>">
+								</a>
+							</li>
+							<!-- <li><a target="_blank" href="<?php echo $profile->google_plus?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li> -->
 							<li>
 								<a>
 									<div id="google_translate_element"></div>
@@ -123,7 +131,14 @@
 						
 						<div class="navbar-collapse collapse width">
 							<ul class="nav navbar-nav pull-right">
-								<li><a href="<?php echo site_url(); ?>">Home</a></li>
+								<li><a href="<?php echo site_url(); ?>">
+									<?php 
+										if($this->session->userdata('site_lang')=="khmer")
+											echo "ទំព័រដើម";
+										else
+											echo "Home";
+									?>
+								</a></li>
 								<?php echo $menu; ?>
 							</ul>
 						</div><!--/.nav-collapse --> 

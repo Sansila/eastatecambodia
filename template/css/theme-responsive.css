@@ -296,6 +296,20 @@
   }
 }
 @media (max-width: 568px) {
+  /* line 24, ../sass/theme.scss */
+  .logo {
+    background: #d84949;
+    height: 78px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 200px;
+  }
+  /* line 32, ../sass/theme.scss */
+  .logo img {
+    margin-top: 12px;
+  }
   /* line 272, ../sass/theme-responsive.scss */
   .pgl-testimonial .owl-controls .owl-buttons .owl-next, .pgl-testimonial .owl-controls .owl-buttons .owl-next {
     right: 25% !important;
@@ -324,6 +338,20 @@
   }
 }
 @media (max-width: 480px) {
+  /* line 24, ../sass/theme.scss */
+  .logo {
+    background: #d84949;
+    height: 78px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 200px;
+  }
+  /* line 32, ../sass/theme.scss */
+  .logo img {
+    margin-top: 12px;
+  }
   /* line 291, ../sass/theme-responsive.scss */
   h1, h2, .page-top h2 {
     font-size: 2.142em;
@@ -382,6 +410,20 @@
   }
 }
 @media (max-width: 360px) {
+  /* line 24, ../sass/theme.scss */
+  .logo {
+    background: #d84949;
+    height: 78px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 200px;
+  }
+  /* line 32, ../sass/theme.scss */
+  .logo img {
+    margin-top: 12px;
+  }
   /* line 335, ../sass/theme-responsive.scss */
   .pgl-testimonial .owl-controls .owl-buttons .owl-next, .pgl-testimonial .owl-controls .owl-buttons .owl-next {
     right: 0 !important;
