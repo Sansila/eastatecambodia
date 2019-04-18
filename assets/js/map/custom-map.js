@@ -545,7 +545,7 @@ function createHomepageGoogleMapByCategory(_latitude,_longitude,status,location,
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +
                                     '<img src="' + locations[i][6] + '" alt="" width="200" height="100">' +
                                     '</a>' +
-                                    '<div class="sale_amount"><span class="m-price">' + locations[i][2] + '</sapn><span class="m-type">  - ' + locations[i][8] + '</span></div>' +
+                                    '<div class="sale_amount"><span class="m-price">' + locations[i][2] + '</span> <span class="m-type">' + locations[i][8] + '</span></div>' +
                                 '</div>' +
                                 '<div class="property-text p-3 module line-clamp">' +
                                     '<a href="'+ locations[i][5] +'" class="d-block">' +

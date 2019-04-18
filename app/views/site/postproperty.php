@@ -109,25 +109,25 @@
 		<div class="container">
 			<div class="container">
 				<!-- <h2>Post Property</h2> -->
-				<div class="txt-header"><h3>Post Property</h3></div>
+				<div class="txt-header"><h3><?php echo $this->lang->line('post_page_title')?></h3></div>
 				<div class="lead pgl-bg-light">
 			        <form enctype="multipart/form-data" method="POST" action="<?php echo site_url('site/site/save')?>">
 		               <div class="row">
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Name <span class="text-danger">*</span></label>
+		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_name')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
 	                                    <input type="text" name="txtname" class="form-control txtName" required="" id="txtname" required="" maxlength="15" minlength="4" id="username"/>                  
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Email</label>
+		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_email')?> </label>
 	                                <div class="col-lg-9">
 	                                    <input type="text" name="txtemail" class="form-control txtName" id="txtemail" />          
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Phone <span class="text-danger">*</span></label>
+		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('post_page_phone')?>  <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
 	                                    <input type="tel" name="txtphone" required="" class="form-control txtName" id="txtphone" style="max-width: 100%;" />                 
 	                                </div>
@@ -136,18 +136,18 @@
 		                    </div>
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'>Address <span class="text-danger">*</span></label>
+		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_address')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9"> 
 	                                    <textarea name="txtaddress" id="txtaddress" required="" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>                 
 	                                </div>
 		                        </div>
 						        <div class="form-group">
-						        	<label class='col-lg-3 control-label'>Relation <span class="text-danger">*</span></label>
+						        	<label class='col-lg-3 control-label'><?php echo $this->lang->line('post_page_relation')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
 									    <select class="form-control txtName" name="txttype_post" style="max-width: 100%;" required="">
-									    	<option value="">-select-</option>
-									    	<option value="owner">I am the owner</option>
-									    	<option value="agent">I am an agent</option>
+									    	<option value="">-<?php echo $this->lang->line('help_us_select')?>-</option>
+									    	<option value="owner"><?php echo $this->lang->line('post_page_owner')?></option>
+									    	<option value="agent"><?php echo $this->lang->line('post_page_agent')?></option>
 									    </select>              
 	                                </div>
 		                        </div>
@@ -156,7 +156,7 @@
 		                    	<div class="form-group">
 	                                <div class="col-lg-4"> 
 	                                    <div class="form-group">
-					                        <input type="submit" name="btnSubmit" class="btnContact" value="Continue" />
+					                        <input type="submit" name="btnSubmit" class="btn btn-success btnContact" value="<?php echo $this->lang->line('post_page_continue')?>" />
 					                    </div>              
 	                                </div>
 		                        </div>

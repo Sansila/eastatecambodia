@@ -1179,10 +1179,10 @@
         <div class="wizard row">
             <div class="col-md-12">
                 <div class="col-md-2">
-                    <a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+                    <a href="<?php echo site_url('site/site/postproperty')?>" class="current"><?php echo $this->lang->line('home_page_post')?></a>
                 </div>
                 <div class="col-md-2">
-                    <a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+                    <a class="current" href="<?php echo site_url('site/site/join')?>"><?php echo $this->lang->line('home_page_join')?></a>
                 </div>
             </div>
         </div>

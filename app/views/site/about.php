@@ -22,7 +22,12 @@
 					</div>
 				</div>
 				<div class="lead pgl-bg-light">
-					<?php echo $desc->content?>
+					<?php 
+						if($this->session->userdata('site_lang')=="khmer")
+							echo $desc->content_kh;
+						else
+							echo $desc->content;
+					?>
 				</div>
 			</div>
 		</div>

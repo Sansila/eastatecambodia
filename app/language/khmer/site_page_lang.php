@@ -260,4 +260,13 @@
     $lang['search_page_sort_area'] = "ទំហំ";
     $lang['search_page_sort_date'] = "កាលបរិច្ឆេទ";
     $lang['search_page_post_date'] = "ថ្ងៃផុស";
+    // Site Post Property
+    $lang['post_page_title'] = "បង្កើតអចលនទ្រព្យថ្មី";
+    $lang['post_page_relation'] = "ទំនាក់ទំនង";
+    $lang['post_page_phone'] = "លេខទូរស័ព្ទ";
+    $lang['post_page_owner'] = "ខ្ញុំជាម្ចាស់";
+    $lang['post_page_agent'] = "ខ្ញុំជាភ្នាក់ងារ";
+    $lang['post_page_continue'] = "បន្ត";
+    $lang['post_page_who'] = "ខ្ញុំជាអ្នកណា?";
+    $lang['post_page_post'] = "រក្សាទុក្ស";
 ?>

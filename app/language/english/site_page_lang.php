@@ -261,4 +261,13 @@
   $lang['search_page_sort_area'] = "Area";
   $lang['search_page_sort_date'] = "Date";
   $lang['search_page_post_date'] = "Post Date";
+  // Site Post Property
+  $lang['post_page_title'] = "Post Property";
+  $lang['post_page_relation'] = "Relation";
+  $lang['post_page_phone'] = "Phone";
+  $lang['post_page_owner'] = "I am the owner";
+  $lang['post_page_agent'] = "I am an agent";
+  $lang['post_page_continue'] = "continue";
+  $lang['post_page_who'] = "Who I am?";
+  $lang['post_page_post'] = "Post";
 ?>

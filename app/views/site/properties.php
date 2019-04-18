@@ -1132,10 +1132,10 @@
 								<a class="current">Properties</a>
 							</div> -->
 							<div class="col-md-2">
-								<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+								<a href="<?php echo site_url('site/site/postproperty')?>" class="current"><?php echo $this->lang->line('home_page_post')?></a>
 							</div>
 							<div class="col-md-2">
-								<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+								<a class="current" href="<?php echo site_url('site/site/join')?>"><?php echo $this->lang->line('home_page_join')?></a>
 							</div>
 						</div>
 					</div>
@@ -1157,20 +1157,20 @@
 
 							<ul class="list-inline list-sort pull-right">
 
-								<li><label for="order-status">Order</label></li>
+								<li><label for="order-status"><?php echo $this->lang->line('search_page_order')?></label></li>
 								<li>
 									<select id="order-status" name="order" data-placeholder="Order" class="chosen-select order_by">
-										<option <?php if($order == "Desc") echo "selected"; else echo "";?> value="Desc">Descending</option>
-										<option <?php if($order == "Asc") echo "selected"; else echo "";?> value="Asc">Ascending</option>
+										<option <?php if($order == "Desc") echo "selected"; else echo "";?> value="Desc"><?php echo $this->lang->line('search_page_desc')?></option>
+										<option <?php if($order == "Asc") echo "selected"; else echo "";?> value="Asc"><?php echo $this->lang->line('search_page_asc')?></option>
 									</select>
 								</li>
-								<li><label for="sortby-status">Sort by</label></li>
+								<li><label for="sortby-status"><?php echo $this->lang->line('search_page_sort')?></label></li>
 								<li>
 									<select id="sortby-status" name="sort" data-placeholder="Sort by" class="chosen-select short_by">
-										<option value="">--Sort By--</option>
-										<option <?php if($sort == 'Price') echo "selected"; else echo "";?> value="Price">Price</option>
-										<option <?php if($sort == 'Area') echo "selected"; else echo "";?> value="Area">Area</option>
-										<option <?php if($sort == 'Date') echo "selected"; else echo "";?> value="Date">Date</option>
+										<option value="">--<?php echo $this->lang->line('search_page_sort')?>--</option>
+										<option <?php if($sort == 'Price') echo "selected"; else echo "";?> value="Price"><?php echo $this->lang->line('search_page_sort_price')?></option>
+										<option <?php if($sort == 'Area') echo "selected"; else echo "";?> value="Area"><?php echo $this->lang->line('search_page_sort_area')?></option>
+										<option <?php if($sort == 'Date') echo "selected"; else echo "";?> value="Date"><?php echo $this->lang->line('search_page_sort_date')?></option>
 									</select>
 								</li>
 							</ul>
@@ -1229,7 +1229,7 @@
 										</div>
 										<div class="amenities clearfix">
 											<ul class="pull-left">
-												<li><strong>Area:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
+												<li><strong><?php echo $this->lang->line('search_page_sort_area')?>:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
 												<li><strong>Post Date:</strong> <?php if($list->create_date != null) echo $list->create_date; else echo "";?></li>
 											</ul>
 											<ul class="pull-right">
@@ -1297,7 +1297,7 @@
 										</div>
 										<div class="amenities clearfix" style="height: 40px;">
 											<ul class="pull-left">
-												<li><strong>Area:</strong> <?php if($grid->housesize !="") echo $grid->housesize; else echo 0;?><sup>m2</sup></li>
+												<li><strong><?php echo $this->lang->line('search_page_sort_area')?>:</strong> <?php if($grid->housesize !="") echo $grid->housesize; else echo 0;?><sup>m2</sup></li>
 											</ul>
 											<ul class="pull-right">
 												<li class="<?php if($grid->bedroom == "") echo "hide"; ?>"><i class="icons icon-bedroom"></i> <?php echo $grid->bedroom;?></li>

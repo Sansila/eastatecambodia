@@ -140,26 +140,26 @@
 		               <div class="row">
 		                    <div class="col-md-6">
 								<div class="form-group hide">
-		                            <label class='col-lg-4 control-label'>Property Title <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_name')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtid" class="form-control txtName" value="<?php echo $id;?>" id="txtid"/> 
 	                                    <input type="text" name="txtemail" class="form-control txtName" value="<?php echo $email;?>" id="txtemail"/>                  
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Property Title <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_name')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txttitle" class="form-control txtName" required="" id="txttitle"/>                  
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Price <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_price')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="number" name="txtprice" required="" class="form-control txtName" id="txtprice" style="max-width: 100%" />                 
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Size(Land, House) <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_size')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <input type="number" name="txtsize" required="" class="form-control txtName" id="txtsize" style="max-width: 100%"/>                 
 	                                </div>
@@ -168,10 +168,10 @@
 		                    </div>
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Categories <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_cat')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <select class="form-control txtName" required="" name="txtcategory" id="txtcategory" style="max-width: 100%;">
-                                        	<option value="">Please Select</option>
+                                        	<option value=""><?php echo $this->lang->line('help_us_select')?></option>
 	                                        <?php
 	                                        $locat=$this->db->query("SELECT * FROM tblpropertytype WHERE type_status = '1' ")->result();
 	                                            foreach ($locat as $me) {
@@ -186,21 +186,21 @@
 	                                </div>
 		                        </div>
 						        <div class="form-group">
-						        	<label class='col-lg-4 control-label'>Property Type <span class="text-danger">*</span></label>
+						        	<label class='col-lg-4 control-label'><?php echo $this->lang->line('p_type')?><span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 									    <select class="form-control txtName" required="" name="txttype" id="txttype" style="max-width: 100%;" required="">
-									    	<option value="">Please Select</option>
-	                                        <option value="1">Sale</option>
-	                                        <option value="2">Rent</option>
-	                                        <option value="3">Sale & Rent</option>
+									    	<option value=""><?php echo $this->lang->line('help_us_select')?></option>
+	                                        <option value="1"><?php echo $this->lang->line('search_sale')?></option>
+	                                        <option value="2"><?php echo $this->lang->line('search_rent')?></option>
+	                                        <option value="3"><?php echo $this->lang->line('search_sale_rent')?></option>
 									    </select>              
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'>Location <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_loc')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
 	                                    <select class="form-control txtName select2-single" required="" name="txtlocation" id="txtlocation" style="max-width: 100%;" required="">
-									    	<option value="">Please Select</option>
+									    	<option value=""><?php echo $this->lang->line('help_us_select')?></option>
 	                                        <?php
 	                                            $location=$this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc")->result();
 	                                            foreach ($location as $menu) {
@@ -215,7 +215,7 @@
 			                </div>
 			                <div class="col-md-12">
 			                	<div class="form-group">
-		                            <label class='col-lg-2 control-label'>Content</label>
+		                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_content')?></label>
 	                                <div class="col-lg-10"> 
 	                                    <textarea name="txtcontent" id="contents_pro" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>                 
 	                                </div>
@@ -224,7 +224,7 @@
 			                <div class="col-md-12" style="margin-top: 20px;"></div>
 			                <div class="col-md-12">
 			                	<div class="form-group">
-		                            <label class='col-lg-2 control-label'>Map</label>
+		                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_map')?></label>
 	                                <div class="col-lg-10"> 
 	                                    <div id="map_canvas" style="height: 500px;"></div>                 
 	                                </div>
@@ -234,7 +234,7 @@
 			                <div class="col-md-12">
 			                	<div class="col-md-6">
 			                        <div class="form-group">
-			                            <label class='col-lg-4 control-label'>Latitude</label>
+			                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_lat')?></label>
 		                                <div class="col-lg-8">
 		                                    <input type="text" name="latitude" class="form-control txtName" id="latitude"/>                  
 		                                </div>
@@ -242,7 +242,7 @@
 			                    </div>
 			                    <div class="col-md-6">
 			                        <div class="form-group">
-			                            <label class='col-lg-4 control-label'>Longtitude</label>
+			                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('p_long')?></label>
 		                                <div class="col-lg-8">
 		                                    <input type="text" name="longtitude" class="form-control txtName" id="longtitude"/> 
 		                                </div>
@@ -251,7 +251,7 @@
 			                </div>
 			                <div class="col-md-12">
 			                	<div class="form-group">
-		                            <label class='col-lg-2 control-label'>Image</label>
+		                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_image')?></label>
 	                                <div class="col-lg-10">
                                         <input id="file-4" type="file" name="userfile[]" class="file" multiple data-upload-url="#">                
 	                                </div>
@@ -259,7 +259,7 @@
 			                </div>
 			                <div class="col-md-12">
 			                	<div class="form-group">
-		                            <label class='col-lg-2 control-label'>Who I am? <span class="text-danger">*</span></label>
+		                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('post_page_who')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-10">
                                         <input type="text" name="txtwho" required="" value="<?php echo $owner?>" disabled="" class="form-control txtName" id="txtwho"/>      
 	                                </div>
@@ -269,7 +269,7 @@
 		                    	<div class="form-group">
 	                                <div class="col-lg-3"> 
 	                                    <div class="form-group">
-					                        <input type="submit" name="btnSubmit" class="btnContact" value="Post" />
+					                        <input type="submit" name="btnSubmit" class="btnContact btn btn-success" value="<?php echo $this->lang->line('post_page_post')?>" />
 					                    </div>              
 	                                </div>
 		                        </div>
