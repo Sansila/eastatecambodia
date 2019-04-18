@@ -250,4 +250,14 @@
     $lang['join_title'] = "ចូលរួមជាមួយយើង";
     $lang['join_business'] = "ឈ្មោះអាជីវកម្ម";
     $lang['join_message_false'] = "ការចូលរួមរបស់អ្នកបានបរាជ័យ";
+    // Site Search 
+    $lang['search_page_result'] = "លទ្ធផលស្វែងរក";
+    $lang['search_page_order'] = "តាមលំដាប់";
+    $lang['search_page_desc'] = "ចុះក្រោម";
+    $lang['search_page_asc'] = "ឡើង";
+    $lang['search_page_sort'] = "តម្រៀបតាម";
+    $lang['search_page_sort_price'] = "តម្លៃ";
+    $lang['search_page_sort_area'] = "ទំហំ";
+    $lang['search_page_sort_date'] = "កាលបរិច្ឆេទ";
+    $lang['search_page_post_date'] = "ថ្ងៃផុស";
 ?>

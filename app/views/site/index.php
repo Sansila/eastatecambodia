@@ -1104,7 +1104,7 @@
 											</div>
 											<div class="amenities clearfix" style="height: 40px;">
 												<ul class="pull-left">
-													<li><strong>Area:</strong> <?php if($hot->housesize !="") echo $hot->housesize; else echo 0;?><sup>m2</sup></li>
+													<li><strong><?php echo $this->lang->line('search_page_sort_area')?>:</strong> <?php if($hot->housesize !="") echo $hot->housesize; else echo 0;?><sup>m2</sup></li>
 												</ul>
 												<ul class="pull-right">
 													<li class="<?php if($hot->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $hot->bedroom; ?></li>
@@ -1181,7 +1181,7 @@
 											</div>
 											<div class="amenities clearfix" style="height: 40px;">
 												<ul class="pull-left">
-													<li><strong>Area:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
+													<li><strong><?php echo $this->lang->line('search_page_sort_area')?>:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
 												</ul>
 												<ul class="pull-right">
 													<li class="<?php if($list->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $list->bedroom; ?></li>

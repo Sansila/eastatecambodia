@@ -251,4 +251,14 @@
   $lang['join_title'] = "Join Us";
   $lang['join_business'] = "Business Name";
   $lang['join_message_false'] = "Your has been join failed";
+  // Site Search 
+  $lang['search_page_result'] = "SEARCH RESULT";
+  $lang['search_page_order'] = "Order";
+  $lang['search_page_desc'] = "Descending";
+  $lang['search_page_asc'] = "Ascending";
+  $lang['search_page_sort'] = "Sort By";
+  $lang['search_page_sort_price'] = "Price";
+  $lang['search_page_sort_area'] = "Area";
+  $lang['search_page_sort_date'] = "Date";
+  $lang['search_page_post_date'] = "Post Date";
 ?>
