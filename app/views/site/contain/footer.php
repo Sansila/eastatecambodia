@@ -79,7 +79,7 @@
 					</div>
 				</div>
 				<div class="pgl-copyrights">
-					<p>Copyright © <?php echo Date('Y')?> RealEstast. Designed by <a href="http://cambodiasoft.com/">CambodiaSoft</a></p>
+					<p>Copyright © <?php echo Date('Y')?> Estat-Cambodia. Designed by <a href="http://cambodiasoft.com/">CambodiaSoft</a></p>
 				</div>
 			</div>
 		</footer>
