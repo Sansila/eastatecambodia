@@ -1282,7 +1282,7 @@
 									}
 								?>
 								<div class="col-sm-10"></div>
-								<div class="col-sm-2"><a href="<?php echo site_url('site/site/listproject')?>" type="button" class="btn btn-success btn-project-more">More...</a></div>
+								<div class="col-sm-2"><a href="<?php echo site_url('site/site/listproject')?>" type="button" class="btn btn-success btn-project-more"><?php echo $this->lang->line('home_page_more')?></a></div>
 						</div>
 					</div>
 

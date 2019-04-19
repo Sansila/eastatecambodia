@@ -164,7 +164,7 @@
 						
 						<!-- Begin Related properties -->
 						<section class="pgl-properties">
-							<h2 style="font-size: 1.571em;">Properties in Project</h2>
+							<h2 style="font-size: 1.571em;"><?php echo $this->lang->line('detail_project_relative_property')?></h2>
 							<div class="row">
 								<div class="owl-carousel pgl-pro-slide owl-theme owl-carousel-init" data-plugin-options='{"items": 3, "itemsDesktop": 3, "singleItem": false, "autoPlay": false, "pagination": false}'>
 									<?php 
@@ -242,19 +242,19 @@
 							        	<select id="id_listing_type" name="available" class="hide">
 								            <option value="0">Sale</option>
 								        </select>
-							            <input type="text" class="search-query" name="q" placeholder="Search..." />
+							            <input type="text" class="search-query" name="q" placeholder="<?php echo $this->lang->line('detail_project_search_placeholder')?>" />
 							            <input id="list_type" class="hide" name="list_type" value="lists"/>
 							            <select id="order-status" name="order" data-placeholder="Order" class="chosen-select order_bys hide">
 											<option value="Desc">Descending</option>
 											<option value="Asc">Ascending</option>
 										</select>
-							            <button type="submit" class="btn btn-primary btn-primarys">Search</button>
+							            <button type="submit" class="btn btn-primary btn-primarys"><?php echo $this->lang->line('detail_project_search')?></button>
 							        </div>
 							    </form>
 							</div>
 						</div>
 						<aside class="block pgl-agents pgl-bg-light">
-							<h3>Contact Us</h3>
+							<h3><?php echo $this->lang->line('detail_project_contact')?></h3>
 							<div style="display: block; opacity: 1;">
 
 								<div class="owl-wrapper-outer autoHeight">
@@ -277,10 +277,10 @@
 						<div class="wizard row">
 							<div class="col-md-12">
 								<div class="col-md-12" style="border-radius: 3px;">
-									<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+									<a href="<?php echo site_url('site/site/postproperty')?>" class="current"><?php echo $this->lang->line('home_page_post')?></a>
 								</div>
 								<div class="col-md-12" style="border-radius: 3px;">
-									<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+									<a class="current" href="<?php echo site_url('site/site/join')?>"><?php echo $this->lang->line('home_page_join')?></a>
 								</div>
 							</div>
 						</div>

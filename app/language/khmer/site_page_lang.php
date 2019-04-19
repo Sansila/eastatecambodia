@@ -223,11 +223,16 @@
     $lang['home_page_hot'] = "អចលនទ្រព្យលក់បន្ទាន់";
     $lang['home_page_recent'] = "អចលនទ្រព្យថ្មី ៗ";
     $lang['home_page_project'] = "គម្រោង​ថ្មី";
+    $lang['home_page_more'] = "ជាច្រើនទៀត...";
     // Site Contact Us
     $lang['contact_name'] = "ឈ្មោះរបស់អ្នក";
     $lang['contact_mail'] = "អាស័យដ្ឋានអ៊ីម៉េល";
     $lang['contact_message'] = "សារអត្ថបទ";
     $lang['contact_submit'] = "បញ្ជូន";
+    $lang['contact_address'] = "អាស័យដ្ឋាន";
+    $lang['contact_phone'] = "ទូរស័ព្ទ";
+    $lang['contact_fax'] = "ទូរសារ";
+    $lang['contact_email'] = "អ៊ីមែល";
     // Site Help Us To find Property
     $lang['help_us_title'] = "ជួយស្វែងរកអចលនទ្រព្យ";
     $lang['help_us_name'] = "ឈ្មោះរបស់អ្នក";
@@ -269,4 +274,53 @@
     $lang['post_page_continue'] = "បន្ត";
     $lang['post_page_who'] = "ខ្ញុំជាអ្នកណា?";
     $lang['post_page_post'] = "រក្សាទុក្ស";
+    // Site Project 
+    $lang['project_title'] = "គម្រោង​ថ្មី";
+    // Site Detial Project Page 
+    $lang['detail_project_relative_property'] = "អចលនទ្រព្យនៅក្នុងគម្រោង";
+    $lang['detail_project_search_placeholder'] = "ស្វែងរក...";
+    $lang['detail_project_search'] = "ស្វែងរក";
+    $lang['detail_project_contact'] = "ទាក់ទងមកពួកយើង";
+    // Site Detial Property Page 
+    $lang['detail_property_our_agent'] = "ភ្នាក់ងាររបស់យើង";
+    $lang['detail_property_view_all'] = "មើលអចលនទ្រព្យទាំងអស់";
+    $lang['detail_property_id'] = "លេខសម្គាល់";
+    $lang['detail_property_post_date'] = "ថ្ងៃផុស";
+    $lang['detail_property_type'] = "ប្រភេទ";
+    $lang['detail_property_area'] = "ទំហំ";
+    $lang['detail_property_price'] = "តម្លៃ";
+    $lang['detail_property_contact_back'] = "ទាក់ទងមកខ្ញុំវិញ";
+    $lang['detail_property_more_info'] = "ព័ត៌មាន​បន្ថែម";
+    $lang['detail_property_additional'] = "ព័ត៌មានបន្ថែម";
+    $lang['detail_property_direction'] = "ទិស";
+    $lang['detail_property_area_size'] = "ទំហំ";
+    $lang['detail_property_bedroom'] = "បន្ទប់គេង";
+    $lang['detail_property_bathroom'] = "បន្ទប់ទឹក";
+    $lang['detail_property_furniture'] = "គ្រឿងសង្ហារឹម";
+    $lang['detail_property_kitchen'] = "ផ្ទះបាយ";
+    $lang['detail_property_living'] = "បន្ទប់ទទួលភ្ញៀវ";
+    $lang['detail_property_dinning'] = "បន្ទប់បរិភោគអាហារ";
+    $lang['detail_property_air'] = "ម៉ាស៊ីនត្រជាក់";
+    $lang['detail_property_parking'] = "ចំណតរថយន្ត";
+    $lang['detail_property_steam_sauna'] = "ស្ទីមនិងសោណា";
+    $lang['detail_property_garden'] = "សួនច្បារ";
+    $lang['detail_property_balcony'] = "យ៉រ";
+    $lang['detail_property_terrace'] = "លាន";
+    $lang['detail_property_elevator'] = "ជណ្តើយន្ត";
+    $lang['detail_property_stair'] = "ជណ្តើរ";
+    $lang['detail_property_gym'] = "កន្លែងហាត់ប្រាណ";
+    $lang['detail_property_map'] = "ផែនទី";
+    $lang['detail_property_video'] = "វីដេអូ";
+    $lang['detail_property_address'] = "អាស័យដ្ឋាន";
+    $lang['detail_property_mobile'] = "ទូរស័ព្ទ";
+    $lang['detail_property_mail'] = "អ៊ីម៉ែល";
+    $lang['detail_property_relative'] = "អចលនទ្រព្យដែលទាក់ទង";
+    $lang['detail_property_your_name'] = "ឈ្មោះ​របស់​អ្នក";
+    $lang['detail_property_your_email'] = "អ៊ីមែល​របស់​អ្នក";
+    $lang['detail_property_your_phone'] = "លេខទូរស័ព្ទ";
+    $lang['detail_property_mod'] = "របៀបទំនាក់ទំនងដែលពេញចិត្ត";
+    $lang['detail_property_mod_phone'] = "ទូរស័ព្ទ";
+    $lang['detail_property_mod_email'] = "អ៊ីម៉ែល";
+    $lang['detail_property_mod_both'] = "ទាំងពីរ";
+    $lang['detail_property_comment'] = "មតិយោបល់";
 ?>

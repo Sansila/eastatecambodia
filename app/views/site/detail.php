@@ -204,11 +204,11 @@
 								<div class="row">
 									<div class="col-sm-4">
 										<ul class="list-unstyled amenities amenities-detail">
-											<li><strong>PropertyID:</strong> <?php echo 'P'.$detail->pid?></li>
-											<li><strong>Post Date:</strong> <?php echo $detail->create_date?></li>
-											<li><strong>Type:</strong> <?php echo $detail->typename?></li>
-											<li><strong>Area:</strong> <?php if($detail->housesize !="") echo $detail->housesize;else echo 0;?><sup>m2</sup></li>
-											<li><strong>Price:</strong> <?php echo '$'.number_format($detail->price)?></li>
+											<li><strong><?php echo $this->lang->line('detail_property_id')?>:</strong> <?php echo 'P'.$detail->pid?></li>
+											<li><strong><?php echo $this->lang->line('detail_property_post_date')?>:</strong> <?php echo $detail->create_date?></li>
+											<li><strong><?php echo $this->lang->line('detail_property_type')?>:</strong> <?php echo $detail->typename?></li>
+											<li><strong><?php echo $this->lang->line('detail_property_area')?>:</strong> <?php if($detail->housesize !="") echo $detail->housesize;else echo 0;?><sup>m2</sup></li>
+											<li><strong><?php echo $this->lang->line('detail_property_price')?>:</strong> <?php echo '$'.number_format($detail->price)?></li>
 											<li><address><i class="fa fa-map-marker"></i> <?php if($detail->locationname !="") echo $detail->locationname; else echo "";?></address></li>
 											<li class="<?php echo $bedroom?>"><i class="icons icon-bedroom"></i> <?php echo $detail->bedroom;?> Bedrooms</li>
 											<li class="<?php echo $bathroom?>"><i class="icons icon-bathroom"></i> <?php echo $detail->bathroom;?> Bathrooms</li>
@@ -226,7 +226,7 @@
 								</div>
 								<div class="tab-detail">
 									<div class="right" style="text-align: right;">
-										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning">Contact Me Back</a>
+										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning"><?php echo $this->lang->line('detail_property_contact_back')?></a>
 										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php?u=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=facebook')?>"
   										target="_blank" >
 										</a>
@@ -244,34 +244,34 @@
 								</div>
 							
 								<div class="tab-detail">
-									<h3>More Infomation</h3>
+									<h3><?php echo $this->lang->line('detail_property_more_info')?></h3>
 									<div class="panel-group" id="accordion">
 										<div class="panel panel-default pgl-panel">
 											<div class="panel-heading">
 												<h4 class="panel-title"> 
-													<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Additional Details</a> 
+													<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><?php echo $this->lang->line('detail_property_additional')?></a> 
 												</h4>
 											</div>
 											<div id="collapseOne" class="panel-collapse collapse in">
 												<div class="panel-body">
 													<ul>
-														<li class="<?php echo $direction?>"><strong>Direction:</strong> <?php echo $detail->direction;?></li>
-														<li class="<?php echo $housesize?>"><strong>Area Size:</strong> <?php echo $detail->housesize;?><sup>m2</sup></li>
-														<li class="<?php echo $bedroom?>"><strong>Bedrooms:</strong> <?php echo $detail->bedroom;?></li>
-														<li class="<?php echo $bathroom?>"><strong>Bathrooms:</strong> <?php echo $detail->bathroom;?></li>
-														<li class="<?php echo $furniture?>"><strong>Furniture:</strong> <?php echo $detail->furniture;?></li>
-														<li class="<?php echo $kitchen?>"><strong>Kitchen:</strong> <?php echo $detail->kitchen;?></li>
-														<li class="<?php echo $livingroom?>"><strong>Living Room:</strong> <?php echo $detail->livingroom;?></li>
-														<li class="<?php echo $dinning?>"><strong>Dining Room:</strong> <?php echo $detail->dinning_room;?></li>
-														<li class="<?php echo $air?>"><strong>Airconditioner:</strong> <?php echo $detail->air_conditional;?></li>
-														<li class="<?php echo $parking?>"><strong>Parking:</strong> <?php echo $detail->parking;?></li>
-														<li class="<?php echo $steamandsouna?>"><strong>Steam & Sauna:</strong> <?php echo $detail->steamandsouna;?></li>
-														<li class="<?php echo $garden?>"><strong>Garden:</strong> <?php echo $detail->garden;?></li>
-														<li class="<?php echo $balcony?>"><strong>Balcony:</strong> <?php echo $detail->balcony;?></li>
-														<li class="<?php echo $terrace?>"><strong>Terrace:</strong> <?php echo $detail->terrace;?></li>
-														<li class="<?php echo $elevator?>"><strong>Elevator:</strong> <?php echo $detail->elevator;?></li>
-														<li class="<?php echo $stairs?>"><strong>Stairs:</strong> <?php echo $detail->stairs;?></li>
-														<li class="<?php echo $gym?>"><strong>Gym:</strong> <?php echo $detail->gym?></li>
+														<li class="<?php echo $direction?>"><strong><?php echo $this->lang->line('detail_property_direction')?>:</strong> <?php echo $detail->direction;?></li>
+														<li class="<?php echo $housesize?>"><strong><?php echo $this->lang->line('detail_property_area_size')?>:</strong> <?php echo $detail->housesize;?><sup>m2</sup></li>
+														<li class="<?php echo $bedroom?>"><strong><?php echo $this->lang->line('detail_property_bedroom')?>:</strong> <?php echo $detail->bedroom;?></li>
+														<li class="<?php echo $bathroom?>"><strong><?php echo $this->lang->line('detail_property_bathroom')?>:</strong> <?php echo $detail->bathroom;?></li>
+														<li class="<?php echo $furniture?>"><strong><?php echo $this->lang->line('detail_property_funiture')?>:</strong> <?php echo $detail->furniture;?></li>
+														<li class="<?php echo $kitchen?>"><strong><?php echo $this->lang->line('detail_property_kitchen')?>:</strong> <?php echo $detail->kitchen;?></li>
+														<li class="<?php echo $livingroom?>"><strong><?php echo $this->lang->line('detail_property_living')?>:</strong> <?php echo $detail->livingroom;?></li>
+														<li class="<?php echo $dinning?>"><strong><?php echo $this->lang->line('detail_property_dinning')?>:</strong> <?php echo $detail->dinning_room;?></li>
+														<li class="<?php echo $air?>"><strong><?php echo $this->lang->line('detail_property_air')?>:</strong> <?php echo $detail->air_conditional;?></li>
+														<li class="<?php echo $parking?>"><strong><?php echo $this->lang->line('detail_property_parking')?>:</strong> <?php echo $detail->parking;?></li>
+														<li class="<?php echo $steamandsouna?>"><strong><?php echo $this->lang->line('detail_property_steam_sauna')?>:</strong> <?php echo $detail->steamandsouna;?></li>
+														<li class="<?php echo $garden?>"><strong><?php echo $this->lang->line('detail_property_garden')?>:</strong> <?php echo $detail->garden;?></li>
+														<li class="<?php echo $balcony?>"><strong><?php echo $this->lang->line('detail_property_balcony')?>:</strong> <?php echo $detail->balcony;?></li>
+														<li class="<?php echo $terrace?>"><strong><?php echo $this->lang->line('detail_property_terrace')?>:</strong> <?php echo $detail->terrace;?></li>
+														<li class="<?php echo $elevator?>"><strong><?php echo $this->lang->line('detail_property_elevator')?>:</strong> <?php echo $detail->elevator;?></li>
+														<li class="<?php echo $stairs?>"><strong><?php echo $this->lang->line('detail_property_stair')?>:</strong> <?php echo $detail->stairs;?></li>
+														<li class="<?php echo $gym?>"><strong><?php echo $this->lang->line('detail_property_gym')?>:</strong> <?php echo $detail->gym?></li>
 													</ul>
 												</div>
 											</div>
@@ -279,7 +279,7 @@
 										<div class="panel panel-default pgl-panel">
 											<div class="panel-heading">
 												<h4 class="panel-title"> 
-													<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Map</a> 
+													<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><?php echo $this->lang->line('detail_property_map')?></a> 
 												</h4>
 											</div>
 											<div id="collapseThree" class="panel-collapse collapse in">
@@ -291,7 +291,7 @@
 										<div class="panel panel-default pgl-panel">
 											<div class="panel-heading">
 												<h4 class="panel-title"> 
-													<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Video</a> 
+													<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><?php echo $this->lang->line('detail_property_video')?></a> 
 												</h4>
 											</div>
 											<div id="collapseTwo" class="panel-collapse collapse in">
@@ -355,15 +355,15 @@
 										<div class="panel panel-default pgl-panel">
 											<div class="panel-heading">
 												<h4 class="panel-title"> 
-													<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Contact us</a> 
+													<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><?php echo $this->lang->line('detail_project_contact')?></a> 
 												</h4>
 											</div>
 											<div id="collapseFive" class="panel-collapse collapse in">
 												<div class="panel-body">
 													<ul>
-														<li><i class="fa fa-map-marker"></i> Address: <?php echo $profile->address?></li>
-														<li><i class="fa fa-phone"></i> Mobile : <?php echo $profile->phone?><br></li>
-														<li><i class="fa fa-envelope-o"></i> Mail: <?php echo $profile->email?></li>
+														<li><i class="fa fa-map-marker"></i> <?php echo $this->lang->line('detail_property_address')?>: <?php echo $profile->address?></li>
+														<li><i class="fa fa-phone"></i> <?php echo $this->lang->line('detail_property_mobile')?> : <?php echo $profile->phone?><br></li>
+														<li><i class="fa fa-envelope-o"></i> <?php echo $this->lang->line('detail_property_mail')?>: <?php echo $profile->email?></li>
 													</ul>
 												</div>
 											</div>
@@ -375,7 +375,7 @@
 						
 						<!-- Begin Related properties -->
 						<section class="pgl-properties">
-							<h2 style="font-size: 1.571em;">Related Properties</h2>
+							<h2 style="font-size: 1.571em;"><?php echo $this->lang->line('detail_property_relative')?></h2>
 							<div class="row">
 								<div class="owl-carousel pgl-pro-slide" data-plugin-options='{"items": 3, "itemsDesktop": 3, "singleItem": false, "autoPlay": false, "pagination": false}'>
 									<?php 
@@ -454,19 +454,19 @@
 							        	<select id="id_listing_type" name="available" class="hide">
 								            <option value="0">Sale</option>
 								        </select>
-							            <input type="text" class="search-query" name="q" placeholder="Search..." />
+							            <input type="text" class="search-query" name="q" placeholder="<?php echo $this->lang->line('detail_project_search_placeholder')?>" />
 							            <input id="list_type" class="hide" name="list_type" value="lists"/>
 							            <select id="order-status" name="order" data-placeholder="Order" class="chosen-select order_bys hide">
 											<option value="Desc">Descending</option>
 											<option value="Asc">Ascending</option>
 										</select>
-							            <button type="submit" class="btn btn-primary btn-primarys">Search</button>
+							            <button type="submit" class="btn btn-primary btn-primarys"><?php echo $this->lang->line('detail_project_search')?></button>
 							        </div>
 							    </form>
 							</div>
 						</div>
 						<aside class="block pgl-agents pgl-bg-light">
-							<h3>Our Agents</h3>
+							<h3><?php echo $this->lang->line('detail_property_our_agent')?></h3>
 							<div class="owl-carousel pgl-pro-slide pgl-agent-item" data-plugin-options='{"items": false, "pagination": false, "autoHeight": true}'>
 
 								<div class="pgl-agent-item">
@@ -484,7 +484,7 @@
 											<i class="fa fa-phone"></i> : <?php echo $detail->phone;?><br>
 											<!-- <i class="fa fa-fax"></i> Fax : 1-800-666-8888<br> -->
 											<i class="fa fa-envelope-o"></i>: <?php echo $detail->email;?><br>
-											<i><a href="<?php echo site_url('site/site/search?available=0&agent='.$detail->userid.'&list_type=lists&order=Desc')?>">View all Property</a></i>
+											<i><a href="<?php echo site_url('site/site/search?available=0&agent='.$detail->userid.'&list_type=lists&order=Desc')?>"><?php echo $this->lang->line('detail_property_view_all')?></a></i>
 										</address>
 									</div>	
 								</div>
@@ -499,10 +499,10 @@
 						<div class="wizard row">
 							<div class="col-md-12">
 								<div class="col-md-12" style="border-radius: 3px;">
-									<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>
+									<a href="<?php echo site_url('site/site/postproperty')?>" class="current"><?php echo $this->lang->line('home_page_post')?></a>
 								</div>
 								<div class="col-md-12" style="border-radius: 3px;">
-									<a class="current" href="<?php echo site_url('site/site/join')?>">Join Us</a>
+									<a class="current" href="<?php echo site_url('site/site/join')?>"><?php echo $this->lang->line('home_page_join')?></a>
 								</div>
 							</div>
 						</div>
@@ -586,7 +586,7 @@
 			  aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
-			      <div class="modal-header text-center">
+			      <div class="modal-header">
 			        <h4 class="modal-title w-100 font-weight-bold">
 			        	<img src="<?php echo site_url('assets/img/logo.png')?>" width="100">
 			        </h4>
@@ -599,29 +599,29 @@
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm-6">
-									<input placeholder="Your Name" type="text" name="name" id="name" class="form-control txt">
+									<input placeholder="<?php echo $this->lang->line('detail_property_your_name')?>" type="text" name="name" id="name" class="form-control txt">
 								</div>
 								<div class="col-sm-6">
-									<input placeholder="Your Email" type="email" name="customer_mail" id="customer_mail" class="form-control txt" required>
+									<input placeholder="<?php echo $this->lang->line('detail_property_your_email')?>" type="email" name="customer_mail" id="customer_mail" class="form-control txt" required>
 								</div>
 								<div class="col-sm-6">
-									<input placeholder="Phone Number" type="text" name="phone" id="phone" class="form-control txt" required>
+									<input placeholder="<?php echo $this->lang->line('detail_property_your_phone')?>" type="text" name="phone" id="phone" class="form-control txt" required>
 								</div>
 								<div class="col-sm-6">
 									<select class="form-control txt-sel" name="in-status" required>
-										<option value="">Prefered Contact Mode</option>
-										<option value="1">Phone</option>
-										<option value="2">Email</option>
-										<option value="3">Both</option>
+										<option value=""><?php echo $this->lang->line('detail_property_mod')?></option>
+										<option value="1"><?php echo $this->lang->line('detail_property_mod_phone')?></option>
+										<option value="2"><?php echo $this->lang->line('detail_property_mod_email')?></option>
+										<option value="3"><?php echo $this->lang->line('detail_property_mod_both')?></option>
 									</select>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<textarea placeholder="Comments" rows="5" name="comments" id="comments" class="form-control" style="max-width: 100%;"></textarea>
+							<textarea placeholder="<?php echo $this->lang->line('detail_property_comment')?>" rows="5" name="comments" id="comments" class="form-control" style="max-width: 100%;"></textarea>
 						</div>
 						<div class="form-group">
-							<input type="submit" name="button" value="Contact Me Back" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 20%;">
+							<input type="submit" name="button" value="<?php echo $this->lang->line('detail_property_contact_back')?>" class="btn btn-primary min-wide" data-loading-text="Loading..." style="min-width: 20%;">
 						</div>
 					</form>
 

@@ -29,14 +29,14 @@
 								<div class="contact">
 									<div class="row">
 										<div class="col-sm-6">
-											<strong>Your address</strong>
+											<strong><?php echo $this->lang->line('contact_address')?></strong>
 											<address><?php echo $profile->address?></address>
 										</div>
 										<div class="col-sm-6">
 											<address>
-												<strong>Phone.</strong> <?php echo $profile->phone?><br>
-												<strong>Fax.</strong> <?php echo $profile->phone?><br>
-												<strong>Email.</strong> <?php echo $profile->email?>
+												<strong><?php echo $this->lang->line('contact_phone')?>.</strong> <?php echo $profile->phone?><br>
+												<strong><?php echo $this->lang->line('contact_fax')?>.</strong> <?php echo $profile->phone?><br>
+												<strong><?php echo $this->lang->line('contact_email')?>.</strong> <?php echo $profile->email?>
 											</address>
 										</div>
 										<div class="col-md-12 ">
@@ -142,10 +142,10 @@ if(isset($_POST['button']))
 	window.onload=function(){
       var map;
       function initialize() {
-          var myLatlng = new google.maps.LatLng(11.583903035180196, 104.90009201657483);
+          var myLatlng = new google.maps.LatLng(11.526230977882758, 104.96148778092572);
 
           var myOptions = {
-              zoom: 18,
+              zoom: 12,
               center: myLatlng,
               mapTypeId: google.maps.MapTypeId.ROADMAP
           };

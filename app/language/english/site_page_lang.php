@@ -224,11 +224,16 @@
   $lang['home_page_hot'] = "HOT PROPERTIES";
   $lang['home_page_recent'] = "RECENT PROPERTIES";
   $lang['home_page_project'] = "NEW PROJECT";
+  $lang['home_page_more'] = "More...";
   // Site Contact Us
   $lang['contact_name'] = "Name";
   $lang['contact_mail'] = "Email Address";
   $lang['contact_message'] = "Message";
   $lang['contact_submit'] = "Submit";
+  $lang['contact_address'] = "Address";
+  $lang['contact_phone'] = "Phone";
+  $lang['contact_fax'] = "Fax";
+  $lang['contact_email'] = "Email";
   // Site Help Us To find Property
   $lang['help_us_title'] = "HELP ME FIND PROPERTY";
   $lang['help_us_name'] = "Your Name";
@@ -270,4 +275,53 @@
   $lang['post_page_continue'] = "continue";
   $lang['post_page_who'] = "Who I am?";
   $lang['post_page_post'] = "Post";
+  // Site Project 
+  $lang['project_title'] = "NEW PROJECT";
+  // Site Detial Project Page 
+  $lang['detail_project_relative_property'] = "Properties in Project";
+  $lang['detail_project_search_placeholder'] = "Search...";
+  $lang['detail_project_search'] = "Search";
+  $lang['detail_project_contact'] = "Contact Us";
+  // Site Detial Property Page 
+  $lang['detail_property_our_agent'] = "Our Agent";
+  $lang['detail_property_view_all'] = "View All Properties";
+  $lang['detail_property_id'] = "PropertyID";
+  $lang['detail_property_post_date'] = "Post Date";
+  $lang['detail_property_type'] = "Type";
+  $lang['detail_property_area'] = "Area";
+  $lang['detail_property_price'] = "Price";
+  $lang['detail_property_contact_back'] = "Contact Me Back";
+  $lang['detail_property_more_info'] = "More Information";
+  $lang['detail_property_additional'] = "Additional Details";
+  $lang['detail_property_direction'] = "Direction";
+  $lang['detail_property_area_size'] = "Area Size";
+  $lang['detail_property_bedroom'] = "Bedrooms";
+  $lang['detail_property_bathroom'] = "Bathrooms";
+  $lang['detail_property_furniture'] = "Furniture";
+  $lang['detail_property_kitchen'] = "Kitchen";
+  $lang['detail_property_living'] = "Living Room";
+  $lang['detail_property_dinning'] = "Dining Room";
+  $lang['detail_property_air'] = "Airconditioner";
+  $lang['detail_property_parking'] = "Parking";
+  $lang['detail_property_steam_sauna'] = "Steam & Sauna";
+  $lang['detail_property_garden'] = "Garden";
+  $lang['detail_property_balcony'] = "Balcony";
+  $lang['detail_property_terrace'] = "Terrace";
+  $lang['detail_property_elevator'] = "Elevator";
+  $lang['detail_property_stair'] = "Stairs";
+  $lang['detail_property_gym'] = "Gym";
+  $lang['detail_property_map'] = "Map";
+  $lang['detail_property_video'] = "Video";
+  $lang['detail_property_address'] = "Address";
+  $lang['detail_property_mobile'] = "Mobile";
+  $lang['detail_property_mail'] = "Mail";
+  $lang['detail_property_relative'] = "Related Property";
+  $lang['detail_property_your_name'] = "Your Name";
+  $lang['detail_property_your_email'] = "Your Email";
+  $lang['detail_property_your_phone'] = "Phone Number";
+  $lang['detail_property_mod'] = "Prefered Contact Mode";
+  $lang['detail_property_mod_phone'] = "Phone";
+  $lang['detail_property_mod_email'] = "Email";
+  $lang['detail_property_mod_both'] = "Both";
+  $lang['detail_property_comment'] = "Comments";
 ?>
