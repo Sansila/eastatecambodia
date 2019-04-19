@@ -236,7 +236,7 @@
 										<a class="fass fa fa-whatsapp mobile" href="whatsapp://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=whatsapp')?>" data-action="share/whatsapp/share">
 											<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
 										</a>
-										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=telegram')?>&text=<?php echo $detail->property_name?>" class="fass fa fa-paper-plane"></a>
+										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=telegram')?>" class="fass fa fa-paper-plane"></a>
 										<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=line')?>" class="fas fa-line">
 											<img src="<?php echo site_url('assets/img/line.png')?>">
 										</a>
@@ -561,7 +561,7 @@
 												</div>
 												<div class="amenities clearfix" style="height: 40px;">
 													<ul class="pull-left">
-														<li><strong>Area:</strong> <?php if($hot->housesize !="") echo $hot->housesize; else echo 0;?><sup>m2</sup></li>
+														<li><strong><?php echo $this->lang->line('detail_property_area')?>:</strong> <?php if($hot->housesize !="") echo $hot->housesize; else echo 0;?><sup>m2</sup></li>
 													</ul>
 													<ul class="pull-right">
 														<li class="<?php if($hot->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $hot->bedroom; ?></li>

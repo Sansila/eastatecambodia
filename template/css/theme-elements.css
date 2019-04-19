@@ -1,11 +1,4 @@
 
-@font-face {
-    font-family: portal;
-    src: url(../fonts/portal.eot);
-    src: url(../fonts/portal.eot#iefix) format("embedded-opentype"), url(../fonts/portal.ttf) format("truetype"), url(../fonts/portal.woff) format("woff"), url(../fonts/portal.svg#portal) format("svg");
-    font-weight: 400;
-    font-style: normal
-}
 /* line 5, ../sass/theme-elements.scss */
 h1, h2, h3, h4, h5, h6 {
   color: #333;
@@ -30,7 +23,7 @@ h1, h2 {
 
 /* line 22, ../sass/theme-elements.scss */
 h3 {
-  font-size: 1.285em;
+  font-size: 1em;
   font-weight: 400;
 }
 

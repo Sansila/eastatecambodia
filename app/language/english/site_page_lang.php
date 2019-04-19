@@ -325,4 +325,7 @@
   $lang['detail_property_mod_email'] = "Email";
   $lang['detail_property_mod_both'] = "Both";
   $lang['detail_property_comment'] = "Comments";
+  // Pagination Page
+  $lang['pagination_next'] = "Next";
+  $lang['pagination_prev'] = "Prev";
 ?>

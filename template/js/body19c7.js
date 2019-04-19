@@ -28527,7 +28527,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
             setupLocations: function(el, options) {
                 var origin   = window.location.origin;
                 if ($.ajax({
-                    url: origin+"/eastatecambodia/site/site/location",
+                    url: origin+"/site/site/location",
                     type: "GET",
                     dataType: "json",
                     success: function(locations) {
@@ -28649,7 +28649,7 @@ if ("function" != typeof gettext) var gettext = function(str) {
                         load: function(h, g) {
                             var origin   = window.location.origin;
                             $.ajax({
-                                url:origin+"/eastatecambodia/site/site/getAutoLocation",
+                                url:origin+"/site/site/getAutoLocation",
                                 type: "GET",
                                 headers: {
                                     Accept: "application/json",

@@ -315,7 +315,7 @@
     $lang['detail_property_address'] = "អាស័យដ្ឋាន";
     $lang['detail_property_mobile'] = "ទូរស័ព្ទ";
     $lang['detail_property_mail'] = "អ៊ីម៉ែល";
-    $lang['detail_property_relative'] = "អចលនទ្រព្យដែលទាក់ទង";
+    $lang['detail_property_relative'] = "អចលនទ្រព្យផ្សេងៗទៀត";
     $lang['detail_property_your_name'] = "ឈ្មោះ​របស់​អ្នក";
     $lang['detail_property_your_email'] = "អ៊ីមែល​របស់​អ្នក";
     $lang['detail_property_your_phone'] = "លេខទូរស័ព្ទ";
@@ -324,4 +324,7 @@
     $lang['detail_property_mod_email'] = "អ៊ីម៉ែល";
     $lang['detail_property_mod_both'] = "ទាំងពីរ";
     $lang['detail_property_comment'] = "មតិយោបល់";
+    // Pagination Page
+  $lang['pagination_next'] = "បន្ទាប់";
+  $lang['pagination_prev'] = "ត្រលប់";
 ?>

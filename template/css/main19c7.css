@@ -2877,6 +2877,9 @@ h6 small {
         font-size: 1rem
     }
 }*/
+.property-thumb-info-content h3 a{
+    line-height: 19px !important;
+}
 
 a {
     color: #88c940;
