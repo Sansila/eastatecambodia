@@ -164,11 +164,11 @@
 											<span class="label forrent <?php if($img->p_type == 0) echo "hide"; else echo "";?>">
 												<?php 
 													if($img->p_type == 1)
-														echo "Sale";
+														echo $this->lang->line('search_sale');
 													if($img->p_type == 2)
-														echo "Rent";
+														echo $this->lang->line('search_rent');
 													if($img->p_type == 3)
-														echo "Rent & Sale";
+														echo $this->lang->line('search_sale_rent');
 												?>
 											</span>
 											<span class="label price"><?php echo 'P'.$img->pid;?></span>
@@ -411,11 +411,11 @@
 													<span class="label forrent <?php if($related->p_type !=0) echo ""; else echo "hide";?>">
 														<?php 
 															if($related->p_type == 1)
-																echo "Sale";
+																echo $this->lang->line('search_sale');
 															if($related->p_type == 2)
-																echo "Rent";
+																echo $this->lang->line('search_rent');
 															if($related->p_type == 3)
-																echo "Rent & Sale";	
+																echo $this->lang->line('search_sale_rent');	
 														?>
 													</span>
 												</span>
@@ -426,7 +426,7 @@
 												</div>
 												<div class="amenities clearfix">
 													<ul class="pull-left">
-														<li><strong>Area:</strong> <?php if($related->housesize !="") echo $related->housesize; else echo 0;?><sup>m2</sup></li>
+														<li><strong><?php echo $this->lang->line('detail_property_area')?>:</strong> <?php if($related->housesize !="") echo $related->housesize; else echo 0;?><sup>m2</sup></li>
 													</ul>
 													<ul class="pull-right">
 														<li class="<?php if($related->bedroom == "" ) echo "hide";?>"><i class="icons icon-bedroom"></i> <?php echo $related->bedroom;?></li>
@@ -478,7 +478,7 @@
 									</div>
 									<div class="pgl-agent-info">
 										<!-- <small>NO.1</small> -->
-										<h4><a href="#"><?php echo $detail->user_name?></a></h4>
+										<h4><a href="#"><?php echo $detail->first_name.' '.$detail->last_name?></a></h4>
 										<address>
 											<!-- <i class="fa fa-map-marker"></i> Office : 1-800-666-8888<br> -->
 											<i class="fa fa-phone"></i> : <?php echo $detail->phone;?><br>
@@ -545,11 +545,11 @@
 														<span class="label forrent <?php if($hot->p_type !=0) echo ""; else echo "hide";?>">
 															<?php 
 																if($hot->p_type == 1)
-																	echo "Sale";
+																	echo $this->lang->line('search_sale');
 																if($hot->p_type == 2)
-																	echo "Rent";
+																	echo $this->lang->line('search_rent');
 																if($hot->p_type == 3)
-																	echo "Rent & Sale";	
+																	echo $this->lang->line('search_sale_rent');	
 															?>
 														</span>
 														<span class="label price"><?php echo 'P'.$hot->pid; ?></span>

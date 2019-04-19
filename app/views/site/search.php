@@ -1207,11 +1207,11 @@
 											<span class="label forrent <?php if($list->p_type != 0) echo ""; else echo "hide";?>">
 												<?php 
 													if($list->p_type == 1)
-														echo "Sale";
+														echo $this->lang->line('search_sale');
 													if($list->p_type == 2)
-														echo "Rent";
+														echo $this->lang->line('search_rent');
 													if($list->p_type == 3)
-														echo "Rent & Sale";	
+														echo $this->lang->line('search_sale_rent');
 												?>
 											</span>
 											<span class="label price"><?php echo 'P'.$list->pid ?></span>
@@ -1280,11 +1280,11 @@
 												<span class="label forrent <?php if($grid->p_type !=0) echo ""; else echo "hide";?>">
 													<?php 
 														if($grid->p_type == 1)
-															echo "Sale";
+															echo $this->lang->line('search_sale');
 														if($grid->p_type == 2)
-															echo "Rent";
+															echo $this->lang->line('search_rent');
 														if($grid->p_type == 3)
-															echo "Rent & Sale";	
+															echo $this->lang->line('search_sale_rent');
 													?>
 												</span>
 												<span class="label price"><?php echo 'P'.$grid->pid ?></span>

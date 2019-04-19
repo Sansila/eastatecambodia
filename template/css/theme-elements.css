@@ -1,3 +1,11 @@
+
+@font-face {
+    font-family: portal;
+    src: url(../fonts/portal.eot);
+    src: url(../fonts/portal.eot#iefix) format("embedded-opentype"), url(../fonts/portal.ttf) format("truetype"), url(../fonts/portal.woff) format("woff"), url(../fonts/portal.svg#portal) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
 /* line 5, ../sass/theme-elements.scss */
 h1, h2, h3, h4, h5, h6 {
   color: #333;
@@ -78,6 +86,12 @@ blockquote footer:before {
   display: none;
 }
 
+.nav>li>a.hide-from-destop{
+    display: none;
+    position: relative;
+    color: white;
+    text-transform: uppercase;
+}
 /* icons */
 /* line 71, ../sass/theme-elements.scss */
 .icons {

@@ -225,6 +225,7 @@
   $lang['home_page_recent'] = "RECENT PROPERTIES";
   $lang['home_page_project'] = "NEW PROJECT";
   $lang['home_page_more'] = "More...";
+  $lang['home_page_support'] = "Need Support?";
   // Site Contact Us
   $lang['contact_name'] = "Name";
   $lang['contact_mail'] = "Email Address";

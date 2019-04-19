@@ -216,7 +216,7 @@
     $lang['search_btn_search'] = "ស្វែងរក";
     $lang['search_btn_search_map'] = "ស្វែងរកលើផែនទី";
     $lang['search_text_search'] = "សូមវាយបញ្ចូល, ជ្រើសរើសទីតាំង ឬទីកន្លែងណាមួយ";
-    $lang['search_looking_for'] = "កំពុងរកមើល";
+    $lang['search_looking_for'] = "រកមើល";
     // Site Home Page
     $lang['home_page_post'] = " បញ្ចូលអចលនទ្រព្យថ្មី";
     $lang['home_page_join'] = "ចូលរួមជាមួយយើង";
@@ -224,6 +224,7 @@
     $lang['home_page_recent'] = "អចលនទ្រព្យថ្មី ៗ";
     $lang['home_page_project'] = "គម្រោង​ថ្មី";
     $lang['home_page_more'] = "ជាច្រើនទៀត...";
+    $lang['home_page_support'] = "ត្រូវការជំនួយ?";
     // Site Contact Us
     $lang['contact_name'] = "ឈ្មោះរបស់អ្នក";
     $lang['contact_mail'] = "អាស័យដ្ឋានអ៊ីម៉េល";

@@ -296,6 +296,9 @@
   }
 }
 @media (max-width: 568px) {
+  .hide-from-destop{
+    display: block !important;
+  }
   /* line 24, ../sass/theme.scss */
   .logo {
     background: #d84949;
@@ -338,6 +341,9 @@
   }
 }
 @media (max-width: 480px) {
+  .hide-from-destop{
+    display: block !important;
+  }
   /* line 24, ../sass/theme.scss */
   .logo {
     background: #d84949;
@@ -410,6 +416,9 @@
   }
 }
 @media (max-width: 360px) {
+  .hide-from-destop{
+    display: block !important;
+  }
   /* line 24, ../sass/theme.scss */
   .logo {
     background: #d84949;

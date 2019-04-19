@@ -41,7 +41,7 @@
 	<!-- Google Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
-
+	
 	<!-- Bootstrap -->
 	<link href="<?php echo site_url('template')?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -100,8 +100,19 @@
 			<header>
 				<div id="top">
 					<div class="container">
-						<p class="pull-left text-note hidden-xs"><i class="fa fa-phone"></i> Need Support? <?php echo $profile->phone?></p>
+						<p class="pull-left text-note hidden-xs"><i class="fa fa-phone"></i> <?php echo $this->lang->line('home_page_support').' : '.$profile->phone?></p>
 						<ul class="nav nav-pills nav-top navbar-right">
+							<li>
+								<a class="hide-from-destop">
+									<i class="fa fa-phone"></i>
+									<?php 
+										//echo substr($profile->phone,0,14);
+										$tokens = explode(' | ', $profile->phone);      // split string on :
+										array_pop($tokens);                   // get rid of last element
+										echo $newString = implode(' | ', $tokens);
+									?>
+								</a>
+							</li>
 							<li><a target="_blank" href="<?php echo site_url('/login')?>"><i class="fa fa-user"></i></a></li>
 							<!-- <li><a target="_blank" href="<?php //echo $profile->email?>" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Email"><i class="fa fa-envelope-o"></i></a></li> -->
 							<li>

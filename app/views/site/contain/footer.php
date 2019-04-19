@@ -24,8 +24,8 @@
 							<h2><?php echo $this->lang->line('footer_contact')?></h2>
 							<p><?php echo $profile->address?></p>
 							<address>
-								<i class="fa fa-phone"></i> Mobile : <?php echo $profile->phone?><br>
-								<i class="fa fa-envelope-o"></i> Mail: <?php echo $profile->email?><!-- <a href="mailto:pixelgeklab@gmail.com">Pixelgeklab@gmail.com</a> -->
+								<i class="fa fa-phone"></i> <?php echo $this->lang->line('contact_phone')?> : <?php echo $profile->phone?><br>
+								<i class="fa fa-envelope-o"></i> <?php echo $this->lang->line('contact_email')?>: <?php echo $profile->email?><!-- <a href="mailto:pixelgeklab@gmail.com">Pixelgeklab@gmail.com</a> -->
 							</address>
 						</div>
 						<div class="col-sm-2 hide">

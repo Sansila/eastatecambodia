@@ -1208,11 +1208,11 @@
 											<span class="label forrent <?php if($list->p_type != 0) echo ""; else echo "hide";?>">
 												<?php 
 													if($list->p_type == 1)
-														echo "Sale";
+														echo $this->lang->line('search_sale');
 													if($list->p_type == 2)
-														echo "Rent";
+														echo $this->lang->line('search_rent');
 													if($list->p_type == 3)
-														echo "Rent & Sale";	
+														echo $this->lang->line('search_sale_rent');
 												?>
 											</span>
 											<span class="label price"><?php echo 'P'.$list->pid; ?></span>
@@ -1230,7 +1230,7 @@
 										<div class="amenities clearfix">
 											<ul class="pull-left">
 												<li><strong><?php echo $this->lang->line('search_page_sort_area')?>:</strong> <?php if($list->housesize !="") echo $list->housesize; else echo 0;?><sup>m2</sup></li>
-												<li><strong>Post Date:</strong> <?php if($list->create_date != null) echo $list->create_date; else echo "";?></li>
+												<li><strong><?php echo $this->lang->line('search_page_post_date');?>:</strong> <?php if($list->create_date != null) echo $list->create_date; else echo "";?></li>
 											</ul>
 											<ul class="pull-right">
 												<li class="<?php if($list->bedroom == "") echo "hide"; ?>"><i class="icons icon-bedroom"></i> <?php echo $list->bedroom;?></li>
@@ -1281,11 +1281,11 @@
 												<span class="label forrent <?php if($grid->p_type !=0) echo ""; else echo "hide";?>">
 													<?php 
 														if($grid->p_type == 1)
-															echo "Sale";
+															echo $this->lang->line('search_sale');
 														if($grid->p_type == 2)
-															echo "Rent";
+															echo $this->lang->line('search_rent');
 														if($grid->p_type == 3)
-															echo "Rent & Sale";	
+															echo $this->lang->line('search_sale_rent');	
 													?>
 												</span>
 												<span class="label price"><?php echo 'P'.$grid->pid ?></span>

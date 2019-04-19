@@ -1,9 +1,19 @@
 @charset "UTF-8";
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@font-face {
+    font-family: KhmerOS;
+    /*src: url(fonts/portal.eot);
+    src: url(fonts/portal.eot#iefix) format("embedded-opentype"), url(fonts/portal.ttf) format("truetype"), url(fonts/portal.woff) format("woff"), url(fonts/portal.svg#portal) format("svg");*/
+    src: url(../fonts/KhmerOS.ttf);
+    src: url(../fonts/KhmerOS.ttf) format("embedded-opentype"), 
+         url(../fonts/KhmerOS.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal
+}
 
 html {
-    font-family: sans-serif;
+    font-family: KhmerOS;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
@@ -222,7 +232,7 @@ html {
 body {
     padding: 0;
     margin: 0;
-    font-family: museo-sans, sans-serif;
+    font-family: KhmerOS, sans-serif;
     line-height: 1.5;
     color: #515762;
     background: #f5f5f5;
@@ -3256,7 +3266,8 @@ p+.stat {
     display: block;
     width: 100%;
     margin-left: 0;
-    margin-right: 0
+    margin-right: 0;
+    font-size: .9125rem;
 }
 
 .button.primary {
@@ -3515,8 +3526,7 @@ textarea {
     margin: 0 0 16px;
     margin: 0 0 1rem;
     font-family: inherit;
-    font-size: 16px;
-    font-size: 1rem;
+    font-size: .9125rem !important;
     color: #000;
     background-color: #fff;
     box-shadow: none;
@@ -13325,7 +13335,8 @@ input.location-non-autocomplete {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: calc(100% - 16px)
+    width: calc(100% - 16px);
+    font-size: .9125rem;
 }
 
 .search-field .text-label-selected {
@@ -13334,7 +13345,8 @@ input.location-non-autocomplete {
     right: 45px;
     right: 2.8125rem;
     text-transform: capitalize;
-    font-weight: 500
+    font-weight: 500;
+    font-size: .9125rem;
 }
 
 @media screen and (min-width:64em) {
@@ -13351,7 +13363,7 @@ input.location-non-autocomplete {
     left: 14px;
     left: .875rem;
     font-size: 13px;
-    font-size: .8125rem;
+    font-size: .6125rem;
     font-style: normal
 }
 
@@ -13537,7 +13549,7 @@ input.location-non-autocomplete {
     .area-list div,
     .price-list div,
     .range-list div {
-        font-size: 1rem
+        font-size: .9125rem;
     }
 }
 
