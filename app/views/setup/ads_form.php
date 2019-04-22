@@ -89,15 +89,15 @@
 
                                             if($i == 1)
                                             {
-                                                $bannerlog = 'Banner Top';
+                                                $bannerlog = 'Fisrt';
                                             }elseif($i == 2)
                                             {
-                                                $bannerlog = 'Banner Left';
+                                                $bannerlog = 'Second';
                                             }elseif($i == 3)
                                             {
-                                                $bannerlog = 'Banner Bottom';
+                                                $bannerlog = 'Third';
                                             }elseif ($i == 4) {
-                                                $bannerlog = 'Banner Right';
+                                                $bannerlog = 'Four';
                                             } 
                                             echo '<option value="'.$i.'" '.$se.' >'.$bannerlog.'</option>';
                                         }?>
@@ -111,6 +111,26 @@
                             <div class=" col-lg-3"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="orders" value='<?php echo isset($data->orders)?$data->orders:""; ?>' id="orders">
+                                </div>                   
+                            </div>
+                            <label class='col-lg-2 control-label'>page</label>
+                            <div class=" col-lg-3"> 
+                                <div class="col-md-12">
+                                    <select id='page_id' class='form-control'>
+                                        <option value='0'>----select---</option>
+                                        <?php 
+                                            $sel = ""; $sel1 = ""; $sel2= "";
+                                            if($data->page == "home")
+                                                $sel = "selected";
+                                            if($data->page == "detail")
+                                                $sel1 = "selected";
+                                            if($data->page == "map")
+                                                $sel2 = "selected";
+                                        ?>
+                                        <option <?php echo $sel;?> value='home'>Home Page</option>
+                                        <option <?php echo $sel1;?> value='detail'>Details Page</option>
+                                        <option <?php echo $sel2;?> value='map'>Map Page</option>
+                                    </select>
                                 </div>                   
                             </div>
                         </div>
@@ -249,7 +269,8 @@
                 link:$("#link").val(),
                 location:$("#location_id").val(),
                 orders:$("#orders").val(),
-                is_active:is_active
+                is_active:is_active,
+                page_id: $('#page_id').val()
             },
             success:function(data) {
                 // $(".result_text").html(data.msg);

@@ -380,7 +380,7 @@ h3{
     series3.dataFields.categoryY = "country";
     series3.dataFields.value = "value";
     series3.name = name;
-    series3.columns.template.tooltipText = "{name}: [bold]{value}";
+    series3.columns.template.tooltipText = "{country}: [bold]{value}";
     series3.columns.template.height = am4core.percent(100);
     series3.sequencedInterpolation = true;
 
@@ -392,7 +392,7 @@ h3{
     valueLabel.label.truncate = false;
   }
 
-  createSeries("value", "value");
+  createSeries("value", "country");
 
 
   var chart4 = am4core.create("chartdivcat", am4charts.PieChart);

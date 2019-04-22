@@ -126,6 +126,9 @@
 			    -webkit-line-clamp: 2 !important;
 			    -webkit-box-orient: vertical;
 			}
+			.img-responsive{
+				width: 100% !important;
+			}
 		</style>
 
 		<!-- Begin Main -->
@@ -443,7 +446,6 @@
 							</div>
 						</section>
 						<!-- End Related properties -->
-						
 					</div>
 					<div class="col-md-3 sidebar">
 						<!-- Begin Our Agents -->
@@ -576,7 +578,9 @@
 								</div>
 							</div>
 						<!-- End Advanced Search -->
-						
+					</div>
+					<div class="col-md-12" style="margin-bottom: 30px;">
+						<img class="img-responsive rendom">
 					</div>
 				</div>	
 			</div>
@@ -634,7 +638,9 @@
 			  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
 			    Modal Login Form</a>
 			</div> -->
-			
+			<?php 
+				$page = "detail";
+			?>
 		</div>
 		<!-- End Main -->
 
@@ -801,5 +807,26 @@
           });
 	});
 
-
+    $.ajax({ 
+      	type: 'GET', 
+      	url:"<?php echo site_url('site/site/getAdvertise/'.$page)?>",
+      	dataType: 'json',
+      	success: function (data) { 
+      		ramdomimage(data);
+      		setInterval(function() {
+			    ramdomimage(data);
+			},5000);
+      	}
+  	});
+  	function ramdomimage(data)
+  	{
+  		var image = [];
+      	$.each(data, function(i, item) {
+		    image.push(item.img);
+		});
+		console.log(image);
+		var size = image.length;
+		var x = Math.floor(size*Math.random());
+      	$('.rendom').attr('src',image[x]);
+  	}
 </script>

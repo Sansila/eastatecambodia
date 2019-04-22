@@ -56,7 +56,7 @@
         }
         function getPropertyName($id)
         {
-            $sql = $this->db->query("SELECT * FROM tblproperty where pid = $id ")->row();
+            $sql = $this->db->query("SELECT * FROM tblproperty where pid = $id")->row();
             return $sql->property_name;
         }
     }

@@ -719,7 +719,9 @@ class Property extends CI_Controller {
 									FROM tblvisitor 
 									WHERE month(date_create) = month('$date')
 									AND pid = $id
-									GROUP BY date(date_create) ")->result();
+									GROUP BY date(date_create) 
+									ORDER BY income DESC
+									")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($perdate);
 	}
@@ -738,7 +740,9 @@ class Property extends CI_Controller {
 	{
 		$perdate = $this->db->query("SELECT DATE_FORMAT(date_create,'%y-%m') as 'year',count(*) as 'income'
 									FROM tblvisitor WHERE pid = $id
-									GROUP BY YEAR(date_create), MONTH(date_create)")->result();
+									GROUP BY YEAR(date_create), MONTH(date_create)
+									ORDER BY income DESC
+									")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($perdate);
 	}

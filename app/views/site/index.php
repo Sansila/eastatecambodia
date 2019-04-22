@@ -34,6 +34,9 @@
 			    border: 1px solid #d84949;
 			    float: right;
 			}
+			.img-responsive{
+				width: 100% !important;
+			}
 		</style>
 		<!-- Begin Main -->
 		<div role="main" class="main">
@@ -1117,6 +1120,9 @@
 								<?php 
 									}
 								?>
+								<div class="col-xs-12" style="margin-bottom: 25px;">
+									<img class="img-responsive rendom">
+								</div>
 						</div>
 					</div>
 
@@ -1195,10 +1201,12 @@
 									}
 								?>
 						</div>
-
 						<?php 
 							echo $this->pagination->create_links();
 						?>
+						<div style="margin-bottom: 25px;">
+							<img class="img-responsive rendom">
+						</div>
 					</div>
 
 					<?php 
@@ -1282,13 +1290,22 @@
 									}
 								?>
 								<div class="col-sm-10"></div>
-								<div class="col-sm-2"><a href="<?php echo site_url('site/site/listproject')?>" type="button" class="btn btn-success btn-project-more"><?php echo $this->lang->line('home_page_more')?></a></div>
+								<div class="col-sm-2">
+									<a href="<?php echo site_url('site/site/listproject')?>" type="button" class="btn btn-success btn-project-more" style="margin-bottom: 25px;">
+										<?php echo $this->lang->line('home_page_more')?>
+									</a>
+								</div>
+								<div class="col-sm-12">
+									<img class="img-responsive rendom">
+								</div>
 						</div>
 					</div>
 
 			</section>
 			<!-- End Properties -->
-
+			<?php 
+				$page = "home";
+			?>
 		</div>
 		<!-- End Main -->
 		<script type="text/javascript">
@@ -1304,5 +1321,27 @@
 				$('#id_q').val(txtsearch);
 				$('#hidden-search-form').submit();
 			});
+			$.ajax({ 
+		      	type: 'GET', 
+		      	url:"<?php echo site_url('site/site/getAdvertise/'.$page)?>",
+		      	dataType: 'json',
+		      	success: function (data) { 
+		      		ramdomimage(data);
+		      		setInterval(function() {
+					    ramdomimage(data);
+					},5000);
+		      	}
+		  	});
+		  	function ramdomimage(data)
+		  	{
+		  		var image = [];
+	          	$.each(data, function(i, item) {
+				    image.push(item.img);
+				});
+				console.log(image);
+				var size = image.length;
+				var x = Math.floor(size*Math.random());
+	          	$('.rendom').attr('src',image[x]);
+		  	}
 		</script>
 		

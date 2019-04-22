@@ -1585,5 +1585,15 @@ class Site extends CI_Controller {
         $this->load->view('site/listproject',$data);
         $this->load->view('site/contain/footer',$datas);
     }
+    function getAdvertise($page)
+    {
+        $query = $this->db->query("SELECT * FROM tblbanner where is_active = 1 AND page = '$page' ")->result();
+        $arr = array();
+        foreach ($query as $ad) {
+            $arr[] = array('img'=>site_url('assets/upload/banner/'.$ad->banner_id.'.png'));
+        }
+        header("Content-type:text/x-json");
+        echo json_encode($arr);
+    }
 }
 ?>

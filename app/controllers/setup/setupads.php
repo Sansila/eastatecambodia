@@ -64,11 +64,14 @@ class SetupAds extends CI_Controller {
 		$location=$this->input->post('location');
 		$orders=$this->input->post('orders');
 		$is_active=$this->input->post('is_active');
+		$pageid=$this->input->post('page_id');
 		$data=array('title'=>$banner_title,
 					'link'=>$link,
 					'banner_location'=>$location,
 					'orders'=>$orders,
-					'is_active'=>$is_active);
+					'is_active'=>$is_active,
+					'page'=>$pageid
+					);
 		$count=$this->validate($banner_id,$banner_title);
 		if($count>0){
 			$msg='Banner name hase already exist....!';
