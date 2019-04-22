@@ -84,6 +84,9 @@
 			    -webkit-line-clamp: 2 !important;
 			    -webkit-box-orient: vertical;
 			}
+			.img-responsive{
+				width: 100% !important;
+			}
 		</style>
 
 		<!-- Begin Main -->
@@ -286,15 +289,23 @@
 						</div>
 						<!-- End Our Agents -->
 					</div>
+					<div class="col-md-12" style="margin-bottom: 30px;">
+						<img class="img-responsive rendom">
+					</div>
 				</div>
 			</div>
 		</div>
+		
+		<?php 
+			$page = "detail";
+		?>
 		<!-- End Main -->
 <script type="text/javascript">
+	
     //get device data
  //    $.getJSON('https://ipapi.co/json/', function(data) {
 	//   	//console.log(JSON.stringify(data, null, 2));
-	//   	var url="<?php echo site_url('site/site/saveipaddress')?>";
+	//   	var url="<?php //echo site_url('site/site/saveipaddress')?>";
 	// 	$.ajax({
  //            url:url,
  //            type:"POST",
@@ -319,10 +330,33 @@
 	// 			"languages": data['languages'],
 	// 			"asn": data['asn'],
 	// 			"org": data['org'],
-	// 			'pid': <?php echo $detail->pid?>
+	// 			'pid': <?php //echo $detail->pid?>
  //            },
  //            success:function(data) {
  //            }
  //          });
 	// });
+
+	$.ajax({ 
+      	type: 'GET', 
+      	url:"<?php echo site_url('site/site/getAdvertise/'.$page)?>",
+      	dataType: 'json',
+      	success: function (data) { 
+      		ramdomimage(data);
+      		setInterval(function() {
+			    ramdomimage(data);
+			},5000);
+      	}
+  	});
+  	function ramdomimage(data)
+  	{
+  		var image = [];
+      	$.each(data, function(i, item) {
+		    image.push(item.img);
+		});
+		console.log(image);
+		var size = image.length;
+		var x = Math.floor(size*Math.random());
+      	$('.rendom').attr('src',image[x]);
+  	}
 </script>

@@ -1370,6 +1370,9 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
     }
+    .img-responsive{
+        width: 100% !important;
+    }
 </style>
 <div role="main" class="pgl-properties pgl-bg-grey">
 	<div class="container">
@@ -1409,8 +1412,14 @@
 			<div id="map"></div>
 		</div>
 		<div style="margin-top: 30px"></div>
+        <div style="margin-bottom: 30px;">
+            <img class="img-responsive rendom">
+        </div>
 	</div>
 </div>
+<?php 
+    $page = "detail";
+?>
 <script>
 (function($){	
     $('.btn-search-map').click(function(){
@@ -1456,4 +1465,27 @@
 
 	createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,category,firstprice,lastprice,available,order,sort,list_type,floorarea_first,floorarea_last,floorlevel_first,floorlevel_last,floorlevel_first,floorlevel_last,landarea_first,landarea_last,land_title,bedroom_first,bedroom_last,bathroom_first,bathroom_last,park_first,park_last,features,return_feature,type,agent);
 })(jQuery);
+
+$.ajax({ 
+        type: 'GET', 
+        url:"<?php echo site_url('site/site/getAdvertise/'.$page)?>",
+        dataType: 'json',
+        success: function (data) { 
+            ramdomimage(data);
+            setInterval(function() {
+                ramdomimage(data);
+            },5000);
+        }
+    });
+    function ramdomimage(data)
+    {
+        var image = [];
+        $.each(data, function(i, item) {
+            image.push(item.img);
+        });
+        console.log(image);
+        var size = image.length;
+        var x = Math.floor(size*Math.random());
+        $('.rendom').attr('src',image[x]);
+    }
 </script>
