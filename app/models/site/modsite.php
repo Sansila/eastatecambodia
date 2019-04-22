@@ -338,11 +338,6 @@ class Modsite extends CI_Model {
                                 LIMIT 20 ")->result();
         return $query;
     }
-    function getAdvertise($page)
-    {
-        $sql = $this->db->query("SELECT * FROM tblbanner WHERE is_active = 1 AND page = '$page' ")->result();
-        return $sql;
-    }
 }
 
 

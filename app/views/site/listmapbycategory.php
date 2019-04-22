@@ -1219,7 +1219,7 @@
     </div>
 </div>
 <?php 
-    $page = "detail";
+    $page = "map";
 ?>
 <script>
 (function($){	
