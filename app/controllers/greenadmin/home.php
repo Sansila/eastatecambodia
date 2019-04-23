@@ -550,4 +550,37 @@ class Home extends CI_Controller {
 		header("Content-type:text/x-json");
 		echo json_encode($data);
 	}
+	function getViewByChannel($gdate)
+	{
+		$where = ""; $date = date('Y-m-d');
+		if($gdate == 1)
+			$where.= "tblvisitor.date_create = $date";
+		else{
+			$where.= "(tblvisitor.date_create >= date_sub(now(), interval $gdate DAY))";
+		}
+		$sql = $this->db->query("SELECT
+									    tblvisitor.view_from AS 'year',
+									    COUNT(*) AS income
+									FROM
+									    tblproperty
+									INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+									WHERE
+									    {$where}
+									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line') 
+									    AND tblproperty.p_status = 1
+									GROUP BY
+									    tblvisitor.view_from
+									ORDER BY
+										income DESC
+								")->result();
+		$data = array();
+		$i = 1;
+		foreach ($sql as $row) {
+			$data[] = array('country' => $row->year,
+							'value' => $row->income);
+			$i++;
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
 }
