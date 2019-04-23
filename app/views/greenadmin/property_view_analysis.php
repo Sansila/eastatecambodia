@@ -455,7 +455,7 @@ function getchannel(gdate)
 
     $.ajax({ 
         type: 'GET', 
-        url:"<?php echo site_url('greenadmin/home/getViewByChannel/')?>"+gdate,
+        url:"<?php echo site_url('greenadmin/home/getViewByChannel')?>/"+gdate,
         dataType: 'json',
         success: function (data) { 
             chart5.data = data;

@@ -554,7 +554,7 @@ class Home extends CI_Controller {
 	{
 		$where = ""; $date = date('Y-m-d');
 		if($gdate == 1)
-			$where.= "tblvisitor.date_create = $date";
+			$where.= "tblvisitor.date_create = '$date' ";
 		else{
 			$where.= "(tblvisitor.date_create >= date_sub(now(), interval $gdate DAY))";
 		}
