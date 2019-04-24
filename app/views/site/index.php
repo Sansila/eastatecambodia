@@ -1121,7 +1121,9 @@
 									}
 								?>
 								<div class="col-xs-12" style="margin-bottom: 25px;">
-									<img class="img-responsive rendom">
+									<a class="img-link">
+										<img class="img-responsive rendom">
+									</a>
 								</div>
 						</div>
 					</div>
@@ -1205,7 +1207,9 @@
 							echo $this->pagination->create_links();
 						?>
 						<div style="margin-bottom: 25px;">
-							<img class="img-responsive rendom">
+							<a class="img-link-two">
+								<img class="img-responsive rendom-two">
+							</a>
 						</div>
 					</div>
 
@@ -1296,7 +1300,9 @@
 									</a>
 								</div>
 								<div class="col-sm-12">
-									<img class="img-responsive rendom">
+									<a class="img-link-tree">
+										<img class="img-responsive rendom-tree">
+									</a>
 								</div>
 						</div>
 					</div>
@@ -1323,7 +1329,7 @@
 			});
 			$.ajax({ 
 		      	type: 'GET', 
-		      	url:"<?php echo site_url('site/site/getAdvertise/'.$page)?>",
+		      	url:"<?php echo site_url('site/site/getAdvertiseBlogOne/'.$page)?>",
 		      	dataType: 'json',
 		      	success: function (data) { 
 		      		ramdomimage(data);
@@ -1337,11 +1343,55 @@
 		  		var image = [];
 	          	$.each(data, function(i, item) {
 				    image.push(item.img);
+				    $('.img-link').attr("href",item.url);
 				});
-				console.log(image);
 				var size = image.length;
 				var x = Math.floor(size*Math.random());
 	          	$('.rendom').attr('src',image[x]);
+		  	}
+		  	$.ajax({ 
+		      	type: 'GET', 
+		      	url:"<?php echo site_url('site/site/getAdvertiseBlogTwo/'.$page)?>",
+		      	dataType: 'json',
+		      	success: function (data) { 
+		      		ramdomimage(data);
+		      		setInterval(function() {
+					    ramdomimageblogtwo(data);
+					},5000);
+		      	}
+		  	});
+		  	function ramdomimageblogtwo(data)
+		  	{
+		  		var image = [];
+	          	$.each(data, function(i, item) {
+				    image.push(item.img);
+				    $('.img-link-two').attr("href",item.url);
+				});
+				var size = image.length;
+				var x = Math.floor(size*Math.random());
+	          	$('.rendom-two').attr('src',image[x]);
+		  	}
+		  	$.ajax({ 
+		      	type: 'GET', 
+		      	url:"<?php echo site_url('site/site/getAdvertiseBlogTree/'.$page)?>",
+		      	dataType: 'json',
+		      	success: function (data) { 
+		      		ramdomimage(data);
+		      		setInterval(function() {
+					    ramdomimageblogtree(data);
+					},5000);
+		      	}
+		  	});
+		  	function ramdomimageblogtree(data)
+		  	{
+		  		var image = [];
+	          	$.each(data, function(i, item) {
+				    image.push(item.img);
+				    $('.img-link-tree').attr("href",item.url);
+				});
+				var size = image.length;
+				var x = Math.floor(size*Math.random());
+	          	$('.rendom-tree').attr('src',image[x]);
 		  	}
 		</script>
 		

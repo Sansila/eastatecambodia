@@ -127,15 +127,15 @@ class SetupAds extends CI_Controller {
                 $img_path=base_url("assets/upload/banner/thumb/".$row->banner_id.'.png');
             	if($row->banner_location == 1)
                 {
-                    $bannerlog = 'Banner Top';
+                    $bannerlog = 'First';
                 }elseif($row->banner_location == 2)
                 {
-                    $bannerlog = 'Banner Left';
+                    $bannerlog = 'Second';
                 }elseif($row->banner_location == 3)
                 {
-                    $bannerlog = 'Banner Bottom';
+                    $bannerlog = 'Third';
                 }elseif ($row->banner_location == 4) {
-                    $bannerlog = 'Banner Right';
+                    $bannerlog = 'Four';
                 }
 			$table.= "<tr>
 				 <td class='no' style='text-align:center;'>".$i."</td>

@@ -75,15 +75,15 @@
 												<?php for ($i=1; $i <= 4 ; $i++) {
 		                                            if($i == 1)
 		                                            {
-		                                                $bannerlog = 'Banner Top';
+		                                                $bannerlog = 'First';
 		                                            }elseif($i == 2)
 		                                            {
-		                                                $bannerlog = 'Banner Left';
+		                                                $bannerlog = 'Second';
 		                                            }elseif($i == 3)
 		                                            {
-		                                                $bannerlog = 'Banner Bottom';
+		                                                $bannerlog = 'Third';
 		                                            }elseif ($i == 4) {
-		                                                $bannerlog = 'Banner Right';
+		                                                $bannerlog = 'Four';
 		                                            } 
 		                                            echo '<option value="'.$i.'">'.$bannerlog.'</option>';
 		                                        }?>

@@ -1590,7 +1590,45 @@ class Site extends CI_Controller {
         $query = $this->db->query("SELECT * FROM tblbanner where is_active = 1 AND page = '$page' ")->result();
         $arr = array();
         foreach ($query as $ad) {
-            $arr[] = array('img'=>site_url('assets/upload/banner/'.$ad->banner_id.'.png'));
+            $arr[] = array('img'=>site_url('assets/upload/banner/'.$ad->banner_id.'.png'),
+                           'url'=>$ad->link
+                            );
+        }
+        header("Content-type:text/x-json");
+        echo json_encode($arr);
+    }
+    function getAdvertiseBlogOne($page)
+    {
+        $query = $this->db->query("SELECT * FROM tblbanner where is_active = 1 AND page = '$page' AND banner_location = 1 ")->result();
+        $arr = array();
+        foreach ($query as $ad) {
+            $arr[] = array('img'=>site_url('assets/upload/banner/'.$ad->banner_id.'.png'),
+                           'url'=>$ad->link
+                            );
+        }
+        header("Content-type:text/x-json");
+        echo json_encode($arr);
+    }
+    function getAdvertiseBlogTwo($page)
+    {
+        $query = $this->db->query("SELECT * FROM tblbanner where is_active = 1 AND page = '$page' AND banner_location = 2 ")->result();
+        $arr = array();
+        foreach ($query as $ad) {
+            $arr[] = array('img'=>site_url('assets/upload/banner/'.$ad->banner_id.'.png'),
+                           'url'=>$ad->link
+                            );
+        }
+        header("Content-type:text/x-json");
+        echo json_encode($arr);
+    }
+    function getAdvertiseBlogTree($page)
+    {
+        $query = $this->db->query("SELECT * FROM tblbanner where is_active = 1 AND page = '$page' AND banner_location = 3 ")->result();
+        $arr = array();
+        foreach ($query as $ad) {
+            $arr[] = array('img'=>site_url('assets/upload/banner/'.$ad->banner_id.'.png'),
+                           'url'=>$ad->link
+                            );
         }
         header("Content-type:text/x-json");
         echo json_encode($arr);

@@ -290,7 +290,9 @@
 						<!-- End Our Agents -->
 					</div>
 					<div class="col-md-12" style="margin-bottom: 30px;">
-						<img class="img-responsive rendom">
+						<a class="img-link">
+							<img class="img-responsive rendom">
+						</a>
 					</div>
 				</div>
 			</div>
@@ -353,8 +355,8 @@
   		var image = [];
       	$.each(data, function(i, item) {
 		    image.push(item.img);
+		    $('.img-link').attr("href",item.url);
 		});
-		console.log(image);
 		var size = image.length;
 		var x = Math.floor(size*Math.random());
       	$('.rendom').attr('src',image[x]);
