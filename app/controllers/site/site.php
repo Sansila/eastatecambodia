@@ -1103,10 +1103,18 @@ class Site extends CI_Controller {
         if(isset($_GET['m']))
             $m = $_GET['m'];
 
-        if($m == "p")
-            $msg = "Thank you for uploading your property. Our team will review soon";
-        else
-            $msg = "Thank you for join us. Our team will review soon";
+        if($m == "p"){
+            if($this->session->userdata('site_lang')=="khmer")
+                $msg = $this->lang->line('message_post');
+            else
+                $msg = $this->lang->line('message_post');
+        }
+        else{
+            if($this->session->userdata('site_lang')=="khmer")
+                $msg = $this->lang->line('message_join');
+            else
+                $msg = $this->lang->line('message_join');
+        }
 
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
@@ -1187,7 +1195,7 @@ class Site extends CI_Controller {
             if(!$mail->Send())
                 echo "<p class='error'>Problem in Sending Mail.</p>";
             else
-                redirect('site/site/message?m=j', 'refresh');
+                redirect('site/site/message?m=success', 'refresh');
         }
         else{
             redirect('site/site/join?m=error', 'refresh');
@@ -1372,7 +1380,7 @@ class Site extends CI_Controller {
                                             <li>- Type: '.$type.'</li>
                                             <li>- Location: '.$check->locationname.'</li>
                                             <li>- Last Updated: '.$check->validate_date.'</li>
-                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'">http://estatecambodia.com/detail/P'.$pid.'</a></li>
+                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'/?name=browser">http://estatecambodia.com/detail/P'.$pid.'</a></li>
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
@@ -1414,7 +1422,7 @@ class Site extends CI_Controller {
                                             <li>- ប្រភេទ: '.$type.'</li>
                                             <li>- ទីតាំង: '.$check->locationname.'</li>
                                             <li>- កែប្រែចុងក្រោយ: '.$check->validate_date.'</li>
-                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'">http://estatecambodia.com/detail/P'.$pid.'</a></li>
+                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'/?name=browser">http://estatecambodia.com/detail/P'.$pid.'</a></li>
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
@@ -1501,7 +1509,7 @@ class Site extends CI_Controller {
         $property_list = $this->site->getPropertyListOnMap();
         $arr = array();
         foreach ($property_list as $list) {
-            $detail = site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name);
+            $detail = site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser');
             $type = ""; $imgs = "";
             if($list->p_type == 1)
                 $type = "Sale";

@@ -2878,7 +2878,11 @@ h6 small {
     }
 }*/
 .property-thumb-info-content h3 a{
-    line-height: 19px !important;
+    line-height: 22px !important;
+}
+.property-thumb-info-content h3 a.title-row{
+    line-height: 19px;
+    font-weight: bold;
 }
 
 a {

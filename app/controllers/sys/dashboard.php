@@ -165,4 +165,59 @@ class Dashboard extends CI_Controller {
 		echo json_encode($arr);
 
 	}
+	function getdatainactiveuser()
+	{
+		$where = '';
+		$perpage=$this->input->post('perpage');
+		$fname=$this->input->post('fname');
+		$lname=$this->input->post('lname');
+		$uname=$this->input->post('uname');
+		$email=$this->input->post('email');
+
+		if($fname !="")
+			$where.= " AND first_name LIKE '%$fname%' ";
+		if($lname !="")
+			$where.= " AND last_name LIKE '%$lname%' ";
+		if($uname !="")
+			$where.= " AND user_name LIKE '%$uname%' ";
+
+		$sql="SELECT * FROM admin_user WHERE is_active = 0 AND type_post IS NOT NULL {$where} ";
+		$table='';
+		$pagina='';
+		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("sys/dashboard/getdatainactiveuser"),$perpage);
+		$no=1;
+		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+		$sql.=" {$limit}";
+		$this->green->setActiveRole($this->session->userdata('roleid'));
+        $this->green->setActiveModule($this->input->post('m'));
+        $this->green->setActivePage($this->input->post('p'));
+
+		foreach($this->db->query($sql)->result() as $row){
+			$table.= "<tr>
+				 <td class='no'>".$no."</td>
+				 <td class='name'>".$row->first_name."</td>											
+				 <td class='type'>".$row->last_name."</td>							 	
+				 <td class='type'>".$row->user_name."</td>							 	
+				 <td class='type'>".$row->email."</td>
+				 <td class='country'>".$row->created_date."</td>
+				 <td class='remove_tag no_wrap'>";
+				 
+				 if($this->green->gAction("D")){
+					$table.= "<a style='padding:0px 5px;'><img rel=".$row->userid." onclick='deleteuser(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+				 }
+
+				 if($this->green->gAction("U")){
+					$table.= "<a style='padding:0px 5px;'><img rel=".$row->userid." onclick='updateuser(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+				 }
+			$table.= " </td>
+				 </tr>
+				 ";										 
+			$no++;	 
+		}
+
+		$arr['data']=$table;
+		$arr['pagina']=$paging;
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
+	}
 }

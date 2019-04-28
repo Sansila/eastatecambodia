@@ -644,7 +644,7 @@ hr {
 }
 /* line 520, ../sass/theme-elements.scss */
 .property-thumb-info-content address {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 /* line 523, ../sass/theme-elements.scss */
 .property-thumb-info-content p {
@@ -1439,7 +1439,7 @@ hr {
 }
 /* line 1172, ../sass/theme-elements.scss */
 .properties-listing .property-thumb-info-content {
-  height: 135px;
+  height: 136px;
   overflow: hidden;
 }
 /* line 1176, ../sass/theme-elements.scss */

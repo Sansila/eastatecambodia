@@ -442,7 +442,7 @@ class Property extends CI_Controller {
 					$table.= "<a style='padding:0px 5px;'><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/reload.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
-					$table.= "<a style='padding:0px 5px;' href='".site_url('site/site/detail/'.$row->pid.'/?name='.$row->property_name)."' target='_blank'><img rel=".$row->pid." src='".base_url('assets/images/icons/view.png')."'/></a>";
+					$table.= "<a style='padding:0px 5px;' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."' target='_blank'><img rel=".$row->pid." src='".base_url('assets/images/icons/view.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
 					$table.= "<a href='".site_url('property/property/analysis/'.$row->pid)."'><img rel=".$row->pid." src='".base_url('assets/images/icons/analytics.png')."'/></a>";
@@ -720,7 +720,7 @@ class Property extends CI_Controller {
 									WHERE month(date_create) = month('$date')
 									AND pid = $id
 									GROUP BY date(date_create) 
-									ORDER BY income DESC
+									ORDER BY date_create DESC
 									")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($perdate);
@@ -741,7 +741,7 @@ class Property extends CI_Controller {
 		$perdate = $this->db->query("SELECT DATE_FORMAT(date_create,'%y-%m') as 'year',count(*) as 'income'
 									FROM tblvisitor WHERE pid = $id
 									GROUP BY YEAR(date_create), MONTH(date_create)
-									ORDER BY income DESC
+									ORDER BY date_create DESC
 									")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($perdate);
@@ -749,6 +749,44 @@ class Property extends CI_Controller {
 	function getPropertyTag()
 	{
 		$data = $this->db->query("SELECT property_tag as label FROM tblproperty WHERE property_tag is not null")->result();
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function getViewByChannel($id,$gdate)
+	{
+		$where = ""; $date = date('Y-m-d');
+		if($gdate == 1)
+			$where.= "tblvisitor.date_create = '$date' ";
+		else{
+			$where.= "(tblvisitor.date_create >= date_sub(now(), interval $gdate DAY))";
+		}
+		$sql = $this->db->query("SELECT
+									    tblvisitor.view_from AS 'year',
+									    COUNT(*) AS income
+									FROM
+									    tblproperty
+									INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
+									WHERE
+									    {$where}
+									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser') 
+									    AND tblproperty.p_status = 1 AND tblproperty.pid = $id
+									GROUP BY
+									    tblvisitor.view_from
+									ORDER BY
+										income DESC
+								")->result();
+		$data = array();
+		$i = 1;
+		$nameyear = "";
+		foreach ($sql as $row) {
+			// if($row->year == null || $row->year == 'browser')
+			// 	$nameyear = "browser";
+			// else
+			$nameyear = $row->year;
+			$data[] = array('country' => $nameyear,
+							'value' => $row->income);
+			$i++;
+		}
 		header("Content-type:text/x-json");
 		echo json_encode($data);
 	}

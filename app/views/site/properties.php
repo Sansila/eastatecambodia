@@ -1186,7 +1186,7 @@
 											<?php 
 												$imgproerty = $this->site->getImage($list->pid);
 											?>
-										<a href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>">
+										<a href="<?php echo site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser')?>">
 											<?php
 												$extends = pathinfo($imgproerty->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
@@ -1223,7 +1223,9 @@
 									<div class="property-thumb-info">
 											
 										<div class="property-thumb-info-content">
-											<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>"><?php echo $list->property_name;?></a></h3>
+											<h3 class="my-title">
+												<a class="title-row module line-clamp1" href="<?php echo site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser')?>"><?php echo $list->property_name;?></a>
+											</h3>
 											<address class="module line-clamp"><?php echo $list->address?></address>
 											<p class="module line-clamps"><?php echo $list->description;?></p>
 										</div>
@@ -1258,7 +1260,7 @@
 											<?php 
 												$imgproertyrow = $this->site->getImage($grid->pid);
 											?>
-											<a href="<?php echo site_url('site/site/detail/'.$grid->pid.'/?name='.$grid->property_name)?>">
+											<a href="<?php echo site_url('site/site/detail/'.$grid->pid.'/?text='.$grid->property_name.'&name=browser')?>">
 											<?php
 												$extends = pathinfo($imgproertyrow->url, PATHINFO_EXTENSION);
 														if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
@@ -1292,7 +1294,7 @@
 											</span>
 										</div>
 										<div class="property-thumb-info-content" style="height: 120px;">
-											<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$grid->pid.'/?name='.$grid->property_name)?>"><?php echo $grid->property_name;?></a></h3>
+											<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$grid->pid.'/?text='.$grid->property_name.'&name=browser')?>"><?php echo $grid->property_name;?></a></h3>
 											<address class="module line-clamp"><?php echo $grid->address;?></address>
 										</div>
 										<div class="amenities clearfix" style="height: 40px;">

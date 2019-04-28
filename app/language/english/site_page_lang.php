@@ -328,4 +328,8 @@
   // Pagination Page
   $lang['pagination_next'] = "Next";
   $lang['pagination_prev'] = "Prev";
+  // Message Page
+  $lang['message_title'] = "Message";
+  $lang['message_join'] = "THANK YOU FOR JOIN US. OUR TEAM WILL REVIEW SOON";
+  $lang['message_post'] = "THANK YOU FOR UPLOADING YOUR PROPERTY. OUR TEAM WILL REVIEW SOON";
 ?>

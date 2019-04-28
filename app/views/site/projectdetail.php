@@ -180,7 +180,7 @@
 													<?php 
 														$imgrelated = $this->site->getImage($related->pid);
 													?>
-													<a href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>">
+													<a href="<?php echo site_url('site/site/detail/'.$related->pid.'/?text='.$related->property_name.'&name=browser')?>">
 														<?php
 															$extends = pathinfo($imgrelated->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
@@ -213,7 +213,7 @@
 												</span>
 												</div>
 												<div class="property-thumb-info-content" style="height: 120px;">
-													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>"><?php echo $related->property_name;?></a></h3>
+													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$related->pid.'/?text='.$related->property_name.'&name=browser')?>"><?php echo $related->property_name;?></a></h3>
 													<address class="module line-clamp"><?php echo $related->address;?></address>
 												</div>
 												<div class="amenities clearfix">
