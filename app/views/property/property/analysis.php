@@ -95,13 +95,11 @@ h3{
       <div class="col-sm-12"><?php echo 'Property Name: '.$pname;?></div>
     </div>
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <h3 style="padding-left: 15px;"><?php echo $this->lang->line('an_perday')?>: <?php echo 'P'.$id?></h3>
         <div id="chartdivday"></div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <h3 style="padding-left: 15px;"><?php echo $this->lang->line('an_permonth')?>: <?php echo 'P'.$id?></h3>
         <div id="chartdiv"></div>
       </div>
