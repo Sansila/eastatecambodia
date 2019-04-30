@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `tblgroupcustomer`;
 CREATE TABLE IF NOT EXISTS `tblgroupcustomer` (
   `groupid` int(10) NOT NULL AUTO_INCREMENT,
-  `byrolerid` int(10) DEFAULT NULL,
+  `byroleid` int(10) DEFAULT NULL,
   `groupname` varchar(245) DEFAULT NULL,
   `groupnamekh` varchar(245) DEFAULT NULL,
   `is_active` int(1) DEFAULT NULL,

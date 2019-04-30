@@ -508,10 +508,10 @@ class Home extends CI_Controller {
 			$table.= "<tr>
 				 <td class='no'>P".$row->pid." - ".$row->property_name." - $".$row->price."</td>
 				 <td class='no' style='width:10%;text-align: center;'>
-				 	<a target='_blank' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>Go Detail</a>
+				 	<a target='_blank' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>Details</a>
 				 </td>
 				 <td class='no' style='width:10%;text-align: center;'>
-				 	<a href='".site_url('property/property/analysis/'.$row->pid)."'>View Analisys</a>
+				 	<a href='".site_url('property/property/analysis/'.$row->pid)."'>View Analysis</a>
 				 </td>
 				 <td class='no' style='width:10%;text-align: center;'>".$row->total_pro." View</td>";
 			$table.= "</tr>";										 

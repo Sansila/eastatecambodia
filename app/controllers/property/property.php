@@ -11,34 +11,32 @@ class Property extends CI_Controller {
 		//$this->lang->load('stock', 'english');
 		$this->load->model("property/modproperty","pro");			
 		$this->thead=array("No"=>'no',
-							"Date"=>"Date",
-							"User Name"=>'User Name',
-							"Pro_Number"=>'Pro_Number',
+							// "Date"=>"Date",
+							"Action"=>'Action',
 							"Property Name"=>'Property Name',
 							"Price"=>'Price',
 							"Category"=> "Category",
 							"Location"=> "Location",
-							"Level" => "Level",
-							"Owner" => "Owner",
-							"Hit" => "Hit",
-							"Property Type" => "Property Type",
+							// "Level" => "Level",
+							// "Owner" => "Owner",
+							// "Hit" => "Hit",
+							// "Property Type" => "Property Type",
 							"Visibled"=>'visibled',
-							"Action"=>'Action'							 	
+							"User Name"=>'User Name',							 	
 							);
 		$this->theadkh=array("លេខរាង"=>'លេខរាង',
-							"ថ្ងៃខែ"=>"ថ្ងៃខែ",
-							"ឈ្មោះអ្នកប្រើ" => 'ឈ្មោះអ្នកប្រើ',
-							"លេខរាងអចនទ្រព្យ"=>'លេខរាងអចនទ្រព្យ',
+							// "ថ្ងៃខែ"=>"ថ្ងៃខែ",
+							"កំណត់"=>'កំណត់',
 							"ឈ្មោះអចនទ្រព្យ"=>'ឈ្មោះអចនទ្រព្យ',
 							"តម្លៃ"=>'តម្លៃ',
 							"ប្រភេទអចនទ្រព្យ"=> "ប្រភេទអចនទ្រព្យ",
 							"ទីតាំង"=> "ទីតាំង",
-							"កម្រិត" => "កម្រិត",
-							"ម្ចាស់អចលនៈទ្រព្យ" => "ម្ចាស់អចលនៈទ្រព្យ",
-							"មើល" => "មើល",
-							"ប្រភេទ" => "ប្រភេទ",
+							// "កម្រិត" => "កម្រិត",
+							// "ម្ចាស់អចលនៈទ្រព្យ" => "ម្ចាស់អចលនៈទ្រព្យ",
+							// "មើល" => "មើល",
+							// "ប្រភេទ" => "ប្រភេទ",
 							"បង្ហាញ"=>'បង្ហាញ',
-							"កំណត់"=>'កំណត់'							 	
+							"ឈ្មោះអ្នកប្រើ" => 'ឈ្មោះអ្នកប្រើ',						 	
 							);
 		$this->idfield="categoryid";
 		
@@ -415,20 +413,14 @@ class Property extends CI_Controller {
 			}else{
 				$loc = "";
 			}
-			$table.= "<tr>
-				 <td class='no'>".$i."</td>
-				 <td class='no'>".$row->create_date."</td>
-				 <td class='user'>".$row->user_name."</td>
-				 <td class='id'>P".$row->pid."</td>	
-				 <td class='name'>".$row->property_name."</td>
-				 <td class='name'>$".$row->price."</td>		
-				 <td class='name'>".$row->typename."</td>
-				 <td class='name'>".$loc."</td>
-				 <td class='name'>".$level."</td>	
-				 <td class='name'>".$owner."</td>
-				 <td class='hit'>".$row->hit."</td>
-				 <td class='name'>".$property_type."</td>		
-				 <td class='type'>".$visibled."</td>
+			// <td class='no'>".$row->create_date."</td>
+			// <td class='user'>".$row->user_name."</td>
+			// <td class='name'>".$level."</td>	
+			// <td class='name'>".$owner."</td>
+			// <td class='hit'>".$row->hit."</td>
+			// <td class='name'>".$property_type."</td>
+			$table.= "<tr class='clickable' data-toggle='collapse' data-target='#group-of-rows-".$i."' aria-expanded='false' aria-controls='group-of-rows-".$i."'>
+				 <td class='no'><i class='fa fa-plus' aria-hidden='true'></i></td>
 				 <td class='remove_tag no_wrap'>";
 				 
 				 if($this->green->gAction("D")){
@@ -441,15 +433,30 @@ class Property extends CI_Controller {
 				 if($this->green->gAction("U")){
 					$table.= "<a style='padding:0px 5px;'><img rel=".$row->pid." onclick='renew(event);' src='".base_url('assets/images/icons/reload.png')."'/></a>";
 				 }
-				 if($this->green->gAction("U")){
-					$table.= "<a style='padding:0px 5px;' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."' target='_blank'><img rel=".$row->pid." src='".base_url('assets/images/icons/view.png')."'/></a>";
-				 }
+				 // if($this->green->gAction("U")){
+					// $table.= "<a style='padding:0px 5px;' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."' target='_blank'><img rel=".$row->pid." src='".base_url('assets/images/icons/view.png')."'/></a>";
+				 // }
 				 if($this->green->gAction("U")){
 					$table.= "<a href='".site_url('property/property/analysis/'.$row->pid)."'><img rel=".$row->pid." src='".base_url('assets/images/icons/analytics.png')."'/></a>";
 				 }
-			$table.= " </td>
+			$table.= " 
+				 </td>
+				 <td class='name' style='text-align:left !important'>
+				 <a href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>P".$row->pid.'-'.$row->property_name."</a></td>
+				 <td class='name'>$".$row->price."</td>		
+				 <td class='name'>".$row->typename."</td>
+				 <td class='name'>".$loc."</td>		
+				 <td class='type'>".$visibled."</td>
+				 <td class='user'>".$row->user_name."</td>
 				 </tr>
-				 ";										 
+				 <tr id='group-of-rows-".$i."' class='collapse' style='background:#ccc'>
+		            <td><i class='fa fa-minus' aria-hidden='true'></i></td>
+		            <td>Hit: ".$row->hit."</td>
+		          	<td>Date: ".$row->create_date."</td> 
+		            <td colspan='2'>Owner: ".$owner."</td>
+		            <td colspan='2'>Level: ".$level."</td> 
+		            <td>Status: ".$property_type."</td>
+		        </tr>";										 
 			$i++;	 
 		}
 		$arr['data']=$table;

@@ -2,7 +2,9 @@
 <style type="text/css">
 	table tbody tr td img{width: 20px; margin-right: 10px}
 	a,.sort{cursor: pointer;}
-
+	table tbody tr td{
+		text-align: center !important;
+	}
 	.cur_sort_up{
 		background-image: url('<?php echo base_url('assets/images/icons/sort-up.png')?>');
 		background-position: left;
@@ -85,13 +87,11 @@
 									</tr>
 									<tr class='remove_tag'>
 										<th></th>
-										<th>
+										<!-- <th>
 											<input type='text' onchange="getdata(1);" class='form-control input-sm' id='search_date' />
-										</th>
-										<th>
-											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_user_name'/>
-										</th>
-										<th><input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_id'/></th>
+										</th> -->
+										<th></th>
+										<!-- <th><input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_id'/></th> -->
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/>
 										</th>
@@ -123,31 +123,31 @@
 												?>
 											</select>
 										</th>
-										<th>
+										<!-- <th>
 											<select class="form-control" id="pro_level" onchange="getdata(1);"> 
 		                                        <option value="0">Please Select</option>
 		                                        <option value="1">Hot</option>
 		                                      	<option value="2">Sponsored</option>
 		                                        <option value="3">Free</option>
 		                                    </select>
-		                                </th>
-										<th>
+		                                </th> -->
+										<!-- <th>
 											<select class="form-control" id="relative_owner" onchange="getdata(1);">
 		                                        <option value="0">Please Select</option>
 		                                        <option value="1">I am the owner</option>
 		                                        <option value="2">I know owner directly</option>
 		                                        <option value="3">I do not know owner</option>
 		                                    </select>
-										</th>
-										<th></th>
-										<th >
+										</th> -->
+										<!-- <th></th> -->
+										<!-- <th >
 											<select class="form-control" id="pro_status" onchange="getdata(1);">
 												<option value="">-select-</option>
 												<option value="1">Sale</option>
 												<option value="2">Rent</option>
 												<option value="3">Rent & Sale</option>
 											</select>
-										</th>
+										</th> -->
 										<th >
 											<select class="form-control" id="available_pro" onchange="getdata(1);">
 												<option value="">-Select-</option>
@@ -158,14 +158,16 @@
 		                                        <option value="5"><?php echo $this->lang->line('p_na')?></option>
 		                                    </select>
 										</th>
-										<th width='150'>
+										<th>
+											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_user_name'/>
 										</th>
 										
 									</tr>
 								</thead>
-								<tbody class='list'>
+								<tbody class='list'></tbody>
+								<!-- <tbody id='group-of-rows-1' class='collapse my-collapse'>
 
-								</tbody>
+								</tbody> -->
 							</table>  
 
 						</div>
