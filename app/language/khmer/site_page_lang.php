@@ -325,6 +325,10 @@
     $lang['detail_property_mod_both'] = "ទាំងពីរ";
     $lang['detail_property_comment'] = "មតិយោបល់";
     // Pagination Page
-  $lang['pagination_next'] = "បន្ទាប់";
-  $lang['pagination_prev'] = "ត្រលប់";
+    $lang['pagination_next'] = "បន្ទាប់";
+    $lang['pagination_prev'] = "ត្រលប់";
+    // Message Page
+    $lang['message_title'] = "ទំព័រសារ";
+    $lang['message_join'] = "អរគុណសម្រាប់ការចូលរួមជាមួយពួកយើង ក្រុមការងាររបស់យើងនឹងពិនិត្យមើលឆាប់ៗនេះ";
+    $lang['message_post'] = "សូមអរគុណសម្រាប់ការដាក់បញ្ចូលអចលនទ្រព្យរបស់អ្នក។ ក្រុមការងាររបស់យើងនឹងពិនិត្យមើលឆាប់ៗនេះ";
 ?>

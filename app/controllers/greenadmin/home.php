@@ -508,7 +508,7 @@ class Home extends CI_Controller {
 			$table.= "<tr>
 				 <td class='no'>P".$row->pid." - ".$row->property_name." - $".$row->price."</td>
 				 <td class='no' style='width:10%;text-align: center;'>
-				 	<a target='_blank' href='".site_url('site/site/detail/'.$row->pid.'/?name='.$row->property_name)."'>Go Detail</a>
+				 	<a target='_blank' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>Go Detail</a>
 				 </td>
 				 <td class='no' style='width:10%;text-align: center;'>
 				 	<a href='".site_url('property/property/analysis/'.$row->pid)."'>View Analisys</a>
@@ -566,7 +566,7 @@ class Home extends CI_Controller {
 									INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
 									WHERE
 									    {$where}
-									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line') 
+									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser') 
 									    AND tblproperty.p_status = 1
 									GROUP BY
 									    tblvisitor.view_from
@@ -575,8 +575,13 @@ class Home extends CI_Controller {
 								")->result();
 		$data = array();
 		$i = 1;
+		$nameyear = "";
 		foreach ($sql as $row) {
-			$data[] = array('country' => $row->year,
+			// if($row->year == null || $row->year == 'browser')
+			// 	$nameyear = "browser";
+			// else
+			$nameyear = $row->year;
+			$data[] = array('country' => $nameyear,
 							'value' => $row->income);
 			$i++;
 		}

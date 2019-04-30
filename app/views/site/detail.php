@@ -391,7 +391,7 @@
 													<?php 
 														$imgrelated = $this->site->getImage($related->pid);
 													?>
-													<a href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>">
+													<a href="<?php echo site_url('site/site/detail/'.$related->pid.'/?text='.$related->property_name.'&name=browser')?>">
 														<?php
 															$extends = pathinfo($imgrelated->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
@@ -424,7 +424,7 @@
 												</span>
 												</div>
 												<div class="property-thumb-info-content" style="height: 120px;">
-													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$related->pid.'/?name='.$related->property_name)?>"><?php echo $related->property_name;?></a></h3>
+													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$related->pid.'/?text='.$related->property_name.'&name=browser')?>"><?php echo $related->property_name;?></a></h3>
 													<address class="module line-clamp"><?php echo $related->address;?></address>
 												</div>
 												<div class="amenities clearfix">
@@ -521,7 +521,7 @@
 										<div class="pgl-property">
 											<div class="property-thumb-info">
 												<div class="property-thumb-info-image">
-													<a href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>">
+													<a href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?text='.$hot->property_name.'&name=browser')?>">
 														<?php 
 															$img = $this->site->getImage($hot->pid);
 														?>
@@ -558,7 +558,7 @@
 													</span>
 												</div>
 												<div class="property-thumb-info-content" style="height: 90px;">
-													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>"><?php echo $hot->property_name?></a></h3>
+													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?text='.$hot->property_name.'&name=browser')?>"><?php echo $hot->property_name?></a></h3>
 													<address class="module line-clamps"><?php echo $hot->address?></address>
 												</div>
 												<div class="amenities clearfix" style="height: 40px;">

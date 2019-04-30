@@ -258,7 +258,7 @@ class Listmap extends CI_Controller {
 
 		$arr = array();
         foreach ($all as $list) {
-            $detail = site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name);
+            $detail = site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser');
             $type = ""; $imgs = "";
             if($list->p_type == 1)
                 $type = "Sale";
@@ -553,7 +553,7 @@ class Listmap extends CI_Controller {
 
         $arr = array();
         foreach ($all as $list) {
-            $detail = site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name);
+            $detail = site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser');
             $type = ""; $imgs = "";
             if($list->p_type == 1)
                 $type = "Sale";

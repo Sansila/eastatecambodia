@@ -1103,10 +1103,18 @@ class Site extends CI_Controller {
         if(isset($_GET['m']))
             $m = $_GET['m'];
 
-        if($m == "p")
-            $msg = "Thank you for uploading your property. Our team will review soon";
-        else
-            $msg = "Thank you for join us. Our team will review soon";
+        if($m == "p"){
+            if($this->session->userdata('site_lang')=="khmer")
+                $msg = $this->lang->line('message_post');
+            else
+                $msg = $this->lang->line('message_post');
+        }
+        else{
+            if($this->session->userdata('site_lang')=="khmer")
+                $msg = $this->lang->line('message_join');
+            else
+                $msg = $this->lang->line('message_join');
+        }
 
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
@@ -1187,7 +1195,7 @@ class Site extends CI_Controller {
             if(!$mail->Send())
                 echo "<p class='error'>Problem in Sending Mail.</p>";
             else
-                redirect('site/site/message?m=j', 'refresh');
+                redirect('site/site/message?m=success', 'refresh');
         }
         else{
             redirect('site/site/join?m=error', 'refresh');
@@ -1372,7 +1380,7 @@ class Site extends CI_Controller {
                                             <li>- Type: '.$type.'</li>
                                             <li>- Location: '.$check->locationname.'</li>
                                             <li>- Last Updated: '.$check->validate_date.'</li>
-                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'">http://estatecambodia.com/detail/P'.$pid.'</a></li>
+                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'/?name=browser">http://estatecambodia.com/detail/P'.$pid.'</a></li>
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
@@ -1414,7 +1422,7 @@ class Site extends CI_Controller {
                                             <li>- ប្រភេទ: '.$type.'</li>
                                             <li>- ទីតាំង: '.$check->locationname.'</li>
                                             <li>- កែប្រែចុងក្រោយ: '.$check->validate_date.'</li>
-                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'">http://estatecambodia.com/detail/P'.$pid.'</a></li>
+                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$check->pid.'/?name=browser">http://estatecambodia.com/detail/P'.$pid.'</a></li>
                                         </ul>
                                     </div>
                                     <div style="text-align: left">
@@ -1501,7 +1509,7 @@ class Site extends CI_Controller {
         $property_list = $this->site->getPropertyListOnMap();
         $arr = array();
         foreach ($property_list as $list) {
-            $detail = site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name);
+            $detail = site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser');
             $type = ""; $imgs = "";
             if($list->p_type == 1)
                 $type = "Sale";
@@ -1632,6 +1640,50 @@ class Site extends CI_Controller {
         }
         header("Content-type:text/x-json");
         echo json_encode($arr);
+    }
+    function customer($id)
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['locs'] = $this->site->getlocation();
+        $data['id'] = $id;
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/customer',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function savecustomer($id)
+    {
+        $location = $this->input->post('location');
+        $loc = ''; 
+        $i = 1; 
+        $num = count($location); 
+        $cama = ',';
+        foreach ($location as $key) {
+            $loc.= $key.''.$cama;
+            if(++$i == $num)
+            {
+                $cama = '';
+            }
+        }
+        $data = array(
+            'locationid' => $loc,
+            'customer_type' => $this->input->post('customertype'),
+            'customer_name' => $this->input->post('txtName'),
+            'phone' => $this->input->post('txtPhone'),
+            'email' => $this->input->post('txtEmail'),
+            'address' => $this->input->post('txtAddress'),
+            'description' => $this->input->post('txtRemark'),
+            'create_date' => date('Y-m-d')
+        );
+
+        $save = $this->site->savecustomer($data);
+
+        if($save)
+            redirect('site/site/customer/'.$id.'?type='.$id.'&m=success', 'refresh');
+        else
+            redirect('site/site/customer/'.$id.'?type='.$id.'&?m=error', 'refresh');
+        
     }
 }
 ?>

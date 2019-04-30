@@ -240,6 +240,7 @@
 		      <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
 		      <a href='#' class="current"><?php echo $this->lang->line('property_list')?> : <?php echo $this->pro->countAllUnaproveProperty();?> <?php echo $this->lang->line('record')?></a>
 		</div>
+
 		<div class="wrapper">
 			<div class="clearfix" id="main_content_outer">
 			    <div id="main_content">
@@ -418,79 +419,83 @@
 		</div><br>
 
 		<!-- </div> -->
-		
-		<div class="panel-body">
-	      		<div class="panel panel-default"> 
-			        <div class="table-responsive" id="tab_print">
-						<table align='center' class='table'>
-							<thead>
-								<th class='col-xs-1'>No</th>
-								<th class='col-xs-1'>First Name</th>
-								<th class='col-xs-1'>Last Name </th>
-								<th class='col-xs-1'>User Name</th>
-								<th class='col-xs-2'>Email</th>
-								<th class='col-xs-1'>Role</th>
-								<th class='col-xs-1'>Last Visited</th>
-								<th class='col-xs-1'>Created Date</th>
-								<th class='col-xs-1'>Action</th>
-							</thead>
-							<tbody>
-								<td></td>
-								<td><input class='form-control input-sm' id='txts_fname' type='text' onkeyup='search(event);' value='' name='txts_fname'/></td>
-								<td><input class='form-control input-sm' id='txts_lname' type='text' onkeyup='search(event);' value='' name='txts_lname'/></td>
-								<td><input class='form-control input-sm' id='txts_uname' type='text' onkeyup='search(event);' value='' name='txts_uname'/></td>
-								<td><input class='form-control input-sm' id='txts_email' type='text' onkeyup='search(event);' value='' name='txts_email'/></td>
-								<td>
-									<select class="form-control input-sm" id='cbos_role'name='cbos_role' onchange='search(event);'>
-												<option value='0'>Select Role</option>
-										<?php
-											foreach ($this->role->getallrole() as $role_row) {
-												echo "<option value='$role_row->roleid'>$role_row->role</option>";
-											}
-										?>
 
-									</select>
-								</td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tbody>
-							<tbody id='listbody' class="listbody">
-							<?php
-							 $i=1;
-								foreach ($query as $row) {
-									echo "
-										<tr>
-											<td align='center'>$i</td>
-											<td>$row->first_name</td>
-											<td>$row->last_name</td>
-											<td>$row->user_name</td>
-											<td>$row->email</td>
-											<td>$row->role</td>
-											<td>".date("d-m-Y", strtotime($row->last_visit))."</td>
-											<td>".date("d-m-Y", strtotime($row->created_date))."</td>";
-											echo "<td align='right' class='no_wrap'>";
-											if($row->is_admin!='1'){
-												echo "<a>
-															<img rel='$row->userid' onclick='deleteuser(event);' src='".base_url('assets/images/icons/delete.png')."'/>
-														</a>";
-												}			
-												echo "<a>
-															<img  rel='$row->userid' onclick='updateuser(event);' src='".base_url('assets/images/icons/edit.png')."'/>
-														</a>
-														</td>";
-										echo "</tr>";# code...
-									$i++;
-								}
-							?>
-								<tr>
-									<td colspan='12' id='pgt'><div style='text-align:center'><ul class='pagination' style='text-align:center'><?php echo $this->pagination->create_links(); ?></ul></div></td>
-								</tr> 
-							</body>
-						</table>
-					</div>
-				</div>	
-			</div>	
+		<div class="wrapper">
+			<div class="clearfix" id="main_content_outer">
+			    <div id="main_content">
+			      <div class="col-xs-12">
+				      	<div class="col-xs-6">
+				      	</div>
+				      	  
+				  </div>
+			      <div class="row">
+			      		<div class="col-sm-12">
+			      			<div class="widget-box table-responsive">
+								<div class="widget-title no_wrap" id='top-bar'>
+									<span class="icon">
+										<i class="fa fa-th"></i>
+									</span>
+										<h5><?php echo $this->lang->line('cl_title')?></h5>
+									<div style="text-align: right; width:130px; float:right">
+							      			      		
+							      	</div> 			    
+								</div>
+								<div class="widget-content nopadding" id='tap_print'>
+
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<thead>
+												<th class='col-xs-1'>No</th>
+												<th class='col-xs-1'>First Name</th>
+												<th class='col-xs-1'>Last Name </th>
+												<th class='col-xs-1'>User Name</th>
+												<th class='col-xs-2'>Email</th>
+												<th class='col-xs-1'>Created Date</th>
+												<th class='col-xs-1'>Action</th>
+											</thead>
+											<tr class='remove_tag'>
+												<td></td>
+												<td><input class='form-control input-sm' id='txts_fname' type='text' onkeyup='getdatainactiveuser(1);' value='' name='txts_fname'/></td>
+												<td><input class='form-control input-sm' id='txts_lname' type='text' onkeyup='getdatainactiveuser(1);' value='' name='txts_lname'/></td>
+												<td><input class='form-control input-sm' id='txts_uname' type='text' onkeyup='getdatainactiveuser(1);' value='' name='txts_uname'/></td>
+												<td><input class='form-control input-sm' id='txts_email' type='text' onkeyup='getdatainactiveuser(1);' value='' name='txts_email'/></td>
+												<td></td>
+												<th width='150'>
+												</th>
+												
+											</tr>
+										</thead>
+										<tbody class='listinactiveuser'>
+
+										</tbody>
+									</table>  
+
+								</div>
+							</div>
+							<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+									<div class='col-sm-3'>
+										<label><?php echo $this->lang->line('show')?>  
+											
+											<select id='perpage' onchange='getdatainactiveuser(1);' name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0" tabindex="-1" class="form-control select2-offscreen">
+												<?PHP
+												for ($i=10; $i < 500; $i+=10) { 
+													echo "<option value='$i'>$i</option>";
+												}
+												 ?>
+											</select> 
+										</label>
+									</div>
+									<div class='dataTables_paginate_inactive_user'>
+
+									</div>
+							</div>
+			      		</div>	      	
+			        </div> 
+			    </div>
+		   </div>
+		</div>
+		
+			
 	</div>
 			
 	<!-- <script src="<?php echo base_url('assets/js/unicorn.interface.js')?>"></script>		 -->
@@ -710,11 +715,13 @@
 	})
 	$(function(){	
 		getdata(1);	
-		getdatac(1);	
+		getdatac(1);
+		getdatainactiveuser(1);	
 		$(document).on('click', '.pagenav', function(){
 		    var page = $(this).attr("id");
 			getdata(page);
-			getdatac(page);			
+			getdatac(page);	
+			getdatainactiveuser(page);		
 		});	
 		$("#btnprint").on("click",function(){
 				var htmlToPrint = '' +
@@ -797,6 +804,36 @@
             success:function(data) {
               $(".lists").html(data.data); console.log(data);
               $('.dataTables_paginatec').html(data.pagina.pagination);
+            }
+        })
+	}
+	function getdatainactiveuser(page){
+	  	var url="<?php echo site_url('sys/dashboard/getdatainactiveuser')?>";
+	  	var m="<?PHP echo $m?>";
+	  	var p="<?PHP echo $p?>";
+	  	var fname=$('#txts_fname').val();
+	  	var lname=$('#txts_lname').val();
+	  	var uname=$('#txts_uname').val();
+	  	var email=$('#txts_email').val();
+	  	
+	  	var perpage=$('#perpage').val();
+		$.ajax({
+            url:url,
+            type:"POST",
+            datatype:"Json",
+            async:false,
+            data:{'m':m,
+            		'p':p,
+            		'page':page,
+            		'fname':fname,
+            		'lname':lname,
+            		'uname':uname,
+            		'email':email,
+            		'perpage':perpage
+            	},
+            success:function(data) {
+              $(".listinactiveuser").html(data.data); console.log(data);
+              $('.dataTables_paginate_inactive_user').html(data.pagina.pagination);
             }
         })
 	}

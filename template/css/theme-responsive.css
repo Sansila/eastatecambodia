@@ -339,6 +339,10 @@
     float: none;
     width: 100%;
   }
+  .property-thumb-info-content h3 a.title-row {
+    line-height: 22px !important;
+    font-weight: bold;
+  }
 }
 @media (max-width: 480px) {
   .hide-from-destop{
@@ -414,6 +418,10 @@
   .pgl-pro-tabs li a {
     display: inline-block;
   }
+  .property-thumb-info-content h3 a.title-row {
+    line-height: 22px !important;
+    font-weight: bold;
+  }
 }
 @media (max-width: 360px) {
   .hide-from-destop{
@@ -476,5 +484,9 @@
   /* line 367, ../sass/theme-responsive.scss */
   .flex-direction-nav a {
     bottom: 121px;
+  }
+  .property-thumb-info-content h3 a.title-row {
+    line-height: 22px !important;
+    font-weight: bold;
   }
 }

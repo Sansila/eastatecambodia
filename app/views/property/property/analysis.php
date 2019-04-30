@@ -15,6 +15,11 @@
   height: 500px;
   border: 1px solid #a6a6c1;
 }
+#chartdivchannel{
+  width: 100%;
+  height: 500px;
+  border: 1px solid #a6a6c1;
+}
 .bd-example {
     padding: 1rem;
     margin-right: 0;
@@ -73,6 +78,15 @@ h3{
     color: white;
     text-transform: uppercase;
 }
+.optday{
+  float: left;
+  border: none;
+  background: none;
+  color: white
+}
+.optday option{
+  color: #999999;
+}
 </style>
 <!-- HTML -->
 <?php 
@@ -102,6 +116,22 @@ h3{
       <div class="col-sm-6">
         <h3 style="padding-left: 15px;"><?php echo $this->lang->line('an_permonth')?>: <?php echo 'P'.$id?></h3>
         <div id="chartdiv"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+         <h3 style="padding-left: 15px;">
+          <select class="optday" id="txtshowby">
+            <option value="1">Today</option>
+            <option value="3">Last 3 days</option>
+            <option value="7">Last 7 days</option>
+            <option value="15">Last 15 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="60">Last 60 days</option>
+            <option value="90">Last 90 days</option>
+          </select>
+          Property Analysis By Channel: <?php echo 'P'.$id?></h3>
+        <div id="chartdivchannel"></div>
       </div>
     </div>
 
@@ -218,5 +248,53 @@ function createSeries2(field, name) {
 }
 
 createSeries2("income", "Income");
+
+
+var gdate = 1;
+getchannel(gdate);
+
+$('.optday').change(function(){
+    getchannel($(this).val());
+});
+
+function getchannel(gdate)
+{
+    var chart5 = am4core.create("chartdivchannel", am4charts.PieChart);
+    chart5.hiddenState.properties.opacity = 0; // this creates initial fade-in
+    chart5.fontSize = 10;
+
+    $.ajax({ 
+        type: 'GET', 
+        url:"<?php echo site_url('property/property/getViewByChannel/'.$id)?>/"+gdate,
+        dataType: 'json',
+        success: function (data) { 
+            chart5.data = data;
+            console.log(data);
+        }
+    });
+
+    chart5.radius = am4core.percent(70);
+    chart5.innerRadius = am4core.percent(40);
+    // chart.startAngle = 180;
+    // chart.endAngle = 360;
+    chart5.responsive.enabled = true;
+
+    var series5 = chart5.series.push(new am4charts.PieSeries());
+    series5.dataFields.value = "value";
+    series5.dataFields.category = "country";
+    series5.legendSettings.labelText = '{country}';
+    series5.legendSettings.valueText = '{value}';
+
+    series5.slices.template.cornerRadius = 10;
+    series5.slices.template.innerCornerRadius = 7;
+    series5.slices.template.draggable = false;
+    series5.slices.template.inert = true;
+    series5.alignLabels = false;
+
+    series5.hiddenState.properties.startAngle = 90;
+    series5.hiddenState.properties.endAngle = 90;
+
+    chart5.legend = new am4charts.Legend();
+}
 
 </script>

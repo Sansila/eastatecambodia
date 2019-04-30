@@ -47,7 +47,7 @@ h1 {
 		<div class="container container-table">
 			<div class="row vertical-center-row">
 		        <div class="text-center col-md-12">
-		        	<div class="txt-header"><h3>Message</h3></div>
+		        	<div class="txt-header"><h3><?php echo $this->lang->line('message_title')?></h3></div>
 					<div class="lead pgl-bg-light">
 				        
 				        <div class="bgimg">

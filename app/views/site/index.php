@@ -1065,7 +1065,7 @@
 									<div class="pgl-property">
 										<div class="property-thumb-info">
 											<div class="property-thumb-info-image">
-												<a href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>">
+												<a href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?text='.$hot->property_name.'&name=browser')?>">
 													<?php 
 														$img = $this->site->getImage($hot->pid);
 													?>
@@ -1102,7 +1102,7 @@
 												</span>
 											</div>
 											<div class="property-thumb-info-content" style="height: 120px;">
-												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?name='.$hot->property_name)?>"><?php echo $hot->property_name?></a></h3>
+												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?text='.$hot->property_name.'&name=browser')?>"><?php echo $hot->property_name?></a></h3>
 												<address class="module line-clamp"><?php echo $hot->address?></address>
 											</div>
 											<div class="amenities clearfix" style="height: 40px;">
@@ -1147,7 +1147,7 @@
 									<div class="pgl-property">
 										<div class="property-thumb-info">
 											<div class="property-thumb-info-image">
-												<a href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>">
+												<a href="<?php echo site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser')?>">
 													<?php 
 														$img = $this->site->getImage($list->pid);
 													?>
@@ -1184,7 +1184,7 @@
 												</span>
 											</div>
 											<div class="property-thumb-info-content" style="height: 120px;">
-												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid.'/?name='.$list->property_name)?>"><?php echo $list->property_name?></a></h3>
+												<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$list->pid.'/?text='.$list->property_name.'&name=browser')?>"><?php echo $list->property_name?></a></h3>
 												<address class="module line-clamp"><?php echo $list->address?></address>
 											</div>
 											<div class="amenities clearfix" style="height: 40px;">
@@ -1238,7 +1238,7 @@
 									<div class="pgl-property">
 										<div class="property-thumb-info">
 											<div class="property-thumb-info-image">
-												<a href="<?php echo site_url('project/detail/'.$list->projectid.'/?name='.$list->project_name)?>">
+												<a href="<?php echo site_url('project/detail/'.$list->projectid.'/?text='.$list->project_name.'&name=browser')?>">
 													<?php 
 														$img = $this->site->getImageProject($list->projectid);
 													?>
@@ -1275,7 +1275,7 @@
 												</span> -->
 											</div>
 											<div class="property-thumb-info-content" style="height: 120px;">
-												<h3><a class="module line-clamp" href="<?php echo site_url('project/detail/'.$list->projectid.'/?name='.$list->project_name)?>"><?php echo $list->project_name?></a></h3>
+												<h3><a class="module line-clamp" href="<?php echo site_url('project/detail/'.$list->projectid.'/?text='.$list->project_name.'&name=browser')?>"><?php echo $list->project_name?></a></h3>
 												<address class="module line-clamp"><?php echo $list->locationname?></address>
 											</div>
 											<!-- <div class="amenities clearfix" style="height: 40px;">
