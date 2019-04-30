@@ -338,6 +338,19 @@ class Modsite extends CI_Model {
                                 LIMIT 20 ")->result();
         return $query;
     }
+    function getlocation()
+    {
+        $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 ")->result();
+        return $sql;
+    }
+    function savecustomer($data)
+    {
+        $insert = $this->db->insert('tblcustomer', $data);
+        if($insert)
+            return true;
+        else
+            return false;
+    }
 }
 
 

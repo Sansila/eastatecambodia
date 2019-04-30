@@ -1641,5 +1641,49 @@ class Site extends CI_Controller {
         header("Content-type:text/x-json");
         echo json_encode($arr);
     }
+    function customer($id)
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['locs'] = $this->site->getlocation();
+        $data['id'] = $id;
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/customer',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function savecustomer($id)
+    {
+        $location = $this->input->post('location');
+        $loc = ''; 
+        $i = 1; 
+        $num = count($location); 
+        $cama = ',';
+        foreach ($location as $key) {
+            $loc.= $key.''.$cama;
+            if(++$i == $num)
+            {
+                $cama = '';
+            }
+        }
+        $data = array(
+            'locationid' => $loc,
+            'customer_type' => $this->input->post('customertype'),
+            'customer_name' => $this->input->post('txtName'),
+            'phone' => $this->input->post('txtPhone'),
+            'email' => $this->input->post('txtEmail'),
+            'address' => $this->input->post('txtAddress'),
+            'description' => $this->input->post('txtRemark'),
+            'create_date' => date('Y-m-d')
+        );
+
+        $save = $this->site->savecustomer($data);
+
+        if($save)
+            redirect('site/site/customer/'.$id.'?type='.$id.'&m=success', 'refresh');
+        else
+            redirect('site/site/customer/'.$id.'?type='.$id.'&?m=error', 'refresh');
+        
+    }
 }
 ?>
