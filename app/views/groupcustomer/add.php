@@ -145,7 +145,9 @@
             var formdata = new FormData(form);
             if(data.groupid!='' && data.groupid!=null){
               toasmsg('success',data.msg);
-              location.href='<?php echo site_url("customer/viewgroup?m=".$m.'&p='.$p) ?>';
+              setTimeout(function(){
+                location.href='<?php echo site_url("customer/viewgroup?m=".$m.'&p='.$p) ?>';
+              },500);
             }else{
               toasmsg('error',data.msg);
             }

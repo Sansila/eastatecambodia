@@ -138,16 +138,15 @@ class Customer extends CI_Controller {
 		$groupid=$this->input->post('groupid');
 		$groupname=$this->input->post('groupname');
 		$is_active=$this->input->post('is_active');
-		$count=$this->cust->vaidate($groupname,$groupid);
+		//$count=$this->cust->vaidate($groupname,$groupid);
 		$msg='';
-		if($count>0){
-			$msg="Group Name Is already Exist...!";
-			$storeid='';
-		}else{
-			$menu_id=$this->cust->save($groupid,$groupname,$is_active);
+		$groupids=$this->cust->save($groupid,$groupname,$is_active);
+		if($groupids == $groupid)
+			$msg="Group Name Has Updated...!";
+		else
 			$msg="Group Name Has Created...!";
-		}
-		$arr=array('msg'=>$msg,'groupid'=>$groupid);
+		
+		$arr=array('msg'=>$msg,'groupid'=>$groupids);
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
 	}
@@ -222,8 +221,41 @@ class Customer extends CI_Controller {
 	function add()
 	{
 		$data['page_header']="Here is Index Page";	
+		$datas['locs'] = $this->cust->getlocation();
 		$this->load->view('greenadmin/header',$data);
-		$this->load->view('customer/add');
+		$this->load->view('customer/add',$datas);
 		$this->load->view('greenadmin/footer');
+	}
+	function savecustomer()
+	{
+		$customerid = $this->input->post('customerid');
+        $data = array(
+        	'locationid' => $this->input->post('location'),
+        	'byroleid' => $this->session->userdata('roleid'),
+        	'group_name' => $this->input->post('groupid'),
+        	'company' => $this->input->post('company'),
+        	'title' => $this->input->post('title'),
+        	'customer_name' => $this->input->post('customername'),
+        	'phone' => $this->input->post('phone'),
+        	'email' => $this->input->post('email'),
+        	'address' => $this->input->post('address'),
+        	'description' => $this->input->post('description'),
+        	'remark' => $this->input->post('remark'),
+        	'is_active' => $this->input->post('is_active'),
+        );
+        $data1 = array(
+        	'create_date' => date('Y-m-d')
+        );
+
+        $msg='';
+		$groupids=$this->cust->save($groupid,$groupname,$is_active);
+		if($groupids == $groupid)
+			$msg="Group Name Has Updated...!";
+		else
+			$msg="Group Name Has Created...!";
+		
+		$arr=array('msg'=>$msg,'groupid'=>$groupids);
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
 	}
 }

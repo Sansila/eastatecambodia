@@ -12,13 +12,14 @@ class Modcutomer extends CI_Model {
 	function save($groupid,$groupname,$is_active)
 	{
 		$data=array(
-			'byrolerid'=> $this->$this->session->userdata('roleid'),
+			'byroleid'=>$this->session->userdata('roleid'),
             'groupname'=>$groupname,
             'is_active'=>$is_active,
          );
 		$data1 = array('date_create' => date('Y-m-d'));
         if($groupid!=''){
             $this->db->where('groupid',$groupid)->update('tblgroupcustomer',$data);
+            $groupid = $groupid;
         }else{
             $this->db->insert('tblgroupcustomer',array_merge($data,$data1));
             $groupid = $this->db->insert_id();
@@ -30,4 +31,20 @@ class Modcutomer extends CI_Model {
 		$sql = $this->db->query("SELECT * FROM tblgroupcustomer WHERE is_active = 1 AND groupid = $gid ")->row();
 		return $sql;
 	}
+	function getlocation()
+    {
+        $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 ")->result();
+        return $sql;
+    }
+    function getgroupcustomer()
+    {
+    	$roleid = $this->session->userdata('roleid');
+    	$where = "";
+    	if($roleid != 1)
+            $where.= " AND byroleid = $roleid";
+    	$query = $this->db->query("SELECT * FROM tblgroupcustomer 
+    							   WHERE is_active = 1 {$where} 
+    							   ORDER BY groupid DESC")->result();
+    	return $query;
+    }
 }
