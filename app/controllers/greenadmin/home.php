@@ -588,4 +588,82 @@ class Home extends CI_Controller {
 		header("Content-type:text/x-json");
 		echo json_encode($data);
 	}
+	// function customer()
+	// {
+	// 	$data['page_header']="Here is Index Page";
+	// 	$data['idfield']=$this->idfields;		
+	// 	$data['thead']=	$this->theads;		
+	// 	$this->load->view('greenadmin/header',$data);
+	// 	$this->load->view('greenadmin/customer');
+	// 	$this->load->view('greenadmin/footer');	
+	// }
+	// function getdata_customer()
+	// {
+	// 	$perpage=$this->input->post('perpage');
+	// 	$s_name=$this->input->post('s_name');
+		
+	// 	$sql="SELECT * FROM tblcustomer WHERE is_active = 1 AND customer_name LIKE '%$s_name%' ORDER BY customerid DESC";
+	// 	$table='';
+	// 	$pagina='';
+	// 	$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("greenadmin/home/getdata_customer"),$perpage);
+	// 	$no=1;
+	// 	$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+	// 	$sql.=" {$limit}";
+	// 	$this->green->setActiveRole($this->session->userdata('roleid'));
+ //        $this->green->setActiveModule($this->input->post('m'));
+ //        $this->green->setActivePage($this->input->post('p'));
+
+	// 	foreach($this->db->query($sql)->result() as $row){
+	// 		$location = $row->locationid;
+	// 		$location = trim($location, ',');
+ //            $arr = explode(',', $location);
+ //            $i = 0; $wheres = ""; $cats = "";
+ //            $num = count($arr);
+ //            $wheres.= " AND (";
+ //            foreach ($arr as $r) {
+ //        		$or = "OR";
+ //                if(++$i == $num)
+ //                {
+ //                    $or = "";
+ //                }
+ //                $wheres.= "propertylocationid = '$r' $or ";
+ //            }
+ //            $wheres.= ")";
+ //            $category = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 {$wheres}")->result();
+ //            $s = count($category); $i=0;
+ //            foreach ($category as $cat) {
+ //            	$or = ",";
+ //                if(++$i == $s)
+ //                {
+ //                    $or = "";
+ //                }
+ //            	$cats.= $cat->locationname.''.$or;
+ //            }
+            
+	// 		$table.= "<tr>
+	// 			 <td class='no'>".$no."</td>
+	// 			 <td class='name '>".$row->customer_name."</td>											
+	// 			 <td class='type '>".$row->phone."</td>							 	
+	// 			 <td class='type '>".$row->email."</td>							 	
+	// 			 <td class='type '>".$row->address."</td>							 	
+	// 			 <td class='country '>".$cats."</td>
+	// 			 <td class='remove_tag no_wrap '>";
+				 
+	// 			 if($this->green->gAction("D")){
+	// 				$table.= "<a><img rel=".$row->customerid." onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+	// 			 }
+	// 			 if($this->green->gAction("U")){
+	// 			 	$table.= "<a href='".site_url('greenadmin/home/approveByemail/'.$row->customerid)."'>Approve by Email</a>";
+	// 			 }
+	// 		$table.= " </td>
+	// 			 </tr>
+	// 			 ";										 
+	// 		$no++;	 
+	// 	}
+
+	// 	$arr['data']=$table;
+	// 	$arr['pagina']=$paging;
+	// 	header("Content-type:text/x-json");
+	// 	echo json_encode($arr);
+	// }
 }
