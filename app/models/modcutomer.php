@@ -47,4 +47,32 @@ class Modcutomer extends CI_Model {
     							   ORDER BY groupid DESC")->result();
     	return $query;
     }
+    function savecustomer($data,$data1,$customerid)
+    {
+        if($customerid!=''){
+            $this->db->where('customerid',$customerid)->update('tblcustomer',$data);
+            $cust = $customerid;
+        }else{
+            $this->db->insert('tblcustomer',array_merge($data,$data1));
+            $cust = $this->db->insert_id();
+        }
+        return $cust;
+    }
+    function getGroup($roleid)
+    {
+        $where = "";
+        if($roleid !=1)
+            $where.= " AND byroleid = $roleid ";
+        $sql = $this->db->query("SELECT * FROM tblgroupcustomer WHERE is_active = 1 {$where} ORDER BY groupid DESC")->result();
+        return $sql;
+    }
+    function getCustomerByid($cid)
+    {
+        $sql = $this->db->query("SELECT * FROM tblcustomer as c 
+                                INNER JOIN tblgroupcustomer as g 
+                                ON c.group_name = g.groupid
+                                WHERE c.is_active = 1 AND c.customerid = $cid
+                                ")->row();
+        return $sql;
+    }
 }

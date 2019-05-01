@@ -12,6 +12,7 @@ class Customer extends CI_Controller {
         $this->load->helper("url");
 
 		$this->theads=array("No"=>'no',
+							 "Group Name"=>'Group Name',
 							 "Customer Name"=>'Customer Name',	 
 							 "Phone"=>'Phone',	
 							 "Email"=>'Email',	
@@ -48,7 +49,7 @@ class Customer extends CI_Controller {
 	{
 		$data['page_header']="Here is Index Page";	
 		$data['idfield']=$this->idfields;		
-		$data['thead']=	$this->theads;	
+		$data['thead']=	$this->theads;
 		$this->load->view('greenadmin/header',$data);
 		$this->load->view('customer/customer');
 		$this->load->view('greenadmin/footer');	
@@ -57,8 +58,17 @@ class Customer extends CI_Controller {
 	{
 		$perpage=$this->input->post('perpage');
 		$s_name=$this->input->post('s_name');
-		
-		$sql="SELECT * FROM tblcustomer WHERE is_active = 1 AND customer_name LIKE '%$s_name%' ORDER BY customerid DESC";
+		$g_name=$this->input->post('group');
+
+		$where = '';
+		if($g_name !='')
+			$where.= " AND g.groupid = $g_name ";
+		$sql=" SELECT * FROM tblcustomer as c 
+			INNER JOIN tblgroupcustomer as g 
+			ON c.group_name = g.groupid
+			WHERE c.is_active = 1 AND c.customer_name LIKE '%$s_name%' 
+			{$where}
+			ORDER BY c.customerid DESC";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("greenadmin/home/getdata_customer"),$perpage);
@@ -97,7 +107,13 @@ class Customer extends CI_Controller {
             }
             
 			$table.= "<tr>
-				 <td class='no'>".$no."</td>
+				 <td class='no'>
+	                <label class='custom-control custom-checkbox'>
+	                    <input type='checkbox' class='custom-control-input' value='".$row->customerid."'>
+	                    <span class='custom-control-indicator'></span>
+	                </label>
+				 </td>
+				 <td class='name '>".$row->groupname."</td>
 				 <td class='name '>".$row->customer_name."</td>											
 				 <td class='type '>".$row->phone."</td>							 	
 				 <td class='type '>".$row->email."</td>							 	
@@ -109,7 +125,7 @@ class Customer extends CI_Controller {
 					$table.= "<a><img rel=".$row->customerid." onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
-				 	$table.= "<a href='".site_url('customer/approveByemail/'.$row->customerid)."'>Approve by Email</a>";
+				 	$table.= "<a><img rel='".$row->customerid."' onclick='update(event);' src='".site_url('assets/images/icons/edit.png')."'></a>";
 				 }
 			$table.= " </td>
 				 </tr>
@@ -229,8 +245,20 @@ class Customer extends CI_Controller {
 	function savecustomer()
 	{
 		$customerid = $this->input->post('customerid');
+		$location = $this->input->post('location');
+		$loc = ''; 
+        $i = 1; 
+        $num = count($location); 
+        $cama = ',';
+        foreach ($location as $key) {
+            $loc.= $key.''.$cama;
+            if(++$i == $num)
+            {
+                $cama = '';
+            }
+        }
         $data = array(
-        	'locationid' => $this->input->post('location'),
+        	'locationid' => $loc,
         	'byroleid' => $this->session->userdata('roleid'),
         	'group_name' => $this->input->post('groupid'),
         	'company' => $this->input->post('company'),
@@ -246,16 +274,24 @@ class Customer extends CI_Controller {
         $data1 = array(
         	'create_date' => date('Y-m-d')
         );
-
         $msg='';
-		$groupids=$this->cust->save($groupid,$groupname,$is_active);
-		if($groupids == $groupid)
-			$msg="Group Name Has Updated...!";
+		$customerids = $this->cust->savecustomer($data,$data1,$customerid);
+		if($customerids == $customerid)
+			$msg="Customer Has Updated...!";
 		else
-			$msg="Group Name Has Created...!";
+			$msg="Customer Has Created...!";
 		
-		$arr=array('msg'=>$msg,'groupid'=>$groupids);
+		$arr=array('msg'=>$msg,'customerid'=>$customerids);
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
+	}
+	function editcustomer($cid)
+	{
+		$data['page_header']="Here is Index Page";	
+		$datas['locs'] = $this->cust->getlocation();
+		$datas['row'] = $this->cust->getCustomerByid($cid);
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('customer/add',$datas);
+		$this->load->view('greenadmin/footer');
 	}
 }

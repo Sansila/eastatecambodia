@@ -47,7 +47,10 @@
                   	<?php 
                   		$groups = $this->cust->getgroupcustomer();
                   		foreach ($groups as $group) {
-                  			echo '<option value="'.$group->groupid.'">'.$group->groupname.'</option>';
+                        $sel = "";
+                        if($row->groupid == $group->groupid)
+                          $sel = "selected";
+                  			echo '<option '.$sel.' value="'.$group->groupid.'">'.$group->groupname.'</option>';
                   		}
 
                   	?>
@@ -103,9 +106,18 @@
                   	<select class="form-control required select2-single" id="txtlocation" multiple="multiple" name="txtlocation">
                   		<option value="">Select</option>
                     	<?php 
+                        $aloc = array();
+                        $row->locationid = trim($row->locationid, ',');
+                        $arr = explode(',', $row->locationid);
+                        foreach ($arr as $r) {
+                          $aloc[$r] = $r;
+                        }
                     		foreach ($locs as $loc) {
+                          $sel = "";
+                          if($aloc[$loc->propertylocationid] == $loc->propertylocationid)
+                            $sel = "selected";
                     	?>
-                    		<option value="<?php echo $loc->propertylocationid?>">
+                    		<option <?php echo $sel;?> value="<?php echo $loc->propertylocationid?>">
                     			<?php echo str_repeat("---- &nbsp;",$loc->level).$loc->locationname;?>
                     		</option>
                     	<?php 
@@ -179,7 +191,7 @@
     	placeholder: 'Location'
 	});
   $('#cancel').click(function(){
-    location.href="<?PHP echo site_url('category/index?m=Nw==&p=NzY=');?>";
+    location.href="<?PHP echo site_url('customer/add?m='.$m.'&p='.$p);?>";
   });
   $(function(){
     //Form Validation
@@ -245,15 +257,17 @@
             email:$("#txtemail").val(),
             address:$("#txtaddress").val(),
             location:$("#txtlocation").val(),
-            remrk:$('#txtremark').val(),
+            remark:$('#txtremark').val(),
             description:$("#txtdescription").val(),
             is_active:is_active
           },
           success:function(data) {
             var formdata = new FormData(form);
-            if(data.groupid!='' && data.groupid!=null){
+            if(data.customerid!='' && data.customerid!=null){
               toasmsg('success',data.msg);
-              location.href='<?php echo site_url("customer/viewgroup?m=".$m.'&p='.$p) ?>';
+              setTimeout(function(){
+                location.href='<?php echo site_url("customer/view?m=".$m.'&p='.$p) ?>';
+              },1000);
             }else{
               toasmsg('error',data.msg);
             }

@@ -20,6 +20,57 @@
 	.colorbg{
 		background: #d0adc7 !important;
 	}
+
+	.custom-checkbox {
+	  min-height: 1rem;
+	  padding-left: 0;
+	  margin-right: 0;
+	  cursor: pointer; 
+	}
+	.custom-checkbox .custom-control-input{
+		display: none;
+	}
+  	.custom-checkbox .custom-control-indicator {
+	    content: "";
+	    display: inline-block;
+	    position: relative;
+	    width: 30px;
+	    height: 10px;
+	    background-color: #818181;
+	    border-radius: 15px;
+	    margin-right: 10px;
+	    -webkit-transition: background .3s ease;
+	    transition: background .3s ease;
+	    vertical-align: middle;
+	    margin: 0 16px;
+	    box-shadow: none; 
+  	}
+    .custom-checkbox .custom-control-indicator:after {
+      	content: "";
+      	position: absolute;
+      	display: inline-block;
+      	width: 18px;
+      	height: 18px;
+      	background-color: #f1f1f1;
+      	border-radius: 21px;
+      	box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+      	left: -2px;
+      	top: -4px;
+      	-webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+      	transition: left .3s ease, background .3s ease, box-shadow .1s ease; 
+    }
+  	.custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+    	background-color: #84c7c1;
+    	background-image: none;
+    	box-shadow: none !important; 
+  	}
+    .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator:after {
+      	background-color: #84c7c1;
+      	left: 15px; 
+    }
+  	.custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+    	box-shadow: none !important; 
+  	}
 </style>
 <?php
 	$m='';
@@ -78,6 +129,17 @@
 									<tr class='remove_tag'>
 										<th></th>
 										<th>
+											<select class="form-control" id="txtsearchgroup" onchange="getdata(1);">
+												<option value="">Select</option>
+												<?php 
+													$roleid = $this->session->userdata('roleid');
+													foreach ($this->cust->getGroup($roleid) as $group) {
+														echo '<option value="'.$group->groupid.'">'.$group->groupname.'</option>';
+													}
+												?>
+											</select>
+										</th>
+										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/> 
 										</th>
 										<th ></th>
@@ -116,66 +178,16 @@
 
 							</div>
 					</div>
+					<div style="padding: 0px 0px 15px;">
+						<button class="btn btn-primary">Send as Telegram</button>
+					</div>
 	      		</div>	      	
 	        </div> 
 	    </div>
    </div>
 </div>
 
-<div class="modal fade bs-example-modal-lg" id="exporttap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="wrapper">
-				<div class="clearfix" id="main_content_outer">
-				    <div id="main_content">
-					    <div class="result_info">
-					    	<div class="col-sm-6">
-					      		<strong>Choose Column To Export</strong>
-					      	</div>
-					      	<div class="col-sm-6" style="text-align: center">
-					      		<strong>
-					      			<center class='visit_error' style='color:red;'></center>
-					      		</strong>	
-					      	</div>
-					    </div>
-					      	<form enctype="multipart/form-data" name="frmvisit" id="frmvisit" method="POST">
-						        <div class="row">
-									<div class="col-sm-12">
-							            	<div class="panel-body">
-							            		<div class='table-responsive'>
-										               <table class='table'>
-										               		<thead >
-										               			<?php
-										               			foreach($thead as $th=>$val){
-										               				if($th!='Action')
-											           					echo "<th>".$th."</th>";	
-											           			}?>
-										               		</thead>
-										               		<tbody >
-										               			<?php
-										               			foreach($thead as $th=>$val){
-										               				if($th!='Action')
-											           					echo "<td align='center'><input type='checkbox' checked class='colch' rel='".$val."'></td>";	
-											           			}?>
-										               		</tbody>
-										               </table>
-											   </div>
-								            </div>
-								    </div> 
-								</div>
-					      </form>
-					</div> 
-			    </div>
-			</div> 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id='btnprint' class="btn btn-primary">Print</button>
-                <button type="button" id='btnexport' class="btn btn-primary">Export</button>
-            </div>
-        </div>                       <!-- /.modal-content -->
-    </div>
-                                <!-- /.modal-dialog -->
-</div>
+
 
 <script type="text/javascript">
 
@@ -258,7 +270,7 @@
 		            		'p':p,
 		            		'page':page,
 		            		's_name':s_name,
-		            		
+		            		'group': $('#txtsearchgroup').val(),
 		            		'perpage':perpage
 		            	},
 		            success:function(data) {
@@ -270,16 +282,12 @@
 		
 		function update(event){
 			    var storeid=jQuery(event.target).attr("rel");
-				location.href="<?PHP echo site_url('greenadmin/home/edit');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
+				location.href="<?PHP echo site_url('customer/editcustomer');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
 			
 		}
-		function previewstore(event){
-			    var storeid=jQuery(event.target).attr("rel");
-				window.open("<?PHP echo site_url('store/store/preview');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>",'_blank');
-			
-		}
+
 		function deletefinding(event){
-			var conf=confirm("Are you Sure to delete this Finding");
+			var conf=confirm("Are you Sure to delete this Customer");
 			if(conf==true){
 				var storeid=jQuery(event.target).attr("rel");
 				var url="<?php echo site_url('customer/delete')?>/"+storeid;
