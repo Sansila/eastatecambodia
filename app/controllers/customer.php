@@ -314,7 +314,11 @@ class Customer extends CI_Controller {
         $where.= ")";
 
         $propertys = $this->db->query("SELECT * FROM tblproperty WHERE p_status = 1 {$where} ")->result();
-
+        $list = '<ul style="list-style: none; text-align: left;">';
+        foreach ($propertys as $pro) {
+        	$list.= "<li><a href='".site_url('site/site/detail/'.$pro->pid.'?text='.$pro->property_name.'&name=browser')."'>http://estatecambodia.com/site/site/detail/".$pro->pid."</a></li>";
+        }
+        $list.="</ul>";
         require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -339,7 +343,7 @@ class Customer extends CI_Controller {
                                 <img src="'.$logo.'" style="width: 140px;">
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                     Dear customer thank you for finding properties in our website please click link below to see property detail: 
-                                    
+                                    '.$list.'
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
                                     <p>Best regards,</p>
