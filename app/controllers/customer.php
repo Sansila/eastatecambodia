@@ -357,7 +357,8 @@ class Customer extends CI_Controller {
         </div>';
         $mail->MsgHTML($description);
         $mail->IsHTML(true);
-        $mail->Send();
+        if($mail->Send())
+        	echo "success";
         $mail->ClearAddresses();
 	}
 }

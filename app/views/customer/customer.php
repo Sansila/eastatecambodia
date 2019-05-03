@@ -179,7 +179,12 @@
 							</div>
 					</div>
 					<div style="padding: 0px 0px 15px;">
-						<button class="btn btn-primary btn-send">Send as Email</button>
+						<div class="col-sm-3">
+							<button class="btn btn-primary btn-send">Send as Email</button>
+						</div>
+						<div class="alert alert-success col-sm-4 hide my-message-email">
+						  	<strong>Success!</strong> The email has been sent.
+						</div>
 					</div>
 	      		</div>	      	
 	        </div> 
@@ -211,7 +216,13 @@
 				            		'email':email
 				            	},
 				            success:function(data) {
-				              console.log(data);
+					            if(data == "success")
+					            {
+				              		$('.my-message-email').removeClass('hide');
+				              		setTimeout(function(){
+				              			$('.my-message-email').addClass('hide');
+				              		},1000);
+				              	}
 				            }
 				        });
 					}
