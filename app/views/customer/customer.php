@@ -217,7 +217,7 @@
 					}
 				});
 			}else{
-				alert('Please check any user to send email');
+				alert('Please check any customer to send email');
 			}
 			
 		});
