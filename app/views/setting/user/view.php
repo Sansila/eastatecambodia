@@ -60,7 +60,7 @@
 								<td><input class='form-control input-sm' id='txts_email' type='text' onkeyup='search(event);' value='' name='txts_email'/></td>
 								<td>
 									<select class="form-control input-sm" id='cbos_role'name='cbos_role' onchange='search(event);'>
-												<option value='0'>Select Role</option>
+												<option value=''>Select Role</option>
 										<?php
 											foreach ($this->role->getallrole() as $role_row) {
 												echo "<option value='$role_row->roleid'>$role_row->role</option>";
@@ -101,11 +101,10 @@
 									$i++;
 								}
 							?>
-								<tr>
-									<td colspan='12' id='pgt'><div style='text-align:center'><ul class='pagination' style='text-align:center'><?php echo $this->pagination->create_links(); ?></ul></div></td>
-								</tr> 
+								
 							</body>
 						</table>
+						<div style='text-align:center'><ul class='pagination' style='text-align:center'><?php echo $this->pagination->create_links(); ?></ul></div>
 					</div>
 				</div>	
 			</div>
@@ -127,7 +126,7 @@
 				var u_name=jQuery('#txts_uname').val();
 				//alert('f_name:'+f_name+"l_name"+l_name+"email:"+email+"roleid:"+roleid+"u_name:"+u_name+"schoolid:"+schoolid+"year:"+year);
 				$.ajax({
-							url:"<?php echo base_url(); ?>index.php/setting/user/search",    
+							url:"<?php echo base_url(); ?>setting/user/search",    
 							data: {'f_name':f_name,'l_name':l_name,'email':email,'roleid':roleid,'u_name':u_name},
 							type: "POST",
 							success: function(data){
