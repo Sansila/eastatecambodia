@@ -100,7 +100,7 @@
                   <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->address)?"$row->address":""; ?>' id="txtaddress" name="txtaddress">
                 </div>
               </div>
-              <label class='col-lg-2 control-label'>Location Name</label>
+              <label class='col-lg-2 control-label'>Find Property In</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   	<select class="form-control required select2-single" id="txtlocation" multiple="multiple" name="txtlocation">

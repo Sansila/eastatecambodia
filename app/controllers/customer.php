@@ -109,17 +109,18 @@ class Customer extends CI_Controller {
 			$table.= "<tr>
 				 <td class='no'>
 	                <label class='custom-control custom-checkbox'>
-	                    <input type='checkbox' class='custom-control-input' value='".$row->customerid."'>
+	                    <input type='checkbox' class='custom-control-input'>
 	                    <span class='custom-control-indicator'></span>
 	                </label>
 				 </td>
-				 <td class='name '>".$row->groupname."</td>
-				 <td class='name '>".$row->customer_name."</td>											
-				 <td class='type '>".$row->phone."</td>							 	
-				 <td class='type '>".$row->email."</td>							 	
-				 <td class='type '>".$row->address."</td>							 	
-				 <td class='country '>".$cats."</td>
-				 <td class='remove_tag no_wrap '>";
+				 <td class='location hide'>".$row->locationid."</td>
+				 <td class='name'>".$row->groupname."</td>
+				 <td class='name'>".$row->customer_name."</td>											
+				 <td class='type'>".$row->phone."</td>							 	
+				 <td class='email'>".$row->email."</td>							 	
+				 <td class='type'>".$row->address."</td>							 	
+				 <td class='country'>".$cats."</td>
+				 <td class='remove_tag no_wrap'>";
 				 
 				 if($this->green->gAction("D")){
 					$table.= "<a><img rel=".$row->customerid." onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
@@ -294,16 +295,65 @@ class Customer extends CI_Controller {
 		$this->load->view('customer/add',$datas);
 		$this->load->view('greenadmin/footer');
 	}
-	function sendTelegram()
+	function sendEmail()
 	{
-		$apiToken = "795337443:AAEILteGOYG6avigY3HAAtpTP4_opTFR8Pk";
+		$location = $this->input->post('loc');
+		$email = $this->input->post('email');
+		$location = trim($location, ',');
+        $arr = explode(',', $location);
+        $num = count($arr);$i=0;
+        $where = " AND (";
+        foreach ($arr as $loc) {
+        	$or = "OR";
+            if(++$i == $num)
+            {
+                $or = "";
+            }
+        	$where.= "lp_id = '$loc' $or ";
+        }
+        $where.= ")";
 
-		$data = [
-		    'chat_id' => '582595177',
-		    'phone_number' => '0964464486',
-		    'text' => 'Hello world!'
-		];
+        $propertys = $this->db->query("SELECT * FROM tblproperty WHERE p_status = 1 {$where} ")->result();
 
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+        require('phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->WordWrap   = 80;
+        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+        $mail->Subject = "Estate Cambodia - Customer looking for propertyies by location";
+        $mail->AddAddress($email);
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<div style="width: 100%">
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
+                <tbody>
+                    <tr>
+                        <td style="width:8px" width="8"></td>
+                        <td>
+                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
+                                <img src="'.$logo.'" style="width: 140px;">
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    Dear customer thank you for finding properties in our website please click link below to see property detail: 
+                                    
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
+                                    <p>Best regards,</p>
+                                    <p>Estate Cambodia Team</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>';
+        $mail->MsgHTML($description);
+        $mail->IsHTML(true);
+        $mail->Send();
+        $mail->ClearAddresses();
 	}
 }

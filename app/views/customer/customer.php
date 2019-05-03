@@ -179,7 +179,7 @@
 							</div>
 					</div>
 					<div style="padding: 0px 0px 15px;">
-						<a href="<?php echo site_url('customer/sendTelegram')?>" class="btn btn-primary">Send as Telegram</a>
+						<button class="btn btn-primary btn-send">Send as Email</button>
 					</div>
 	      		</div>	      	
 	        </div> 
@@ -191,6 +191,29 @@
 
 <script type="text/javascript">
 
+		$(".btn-send").on("click", function() {
+			$('.list').find('tr').each(function(){
+				var ch = $(this).find('td.no label .custom-control-input').is(':checked');
+				var loc = $(this).find('td.location').text();
+				var email = $(this).find('td.email').text();
+				if(ch == true){
+					var url="<?php echo site_url('customer/sendEmail')?>";
+					$.ajax({
+			            url:url,
+			            type:"POST",
+			            datatype:"Json",
+			            async:false,
+			            data:{
+			            		'loc':loc,
+			            		'email':email
+			            	},
+			            success:function(data) {
+			              console.log(data);
+			            }
+			        });
+				}
+			});
+		});
 		
 		$('#export').click(function(){
 			$('#exporttap').modal('show');
@@ -262,22 +285,22 @@
           	
           	var perpage=$('#perpage').val();
 			$.ajax({
-		            url:url,
-		            type:"POST",
-		            datatype:"Json",
-		            async:false,
-		            data:{'m':m,
-		            		'p':p,
-		            		'page':page,
-		            		's_name':s_name,
-		            		'group': $('#txtsearchgroup').val(),
-		            		'perpage':perpage
-		            	},
-		            success:function(data) {
-		              $(".list").html(data.data); console.log(data);
-		              $('.dataTables_paginate').html(data.pagina.pagination);
-		            }
-		          })
+	            url:url,
+	            type:"POST",
+	            datatype:"Json",
+	            async:false,
+	            data:{'m':m,
+	            		'p':p,
+	            		'page':page,
+	            		's_name':s_name,
+	            		'group': $('#txtsearchgroup').val(),
+	            		'perpage':perpage
+	            	},
+	            success:function(data) {
+	              $(".list").html(data.data); console.log(data);
+	              $('.dataTables_paginate').html(data.pagina.pagination);
+	            }
+	        });
 		}
 		
 		function update(event){
