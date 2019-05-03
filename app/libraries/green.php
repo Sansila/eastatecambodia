@@ -179,7 +179,8 @@
 			}
 			$arrModules=$this->getTable("SELECT
 											DISTINCT
-											rolmod.moduleid
+											rolmod.moduleid,
+											rolmod.`order`
 										FROM
 											z_role_module_detail as rolmod
 										{$where}

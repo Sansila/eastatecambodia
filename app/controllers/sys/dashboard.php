@@ -181,7 +181,7 @@ class Dashboard extends CI_Controller {
 		if($uname !="")
 			$where.= " AND user_name LIKE '%$uname%' ";
 
-		$sql="SELECT * FROM admin_user WHERE is_active = 0 AND type_post IS NOT NULL {$where} ";
+		$sql="SELECT * FROM admin_user WHERE is_active = 0 AND (type_post IS NOT NULL OR type_post='join') {$where} ";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("sys/dashboard/getdatainactiveuser"),$perpage);

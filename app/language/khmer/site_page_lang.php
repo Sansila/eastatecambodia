@@ -241,12 +241,16 @@
     $lang['help_us_phone'] = "លេខទូរស័ព្ទ";
     $lang['help_us_email'] = "អាស័យដ្ឋានអ៊ីម៉េល";
     $lang['help_us_address'] = "អាស័យដ្ឋាន";
+    $lang['help_us_gender'] = "ភេទ";
     $lang['help_us_pro_type'] = "ប្រភេទ";
+    $lang['help_us_browse'] = "រកមើល";
     $lang['help_us_description'] = "ពិពណ៌នា";
     $lang['help_us_sale'] = "លក់";
     $lang['help_us_rent'] = "ជួល";
     $lang['help_us_continue'] = "រក្សាទុក";
     $lang['help_us_select'] = "ជ្រើសរើស";
+    $lang['help_us_male'] = "ប្រុស";
+    $lang['help_us_female'] = "ស្រី";
     $lang['help_us_message_false'] = "សូមព្យាយាមម្តងទៀត";
     $lang['help_us_message_success'] = "សូមអរគុណអ្នកដែលបានរកឃើញនៅក្នុងគេហទំព័ររបស់យើង";
     // Site Footer

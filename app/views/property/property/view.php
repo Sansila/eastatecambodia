@@ -140,14 +140,14 @@
 		                                    </select>
 										</th> -->
 										<!-- <th></th> -->
-										<!-- <th >
+										<th >
 											<select class="form-control" id="pro_status" onchange="getdata(1);">
 												<option value="">-select-</option>
 												<option value="1">Sale</option>
 												<option value="2">Rent</option>
 												<option value="3">Rent & Sale</option>
 											</select>
-										</th> -->
+										</th>
 										<th >
 											<select class="form-control" id="available_pro" onchange="getdata(1);">
 												<option value="">-Select-</option>

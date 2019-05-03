@@ -294,4 +294,16 @@ class Customer extends CI_Controller {
 		$this->load->view('customer/add',$datas);
 		$this->load->view('greenadmin/footer');
 	}
+	function sendTelegram()
+	{
+		$apiToken = "795337443:AAEILteGOYG6avigY3HAAtpTP4_opTFR8Pk";
+
+		$data = [
+		    'chat_id' => '582595177',
+		    'phone_number' => '0964464486',
+		    'text' => 'Hello world!'
+		];
+
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
 }

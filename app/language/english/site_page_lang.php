@@ -242,12 +242,16 @@
   $lang['help_us_phone'] = "Phone Number";
   $lang['help_us_email'] = "Email";
   $lang['help_us_address'] = "Address";
+  $lang['help_us_gender'] = "Gender";
+  $lang['help_us_browse'] = "Browse";
   $lang['help_us_pro_type'] = "Property Type";
   $lang['help_us_description'] = "Description";
   $lang['help_us_sale'] = "Sale";
   $lang['help_us_rent'] = "Rent";
   $lang['help_us_continue'] = "Continue";
   $lang['help_us_select'] = "Select";
+  $lang['help_us_male'] = "Male";
+  $lang['help_us_female'] = "Female";
   $lang['help_us_message_false'] = "Failed please try again.";
   $lang['help_us_message_success'] = "Thank you for finding in our website.";
   // Site Footer

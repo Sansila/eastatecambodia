@@ -128,7 +128,7 @@
 
 		        oFReader.onload = function (oFREvent) {
 		            document.getElementById("uploadPreview").src = oFREvent.target.result;
-		             document.getElementById("uploadPreview").style.backgroundImage = "none";
+		            document.getElementById("uploadPreview").style.backgroundImage = "none";
 		        };
 		    };
 			$(function(){

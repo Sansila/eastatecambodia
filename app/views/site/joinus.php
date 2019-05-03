@@ -118,7 +118,7 @@
 				?>
 				<div class="txt-header"><h3><?php echo $this->lang->line('join_title')?></h3></div>
 				<div class="lead pgl-bg-light">
-			        <form method="post" action="<?php echo site_url('site/site/savejoin')?>">
+			        <form enctype="multipart/form-data" method="post" action="<?php echo site_url('site/site/savejoin')?>">
 		                <!-- <h3>Post Property</h3> -->
 		               <div class="row">
 		                    <div class="col-md-6">
@@ -150,9 +150,19 @@
 		                    </div>
 		                    <div class="col-md-6">
 		                    	<div class="form-group">
+		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_gender')?> <span class="text-danger">*</span></label>
+	                                <div class="col-lg-9">
+	                                    <select class="form-control txtName" required style="max-width: 100%;" name="txtgender">
+	                                    	<option value=""><?php echo $this->lang->line('help_us_select');?></option>
+	                                    	<option value="Male"><?php echo $this->lang->line('help_us_male')?></option>
+	                                    	<option value="Female"><?php echo $this->lang->line('help_us_female')?></option>
+	                                    </select>        
+	                                </div>
+		                        </div>
+		                    	<div class="form-group">
 		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_address')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-9">
-	                                    <textarea name="txtAddress" class="form-control txtMsg" required="" style="width: 100%; height: 95px;"></textarea>        
+	                                    <input type="text" name="txtAddress" class="form-control txtMsg" required="">        
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
@@ -161,12 +171,23 @@
 	                                    <textarea name="txtRemark" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>       
 	                                </div>
 		                        </div>
+		                        <div class="form-group">
+		                        	<div class="col-lg-12">
+				                        <div style='border:0px solid #CCCCCC; text-align:center; width:200px; margin:0 auto;'>
+											<img src="<?php echo base_url('assets/upload/No_person.jpg') ?>" id="uploadPreview" style='width:120px; height:150px; margin-bottom:15px'>
+											<input id="uploadImage" accept="image/gif, image/jpeg, image/jpg, image/png" type="file" name="userfile" onchange="PreviewImage();" style="visibility:hidden; display:none" />
+											<input type='button' class="btn btn-success" onclick="$('#uploadImage').click();" value='<?php echo $this->lang->line('help_us_browse')?>' style="font-size: 15px;"/>
+											
+										</div>
+									</div>
+								</div>
 		                    </div>
 		                    <div class="col-md-4">
 			                    <div class="form-group">
 			                        <input type="submit" name="btnSubmit" class="btnContact" value="<?php echo $this->lang->line('help_us_continue')?>" />
 			                    </div>
 			                </div>
+			                <div class="col-md-8"></div>
 		                </div>
 		            </form>
 
@@ -181,4 +202,13 @@
 	setTimeout(function(){ 
 		$('.alert-danger').addClass('hide');
 	}, 3000);
+	function PreviewImage() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("uploadPreview").src = oFREvent.target.result;
+             document.getElementById("uploadPreview").style.backgroundImage = "none";
+        };
+    };
 </script>

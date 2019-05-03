@@ -237,11 +237,9 @@ class Modsite extends CI_Model {
     }
     function savejoin($data)
     {
-        $insert = $this->db->insert('admin_user', $data);
-        if($insert)
-            return true;
-        else
-            return false;
+        $this->db->insert('admin_user', $data);
+        $userid = $this->db->insert_id();
+        return $userid;
     }
     function getHotProperty()
     {

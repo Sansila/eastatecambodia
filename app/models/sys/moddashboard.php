@@ -17,7 +17,7 @@
 		}
 		function CountInactiveUser()
 		{
-			$query = $this->db->query("SELECT Count(*) as total_user FROM admin_user as u WHERE u.is_active = 0 AND u.type_post IS NOT NULL ")->row();
+			$query = $this->db->query("SELECT Count(*) as total_user FROM admin_user as u WHERE u.is_active = 0 AND (u.type_post IS NOT NULL OR u.type_post='join') ")->row();
 			return $query->total_user;
 		}
 		function CountActiveProperty()

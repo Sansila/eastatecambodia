@@ -879,6 +879,8 @@ class Site extends CI_Controller {
 
         $data = array(
             'user_name' => $name,
+            'first_name' => $name,
+            'last_name' => $name,
             'email' => $email,
             'phone' => $phone,
             'address' => $address,
@@ -1128,31 +1130,34 @@ class Site extends CI_Controller {
     }
     function savejoin()
     {
+        
         $name = $this->input->post('txtName');
         $phone = $this->input->post('txtPhone');
         $email = $this->input->post('txtEmail');
         $business = $this->input->post('txtBusiness');
         $address = $this->input->post('txtAddress');
         $remark = $this->input->post('txtRemark');
+        $gender = $this->input->post('txtgender');
         $date = Date('y-m-d');
 
         $data = array(
             'user_name' => $name,
             'first_name' => $name,
             'last_name' => $name,
-            'email' => $phone,
-            'phone' => $email,
+            'email' => $email,
+            'phone' => $phone,
             'business' => $business,
             'address' => $address,
             'remark' => $remark,
             'created_date' => $date,
             'is_active' => 0,
+            'type_post' => 'join',
+            'gender' => $gender,
         );
 
         $join = $this->site->savejoin($data);
 
         if($join){
-            // redirect('site/site/message?m=j', 'refresh');
             require('phpmailer/class.phpmailer.php');
             $mail = new PHPMailer();
             $mail->IsSMTP();
@@ -1164,7 +1169,7 @@ class Site extends CI_Controller {
             $mail->Mailer   = "smtp";
             $mail->WordWrap   = 80;
             $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-            $mail->Subject = "Estate Cambodia";
+            $mail->Subject = "Estate Cambodia - Joining Us";
             $mail->AddAddress($email);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
             $description = '<div style="width: 100%">
@@ -1176,7 +1181,7 @@ class Site extends CI_Controller {
                                 <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
                                     <img src="'.$logo.'" style="width: 140px;">
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
-                                        Thank you for join us, Our team will review soon.
+                                        Thank you for joining us, Our team will review soon.
                                     </div>
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                         <p>Best regards,</p>
@@ -1192,12 +1197,28 @@ class Site extends CI_Controller {
 
             $mail->MsgHTML($description);
             $mail->IsHTML(true);
-            if(!$mail->Send())
+            if(!$mail->Send()){
                 echo "<p class='error'>Problem in Sending Mail.</p>";
-            else
-                redirect('site/site/message?m=success', 'refresh');
-        }
-        else{
+            }else{
+                $config['upload_path'] ='./assets/upload/adminuser/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['file_name']  = "$join.png";
+                $config['overwrite']=true;
+                $config['file_type']='image/png';
+
+                $this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload('userfile'))
+                {
+                    $error = array('error' => $this->upload->display_errors());
+                    redirect('site/site/message?m=success', 'refresh');         
+                }
+                else
+                {               
+                    redirect('site/site/message?m=success', 'refresh');
+                }
+            }       
+        }else{
             redirect('site/site/join?m=error', 'refresh');
         }
     }
@@ -1640,50 +1661,6 @@ class Site extends CI_Controller {
         }
         header("Content-type:text/x-json");
         echo json_encode($arr);
-    }
-    function customer($id)
-    {
-        $datas['name'] = "";
-        $datas['profile'] = $this->site->getSiteprofile();
-        $datas['menu'] = $this->site->get_menu();
-        $data['locs'] = $this->site->getlocation();
-        $data['id'] = $id;
-        $this->load->view('site/contain/header',$datas);
-        $this->load->view('site/customer',$data);
-        $this->load->view('site/contain/footer',$datas);
-    }
-    function savecustomer($id)
-    {
-        $location = $this->input->post('location');
-        $loc = ''; 
-        $i = 1; 
-        $num = count($location); 
-        $cama = ',';
-        foreach ($location as $key) {
-            $loc.= $key.''.$cama;
-            if(++$i == $num)
-            {
-                $cama = '';
-            }
-        }
-        $data = array(
-            'locationid' => $loc,
-            'customer_type' => $this->input->post('customertype'),
-            'customer_name' => $this->input->post('txtName'),
-            'phone' => $this->input->post('txtPhone'),
-            'email' => $this->input->post('txtEmail'),
-            'address' => $this->input->post('txtAddress'),
-            'description' => $this->input->post('txtRemark'),
-            'create_date' => date('Y-m-d')
-        );
-
-        $save = $this->site->savecustomer($data);
-
-        if($save)
-            redirect('site/site/customer/'.$id.'?type='.$id.'&m=success', 'refresh');
-        else
-            redirect('site/site/customer/'.$id.'?type='.$id.'&?m=error', 'refresh');
-        
     }
 }
 ?>

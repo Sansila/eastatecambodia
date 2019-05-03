@@ -20,7 +20,7 @@ class Property extends CI_Controller {
 							// "Level" => "Level",
 							// "Owner" => "Owner",
 							// "Hit" => "Hit",
-							// "Property Type" => "Property Type",
+							"Property Type" => "Property Type",
 							"Visibled"=>'visibled',
 							"User Name"=>'User Name',							 	
 							);
@@ -34,7 +34,7 @@ class Property extends CI_Controller {
 							// "កម្រិត" => "កម្រិត",
 							// "ម្ចាស់អចលនៈទ្រព្យ" => "ម្ចាស់អចលនៈទ្រព្យ",
 							// "មើល" => "មើល",
-							// "ប្រភេទ" => "ប្រភេទ",
+							"ប្រភេទ" => "ប្រភេទ",
 							"បង្ហាញ"=>'បង្ហាញ',
 							"ឈ្មោះអ្នកប្រើ" => 'ឈ្មោះអ្នកប្រើ',						 	
 							);
@@ -296,8 +296,8 @@ class Property extends CI_Controller {
 			$where.= " AND pl.agent_id = '$user' ";
 		if($p_type !="")
 			$where.= " AND pt.typeid = '$p_type' ";
-		if($s_id !="")
-			$where.= " AND pl.pid = '$s_id' ";
+		// if($s_name !="")
+		// 	$where.= " AND pl.pid = '$s_name' ";
 		if($user_add !="")
 			$where.= " AND u.user_name LIKE '%$user_add%' ";
 		if($p_status !="")
@@ -339,7 +339,7 @@ class Property extends CI_Controller {
 		on u.userid = pl.agent_id
 		left join tblpropertylocation l 
 		on pl.lp_id = l.propertylocationid
-		WHERE pl.p_status <> 0 {$where} AND pl.property_name LIKE '%$s_name%'  order by pl.create_date DESC";
+		WHERE pl.p_status <> 0 {$where} AND CONCAT(pl.property_name,pl.pid) LIKE '%$s_name%'  order by pl.create_date DESC";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);
@@ -445,7 +445,8 @@ class Property extends CI_Controller {
 				 <a href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>P".$row->pid.'-'.$row->property_name."</a></td>
 				 <td class='name'>$".$row->price."</td>		
 				 <td class='name'>".$row->typename."</td>
-				 <td class='name'>".$loc."</td>		
+				 <td class='name'>".$loc."</td>	
+				 <td class='name'>".$property_type."</td>		
 				 <td class='type'>".$visibled."</td>
 				 <td class='user'>".$row->user_name."</td>
 				 </tr>
@@ -453,9 +454,8 @@ class Property extends CI_Controller {
 		            <td><i class='fa fa-minus' aria-hidden='true'></i></td>
 		            <td>Hit: ".$row->hit."</td>
 		          	<td>Date: ".$row->create_date."</td> 
-		            <td colspan='2'>Owner: ".$owner."</td>
-		            <td colspan='2'>Level: ".$level."</td> 
-		            <td>Status: ".$property_type."</td>
+		            <td colspan='3'>Owner: ".$owner."</td>
+		            <td colspan='3'>Level: ".$level."</td> 
 		        </tr>";										 
 			$i++;	 
 		}

@@ -73,12 +73,12 @@ class user extends CI_Controller {
 
 		if ( ! $this->upload->do_upload('userfile'))
 		{
-			$error = array('error' => $this->upload->display_errors());			
+			$error = array('error' => $this->upload->display_errors());	
+			redirect($_SERVER['HTTP_REFERER']);		
 		}
 		else
 		{				
-		
-			
+			redirect($_SERVER['HTTP_REFERER']);
 		}
 	}
 	function edit($id){
@@ -240,8 +240,6 @@ class user extends CI_Controller {
 			$this->db->insert('admin_user',$data);
 			$id=$this->db->insert_id();			
 			$this->do_upload($id);
-			
-			redirect('setting/user/');
 		}
 		
 	}
@@ -255,6 +253,7 @@ class user extends CI_Controller {
 		$f_name=$this->input->post('txtf_name');
 		$l_name=$this->input->post('txtl_name');
 		$username=$this->input->post('txtu_name');
+		$realpwd=$this->input->post('txtpwd');
 		$pwd=md5($this->input->post('txtpwd'));
 		$email=$this->input->post('txtemail');
 		$role=$this->input->post('cborole');
@@ -263,6 +262,7 @@ class user extends CI_Controller {
 		$gender=$this->input->post('gender');
 		$address=$this->input->post('address');
 		$count=$this->user->getuservalidateup($username,$email,$userid);
+
 		if($count!=0){
 			$data1['query']=$this->user->getuserrow($userid);
 			$data['error']=(object) array('error'=>"<div style='text-align:center; color:red;'>This username and your email has been created before Please choose other username </div>");
@@ -273,7 +273,7 @@ class user extends CI_Controller {
 			$this->load->view('greenadmin/footer');
 		}else{
 			if($role==1)
-			$admin=1;
+				$admin=1;
 			else
 				$admin=0;
 			$u_row=$this->user->getuserrow($userid);
@@ -307,10 +307,9 @@ class user extends CI_Controller {
 			}
 			$this->db->where('userid',$userid);
 			$this->db->update('admin_user',$data);
+			$this->sendEmail($username,$realpwd,$email);
 			$this->do_upload($userid);
-			redirect('setting/user/');
 		}
-		
 	}
 	
 	function delete($id){
@@ -324,6 +323,62 @@ class user extends CI_Controller {
 	{
 		$this->db->where('userid',$id);
 		$this->db->delete('admin_user');
+	}
+	function sendEmail($username,$realpwd,$email)
+	{
+		require('phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->WordWrap   = 80;
+
+        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+        $mail->Subject = "Estate Cambodia - User Acount Approved";
+        $mail->AddAddress($email);
+
+        $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $description = '<div style="width: 100%">
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
+                <tbody>
+                    <tr>
+                        <td style="width:8px" width="8"></td>
+                        <td>
+                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                <img src="'.$logo.'" style="width: 140px;">
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    Your account has been created.
+                                    <ul style="list-style: none; text-align: left;">
+                                    	<li>- User Name:'.$username.'</li>
+                                        <li>- Password: '.$realpwd.'</li>
+                                        <li>- * Please change your password after login.</li>
+                                    </ul>
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    Please click the following link to login your account.
+                                    <a href="estatecambodia.com/login">estatecambodia.com/login</a>
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    <p>Best regards,</p>
+                                    <p>Estate Cambodia Team</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:8px" width="8"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>';
+
+        $mail->MsgHTML($description);
+        $mail->IsHTML(true);
+        if(!$mail->Send()){
+            echo "<p class='error'>Problem in Sending Mail.</p>";
+        }
 	}
 }
 

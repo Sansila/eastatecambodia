@@ -179,7 +179,7 @@
 							</div>
 					</div>
 					<div style="padding: 0px 0px 15px;">
-						<button class="btn btn-primary">Send as Telegram</button>
+						<a href="<?php echo site_url('customer/sendTelegram')?>" class="btn btn-primary">Send as Telegram</a>
 					</div>
 	      		</div>	      	
 	        </div> 

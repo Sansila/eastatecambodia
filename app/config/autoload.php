@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('parser','database','session','green','gsite');
+$autoload['libraries'] = array('parser','database','session','green','gsite','telegram/telegram_lib');
 
 
 /*
