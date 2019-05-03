@@ -270,7 +270,7 @@ class user extends CI_Controller {
 				$admin=0;
 			$u_row=$this->user->getuserrow($userid);
 			if($u_row->password!=$this->input->post('txtpwd')){
-				$data=array(
+				$datas=array(
 					'first_name'=>$f_name,
 					'last_name'=>$l_name,
 					'user_name'=>$username,
@@ -284,7 +284,7 @@ class user extends CI_Controller {
 					'is_active'=>1
 				);
 			}else{
-					$data=array(
+					$datas=array(
 					'first_name'=>$f_name,
 					'last_name'=>$l_name,
 					'user_name'=>$username,
@@ -298,7 +298,7 @@ class user extends CI_Controller {
 				);
 			}
 			$this->db->where('userid',$userid);
-			$this->db->update('admin_user',$data);
+			$this->db->update('admin_user',$datas);
 			$this->sendEmail($username,$realpwd,$email);
 			$this->do_upload($userid);
 		}

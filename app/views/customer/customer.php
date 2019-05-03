@@ -192,27 +192,34 @@
 <script type="text/javascript">
 
 		$(".btn-send").on("click", function() {
-			$('.list').find('tr').each(function(){
-				var ch = $(this).find('td.no label .custom-control-input').is(':checked');
-				var loc = $(this).find('td.location').text();
-				var email = $(this).find('td.email').text();
-				if(ch == true){
-					var url="<?php echo site_url('customer/sendEmail')?>";
-					$.ajax({
-			            url:url,
-			            type:"POST",
-			            datatype:"Json",
-			            async:false,
-			            data:{
-			            		'loc':loc,
-			            		'email':email
-			            	},
-			            success:function(data) {
-			              console.log(data);
-			            }
-			        });
-				}
-			});
+			var fcheck = $('.custom-control-input').is(':checked');
+			if(fcheck == true)
+			{
+				$('.list').find('tr').each(function(){
+					var ch = $(this).find('td.no label .custom-control-input').is(':checked');
+					var loc = $(this).find('td.location').text();
+					var email = $(this).find('td.email').text();
+					if(ch == true){
+						var url="<?php echo site_url('customer/sendEmail')?>";
+						$.ajax({
+				            url:url,
+				            type:"POST",
+				            datatype:"Json",
+				            async:false,
+				            data:{
+				            		'loc':loc,
+				            		'email':email
+				            	},
+				            success:function(data) {
+				              console.log(data);
+				            }
+				        });
+					}
+				});
+			}else{
+				alert('Please check any user to send email');
+			}
+			
 		});
 		
 		$('#export').click(function(){
