@@ -17,12 +17,13 @@ class Property extends CI_Controller {
 							"Price"=>'Price',
 							"Category"=> "Category",
 							"Location"=> "Location",
-							// "Level" => "Level",
-							// "Owner" => "Owner",
 							// "Hit" => "Hit",
 							"Property Type" => "Property Type",
 							"Visibled"=>'visibled',
-							"User Name"=>'User Name',							 	
+							"User Name"=>'User Name',
+							"Level" => "Level",
+							"Owner" => "Owner",
+							"Project Name"=>'Project Name',					 	
 							);
 		$this->theadkh=array("លេខរាង"=>'លេខរាង',
 							// "ថ្ងៃខែ"=>"ថ្ងៃខែ",
@@ -31,12 +32,13 @@ class Property extends CI_Controller {
 							"តម្លៃ"=>'តម្លៃ',
 							"ប្រភេទអចនទ្រព្យ"=> "ប្រភេទអចនទ្រព្យ",
 							"ទីតាំង"=> "ទីតាំង",
-							// "កម្រិត" => "កម្រិត",
-							// "ម្ចាស់អចលនៈទ្រព្យ" => "ម្ចាស់អចលនៈទ្រព្យ",
 							// "មើល" => "មើល",
 							"ប្រភេទ" => "ប្រភេទ",
 							"បង្ហាញ"=>'បង្ហាញ',
-							"ឈ្មោះអ្នកប្រើ" => 'ឈ្មោះអ្នកប្រើ',						 	
+							"ឈ្មោះអ្នកប្រើ" => 'ឈ្មោះអ្នកប្រើ',	
+							"កម្រិត" => "កម្រិត",
+							"ម្ចាស់អចលនៈទ្រព្យ" => "ម្ចាស់អចលនៈទ្រព្យ",
+							"ឈ្មោះគម្រោង"=>'ឈ្មោះគម្រោង',					 	
 							);
 		$this->idfield="categoryid";
 		
@@ -282,6 +284,8 @@ class Property extends CI_Controller {
 		$levels = $this->input->post('level');
 		$owner = $this->input->post('owner');
 		$avialable_pro = $this->input->post('avialable_pro');
+		$price = $this->input->post('price');
+		$project = $this->input->post('project');
 
 		$where = "";
 		$var = $this->session->all_userdata();
@@ -312,6 +316,10 @@ class Property extends CI_Controller {
 			$where .= " AND pl.relative_owner = '$owner' ";
 		if($avialable_pro !="")
 			$where .= " AND pl.p_status = '$avialable_pro' ";
+		if($price !='')
+			$where .= " AND pl.price LIKE '%$price%' ";
+		if($project !="")
+			$where.= " AND pro.projectid = $project ";
 
 		$sql="SELECT pl.pid,
 					 pl.property_name,
@@ -327,18 +335,27 @@ class Property extends CI_Controller {
 					 pl.p_type,
 					 pl.direct_sale,
 					 pt.typeid,
+					 pl.housesize,
 					 pt.typename,
+					 pl.property_tag,
+					 pl.internal_remark,
+					 pl.address,
+					 pl.projectid,
 					 u.userid,
 					 u.user_name,
 					 l.propertylocationid,
-					 l.lineage
+					 l.lineage,
+					 pro.projectid,
+					 pro.project_name
 		FROM tblproperty pl
 		left join tblpropertytype pt
 		on pl.type_id = pt.typeid
 		left join admin_user as u
 		on u.userid = pl.agent_id
-		left join tblpropertylocation l 
+		left join tblpropertylocation l
 		on pl.lp_id = l.propertylocationid
+		left join tblproject as pro
+		on pl.projectid = pro.projectid
 		WHERE pl.p_status <> 0 {$where} AND CONCAT(pl.property_name,pl.pid) LIKE '%$s_name%'  order by pl.create_date DESC";
 		$table='';
 		$pagina='';
@@ -356,6 +373,7 @@ class Property extends CI_Controller {
 			$level ="";
 			$owner ="";
 			$property_type ="";
+			
 			if($row->p_status==1)
 				$visibled="Available";
 			if($row->p_status == 2)
@@ -366,12 +384,14 @@ class Property extends CI_Controller {
 				$visibled="Rented";
 			if($row->p_status == 5)
 				$visibled="NA";
+
 			if($row->p_type == 1)
 				$property_type = "Sale";
 			if($row->p_type == 2)
 				$property_type = "Rent";
 			if($row->p_status == 3)
 				$property_type = "Rent & Sale";
+
 			if($row->pro_level == 1)
 				$level = "Hot";
 			if($row->pro_level == 2)
@@ -442,20 +462,26 @@ class Property extends CI_Controller {
 			$table.= " 
 				 </td>
 				 <td class='name' style='text-align:left !important'>
-				 <a href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>P".$row->pid.'-'.$row->property_name."</a></td>
-				 <td class='name'>$".$row->price."</td>		
+				 	<a href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>P".$row->pid.'-'.$row->property_name."</a>
+				 </td>
+				 <td class='name'>$".$row->price."</td>
 				 <td class='name'>".$row->typename."</td>
 				 <td class='name'>".$loc."</td>	
 				 <td class='name'>".$property_type."</td>		
 				 <td class='type'>".$visibled."</td>
 				 <td class='user'>".$row->user_name."</td>
+				 <td class='name'>".$level."</td>	
+				 <td class='name'>".$owner."</td>
+				 <td class='name'>".$row->project_name."</td>
 				 </tr>
 				 <tr id='group-of-rows-".$i."' class='collapse' style='background:#ccc'>
-		            <td><i class='fa fa-minus' aria-hidden='true'></i></td>
-		            <td>Hit: ".$row->hit."</td>
-		          	<td>Date: ".$row->create_date."</td> 
-		            <td colspan='3'>Owner: ".$owner."</td>
-		            <td colspan='3'>Level: ".$level."</td> 
+		            <td style='text-align:left !important'><i class='fa fa-minus' aria-hidden='true'></i></td>
+		            <td style='text-align:left !important'>Size: ".$row->housesize."</td>
+		          	<td style='text-align:left !important' colspan='2'>Address: ".$row->address."</td>
+		            <td style='text-align:left !important'>Hit: ".$row->hit."</td>
+		            <td style='text-align:left !important' colspan='2'>Pro-Tag: ".$row->property_tag."</td> 
+		            <td style='text-align:left !important' colspan='3'>In-Remark: ".$row->internal_remark."</td> 
+		            <td style='text-align:left !important' colspan='2'>Date: ".$row->create_date."</td> 
 		        </tr>";										 
 			$i++;	 
 		}

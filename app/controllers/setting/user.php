@@ -89,9 +89,10 @@ class user extends CI_Controller {
 		$this->load->view('setting/user/view',$data);
 		$this->load->view('greenadmin/footer');
 	}
-	function edit_isinactive($id)
+	function edit_isinactive($id,$approve)
 	{
 		$data1['query']=$this->user->getuserrowinactive($id);
+		$data1['approve'] = $approve;
 		$this->load->view('greenadmin/header');
 		$this->load->view('setting/user/edit',$data1);
 		$data['query']=$this->user->getuser();
@@ -253,6 +254,7 @@ class user extends CI_Controller {
 		$phone=$this->input->post('txtphone');
 		$gender=$this->input->post('gender');
 		$address=$this->input->post('address');
+		$approve = $this->input->post('txtapprove');
 		$count=$this->user->getuservalidateup($username,$email,$userid);
 
 		if($count!=0){
@@ -299,7 +301,7 @@ class user extends CI_Controller {
 			}
 			$this->db->where('userid',$userid);
 			$this->db->update('admin_user',$datas);
-			$this->sendEmail($username,$realpwd,$email);
+			$this->sendEmail($username,$realpwd,$email,$approve);
 			$this->do_upload($userid);
 		}
 	}
@@ -316,7 +318,7 @@ class user extends CI_Controller {
 		$this->db->where('userid',$id);
 		$this->db->delete('admin_user');
 	}
-	function sendEmail($username,$realpwd,$email)
+	function sendEmail($username,$realpwd,$email,$approve)
 	{
 		require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
@@ -330,8 +332,13 @@ class user extends CI_Controller {
         $mail->WordWrap   = 80;
 
         $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-        $mail->Subject = "Estate Cambodia - User Acount Approved";
+        $mail->Subject = "Estate Cambodia - User Acount Has Been Changed";
         $mail->AddAddress($email);
+
+        if($approve !="")
+        	$pwd = '<li>- Password: '.$realpwd.'</li>';
+        else
+        	$pwd = "";
 
         $logo = "http://estatecambodia.com/assets/img/logo.png";
         $description = '<div style="width: 100%">
@@ -343,12 +350,12 @@ class user extends CI_Controller {
                             <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
                                 <img src="'.$logo.'" style="width: 140px;">
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                    Your account has been created.
+                                    Your account has been Changed.
                                     <ul style="list-style: none; text-align: left;">
                                     	<li>- User Name:'.$username.'</li>
-                                        <li>- Password: '.$realpwd.'</li>
-                                        <li>- * Please change your password after login.</li>
+                                        '.$pwd.'
                                     </ul>
+                                    <p style="font-style: italic;">* Please change your password after login.</p>
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                     Please click the following link to login your account.

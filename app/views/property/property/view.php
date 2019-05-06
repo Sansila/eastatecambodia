@@ -95,7 +95,9 @@
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/>
 										</th>
-										<th></th>
+										<th>
+											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_price'/>
+										</th>
 										<th >
 										   <select class="form-control input-sm" id="pro_type" name="pro_type" onchange="getdata(1);">
 										   		<option value="">-select-</option>
@@ -161,7 +163,33 @@
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_user_name'/>
 										</th>
-										
+										<th>
+											<select class="form-control input-sm" id="srclevel" name="srclevel" onchange="getdata(1);">
+												<option value="">-select-</option>
+												<option value="1">Hot</option>
+												<option value="2">Sponsored</option>
+												<option value="3">Free</option>
+											</select>
+										</th>
+										<th>
+											<select class="form-control input-sm" id="srcowner" name="srcowner" onchange="getdata(1);">
+												<option value="">-select-</option>
+												<option value="1">I am the owner</option>
+												<option value="2">I know owner directly</option>
+												<option value="3">I do not know owner</option>
+											</select>
+										</th>
+										<th>
+											<select class="form-control input-sm" id="project" name="project" onchange="getdata(1);">
+												<option value="">-select-</option>
+												<?php 
+													$projects = $this->db->query("SELECT * FROM tblproject WHERE is_active = 1")->result();
+													foreach ($projects as $pro) {
+														echo '<option value="'.$pro->projectid.'">'.$pro->project_name.'</option>';
+													}
+												?>
+											</select>
+										</th>
 									</tr>
 								</thead>
 								<tbody class='list'></tbody>
@@ -334,9 +362,11 @@
 			var p_status = $("#pro_status").val();
 			var pro_loc = $("#pro_loc").val();
 			var search_date = $("#search_date").val();
-			var level = $('#pro_level').val();
-			var owner = $('#relative_owner').val();
+			var level = $('#srclevel').val();
+			var owner = $('#srcowner').val();
 			var avialable_pro = $("#available_pro").val();
+			var price = $('#s_store_price').val();
+			var project = $('#project').val();
           	
           	var perpage=$('#perpage').val();
 			$.ajax({
@@ -357,7 +387,9 @@
 							'date': search_date,
 							'level': level,
 							'owner': owner,
-							'avialable_pro': avialable_pro
+							'avialable_pro': avialable_pro,
+							'price': price,
+							'project': project
 		            	},
 		            success:function(data) {
 		              $(".list").html(data.data); console.log(data);

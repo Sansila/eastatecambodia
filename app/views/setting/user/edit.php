@@ -33,6 +33,7 @@
 		        <div class="table-responsive" id="tab_print">
 						<form enctype="multipart/form-data" accept-charset="utf-8" method='post' id="defaultform" action='<?php echo site_url('setting/user/update');?>'>
 							<input type='text' id='txtuserid' style='display:none;' name='txtuserid' value="<?php if(isset($query->userid)) echo $query->userid; else echo "";?>">
+							<input type='text' id='txtapprove' style='display:none;' name='txtapprove' value="<?php if(isset($approve)) echo $approve; else echo "";?>">
 							<table align='center' width="900">
 								<tr>
 									<td><label for="emailField">First Name</label></td>

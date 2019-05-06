@@ -931,7 +931,8 @@
 	}
 	function updateuser(event){
 		var u_id=jQuery(event.target).attr("rel");
-		location.href="<?PHP echo site_url('setting/user/edit_isinactive');?>/"+u_id;
+		var approve = 1;
+		location.href="<?PHP echo site_url('setting/user/edit_isinactive');?>/"+u_id+'/'+approve;
 	}
 	function deletefinding(event){
 		var conf=confirm("Are you Sure to delete this Finding");
