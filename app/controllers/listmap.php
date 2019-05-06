@@ -5,7 +5,6 @@ class Listmap extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->library('pagination');
-        $this->load->library('encrypt');
         $this->load->helper(array('form', 'url'));
         $this->load->model("site/modsite","site");
         date_default_timezone_set("Asia/Bangkok");
