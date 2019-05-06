@@ -55,10 +55,10 @@ class user extends CI_Controller {
 		header("Content-type:text/x-json");
 		echo json_encode($msg);
 	}
-	function do_upload($id='')
+	function do_upload($id)
 	{
-		if($id=='')
-			$id=$this->session->userdata('userid');
+		// if($id=='')
+		// 	$id=$this->session->userdata('userid');
 		if(!file_exists('./assets/upload/adminuser/')){
 		    if(mkdir('./assets/upload/adminuser/',0755,true)){
 		        return true;
@@ -73,7 +73,7 @@ class user extends CI_Controller {
 
 		if ( ! $this->upload->do_upload('userfile'))
 		{
-			$error = array('error' => $this->upload->display_errors());	
+			$error = array('error' => $this->upload->display_errors());
 			redirect($_SERVER['HTTP_REFERER']);		
 		}
 		else
@@ -301,8 +301,8 @@ class user extends CI_Controller {
 			}
 			$this->db->where('userid',$userid);
 			$this->db->update('admin_user',$datas);
-			$this->sendEmail($username,$realpwd,$email,$approve);
-			$this->do_upload($userid);
+			//$this->do_upload($userid);
+			$this->sendEmail($username,$realpwd,$email,$approve,$userid);
 		}
 	}
 	
@@ -318,7 +318,7 @@ class user extends CI_Controller {
 		$this->db->where('userid',$id);
 		$this->db->delete('admin_user');
 	}
-	function sendEmail($username,$realpwd,$email,$approve)
+	function sendEmail($username,$realpwd,$email,$approve,$userid)
 	{
 		require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
@@ -378,6 +378,7 @@ class user extends CI_Controller {
         if(!$mail->Send()){
             echo "<p class='error'>Problem in Sending Mail.</p>";
         }
+        $this->do_upload($userid);
 	}
 }
 

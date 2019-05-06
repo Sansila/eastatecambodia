@@ -238,6 +238,7 @@
     $lang['help_us_title'] = "ជួយស្វែងរកអចលនទ្រព្យ";
     $lang['help_us_name'] = "ឈ្មោះរបស់អ្នក";
     $lang['help_us_pro_category'] = "ប្រភេទអចលនទ្រព្យ";
+    $lang['help_us_pro_location'] = "តំបន់";
     $lang['help_us_phone'] = "លេខទូរស័ព្ទ";
     $lang['help_us_email'] = "អាស័យដ្ឋានអ៊ីម៉េល";
     $lang['help_us_address'] = "អាស័យដ្ឋាន";

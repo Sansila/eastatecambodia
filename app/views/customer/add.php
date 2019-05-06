@@ -72,10 +72,14 @@
                   <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->company)?"$row->company":""; ?>' id="txtcompany" name="txtcompany">
                 </div>
               </div>
-              <label class='col-lg-2 control-label'>Title</label>
+              <label class='col-lg-2 control-label'>Gender</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->title)?"$row->title":""; ?>' id="txttitle" name="txttitle">
+                  <select class="form-control required" name="gender" id="gender">
+                    <option value="">-Select-</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -86,62 +90,119 @@
                   <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->phone)?"$row->phone":""; ?>' id="txtphone" name="txtphone">
                 </div>
               </div>
+              <label class='col-lg-2 control-label'>Title</label>
+              <div class="col-lg-4"> 
+                <div class="col-md-12">
+                  <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->title)?"$row->title":""; ?>' id="txttitle" name="txttitle">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
               <label class='col-lg-2 control-label'>Email</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->email)?"$row->email":""; ?>' id="txtemail" name="txtemail">
                 </div>
               </div>
-            </div>
-            <div class="form-group">
               <label class='col-lg-2 control-label'>Address</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <input type="text"  class="form-control input-sm required" value='<?php echo isset($row->address)?"$row->address":""; ?>' id="txtaddress" name="txtaddress">
                 </div>
               </div>
+            </div>
+            <div class="form-group">
               <label class='col-lg-2 control-label'>Find Property In</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  	<select class="form-control required select2-single" id="txtlocation" multiple="multiple" name="txtlocation">
-                  		<option value="">Select</option>
-                    	<?php 
+                    <select class="form-control required select2-single txtlocation" id="txtlocation" multiple="multiple" name="txtlocation" onchange="getproperty();">
+                      <option value="">Select</option>
+                      <?php 
                         $aloc = array();
                         $row->locationid = trim($row->locationid, ',');
                         $arr = explode(',', $row->locationid);
                         foreach ($arr as $r) {
                           $aloc[$r] = $r;
                         }
-                    		foreach ($locs as $loc) {
+                        foreach ($locs as $loc) {
                           $sel = "";
                           if($aloc[$loc->propertylocationid] == $loc->propertylocationid)
                             $sel = "selected";
-                    	?>
-                    		<option <?php echo $sel;?> value="<?php echo $loc->propertylocationid?>">
-                    			<?php echo str_repeat("---- &nbsp;",$loc->level).$loc->locationname;?>
-                    		</option>
-                    	<?php 
-                    		}
-                    	?>
-                  	</select>
+                      ?>
+                        <option <?php echo $sel;?> value="<?php echo $loc->propertylocationid?>">
+                          <?php echo str_repeat("---- &nbsp;",$loc->level).$loc->locationname;?>
+                        </option>
+                      <?php 
+                        }
+                      ?>
+                    </select>
                 </div>
               </div>
-            </div>
-            <div class="form-group">
               <label class='col-lg-2 control-label'>Remark</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <input type="text"  class="form-control input-sm" value='<?php echo isset($row->remark)?"$row->remark":""; ?>' id="txtremark">
                 </div>
               </div>
+            </div>
+            <div class="form-group">
+              <label class='col-lg-2 control-label'>Property Category</label>
+              <div class="col-lg-4"> 
+                <div class="col-md-12">
+                  <select class="form-control select2-category txtcategory required" name="txtcategory" id="txtcategory" multiple="" onchange="getproperty();">
+                    <option>-Select-</option>
+                    <?php 
+                      $cates = $this->cust->getPropertyCategory();
+                      $allcate = array();
+                      $row->categoryid = trim($row->categoryid, ',');
+                      $arrcate = explode(',', $row->categoryid);
+                      foreach ($arrcate as $rc) {
+                        $allcate[$rc] = $rc;
+                      }
+                      foreach ($cates as $cate) {
+                        $sel = "";
+                        if($allcate[$cate->typeid] == $cate->typeid)
+                          $sel = "selected";
+                        echo '<option '.$sel.' value="'.$cate->typeid.'">'.$cate->typename.'</option>';
+                      }
+                    ?>
+                  </select>
+                </div>
+              </div>
+              <label class='col-lg-2 control-label'>Property Result</label>
+              <div class=" col-lg-4"> 
+                <div class="col-md-12">
+                  <select class="form-control select2-property txtproperty required" name="txtproperty" id="txtproperty" multiple="">
+                    <option>-Select-</option>
+                    <?php 
+                      if(isset($row->pid))
+                      {
+                          $result = $this->cust->getSelectedProperty($row->pid,$row->categoryid,$row->locationid);
+                          $allpro = array();
+                          $row->pid = trim($row->pid, ',');
+                          $arrpro = explode(',', $row->pid);
+                          foreach ($arrpro as $pr) {
+                            $allpro[$pr] = $pr;
+                          }
+                          foreach ($result as $pro) {
+                            $sel = '';
+                            if($allpro[$pro->pid] == $pro->pid)
+                              $sel = "selected";
+                            echo '<option '.$sel.' value="'.$pro->pid.'">P'.$pro->pid.' - '.$pro->property_name.'</option>';
+                          }
+                      }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
               <label class='col-lg-2 control-label'>Description</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <input type="text"  class="form-control input-sm " value='<?php echo isset($row->description)?"$row->description":""; ?>' id="txtdescription">
                 </div>
               </div>
-            </div>
-            <div class="form-group">
               <label class='col-lg-2 control-label'><?php echo $this->lang->line('mn_active')?></label>
               <div class=" col-lg-3"> 
                 <div class="col-md-2">
@@ -190,9 +251,19 @@
     	allowClear:true,
     	placeholder: 'Location'
 	});
+  $(".select2-category").select2({
+    allowClear:true,
+    placeholder: 'Category'
+  });
+  $(".select2-property").select2({
+    allowClear:true,
+    placeholder: 'Property'
+  });
   $('#cancel').click(function(){
     location.href="<?PHP echo site_url('customer/add?m='.$m.'&p='.$p);?>";
   });
+  
+
   $(function(){
     //Form Validation
     $("#basic_validate").submit(function(e){
@@ -259,7 +330,11 @@
             location:$("#txtlocation").val(),
             remark:$('#txtremark').val(),
             description:$("#txtdescription").val(),
-            is_active:is_active
+            is_active:is_active,
+            category: $("#txtcategory").val(),
+            gender: $("#gender").val(),
+            property: $("#txtproperty").val()
+
           },
           success:function(data) {
             var formdata = new FormData(form);
@@ -288,5 +363,28 @@
       }      
     });
   });
+
+
+  function getproperty()
+  {
+    var url="<?php echo site_url('customer/searchproperty')?>";
+    var location = $('.txtlocation').val();
+    var category = $('.txtcategory').val();
+    var property = '';
+    $.ajax({
+        url:url,
+        type:"POST",
+        datatype:"Json",
+        async:false,
+        data:{  
+          location: location,
+          category: category,
+          property: property
+        },
+        success:function(data) {
+          $(".txtproperty").html(data.data);
+        }
+      });
+  }
 
 </script>

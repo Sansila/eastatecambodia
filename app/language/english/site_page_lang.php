@@ -239,6 +239,7 @@
   $lang['help_us_title'] = "HELP ME FIND PROPERTY";
   $lang['help_us_name'] = "Your Name";
   $lang['help_us_pro_category'] = "Property Category";
+  $lang['help_us_pro_location'] = "Property Location";
   $lang['help_us_phone'] = "Phone Number";
   $lang['help_us_email'] = "Email";
   $lang['help_us_address'] = "Address";

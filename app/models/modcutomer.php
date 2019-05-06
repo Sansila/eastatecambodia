@@ -75,4 +75,67 @@ class Modcutomer extends CI_Model {
                                 ")->row();
         return $sql;
     }
+    function getPropertyCategory()
+    {
+        $sql = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1")->result();
+        return $sql;
+    }
+    function getSelectedProperty($pid,$category,$location)
+    {
+        $where = "";
+
+        if($location !="")
+        {
+            $location = trim($location, ',');
+            $arrl = explode(',', $location);
+
+            $num = count($arrl);$i=0;
+            $where.= " AND (";
+            foreach ($arrl as $loc) {
+                $or = "OR";
+                if(++$i == $num)
+                {
+                    $or = "";
+                }
+                $where.= " p.lp_id = $loc $or ";
+            }
+            $where.= ")";
+        }
+
+        if($category !="")
+        {
+            $category = trim($category, ',');
+            $arrc = explode(',', $category);
+
+            $num = count($arrc);$i=0;
+            $where.= " AND (";
+            foreach ($arrc as $cat) {
+                $or = "OR";
+                if(++$i == $num)
+                {
+                    $or = "";
+                }
+                $where.= " p.type_id = $cat $or ";
+            }
+            $where.= ")";
+        }
+
+        $query = $this->db->query("SELECT p.pid,
+                         p.type_id,
+                         p.lp_id,
+                         p.property_name
+                        FROM tblproperty as p
+                        WHERE p.p_status = 1 {$where} ORDER BY p.pid DESC")->result();
+
+        return $query;
+    }
+    function getallproperty()
+    {
+        $query = $this->db->query("SELECT p.pid,
+                                          p.property_name
+                                   FROM tblproperty as p
+                                   WHERE p.p_status = 1 ORDER BY p.pid DESC")->result();
+
+        return $query;
+    }
 }

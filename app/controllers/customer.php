@@ -9,6 +9,7 @@ class Customer extends CI_Controller {
 	public function __construct(){
         parent::__construct();
         $this->load->model("Modcutomer","cust");
+        $this->load->helper(array('form', 'url'));
         $this->load->helper("url");
 
 		$this->theads=array("No"=>'no',
@@ -247,9 +248,18 @@ class Customer extends CI_Controller {
 	{
 		$customerid = $this->input->post('customerid');
 		$location = $this->input->post('location');
-		$loc = ''; 
+		$category = $this->input->post('category');
+		$property = $this->input->post('property');
+		$gender = $this->input->post('gender');
+
+		$loc = '';
+		$cate = '';
+		$prop = ''; 
         $i = 1; 
         $num = count($location); 
+        $numcat = count($category); 
+        $numpro = count($property); 
+
         $cama = ',';
         foreach ($location as $key) {
             $loc.= $key.''.$cama;
@@ -258,6 +268,21 @@ class Customer extends CI_Controller {
                 $cama = '';
             }
         }
+        foreach ($category as $cat) {
+        	$cate.= $cat.''.$cama;
+            if(++$i == $numcat)
+            {
+                $cama = '';
+            }
+        }
+        foreach ($property as $pro) {
+        	$prop.= $pro.''.$cama;
+            if(++$i == $numpro)
+            {
+                $cama = '';
+            }
+        }
+
         $data = array(
         	'locationid' => $loc,
         	'byroleid' => $this->session->userdata('roleid'),
@@ -271,6 +296,9 @@ class Customer extends CI_Controller {
         	'description' => $this->input->post('description'),
         	'remark' => $this->input->post('remark'),
         	'is_active' => $this->input->post('is_active'),
+        	'gender' => $gender,
+        	'pid' => $prop,
+        	'categoryid' => $cate
         );
         $data1 = array(
         	'create_date' => date('Y-m-d')
@@ -360,5 +388,61 @@ class Customer extends CI_Controller {
         if($mail->Send())
         	echo "success";
         $mail->ClearAddresses();
+	}
+	function searchproperty()
+	{
+		$location = $this->input->post('location');
+		$category = $this->input->post('category');
+		$property = $this->input->post('property');
+
+		$where = "";
+
+        if($location !="")
+        {
+            $where.= " AND (";
+            $num = count($location);$i=0;
+            foreach ($location as $loc) {
+                $or = "OR";
+                if(++$i == $num)
+                {
+                    $or = "";
+                }
+                $where.= " p.lp_id = $loc $or ";
+            }
+            $where.= ")";
+        }
+
+        if($category !="")
+        {
+            $where.= " AND (";
+            $num = count($category);$i=0;
+            foreach ($category as $cat) {
+                $or = "OR";
+                if(++$i == $num)
+                {
+                    $or = "";
+                }
+                $where.= " p.type_id = $cat $or ";
+            }
+            $where.= ")";
+        }
+
+        $query = "SELECT p.pid,
+                         p.type_id,
+                         p.lp_id,
+                         p.property_name
+                        FROM tblproperty as p
+                        WHERE p.p_status = 1 {$where} ORDER BY p.pid DESC
+               ";
+
+        $all = $this->db->query($query)->result();
+        $option = "<option value=''>-Select-</option>";
+
+        foreach ($all as $pro) {
+        	$option.='<option value="'.$pro->pid.'">P'.$pro->pid.' - '.$pro->property_name.'</option>';
+        }
+        $arr['data']=$option;
+        header('Content-Type: application/json');
+        echo json_encode($arr);
 	}
 }

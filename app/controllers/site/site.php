@@ -1262,13 +1262,21 @@ class Site extends CI_Controller {
     }
     function savefind()
     {
-        $c = ""; $t = "";
+        $c = ""; $t = ""; $l ="";
         $cates = $this->input->post('txtpro_cate');
+        $locat = $this->input->post('txtpro_loc');
         $email = $this->input->post('txtEmail');
+        $gender = $this->input->post('txtgender');
+        $types = $this->input->post('txtpro_type');
+
         foreach ($cates as $cate) {
             $c.= $cate.',';
         }
-        $types = $this->input->post('txtpro_type');
+
+        foreach ($locat as $loc) {
+            $l.= $loc.',';
+        }
+        
         foreach ($types as $type) {
             $t.= $type.',';
         }
@@ -1281,7 +1289,9 @@ class Site extends CI_Controller {
                     'fpcategory' => $c,
                     'fpstatus' => $t,
                     'fcreate_date' => date('Y-m-d'),
-                    'fdescription' => $this->input->post('txtDes')
+                    'fdescription' => $this->input->post('txtDes'),
+                    'fplocation' => $l,
+                    'fgender' => $gender
                     );
         $this->db->insert('tblfindproperty',$data);
 

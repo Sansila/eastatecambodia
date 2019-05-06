@@ -170,13 +170,22 @@
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_address')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
-	                                    <textarea name="txtAddress" class="form-control txtAddress" required="" style="width: 100%; height: 95px;"></textarea>        
+	                                    <textarea name="txtAddress" class="form-control txtAddress" required="" style="width: 100%; height: 75px;"></textarea>        
+	                                </div>
+		                        </div>
+		                        <div class="form-group">
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_gender')?> <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <select class="form-control txtName" name="txtgender" required="" style="max-width: 100%;" required="">
+	                                    	<option value="">-Select-</option>
+	                                    	<option value="Male">Male</option>
+	                                    	<option value="Female">Female</option>
+	                                    </select>      
 	                                </div>
 		                        </div>
 		                        
 		                    </div>
 		                    <div class="col-md-6">
-		                    	
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_pro_category')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8">
@@ -192,21 +201,32 @@
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_pro_location')?> <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <select class="form-control txtName select2-single" multiple="multiple" name="txtpro_loc[]" style="max-width: 100%;" required="">
+	                                    	<option value="">-Select-</option>
+	                                    	<?php 
+	                                    		$locats = $this->site->getPropertyLocation();
+	                                    		foreach ($locats as $loc) {
+	                                    			echo '<option value="'.$loc->propertylocationid.'">
+							                    			'.str_repeat("---- &nbsp;",$loc->level).$loc->locationname.'
+							                    		  </option>';
+	                                    		}
+	                                    	?>
+	                                    </select>
+	                                </div>
+		                        </div>
+		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_pro_type')?> <span class="text-danger">*</span></label>
 	                                <div class="col-lg-8" style="margin-bottom: 15px;">
-	                                    <!-- <select name="txtpro_type" class="form-control txtName" style="max-width: 100%;" required="">
-	                                    	<option value="">-Select-</option>
-	                                    	<option value="1">Sale</option>
-	                                    	<option value="2">Rent</option>
-	                                    </select> -->
-	                                    <input type="checkbox" value="1" name="txtpro_type[]"><spand style="font-size: 14px;"><?php echo $this->lang->line('help_us_sale')?></spand>
+	                                    <input type="checkbox" value="1" name="txtpro_type[]" required=""><spand style="font-size: 14px;"><?php echo $this->lang->line('help_us_sale')?></spand>
 	                                    <input type="checkbox" value="2" name="txtpro_type[]"><spand style="font-size: 14px;"><?php echo $this->lang->line('help_us_rent')?></spand>
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_description')?></label>
 	                                <div class="col-lg-8">
-	                                    <textarea name="txtDes" class="form-control txtAddress" style="width: 100%; height: 139px;"></textarea>       
+	                                    <textarea name="txtDes" class="form-control txtAddress" style="width: 100%; height: 95px;"></textarea>       
 	                                </div>
 		                        </div>
 		                    </div>

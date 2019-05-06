@@ -179,8 +179,21 @@
 							</div>
 					</div>
 					<div style="padding: 0px 0px 15px;">
-						<div class="col-sm-3">
-							<button class="btn btn-primary btn-send">Send as Email</button>
+						<div class="col-sm-5">
+							<div class="col-sm-8">
+								<select class="form-control select-property slproperty" name="slproperty" id="slproperty" multiple="">
+									<option value="">Property List</option>
+									<?php 
+										$propertys = $this->cust->getallproperty();
+										foreach ($propertys as $pros) {
+											echo '<option value= "'.$pros->pid.'">'.$pros->property_name.'</option>';
+										}
+									?>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<button class="btn btn-primary btn-send">Send as Email</button>
+							</div>
 						</div>
 						<div class="alert alert-success col-sm-4 hide my-message-email">
 						  	<strong>Success!</strong> The email has been sent.
@@ -196,10 +209,20 @@
 
 <script type="text/javascript">
 
+	$('.select-property').select2({
+    	allowClear:true,
+    	placeholder: 'Property List'
+	});
+
 		$(".btn-send").on("click", function() {
 			var fcheck = $('.custom-control-input').is(':checked');
-			if(fcheck == true)
+			var property = $('.slproperty').val();
+			if(fcheck == false)
 			{
+				alert('Please check any customer to send email');
+			}else if(property == null){
+				alert('Please select any property to send email');
+			}else{
 				$('.list').find('tr').each(function(){
 					var ch = $(this).find('td.no label .custom-control-input').is(':checked');
 					var loc = $(this).find('td.location').text();
@@ -227,8 +250,6 @@
 				        });
 					}
 				});
-			}else{
-				alert('Please check any customer to send email');
 			}
 			
 		});
