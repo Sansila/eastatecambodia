@@ -9,7 +9,7 @@
     	function getCountAllPropertyByCategoryID($cid,$cname,$userid,$roleid)
     	{
             $where = "";
-            if($roleid == 1)
+            if($roleid == 1 || $roleid == 2)
                 $where.= "";
             else
                 $where.= " AND p.agent_id = $userid";
@@ -34,7 +34,7 @@
         function getallProperty($userid,$roleid)
         {
             $where = "";
-            if($roleid == 1)
+            if($roleid == 1 || $roleid == 2)
                 $where.= "";
             else
                 $where.= " AND p.agent_id = $userid";
@@ -44,7 +44,7 @@
         function getCountStatus($userid,$roleid)
         {
             $where = "";
-            if($roleid == 1)
+            if($roleid == 1 || $roleid == 2)
                 $where.= "";
             else
                 $where.= " AND agent_id = $userid";
@@ -56,8 +56,9 @@
         }
         function getCountStatusBySale($userid,$roleid)
         {
+            $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
             $where = "";
-            if($roleid == 1)
+            if($rol->is_admin == 1 || $rol->is_admin == 2)
                 $where.= "";
             else
                 $where.= " AND agent_id = $userid ";
@@ -71,8 +72,9 @@
         }
         function getCountStatusByRent($userid,$roleid)
         {
+            $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
             $where = "";
-            if($roleid == 1)
+            if($rol->is_admin == 1 || $rol->is_admin == 2)
                 $where.= "";
             else
                 $where.= " AND agent_id = $userid ";
@@ -85,8 +87,9 @@
             return $query;
         }
         function getCountStatusByRentAndSale($userid,$roleid){
+            $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
             $where = "";
-            if($roleid == 1)
+            if($rol->is_admin == 1 || $rol->is_admin == 2)
                 $where.= "";
             else
                 $where.= " AND agent_id = $userid ";

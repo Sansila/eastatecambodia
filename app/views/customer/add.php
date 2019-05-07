@@ -116,7 +116,6 @@
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                     <select class="form-control required select2-single txtlocation" id="txtlocation" multiple="multiple" name="txtlocation" onchange="getproperty();">
-                      <option value="">Select</option>
                       <?php 
                         $aloc = array();
                         $row->locationid = trim($row->locationid, ',');
@@ -150,7 +149,6 @@
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <select class="form-control select2-category txtcategory required" name="txtcategory" id="txtcategory" multiple="" onchange="getproperty();">
-                    <option>-Select-</option>
                     <?php 
                       $cates = $this->cust->getPropertyCategory();
                       $allcate = array();
@@ -173,7 +171,6 @@
               <div class=" col-lg-4"> 
                 <div class="col-md-12">
                   <select class="form-control select2-property txtproperty required" name="txtproperty" id="txtproperty" multiple="">
-                    <option>-Select-</option>
                     <?php 
                       if(isset($row->pid))
                       {

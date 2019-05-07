@@ -327,26 +327,113 @@ class Customer extends CI_Controller {
 	{
 		$location = $this->input->post('loc');
 		$email = $this->input->post('email');
+		$property = $this->input->post('property');
+
 		$location = trim($location, ',');
         $arr = explode(',', $location);
-        $num = count($arr);$i=0;
+        $num = count($arr);
+        $numpro = count($property);
+        $i=0;
         $where = " AND (";
-        foreach ($arr as $loc) {
+        // foreach ($arr as $loc) {
+        // 	$or = "OR";
+        //     if(++$i == $num)
+        //     {
+        //         $or = "";
+        //     }
+        // 	$where.= "lp_id = '$loc' $or ";
+        // }
+        // $where.= ") AND (";
+        foreach ($property as $p) {
         	$or = "OR";
-            if(++$i == $num)
+            if(++$i == $numpro)
             {
                 $or = "";
             }
-        	$where.= "lp_id = '$loc' $or ";
+        	$where.= "p.pid = '$p' $or ";
         }
         $where.= ")";
 
-        $propertys = $this->db->query("SELECT * FROM tblproperty WHERE p_status = 1 {$where} ")->result();
-        $list = '<ul style="list-style: none; text-align: left;">';
+        $propertys = $this->db->query("SELECT 
+        								p.pid,
+        								p.lp_id,
+        								p.type_id,
+        								p.property_name,
+        								p.description,
+        								p.price,
+        								p.p_type,
+        								l.propertylocationid,
+        								l.locationname,
+        								pt.typeid,
+        								pt.typename
+        							   FROM tblproperty as p
+        							   RIGHT JOIN tblpropertylocation l 
+        							   ON p.lp_id = l.propertylocationid
+        							   RIGHT JOIN tblpropertytype as pt
+        							   ON p.type_id = pt.typeid
+        							   WHERE p.p_status = 1 {$where} ")->result();
+
+        $list = '<div class="container">
+        		<div id="products" class="row list-group" style="width: 100%;margin: 0 auto;">';
+
         foreach ($propertys as $pro) {
-        	$list.= "<li><a href='".site_url('site/site/detail/'.$pro->pid.'?text='.$pro->property_name.'&name=browser')."'>http://estatecambodia.com/site/site/detail/".$pro->pid."</a></li>";
+        	$img = $this->cust->getImage($pro->pid);
+        	$images = '';
+        	$property_type = '';
+        	if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url)))
+        		$images = base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+        	else
+        		$images = base_url('assets/upload/noimage.jpg');
+
+        	if($pro->p_type == 1)
+				$property_type = "Sale";
+			if($pro->p_type == 2)
+				$property_type = "Rent";
+			if($pro->p_type == 3)
+				$property_type = "Rent & Sale";
+
+        	$list.= '<div class="item  col-xs-4 col-lg-4" style="width: 299px; height:535px; border: 1px solid; float: left; margin: 10px;">
+                        <div class="thumbnail" style=";padding: 0px;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;">
+                            <img class="group list-group-image" src="'.$images.'" alt="" style="float: left; margin-bottom: 20px;" width="300" height="187"/>
+                            <div style="padding: 10px; color: white; background: green;">
+                                P'.$pro->pid.' | '.$pro->typename.' | '.$property_type.'
+                            </div>
+                            <div class="caption" style="padding: 10px; ">
+                                <h4 class="group inner list-group-item-heading" style="height:43px; overflow: hidden;">
+                                	<a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="text-decoration: none;">
+                                    '.$pro->property_name.'
+                                    </a>
+                                </h4>
+                                <div class="group inner list-group-item-text" style="margin: 0 0 11px; height:81px; overflow:hidden;">
+                                	'.$pro->description.'
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6" style="width: 160px;float: left;">
+                                        <p class="lead" style="color: #d84949;">
+                                            $'.$pro->price.'
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: green;color: white;">
+                                        <p class="lead" >
+                                            <a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="color:white; text-decoration: none;">
+                                                Detail
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <p style="clear: both;"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid; padding: 10px;">
+                            '.$pro->locationname.'
+                        </div>
+                   	</div>
+                   	';
         }
-        $list.="</ul>";
+        $list.="</div><div style='clear: both;'></div></div>";
+
+        //echo $list; die();
+
         require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -358,7 +445,7 @@ class Customer extends CI_Controller {
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
         $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-        $mail->Subject = "Estate Cambodia - Customer looking for propertyies by location";
+        $mail->Subject = "Estate Cambodia - Customer looking for properties";
         $mail->AddAddress($email);
         $logo = "http://estatecambodia.com/assets/img/logo.png";
         $description = '<div style="width: 100%">
@@ -370,7 +457,7 @@ class Customer extends CI_Controller {
                             <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
                                 <img src="'.$logo.'" style="width: 140px;">
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                    Dear customer thank you for finding properties in our website please click link below to see property detail: 
+                                    Dear customer thank you for finding properties in our website : 
                                     '.$list.'
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 

@@ -39,8 +39,9 @@ class Modcutomer extends CI_Model {
     function getgroupcustomer()
     {
     	$roleid = $this->session->userdata('roleid');
+        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
     	$where = "";
-    	if($roleid != 1)
+    	if($rol->is_admin != 1 || $rol->is_admin != 2)
             $where.= " AND byroleid = $roleid";
     	$query = $this->db->query("SELECT * FROM tblgroupcustomer 
     							   WHERE is_active = 1 {$where} 
@@ -60,8 +61,9 @@ class Modcutomer extends CI_Model {
     }
     function getGroup($roleid)
     {
+        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
         $where = "";
-        if($roleid !=1)
+        if($rol->is_admin != 1 || $rol->is_admin != 2)
             $where.= " AND byroleid = $roleid ";
         $sql = $this->db->query("SELECT * FROM tblgroupcustomer WHERE is_active = 1 {$where} ORDER BY groupid DESC")->result();
         return $sql;
@@ -137,5 +139,10 @@ class Modcutomer extends CI_Model {
                                    WHERE p.p_status = 1 ORDER BY p.pid DESC")->result();
 
         return $query;
+    }
+    function getImage($pid)
+    {
+        $sql = $this->db->query("SELECT * FROM tblgallery as g WHERE g.pid = $pid ")->row();
+        return $sql;
     }
 }

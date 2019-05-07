@@ -294,7 +294,7 @@ class Property extends CI_Controller {
 		$role = $this->session->userdata('roleid');
 		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $role ")->row();
 
-		if($role == 1)
+		if($rol->is_admin == 1 || $rol->is_admin == 2)
 			$where.= "";
 		else
 			$where.= " AND pl.agent_id = '$user' ";
@@ -389,7 +389,7 @@ class Property extends CI_Controller {
 				$property_type = "Sale";
 			if($row->p_type == 2)
 				$property_type = "Rent";
-			if($row->p_status == 3)
+			if($row->p_type == 3)
 				$property_type = "Rent & Sale";
 
 			if($row->pro_level == 1)
@@ -781,7 +781,7 @@ class Property extends CI_Controller {
 	}
 	function getPropertyTag()
 	{
-		$data = $this->db->query("SELECT property_tag as label FROM tblproperty WHERE property_tag is not null")->result();
+		$data = $this->db->query("SELECT property_tag as label FROM tblproperty WHERE property_tag is not null GROUP BY property_tag ")->result();
 		header("Content-type:text/x-json");
 		echo json_encode($data);
 	}

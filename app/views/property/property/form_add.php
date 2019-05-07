@@ -45,7 +45,7 @@
       <?php 
         $roleid=$this->session->userdata('roleid'); 
       ?>
-      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo ""; ?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+      <a href="<?php if($roleid == 1 || $roleid == 2) echo base_url('/sys/dashboard'); else echo ""; ?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
       <a href="<?php echo base_url("property/property/add?m=$m&p=$p")?>" title="Go to Store List" class="tip-bottom"><?php echo $this->lang->line('p_header')?></a>
       <a href='#' class="current"><?php if(isset($row->article_id)) echo 'Edit Property'; else echo $this->lang->line('p_header');?></a>
     </div>
@@ -117,7 +117,7 @@
                                         <?php
                                         $locat = "";
                                         $userid = $this->session->userdata('userid');
-                                        if($rol->is_admin == 1)
+                                        if($rol->is_admin == 1 || $rol->is_admin == 2)
                                         {
                                             $locat=$this->db->query("SELECT * FROM admin_user WHERE is_active='1'")->result();
                                         }else{
@@ -197,7 +197,7 @@
                         </div>
                         <?php 
                             $hides = "hide";
-                            if($rol->is_admin == 1)
+                            if($rol->is_admin == 1 || $rol->is_admin == 2)
                                 $hides = "";
                             else
                                 $hides = "hide";
@@ -248,7 +248,7 @@
                                         if($row->pro_level == 3)
                                             $sel2 ="selected";
 
-                                        if($rol->is_admin == 1){
+                                        if($rol->is_admin == 1 || $rol->is_admin == 2){
                                         ?>
                                             <option value="0">Please Select</option>
                                             <option <?php echo $sel;?> value="1"><?php echo $this->lang->line('p_hot')?></option>

@@ -332,7 +332,8 @@
 							AND moduleid='".$this->getActiveModule()."' 
 							AND pageid='".$this->getActivePage()."'";
 					
-			$res=$this->getValue($sqlAction)-0;
+			//$res=$this->getValue($sqlAction)-0;
+			$res=$this->getValue($sqlAction);
 			if($res==1 || $this->getActiveRole()==1){
 				return true;
 			}else{

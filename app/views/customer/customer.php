@@ -1,4 +1,13 @@
-
+<?php
+	$m='';
+	$p='';
+	if(isset($_GET['m'])){
+	    $m=$_GET['m'];
+	}
+	if(isset($_GET['p'])){
+	    $p=$_GET['p'];
+	}
+?>
 <style type="text/css">
 	table tbody tr td img{width: 20px; margin-right: 10px}
 	a,.sort{cursor: pointer;}
@@ -178,15 +187,14 @@
 
 							</div>
 					</div>
-					<div style="padding: 0px 0px 15px;">
+					<div style="padding: 0px 0px 25px; margin-bottom: 25px">
 						<div class="col-sm-5">
 							<div class="col-sm-8">
 								<select class="form-control select-property slproperty" name="slproperty" id="slproperty" multiple="">
-									<option value="">Property List</option>
 									<?php 
 										$propertys = $this->cust->getallproperty();
 										foreach ($propertys as $pros) {
-											echo '<option value= "'.$pros->pid.'">'.$pros->property_name.'</option>';
+											echo '<option value= "'.$pros->pid.'">P'.$pros->pid.' - '.$pros->property_name.'</option>';
 										}
 									?>
 								</select>
@@ -236,14 +244,16 @@
 				            async:false,
 				            data:{
 				            		'loc':loc,
-				            		'email':email
+				            		'email':email,
+				            		'property': property
 				            	},
 				            success:function(data) {
+				            	console.log(data);
 					            if(data == "success")
 					            {
 				              		$('.my-message-email').removeClass('hide');
 				              		setTimeout(function(){
-				              			$('.my-message-email').addClass('hide');
+				              			location.href = "<?PHP echo site_url('customer/view');?>/?<?php echo "m=$m&p=$p" ?>";
 				              		},1000);
 				              	}
 				            }

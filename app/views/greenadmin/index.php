@@ -113,7 +113,8 @@ h3{
       ?>
       <?php 
         $where = "";
-        if($roleid == 1)
+        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
+        if($rol->is_admin == 1 || $rol->is_admin == 2)
             $where.= "";
         else
             $where.= " AND p.agent_id = $userid";

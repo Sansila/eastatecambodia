@@ -135,7 +135,9 @@ class Home extends CI_Controller {
 		}
 		$where .= ")";
 
-        if($roleid == 1)
+		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
+
+        if($rol->is_admin == 1 || $rol->is_admin == 2)
             $where.= "";
         else
             $where.= " AND p.agent_id = $userid ";
@@ -450,7 +452,8 @@ class Home extends CI_Controller {
 		$perdate = $this->input->post('perdate');
 		$userid = ""; $user = "";
 		$roleid = $this->session->userdata('roleid');
-		if($roleid == 1){
+		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
+		if($rol->is_admin == 1 || $rol->is_admin == 2){
 			$userid = ""; $user = "";
 		}
 		else{

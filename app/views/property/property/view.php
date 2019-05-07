@@ -47,8 +47,9 @@
  <div id="breadcrumb">
  	  <?php 
         $roleid=$this->session->userdata('roleid'); 
+        $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
       ?>
-      <a href="<?php if($roleid == 1) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
+      <a href="<?php if($rol->is_admin == 1 || $rol->is_admin == 2) echo base_url('/sys/dashboard'); else echo "";?>" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
       <a href='#' class="current"><?php echo $this->lang->line('p_header_list')?> : <?php echo $this->pro->countAllproperty($userid);?> <?php echo $this->lang->line('record')?></a>
  </div>
 <div class="wrapper">

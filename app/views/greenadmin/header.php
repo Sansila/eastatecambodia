@@ -157,7 +157,8 @@
 			<div id="header">
 				<?php
 				$url = "";
-					if($roleid == 1)
+					$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
+					if($rol->is_admin == 1 || $rol->is_admin == 2)
 						$url = site_url('sys/dashboard');
 					else
 						$url = site_url('greenadmin/home');
