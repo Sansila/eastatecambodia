@@ -116,6 +116,47 @@
 	font-size: 14px;
 	margin-top: 0px;
 }
+.dropdown-menu-price{
+	background: white !important;
+}
+.dropdown-price {
+    position: relative;
+    border: 1px solid #eee;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.caret{
+	float: right;
+    margin-top: 5px;
+}
+.dropdown-toggle-drop{
+	width: 100%;
+    text-align: left;
+    padding: 12px 15px 12px 15px;
+}
+.dropdown-menus {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
 </style>
 <div role="main" class="main">
 	<section class="pgl-intro" style="padding-top: 30px; margin-bottom: 0px;">
@@ -224,6 +265,45 @@
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
+		                        	<label class='col-lg-4 control-label'>Price </label>
+		                        	<div class="col-lg-8">
+		                        		<div class="dropdown dropdown-price">
+									        <button id="min-max-price-range" class="dropdown-toggle dropdown-toggle-drop" href="#" data-toggle="dropdown">Price <strong class="caret"></strong>
+									        </button>
+									        <div class="dropdown-menus dropdown-menu-price col-sm-12" style="padding:10px;">
+									            <form class="row">
+									                <div class="col-xs-5">
+									                    <input class="form-control price-label" placeholder="Min" data-dropdown-id="price-min"/>
+									                </div>
+									                <div class="col-xs-2"> - </div>
+									                <div class="col-xs-5">
+									                    <input class="form-control price-label" placeholder="Max" data-dropdown-id="price-max"/>
+									                </div>
+													<div class="clearfix"></div>
+									                <ul id="price-min" class="col-sm-12 price-range list-unstyled">
+									                    <li data-value="0">0</li>
+									                    <li data-value="10">10</li>
+									                    <li data-value="20">20</li>
+									                    <li data-value="30">30</li>
+									                    <li data-value="40">40</li>
+									                    <li data-value="50">50</li>
+									                    <li data-value="60">60</li>
+									                </ul>
+									                <ul id="price-max" class="col-sm-12 price-range text-right list-unstyled hide">
+									                    <li data-value="0">0</li>
+									                    <li data-value="10">10</li>
+									                    <li data-value="20">20</li>
+									                    <li data-value="30">30</li>
+									                    <li data-value="40">40</li>
+									                    <li data-value="50">50</li>
+									                    <li data-value="60">60</li>
+									                </ul>
+									            </form>
+									        </div>
+									    </div>
+		                        	</div>
+		                        </div>
+		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_description')?></label>
 	                                <div class="col-lg-8">
 	                                    <textarea name="txtDes" class="form-control txtAddress" style="width: 100%; height: 95px;"></textarea>       
@@ -255,4 +335,30 @@
 		allowClear:false,
 		placeholder: 'Select'
 	});
+	//======= dropdown daul form ========//
+	$('#min-max-price-range').click(function (event) {
+	    setTimeout(function(){ $('.price-label').first().focus();   },0);
+	    $('.dropdown-menus').toggle();
+	});
+	var priceLabelObj;
+	$('.price-label').focus(function (event) {
+	    priceLabelObj=$(this);
+	    $('.price-range').addClass('hide');
+	    $('#'+$(this).data('dropdownId')).removeClass('hide');
+	});
+
+	$(".price-range li").click(function(){
+	    priceLabelObj.attr('value', $(this).attr('data-value'));
+	    var curElmIndex=$( ".price-label" ).index( priceLabelObj );
+	    var nextElm=$( ".price-label" ).eq(curElmIndex+1);
+
+	    if(nextElm.length){
+	        $( ".price-label" ).eq(curElmIndex+1).focus();
+	    }else{
+	        $('#min-max-price-range').dropdown('toggle');
+	    }
+	});
+	// $(document).on("click", function () {
+	//     $('.dropdown-menus').hide();
+	// });
 </script>
