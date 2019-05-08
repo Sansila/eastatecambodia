@@ -200,7 +200,7 @@
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<button class="btn btn-primary btn-send">Send as Email</button>
+								<button class="btn btn-primary btn-send">Send as Email <i class="fa fa-spinner fa-spin hide"></i></button>
 							</div>
 						</div>
 						<div class="alert alert-success col-sm-4 hide my-message-email">
@@ -231,6 +231,7 @@
 			}else if(property == null){
 				alert('Please select any property to send email');
 			}else{
+				$('.fa-spin').removeClass('hide');
 				$('.list').find('tr').each(function(){
 					var ch = $(this).find('td.no label .custom-control-input').is(':checked');
 					var loc = $(this).find('td.location').text();

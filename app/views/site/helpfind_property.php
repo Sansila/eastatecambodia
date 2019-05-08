@@ -119,7 +119,17 @@
 .dropdown-menu-price{
 	background: white !important;
 }
+.text-right-both{
+	padding-right: 20px;
+}
 .dropdown-price {
+    position: relative;
+    border: 1px solid #eee;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.dropdown-size {
     position: relative;
     border: 1px solid #eee;
     border-radius: 30px;
@@ -135,7 +145,29 @@
     text-align: left;
     padding: 12px 15px 12px 15px;
 }
-.dropdown-menus {
+.dropdown-menu-price {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+.dropdown-menu-size {
     position: absolute;
     top: 100%;
     left: 0;
@@ -267,45 +299,102 @@
 		                        <div class="form-group">
 		                        	<label class='col-lg-4 control-label'>Price </label>
 		                        	<div class="col-lg-8">
-		                        		<div class="dropdown dropdown-price">
-									        <button id="min-max-price-range" class="dropdown-toggle dropdown-toggle-drop" href="#" data-toggle="dropdown">Price <strong class="caret"></strong>
+		                        		<!-- <div class="dropdown dropdown-price">
+									        <button id="min-max-price-range-price" class="dropdown-toggle dropdown-toggle-drop" href="#" data-toggle="dropdown">Price <strong class="caret"></strong>
 									        </button>
-									        <div class="dropdown-menus dropdown-menu-price col-sm-12" style="padding:10px;">
+									        <div class="dropdown-menu-price dropdown-menu-p_price col-sm-12" style="padding:10px;">
 									            <form class="row">
 									                <div class="col-xs-5">
-									                    <input class="form-control price-label" placeholder="Min" data-dropdown-id="price-min"/>
+									                    <input type="text" class="form-control p_price-label" placeholder="Min Price" data-dropdown-id="p_price-min" />
 									                </div>
 									                <div class="col-xs-2"> - </div>
 									                <div class="col-xs-5">
-									                    <input class="form-control price-label" placeholder="Max" data-dropdown-id="price-max"/>
+									                    <input type="text" class="form-control p_price-label" placeholder="Max Price" data-dropdown-id="p_price-max" />
 									                </div>
 													<div class="clearfix"></div>
-									                <ul id="price-min" class="col-sm-12 price-range list-unstyled">
-									                    <li data-value="0">0</li>
-									                    <li data-value="10">10</li>
-									                    <li data-value="20">20</li>
-									                    <li data-value="30">30</li>
-									                    <li data-value="40">40</li>
-									                    <li data-value="50">50</li>
-									                    <li data-value="60">60</li>
+									                <ul id="p_price-min" class="col-sm-12 p_price-range list-unstyled">
+									                    <li data-value="0">No Minimum</li>
+									                    <li data-value="25000">$25,000</li>
+									                    <li data-value="50000">$50,000</li>
+									                    <li data-value="75000">$75,000</li>
+									                    <li data-value="100000">$100,000</li>
+									                    <li data-value="200000">$200,000</li>
+									                    <li data-value="300000">$300,000</li>
+									                    <li data-value="400000">$400,000</li>
+									                    <li data-value="500000">$500,000</li>
+									                    <li data-value="750000">$750,000</li>
+									                    <li data-value="1000000">$1,000,000</li>
 									                </ul>
-									                <ul id="price-max" class="col-sm-12 price-range text-right list-unstyled hide">
-									                    <li data-value="0">0</li>
-									                    <li data-value="10">10</li>
-									                    <li data-value="20">20</li>
-									                    <li data-value="30">30</li>
-									                    <li data-value="40">40</li>
-									                    <li data-value="50">50</li>
-									                    <li data-value="60">60</li>
+									                <ul id="p_price-max" class="col-sm-12 p_price-range text-right list-unstyled text-right-both hide">
+									                    <li data-value="0">No Maximum</li>
+									                    <li data-value="25000">$25,000</li>
+									                    <li data-value="50000">$50,000</li>
+									                    <li data-value="75000">$75,000</li>
+									                    <li data-value="100000">$100,000</li>
+									                    <li data-value="200000">$200,000</li>
+									                    <li data-value="300000">$300,000</li>
+									                    <li data-value="400000">$400,000</li>
+									                    <li data-value="500000">$500,000</li>
+									                    <li data-value="750000">$750,000</li>
+									                    <li data-value="1000000">$1,000,000</li>
 									                </ul>
 									            </form>
 									        </div>
-									    </div>
+									    </div> -->
+									    <input type="text" name="txtprice" class="form-control txtName" /> 
 		                        	</div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_description')?></label>
-	                                <div class="col-lg-8">
+		                        	<label class='col-lg-4 control-label'>Size(House & Land) </label>
+		                        	<div class="col-lg-8">
+		                        		<!-- <div class="dropdown dropdown-size">
+									        <button id="min-max-price-range-size" class="dropdown-toggle dropdown-toggle-drop" href="#" data-toggle="dropdown">Size <strong class="caret"></strong>
+									        </button>
+									        <div class="dropdown-menu-size dropdown-menu-p_size col-sm-12" style="padding:10px;">
+									            <form class="row">
+									                <div class="col-xs-5">
+									                    <input type="text" class="form-control size-label" placeholder="Min Size" data-dropdown-id="size-min"/>
+									                </div>
+									                <div class="col-xs-2"> - </div>
+									                <div class="col-xs-5">
+									                    <input type="text" class="form-control size-label" placeholder="Max Size" data-dropdown-id="size-max"/>
+									                </div>
+													<div class="clearfix"></div>
+									                <ul id="size-min" class="col-sm-12 size-range list-unstyled">
+									                    <li data-value="0">No Minimum</li>
+									                    <li data-value="10">10m<sup>2</sup></li>
+									                    <li data-value="20">20m<sup>2</sup></li>
+									                    <li data-value="40">40m<sup>2</sup></li>
+									                    <li data-value="80">80m<sup>2</sup></li>
+									                    <li data-value="100">100m<sup>2</sup></li>
+									                    <li data-value="200">200m<sup>2</sup></li>
+									                    <li data-value="400">400m<sup>2</sup></li>
+									                    <li data-value="800">800m<sup>2</sup></li>
+									                    <li data-value="1000">1000m<sup>2</sup></li>
+									                </ul>
+									                <ul id="size-max" class="col-sm-12 size-range text-right list-unstyled text-right-both hide">
+									                    <li data-value="0">No Maximum</li>
+									                    <li data-value="10">10m<sup>2</sup></li>
+									                    <li data-value="20">20m<sup>2</sup></li>
+									                    <li data-value="40">40m<sup>2</sup></li>
+									                    <li data-value="80">80m<sup>2</sup></li>
+									                    <li data-value="100">100m<sup>2</sup></li>
+									                    <li data-value="200">200m<sup>2</sup></li>
+									                    <li data-value="400">400m<sup>2</sup></li>
+									                    <li data-value="800">800m<sup>2</sup></li>
+									                    <li data-value="1000">1000m<sup>2</sup></li>
+									                </ul>
+									            </form>
+									        </div>
+									    </div> -->
+									    <input type="text" name="txtsize" class="form-control txtName" /> 
+		                        	</div>
+		                        </div>
+		                    </div>
+		                    <div class="col-sm-12">
+		                    	<div class="form-group">
+		                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('help_us_description')?></label>
+	                                <div class="col-lg-10">
 	                                    <textarea name="txtDes" class="form-control txtAddress" style="width: 100%; height: 95px;"></textarea>       
 	                                </div>
 		                        </div>
@@ -335,30 +424,57 @@
 		allowClear:false,
 		placeholder: 'Select'
 	});
-	//======= dropdown daul form ========//
-	$('#min-max-price-range').click(function (event) {
-	    setTimeout(function(){ $('.price-label').first().focus();   },0);
-	    $('.dropdown-menus').toggle();
-	});
-	var priceLabelObj;
-	$('.price-label').focus(function (event) {
-	    priceLabelObj=$(this);
-	    $('.price-range').addClass('hide');
-	    $('#'+$(this).data('dropdownId')).removeClass('hide');
-	});
+	// //======= dropdown daul form price ========//
+	// $('#min-max-price-range-price').click(function (event) {
+	//     setTimeout(function(){ $('.p_price-label').first().focus();   },0);
+	//     $('.dropdown-menu-price').toggle();
+	//     $('.dropdown-menu-size').hide();
+	// });
+	// var priceLabelObj;
+	// $('.p_price-label').focus(function (event) {
+	//     priceLabelObj=$(this);
+	//     $('.p_price-range').addClass('hide');
+	//     $('#'+$(this).data('dropdownId')).removeClass('hide');
+	// });
 
-	$(".price-range li").click(function(){
-	    priceLabelObj.attr('value', $(this).attr('data-value'));
-	    var curElmIndex=$( ".price-label" ).index( priceLabelObj );
-	    var nextElm=$( ".price-label" ).eq(curElmIndex+1);
+	// $(".p_price-range li").click(function(){
+	//     priceLabelObj.attr('value', $(this).attr('data-value'));
+	//     var curElmIndex=$( ".p_price-label" ).index( priceLabelObj );
+	//     var nextElm=$( ".p_price-label" ).eq(curElmIndex+1);
 
-	    if(nextElm.length){
-	        $( ".price-label" ).eq(curElmIndex+1).focus();
-	    }else{
-	        $('#min-max-price-range').dropdown('toggle');
-	    }
-	});
+	//     if(nextElm.length){
+	//         $( ".p_price-label" ).eq(curElmIndex+1).focus();
+	//     }else{
+	//         //$('#min-max-price-range').dropdown('toggle');
+	//         $('.dropdown-menu-price').toggle();
+	//     }
+	// });
+	// //======= dropdown daul form size ========//
+	// $('#min-max-price-range-size').click(function (event) {
+	//     setTimeout(function(){ $('.size-label').first().focus();   },0);
+	//     $('.dropdown-menu-size').toggle();
+	// });
+	// var sizeLabelObj;
+	// $('.size-label').focus(function (event) {
+	//     sizeLabelObj=$(this);
+	//     $('.size-range').addClass('hide');
+	//     $('#'+$(this).data('dropdownId')).removeClass('hide');
+	// });
+
+	// $(".size-range li").click(function(){
+	//     sizeLabelObj.attr('value', $(this).attr('data-value'));
+	//     var curElmIndex=$( ".size-label" ).index( sizeLabelObj );
+	//     var nextElm=$( ".size-label" ).eq(curElmIndex+1);
+
+	//     if(nextElm.length){
+	//         $( ".size-label" ).eq(curElmIndex+1).focus();
+	//     }else{
+	//         //$('#min-max-price-range').dropdown('toggle');
+	//         $('.dropdown-menu-size').toggle();
+	//     }
+	// });
 	// $(document).on("click", function () {
-	//     $('.dropdown-menus').hide();
+	//     $('.dropdown-menu-price').hide();
+	//     $('.dropdown-menu-size').hide();
 	// });
 </script>
