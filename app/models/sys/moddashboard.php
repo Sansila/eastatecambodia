@@ -32,7 +32,7 @@
 		}
 		function CountFinderProperty()
 		{
-			$query = $this->db->query("SELECT count(*) as total_finder FROM tblfindproperty WHERE review is null ")->row();
+			$query = $this->db->query("SELECT count(*) as total_finder FROM tblcustomer WHERE is_active = 0 ")->row();
 			return $query->total_finder;
 		}
 	}

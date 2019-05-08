@@ -299,7 +299,7 @@ class Home extends CI_Controller {
 		$perpage=$this->input->post('perpage');
 		$s_name=$this->input->post('s_name');
 		
-		$sql="SELECT * FROM tblfindproperty WHERE 1=1 AND fname LIKE '%$s_name%' ORDER BY fid DESC";
+		$sql="SELECT * FROM tblcustomer WHERE is_active = 0 AND customer_name LIKE '%$s_name%' ORDER BY customerid DESC";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("greenadmin/home/getdata"),$perpage);
@@ -311,7 +311,7 @@ class Home extends CI_Controller {
         $this->green->setActivePage($this->input->post('p'));
 
 		foreach($this->db->query($sql)->result() as $row){
-			$location = $row->fpcategory;
+			$location = $row->customerid;
 			$location = trim($location, ',');
             $arr = explode(',', $location);
             $i = 0; $wheres = ""; $cats = "";
@@ -336,7 +336,7 @@ class Home extends CI_Controller {
                 }
             	$cats.= $cat->typename.''.$or;
             }
-            $type = $row->fpstatus;
+            $type = $row->customerid;
             $type = trim($type, ',');
             $arrs = explode(',', $type);
             $st = count($arrs); $i = 0;
@@ -355,28 +355,28 @@ class Home extends CI_Controller {
             	$all.= $status.''.$or;
             }
             $color = "";
-            if($row->review == 1)
+            if($row->is_active == 1)
             	$color = "colorbg";
             else
             	$color = "";
 			$table.= "<tr>
 				 <td class='no ".$color."'>".$no."</td>
-				 <td class='name ".$color."'>".$row->fname."</td>											
-				 <td class='type ".$color."'>".$row->fphone."</td>							 	
-				 <td class='type ".$color."'>".$row->femail."</td>							 	
-				 <td class='type ".$color."'>".$row->faddress."</td>							 	
+				 <td class='name ".$color."'>".$row->customer_name."</td>											
+				 <td class='type ".$color."'>".$row->phone."</td>							 	
+				 <td class='type ".$color."'>".$row->email."</td>							 	
+				 <td class='type ".$color."'>".$row->address."</td>							 	
 				 <td class='country ".$color."'>".$cats."</td>
 				 <td class='country ".$color."'>".$all."</td>
 				 <td class='remove_tag no_wrap ".$color."'>";
 				 
 				 if($this->green->gAction("D")){
-					$table.= "<a><img rel=".$row->fid." onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+					$table.= "<a><img rel=".$row->customerid." onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
 				 }
 				 if($this->green->gAction("U")){
-				 	if($row->review == 1)
+				 	if($row->is_active == 1)
 						$table.= "<a>Reviewed</a>";
 					else
-						$table.= "<a href='".site_url('greenadmin/home/review/'.$row->fid)."'>Review</a>";
+						$table.= "<a href='".site_url('greenadmin/home/review/'.$row->customerid)."'>Review</a>";
 				 }
 			$table.= " </td>
 				 </tr>
@@ -391,14 +391,14 @@ class Home extends CI_Controller {
 	}
 	function delete($id)
 	{
-		$this->db->where('fid',$id);
-		$this->db->delete('tblfindproperty');
+		$this->db->where('customerid',$id);
+		$this->db->delete('tblcustomer');
 	}
 	function review($id)
 	{
-		$data = array('review' => 1);
-		$this->db->where('fid',$id);
-		$this->db->update('tblfindproperty',$data);
+		$data = array('is_active' => 1);
+		$this->db->where('customerid',$id);
+		$this->db->update('tblcustomer',$data);
 
 		redirect($_SERVER['HTTP_REFERER']);
 	}

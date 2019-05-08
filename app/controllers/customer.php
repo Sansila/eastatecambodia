@@ -142,7 +142,7 @@ class Customer extends CI_Controller {
 	}
 	function delete($id)
 	{
-		$this->db->query("UPDATE tblcustomer SET is_active = 0 WHERE customerid = $id ")->row();
+		$this->db->query("UPDATE tblcustomer SET is_active = 2 WHERE customerid = $id ")->row();
 	}
 	function addgroup()
 	{
@@ -298,7 +298,7 @@ class Customer extends CI_Controller {
         	'is_active' => $this->input->post('is_active'),
         	'gender' => $gender,
         	'pid' => $prop,
-        	'categoryid' => $cate
+        	'categoryid' => $cate,
         );
         $data1 = array(
         	'create_date' => date('Y-m-d')
@@ -457,7 +457,8 @@ class Customer extends CI_Controller {
                             <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
                                 <img src="'.$logo.'" style="width: 140px;">
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                    Dear customer thank you for finding properties in our website : 
+                                    <p>Dear customer,</p>
+                                    <p>The following are the properties that Estate Cambodia would like to share and you may review for your interest: </p>
                                     '.$list.'
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 

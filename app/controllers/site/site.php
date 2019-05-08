@@ -1295,8 +1295,8 @@ class Site extends CI_Controller {
                     'locationid' => $l,
                     'gender' => $gender,
                     'price' => $price,
-                    'size' => $size
-
+                    'size' => $size,
+                    'is_active' => 0
                     );
         $this->db->insert('tblcustomer',$data); 
 
