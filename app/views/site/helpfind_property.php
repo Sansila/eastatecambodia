@@ -297,7 +297,7 @@
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                        	<label class='col-lg-4 control-label'>Price </label>
+		                        	<label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_price')?> </label>
 		                        	<div class="col-lg-8">
 		                        		<!-- <div class="dropdown dropdown-price">
 									        <button id="min-max-price-range-price" class="dropdown-toggle dropdown-toggle-drop" href="#" data-toggle="dropdown">Price <strong class="caret"></strong>
@@ -341,11 +341,11 @@
 									            </form>
 									        </div>
 									    </div> -->
-									    <input type="text" name="txtprice" class="form-control txtName" /> 
+									    <input type="number" name="txtprice" class="form-control txtName" style="max-width: 100%" /> 
 		                        	</div>
 		                        </div>
 		                        <div class="form-group">
-		                        	<label class='col-lg-4 control-label'>Size(House & Land) </label>
+		                        	<label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_size')?> </label>
 		                        	<div class="col-lg-8">
 		                        		<!-- <div class="dropdown dropdown-size">
 									        <button id="min-max-price-range-size" class="dropdown-toggle dropdown-toggle-drop" href="#" data-toggle="dropdown">Size <strong class="caret"></strong>
@@ -387,7 +387,7 @@
 									            </form>
 									        </div>
 									    </div> -->
-									    <input type="text" name="txtsize" class="form-control txtName" /> 
+									    <input type="number" name="txtsize" class="form-control txtName" style="max-width: 100%"/> 
 		                        	</div>
 		                        </div>
 		                    </div>

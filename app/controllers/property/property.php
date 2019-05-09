@@ -69,6 +69,8 @@ class Property extends CI_Controller {
 		$pro_id=$this->input->post('pro_id');
 		$title=$this->input->post('property_name');
 		$location = $this->input->post('location');
+		$p_category = $this->input->post('category');
+		$p_status = $this->input->post('type');
 
 		$row = $this->db->query("SELECT * FROM tblpropertylocation where status = 1 AND propertylocationid = $location ")->row();
 
@@ -145,15 +147,18 @@ class Property extends CI_Controller {
 		);
 
 		$msg='';
+		$action = '';
 		$count = $this->pro->vaidate($title,$pro_id);
 
 		if($pro_id > 0){
 			$this->db->where('pid',$pro_id)->update('tblproperty', $data);
 			$this->db->query("UPDATE `tblproperty` SET `validate_date` = DATE_ADD(CURDATE(), INTERVAL 15 DAY) WHERE `pid` = $pro_id");
 			$msg = "Property Has Update...!";
+			$action = 'update';
 		}else{ 
 			$pro_id = $this->pro->save(array_merge($data,$data1), $pro_id);
 			$msg="Property Has Created...!";
+			$action = 'insert';
 
 			// if($count > 0) {
 			// 	$msg = "Property Is already Exist...!";
@@ -161,9 +166,9 @@ class Property extends CI_Controller {
 			// 	$pro_id = $this->pro->save(array_merge($data,$data1), $pro_id);
 			// 	$msg="Property Has Created...!";
 			// }
-
+			//$this->checkcustomerfindproperty($location,$p_category,$p_status);
 		}
-		$arr=array('msg'=>$msg,'pid'=>$pro_id);
+		$arr=array('msg'=>$msg,'pid'=>$pro_id, 'location'=>$location, 'cate'=> $p_category, 'types'=> $p_status, 'status' => $action);
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
 	}
@@ -823,4 +828,161 @@ class Property extends CI_Controller {
 		header("Content-type:text/x-json");
 		echo json_encode($data);
 	}
+	function checkcustomerfindproperty($pid,$location,$p_category,$p_status)
+	{
+		$loc = ''; 
+		$cate = ''; 
+		$price = ''; 
+		$size = ''; 
+		$status = '';
+		$customer = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1")->result();
+		foreach ($customer as $cust) {
+			$cust->locationid = trim($cust->locationid, ',');
+			$arrloc = explode(',', $cust->locationid);
+			foreach ($arrloc as $l) {
+				if($l == $location)
+					$loc = $l;
+			}
+			$cust->categoryid = trim($cust->categoryid, ',');
+			$arrcate = explode(',', $cust->categoryid);
+			foreach ($arrcate as $c) {
+				if($c == $p_category)
+					$cate = $c;
+			}
+			$cust->p_status = trim($cust->p_status, ',');
+			$arrstatus = explode(',', $cust->p_status);
+			foreach ($arrstatus as $s) {
+				if($s == $p_status)
+					$status = $s;
+			}
+			if($cust->price != '')
+				$price = $cust->price;
+			if($cust->size != '')
+				$size = $cust->size;
+
+			$this->sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$cust->email);
+		}
+	}
+	function sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$email)
+	{
+		$pro = $this->db->query("SELECT 
+        								p.pid,
+        								p.lp_id,
+        								p.type_id,
+        								p.property_name,
+        								p.description,
+        								p.price,
+        								p.p_type,
+        								p.housesize,
+        								l.propertylocationid,
+        								l.locationname,
+        								pt.typeid,
+        								pt.typename
+        							   FROM tblproperty as p
+        							   RIGHT JOIN tblpropertylocation l 
+        							   ON p.lp_id = l.propertylocationid
+        							   RIGHT JOIN tblpropertytype as pt
+        							   ON p.type_id = pt.typeid
+        							   WHERE p.p_status = 1 AND p.pid = $pid ")->row();
+
+			if($pro->lp_id == $loc || $pro->type_id == $cate || $pro->p_type == $status || $pro->price == $price || $pro->housesize == $size)
+			{
+
+				$img = $this->pro->getImage($pro->pid);
+	        	$images = '';
+	        	$property_type = '';
+	        	if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url)))
+	        		$images = base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+	        	else
+	        		$images = base_url('assets/upload/noimage.jpg');
+
+	        	if($pro->p_type == 1)
+					$property_type = "Sale";
+				if($pro->p_type == 2)
+					$property_type = "Rent";
+				if($pro->p_type == 3)
+					$property_type = "Rent & Sale";
+
+	        	$list= '<div class="container">
+	        		<div id="products" class="row list-group" style="width: 100%;margin: 0 auto;"><div class="item  col-xs-4 col-lg-4" style="width: 299px; height:523px; border: 1px solid; float: left; margin: 10px;">
+	                        <div class="thumbnail" style=";padding: 0px;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;">
+	                            <img class="group list-group-image" src="'.$images.'" alt="" style="float: left; margin-bottom: 20px;" width="300" height="187"/>
+	                            <div style="padding:0px 10px 15px 10px;color: white; background: #d84949;">
+	                                	P'.$pro->pid.' | '.$pro->typename.' | '.$property_type.'
+	                            </div>
+	                            <div class="caption" style="padding: 10px; ">
+	                                <h4 class="group inner list-group-item-heading" style="height:43px; overflow: hidden;">
+	                                	<a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="text-decoration: none;">
+	                                    '.$pro->property_name.'
+	                                    </a>
+	                                </h4>
+	                                <div class="group inner list-group-item-text" style="margin: 0 0 11px; height:81px; overflow:hidden;">
+	                                	'.$pro->description.'
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-xs-12 col-md-6" style="width: 160px;float: left;">
+	                                        <p class="lead" style="color: #d84949;">
+	                                            $'.$pro->price.'
+	                                        </p>
+	                                    </div>
+	                                    <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: #d84949;color: white;">
+	                                        <p class="lead">
+	                                            <a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="color:white; text-decoration: none;">
+	                                                Detail
+	                                            </a>
+	                                        </p>
+	                                    </div>
+	                                    <p style="clear: both;"></p>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div style="border-top: 1px solid; padding: 10px;">
+	                            '.$pro->locationname.'
+	                        </div>
+	                   	</div></div><div style="clear: both;"></div></div>';
+
+			        require('phpmailer/class.phpmailer.php');
+			        $mail = new PHPMailer();
+			        $mail->IsSMTP();
+			        $mail->SMTPDebug = 0;
+			        $mail->SMTPAuth = TRUE;
+			        $mail->SMTPSecure = "ssl";
+			        $mail->Port     = 465;
+			        $mail->Host     = "smtp.gmail.com";
+			        $mail->Mailer   = "smtp";
+			        $mail->WordWrap   = 80;
+			        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+			        $mail->Subject = "Estate Cambodia - Customer looking for properties";
+			        $mail->AddAddress($email);
+			        $logo = "http://estatecambodia.com/assets/img/logo.png";
+			        $description = '<div style="width: 100%">
+			            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
+			                <tbody>
+			                    <tr>
+			                        <td style="width:8px" width="8"></td>
+			                        <td>
+			                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
+			                                <img src="'.$logo.'" style="width: 140px;">
+			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+			                                    <p>Dear customer,</p>
+			                                    <p>The following are the properties that Estate Cambodia would like to share and you may review for your interest: </p>
+			                                    '.$list.'
+			                                </div>
+			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
+			                                    <p>Best regards,</p>
+			                                    <p>Estate Cambodia Team</p>
+			                                </div>
+			                            </div>
+			                        </td>
+			                    </tr>
+			                </tbody>
+			            </table>
+			        </div>';
+			        $mail->MsgHTML($description);
+			        $mail->IsHTML(true);
+			        $mail->Send();
+			        $mail->ClearAddresses();
+
+			}
+	}	
 }
