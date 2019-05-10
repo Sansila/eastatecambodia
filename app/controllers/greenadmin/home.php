@@ -396,7 +396,7 @@ class Home extends CI_Controller {
 	}
 	function review($id)
 	{
-		$data = array('is_active' => 1);
+		$data = array('is_active' => 1,'userid'=>$this->session->userdata('userid'));
 		$this->db->where('customerid',$id);
 		$this->db->update('tblcustomer',$data);
 

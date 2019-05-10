@@ -835,7 +835,16 @@ class Property extends CI_Controller {
 		$price = ''; 
 		$size = ''; 
 		$status = '';
-		$customer = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1")->result();
+		$where = '';
+		$userid = $this->session->userdata('userid');
+		$roleid = $this->session->userdata('roleid');
+		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
+		if($rol->is_admin != 1 || $rol->is_admin != 2)
+            $where.= " AND userid = $userid ";
+        else
+        	$where.= "";
+
+		$customer = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1 {$where}")->result();
 		foreach ($customer as $cust) {
 			$cust->locationid = trim($cust->locationid, ',');
 			$arrloc = explode(',', $cust->locationid);

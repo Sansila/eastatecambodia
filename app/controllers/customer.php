@@ -299,6 +299,7 @@ class Customer extends CI_Controller {
         	'gender' => $gender,
         	'pid' => $prop,
         	'categoryid' => $cate,
+        	'userid' => $this->session->userdata('userid'),
         );
         $data1 = array(
         	'create_date' => date('Y-m-d')

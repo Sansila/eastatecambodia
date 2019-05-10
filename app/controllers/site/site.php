@@ -1138,7 +1138,7 @@ class Site extends CI_Controller {
         $address = $this->input->post('txtAddress');
         $remark = $this->input->post('txtRemark');
         $gender = $this->input->post('txtgender');
-        $date = Date('y-m-d');
+        $date = Date('y-m-d H:i:s');
 
         $data = array(
             'user_name' => $name,
