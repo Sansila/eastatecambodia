@@ -186,8 +186,7 @@ class Property extends CI_Controller {
 	    $updimg=$this->input->post('updimg');
 	    $files = $_FILES;
 	    $cpt = count($_FILES['userfile']['name']);
-	    $array = urldecode($arr);
-
+	
 	    for($i=0; $i<$cpt; $i++)
 	    {         
 	    	$extends = pathinfo($files["userfile"]["name"][$i], PATHINFO_EXTENSION);
@@ -1008,11 +1007,6 @@ class Property extends CI_Controller {
 	function updatestatusimage($pid)
 	{
 		$imgstatus = $this->input->post('arr');
-		$simg = $this->pro->setupdate($imgstatus);
-		
-		$galery = $this->db->query("SELECT * FROM tblgallery WHERE pid = $pid ")->result();
-		foreach ($galery as $gal) {
-			
-		} 
+		$data = array();
 	}	
 }
