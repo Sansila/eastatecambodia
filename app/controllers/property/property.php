@@ -71,6 +71,9 @@ class Property extends CI_Controller {
 		$location = $this->input->post('location');
 		$p_category = $this->input->post('category');
 		$p_status = $this->input->post('type');
+		// $array = $this->input->post('arr');
+
+		//print_r($array); die();
 
 		$row = $this->db->query("SELECT * FROM tblpropertylocation where status = 1 AND propertylocationid = $location ")->row();
 
@@ -171,6 +174,7 @@ class Property extends CI_Controller {
 			// }
 			//$this->checkcustomerfindproperty($location,$p_category,$p_status);
 		}
+		
 		$arr=array('msg'=>$msg,'pid'=>$pro_id, 'location'=>$location, 'cate'=> $p_category, 'types'=> $p_status, 'status' => $action);
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
@@ -182,6 +186,8 @@ class Property extends CI_Controller {
 	    $updimg=$this->input->post('updimg');
 	    $files = $_FILES;
 	    $cpt = count($_FILES['userfile']['name']);
+	    $array = urldecode($arr);
+
 	    for($i=0; $i<$cpt; $i++)
 	    {         
 	    	$extends = pathinfo($files["userfile"]["name"][$i], PATHINFO_EXTENSION);
@@ -998,5 +1004,15 @@ class Property extends CI_Controller {
 			        $mail->ClearAddresses();
 
 			}
+	}
+	function updatestatusimage($pid)
+	{
+		$imgstatus = $this->input->post('arr');
+		$simg = $this->pro->setupdate($imgstatus);
+		
+		$galery = $this->db->query("SELECT * FROM tblgallery WHERE pid = $pid ")->result();
+		foreach ($galery as $gal) {
+			
+		} 
 	}	
 }

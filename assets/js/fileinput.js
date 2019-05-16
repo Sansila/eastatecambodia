@@ -264,7 +264,7 @@
         uploadIcon: '<i class="glyphicon glyphicon-upload text-info"></i>',
         uploadClass: 'btn btn-xs btn-default',
         uploadTitle: 'Upload file',
-        indicatorNew: '<i class="glyphicon glyphicon-hand-down text-warning"></i>',
+        indicatorNew: '<label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input my-enable-img" checked><span class="custom-control-indicator"></span></label>',
         indicatorSuccess: '<i class="glyphicon glyphicon-ok-sign text-success"></i>',
         indicatorError: '<i class="glyphicon glyphicon-exclamation-sign text-danger"></i>',
         indicatorLoading: '<i class="glyphicon glyphicon-hand-up text-muted"></i>',

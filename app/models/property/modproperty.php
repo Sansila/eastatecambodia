@@ -64,4 +64,12 @@
             $sql = $this->db->query("SELECT * FROM tblgallery as g WHERE g.pid = $pid ")->row();
             return $sql;
         }
+        function setupdate($imgstatus)
+        {
+            $arr = array();
+            foreach ($imgstatus as $img) {
+                $arr[] = $img;
+            }
+            return $arr;
+        }
     }

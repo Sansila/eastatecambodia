@@ -87,7 +87,6 @@
         box-shadow: none !important; 
     }
 </style>
-
     <div id="content-header" class="mini">
         <h1><?php echo $this->lang->line('p_header')?></h1>
         <ul class="mini-stats box-3">
@@ -133,14 +132,14 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                           <div class="card-body">
                             <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_name')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_name')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm required" name="property_name" value='<?php echo isset($row->property_name)?"$row->property_name":""; ?>' id="property_name">
                                     <input type="text"  class="form-control input-sm hide" name="property_id" value='<?php echo isset($row->pid)?$row->pid:""; ?>' id="property_id">
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_cat')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_cat')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control input-sm required" required="" name="category_id" id="category_id">
@@ -161,7 +160,7 @@
                             
                         </div>
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_agent')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_agent')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="agent_id">
@@ -188,7 +187,7 @@
                                     </select>
                                 </div>                   
                             </div>
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_type')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_type')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control input-sm required" name="property_type" id="property_type">
@@ -203,14 +202,14 @@
                         </div>
                          
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_price')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_price')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="number"  class="form-control input-sm" name="price" value='<?php echo isset($row->price)?"$row->price":"" ?>' id="price">
                                 </div>                   
                             </div>
                             
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_size')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_size')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="number"  class="form-control input-sm" name="house_size" value='<?php echo isset($row->housesize)?"$row->housesize":""; ?>' id="house_size">
@@ -220,7 +219,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_loc')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_loc')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control select2-single input-sm required" id="location_id" name="location_id">
@@ -287,7 +286,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_level')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_level')?> <span class="text-danger">*</span></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control" id="pro_level">    
@@ -446,6 +445,7 @@
                                 <div class="col-md-12">
                                     <?php
                                     if(isset($row->pid)){
+                                        echo '<div class="file-input">';
                                         $img=$this->db->query("SELECT * FROM tblgallery WHERE pid='$row->pid'")->result();
                                         foreach ($img as $img) {
                                      ?>
@@ -470,12 +470,18 @@
                                                      <div class="file-thumbnail-footer">
                                                       <div class="file-caption-name" style="width: 250px;" title=""><p><?php echo $img->url; ?></p><div><span class="hide realname"><?php echo $value?></span></div></div>
                                                       <div class="file-actions">
-                                                      <div class="file-footer-buttons">
-                                                      <button title="Upload file" class="hide kv-file-upload btn btn-xs btn-default" type="button"><i class="glyphicon glyphicon-upload text-info"></i>
-                                                      </button>
-                                                      <button title="Remove file" class="kv-file-remove btn btn-xs btn-default" type="button" rel='<?php echo $img->gallery_id ?>'><i class="glyphicon glyphicon-trash text-danger"></i></button>
-                                                          </div>
-                                                          <div title="Not uploaded yet" tabindex="-1" class="file-upload-indicator"></div>
+                                                        <div class="file-footer-buttons">
+                                                            <button title="Upload file" class="hide kv-file-upload btn btn-xs btn-default" type="button"><i class="glyphicon glyphicon-upload text-info"></i>
+                                                            </button>
+                                                            <button title="Remove file" class="kv-file-remove btn btn-xs btn-default" type="button" rel='<?php echo $img->gallery_id ?>'><i class="glyphicon glyphicon-trash text-danger"></i></button>
+                                                        </div>
+                                                        <div class="file-upload-indicator" title="Not uploaded yet">
+                                                            <label class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input my-enable-img" <?php if($img->enable_pro_image == 1) echo "checked"; else echo "";?>>
+                                                                <span class="custom-control-indicator"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div title="Not uploaded yet" tabindex="-1" class="file-upload-indicator"></div>
                                                           <div class="clearfix"></div>
                                                       </div>
                                                       </div>
@@ -483,6 +489,7 @@
 
                                             </div>
                                     <?php }
+                                        echo '</div>';
                                      }
                                     ?>
                                     <input id="file-4" type="file" name="userfile[]" class="file" multiple data-upload-url="#">
@@ -490,11 +497,15 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
+                        <?php 
+                            $hidecheck = "hide";
+                            if($rol->is_admin == 1 || $rol->is_admin == 2)
+                                $hidecheck = "";
+                        ?>
+                        <div class="form-group <?php echo $hidecheck;?>">
                             <div class="col-lg-3">
                                 <label class='custom-control custom-checkbox'>
-                                    <input type='checkbox' class='custom-control-input'>
+                                    <input type='checkbox' class='custom-control-input txt-match'>
                                     <span class='custom-control-indicator'></span>
                                 </label>
                             </div>
@@ -924,8 +935,9 @@
               })
         $(this).closest('.saouy').remove();
     });
-    function uploads(pid,formdata,msg,status,location,cate,types){
+    function uploads(pid,formdata,msg,status,location,cate,types,arr){
         //alert(visitid+'/'+familyid);
+        //var arrStr = encodeURIComponent(JSON.stringify(arr));
         $.ajax({
             type:'POST',
             url:"<?PHP echo site_url('property/property/upload');?>/"+pid,
@@ -939,7 +951,9 @@
                 console.log(data);
                 $('#myModal').modal('hide');
                 if(status == 'insert'){
-                    sendnitificationemail(pid,location,cate,types);
+                    sendnitificationemail(pid,location,cate,types,arr);
+                }else if(status == 'update'){
+                    updatestatusimage(pid,arr);
                 }
             },
             error: function(data){
@@ -947,27 +961,45 @@
                 console.log(data);
                 //location.reload();
                 //location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
-                setTimeout(function(){ 
-                    location.reload();
-                }, 1000);
+                // setTimeout(function(){ 
+                //     location.reload();
+                // }, 1000);
             }
         });
        
     } 
-    function sendnitificationemail(pid,location,cate,types)
+    function sendnitificationemail(pid,location,cate,types,arr)
     {
         $.ajax({
             url:"<?PHP echo site_url('property/property/checkcustomerfindproperty');?>/"+pid+'/'+location+'/'+cate+'/'+types,
             type:"POST",
             async:false,
             success:function(data){
-
+                updatestatusimage(pid,arr);
             },
             error: function(data){
 
             }
         });
     }
+    function updatestatusimage(pid,arr)
+    {
+        $.ajax({
+            url:"<?PHP echo site_url('property/property/updatestatusimage');?>/"+pid,
+            type:"POST",
+            data:{
+                arr:arr
+            }
+            async:false,
+            success:function(data){
+                console.log(data);
+            },
+            error: function(data){
+
+            }
+        });
+    }
+
     $('#cancel').click(function(){
         location.href="<?PHP echo site_url('store/store/index');?>?<?php echo 'm=$m&p=$p' ?>";
     }) 
@@ -1022,97 +1054,109 @@
           $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
         },        
         submitHandler: function(form) {
-          $('#myModal').modal('show');
-          var url="<?php echo site_url('property/property/save')?>";
-          var is_active=0;
-          if($('#is_active').is(':checked'))
-                is_active=1;
-          var is_marguee=0;
-            if($('#is_marguee').is(':checked'))
-              is_marguee=1;
-          var urgent = 0;
-            if($('#urgent').is(':checked'))
-                urgent = 1;
-          var match = 0;
-            if($('.custom-control-input').is(':checked'))
-                match = 1;
-          $("body").toggleClass("wait");
-          setTimeout(function(){
-              $.ajax({
-                url:url,
-                type:"POST",
-                datatype:"Json",
-                async:false,
-                data:{
-                    pro_id:$('#property_id').val(),
-                    property_name:$("#property_name").val(),
-                    category:$("#category_id").val(),
-                    angent:$("#agent_id").val(),
-                    type:$("#property_type").val(),
-                    price:$("#price").val(),
-                    floor:$("#floor").val(),
-                    house_size:$("#house_size").val(),
-                    land_size:$("#land_size").val(),
-                    direction:$("#direction").val(),
-                    bedroom:$("#bedroom").val(),
-                    bathroom:$('#bathroom').val(),
-                    livingroom:$('#living_room').val(),
-                    kitchen: $('#kitchen').val(),
-                    dining_room: $('#dining_room').val(),
-                    funiture: $('#furniture').val(),
-                    aircond: $('#aircon').val(),
-                    parking: $('#parking').val(),
-                    stam_suana: $('#st_sa').val(),
-                    garden: $('#garden').val(),
-                    balcony: $('#balcony').val(),
-                    terrace: $('#terrace').val(),
-                    elevator: $('#elevator').val(),
-                    stair: $('#stairs').val(),
-                    title: $('#pro_title').val(),
-                    contract: $('#contract_allowed').val(),
-                    commission: $('#commission').val(),
-                    urgent: urgent,
-                    service_pro: $('#provider').val(),
-                    gym: $('#gym').val(),
-                    advantage: $('#advantage').val(),
-                    mail_owner: $('#email_owner').val(),
-                    owner_name: $('#owner_name').val(),
-                    contact_owner: $('#owner_contact').val(),
-                    address: $('#address').val(),
-                    location: $('#location_id').val(),
-                    available: $('#available_pro').val(),
-                    start_date: $('#start_date').val(),
-                    end_date: $('#end_date').val(),
-                    content: $('#contents_pro').val(),
-                    content_kh: $('#contents_kh_pro').val(),
-                    story: $('#story').val(),
-                    pool: $('#pool').val(),
-                    latitude: $('#latitude').val(), 
-                    longtitude: $('#longtitude').val(),
-                    level: $('#pro_level').val(),
-                    relative_owner: $('#relative_owner').val(),
-                    directly: $('#txt_directly').val(),
-                    internal_remark: $('#internal_remark').val(),
-                    property_tag: $('#property_tag').val(),
-                    projectid: $('#projectid').val(),
-                    verifyemail: $('#verifyemail').val(),
-                    match: match,
-                },
-                success:function(data) {
-                    // $(".result_text").html(data.msg);
-                    var formdata = new FormData(form);
-
-                    if(data.pid!='' && data.pid!=null){
-                        uploads(data.pid,formdata,data.msg,data.status,data.location,data.cate,data.types);
-                    }else{
-                        toasmsg('error',data.msg);
-                    }
-                    $('#basic_validate')[0].reset();
+            var arr = [];
+            var ch = 0;
+            $('.file-input').find('.my-enable-img').each(function(){
+                if($(this).is(':checked'))
+                {
+                    ch = 1;
+                }else{
+                    ch = 0;
                 }
-              })
-          }, 500);
+                arr.push(ch);
+            });
+
+            $('#myModal').modal('show');
+            var url="<?php echo site_url('property/property/save')?>";
+            var is_active=0;
+                if($('#is_active').is(':checked'))
+                    is_active=1;
+            var is_marguee=0;
+                if($('#is_marguee').is(':checked'))
+                  is_marguee=1;
+            var urgent = 0;
+                if($('#urgent').is(':checked'))
+                    urgent = 1;
+            var match = 0;
+                if($('.txt-match').is(':checked'))
+                    match = 1;
+            $("body").toggleClass("wait");
+            setTimeout(function(){
+                $.ajax({
+                    url:url,
+                    type:"POST",
+                    datatype:"Json",
+                    async:false,
+                    data:{
+                        pro_id:$('#property_id').val(),
+                        property_name:$("#property_name").val(),
+                        category:$("#category_id").val(),
+                        angent:$("#agent_id").val(),
+                        type:$("#property_type").val(),
+                        price:$("#price").val(),
+                        floor:$("#floor").val(),
+                        house_size:$("#house_size").val(),
+                        land_size:$("#land_size").val(),
+                        direction:$("#direction").val(),
+                        bedroom:$("#bedroom").val(),
+                        bathroom:$('#bathroom').val(),
+                        livingroom:$('#living_room').val(),
+                        kitchen: $('#kitchen').val(),
+                        dining_room: $('#dining_room').val(),
+                        funiture: $('#furniture').val(),
+                        aircond: $('#aircon').val(),
+                        parking: $('#parking').val(),
+                        stam_suana: $('#st_sa').val(),
+                        garden: $('#garden').val(),
+                        balcony: $('#balcony').val(),
+                        terrace: $('#terrace').val(),
+                        elevator: $('#elevator').val(),
+                        stair: $('#stairs').val(),
+                        title: $('#pro_title').val(),
+                        contract: $('#contract_allowed').val(),
+                        commission: $('#commission').val(),
+                        urgent: urgent,
+                        service_pro: $('#provider').val(),
+                        gym: $('#gym').val(),
+                        advantage: $('#advantage').val(),
+                        mail_owner: $('#email_owner').val(),
+                        owner_name: $('#owner_name').val(),
+                        contact_owner: $('#owner_contact').val(),
+                        address: $('#address').val(),
+                        location: $('#location_id').val(),
+                        available: $('#available_pro').val(),
+                        start_date: $('#start_date').val(),
+                        end_date: $('#end_date').val(),
+                        content: $('#contents_pro').val(),
+                        content_kh: $('#contents_kh_pro').val(),
+                        story: $('#story').val(),
+                        pool: $('#pool').val(),
+                        latitude: $('#latitude').val(), 
+                        longtitude: $('#longtitude').val(),
+                        level: $('#pro_level').val(),
+                        relative_owner: $('#relative_owner').val(),
+                        directly: $('#txt_directly').val(),
+                        internal_remark: $('#internal_remark').val(),
+                        property_tag: $('#property_tag').val(),
+                        projectid: $('#projectid').val(),
+                        verifyemail: $('#verifyemail').val(),
+                        match: match,
+                    },
+                    success:function(data) {
+                        // $(".result_text").html(data.msg);
+                        var formdata = new FormData(form);
+
+                        if(data.pid!='' && data.pid!=null){
+                            uploads(data.pid,formdata,data.msg,data.status,data.location,data.cate,data.types,arr);
+                        }else{
+                            toasmsg('error',data.msg);
+                        }
+                        $('#basic_validate')[0].reset();
+                    }
+                });
+            }, 500);
         }
-      });
+    });
 
     $("#is_active").on("click",function(){      
       if($(this).prop("checked")==true){

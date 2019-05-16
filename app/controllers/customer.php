@@ -275,14 +275,17 @@ class Customer extends CI_Controller {
                 $cama = '';
             }
         }
-        foreach ($property as $pro) {
-        	$prop.= $pro.''.$cama;
-            if(++$i == $numpro)
-            {
-                $cama = '';
-            }
+        if($property !="")
+        {
+        	foreach ($property as $pro) {
+	        	$prop.= $pro.''.$cama;
+	            if(++$i == $numpro)
+	            {
+	                $cama = '';
+	            }
+	        }
         }
-
+        
         $data = array(
         	'locationid' => $loc,
         	'byroleid' => $this->session->userdata('roleid'),
@@ -375,6 +378,8 @@ class Customer extends CI_Controller {
         							   ON p.type_id = pt.typeid
         							   WHERE p.p_status = 1 {$where} ")->result();
 
+
+        $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
         $list = '<div class="container">
         		<div id="products" class="row list-group" style="width: 100%;margin: 0 auto;">';
 
@@ -394,19 +399,22 @@ class Customer extends CI_Controller {
 			if($pro->p_type == 3)
 				$property_type = "Rent & Sale";
 
-        	$list.= '<div class="item  col-xs-4 col-lg-4" style="width: 299px; height:523px; border: 1px solid; float: left; margin: 10px;">
+        	$list.= '<div class="item  col-xs-4 col-lg-4" style="width: 299px; height:550px; border: 1px solid; float: left; margin: 10px;">
                         <div class="thumbnail" style=";padding: 0px;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;">
-                            <img class="group list-group-image" src="'.$images.'" alt="" style="float: left; margin-bottom: 20px;" width="300" height="187"/>
-                            <div style="padding:0px 10px 15px 10px;color: white; background: #d84949;">
+                            <img class="group list-group-image" src="'.$images.'" alt="" style="float: left; margin-bottom: 10px;" width="300" height="187"/>
+                            <div style="padding:0px 10px 7px 10px;color: white; background: #d84949;">
                                 	P'.$pro->pid.' | '.$pro->typename.' | '.$property_type.'
                             </div>
                             <div class="caption" style="padding: 10px; ">
-                                <h4 class="group inner list-group-item-heading" style="height:43px; overflow: hidden;">
+                                <h4 class="group inner list-group-item-heading" style="height:43px; overflow: hidden;     margin-top: 3px;">
                                 	<a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="text-decoration: none;">
                                     '.$pro->property_name.'
                                     </a>
                                 </h4>
-                                <div class="group inner list-group-item-text" style="margin: 0 0 11px; height:81px; overflow:hidden;">
+                                <div style="font-size:12px;">
+		                            <img src="'.$iconloc.'" />'.$pro->locationname.'
+		                        </div>
+                                <div class="group inner list-group-item-text" style="margin: 0 0 11px; height:160px; overflow:hidden; font-size:12px;">
                                 	'.$pro->description.'
                                 </div>
                                 <div class="row">
@@ -415,8 +423,8 @@ class Customer extends CI_Controller {
                                             $'.$pro->price.'
                                         </p>
                                     </div>
-                                    <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: #d84949;color: white;">
-                                        <p class="lead">
+                                    <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: #d84949;color: white; height: 30px; margin-top: 12px;">
+                                        <p class="lead" style="margin-top: 6px;">
                                             <a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="color:white; text-decoration: none;">
                                                 Details
                                             </a>
@@ -425,9 +433,6 @@ class Customer extends CI_Controller {
                                     <p style="clear: both;"></p>
                                 </div>
                             </div>
-                        </div>
-                        <div style="border-top: 1px solid; padding: 10px;">
-                            '.$pro->locationname.'
                         </div>
                    	</div>
                    	';
