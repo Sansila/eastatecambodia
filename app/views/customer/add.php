@@ -3,6 +3,57 @@
 	ul,ol{ margin-bottom: 0px !important; }
 	a{ cursor: pointer; }
 	.datepicker { z-index: 9999; }
+  .custom-checkbox {
+      min-height: 1rem;
+      padding-left: 0;
+      margin-right: 0;
+      cursor: pointer; 
+      float: right;
+    }
+    .custom-checkbox .custom-control-input{
+        display: none;
+    }
+    .custom-checkbox .custom-control-indicator {
+        content: "";
+        display: inline-block;
+        position: relative;
+        width: 30px;
+        height: 10px;
+        background-color: #818181;
+        border-radius: 15px;
+        margin-right: 10px;
+        -webkit-transition: background .3s ease;
+        transition: background .3s ease;
+        vertical-align: middle;
+        margin: 0 16px;
+        box-shadow: none; 
+    }
+    .custom-checkbox .custom-control-indicator:after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: #f1f1f1;
+        border-radius: 21px;
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+        left: -2px;
+        top: -4px;
+        -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+        transition: left .3s ease, background .3s ease, box-shadow .1s ease; 
+    }
+    .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+        background-color: #84c7c1;
+        background-image: none;
+        box-shadow: none !important; 
+    }
+    .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator:after {
+        background-color: #84c7c1;
+        left: 15px; 
+    }
+    .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+        box-shadow: none !important; 
+    }
 </style>
 <div id="content-header" class="mini">
   <h1>Customer</h1>
@@ -207,6 +258,17 @@
                 </div>
               </div>
             </div>
+
+            <div class="form-group">
+              <div class="col-lg-3">
+                  <label class='custom-control custom-checkbox'>
+                      <input type='checkbox' class='custom-control-input'>
+                      <span class='custom-control-indicator'></span>
+                  </label>
+              </div>
+              <label class='col-lg-3 control-label' style="text-align: left;">Notify Suggested Property</label>
+            </div>
+
             <div class="form-group">
               <label class="col-lg-2 control-label"></label>                      
               <div class="col-md-10">
@@ -310,6 +372,9 @@
         var is_active=0;
         if($('#is_active').is(':checked'))
           is_active=1;
+        var notify = 0;
+        if($('.custom-control-input').is(':checked'))
+            notify = 1;
         $.ajax({
           url:url,
           type:"POST",
@@ -330,8 +395,8 @@
             is_active:is_active,
             category: $("#txtcategory").val(),
             gender: $("#gender").val(),
-            property: $("#txtproperty").val()
-
+            property: $("#txtproperty").val(),
+            notify: notify,
           },
           success:function(data) {
             var formdata = new FormData(form);

@@ -138,9 +138,12 @@ class Property extends CI_Controller {
 			'property_tag' => $this->input->post('property_tag'),
 			'projectid' => $this->input->post('projectid'),
 			'ccemail' => $this->input->post('verifyemail'),
+			'match_property' => $this->input->post('match'),
 		);
-
-		
+		$data_modify = array(
+			'modify_date' => date('Y-m-d H:i:s'),
+			'modify_person' => $this->session->userdata('userid')
+		);
 		$data1 = array(
 			'create_date'=> date('Y-m-d'),
 			'validate' => 1,
@@ -151,7 +154,7 @@ class Property extends CI_Controller {
 		$count = $this->pro->vaidate($title,$pro_id);
 
 		if($pro_id > 0){
-			$this->db->where('pid',$pro_id)->update('tblproperty', $data);
+			$this->db->where('pid',$pro_id)->update('tblproperty', array_merge($data, $data_modify));
 			$this->db->query("UPDATE `tblproperty` SET `validate_date` = DATE_ADD(CURDATE(), INTERVAL 15 DAY) WHERE `pid` = $pro_id");
 			$msg = "Property Has Update...!";
 			$action = 'update';
@@ -844,32 +847,34 @@ class Property extends CI_Controller {
         else
         	$where.= "";
 
-		$customer = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1 {$where}")->result();
-		foreach ($customer as $cust) {
-			$cust->locationid = trim($cust->locationid, ',');
-			$arrloc = explode(',', $cust->locationid);
-			foreach ($arrloc as $l) {
-				if($l == $location)
-					$loc = $l;
-			}
-			$cust->categoryid = trim($cust->categoryid, ',');
-			$arrcate = explode(',', $cust->categoryid);
-			foreach ($arrcate as $c) {
-				if($c == $p_category)
-					$cate = $c;
-			}
-			$cust->p_status = trim($cust->p_status, ',');
-			$arrstatus = explode(',', $cust->p_status);
-			foreach ($arrstatus as $s) {
-				if($s == $p_status)
-					$status = $s;
-			}
-			if($cust->price != '')
-				$price = $cust->price;
-			if($cust->size != '')
-				$size = $cust->size;
+		$customer = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1 AND notify_property = 1 {$where}")->result();
+		if($customer){
+			foreach ($customer as $cust) {
+				$cust->locationid = trim($cust->locationid, ',');
+				$arrloc = explode(',', $cust->locationid);
+				foreach ($arrloc as $l) {
+					if($l == $location)
+						$loc = $l;
+				}
+				$cust->categoryid = trim($cust->categoryid, ',');
+				$arrcate = explode(',', $cust->categoryid);
+				foreach ($arrcate as $c) {
+					if($c == $p_category)
+						$cate = $c;
+				}
+				$cust->p_status = trim($cust->p_status, ',');
+				$arrstatus = explode(',', $cust->p_status);
+				foreach ($arrstatus as $s) {
+					if($s == $p_status)
+						$status = $s;
+				}
+				if($cust->price != '')
+					$price = $cust->price;
+				if($cust->size != '')
+					$size = $cust->size;
 
-			$this->sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$cust->email);
+				$this->sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$cust->email);
+			}
 		}
 	}
 	function sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$email)

@@ -34,6 +34,58 @@
         cursor: wait !important;   
     }
     .datepicker {z-index: 9999;}
+
+    .custom-checkbox {
+      min-height: 1rem;
+      padding-left: 0;
+      margin-right: 0;
+      cursor: pointer; 
+      float: right;
+    }
+    .custom-checkbox .custom-control-input{
+        display: none;
+    }
+    .custom-checkbox .custom-control-indicator {
+        content: "";
+        display: inline-block;
+        position: relative;
+        width: 30px;
+        height: 10px;
+        background-color: #818181;
+        border-radius: 15px;
+        margin-right: 10px;
+        -webkit-transition: background .3s ease;
+        transition: background .3s ease;
+        vertical-align: middle;
+        margin: 0 16px;
+        box-shadow: none; 
+    }
+    .custom-checkbox .custom-control-indicator:after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: #f1f1f1;
+        border-radius: 21px;
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+        left: -2px;
+        top: -4px;
+        -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+        transition: left .3s ease, background .3s ease, box-shadow .1s ease; 
+    }
+    .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+        background-color: #84c7c1;
+        background-image: none;
+        box-shadow: none !important; 
+    }
+    .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator:after {
+        background-color: #84c7c1;
+        left: 15px; 
+    }
+    .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+        box-shadow: none !important; 
+    }
 </style>
 
     <div id="content-header" class="mini">
@@ -438,6 +490,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <label class='custom-control custom-checkbox'>
+                                    <input type='checkbox' class='custom-control-input'>
+                                    <span class='custom-control-indicator'></span>
+                                </label>
+                            </div>
+                            <label class='col-lg-3 control-label' style="text-align: left;">Match & Suggest to Customer</label>
+                        </div>
+
                           </div>
                         </div>
                       </div>
@@ -970,6 +1033,9 @@
           var urgent = 0;
             if($('#urgent').is(':checked'))
                 urgent = 1;
+          var match = 0;
+            if($('.custom-control-input').is(':checked'))
+                match = 1;
           $("body").toggleClass("wait");
           setTimeout(function(){
               $.ajax({
@@ -1030,6 +1096,7 @@
                     property_tag: $('#property_tag').val(),
                     projectid: $('#projectid').val(),
                     verifyemail: $('#verifyemail').val(),
+                    match: match,
                 },
                 success:function(data) {
                     // $(".result_text").html(data.msg);

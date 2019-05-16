@@ -300,6 +300,7 @@ class Customer extends CI_Controller {
         	'pid' => $prop,
         	'categoryid' => $cate,
         	'userid' => $this->session->userdata('userid'),
+        	'notify_property' => $this->input->post('notify'),
         );
         $data1 = array(
         	'create_date' => date('Y-m-d')
