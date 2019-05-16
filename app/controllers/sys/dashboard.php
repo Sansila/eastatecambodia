@@ -193,13 +193,14 @@ class Dashboard extends CI_Controller {
         $this->green->setActivePage($this->input->post('p'));
 
 		foreach($this->db->query($sql)->result() as $row){
+			$date=date_create($row->created_date);
 			$table.= "<tr>
 				 <td class='no'>".$no."</td>
 				 <td class='name'>".$row->first_name."</td>											
 				 <td class='type'>".$row->last_name."</td>							 	
 				 <td class='type'>".$row->user_name."</td>							 	
 				 <td class='type'>".$row->email."</td>
-				 <td class='country'>".$row->created_date."</td>
+				 <td class='country'>".date_format($date,"Y-m-d H:i:s")."</td>
 				 <td class='remove_tag no_wrap'>";
 				 
 				 if($this->green->gAction("D")){

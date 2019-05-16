@@ -92,7 +92,7 @@
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control input-sm required" required="" name="category_id" id="category_id">
-                                        <option value="">Please Select</option>
+                                        <option value="0">Please Select</option>
                                         <?php
                                         $locat=$this->db->query("SELECT * FROM tblpropertytype WHERE type_status = '1' ")->result();
                                             foreach ($locat as $me) {
@@ -140,7 +140,7 @@
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control input-sm required" name="property_type" id="property_type">
-                                        <option value="">Please Select</option>
+                                        <option value="0">Please Select</option>
                                         <option value="1" <?php if(isset($row->p_type)){ if($row->p_type == 1) echo "selected"; }?> >Sale</option>
                                         <option value="2" <?php if(isset($row->p_type)){ if($row->p_type == 2) echo "selected"; }?> >Rent</option>
                                         <option value="3" <?php if(isset($row->p_type)){ if($row->p_type == 3) echo "selected"; }?> >Sale & Rent</option>
@@ -154,14 +154,14 @@
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_price')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="price" value='<?php echo isset($row->price)?"$row->price":"" ?>' id="price">
+                                    <input type="number"  class="form-control input-sm" name="price" value='<?php echo isset($row->price)?"$row->price":"" ?>' id="price">
                                 </div>                   
                             </div>
                             
                             <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_size')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
-                                    <input type="text"  class="form-control input-sm" name="house_size" value='<?php echo isset($row->housesize)?"$row->housesize":""; ?>' id="house_size">
+                                    <input type="number"  class="form-control input-sm" name="house_size" value='<?php echo isset($row->housesize)?"$row->housesize":""; ?>' id="house_size">
                                 </div>                   
                             </div>
                             
@@ -172,7 +172,7 @@
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control select2-single input-sm required" id="location_id" name="location_id">
-                                        <option value="">Please Select</option>
+                                        <option value="0">Please Select</option>
                                         <?php
                                             $location=$this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc")->result();
                                             foreach ($location as $menu) {
@@ -208,7 +208,7 @@
                                 <div class="col-lg-4"> 
                                     <div class="col-md-12">
                                         <select class="form-control select2-single-project input-sm" id="projectid" name="projectid">
-                                            <option value="">Please Select</option>
+                                            <option value="0">Please Select</option>
                                             <?php
                                                 $project=$this->db->query("SELECT * FROM tblproject where is_active = 1 ORDER BY projectid asc")->result();
                                                 foreach ($project as $pro) {
@@ -861,7 +861,7 @@
               })
         $(this).closest('.saouy').remove();
     });
-    function uploads(pid,formdata,msg){
+    function uploads(pid,formdata,msg,status,location,cate,types){
         //alert(visitid+'/'+familyid);
         $.ajax({
             type:'POST',
@@ -872,13 +872,12 @@
             processData: false,
             success:function(data){
                 toasmsg('success',msg);
-                //location.reload();
-                //location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
                 console.log("success");
                 console.log(data);
-                setTimeout(function(){ 
-                    location.reload();
-                }, 1000);
+                $('#myModal').modal('hide');
+                if(status == 'insert'){
+                    sendnitificationemail(pid,location,cate,types);
+                }
             },
             error: function(data){
                 console.log("error");
@@ -892,6 +891,20 @@
         });
        
     } 
+    function sendnitificationemail(pid,location,cate,types)
+    {
+        $.ajax({
+            url:"<?PHP echo site_url('property/property/checkcustomerfindproperty');?>/"+pid+'/'+location+'/'+cate+'/'+types,
+            type:"POST",
+            async:false,
+            success:function(data){
+
+            },
+            error: function(data){
+
+            }
+        });
+    }
     $('#cancel').click(function(){
         location.href="<?PHP echo site_url('store/store/index');?>?<?php echo 'm=$m&p=$p' ?>";
     }) 
@@ -1023,10 +1036,7 @@
                     var formdata = new FormData(form);
 
                     if(data.pid!='' && data.pid!=null){
-                        uploads(data.pid,formdata,data.msg);
-
-                        // toasmsg('success',data.msg);
-                        // location.href='<?php //echo site_url("article/index?m=".$m.'&p='.$p) ?>';
+                        uploads(data.pid,formdata,data.msg,data.status,data.location,data.cate,data.types);
                     }else{
                         toasmsg('error',data.msg);
                     }

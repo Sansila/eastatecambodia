@@ -59,4 +59,9 @@
             $sql = $this->db->query("SELECT * FROM tblproperty where pid = $id")->row();
             return $sql->property_name;
         }
+        function getImage($pid)
+        {
+            $sql = $this->db->query("SELECT * FROM tblgallery as g WHERE g.pid = $pid ")->row();
+            return $sql;
+        }
     }

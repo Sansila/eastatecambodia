@@ -254,6 +254,8 @@
     $lang['help_us_female'] = "ស្រី";
     $lang['help_us_message_false'] = "សូមព្យាយាមម្តងទៀត";
     $lang['help_us_message_success'] = "សូមអរគុណអ្នកដែលបានរកឃើញនៅក្នុងគេហទំព័ររបស់យើង";
+    $lang['help_us_price'] = "តម្លៃ";
+    $lang['help_us_size'] = "ទំហំ(ផ្ទះ & ដី)";
     // Site Footer
     $lang['footer_property'] = "ប្រភេទអចលនទ្រព្យ";
     $lang['footer_contact'] = "ទំនាក់ទំនងពត៌មានលំអិត";

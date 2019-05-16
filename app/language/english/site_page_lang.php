@@ -255,6 +255,8 @@
   $lang['help_us_female'] = "Female";
   $lang['help_us_message_false'] = "Failed please try again.";
   $lang['help_us_message_success'] = "Thank you for finding in our website.";
+  $lang['help_us_price'] = "Price";
+  $lang['help_us_size'] = "Size(House & Land)";
   // Site Footer
   $lang['footer_property'] = "Properties";
   $lang['footer_contact'] = "Contact detail";

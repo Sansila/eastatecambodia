@@ -142,7 +142,7 @@ class Customer extends CI_Controller {
 	}
 	function delete($id)
 	{
-		$this->db->query("UPDATE tblcustomer SET is_active = 0 WHERE customerid = $id ")->row();
+		$this->db->query("UPDATE tblcustomer SET is_active = 2 WHERE customerid = $id ")->row();
 	}
 	function addgroup()
 	{
@@ -298,7 +298,8 @@ class Customer extends CI_Controller {
         	'is_active' => $this->input->post('is_active'),
         	'gender' => $gender,
         	'pid' => $prop,
-        	'categoryid' => $cate
+        	'categoryid' => $cate,
+        	'userid' => $this->session->userdata('userid'),
         );
         $data1 = array(
         	'create_date' => date('Y-m-d')
@@ -392,11 +393,11 @@ class Customer extends CI_Controller {
 			if($pro->p_type == 3)
 				$property_type = "Rent & Sale";
 
-        	$list.= '<div class="item  col-xs-4 col-lg-4" style="width: 299px; height:535px; border: 1px solid; float: left; margin: 10px;">
+        	$list.= '<div class="item  col-xs-4 col-lg-4" style="width: 299px; height:523px; border: 1px solid; float: left; margin: 10px;">
                         <div class="thumbnail" style=";padding: 0px;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;">
                             <img class="group list-group-image" src="'.$images.'" alt="" style="float: left; margin-bottom: 20px;" width="300" height="187"/>
-                            <div style="padding: 10px; color: white; background: green;">
-                                P'.$pro->pid.' | '.$pro->typename.' | '.$property_type.'
+                            <div style="padding:0px 10px 15px 10px;color: white; background: #d84949;">
+                                	P'.$pro->pid.' | '.$pro->typename.' | '.$property_type.'
                             </div>
                             <div class="caption" style="padding: 10px; ">
                                 <h4 class="group inner list-group-item-heading" style="height:43px; overflow: hidden;">
@@ -413,8 +414,8 @@ class Customer extends CI_Controller {
                                             $'.$pro->price.'
                                         </p>
                                     </div>
-                                    <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: green;color: white;">
-                                        <p class="lead" >
+                                    <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: #d84949;color: white;">
+                                        <p class="lead">
                                             <a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="color:white; text-decoration: none;">
                                                 Details
                                             </a>
@@ -458,7 +459,7 @@ class Customer extends CI_Controller {
                                 <img src="'.$logo.'" style="width: 140px;">
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                     <p>Dear customer,</p>
-                                    <p>The following are the properties that Estate Cambodia would like to share and you may review for your interest: </p> 
+                                    <p>The following are the properties that Estate Cambodia would like to share and you may review for your interest: </p>
                                     '.$list.'
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 

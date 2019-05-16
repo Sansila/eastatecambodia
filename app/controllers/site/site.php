@@ -623,7 +623,7 @@ class Site extends CI_Controller {
             $page = $_GET['per_page'];
         $config['base_url'] = site_url('site/site/properties/'.$id.'/?type='.$type.'&available='.$available.'&status='.$status.'&'.$return_cat.'price__lte='.$lastprice.'&price__gte='.$firstprice.'&q='.$return_loc.'&list_type='.$list_type.'&order='.$order.'&sort='.$sort.'&'.$return_feature.'garages__lte='.$park_last.'&garages__gte='.$park_first.'&bedrooms__lte='.$bedroom_last.'&bedrooms__gte='.$bedroom_first.'&building_area_total__lte='.$landarea_last.'&building_area_total__gte='.$landarea_first.'&land_title='.$land_title.'&address_floor_level__lte='.$floorlevel_last.'&address_floor_level__gte='.$floorlevel_first);
 
-        $config['per_page'] = 16;
+        $config['per_page'] = 24;
         $config['num_link'] = 3;
         $config['page_query_string'] = TRUE;
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -1138,7 +1138,7 @@ class Site extends CI_Controller {
         $address = $this->input->post('txtAddress');
         $remark = $this->input->post('txtRemark');
         $gender = $this->input->post('txtgender');
-        $date = Date('y-m-d');
+        $date = Date('y-m-d H:i:s');
 
         $data = array(
             'user_name' => $name,
@@ -1268,6 +1268,8 @@ class Site extends CI_Controller {
         $email = $this->input->post('txtEmail');
         $gender = $this->input->post('txtgender');
         $types = $this->input->post('txtpro_type');
+        $price = $this->input->post('txtprice');
+        $size = $this->input->post('txtsize');
 
         foreach ($cates as $cate) {
             $c.= $cate.',';
@@ -1282,18 +1284,21 @@ class Site extends CI_Controller {
         }
         $id = $this->input->post("txtID");
         $data = array(
-                    'fname' => $this->input->post('txtName'),
-                    'fphone' => $this->input->post('txtPhone'),
-                    'femail' => $this->input->post('txtEmail'),
-                    'faddress' => $this->input->post('txtAddress'),
-                    'fpcategory' => $c,
-                    'fpstatus' => $t,
-                    'fcreate_date' => date('Y-m-d'),
-                    'fdescription' => $this->input->post('txtDes'),
-                    'fplocation' => $l,
-                    'fgender' => $gender
+                    'customer_name' => $this->input->post('txtName'),
+                    'phone' => $this->input->post('txtPhone'),
+                    'email' => $this->input->post('txtEmail'),
+                    'address' => $this->input->post('txtAddress'),
+                    'categoryid' => $c,
+                    'p_status' => $t,
+                    'create_date' => date('Y-m-d'),
+                    'description' => $this->input->post('txtDes'),
+                    'locationid' => $l,
+                    'gender' => $gender,
+                    'price' => $price,
+                    'size' => $size,
+                    'is_active' => 0
                     );
-        $this->db->insert('tblfindproperty',$data);
+        $this->db->insert('tblcustomer',$data); 
 
         if($this->db->affected_rows() > 0){
             require('phpmailer/class.phpmailer.php');
