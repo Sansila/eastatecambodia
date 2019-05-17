@@ -416,11 +416,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_map')?> </label>
-                            <div class="col-lg-10"> 
-                                <div class="col-md-12">
-                                    <div id="map_canvas" style="height: 500px;"></div>
-                                </div>                   
+                            <div class="col-lg-12">
+                                <label class='col-lg-2 control-label' style=" margin-bottom: 10px;"><?php echo $this->lang->line('p_map')?> </label>
+                                <label class='col-lg-10 control-label' style="text-align: center; font-weight: normal; font-size: 13px;"><?php echo $this->lang->line('p_map_desc')?></label>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-10"> 
+                                    <div class="col-md-12">
+                                        <div id="map_canvas" style="height: 500px;"></div>
+                                    </div>                   
+                                </div>
                             </div>
                         </div>
 
@@ -503,8 +509,8 @@
                                 $hidecheck = "";
                         ?>
                         <div class="form-group <?php echo $hidecheck;?>">
-                            <div class="col-lg-3">
-                                <label class='custom-control custom-checkbox'>
+                            <div class="col-lg-2">
+                                <label class='custom-control custom-checkbox' style="margin-right: 12px; margin-top: 5px;">
                                     <input type='checkbox' class='custom-control-input txt-match'>
                                     <span class='custom-control-indicator'></span>
                                 </label>
@@ -516,12 +522,24 @@
                         </div>
                       </div>
                       <div class="card">
-                        <div class="card-header" id="headingTwo">
-                          <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              <p><b><span style="color:red; padding-left: 20px;"><?php echo $this->lang->line('p_moreinfo')?></span></b></p>
-                            </button>
-                          </h5>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-11">
+                            <div class="card-header" id="headingTwo">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="text-decoration: none;">
+                                  <p>
+                                    <b> 
+                                        <span>
+                                            <img src="<?php echo site_url('assets/img/plus.png')?>">
+                                        </span>
+                                        <span style="color:red; padding-left: 20px;">
+                                            <?php echo $this->lang->line('p_moreinfo')?>
+                                        </span>
+                                    </b>
+                                </p>
+                                </button>
+                              </h5>
+                            </div>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                           <div class="card-body">

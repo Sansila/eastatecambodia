@@ -53,7 +53,8 @@
   $lang['p_level'] = "Property Level";
   $lang['p_owner'] = "Owner Relation";
   $lang['p_content'] = "Property Description";
-  $lang['p_map'] = "Map​ Please drag the red sign on the map below to location of the property";
+  $lang['p_map'] = "Map​";
+  $lang['p_map_desc'] = "Drag the red sign on the map below to location of the property";
   $lang['p_lat'] = "Latitude";
   $lang['p_long'] = "Longtitude";
   $lang['p_image'] = "Images";
