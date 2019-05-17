@@ -984,23 +984,23 @@
     }
     function updatestatusimage(pid,arr)
     {
-        jQuery.each( arr, function( i, val ) {
-            $.ajax({
-                url:"<?PHP echo site_url('property/property/updatestatusimage');?>/"+pid,
-                type:"POST",
-                data:{
-                    arr:val
-                },
-                async:false,
-                success:function(data){
-                    console.log(data);
-                },
-                error: function(data){
+        // jQuery.each( arr, function( i, val ) {
+            
+        // });
+        $.ajax({
+            url:"<?PHP echo site_url('property/property/updatestatusimage');?>/"+pid,
+            type:"POST",
+            data:{
+                arr:arr
+            },
+            async:false,
+            success:function(data){
+                console.log(data);
+            },
+            error: function(data){
 
-                }
-            });
+            }
         });
-        
     }
 
     $('#cancel').click(function(){

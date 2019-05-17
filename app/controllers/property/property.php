@@ -1002,11 +1002,28 @@ class Property extends CI_Controller {
 			        $mail->Send();
 			        $mail->ClearAddresses();
 
-			}
+				}
 	}
 	function updatestatusimage($pid)
 	{
-		$imgstatus = $this->input->post('arr');
-		$data = array();
+		$imgstatus = $this->input->post('arr'); 
+		$arr = array(); 
+		$arrs = array();
+		$idgallery = $this->db->query("SELECT * FROM tblgallery WHERE pid = $pid ")->result(); 	
+		foreach ($idgallery as $idg) {
+			$arr[] = array('id' => $idg->gallery_id);
+		}
+		foreach ($imgstatus as $val) {
+			$arrs[] = array('en' => $val);
+		}
+		$all = array(
+			'id' => $arr,
+			'enable' => $arrs
+		);
+		foreach ($all as $key => $value) {
+			foreach ($value as $v) {
+				print_r($v);
+			}
+		}
 	}	
 }
