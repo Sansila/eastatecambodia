@@ -278,7 +278,7 @@
                                     </div>                   
                                 </div>
                             </div>
-                            <label class='col-lg-2 control-label'>Verify Email</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_verify_mail')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="verifyemail" value='<?php echo isset($row->ccemail)?"$row->ccemail":"" ?>' id="verifyemail">
@@ -416,7 +416,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_map')?></label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_map')?> </label>
                             <div class="col-lg-10"> 
                                 <div class="col-md-12">
                                     <div id="map_canvas" style="height: 500px;"></div>
@@ -476,8 +476,8 @@
                                                             <button title="Remove file" class="kv-file-remove btn btn-xs btn-default" type="button" rel='<?php echo $img->gallery_id ?>'><i class="glyphicon glyphicon-trash text-danger"></i></button>
                                                         </div>
                                                         <div class="file-upload-indicator" title="Not uploaded yet">
-                                                            <label class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input my-enable-img" <?php if($img->enable_pro_image == 1) echo "checked"; else echo "";?>>
+                                                            <label class="custom-control custom-checkbox" style="float: left;width: 170px;"><span class="disable-img"><?php if($img->enable_pro_image == 1 || $img->enable_pro_image == null) echo "Show"; else echo "Hide";?></span>
+                                                                <input type="checkbox" class="custom-control-input my-enable-img" <?php if($img->enable_pro_image == 1 || $img->enable_pro_image == null) echo "checked"; else echo "";?>>
                                                                 <span class="custom-control-indicator"></span>
                                                             </label>
                                                         </div>
@@ -509,7 +509,7 @@
                                     <span class='custom-control-indicator'></span>
                                 </label>
                             </div>
-                            <label class='col-lg-3 control-label' style="text-align: left;">Match & Suggest to Customer</label>
+                            <label class='col-lg-3 control-label' style="text-align: left;"><?php echo $this->lang->line('p_match')?></label>
                         </div>
 
                           </div>
@@ -869,6 +869,20 @@
     }//]]> 
 </script>
 <script type="text/javascript">
+
+    $('.file-input').find('.saouy').each(function(){
+        var input = $('label.custom-checkbox').closest(this).find('.my-enable-img');
+        var label = $('label.custom-checkbox').closest(this).find('.disable-img').text();
+        input.change(function(){
+            if(input.is(":checked")) {
+                $(this).closest('.saouy').find('span.disable-img').text("Show");
+            }else{
+                $(this).closest('.saouy').find('span.disable-img').text("Hide");
+            }
+        });
+    });
+
+    
     var yerler = [];
     var url="<?php echo site_url('property/property/getPropertyTag')?>";
     $.ajax({
@@ -892,7 +906,6 @@
         },
         select: function (event, ui) {
             event.preventDefault();
-            //$("#projeKatmanRaporCbx").val(ui.item.value);
             $("#property_tag").val(ui.item.label);
         }
     });
@@ -959,11 +972,6 @@
             error: function(data){
                 console.log("error");
                 console.log(data);
-                //location.reload();
-                //location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
-                // setTimeout(function(){ 
-                //     location.reload();
-                // }, 1000);
             }
         });
        
@@ -984,9 +992,6 @@
     }
     function updatestatusimage(pid,arr)
     {
-        // jQuery.each( arr, function( i, val ) {
-            
-        // });
         $.ajax({
             url:"<?PHP echo site_url('property/property/updatestatusimage');?>/"+pid,
             type:"POST",
@@ -995,7 +1000,9 @@
             },
             async:false,
             success:function(data){
-                console.log(data);
+                setTimeout(function(){ 
+                    location.reload();
+                }, 1000);
             },
             error: function(data){
 
@@ -1005,7 +1012,8 @@
 
     $('#cancel').click(function(){
         location.href="<?PHP echo site_url('store/store/index');?>?<?php echo 'm=$m&p=$p' ?>";
-    }) 
+    });
+
     $("#menu_type").change(function(){
         if($(this).val()==1)
             $("#article_tap").removeClass("hide");

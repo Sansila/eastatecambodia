@@ -264,7 +264,7 @@
         uploadIcon: '<i class="glyphicon glyphicon-upload text-info"></i>',
         uploadClass: 'btn btn-xs btn-default',
         uploadTitle: 'Upload file',
-        indicatorNew: '<label class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input my-enable-img" checked><span class="custom-control-indicator"></span></label>',
+        indicatorNew: '<label class="custom-control custom-checkbox" style="float: left;width: 170px;"><span class="disable-img">Show</span><input type="checkbox" class="custom-control-input my-enable-img" checked><span class="custom-control-indicator"></span></label>',
         indicatorSuccess: '<i class="glyphicon glyphicon-ok-sign text-success"></i>',
         indicatorError: '<i class="glyphicon glyphicon-exclamation-sign text-danger"></i>',
         indicatorLoading: '<i class="glyphicon glyphicon-hand-up text-muted"></i>',
@@ -1124,9 +1124,7 @@
             if (isEmpty($el.val())) {
                 return;
             }
-            // Fix for IE ver < 11, that does not clear file inputs
-            // Requires a sequence of steps to prevent IE crashing but
-            // still allow clearing of the file input.
+
             if (self.isIE9 || self.isIE10) {
                 $srcFrm = $el.closest('form');
                 $tmpFrm = $(document.createElement('form'));
@@ -1780,7 +1778,7 @@
             }
             self.$preview.find('.kv-file-remove').each(function () {
                 var $el = $(this), $frame = $el.closest('.file-preview-frame'), hasError,
-                    id = $frame.attr('id'), ind = $frame.attr('data-fileindex'), n, cap, status;
+                    id  = $frame.attr('id'), ind = $frame.attr('data-fileindex'), n, cap, status;
                 handler($el, 'click', function () {
                     status = self.raise('filepreremove', [id, ind]);
                     if (status === false || !self.validateMinCount()) {
@@ -1821,6 +1819,18 @@
                         ind = $frame.attr('data-fileindex');
                     if (!$frame.hasClass('file-preview-error')) {
                         self.uploadSingle(ind, self.filestack, false);
+                    }
+                });
+            });
+
+            self.$preview.find('.custom-checkbox').each(function() {
+                var $el = $(this);
+                var input = $el.closest('.file-preview-frame').find('.my-enable-img');
+                handler(input, 'change', function () {
+                    if(input.is(":checked")) {
+                        input.closest('.file-preview-frame').find('span.disable-img').text("Show");
+                    }else{
+                        input.closest('.file-preview-frame').find('span.disable-img').text("Hide");
                     }
                 });
             });
@@ -2674,5 +2684,6 @@
             $input.fileinput();
         }
     });
+
 })
 (window.jQuery);
