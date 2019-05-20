@@ -14,14 +14,20 @@ class Modsite extends CI_Model {
     {
         $sql = $this->db->query("SELECT * FROM tblgallery as g 
                                 right join tblproperty as p on p.pid = g.pid
-                                WHERE p.pid = '$pid' AND p.p_status = 1 ")->result();
+                                WHERE p.pid = '$pid' 
+                                AND p.p_status = 1 
+                                AND (g.enable_pro_image = 1 OR g.enable_pro_image is null)
+                                ")->result();
         return $sql;
     }
     function getImageLimitByID($pid)
     {
         $sql = $this->db->query("SELECT * FROM tblgallery as g 
                                 right join tblproperty as p on p.pid = g.pid
-                                WHERE p.pid = '$pid' AND p.p_status = 1 LIMIT 1")->result();
+                                WHERE p.pid = '$pid' 
+                                AND p.p_status = 1 
+                                AND (g.enable_pro_image = 1 OR g.enable_pro_image is null) 
+                                LIMIT 1")->result();
         return $sql;
     }
     function getSiteprofile()
@@ -218,7 +224,9 @@ class Modsite extends CI_Model {
     {
         $sql = $this->db->query("SELECT * FROM tblgallery as g 
                                 right join tblproperty as p on p.pid = g.pid
-                                WHERE p.pid = '$pid' AND p.p_status = 1 ")->row();
+                                WHERE p.pid = '$pid' 
+                                AND p.p_status = 1 
+                                AND (g.enable_pro_image = 1 OR g.enable_pro_image is null)")->row();
         return $sql;
     }
     function save($data)
@@ -300,7 +308,10 @@ class Modsite extends CI_Model {
     {
         $sql = $this->db->query("SELECT * FROM tblgallery as g 
                                 right join tblproject as p on p.projectid = g.projectid
-                                WHERE p.projectid = '$projectid' AND p.is_active = 1 ")->row();
+                                WHERE p.projectid = '$projectid' 
+                                AND p.is_active = 1 
+                                AND (g.enable_pro_image = 1 OR g.enable_pro_image is null)
+                                ")->row();
         return $sql;
     }
     function getDetailProject($id)
@@ -315,7 +326,10 @@ class Modsite extends CI_Model {
     {
         $sql = $this->db->query("SELECT * FROM tblgallery as g 
                                 right join tblproject as p on p.projectid = g.projectid
-                                WHERE g.projectid = '$id' AND p.is_active = 1 ")->result();
+                                WHERE g.projectid = '$id' 
+                                AND p.is_active = 1 
+                                AND (g.enable_pro_image = 1 OR g.enable_pro_image is null)
+                                ")->result();
         return $sql;
     }
     function getProjectID($id)

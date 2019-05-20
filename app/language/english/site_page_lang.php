@@ -53,11 +53,14 @@
   $lang['p_level'] = "Property Level";
   $lang['p_owner'] = "Owner Relation";
   $lang['p_content'] = "Property Description";
-  $lang['p_map'] = "Map";
+  $lang['p_map'] = "Map​";
+  $lang['p_map_desc'] = "Drag the red sign on the map below to location of the property";
   $lang['p_lat'] = "Latitude";
   $lang['p_long'] = "Longtitude";
   $lang['p_image'] = "Images";
-  $lang['p_moreinfo'] = "Add More Info";
+  $lang['p_moreinfo'] = "Add more information » Click on this link to provide more details information of the propery";
+  $lang['p_match'] = "Match & Suggest to Customer";
+  $lang['p_verify_mail'] = "Verify Email";
   $lang['p_floor'] = "Floor";
   $lang['p_story'] = "Story";
   $lang['p_pool'] = "Pool";

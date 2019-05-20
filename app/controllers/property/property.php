@@ -1010,20 +1010,16 @@ class Property extends CI_Controller {
 		$arr = array(); 
 		$arrs = array();
 		$idgallery = $this->db->query("SELECT * FROM tblgallery WHERE pid = $pid ")->result(); 	
+		$i = 0;
 		foreach ($idgallery as $idg) {
-			$arr[] = array('id' => $idg->gallery_id);
+			$arr[$i] = $idg->gallery_id;
+			$i++;
 		}
+		$j = 0;
 		foreach ($imgstatus as $val) {
-			$arrs[] = array('en' => $val);
-		}
-		$all = array(
-			'id' => $arr,
-			'enable' => $arrs
-		);
-		foreach ($all as $key => $value) {
-			foreach ($value as $v) {
-				print_r($v);
-			}
+			$arrs[$j] = $val;
+			$this->db->query("UPDATE tblgallery SET enable_pro_image = $arrs[$j] WHERE gallery_id = $arr[$j]");
+			$j++;
 		}
 	}	
 }

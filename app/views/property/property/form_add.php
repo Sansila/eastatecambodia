@@ -278,7 +278,7 @@
                                     </div>                   
                                 </div>
                             </div>
-                            <label class='col-lg-2 control-label'>Verify Email</label>
+                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_verify_mail')?></label>
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm" name="verifyemail" value='<?php echo isset($row->ccemail)?"$row->ccemail":"" ?>' id="verifyemail">
@@ -416,11 +416,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label class='col-lg-2 control-label'><?php echo $this->lang->line('p_map')?></label>
-                            <div class="col-lg-10"> 
-                                <div class="col-md-12">
-                                    <div id="map_canvas" style="height: 500px;"></div>
-                                </div>                   
+                            <div class="col-lg-12">
+                                <label class='col-lg-2 control-label' style=" margin-bottom: 10px;"><?php echo $this->lang->line('p_map')?> </label>
+                                <label class='col-lg-10 control-label' style="text-align: center; font-weight: normal; font-size: 13px;"><?php echo $this->lang->line('p_map_desc')?></label>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-10"> 
+                                    <div class="col-md-12">
+                                        <div id="map_canvas" style="height: 500px;"></div>
+                                    </div>                   
+                                </div>
                             </div>
                         </div>
 
@@ -476,8 +482,8 @@
                                                             <button title="Remove file" class="kv-file-remove btn btn-xs btn-default" type="button" rel='<?php echo $img->gallery_id ?>'><i class="glyphicon glyphicon-trash text-danger"></i></button>
                                                         </div>
                                                         <div class="file-upload-indicator" title="Not uploaded yet">
-                                                            <label class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input my-enable-img" <?php if($img->enable_pro_image == 1) echo "checked"; else echo "";?>>
+                                                            <label class="custom-control custom-checkbox" style="float: left;width: 170px;"><span class="disable-img"><?php if($img->enable_pro_image == 1 || $img->enable_pro_image == null) echo "Show"; else echo "Hide";?></span>
+                                                                <input type="checkbox" class="custom-control-input my-enable-img" <?php if($img->enable_pro_image == 1 || $img->enable_pro_image == null) echo "checked"; else echo "";?>>
                                                                 <span class="custom-control-indicator"></span>
                                                             </label>
                                                         </div>
@@ -503,25 +509,37 @@
                                 $hidecheck = "";
                         ?>
                         <div class="form-group <?php echo $hidecheck;?>">
-                            <div class="col-lg-3">
-                                <label class='custom-control custom-checkbox'>
+                            <div class="col-lg-2">
+                                <label class='custom-control custom-checkbox' style="margin-right: 12px; margin-top: 5px;">
                                     <input type='checkbox' class='custom-control-input txt-match'>
                                     <span class='custom-control-indicator'></span>
                                 </label>
                             </div>
-                            <label class='col-lg-3 control-label' style="text-align: left;">Match & Suggest to Customer</label>
+                            <label class='col-lg-3 control-label' style="text-align: left;"><?php echo $this->lang->line('p_match')?></label>
                         </div>
 
                           </div>
                         </div>
                       </div>
                       <div class="card">
-                        <div class="card-header" id="headingTwo">
-                          <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              <p><b><span style="color:red; padding-left: 20px;"><?php echo $this->lang->line('p_moreinfo')?></span></b></p>
-                            </button>
-                          </h5>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-11">
+                            <div class="card-header" id="headingTwo">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="text-decoration: none;">
+                                  <p>
+                                    <b> 
+                                        <span>
+                                            <img src="<?php echo site_url('assets/img/plus.png')?>">
+                                        </span>
+                                        <span style="color:red; padding-left: 20px;">
+                                            <?php echo $this->lang->line('p_moreinfo')?>
+                                        </span>
+                                    </b>
+                                </p>
+                                </button>
+                              </h5>
+                            </div>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                           <div class="card-body">
@@ -869,6 +887,20 @@
     }//]]> 
 </script>
 <script type="text/javascript">
+
+    $('.file-input').find('.saouy').each(function(){
+        var input = $('label.custom-checkbox').closest(this).find('.my-enable-img');
+        var label = $('label.custom-checkbox').closest(this).find('.disable-img').text();
+        input.change(function(){
+            if(input.is(":checked")) {
+                $(this).closest('.saouy').find('span.disable-img').text("Show");
+            }else{
+                $(this).closest('.saouy').find('span.disable-img').text("Hide");
+            }
+        });
+    });
+
+    
     var yerler = [];
     var url="<?php echo site_url('property/property/getPropertyTag')?>";
     $.ajax({
@@ -892,7 +924,6 @@
         },
         select: function (event, ui) {
             event.preventDefault();
-            //$("#projeKatmanRaporCbx").val(ui.item.value);
             $("#property_tag").val(ui.item.label);
         }
     });
@@ -959,11 +990,6 @@
             error: function(data){
                 console.log("error");
                 console.log(data);
-                //location.reload();
-                //location.href="<?php echo site_url('property/property/index/?m='.$m.'&p='.$p) ?>";
-                // setTimeout(function(){ 
-                //     location.reload();
-                // }, 1000);
             }
         });
        
@@ -984,9 +1010,6 @@
     }
     function updatestatusimage(pid,arr)
     {
-        // jQuery.each( arr, function( i, val ) {
-            
-        // });
         $.ajax({
             url:"<?PHP echo site_url('property/property/updatestatusimage');?>/"+pid,
             type:"POST",
@@ -995,7 +1018,9 @@
             },
             async:false,
             success:function(data){
-                console.log(data);
+                setTimeout(function(){ 
+                    location.reload();
+                }, 1000);
             },
             error: function(data){
 
@@ -1005,7 +1030,8 @@
 
     $('#cancel').click(function(){
         location.href="<?PHP echo site_url('store/store/index');?>?<?php echo 'm=$m&p=$p' ?>";
-    }) 
+    });
+
     $("#menu_type").change(function(){
         if($(this).val()==1)
             $("#article_tap").removeClass("hide");
