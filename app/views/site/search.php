@@ -209,8 +209,6 @@
 	                                </div>
 	                            </div>
 
-	                            
-
 	                            <div class="search-field-wrapper search-refine">
 	                                <button data-toggle="refine-dropdown" class="search-field hollow expanded">
 	                                    <span class="text-label"><?php echo $this->lang->line('search_customize')?></span>
@@ -556,7 +554,11 @@
 	                            </div>
 	                            <div class="search-field-wrapper search-button">
 	                                <button class="button highlight expanded btn-search-map">
-	                                	<?php echo $this->lang->line('search_btn_search_map')?> <span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
+	                                	<?php echo $this->lang->line('search_btn_search_map')?> 
+	                                	<span>
+	                                		<img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;">
+	                                	</span>
+	                                </button>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -950,7 +952,11 @@
 	                            </div>
 	                            <div class="search-field-wrapper search-button">
 	                                <button class="button highlight expanded btn-search-map-mobile">
-	                                	<?php echo $this->lang->line('search_btn_search_map')?><span><img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;"></span></button>
+	                                	<?php echo $this->lang->line('search_btn_search_map')?>
+	                                	<span>
+	                                		<img src="<?php echo site_url('assets/img/map.png')?>" style="width: 24px;">
+	                                	</span>
+	                                </button>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -1331,7 +1337,7 @@
 				$('#hidden-search-form').submit();
 			});
 			$('.btn-search-map-mobile').click(function(){
-				$('.search_map').val('map');
+				$('#search_map').val('map');
 				var txtsearch = $('#id_mobile_location_autocomplete').val();
 				$('#id_q').val(txtsearch);
 				$('#hidden-search-form').submit();

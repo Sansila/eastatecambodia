@@ -558,7 +558,9 @@
 													</span>
 												</div>
 												<div class="property-thumb-info-content" style="height: 90px;">
-													<h3><a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?text='.$hot->property_name.'&name=browser')?>"><?php echo $hot->property_name?></a></h3>
+													<h3 style="margin-bottom:6px;"> 
+														<a class="module line-clamp" href="<?php echo site_url('site/site/detail/'.$hot->pid.'/?text='.$hot->property_name.'&name=browser')?>"><?php echo $hot->property_name?></a>
+													</h3>
 													<address class="module line-clamps"><?php echo $hot->address?></address>
 												</div>
 												<div class="amenities clearfix" style="height: 40px;">
