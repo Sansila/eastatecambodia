@@ -1119,7 +1119,7 @@
 					<option <?php if($sort == 'Date') echo "selected"; else echo "";?> value="Date">Date</option>
 				</select>
 
-		        <input id="search_map" name="search_map"/>
+		        <input id="search_map" class="search_map" name="search_map"/>
 		    </form>
 			<!-- End Advanced Search -->
 			
@@ -1337,7 +1337,7 @@
 				$('#hidden-search-form').submit();
 			});
 			$('.btn-search-map-mobile').click(function(){
-				$('#search_map').val('map');
+				$('.search_map').val('map');
 				var txtsearch = $('#id_mobile_location_autocomplete').val();
 				$('#id_q').val(txtsearch);
 				$('#hidden-search-form').submit();

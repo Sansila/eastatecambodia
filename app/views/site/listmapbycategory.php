@@ -1124,7 +1124,7 @@
                 </select>
                 
                 <input id="type" name="type" type="text" value="<?php echo $types?>" />
-                <input id="search_map" name="search_map"/>
+                <input id="search_map" class="search_map" name="search_map"/>
             </form>
 <style type="text/css">
     .homepage-map #map {

@@ -1,7 +1,7 @@
 <?php
     $lang['dashboard'] = "ទំព័រដើម";
     $lang['logout'] = "ចាកចេញ";
-    $lang['setting'] = "ការកំណត់";
+    $lang['setting'] = "ព័ត៌មានអ្នកប្រើ";
     $lang['profile'] = "អ្នកប្រើប្រាស់ប្រព័ន្ធ";
     $lang['ch_pwd'] = "ផ្លាស់ប្តូរពាក្យសម្ងាត់";
     $lang['inactive_post'] = "ការផុសដែលមិនទាន់អនុញ្ញាត្តិ";

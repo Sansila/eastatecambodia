@@ -1321,7 +1321,7 @@
                     <option <?php if($sort == 'Date') echo "selected"; else echo "";?> value="Date">Date</option>
                 </select>
 
-                <input id="search_map" name="search_map"/>
+                <input id="search_map" class="search_map" name="search_map"/>
             </form>
 <style type="text/css">
 	.homepage-map #map {

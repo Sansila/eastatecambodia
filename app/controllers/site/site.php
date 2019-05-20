@@ -1408,7 +1408,7 @@ class Site extends CI_Controller {
                                 <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
                                     <img src="'.$logo.'" style="width: 140px;">
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-                                        Dear Partner/Agent/Property Owner,Kindly verify and update the property information as follow: 
+                                        Kindly verify and update the property information as follow if it is still available, sold or rent, price changed, etc: 
                                         <ul style="list-style: none; text-align: left;">
                                             <li>- Property ID: P'.$check->pid.'</li>
                                             <li>- Property Title: '.$check->property_name.' USD</li>
@@ -1421,20 +1421,26 @@ class Site extends CI_Controller {
                                     </div>
                                     <div style="text-align: left">
                                         <ul style="list-style: none; text-align: left;">
-                                            <li style="padding: 20px 0px;">
-                                                <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                                    Property Info Is Correct
-                                                </a>
+                                            <li style="padding: 10px 0px; width:200px;">
+                                                <div style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">     
+                                                    <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                                       <img src="http://estatecambodia.com/assets/img/iconmail/tick.png" style="margin-bottom: -4px;"> Property Info Is Correct
+                                                    </a>
+                                                </div>
                                             </li>
-                                            <li>
-                                                <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                                    Change Property Info
-                                                </a>
+                                            <li style="width:200px;">
+                                                <div style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">             
+                                                    <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
+                                                        <img src="http://estatecambodia.com/assets/img/iconmail/edit.png" style="margin-bottom: -4px;"> Change Property Info
+                                                    </a>
+                                                </div>
                                             </li>
-                                            <li style="padding: 20px 0px;">
+                                            <li style="padding: 10px 0px; width:200px;">
+                                                <div style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;"> 
                                                 <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
-                                                    Property Is Not Available Now
+                                                    <img src="http://estatecambodia.com/assets/img/iconmail/delete.png" style="margin-bottom: -4px;"> Property Is Not Available Now
                                                 </a>
+                                                </di>
                                             </li>
                                         </ul>
                                     </div>
@@ -1454,7 +1460,7 @@ class Site extends CI_Controller {
                                         <ul style="list-style: none; text-align: left;">
                                             <li>- លេខសម្គាល់អចលនទ្រព្យ: P'.$check->pid.'</li>
                                             <li>- ចំណងជើងអចលនទ្រព្យ: '.$check->property_name.' USD</li>
-                                            <li>- តម្លៃ: '.$check->price.'</li>
+                                            <li>- តម្លៃ: '.$check->price.'USD</li>
                                             <li>- ប្រភេទ: '.$type.'</li>
                                             <li>- ទីតាំង: '.$check->locationname.'</li>
                                             <li>- កែប្រែចុងក្រោយ: '.$check->validate_date.'</li>
@@ -1463,27 +1469,32 @@ class Site extends CI_Controller {
                                     </div>
                                     <div style="text-align: left">
                                         <ul style="list-style: none; text-align: left;">
-                                            <li style="padding: 20px 0px;">
+                                            <li style="padding: 10px 0px; width:280px;">
+                                                <div style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
                                                 <a target="_blank" href="http://estatecambodia.com/site/site/updateValidate/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                                    ព័ត៌មានអចនទ្រព្យគឺត្រឹមត្រូវ
+                                                    <img src="http://estatecambodia.com/assets/img/iconmail/tick.png" style="margin-bottom: -4px;"> ព័ត៌មានអចនទ្រព្យគឺត្រឹមត្រូវ
                                                 </a>
+                                                </div>
                                             </li>
-                                            <li>
+                                            <li style="width:280px;">
+                                                <div style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
                                                 <a target="_blank" href="http://estatecambodia.com/firstlogin/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
-                                                    ផ្លាស់ប្តូរព័ត៌មានអចនទ្រព្យ
+                                                    <img src="http://estatecambodia.com/assets/img/iconmail/edit.png" style="margin-bottom: -4px;"> ផ្លាស់ប្តូរព័ត៌មានអចនទ្រព្យ
                                                 </a>
+                                                </div>
                                             </li>
-                                            <li style="padding: 20px 0px;">
+                                            <li style="padding: 10px 0px; width:280px;">
+                                                <div style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; margin-right: 10px; font-size:12px;">
                                                 <a target="_blank" href="http://estatecambodia.com/site/site/changePropertyStatus/'.$check->pid.'" style="background: #d84949;padding: 10px;border-radius: 5px;color: white; text-decoration: none; font-size:12px;">
-                                                    អចនទ្រព្យមិនអាចរកបានទេឥឡូវនេះ
+                                                    <img src="http://estatecambodia.com/assets/img/iconmail/delete.png" style="margin-bottom: -4px;"> អចនទ្រព្យមិនអាចរកបានទេឥឡូវនេះ
                                                 </a>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
                                     <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                         ការផ្ទៀងផ្ទាត់អចលនទ្រព្យគឺមានសារៈសំខាន់ខ្លាំងណាស់ក្នុងការយល់ដឹងថាតើព័ត៌មានមានសុពលភាពសម្រាប់អតិថិជនរបស់យើងដូច្នេះយើងអាចផ្តល់ព័ត៌មានដែលអាចទុកចិត្តបានដល់ពួកគេ។ សូមអរគុណសម្រាប់កិច្ចសហការរបស់អ្នក។ 
-                                        <p>Best regards,</p>
-                                        <p>Estate Cambodia Team</p>
+                                        <p>ពីអេស្តេត ខេមបូឌែរ</p>
                                     </div>
                                 </div>
                                 <div style="clear: both;"></div>

@@ -1,7 +1,7 @@
 <?php
   $lang['dashboard'] = "Dashboard";
   $lang['logout'] = "Logout";
-  $lang['setting'] = "Settings";
+  $lang['setting'] = "Profile";
   $lang['profile'] = "User Profile";
   $lang['ch_pwd'] = "Change Password";
   $lang['inactive_post'] = "Inactive Post Properties";
