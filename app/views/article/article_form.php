@@ -66,6 +66,11 @@
                                 <div class="col-md-12">
                                     <input type="text"  class="form-control input-sm required" name="title" value='<?php echo isset($row->article_title)?"$row->article_title":""; ?>' id="title">
                                     <input type="text"  class="form-control input-sm hide" name="article_id" value='<?php echo isset($row->article_id)?$row->article_id:""; ?>' id="article_id">
+                                    <?php 
+                                        $userid = $this->session->userdata('userid');
+                                        $username = $this->art->getUserName($userid);
+                                    ?>
+                                    <input type="text"  class="form-control input-sm hide" name="txtpost_person" value='<?php echo isset($row->post_person)?$row->post_person:"$username->user_name"; ?>' id="txtpost_person">
                                 </div>                   
                             </div>
                             
@@ -87,7 +92,7 @@
                                     <select class="form-control" id="location_id">
                                         <option value="0">Please Select</option>
                                         <?php
-                                        $locat=$this->db->query("SELECT * FROM tblmenus WHERE is_active='1'")->result();
+                                        $locat=$this->db->query("SELECT * FROM tblmenus m WHERE m.is_active= 1 AND m.order = 2 OR m.order = 3 ")->result();
                                             foreach ($locat as $me) {
                                                 $se='';
                                                 if(isset($row->menu_id))
@@ -366,7 +371,8 @@
                     icon:$("#icon").val(),
                     location_id:$("#location_id").val(),
                     is_active:is_active,
-                    is_marguee:is_marguee
+                    is_marguee:is_marguee,
+                    is_menu: $("#location_id option:selected").text()
                 },
                 success:function(data) {
                     // $(".result_text").html(data.msg);

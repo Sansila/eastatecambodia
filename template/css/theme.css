@@ -369,6 +369,12 @@ body {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;  
 }
+.line-clamp6{
+  padding: 5px 0 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;  
+}
 /* .line-clamps{
   display: -webkit-box;
   -webkit-line-clamp: 2;

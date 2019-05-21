@@ -1688,5 +1688,62 @@ class Site extends CI_Controller {
         header("Content-type:text/x-json");
         echo json_encode($arr);
     }
+    function news(){
+        $menuid = $_GET['type'];
+
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+
+        $page = 0;
+        if(isset($_GET['per_page']))
+            $page = $_GET['per_page'];
+        $config['base_url'] = site_url('site/site/news/'.$menuid.'?type='.$menuid.'&a=link');
+        $config['per_page'] = 6;
+        $config['num_link'] = 3;
+        $config['page_query_string'] = TRUE;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = $this->lang->line('pagination_prev');
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = $this->lang->line('pagination_next');
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+
+        $query = " SELECT * FROM tblarticle WHERE is_active = 1 AND is_menu = 'news' ORDER BY article_id DESC";
+
+        $config['total_rows'] = count($this->db->query($query)->result());
+        $this->pagination->initialize($config);
+        $limit = " LIMIT ".$config['per_page'];
+        if($page >0)
+            $limit = " LIMIT $page, ".$config['per_page'];
+        $query.= " {$limit}";
+        $data['lists'] = $this->db->query($query)->result();
+
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/news',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
+    function newsdetail($newid)
+    {
+        $datas['name'] = "";
+        $datas['profile'] = $this->site->getSiteprofile();
+        $datas['menu'] = $this->site->get_menu();
+        $data['row'] = $this->site->getNewsDetail($newid);
+        $this->load->view('site/contain/header',$datas);
+        $this->load->view('site/newsdetail',$data);
+        $this->load->view('site/contain/footer',$datas);
+    }
 }
 ?>

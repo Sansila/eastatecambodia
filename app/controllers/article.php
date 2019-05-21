@@ -237,8 +237,8 @@ class article extends CI_Controller {
             $config2['maintain_ratio'] = false;
             $config2['create_thumb'] = "$productid".'_'."$imagename";
             $config2['thumb_marker'] = false;
-            $config2['height'] = 280;
-            $config2['width'] = 380;
+            $config2['height'] = 225;
+            $config2['width'] = 410;
             $this->load->library('image_lib');
             $this->image_lib->initialize($config2); 
             if ( ! $this->image_lib->resize()){
@@ -293,9 +293,10 @@ class article extends CI_Controller {
 		$icon=$this->input->post('icon');
 		$is_active=$this->input->post('is_active');
 		$is_marguee=$this->input->post('is_marguee');
+		$is_menu = $this->input->post('is_menu');
 		$msg='';
 
-		$article_id=$this->art->save($article_id,$title,$content,$is_active,$is_marguee,$content_kh,$keyword,$meta_desc,$location_id,$title_kh,$icon,$event_date);
+		$article_id=$this->art->save($article_id,$title,$content,$is_active,$is_marguee,$content_kh,$keyword,$meta_desc,$location_id,$title_kh,$icon,$event_date,$is_menu);
 		
 		$msg="Article Has Created...!";
 		$arr=array('msg'=>$msg,'article_id'=>$article_id);

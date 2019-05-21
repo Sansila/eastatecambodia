@@ -117,7 +117,7 @@ class Modsite extends CI_Model {
     {
         $query = $this->db->query("SELECT * FROM tblmenus as m 
                                    INNER JOIN tbllocation as l ON m.menu_type = l.location_id 
-                                   ORDER BY m.menu_id asc");
+                                   ORDER BY m.order asc");
         $cat = array(
             'items' => array(),
             'parents' => array()
@@ -362,6 +362,24 @@ class Modsite extends CI_Model {
             return true;
         else
             return false;
+    }
+    function getnews()
+    {
+        $sql = $this->db->query("SELECT * FROM tblarticle WHERE is_active = 1 AND is_menu = 'news' ORDER BY article_id DESC")->result();
+        return $sql;
+    }
+    function getImageForNews($article_id)
+    {
+        $sql = $this->db->query("SELECT * FROM tblgallery as g 
+                                right join tblarticle as a 
+                                on a.article_id = g.article_id
+                                WHERE a.article_id = '$article_id' 
+                                AND a.is_active = 1 ")->row();
+        return $sql;
+    }
+    function getNewsDetail($newid){
+        $sql = $this->db->query("SELECT * FROM tblarticle WHERE is_active = 1 AND article_id = $newid ")->row();
+        return $sql;
     }
 }
 

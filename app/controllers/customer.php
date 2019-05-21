@@ -268,20 +268,22 @@ class Customer extends CI_Controller {
                 $cama = '';
             }
         }
+        $camac = ',';
         foreach ($category as $cat) {
-        	$cate.= $cat.''.$cama;
+        	$cate.= $cat.''.$camac;
             if(++$i == $numcat)
             {
-                $cama = '';
+                $camac = '';
             }
         }
+        $camap = ',';
         if($property !="")
         {
         	foreach ($property as $pro) {
-	        	$prop.= $pro.''.$cama;
+	        	$prop.= $pro.''.$camap;
 	            if(++$i == $numpro)
 	            {
-	                $cama = '';
+	                $camap = '';
 	            }
 	        }
         }

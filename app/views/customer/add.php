@@ -128,8 +128,16 @@
                 <div class="col-md-12">
                   <select class="form-control required" name="gender" id="gender">
                     <option value="">-Select-</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <?php
+                      $sel = "";
+                      $self = "";
+                      if($row->gender == "Male")
+                        $sel = "selected";
+                      if($row->gender == "Female")
+                        $self = "selected";
+                    ?>
+                    <option <?php echo $sel;?> value="Male">Male</option>
+                    <option <?php echo $self;?> value="Female">Female</option>
                   </select>
                 </div>
               </div>
@@ -262,7 +270,7 @@
             <div class="form-group">
               <div class="col-lg-3">
                   <label class='custom-control custom-checkbox'>
-                      <input type='checkbox' class='custom-control-input'>
+                      <input type='checkbox' <?php if(isset($row->notify_property)) echo "checked"; else echo "";?> class='custom-control-input'​>
                       <span class='custom-control-indicator'></span>
                   </label>
               </div>

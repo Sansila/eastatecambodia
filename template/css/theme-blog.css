@@ -13,8 +13,13 @@ iframe {
   background-color: white;
   padding: 30px 30px 45px;
   position: relative;
+  height: 302px;
+  overflow: hidden;
 }
-
+.my-content{
+  height: 150px;
+  margin-bottom: 20px !important;
+}
 /* line 18, ../sass/theme-blog.scss */
 .post-date {
   background-color: #d84949;

@@ -1328,7 +1328,7 @@ hr {
 /* line 1089, ../sass/theme-elements.scss */
 .sidebar .blk-search {
   background-color: #111;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 /* line 1093, ../sass/theme-elements.scss */
 .sidebar .blk-ads {
