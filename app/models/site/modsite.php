@@ -381,6 +381,47 @@ class Modsite extends CI_Model {
         $sql = $this->db->query("SELECT * FROM tblarticle WHERE is_active = 1 AND article_id = $newid ")->row();
         return $sql;
     }
+    function getCountCategory()
+    {
+        $sql = $this->db->query("SELECT
+                                    p.type_id,
+                                    p.p_status,
+                                    c.typeid,
+                                    c.typename,
+                                    c.typenamekh,
+                                    c.menu,
+                                    COUNT(p.type_id) AS tcategory
+                                FROM
+                                    tblproperty p
+                                INNER JOIN tblpropertytype c ON
+                                    p.type_id = c.typeid
+                                WHERE
+                                    p.p_status = 1
+                                GROUP BY
+                                    c.typeid
+                                ORDER BY
+                                    tcategory DESC ")->result();
+        return $sql;
+    }
+    function updateViewNews($newid)
+    {
+        $lastview = $this->db->query("SELECT article_id,hit,is_active 
+                                      FROM tblarticle 
+                                      WHERE article_id = $newid AND is_active = 1 ")->row();
+        $last = ($lastview->hit) + 1;
+
+        $data = array('hit' => $last);
+        $this->db->where('article_id',$newid);
+        $this->db->update('tblarticle',$data);
+    }
+    function getPopularNews()
+    {
+        $sql = $this->db->query("SELECT * FROM tblarticle 
+                                 where is_active = 1 
+                                 AND is_menu = 'news' 
+                                 and hit > 8")->result();
+        return $sql;
+    }
 }
 
 

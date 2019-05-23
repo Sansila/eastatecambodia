@@ -342,4 +342,9 @@
   $lang['message_title'] = "Message";
   $lang['message_join'] = "THANK YOU FOR JOIN US. OUR TEAM WILL REVIEW SOON";
   $lang['message_post'] = "THANK YOU FOR UPLOADING YOUR PROPERTY. OUR TEAM WILL REVIEW SOON";
+  // page News and Detail
+  $lang['news_category'] = "POST BY CATEGORY";
+  $lang['news_popular'] = "Popular";
+  $lang['news_tag'] = "Property Tags";
+  $lang['news_read_more'] ="Read More";
 ?>

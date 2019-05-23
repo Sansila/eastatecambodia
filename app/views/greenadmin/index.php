@@ -62,6 +62,11 @@ h3{
 .unlink:hover{
   cursor: inherit;
 }
+#chartpropertystatus{
+  width: 100%;
+  height: 500px;
+  border: 1px solid #a6a6c1;
+}
 </style>
 <!-- HTML -->
 <?php 
@@ -145,9 +150,13 @@ h3{
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <h3 style="padding-left: 15px;"><?php echo $this->lang->line('chart_loc')?></h3>
         <div id="chartdivloc"></div>
+      </div>
+      <div class="col-sm-6">
+        <h3 style="padding-left: 15px;">Property Status</h3>
+        <div id="chartpropertystatus"></div>
       </div>
     </div>
     <div class="row">
@@ -431,5 +440,42 @@ h3{
     series4.hiddenState.properties.endAngle = 90;
 
     chart4.legend = new am4charts.Legend();
+
+    var chart6 = am4core.create("chartpropertystatus", am4charts.PieChart);
+      chart6.hiddenState.properties.opacity = 0; // this creates initial fade-in
+      chart6.fontSize = 10;
+
+      $.ajax({ 
+          type: 'GET', 
+          url:"<?php echo site_url('greenadmin/home/getPropertyStatus')?>",
+          dataType: 'json',
+          success: function (data) { 
+              chart6.data = data;
+              console.log(data);
+          }
+      });
+
+      chart6.radius = am4core.percent(70);
+      chart6.innerRadius = am4core.percent(40);
+      // chart.startAngle = 180;
+      // chart.endAngle = 360;
+      chart6.responsive.enabled = true;
+
+      var series6 = chart6.series.push(new am4charts.PieSeries());
+      series6.dataFields.value = "value";
+      series6.dataFields.category = "country";
+      series6.legendSettings.labelText = '{country}';
+      series6.legendSettings.valueText = '{value}';
+
+      series6.slices.template.cornerRadius = 10;
+      series6.slices.template.innerCornerRadius = 7;
+      series6.slices.template.draggable = false;
+      series6.slices.template.inert = true;
+      series6.alignLabels = false;
+
+      series6.hiddenState.properties.startAngle = 90;
+      series6.hiddenState.properties.endAngle = 90;
+
+      chart6.legend = new am4charts.Legend();
 
 </script>

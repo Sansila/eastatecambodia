@@ -669,4 +669,45 @@ class Home extends CI_Controller {
 	// 	header("Content-type:text/x-json");
 	// 	echo json_encode($arr);
 	// }
+	function getPropertyStatus()
+	{
+		$userid = $this->session->userdata('userid');
+		$roleid = $this->session->userdata('roleid');
+		$where = "";
+    	$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
+    	if($rol->is_admin == 1 || $rol->is_admin == 2)
+    		$where.= "";
+    	else
+    		$where.=" AND agent_id = $userid";
+		$sql = $this->db->query("SELECT tblproperty.p_status as 'year', 
+										COUNT(*) as income 
+								 FROM tblproperty 
+								 WHERE p_status is not null {$where} 
+								 GROUP BY p_status
+								 ORDER BY income DESC
+								 ")->result();
+		$data = array();
+		$i = 1;
+		$nameyear = "";
+		foreach ($sql as $row) {
+			if($row->year == 1)
+				$nameyear = 'Available';
+			if($row->year == 2)
+				$nameyear = 'Draft';
+			if($row->year == 3)
+				$nameyear = 'Sold';
+			if($row->year == 4)
+				$nameyear = 'Rented';
+			if($row->year == 5)
+				$nameyear = 'NA';
+			if($row->year == 0)
+				$nameyear = 'Unavailable';
+
+			$data[] = array('country' => $nameyear,
+							'value' => $row->income);
+			$i++;
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
 }

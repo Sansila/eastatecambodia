@@ -31,7 +31,7 @@
 											<div class="module line-clamp6 my-content">
 												<?php echo $news->content;?>
 											</div>
-											<a class="btn btn-default btn-sm" href="<?php echo site_url('site/site/newsdetail/'.$news->article_id)?>">Read more</a>
+											<a class="btn btn-default btn-sm" href="<?php echo site_url('site/site/newsdetail/'.$news->article_id)?>"><?php echo $this->lang->line('news_read_more')?></a>
 										</div>
 									</div>
 									
@@ -59,129 +59,42 @@
 						</form>
 					</aside>
 					
-					<aside class="block tabs pgl-bg-light">
+					<aside class="block tabs pgl-bg-light <?php if(count($populars) > 0) echo ""; else echo "hide";?>" >
 						<ul class="nav nav-tabs second-tabs">
-							<li class="active"><a href="#popularPosts" data-toggle="tab"><i class="icon icon-star"></i> Popular</a></li>
-							<li><a href="#latestComments" data-toggle="tab">Comments</a></li>
+							<li class="active">
+								<a href="#popularPosts" data-toggle="tab">
+									<i class="icon icon-star"></i> <?php echo $this->lang->line('news_popular')?>
+								</a>
+							</li>
+							<!-- <li><a href="#latestComments" data-toggle="tab">Comments</a></li> -->
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="popularPosts">
 								<ul class="list-unstyled simple-post-list">
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-7.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Proin rutrum nisi eu ante mattis sit amet</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 113 views
+									<?php 
+										foreach ($populars as $pop) {
+											$img = $this->site->getImageForNews($pop->article_id);
+									?>
+										<li>
+											<div class="post-image">
+												<a href="<?php echo site_url('site/site/newsdetail/'.$pop->article_id)?>">
+													<img class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>" alt="Blog">
+												</a>
 											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-6.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Sed non mauris vitae erat consequat</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 113 views
+											<div class="post-info">
+												<a href="<?php echo site_url('site/site/newsdetail/'.$pop->article_id)?>" class="module line-clamp">
+													<?php
+														echo $pop->article_title;
+													?>	
+												</a>
+												<div class="post-meta">
+													<i class="fa fa-eye"></i> <?php echo $pop->hit;?> views
+												</div>
 											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-5.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Nullam ac urna eu felis dapibus</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 113 views
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-4.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Class aptent taciti sociosqu ad litora</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 113 views
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-3.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Ac urna eu felis condimentum</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 113 views
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							
-							<div class="tab-pane" id="latestComments">
-								<ul class="list-unstyled simple-post-list">
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-1.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Sed non mauris vitae erat consequat</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 213 views
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-2.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Proin rutrum nisi eu ante mattis sit amet</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 117 views
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-3.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Nullam ac urna eu felis dapibus</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 19 views
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-4.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Class aptent taciti sociosqu ad litora</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 113 views
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="post-image">
-											<a href="blog-single.html"><img class="img-responsive" src="<?php echo site_url('template')?>/images/blog/demo-thumb-3.jpg" alt="Blog"></a>
-										</div>
-										<div class="post-info">
-											<a href="blog-single.html">Ac urna eu felis condimentum</a>
-											<div class="post-meta">
-												<i class="fa fa-eye"></i> 113 views
-											</div>
-										</div>
-									</li>
+										</li>
+									<?php
+										}
+									?>
 								</ul>
 							</div>
 						</div>
@@ -189,20 +102,24 @@
 
 					<!-- Begin Posts By Category -->
 					<aside class="block pgl-cat pgl-bg-light">
-						<h3>Posts By Category</h3>
+						<h3><?php echo $this->lang->line('news_category')?></h3>
 						<ul class="list-unstyled list-cat">
-							<li><a href="#">Single Family </a> <span>(39)  </span></li>
-							<li><a href="#">Apartment  </a> <span>(15)  </span></li>
-							<li><a href="#">Condo </a> <span>(27)  </span></li>
-							<li><a href="#">Multi Family </a> <span>(23)  </span></li>
-							<li><a href="#">Villa </a> <span>(18)  </span></li>
-							<li><a href="#">Other  </a> <span>(21)  </span></li>
+							<?php 
+								foreach ($cates as $cate) {
+									if($this->session->userdata('site_lang')=="khmer")
+                    				{
+										echo '<li><a href="'.site_url('site/site/properties/'.$cate->menu.'?type='.$cate->menu).'">'.$cate->typenamekh.'  </a> <span>('.$cate->tcategory.')  </span></li>';
+									}else{
+										echo '<li><a href="'.site_url('site/site/properties/'.$cate->menu.'?type='.$cate->menu).'">'.$cate->typename.'  </a> <span>('.$cate->tcategory.')  </span></li>';
+									}
+								}
+							?>
 						</ul>
 					</aside>
 					<!-- End Posts By Category -->
 
 					<aside class="block pgl-bg-light">
-						<h3>Tags</h3>
+						<h3><?php echo $this->lang->line('news_tag')?></h3>
 						<ul class="list-inline tagclouds">
 							<li><a href="#">Image</a></li>
 							<li><a href="#">Features</a></li>
@@ -225,4 +142,5 @@
 
 <script type="text/javascript">
 	$('.my-content').find('img').addClass('hide');
+	$('.my-content').find('iframe').addClass('hide');
 </script>
