@@ -347,4 +347,6 @@
   $lang['news_popular'] = "Popular";
   $lang['news_tag'] = "Property Tags";
   $lang['news_read_more'] ="Read More";
+  $lang['news_view'] ="Views";
+  $lang['news_search'] = "Looking for something";
 ?>

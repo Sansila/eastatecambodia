@@ -1,3 +1,8 @@
+		<?php 
+			$per_page = '';
+			if(isset($_GET['per_page']))
+				$per_page = $_GET['per_page'];
+		?>
 		<style type="text/css">
 			.home-tabs.hot-new {
 			    border-color: #d84949;
@@ -1044,7 +1049,7 @@
 					<?php 
 						if(!empty($hot)){
 					?>
-					<ul class="nav nav-tabs home-tabs hot-new" role="tablist" style="margin-bottom: 30px;">
+					<ul class="nav nav-tabs home-tabs hot-new <?php if($per_page !='') echo 'hide'; else echo '';?>" role="tablist" style="margin-bottom: 30px;">
 				        <li class="title font-strong">
 				        	<a><?php echo $this->lang->line('home_page_hot')?> 
 				        		<div class="corner"></div>
@@ -1055,7 +1060,7 @@
 
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div class="tab-pane active" id="all">
+						<div class="tab-pane active <?php if($per_page !='') echo 'hide'; else echo '';?>" id="all">
 							<div class="row">
 								<?php 
 									foreach ($hot as $hot) {
@@ -1137,7 +1142,7 @@
 				     </ul>
 
 					<!-- Tab panes -->
-					<div class="tab-content">
+					<div class="tab-content" id="tap-content-recent">
 						<div class="tab-pane active" id="all">
 							<div class="row">
 								<?php 

@@ -174,7 +174,7 @@
               <label class='col-lg-2 control-label'>Find Property In</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                    <select class="form-control required select2-single txtlocation" id="txtlocation" multiple="multiple" name="txtlocation" onchange="getproperty();">
+                    <select class="form-control required select2-single txtlocation" id="txtlocation" multiple="multiple" name="txtlocation">
                       <?php 
                         $aloc = array();
                         $row->locationid = trim($row->locationid, ',');
@@ -207,7 +207,7 @@
               <label class='col-lg-2 control-label'>Property Category</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  <select class="form-control select2-category txtcategory required" name="txtcategory" id="txtcategory" multiple="" onchange="getproperty();">
+                  <select class="form-control select2-category txtcategory required" name="txtcategory" id="txtcategory" multiple="">
                     <?php 
                       $cates = $this->cust->getPropertyCategory();
                       $allcate = array();
@@ -226,27 +226,23 @@
                   </select>
                 </div>
               </div>
-              <label class='col-lg-2 control-label'>Property Result</label>
+              <label class='col-lg-2 control-label'>Property Tags</label>
               <div class=" col-lg-4"> 
                 <div class="col-md-12">
                   <select class="form-control select2-property txtproperty" name="txtproperty" id="txtproperty" multiple="">
                     <?php 
-                      if(isset($row->pid))
-                      {
-                          $result = $this->cust->getSelectedProperty($row->pid,$row->categoryid,$row->locationid);
-                          $allpro = array();
-                          $row->pid = trim($row->pid, ',');
-                          $arrpro = explode(',', $row->pid);
-                          foreach ($arrpro as $pr) {
-                            $allpro[$pr] = $pr;
-                          }
-                          foreach ($result as $pro) {
-                            $sel = '';
-                            if($allpro[$pro->pid] == $pro->pid)
-                              $sel = "selected";
-                            echo '<option '.$sel.' value="'.$pro->pid.'">P'.$pro->pid.' - '.$pro->property_name.'</option>';
-                          }
-                      }
+                        $allpid = array();
+                        $row->pid = trim($row->pid, ',');
+                        $arrpid = explode(',', $row->pid);
+                        foreach ($arrpid as $rpid) {
+                          $allpid[$rpid] = $rpid;
+                        }
+                        foreach ($this->cust->getPropertyTag() as $tag) {
+                          $sel = "";
+                          if($allpid[$tag->property_tag] == $tag->property_tag)
+                            $sel = "selected";
+                          echo '<option '.$sel.' value="'.$tag->property_tag.'">'.$tag->property_tag.'</option>';
+                        }                      
                     ?>
                   </select>
                 </div>
@@ -270,7 +266,7 @@
             <div class="form-group">
               <div class="col-lg-3">
                   <label class='custom-control custom-checkbox'>
-                      <input type='checkbox' <?php if(isset($row->notify_property)) echo "checked"; else echo "";?> class='custom-control-input'​>
+                      <input type='checkbox' <?php if(isset($row->notify_property)){ if($row->notify_property == 1) echo 'checked'; else echo '';}?> class='custom-control-input'​>
                       <span class='custom-control-indicator'></span>
                   </label>
               </div>
@@ -324,7 +320,7 @@
   });
   $(".select2-property").select2({
     allowClear:true,
-    placeholder: 'Property'
+    placeholder: 'Property Tags'
   });
   $('#cancel').click(function(){
     location.href="<?PHP echo site_url('customer/add?m='.$m.'&p='.$p);?>";
@@ -435,26 +431,26 @@
   });
 
 
-  function getproperty()
-  {
-    var url="<?php echo site_url('customer/searchproperty')?>";
-    var location = $('.txtlocation').val();
-    var category = $('.txtcategory').val();
-    var property = '';
-    $.ajax({
-        url:url,
-        type:"POST",
-        datatype:"Json",
-        async:false,
-        data:{  
-          location: location,
-          category: category,
-          property: property
-        },
-        success:function(data) {
-          $(".txtproperty").html(data.data);
-        }
-      });
-  }
+  // function getproperty()
+  // {
+  //   var url="<?php echo site_url('customer/searchproperty')?>";
+  //   var location = $('.txtlocation').val();
+  //   var category = $('.txtcategory').val();
+  //   var property = '';
+  //   $.ajax({
+  //       url:url,
+  //       type:"POST",
+  //       datatype:"Json",
+  //       async:false,
+  //       data:{  
+  //         location: location,
+  //         category: category,
+  //         property: property
+  //       },
+  //       success:function(data) {
+  //         $(".txtproperty").html(data.data);
+  //       }
+  //     });
+  // }
 
 </script>

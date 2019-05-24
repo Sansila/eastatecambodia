@@ -9,25 +9,36 @@
 	<meta name="author" content="estatecambodia.com">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php 
-		foreach ($imagelimit as $img) {
-			$extends = pathinfo($img->url, PATHINFO_EXTENSION);
-			$hide = "";
-			if($extends == "mp4" || $extends == "movie" || $extends == "mpe" || $extends == "qt" || $extends == "mov" || $extends == "avi" || $extends == "mpg" || $extends == "mpeg")
-			{
-				$hide = "hide";
-			}else{
+		if($sitetype == "property"){
+			foreach ($imagelimit as $img) {
+				$extends = pathinfo($img->url, PATHINFO_EXTENSION);
+				$hide = "";
+				if($extends == "mp4" || $extends == "movie" || $extends == "mpe" || $extends == "qt" || $extends == "mov" || $extends == "avi" || $extends == "mpg" || $extends == "mpeg")
+				{
+					$hide = "hide";
+				}else{
 	?>
-	
-	<meta property="og:image" content="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+			<meta property="og:image" content="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
 	<?php
+				}
 			}
-		}
 	?>
 	<meta property="og:url"    		  content="<?php echo site_url('site/site/detail/'.$detail->pid.'/?name='.$detail->property_name)?>" />
 	<meta property="og:type"          content="website" />
 	<meta property="og:title"         content="<?php echo $detail->property_name;?>" />
 	<meta property="og:description"   content="<?php echo $detail->property_name?>" />
+	<?php
+		}else if($sitetype == "newsdetail"){
+	?>
+		<meta property="og:image" content="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+		<meta property="og:url"    		  content="<?php echo site_url('site/site/newsdetail/'.$row->article_id.'?type='.$type)?>" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="<?php echo $row->article_title;?>" />
+		<meta property="og:description"   content="<?php echo $row->article_title?>" />
 
+	<?php
+		}
+	?>
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo site_url('assets/img/estatecambodiaicon.ico')?> ">
 	<title>
 		<?php 

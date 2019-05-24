@@ -966,7 +966,7 @@
               })
         $(this).closest('.saouy').remove();
     });
-    function uploads(pid,formdata,msg,status,location,cate,types,arr){
+    function uploads(pid,formdata,msg,status,location,cate,types,arr,tag){
         //alert(visitid+'/'+familyid);
         //var arrStr = encodeURIComponent(JSON.stringify(arr));
         $.ajax({
@@ -982,7 +982,7 @@
                 console.log(data);
                 $('#myModal').modal('hide');
                 if(status == 'insert'){
-                    sendnitificationemail(pid,location,cate,types,arr);
+                    sendnitificationemail(pid,location,cate,types,arr,tag);
                 }else if(status == 'update'){
                     updatestatusimage(pid,arr);
                 }
@@ -994,11 +994,14 @@
         });
        
     } 
-    function sendnitificationemail(pid,location,cate,types,arr)
+    function sendnitificationemail(pid,location,cate,types,arr,tag)
     {
         $.ajax({
             url:"<?PHP echo site_url('property/property/checkcustomerfindproperty');?>/"+pid+'/'+location+'/'+cate+'/'+types,
             type:"POST",
+            data:{
+                tag: tag
+            },
             async:false,
             success:function(data){
                 updatestatusimage(pid,arr);
@@ -1176,7 +1179,7 @@
                         var formdata = new FormData(form);
 
                         if(data.pid!='' && data.pid!=null){
-                            uploads(data.pid,formdata,data.msg,data.status,data.location,data.cate,data.types,arr);
+                            uploads(data.pid,formdata,data.msg,data.status,data.location,data.cate,data.types,arr,data.tag);
                         }else{
                             toasmsg('error',data.msg);
                         }

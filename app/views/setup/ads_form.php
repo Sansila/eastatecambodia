@@ -119,17 +119,20 @@
                                     <select id='page_id' class='form-control'>
                                         <option value='0'>----select---</option>
                                         <?php 
-                                            $sel = ""; $sel1 = ""; $sel2= "";
+                                            $sel = ""; $sel1 = ""; $sel2= ""; $sel3 = "";
                                             if($data->page == "home")
                                                 $sel = "selected";
                                             if($data->page == "detail")
                                                 $sel1 = "selected";
                                             if($data->page == "map")
                                                 $sel2 = "selected";
+                                            if($data->page == "newsdetail")
+                                                $sel3 = "selected";
                                         ?>
                                         <option <?php echo $sel;?> value='home'>Home Page</option>
                                         <option <?php echo $sel1;?> value='detail'>Details Page</option>
                                         <option <?php echo $sel2;?> value='map'>Map Page</option>
+                                        <option <?php echo $sel3;?> value='newsdetail'>NewsDetail Page</option>
                                     </select>
                                 </div>                   
                             </div>

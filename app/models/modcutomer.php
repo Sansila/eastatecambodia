@@ -145,4 +145,15 @@ class Modcutomer extends CI_Model {
         $sql = $this->db->query("SELECT * FROM tblgallery as g WHERE g.pid = $pid ")->row();
         return $sql;
     }
+    function getPropertyTag()
+    {
+        $sql = $this->db->query("SELECT property_tag, p_status, count(property_tag) as totaltag FROM tblproperty
+                                 WHERE property_tag !='' 
+                                 AND p_status = 1
+                                 GROUP BY property_tag 
+                                 ORDER BY totaltag DESC
+                                 ")->result();
+        return $sql;
+    }
+
 }

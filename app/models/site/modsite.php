@@ -418,8 +418,20 @@ class Modsite extends CI_Model {
     {
         $sql = $this->db->query("SELECT * FROM tblarticle 
                                  where is_active = 1 
-                                 AND is_menu = 'news' 
-                                 and hit > 8")->result();
+                                 AND is_menu = 'news'
+                                 order by hit desc 
+                                 LIMIT 8 ")->result();
+        return $sql;
+    }
+    function getPropertyTag()
+    {
+        $sql = $this->db->query("SELECT property_tag, p_status, count(property_tag) as totaltag FROM tblproperty
+                                 WHERE property_tag !='' 
+                                 AND p_status = 1
+                                 GROUP BY property_tag 
+                                 ORDER BY totaltag DESC
+                                 LIMIT 5
+                                 ")->result();
         return $sql;
     }
 }

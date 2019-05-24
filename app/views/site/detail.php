@@ -116,6 +116,14 @@
 			  		display: inline-block;
 			  	}
 			}
+			@media only screen and (max-width: 480px) {
+			  	.destop{
+			  		display: none;
+			  	}
+			  	.mobile{
+			  		display: inline-block;
+			  	}
+			}
 			.line-clamps {
 			    display: -webkit-box;
 			    -webkit-line-clamp: 1 !important;
@@ -467,6 +475,18 @@
 							    </form>
 							</div>
 						</div>
+						
+						<aside class="block pgl-bg-light">
+							<h3><?php echo $this->lang->line('news_tag')?></h3>
+							<ul class="list-inline tagclouds">
+								<?php 
+									foreach ($tags as $tag) {
+										echo '<li style="padding-left:5px;"><a href="'.site_url('site/site/search?available=0&q='.$tag->property_tag.'&list_type=lists&order=Desc').'">'.$tag->property_tag.'</a></li>';
+									}
+								?>
+							</ul>
+						</aside>
+
 						<aside class="block pgl-agents pgl-bg-light">
 							<h3><?php echo $this->lang->line('detail_property_our_agent')?></h3>
 							<div class="owl-carousel pgl-pro-slide pgl-agent-item" data-plugin-options='{"items": false, "pagination": false, "autoHeight": true}'>
@@ -578,8 +598,9 @@
 							<?php } ?>
 
 								</div>
-							</div>
+						</div>
 						<!-- End Advanced Search -->
+
 					</div>
 					<div class="col-md-12" style="margin-bottom: 30px;">
 						<a class="img-link">

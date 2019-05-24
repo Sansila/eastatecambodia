@@ -346,4 +346,6 @@
     $lang['news_popular'] = "អត្ថបទពេញនិយម";
     $lang['news_tag'] = "សំគាល់អចលនទ្រព្យ";
     $lang['news_read_more'] ="អាន​បន្ថែម";
+    $lang['news_view'] ="មើល";
+    $lang['news_search'] = "កំពុងស្វែងរកអត្ថបទ";
 ?>

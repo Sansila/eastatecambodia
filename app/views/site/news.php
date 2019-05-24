@@ -18,7 +18,7 @@
 							<div class="col-sm-6">
 								<article class="post post-mid">
 									<div class="post-image">
-										<a href="<?php echo site_url('site/site/newsdetail/'.$news->article_id)?>"><img class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>" alt="Blog"></a>
+										<a href="<?php echo site_url('site/site/newsdetail/'.$news->article_id.'?type='.$type)?>"><img class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>" alt="Blog"></a>
 										<span class="post-date">
 											<span class="day"><?php echo $date->format('d');?></span>
 											<span class="month-year"><?php echo $date->format('M Y')?></span>
@@ -27,11 +27,11 @@
 									<div class="post-body">
 										
 										<div class="post-content">
-											<h3 class="module line-clamp1" style="font-size: 1.542em; margin-bottom: -5px;"><a href="<?php echo site_url('site/site/newsdetail/'.$news->article_id)?>"><?php echo $news->article_title;?></a></h3>
+											<h3 class="module line-clamp" style="font-size: 1.342em; margin-bottom: -5px;"><a href="<?php echo site_url('site/site/newsdetail/'.$news->article_id.'?type='.$type)?>"><?php echo $news->article_title;?></a></h3>
 											<div class="module line-clamp6 my-content">
 												<?php echo $news->content;?>
 											</div>
-											<a class="btn btn-default btn-sm" href="<?php echo site_url('site/site/newsdetail/'.$news->article_id)?>"><?php echo $this->lang->line('news_read_more')?></a>
+											<a class="btn btn-default btn-sm" href="<?php echo site_url('site/site/newsdetail/'.$news->article_id.'?type='.$type)?>"><?php echo $this->lang->line('news_read_more')?></a>
 										</div>
 									</div>
 									
@@ -50,10 +50,10 @@
 				</div>
 				<div class="col-md-3 sidebar">
 					<aside class="block pgl-bg-light blk-search">
-						<form class="form-inline form-search" class="form-inline" role="form">
+						<form class="form-inline form-search" class="form-inline" role="form" action="<?php echo site_url('site/site/searcharticle/'.$type.'?type='.$type)?>" method="post">
 							<div class="form-group">
-								<label class="sr-only" for="textsearch2">Looking for something</label>
-								<input type="text" class="form-control" id="textsearch2" placeholder="Looking for something">
+								<label class="sr-only" for="txtsearcharticle"><?php echo $this->lang->line('news_search')?></label>
+								<input type="text" class="form-control" id="txtsearcharticle" name="txtsearcharticle" placeholder="Looking for something">
 							</div>
 							<button type="submit" class="btn"><i class="fa fa-search"></i></button>
 						</form>
@@ -77,18 +77,23 @@
 									?>
 										<li>
 											<div class="post-image">
-												<a href="<?php echo site_url('site/site/newsdetail/'.$pop->article_id)?>">
+												<a href="<?php echo site_url('site/site/newsdetail/'.$pop->article_id.'?type='.$type)?>">
 													<img class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>" alt="Blog">
 												</a>
 											</div>
 											<div class="post-info">
-												<a href="<?php echo site_url('site/site/newsdetail/'.$pop->article_id)?>" class="module line-clamp">
+												<a href="<?php echo site_url('site/site/newsdetail/'.$pop->article_id.'?type='.$type)?>" class="module line-clamp">
 													<?php
 														echo $pop->article_title;
 													?>	
 												</a>
 												<div class="post-meta">
-													<i class="fa fa-eye"></i> <?php echo $pop->hit;?> views
+													<?php 
+														$hit = 0;
+														if($pop->hit !="")
+															$hit = $pop->hit;
+													?>
+													<i class="fa fa-eye"></i> <?php echo $hit.' '.$this->lang->line('news_view');?>
 												</div>
 											</div>
 										</li>
@@ -101,7 +106,7 @@
 					</aside>
 
 					<!-- Begin Posts By Category -->
-					<aside class="block pgl-cat pgl-bg-light">
+					<aside class="block pgl-cat pgl-bg-light hide">
 						<h3><?php echo $this->lang->line('news_category')?></h3>
 						<ul class="list-unstyled list-cat">
 							<?php 
@@ -118,18 +123,14 @@
 					</aside>
 					<!-- End Posts By Category -->
 
-					<aside class="block pgl-bg-light">
+					<aside class="block pgl-bg-light hide">
 						<h3><?php echo $this->lang->line('news_tag')?></h3>
 						<ul class="list-inline tagclouds">
-							<li><a href="#">Image</a></li>
-							<li><a href="#">Features</a></li>
-							<li><a href="#">Gallery</a></li>
-							<li><a href="#">Post Formats</a></li>
-							<li><a href="#">Typography</a></li>
-							<li><a href="#">WooCommerce</a></li>
-							<li><a href="#">Shortcodes</a></li>
-							<li><a href="#">Best Sellers</a></li>
-							<li><a href="#">Slideshow</a></li>
+							<?php 
+								foreach ($tags as $tag) {
+									echo '<li style="padding-left:5px;"><a href="'.site_url('site/site/search?available=0&q='.$tag->property_tag.'&list_type=lists&order=Desc').'">'.$tag->property_tag.'</a></li>';
+								}
+							?>
 						</ul>
 					</aside>
 				</div>

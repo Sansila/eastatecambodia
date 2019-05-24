@@ -78,7 +78,21 @@
 										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_store_name'/> 
 										</th>
-										<th ></th>
+										<th>
+											<select class="form-control txtlocation" onchange="getdata(1);" id="txtlocation">
+												<option value=""> Select </option>
+												<?php
+		                                        	$locat=$this->db->query("SELECT * FROM tblmenus m WHERE m.is_active= 1 AND m.order = 2 OR m.order = 3 ")->result();
+		                                            foreach ($locat as $me) {
+		                                                $se='';
+		                                                if(isset($row->menu_id))
+		                                                    if($row->menu_id==$me->menu_id)
+		                                                        $se='selected';
+		                                                echo "<option value='$me->menu_id' $se>$me->menu_name</option>";
+		                                            }
+		                                         ?>
+											</select>
+										</th>
 										<th>
 											
 										</th>
@@ -240,7 +254,7 @@
           	var m="<?PHP echo $m?>";
           	var p="<?PHP echo $p?>";
           	var s_name=$('#s_store_name').val();
-          	
+          	var location = $('.txtlocation').val();
           	var perpage=$('#perpage').val();
 			$.ajax({
 		            url:url,
@@ -251,7 +265,7 @@
 		            		'p':p,
 		            		'page':page,
 		            		's_name':s_name,
-		            		
+		            		'location':location,
 		            		'perpage':perpage
 		            	},
 		            success:function(data) {

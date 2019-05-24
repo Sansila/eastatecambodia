@@ -69,12 +69,16 @@ class article extends CI_Controller {
 	function getdata(){
 		$perpage=$this->input->post('perpage');
 		$s_name=$this->input->post('s_name');
+		$location = $this->input->post('location');
+		$where ="";
+		if($location !="")
+			$where.= " AND a.menu_id = $location ";
 		
 		$sql="SELECT a.*, ms.menu_id, ms.menu_name 
 				FROM tblarticle a
 				LEFT JOIN tblmenus ms 
 				ON(a.menu_id=ms.menu_id)
-				WHERE a.article_title LIKE '%$s_name%' and a.is_active='1'";
+				WHERE a.article_title LIKE '%$s_name%' and a.is_active='1' {$where}";
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("store/store/getstore"),$perpage);
