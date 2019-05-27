@@ -6,6 +6,7 @@ class Customer extends CI_Controller {
 	protected $thead;
 	protected $idfield;
 	protected $searchrow;
+	protected $theadrequire;
 	public function __construct(){
         parent::__construct();
         $this->load->model("Modcutomer","cust");
@@ -21,6 +22,7 @@ class Customer extends CI_Controller {
 							 "Location"=>'Location',
 							 "Action"=>'Action'							 	
 							);
+
 		$this->idfields="categoryid";
 
 		$this->thead = array(
@@ -36,6 +38,17 @@ class Customer extends CI_Controller {
 			"កំណត់"=>'កំណត់'			
 		);
 		$this->idfield="categoryid";
+
+		$this->theadrequire=array("No"=>'no',
+							 "Customer Name"=>'Customer Name',	 
+							 "Category" => "Category",	
+							 "Location"=>'Location',
+							 "Type" => "Type",
+							 "Price" => "Price",
+							 "Size" => "Size",
+							 "Description" => "Description",
+							 "Action"=>'Action'							 	
+							);
     }
 	public function index()
 	{
@@ -615,5 +628,135 @@ class Customer extends CI_Controller {
 		$arr=array('msg'=>$msg,'requireid'=>$require);
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
+	}
+	function list_requirement()
+	{
+		$data['page_header']="Here is Index Page";	
+		$data['idfield']=$this->idfields;		
+		$data['thead']=	$this->theadrequire;
+		$datas['customer'] = $this->cust->getCustomer();
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('customer_requirement/list',$datas);
+		$this->load->view('greenadmin/footer');	
+	}
+	function getdatarequire()
+	{
+		$perpage=$this->input->post('perpage');
+		$s_name=$this->input->post('s_name');	
+		$c = $this->input->post('customer');
+		$w = '';
+		if($c!='')
+			$w.= " AND c.customerid = $c ";
+
+		$sql="SELECT * FROM tblrequirement r
+		INNER JOIN tblcustomer c
+		ON r.customerid = c.customerid
+		WHERE r.is_active=1 {$w}  order by r.requireid desc";
+
+		$table='';
+		$pagina='';
+		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("customer/getdatarequire"),$perpage);
+
+		$i=1;
+		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
+		$sql.=" {$limit}";
+		$this->green->setActiveRole($this->session->userdata('roleid'));
+    	$this->green->setActiveModule($this->input->post('m'));
+    	$this->green->setActivePage($this->input->post('p')); 
+
+		foreach($this->db->query($sql)->result() as $row){
+			$visibled='No';
+			$typ='';
+			$lay='';
+			$type = '';
+			if($row->is_active==1)
+				$visibled="Yes";
+			if($row->type == 1)
+				$type = 'Sale';
+			if($row->type == 2)
+				$type = 'Rent';
+
+			$location = $row->location;
+			$location = trim($location, ',');
+            $arr = explode(',', $location);
+            $i = 0; $wheres = ""; $locs = "";
+            $num = count($arr);
+            $wheres.= " AND (";
+            foreach ($arr as $r) {
+        		$or = "OR";
+                if(++$i == $num)
+                {
+                    $or = "";
+                }
+                $wheres.= "propertylocationid = '$r' $or ";
+            }
+            $wheres.= ")";
+            $p_location = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 {$wheres}")->result();
+            $s = count($p_location); $i=0;
+            foreach ($p_location as $loc) {
+            	$or = ",";
+                if(++$i == $s)
+                {
+                    $or = "";
+                }
+            	$locs.= $loc->locationname.''.$or;
+            }
+
+            $category = $row->category;
+			$category = trim($category, ',');
+            $arrcate = explode(',', $category);
+            $j = 0; $where = ""; $cates = "";
+            $nums = count($arrcate);
+            $where.= " AND (";
+            foreach ($arrcate as $rc) {
+        		$or = "OR";
+                if(++$j == $nums)
+                {
+                    $or = "";
+                }
+                $where.= "typeid = '$rc' $or ";
+            }
+            $where.= ")";
+            $p_category = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1 {$where}")->result();
+            $sc = count($p_category); $j=0;
+            foreach ($p_category as $cate) {
+            	$or = ",";
+                if(++$j == $sc)
+                {
+                    $or = "";
+                }
+            	$cates.= $cate->typename.''.$or;
+            }
+
+			$table.= "<tr>
+				<td class='no'>".$i."</td>
+				<td class='type'>".$row->customer_name."</td>
+				<td class='type'>".$cates."</td>
+				<td class='type'>".$locs."</td>
+				<td class='type'>".$type."</td>
+				<td class='type'>".$row->price."</td>
+				<td class='type'>".$row->size."</td>
+				<td class='type'>".$row->remark."</td>
+				<td class='remove_tag no_wrap'>";
+
+			if($this->green->gAction("D")){
+				$table.= "<a><img rel='".$row->requireid."'  onclick='deletefinding(event);' src='".base_url('assets/images/icons/delete.png')."'/></a>";
+			}
+			if($this->green->gAction("U")){
+				$table.= "<a><img rel='".$row->requireid."'  onclick='update(event);' src='".base_url('assets/images/icons/edit.png')."'/></a>";
+			}
+
+			$table.= " </td></tr>";
+			$i++;
+		}
+
+		$arr['data']=$table;
+		$arr['pagina']=$paging;
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
+	}
+	function deleterequire($rid)
+	{
+		$this->db->query("UPDATE tblrequirement SET is_active = 0 WHERE requireid = $rid ")->row();
 	}
 }
