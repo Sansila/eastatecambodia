@@ -59,6 +59,17 @@ class Modcutomer extends CI_Model {
         }
         return $cust;
     }
+    function saverequire($data,$data1,$data2,$requireid)
+    {
+        if($requireid!=''){
+            $this->db->where('requireid',$requireid)->update('tblrequirement',array_merge($data,$data2));
+            $require = $requireid;
+        }else{
+            $this->db->insert('tblrequirement',array_merge($data,$data1));
+            $require = $this->db->insert_id();
+        }
+        return $require;
+    }
     function getGroup($roleid)
     {
         $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
@@ -155,5 +166,9 @@ class Modcutomer extends CI_Model {
                                  ")->result();
         return $sql;
     }
-
+    function getCustomer()
+    {
+        $sql = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1")->result();
+        return $sql;
+    }
 }

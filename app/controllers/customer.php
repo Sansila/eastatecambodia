@@ -542,4 +542,78 @@ class Customer extends CI_Controller {
         header('Content-Type: application/json');
         echo json_encode($arr);
 	}
+	function requirement()
+	{
+		$data['page_header']="Here is Index Page";	
+		$data['idfield']=$this->idfields;		
+		$data['thead']=	$this->theads;
+		$datas['locs'] = $this->cust->getlocation();
+		$datas['customer'] = $this->cust->getCustomer();	
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('customer_requirement/add',$datas);
+		$this->load->view('greenadmin/footer');	
+	}
+	function saverequire()
+	{
+		$requireid = $this->input->post('requireid');
+		$customer = $this->input->post('customername');
+		$location = $this->input->post('location');
+		$category = $this->input->post('category');
+		$type = $this->input->post('type');
+		$price = $this->input->post('price');
+		$size = $this->input->post('size');
+		$desc = $this->input->post('description');
+		$is_active = $this->input->post('is_active');
+
+		$loc = '';
+		$cate = '';
+        $i = 1; 
+        $num = count($location); 
+        $numcat = count($category); 
+
+        $cama = ',';
+        foreach ($location as $key) {
+            $loc.= $key.''.$cama;
+            if(++$i == $num)
+            {
+                $cama = '';
+            }
+        }
+        $camac = ',';
+        foreach ($category as $cat) {
+        	$cate.= $cat.''.$camac;
+            if(++$i == $numcat)
+            {
+                $camac = '';
+            }
+        }
+        
+        $data = array(
+        	'customerid' => $customer, 
+        	'category' => $cate,
+        	'location' => $loc,
+        	'price' => $price,
+        	'size' => $size,
+        	'type' => $type,
+        	'remark' => $desc,
+        	'is_active' => $is_active,
+        	'userid' => $this->session->userdata('userid'),
+        );
+        $data1 = array(
+        	'date' => date('Y-m-d H:i:s')
+        );
+        $data2 = array(
+        	'date_modify' => date('Y-m-d H:i:s')
+        );
+        $msg='';
+		$require = $this->cust->saverequire($data,$data1,$data2,$requireid);
+		if($requireid == $require)
+			$msg="Customer Require Has Updated...!";
+		else
+			$msg="Customer Require Has Created...!";
+		
+		$arr=array('msg'=>$msg,'requireid'=>$require);
+		header("Content-type:text/x-json");
+		echo json_encode($arr);
+	}
 }
