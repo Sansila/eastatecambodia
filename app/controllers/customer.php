@@ -648,16 +648,27 @@ class Customer extends CI_Controller {
 		if($c!='')
 			$w.= " AND c.customerid = $c ";
 
-		$sql="SELECT * FROM tblrequirement r
-		INNER JOIN tblcustomer c
-		ON r.customerid = c.customerid
-		WHERE r.is_active=1 {$w}  order by r.requireid desc";
+		$sql="SELECT r.requireid,
+					 r.customerid,
+					 r.category,
+					 r.location,
+					 r.price,
+					 r.size,
+					 r.type,
+					 r.is_active,
+					 r.remark,
+					 c.customerid,
+					 c.customer_name
+				FROM tblrequirement r
+				INNER JOIN tblcustomer c
+				ON r.customerid = c.customerid
+				WHERE r.is_active=1 {$w}  order by r.requireid desc";
 
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("customer/getdatarequire"),$perpage);
 
-		$i=1;
+		$ro=1;
 		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
 		$sql.=" {$limit}";
 		$this->green->setActiveRole($this->session->userdata('roleid'));
@@ -729,13 +740,13 @@ class Customer extends CI_Controller {
             }
 
 			$table.= "<tr>
-				<td class='no'>".$i."</td>
+				<td class='no'>".$ro."</td>
 				<td class='type'>".$row->customer_name."</td>
 				<td class='type'>".$cates."</td>
 				<td class='type'>".$locs."</td>
 				<td class='type'>".$type."</td>
-				<td class='type'>".$row->price."</td>
-				<td class='type'>".$row->size."</td>
+				<td class='type'>".$row->price."$</td>
+				<td class='type'>".$row->size."<sup>m2</sup></td>
 				<td class='type'>".$row->remark."</td>
 				<td class='remove_tag no_wrap'>";
 
@@ -747,7 +758,7 @@ class Customer extends CI_Controller {
 			}
 
 			$table.= " </td></tr>";
-			$i++;
+			$ro++;
 		}
 
 		$arr['data']=$table;

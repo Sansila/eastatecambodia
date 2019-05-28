@@ -851,47 +851,58 @@ class Property extends CI_Controller {
 		$roleid = $this->session->userdata('roleid');
 		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
 		if($rol->is_admin != 1 || $rol->is_admin != 2)
-            $where.= " AND userid = $userid ";
+            $where.= " AND r.userid = $userid ";
         else
         	$where.= "";
 
-		$customer = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1 AND notify_property = 1 {$where}")->result();
+		$customer = $this->db->query("SELECT r.requireid,
+											 r.customerid,
+											 r.category,
+											 r.location,
+											 r.price,
+											 r.size,
+											 r.type,
+											 r.is_active,
+											 r.remark,
+											 r.userid,
+											 c.customerid,
+											 c.notify_property,
+											 c.email
+									  FROM tblcustomer c
+									  INNER JOIN tblrequirement r
+									  ON r.customerid = c.customerid
+									  WHERE r.is_active = 1 
+									  AND c.notify_property = 1 {$where}")->result();
 		if($customer){
 			foreach ($customer as $cust) {
-				$cust->locationid = trim($cust->locationid, ',');
-				$arrloc = explode(',', $cust->locationid);
+				$cust->location = trim($cust->location, ',');
+				$arrloc = explode(',', $cust->location);
 				foreach ($arrloc as $l) {
 					if($l == $location)
 						$loc = $l;
 				}
-				$cust->categoryid = trim($cust->categoryid, ',');
-				$arrcate = explode(',', $cust->categoryid);
+				$cust->category = trim($cust->category, ',');
+				$arrcate = explode(',', $cust->category);
 				foreach ($arrcate as $c) {
 					if($c == $p_category)
 						$cate = $c;
 				}
-				$cust->p_status = trim($cust->p_status, ',');
-				$arrstatus = explode(',', $cust->p_status);
+				$cust->type = trim($cust->type, ',');
+				$arrstatus = explode(',', $cust->type);
 				foreach ($arrstatus as $s) {
 					if($s == $p_status)
 						$status = $s;
-				}
-				$row->pid = trim($row->pid, ',');
-				$arrtag = explode(',', $row->pid);
-				foreach ($arrtag as $rtag) {
-					if($rtag == $tags)
-						$tag = $rtag;
 				}
 				if($cust->price != '')
 					$price = $cust->price;
 				if($cust->size != '')
 					$size = $cust->size;
 
-				$this->sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$cust->email,$tag);
+				$this->sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$cust->email);
 			}
 		}
 	}
-	function sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$email,$tag)
+	function sendnotificationmatchproperty($pid,$loc,$cate,$status,$price,$size,$email)
 	{
 		$pro = $this->db->query("SELECT 
         								p.pid,
@@ -912,12 +923,14 @@ class Property extends CI_Controller {
         							   ON p.lp_id = l.propertylocationid
         							   RIGHT JOIN tblpropertytype as pt
         							   ON p.type_id = pt.typeid
-        							   WHERE p.p_status = 1 AND p.pid = $pid ")->row();
+        							   WHERE p.p_status = 1 
+        							   AND p.pid = $pid
+        							   ")->row();
 
-			if($pro->lp_id == $loc || $pro->type_id == $cate || $pro->p_type == $status || $pro->price == $price || $pro->housesize == $size || $pro->property_tag == $tag)
+			if($pro->lp_id == $loc || $pro->type_id == $cate || $pro->p_type == $status )
 			{
 
-				$img = $this->pro->getImage($pro->pid);
+				$img = $this->pro->getImage($pid);
 	        	$images = '';
 	        	$property_type = '';
 	        	if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url)))

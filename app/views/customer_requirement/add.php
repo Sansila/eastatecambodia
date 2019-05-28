@@ -319,7 +319,7 @@
           },
           success:function(data) {
             var formdata = new FormData(form);
-            if(data.customerid!='' && data.customerid!=null){
+            if(data.requireid!='' && data.requireid!=null){
               toasmsg('success',data.msg);
               setTimeout(function(){
                 location.href='<?php echo site_url("customer/view?m=".$m.'&p='.$p) ?>';
