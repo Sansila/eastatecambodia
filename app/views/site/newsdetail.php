@@ -58,8 +58,8 @@
 												<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
 											</a>
 											<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/newsdetail/'.$row->article_id.'/?type='.$type.'&name=telegram')?>" class="fass fa fa-paper-plane"></a>
-											<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/newsdetail/'.$row->article_id.'/?type='.$type.'&name=line')?>" class="fas fa-line">
-												<img src="<?php echo site_url('assets/img/line.png')?>">
+											<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/newsdetail/'.$row->article_id.'/?type='.$type.'&name=line')?>" class="fas fa-line" style="padding: 5px 8px;">
+												<img src="<?php echo site_url('assets/img/line.png')?>" style="position: relative; left: 0px;">
 											</a>
 										</div>
 									</div>

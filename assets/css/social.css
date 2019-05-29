@@ -40,9 +40,10 @@
   color: white;
 }
 
-.fa-google {
+.map-google {
   background: #dd4b39;
   color: white;
+  padding: 5px 8px;
 }
 
 .fa-linkedin {
@@ -55,7 +56,10 @@
 }
 
 .fa-line img{
-  width: 32px;
+  /*width: 32px;*/
+  position: relative;
+  left: 3px;
+  top: 2px;
 }
 
 .fa-youtube {

@@ -84,14 +84,6 @@
 			.chosen-container{
 				display: none !important; 
 			}
-			.left{
-				float: left;
-				font-size: 12px;
-				height: 35px;
-    			border-radius: 3px;
-    			background-color: #d84949 !important;
-    			border-color: #d84949;
-			}
 			.modal-header .close {
 			    margin-top: -35px;
 			}
@@ -236,7 +228,7 @@
 									</div>
 								</div>
 								<div class="tab-detail">
-									<div class="right" style="text-align: right;">
+									<div class="right">
 										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning"><?php echo $this->lang->line('detail_property_contact_back')?></a>
 										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php?u=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=facebook')?>"
   										target="_blank" >
@@ -247,9 +239,12 @@
 										<a class="fass fa fa-whatsapp mobile" href="whatsapp://send?text=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=whatsapp')?>" data-action="share/whatsapp/share">
 											<img src="<?php echo site_url('assets/img/icons/whatsapp.png')?>">
 										</a>
-										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=telegram')?>" class="fass fa fa-paper-plane"></a>
-										<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=line')?>" class="fas fa-line">
-											<img src="<?php echo site_url('assets/img/line.png')?>">
+										<a target="_blank" href="https://telegram.me/share/url?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=telegram')?>" class="fass fa fa-paper-plane">
+										</a>
+										<a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=line')?>" class="fas fa-line"><img src="<?php echo site_url('assets/img/line.png')?>">
+										</a>
+										<a target="_blank" class="fas map-google" href="https://www.google.com/maps/search/?api=1&query=<?php echo $detail->latitude?>,<?php echo $detail->longtitude?>">
+											<img src="<?php echo site_url('assets/img/google-maps.png')?>">
 										</a>
 									</div>
 								</div>

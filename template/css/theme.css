@@ -465,3 +465,14 @@ body {
 .wizard .current:after {
     border-left-color: #007ACC;
 }
+.right{
+  text-align: right;
+}
+.left{
+  float: left;
+  font-size: 12px;
+  height: 35px;
+  border-radius: 3px;
+  background-color: #d84949 !important;
+  border-color: #d84949;
+}

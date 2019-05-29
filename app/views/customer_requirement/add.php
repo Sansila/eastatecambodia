@@ -55,6 +55,7 @@
         box-shadow: none !important; 
     }
 </style>
+
 <div id="content-header" class="mini">
   <h1>Customer</h1>
   <ul class="mini-stats box-3"></ul>
@@ -180,14 +181,20 @@
               <label class='col-lg-2 control-label'>Price</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  <input type="number"  class="form-control input-sm required" value='<?php echo isset($row->price)?"$row->price":""; ?>' id="txtprice" name="txtprice">
+                  <input type="number"  class="form-control input-sm " value='<?php echo isset($row->price)?"$row->price":""; ?>' id="txtprice" name="txtprice">
                 </div>
               </div>
-              <label class='col-lg-2 control-label'>Size(House & Land)</label>
+              <label class='col-lg-2 control-label'>Size</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  <input type="number"  class="form-control input-sm required" value='<?php echo isset($row->size)?"$row->size":""; ?>' id="txtsize" name="txtsize">
+                  <input type="number"  class="form-control input-sm " value='<?php echo isset($row->size)?"$row->size":""; ?>' id="txtsize" name="txtsize">
                 </div>
+              </div>
+              <div data-role="rangeslider">
+                <label for="price-min">Price:</label>
+                <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+                <label for="price-max">Price:</label>
+                <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
               </div>
             </div>
 
@@ -279,12 +286,6 @@
         	required:true,
         },
         txttype:{
-        	required: true,
-        },
-        txtsize:{
-        	required: true,
-        },
-        txtprice:{
         	required: true,
         }
       },
