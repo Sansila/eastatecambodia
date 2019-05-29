@@ -222,7 +222,7 @@ class Property extends CI_Controller {
         $config2['source_image'] = $this->upload->upload_path.$this->upload->file_name;
         $config2['new_image'] = './assets/upload/property/thumb';
         $config2['maintain_ratio'] = false;
-        $config2['create_thumb'] = "$pid".'_'."$imagename";
+        $config2['create_thumb'] = "$pid".'_'.str_replace(" ", "_", $imagename);
         $config2['thumb_marker'] = false;
         $config2['height'] = 564;
 		$config2['width'] = 848;
@@ -251,7 +251,7 @@ class Property extends CI_Controller {
 	    $config['upload_path'] = './assets/upload/property/';
 	    $config['allowed_types'] = 'gif|jpg|png|jpeg|mpeg|mpg|mp4|mpe|qt|avi|mov';
 	    $config['max_size']      = '0';
-	    $config['file_name']  	 = "$pid".'_'."$imagename";
+	    $config['file_name']  	 = "$pid".'_'.str_replace(" ", "_", $imagename);
 		$config['overwrite']	 = true;
 
 	    return $config;
@@ -270,7 +270,7 @@ class Property extends CI_Controller {
 	    $config['upload_path'] = './assets/upload/property/';
 	    $config['allowed_types'] = 'gif|jpg|png|jpeg|mpeg|mpg|mp4|mpe|qt|avi|mov';
 	    $config['max_size']      = '0';
-	    $config['file_name']  	 = "$pid".'_'."$imagename";
+	    $config['file_name']  	 = "$pid".'_'.str_replace(" ", "_", $imagename);
 		$config['overwrite']	 = true;
 
 	    return $config;
@@ -281,7 +281,7 @@ class Property extends CI_Controller {
 		$count=$this->db->query("SELECT count(*) as count FROM tblgallery where pid='$pid' AND url='$imagename'")->row()->count;
 		if($count==0){
 			$data=array('pid'=>$pid,
-						'url'=>$imagename,
+						'url'=>str_replace(" ", "_", $imagename),
 						'gallery_type'=>'0');
 			$this->db->insert('tblgallery',$data);
 		}

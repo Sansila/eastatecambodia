@@ -464,12 +464,12 @@
                                                         {
                                                     ?>
                                                         <video style="height: 176px;" class="img-responsive" controls>
-                                                            <source src="<?php echo base_url('assets/upload/property/'.$img->pid.'_'.$img->url); ?>">
+                                                            <source src="<?php echo base_url('assets/upload/property/'.$img->pid.'_'.str_replace(" ", "_", $img->url)); ?>">
                                                         </video>
                                                     <?php 
                                                         }else{
                                                     ?>
-                                                     <img style="width:auto;height:160px;" alt="" title="" class="file-preview-image" src="<?php echo site_url('/assets/upload/property/thumb/'.$row->pid.'_'.$img->url) ?>">
+                                                     <img style="width:auto;height:160px;" alt="" title="" class="file-preview-image" src="<?php echo site_url('/assets/upload/property/thumb/'.$row->pid.'_'.str_replace(" ", "_", $img->url)) ?>">
                                                      <?php 
                                                         }
                                                      ?>

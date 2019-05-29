@@ -18,7 +18,18 @@
 							<div class="col-sm-6">
 								<article class="post post-mid">
 									<div class="post-image">
-										<a href="<?php echo site_url('site/site/newsdetail/'.$news->article_id.'?type='.$type)?>"><img class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>" alt="Blog"></a>
+										<a href="<?php echo site_url('site/site/newsdetail/'.$news->article_id.'?type='.$type)?>">
+											<?php 
+												$have_img = false;
+												$img_path = base_url('assets/upload/noimage.jpg');
+												if(file_exists(FCPATH.'assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))
+												{
+													$img_path = site_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url);
+													$have_img = true;
+												}
+											?>
+											<img class="img-responsive" src="<?php echo $img_path; ?>" alt="Blog">
+										</a>
 										<span class="post-date">
 											<span class="day"><?php echo $date->format('d');?></span>
 											<span class="month-year"><?php echo $date->format('M Y')?></span>
@@ -78,7 +89,17 @@
 										<li>
 											<div class="post-image">
 												<a href="<?php echo site_url('site/site/newsdetail/'.$pop->article_id.'?type='.$type)?>">
-													<img class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>" alt="Blog">
+													<?php 
+														$have_img = false;
+														$img_path = base_url('assets/upload/noimage.jpg');
+														if(file_exists(FCPATH.'assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))
+														{
+															$img_path = site_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url);
+															$have_img = true;
+														}
+													?>
+
+													<img class="img-responsive" src="<?php echo $img_path;?>" alt="Blog">
 												</a>
 											</div>
 											<div class="post-info">

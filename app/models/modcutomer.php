@@ -171,4 +171,9 @@ class Modcutomer extends CI_Model {
         $sql = $this->db->query("SELECT * FROM tblcustomer WHERE is_active = 1")->result();
         return $sql;
     }
+    function getRequireCustomer($rid)
+    {
+        $sql = $this->db->query("SELECT * FROM tblrequirement WHERE is_active = 1 AND requireid = $rid ")->row();
+        return $sql;
+    }
 }

@@ -181,21 +181,26 @@
               <label class='col-lg-2 control-label'>Price</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  <input type="number"  class="form-control input-sm " value='<?php echo isset($row->price)?"$row->price":""; ?>' id="txtprice" name="txtprice">
+                  <!-- <input type="number"  class="form-control input-sm " value='<?php echo isset($row->price)?"$row->price":""; ?>' id="txtprice" name="txtprice"> -->
+                    <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+                    <div>
+                      <input type="number" min="0" max="9900" id="min_price" oninput="validity.valid||(value='0');" class="price-range-field" value="<?php echo isset($row->min_price)?"$row->min_price":"0"; ?>" />
+                      <input type="number" min="0" max="10000" id="max_price" oninput="validity.valid||(value='10000');" class="price-range-field" value="<?php echo isset($row->max_price)?"$row->max_price":"10000"; ?>" />
+                    </div>
                 </div>
               </div>
               <label class='col-lg-2 control-label'>Size</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  <input type="number"  class="form-control input-sm " value='<?php echo isset($row->size)?"$row->size":""; ?>' id="txtsize" name="txtsize">
+                  <!-- <input type="number"  class="form-control input-sm " value='<?php echo isset($row->size)?"$row->size":""; ?>' id="txtsize" name="txtsize"> -->
+                  <div id="slider-range-size" class="price-filter-range-size" name="rangeInput-size"></div>
+                  <div>
+                    <input type="number" min=0 max="99000" id="min_size" oninput="validity.valid||(value='0');" class="price-range-field" />
+                    <input type="number" min=0 max="100000" id="max_size" oninput="validity.valid||(value='100000');" class="price-range-field" />
+                  </div>
                 </div>
               </div>
-              <div data-role="rangeslider">
-                <label for="price-min">Price:</label>
-                <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
-                <label for="price-max">Price:</label>
-                <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
-              </div>
+
             </div>
 
             <div class="form-group">
@@ -205,10 +210,33 @@
                   <input type="text"  class="form-control input-sm " value='<?php echo isset($row->description)?"$row->description":""; ?>' id="txtdescription">
                 </div>
               </div>
-              <label class='col-lg-2 control-label'><?php echo $this->lang->line('mn_active')?></label>
-              <div class=" col-lg-3"> 
-                <div class="col-md-2">
-                  <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->is_active)){ if($row->is_active==1) echo 'checked'; }else{ echo "checked"; } ?>>
+              <label class='col-lg-2 control-label'>Property Tag</label>
+              <div class=" col-lg-4"> 
+                <div class="col-md-12">
+                  <select class="form-control select2-property txtproperty" name="txtproperty" id="txtproperty" multiple="">
+                    <?php 
+                        $allpid = array();
+                        $row->property_tag = trim($row->property_tag, ',');
+                        $arrpid = explode(',', $row->property_tag);
+                        foreach ($arrpid as $rpid) {
+                          $allpid[$rpid] = $rpid;
+                        }
+                        foreach ($this->cust->getPropertyTag() as $tag) {
+                          $sel = "";
+                          if($allpid[$tag->property_tag] == $tag->property_tag)
+                            $sel = "selected";
+                          echo '<option '.$sel.' value="'.$tag->property_tag.'">'.$tag->property_tag.'</option>';
+                        }                      
+                    ?>
+                  </select>
+                </div>
+              </div>
+              <div class="hide">
+                <label class='col-lg-2 control-label'><?php echo $this->lang->line('mn_active')?></label>
+                <div class=" col-lg-3"> 
+                  <div class="col-md-2">
+                    <input type="checkbox"  class="form-control input-sm " name="is_active" id="is_active" <?php if (isset($row->is_active)){ if($row->is_active==1) echo 'checked'; }else{ echo "checked"; } ?>>
+                  </div>
                 </div>
               </div>
             </div>
@@ -313,9 +341,12 @@
             location:$("#txtlocation").val(),
             category: $("#txtcategory").val(),
             type: $('#txttype').val(),
-            price: $('#txtprice').val(),
-            size: $('#txtsize').val(),
+            minprice: $('#min_price').val(),
+            maxprice: $('#max_price').val(),
+            minsize: $('#min_size').val(),
+            maxsize: $('#max_size').val(),
             description:$("#txtdescription").val(),
+            propertytag:$("#txtproperty").val(),
             is_active:is_active,
           },
           success:function(data) {
@@ -323,7 +354,7 @@
             if(data.requireid!='' && data.requireid!=null){
               toasmsg('success',data.msg);
               setTimeout(function(){
-                location.href='<?php echo site_url("customer/view?m=".$m.'&p='.$p) ?>';
+                location.href='<?php echo site_url("customer/list_requirement?m=".$m.'&p='.$p) ?>';
               },1000);
             }else{
               toasmsg('error',data.msg);
@@ -344,6 +375,132 @@
         }        
       }      
     });
+  });
+
+
+  $("#min_price,#max_price").on('change', function () {
+
+    var min_price_range = parseInt($("#min_price").val());
+
+    var max_price_range = parseInt($("#max_price").val());
+
+    if (min_price_range > max_price_range) {
+    $('#max_price').val(min_price_range);
+    }
+
+    $("#slider-range").slider({
+      values: [min_price_range, max_price_range]
+    });
+    
+  });
+
+
+  $("#min_price,#max_price").on("paste keyup", function () {                                        
+
+    var min_price_range = parseInt($("#min_price").val());
+
+    var max_price_range = parseInt($("#max_price").val());
+    
+    if(min_price_range == max_price_range){
+
+      max_price_range = min_price_range + 100;
+      
+      $("#min_price").val(min_price_range);   
+      $("#max_price").val(max_price_range);
+    }
+
+    $("#slider-range").slider({
+    values: [min_price_range, max_price_range]
+    });
+
+  });
+
+
+  $(function () {
+    $("#slider-range").slider({
+    range: true,
+    orientation: "horizontal",
+    min: 0,
+    max: 10000,
+    values: [0, 10000],
+    step: 100,
+
+    slide: function (event, ui) {
+      if (ui.values[0] == ui.values[1]) {
+        return false;
+      }
+      
+      $("#min_price").val(ui.values[0]);
+      $("#max_price").val(ui.values[1]);
+    }
+    });
+
+    $("#min_price").val($("#slider-range").slider("values", 0));
+    $("#max_price").val($("#slider-range").slider("values", 1));
+
+  });
+
+
+  $("#min_size,#max_size").on('change', function () {
+
+    var min_price_range = parseInt($("#min_size").val());
+
+    var max_price_range = parseInt($("#max_size").val());
+
+    if (min_price_range > max_price_range) {
+    $('#max_size').val(min_price_range);
+    }
+
+    $("#slider-range-size").slider({
+    values: [min_price_range, max_price_range]
+    });
+    
+  });
+
+
+  $("#min_size,#max_size").on("paste keyup", function () {                                        
+
+    var min_price_range = parseInt($("#min_size").val());
+
+    var max_price_range = parseInt($("#max_size").val());
+    
+    if(min_price_range == max_price_range){
+
+      max_price_range = min_price_range + 100;
+      
+      $("#min_size").val(min_price_range);   
+      $("#max_size").val(max_price_range);
+    }
+
+    $("#slider-range-size").slider({
+    values: [min_price_range, max_price_range]
+    });
+
+  });
+
+
+  $(function () {
+    $("#slider-range-size").slider({
+    range: true,
+    orientation: "horizontal",
+    min: 0,
+    max: 100000,
+    values: [0, 100000],
+    step: 100,
+
+    slide: function (event, ui) {
+      if (ui.values[0] == ui.values[1]) {
+        return false;
+      }
+      
+      $("#min_size").val(ui.values[0]);
+      $("#max_size").val(ui.values[1]);
+    }
+    });
+
+    $("#min_size").val($("#slider-range-size").slider("values", 0));
+    $("#max_size").val($("#slider-range-size").slider("values", 1));
+
   });
 
 

@@ -239,7 +239,7 @@ class article extends CI_Controller {
             $config2['source_image'] = $this->upload->upload_path.$this->upload->file_name;
             $config2['new_image'] = './assets/upload/article/thumb';
             $config2['maintain_ratio'] = false;
-            $config2['create_thumb'] = "$productid".'_'."$imagename";
+            $config2['create_thumb'] = "$productid".'_'.str_replace(" ", "_", $imagename);
             $config2['thumb_marker'] = false;
             $config2['height'] = 225;
             $config2['width'] = 410;
@@ -267,7 +267,7 @@ class article extends CI_Controller {
 	    $config['upload_path'] = './assets/upload/article/';
 	    $config['allowed_types'] = 'gif|jpg|png';
 	    $config['max_size']      = '0';
-	    $config['file_name']  	 = "$productid".'_'."$imagename";
+	    $config['file_name']  	 = "$productid".'_'.str_replace(" ", "_", $imagename);
 		$config['overwrite']	 = true;
 
 	    return $config;
@@ -279,7 +279,7 @@ class article extends CI_Controller {
 		$count=$this->db->query("SELECT count(*) as count FROM tblgallery where article_id='$productid' AND url='$imagename'")->row()->count;
 		if($count==0){
 			$data=array('article_id'=>$productid,
-						'url'=>$imagename,
+						'url'=>str_replace(" ", "_", $imagename),
 						'gallery_type'=>'0');
 			$this->db->insert('tblgallery',$data);
 		}

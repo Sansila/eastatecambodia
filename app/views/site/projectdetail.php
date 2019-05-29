@@ -120,9 +120,16 @@
 											{
 												$hide = "hide";
 											}else{
+												$have_img = false;
+												$img_path = base_url('assets/upload/noimage.jpg');
+												if(file_exists(FCPATH.'assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))
+												{
+													$img_path = site_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url);
+													$have_img = true;
+												}
 									?>
 									<li>
-										<img aly="" class="img-responsive pixelated <?php echo $hide;?>" src="<?php if(@ file_get_contents(base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+										<img aly="" class="img-responsive pixelated <?php echo $hide;?>" src="<?php echo $img_path;?>"/>
 									</li>
 									<?php
 											}
@@ -143,9 +150,16 @@
 											{
 												$hide = "hide";
 											}else{
+												$have_img = false;
+												$img_path = base_url('assets/upload/noimage.jpg');
+												if(file_exists(FCPATH.'assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))
+												{
+													$img_path = site_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url);
+													$have_img = true;
+												}
 									?>
 									<li>
-										<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url))) echo base_url('assets/upload/project/thumb/'.$img->projectid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+										<img aly="" class="img-responsive" src="<?php echo $img_path;?>"/>
 									</li>
 									<?php
 											}
@@ -185,14 +199,28 @@
 															$extends = pathinfo($imgrelated->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 																	{
+																		$have_img = false;
+																		$img_path = base_url('assets/upload/noimage.jpg');
+																		if(file_exists(FCPATH.'assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url))
+																		{
+																			$img_path = site_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url);
+																			$have_img = true;
+																		}
 														?>
 															<video style="height: 176px;" class="img-responsive" controls>
-															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>">
+															  	<source src="<?php echo $img_path;?>">
 															</video>
 														<?php 
 															}else{
+																$have_img = false;
+																$img_path = base_url('assets/upload/noimage.jpg');
+																if(file_exists(FCPATH.'assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url))
+																{
+																	$img_path = site_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url);
+																	$have_img = true;
+																}
 														?>
-															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+															<img aly="" class="img-responsive" src="<?php echo $img_path;?>"/>
 														<?php 
 															}
 														?>

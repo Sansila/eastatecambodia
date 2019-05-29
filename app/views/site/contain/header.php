@@ -4,6 +4,7 @@
 <!-- Mirrored from pixelgeeklab.com/html/realestast/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Nov 2018 02:55:25 GMT -->
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Real estate, Cambodia, Phnom penh, Property, House, Condo, Land, Hotel, Resort, Sale, Rent, Buy" />
 	<meta name="description" content="Estate Cambodia provides property listing services for people who are looking to buy, sell or rent the properties such as land, house, condo, commercial unit in Cambodia">
 	<meta name="author" content="estatecambodia.com">

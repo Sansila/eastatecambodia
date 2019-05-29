@@ -330,9 +330,8 @@
 		}
 		
 		function update(event){
-			    var storeid=jQuery(event.target).attr("rel");
-				location.href="<?PHP echo site_url('customer/editcustomer');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
-			
+		    var storeid=jQuery(event.target).attr("rel");
+			location.href="<?PHP echo site_url('customer/editrequirement');?>/"+storeid+"?<?php echo "m=$m&p=$p" ?>";
 		}
 
 		function deletefinding(event){

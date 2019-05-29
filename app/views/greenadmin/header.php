@@ -150,8 +150,8 @@
 		<script src="<?php echo site_url('assets/amchart')?>/core.js"></script>
 	    <script src="<?php echo site_url('assets/amchart')?>/charts.js"></script>
 	    <script src="<?php echo site_url('assets/amchart')?>/animated.js"></script>
-	    <!-- <link rel="stylesheet" href="<?php echo site_url('assets/css')?>/jquery.mobile-1.4.5.min.css"  media="screen"> -->
-		<!-- <script src="<?php echo site_url('assets/js')?>/jquery.mobile-1.4.5.min.js"></script> -->
+	    <link rel="stylesheet" href="<?php echo site_url('assets/css')?>/price_range_style.css"  media="screen">
+		<!-- <script src="<?php echo site_url('assets/js')?>/price_range_style.js"></script> -->
 	</head>	
 	
 	<body data-color="grey" class="flat">

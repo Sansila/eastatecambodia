@@ -159,9 +159,17 @@
 											{
 												$hide = "hide";
 											}else{
+
+												$have_img = false;
+												$img_path = base_url('assets/upload/noimage.jpg');
+												if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+												{
+													$img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+													$have_img = true;
+												}
 									?>
 									<li>
-										<img aly="" class="img-responsive pixelated <?php echo $hide;?>" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+										<img aly="" class="img-responsive pixelated <?php echo $hide;?>" src="<?php echo $img_path;?>"/>
 										<span class="property-thumb-info-label">
 											<span class="label price">$<?php echo number_format($img->price)?></span>
 											<span class="label forrent <?php if($img->p_type == 0) echo "hide"; else echo "";?>">
@@ -193,9 +201,16 @@
 											{
 												$hide = "hide";
 											}else{
+												$have_img = false;
+												$img_path = base_url('assets/upload/noimage.jpg');
+												if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+												{
+													$img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+													$have_img = true;
+												}
 									?>
 									<li>
-										<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+										<img aly="" class="img-responsive" src="<?php echo $img_path;?>"/>
 									</li>
 									<?php
 											}
@@ -307,6 +322,14 @@
 															$extends = pathinfo($video->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 															{
+
+															$have_img = false;
+															$img_path = base_url('assets/upload/noimage.jpg');
+															if(file_exists(FCPATH.'assets/upload/property/'.$video->pid.'_'.$video->url))
+															{
+																$img_path = site_url('assets/upload/property/'.$video->pid.'_'.$video->url);
+																$have_img = true;
+															}
 													?>
 													<div class="col-md-4 animation">
 														<div class="pgl-property">
@@ -314,7 +337,7 @@
 																<div class="property-thumb-info-image">
 																	<a href="#">
 																		<video style="height: 176px;" class="img-responsive" controls>
-																			<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$video->pid.'_'.$video->url))) echo base_url('assets/upload/property/'.$video->pid.'_'.$video->url); else echo base_url('assets/upload/noimage.jpg')?>">
+																			<source src="<?php echo $img_path;?>">
 																		</video>
 																	</a>
 																</div>
@@ -398,15 +421,29 @@
 														<?php
 															$extends = pathinfo($imgrelated->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
-																	{
+															{
+																$have_img = false;
+																$img_path = base_url('assets/upload/noimage.jpg');
+																if(file_exists(FCPATH.'assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url))
+																{
+																	$img_path = site_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url);
+																	$have_img = true;
+																}
 														?>
 															<video style="height: 176px;" class="img-responsive" controls>
-															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>">
+															  	<source src="<?php echo $img_path;?>">
 															</video>
 														<?php 
 															}else{
+																$have_img = false;
+																$img_path = base_url('assets/upload/noimage.jpg');
+																if(file_exists(FCPATH.'assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url))
+																{
+																	$img_path = site_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url);
+																	$have_img = true;
+																}
 														?>
-															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url))) echo base_url('assets/upload/property/thumb/'.$imgrelated->pid.'_'.$imgrelated->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+															<img aly="" class="img-responsive" src="<?php echo $img_path;?>"/>
 														<?php 
 															}
 														?>
@@ -490,7 +527,16 @@
 									<div class="img-thumbnail-medium">
 										<a href="#">
 											<!-- <img src="<?php echo site_url('template')?>/images/agents/temp-agent.png" class="img-responsive" alt=""> -->
-											<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/adminuser/'.$detail->userid.'.png'))) echo base_url('assets/upload/adminuser/'.$detail->userid.'.png'); else echo base_url('assets/upload/noimage.jpg')?>"/>
+											<?php 
+												$have_img = false;
+												$img_path = base_url('assets/upload/noimage.jpg');
+												if(file_exists(FCPATH.'assets/upload/adminuser/'.$detail->userid.'.png'))
+												{
+													$img_path = site_url('assets/upload/adminuser/'.$detail->userid.'.png');
+													$have_img = true;
+												}
+											?>
+											<img aly="" class="img-responsive" src="<?php echo $img_path;?>"/>
 										</a>
 									</div>
 									<div class="pgl-agent-info">
@@ -544,15 +590,29 @@
 															$extends = pathinfo($img->url, PATHINFO_EXTENSION);
 															if($extends === "mp4" || $extends === "movie" || $extends === "mpe" || $extends === "qt" || $extends === "mov" || $extends === "avi" || $extends === "mpg" || $extends === "mpeg")
 															{
+															$have_img = false;
+															$img_path = base_url('assets/upload/noimage.jpg');
+															if(file_exists(FCPATH.'assets/upload/property/'.$img->pid.'_'.$img->url))
+															{
+																$img_path = site_url('assets/upload/property/'.$img->pid.'_'.$img->url);
+																$have_img = true;
+															}	
 														?>
 															<video style="height: 176px;" class="img-responsive" controls>
-															  	<source src="<?php if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+															  	<source src="<?php echo $img_path;?>">
 															</video>
 
 														<?php 
 															}else{
+																$have_img = false;
+																$img_path = base_url('assets/upload/noimage.jpg');
+																if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+																{
+																	$img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+																	$have_img = true;
+																}	
 														?>
-															<img aly="" class="img-responsive" src="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>"/>
+															<img aly="" class="img-responsive" src="<?php echo $img_path;?>"/>
 														<?php
 															}
 														?>

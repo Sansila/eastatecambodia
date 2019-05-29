@@ -4,6 +4,7 @@
 <!-- Mirrored from pixelgeeklab.com/html/realestast/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Nov 2018 02:55:25 GMT -->
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Real estate, Cambodia, Phnom penh, Property, House, Condo, Land, Hotel, Resort, Sale, Rent, Buy" />
 	<meta name="description" content="Estate Cambodia provides property listing services for people who are looking to buy, sell or rent the properties such as land, house, condo, commercial unit in Cambodia">
 	<meta name="author" content="estatecambodia.com">
@@ -17,8 +18,15 @@
 				{
 					$hide = "hide";
 				}else{
+					$have_img = false;
+					$img_path = base_url('assets/upload/noimage.jpg');
+					if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+					{
+						$img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+						$have_img = true;
+					}
 	?>
-			<meta property="og:image" content="<?php if(@ file_get_contents(base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url))) echo base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+			<meta property="og:image" content="<?php echo $img_path;?>">
 	<?php
 				}
 			}
@@ -29,8 +37,15 @@
 	<meta property="og:description"   content="<?php echo $detail->property_name?>" />
 	<?php
 		}else if($sitetype == "newsdetail"){
+			$have_img = false;
+			$img_path = base_url('assets/upload/noimage.jpg');
+			if(file_exists(FCPATH.'assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))
+			{
+				$img_path = site_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url);
+				$have_img = true;
+			}
 	?>
-		<meta property="og:image" content="<?php if(@ file_get_contents(base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url))) echo base_url('assets/upload/article/thumb/'.$img->article_id.'_'.$img->url); else echo base_url('assets/upload/noimage.jpg')?>">
+		<meta property="og:image" content="<?php echo $img_path;?>">
 		<meta property="og:url"    		  content="<?php echo site_url('site/site/newsdetail/'.$row->article_id.'?type='.$type)?>" />
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="<?php echo $row->article_title;?>" />

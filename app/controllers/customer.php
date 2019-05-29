@@ -573,16 +573,21 @@ class Customer extends CI_Controller {
 		$location = $this->input->post('location');
 		$category = $this->input->post('category');
 		$type = $this->input->post('type');
-		$price = $this->input->post('price');
-		$size = $this->input->post('size');
+		$minprice = $this->input->post('minprice');
+		$maxprice = $this->input->post('maxprice');
+		$minsize = $this->input->post('minsize');
+		$maxsize = $this->input->post('maxsize');
 		$desc = $this->input->post('description');
 		$is_active = $this->input->post('is_active');
+		$propertytag = $this->input->post('propertytag');
 
 		$loc = '';
 		$cate = '';
+		$tag = '';
         $i = 1; 
         $num = count($location); 
         $numcat = count($category); 
+        $numtag = count($propertytag);
 
         $cama = ',';
         foreach ($location as $key) {
@@ -592,25 +597,36 @@ class Customer extends CI_Controller {
                 $cama = '';
             }
         }
-        $camac = ',';
+        $camac = ','; $j = 1;
         foreach ($category as $cat) {
         	$cate.= $cat.''.$camac;
-            if(++$i == $numcat)
+            if(++$j == $numcat)
             {
                 $camac = '';
             }
+        }
+        $camat = ','; $a = 1;
+        foreach ($propertytag as $ptag) {
+        	$tag.= $ptag.''.$camat;
+        	if(++$a == $numtag)
+        	{
+        		$camat = '';
+        	}
         }
         
         $data = array(
         	'customerid' => $customer, 
         	'category' => $cate,
         	'location' => $loc,
-        	'price' => $price,
-        	'size' => $size,
+        	'min_price' => $minprice,
+        	'max_price' => $maxprice,
+        	'min_size' => $minsize,
+        	'max_size' => $maxsize,
         	'type' => $type,
         	'remark' => $desc,
         	'is_active' => $is_active,
         	'userid' => $this->session->userdata('userid'),
+        	'property_tag' => $tag,
         );
         $data1 = array(
         	'date' => date('Y-m-d H:i:s')
@@ -652,8 +668,10 @@ class Customer extends CI_Controller {
 					 r.customerid,
 					 r.category,
 					 r.location,
-					 r.price,
-					 r.size,
+					 r.min_price,
+					 r.max_price,
+					 r.min_size,
+					 r.max_size,
 					 r.type,
 					 r.is_active,
 					 r.remark,
@@ -745,8 +763,8 @@ class Customer extends CI_Controller {
 				<td class='type'>".$cates."</td>
 				<td class='type'>".$locs."</td>
 				<td class='type'>".$type."</td>
-				<td class='type'>".$row->price."$</td>
-				<td class='type'>".$row->size."<sup>m2</sup></td>
+				<td class='type'>".$row->min_price."-".$row->max_price."$</td>
+				<td class='type'>".$row->min_size."-".$row->max_size."<sup>m2</sup></td>
 				<td class='type'>".$row->remark."</td>
 				<td class='remove_tag no_wrap'>";
 
@@ -769,5 +787,17 @@ class Customer extends CI_Controller {
 	function deleterequire($rid)
 	{
 		$this->db->query("UPDATE tblrequirement SET is_active = 0 WHERE requireid = $rid ")->row();
+	}
+	function editrequirement($rid)
+	{
+		$data['page_header']="Here is Index Page";	
+		$data['idfield']=$this->idfields;		
+		$data['thead']=	$this->theads;
+		$datas['locs'] = $this->cust->getlocation();
+		$datas['customer'] = $this->cust->getCustomer();
+		$datas['row'] = $this->cust->getRequireCustomer($rid);	
+		$this->load->view('greenadmin/header',$data);
+		$this->load->view('customer_requirement/add',$datas);
+		$this->load->view('greenadmin/footer');	
 	}
 }
