@@ -584,34 +584,42 @@ class Customer extends CI_Controller {
 		$loc = '';
 		$cate = '';
 		$tag = '';
-        $i = 1; 
         $num = count($location); 
         $numcat = count($category); 
         $numtag = count($propertytag);
 
-        $cama = ',';
-        foreach ($location as $key) {
-            $loc.= $key.''.$cama;
-            if(++$i == $num)
-            {
-                $cama = '';
-            }
+        if($location !="")
+        {
+        	$i = 1; $cama = ',';
+	        foreach ($location as $key) {
+	            $loc.= $key.''.$cama;
+	            if(++$i == $num)
+	            {
+	                $cama = '';
+	            }
+	        }
         }
-        $camac = ','; $j = 1;
-        foreach ($category as $cat) {
-        	$cate.= $cat.''.$camac;
-            if(++$j == $numcat)
-            {
-                $camac = '';
-            }
+        if($category !='')
+        {
+        	$camac = ','; $j = 1;
+	        foreach ($category as $cat) {
+	        	$cate.= $cat.''.$camac;
+	            if(++$j == $numcat)
+	            {
+	                $camac = '';
+	            }
+	        }
         }
-        $camat = ','; $a = 1;
-        foreach ($propertytag as $ptag) {
-        	$tag.= $ptag.''.$camat;
-        	if(++$a == $numtag)
-        	{
-        		$camat = '';
-        	}
+        if($propertytag !='')
+        {
+        	$camat = ','; $a = 1;
+        	foreach ($propertytag as $ptag) {
+	        	$tag.= $ptag.''.$camat;
+	        	if(++$a == $numtag)
+	        	{
+	        		$camat = '';
+	        	}
+	        }
         }
         
         $data = array(
@@ -786,7 +794,10 @@ class Customer extends CI_Controller {
 	}
 	function deleterequire($rid)
 	{
-		$this->db->query("UPDATE tblrequirement SET is_active = 0 WHERE requireid = $rid ")->row();
+		$data = array(
+			'is_active' => 0,
+		);
+		$this->db->where('requireid',$rid)->update('tblrequirement',$data);
 	}
 	function editrequirement($rid)
 	{

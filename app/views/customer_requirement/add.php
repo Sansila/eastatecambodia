@@ -101,6 +101,8 @@
                   		foreach ($customer as $cus) {
                   			if($row->customerid == $cus->customerid)
                   				$sel = "selected";
+                        else
+                          $sel = "";
                   			echo '<option '.$sel.' value="'.$cus->customerid.'">'.$cus->customer_name.'</option>';
                   		}
 
@@ -184,8 +186,8 @@
                   <!-- <input type="number"  class="form-control input-sm " value='<?php echo isset($row->price)?"$row->price":""; ?>' id="txtprice" name="txtprice"> -->
                     <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
                     <div>
-                      <input type="number" min="0" max="9900" id="min_price" oninput="validity.valid||(value='0');" class="price-range-field" value="<?php echo isset($row->min_price)?"$row->min_price":"0"; ?>" />
-                      <input type="number" min="0" max="10000" id="max_price" oninput="validity.valid||(value='10000');" class="price-range-field" value="<?php echo isset($row->max_price)?"$row->max_price":"10000"; ?>" />
+                      <input type="number" id="min_price" oninput="validity.valid||(value='0');" class="price-range-field" value="<?php echo isset($row->min_price)?"$row->min_price":"0"; ?>" />
+                      <input type="number" id="max_price" oninput="validity.valid||(value='10000');" class="price-range-field" value="<?php echo isset($row->max_price)?"$row->max_price":"10000"; ?>" />
                     </div>
                 </div>
               </div>
@@ -195,8 +197,8 @@
                   <!-- <input type="number"  class="form-control input-sm " value='<?php echo isset($row->size)?"$row->size":""; ?>' id="txtsize" name="txtsize"> -->
                   <div id="slider-range-size" class="price-filter-range-size" name="rangeInput-size"></div>
                   <div>
-                    <input type="number" min=0 max="99000" id="min_size" oninput="validity.valid||(value='0');" class="price-range-field" />
-                    <input type="number" min=0 max="100000" id="max_size" oninput="validity.valid||(value='100000');" class="price-range-field" />
+                    <input type="number" id="min_size" oninput="validity.valid||(value='0');" class="price-range-field" />
+                    <input type="number" id="max_size" oninput="validity.valid||(value='100000');" class="price-range-field" />
                   </div>
                 </div>
               </div>
@@ -415,14 +417,12 @@
 
   });
 
-
-  $(function () {
     $("#slider-range").slider({
     range: true,
     orientation: "horizontal",
     min: 0,
     max: 10000,
-    values: [0, 10000],
+    values: [<?php echo isset($row->min_price)?"$row->min_price":"0"; ?>, <?php echo isset($row->max_price)?"$row->max_price":"10000"; ?>],
     step: 100,
 
     slide: function (event, ui) {
@@ -437,8 +437,6 @@
 
     $("#min_price").val($("#slider-range").slider("values", 0));
     $("#max_price").val($("#slider-range").slider("values", 1));
-
-  });
 
 
   $("#min_size,#max_size").on('change', function () {
@@ -478,30 +476,25 @@
 
   });
 
+  $("#slider-range-size").slider({
+  range: true,
+  orientation: "horizontal",
+  min: 0,
+  max: 100000,
+  values: [<?php echo isset($row->min_size)?"$row->min_size":"0"; ?>, <?php echo isset($row->max_size)?"$row->max_size":"100000"; ?>],
+  step: 100,
 
-  $(function () {
-    $("#slider-range-size").slider({
-    range: true,
-    orientation: "horizontal",
-    min: 0,
-    max: 100000,
-    values: [0, 100000],
-    step: 100,
-
-    slide: function (event, ui) {
-      if (ui.values[0] == ui.values[1]) {
-        return false;
-      }
-      
-      $("#min_size").val(ui.values[0]);
-      $("#max_size").val(ui.values[1]);
+  slide: function (event, ui) {
+    if (ui.values[0] == ui.values[1]) {
+      return false;
     }
-    });
-
-    $("#min_size").val($("#slider-range-size").slider("values", 0));
-    $("#max_size").val($("#slider-range-size").slider("values", 1));
-
+    
+    $("#min_size").val(ui.values[0]);
+    $("#max_size").val(ui.values[1]);
+  }
   });
 
+  $("#min_size").val($("#slider-range-size").slider("values", 0));
+  $("#max_size").val($("#slider-range-size").slider("values", 1));
 
 </script>
