@@ -851,7 +851,7 @@ class Property extends CI_Controller {
 		$where = '';
 		$userid = $this->session->userdata('userid');
 		$roleid = $this->session->userdata('roleid');
-		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
+		$rol = $this->db->query("SELECT * FROM z_role WHERE roleid = $roleid ")->row();
 		if($rol->is_admin != 1 || $rol->is_admin != 2)
             $where.= " AND r.userid = $userid ";
         else
@@ -878,6 +878,7 @@ class Property extends CI_Controller {
 									  WHERE r.is_active = 1 
 									  AND c.notify_property = 1 {$where}")->result();
 		if($customer){
+			$i = 1;
 			foreach ($customer as $cust) {
 				$cust->location = trim($cust->location, ',');
 				$arrloc = explode(',', $cust->location);
@@ -907,6 +908,8 @@ class Property extends CI_Controller {
 					$max_size = $cust->max_size;
 
 				$this->sendnotificationmatchproperty($pid,$loc,$cate,$status,$min_price,$max_price,$min_size,$max_size,$cust->email);
+
+				$i++;
 			}
 		}
 	}
@@ -942,6 +945,8 @@ class Property extends CI_Controller {
         							   ")->row();
 			if($pro)
 			{
+
+
 				if($pro->lp_id == $loc || $pro->type_id == $cate || $pro->p_type == $status )
 				{
 					$imgs = $this->pro->getAllImage($pid);
@@ -1020,9 +1025,15 @@ class Property extends CI_Controller {
 			        </div>';
 			        $mail->MsgHTML($description);
 			        $mail->IsHTML(true);
-			        $mail->Send();
+			        //$mail->Send();
+			        if($email->Send())
+			        	echo 'Send';
+			        else
+			        	echo 'No Send';
 			        $mail->ClearAddresses();
 				}
+
+
 			}
 	}
 	function updatestatusimage($pid)

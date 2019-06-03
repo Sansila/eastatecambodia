@@ -511,7 +511,7 @@
                         <div class="form-group <?php echo $hidecheck;?>">
                             <div class="col-lg-2">
                                 <label class='custom-control custom-checkbox' style="margin-right: 12px; margin-top: 5px;">
-                                    <input type='checkbox' class='custom-control-input txt-match'>
+                                    <input <?php echo isset($row->match_property)?"checked":""; ?> type='checkbox' class='custom-control-input txt-match'>
                                     <span class='custom-control-indicator'></span>
                                 </label>
                             </div>
@@ -984,8 +984,8 @@
                 if(status == 'insert'){
                     sendnitificationemail(pid,location,cate,types,arr,tag);
                 }else if(status == 'update'){
-                    //updatestatusimage(pid,arr);
-                    sendnitificationemail(pid,location,cate,types,arr,tag);
+                    updatestatusimage(pid,arr);
+                    //sendnitificationemail(pid,location,cate,types,arr,tag);
                 }
             },
             error: function(data){
@@ -1005,7 +1005,8 @@
             },
             async:false,
             success:function(data){
-                updatestatusimage(pid,arr);
+                //updatestatusimage(pid,arr);
+                console.log(data);
             },
             error: function(data){
 

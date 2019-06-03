@@ -96,7 +96,7 @@
 
 	<!-- Theme Responsive-->
 	<link href="<?php echo site_url('template')?>/css/theme-responsive.css" rel="stylesheet">
-	<link href="<?php echo site_url('template')?>/css/main19c7.css" rel="stylesheet">
+	<link href="<?php echo site_url('template')?>/css/main.css" rel="stylesheet">
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="<?php echo site_url('template')?>/vendor/jquery.min.js"></script>

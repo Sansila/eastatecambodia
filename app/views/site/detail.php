@@ -244,7 +244,7 @@
 								</div>
 								<div class="tab-detail">
 									<div class="right">
-										<a data-toggle="modal" data-target="#modalLoginForm" class="left btn btn-warning"><?php echo $this->lang->line('detail_property_contact_back')?></a>
+										<a data-toggle="modal" data-target="#modalLoginForm" class="contact-left btn btn-warning"><?php echo $this->lang->line('detail_property_contact_back')?></a>
 										<a class="fass fa fa-facebook" href="http://www.facebook.com/sharer.php?u=<?php echo site_url('site/site/detail/'.$detail->pid.'/?name=facebook')?>"
   										target="_blank" >
 										</a>

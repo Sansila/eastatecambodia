@@ -49,7 +49,7 @@
 
 	<!-- Theme Responsive-->
 	<link href="<?php echo site_url('template')?>/css/theme-responsive.css" rel="stylesheet">
-	<link href="<?php echo site_url('template')?>/css/main19c7.css" rel="stylesheet">
+	<link href="<?php echo site_url('template')?>/css/main.css" rel="stylesheet">
 	<!-- <link href="<?php //echo site_url('template')?>/css/multiple-select.css" rel="stylesheet"> -->
 	<!-- <link href="<?php //echo site_url('template')?>/css/normalize.css" rel="stylesheet"> -->
 	<!-- <link href="<?php //echo site_url('template')?>/css/stylesheet.css" rel="stylesheet"> -->
