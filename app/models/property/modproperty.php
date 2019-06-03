@@ -84,4 +84,34 @@
             }
             return $arr;
         }
+        function getPropertyForMatch($pid,$loc,$cate,$status,$min_price,$max_price,$min_size,$max_size)
+        {
+            $sql = $this->db->query("SELECT 
+                                        p.pid,
+                                        p.lp_id,
+                                        p.type_id,
+                                        p.property_name,
+                                        p.description,
+                                        p.price,
+                                        p.p_type,
+                                        p.housesize,
+                                        p.property_tag,
+                                        l.propertylocationid,
+                                        l.locationname,
+                                        pt.typeid,
+                                        pt.typename
+                                    FROM tblproperty as p
+                                    INNER JOIN tblpropertylocation l 
+                                    ON p.lp_id = l.propertylocationid
+                                    INNER JOIN tblpropertytype as pt
+                                    ON p.type_id = pt.typeid
+                                    WHERE p.p_status = 1 
+                                    AND p.pid = $pid
+                                    AND l.propertylocationid = $loc
+                                    AND pt.typeid = $cate
+                                    AND p.p_type = $status
+                                    AND (p.price BETWEEN $min_price AND $max_price)
+                                    AND (p.housesize BETWEEN $min_size AND $max_size) ")->row();
+            return $sql;
+        }
     }

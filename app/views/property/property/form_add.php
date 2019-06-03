@@ -961,14 +961,12 @@
                 async:false,
                 data:{id:id },
                 success:function(data) {
-                    // alert(data);
+                    
                 }
               })
         $(this).closest('.saouy').remove();
     });
     function uploads(pid,formdata,msg,status,location,cate,types,arr,tag){
-        //alert(visitid+'/'+familyid);
-        //var arrStr = encodeURIComponent(JSON.stringify(arr));
         $.ajax({
             type:'POST',
             url:"<?PHP echo site_url('property/property/upload');?>/"+pid,
@@ -1005,8 +1003,7 @@
             },
             async:false,
             success:function(data){
-                //updatestatusimage(pid,arr);
-                console.log(data);
+                updatestatusimage(pid,arr);
             },
             error: function(data){
 

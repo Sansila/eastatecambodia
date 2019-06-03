@@ -839,6 +839,19 @@ class Property extends CI_Controller {
 	}
 	function checkcustomerfindproperty($pid,$location,$p_category,$p_status)
 	{
+
+		require('phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->WordWrap   = 80;
+
+
 		$loc = ''; 
 		$cate = ''; 
 		$min_price = ''; 
@@ -907,135 +920,91 @@ class Property extends CI_Controller {
 				if($cust->max_size != '')
 					$max_size = $cust->max_size;
 
-				$this->sendnotificationmatchproperty($pid,$loc,$cate,$status,$min_price,$max_price,$min_size,$max_size,$cust->email);
+				$pro = $this->pro->getPropertyForMatch($pid,$loc,$cate,$status,$min_price,$max_price,$min_size,$max_size);
+
+						if($pro != ""){
+
+							$property_type = '';
+				        	$images = '';
+
+							$imgs = $this->pro->getAllImage($pid);
+
+				        	if($imgs)
+				        	{
+					        	foreach ($imgs as $img) {
+					        		$img_path = base_url('assets/upload/noimage.jpg');
+					        		if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+									{
+										$img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+									}
+									$images.= '<img style="width:100%;" src="'.$img_path.'" alt="" />';
+					        	}
+					        }else{
+					        	$images = '<img style="width:100%;" src="'.base_url('assets/upload/noimage.jpg').'" alt="" />';
+					        }
+
+				        	if($pro->p_type == 1)
+								$property_type = "Sale";
+							if($pro->p_type == 2)
+								$property_type = "Rent";
+							if($pro->p_type == 3)
+								$property_type = "Rent & Sale";
+
+					        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+					        $mail->Subject = "Estate Cambodia - Property Information Sharing";
+					        $mail->AddAddress($cust->email);
+
+					        $logo = "http://estatecambodia.com/assets/img/logo.png";
+					        $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
+					        $description = '<div style="width: 100%">
+					            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
+					                <tbody>
+					                    <tr>
+					                        <td style="width:8px" width="8"></td>
+					                        <td>
+					                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
+					                                <img src="'.$logo.'" style="width: 140px;">
+					                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+					                                    <p>Dear customer,</p>
+					                                    The following are the properties that Estate Cambodia would like to share and you may review for your interest: 
+					                                    <ul style="list-style: none; text-align: left;">
+				                                            <li>- Property ID: P'.$pro->pid.'</li>
+				                                            <li>- Property Title: '.$pro->property_name.'</li>
+				                                            <li>- Price: '.$pro->price.'$</li>
+				                                            <li>- Type: '.$property_type.'</li>
+				                                            <li>- <img src="'.$iconloc.'" />Location: '.$pro->locationname.'</li>
+				                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$pro->pid.'/?name=browser">http://estatecambodia.com/detail/P'.$pro->pid.'</a>
+				                                            </li>
+				                                        </ul>
+					                                </div>
+					                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);text-align:left; margin-bottom: 20px;">
+					                                	'.$pro->description.'
+					                                </div>
+					                                <div>
+					                                	'.$images.'
+					                                </div>
+					                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
+					                                    <p>Best regards,</p>
+					                                    <p>Estate Cambodia Team</p>
+					                                </div>
+					                            </div>
+					                        </td>
+					                    </tr>
+					                </tbody>
+					            </table>
+					        </div>';
+				        $mail->MsgHTML($description);
+				        $mail->IsHTML(true);
+				        $mail->Send();
+				        $mail->ClearAddresses();
+					}
+
 
 				$i++;
 			}
 		}
 	}
-	function sendnotificationmatchproperty($pid,$loc,$cate,$status,$min_price,$max_price,$min_size,$max_size,$email)
-	{
-		$pro = $this->db->query("SELECT 
-        								p.pid,
-        								p.lp_id,
-        								p.type_id,
-        								p.property_name,
-        								p.description,
-        								p.price,
-        								p.p_type,
-        								p.housesize,
-        								p.property_tag,
-        								l.propertylocationid,
-        								l.locationname,
-        								pt.typeid,
-        								pt.typename
-        							   FROM tblproperty as p
-        							   INNER JOIN tblpropertylocation l 
-        							   ON p.lp_id = l.propertylocationid
-        							   INNER JOIN tblpropertytype as pt
-        							   ON p.type_id = pt.typeid
-        							   WHERE 
-        							   		p.p_status = 1 
-        							   AND 
-        							   		p.pid = $pid
-        							   AND 
-											(p.price BETWEEN $min_price AND $max_price)
-									   AND 
-											(p.housesize BETWEEN $min_size AND $max_size)
-        							   ")->row();
-			if($pro)
-			{
-
-
-				if($pro->lp_id == $loc || $pro->type_id == $cate || $pro->p_type == $status )
-				{
-					$imgs = $this->pro->getAllImage($pid);
-		        	$property_type = '';
-		        	$images = '';
-		        	
-		        	foreach ($imgs as $img) {
-		        		$img_path = base_url('assets/upload/noimage.jpg');
-		        		if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
-						{
-							$img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
-						}
-
-						$images.= '<img style="width:100%;" src="'.$img_path.'" alt="" />';
-		        	}
-
-		        	if($pro->p_type == 1)
-						$property_type = "Sale";
-					if($pro->p_type == 2)
-						$property_type = "Rent";
-					if($pro->p_type == 3)
-						$property_type = "Rent & Sale";
-
-			        require('phpmailer/class.phpmailer.php');
-			        $mail = new PHPMailer();
-			        $mail->IsSMTP();
-			        $mail->SMTPDebug = 0;
-			        $mail->SMTPAuth = TRUE;
-			        $mail->SMTPSecure = "ssl";
-			        $mail->Port     = 465;
-			        $mail->Host     = "smtp.gmail.com";
-			        $mail->Mailer   = "smtp";
-			        $mail->WordWrap   = 80;
-			        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-			        $mail->Subject = "Estate Cambodia - Property Information Sharing";
-			        $mail->AddAddress($email);
-
-			        $logo = "http://estatecambodia.com/assets/img/logo.png";
-			        $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
-			        $description = '<div style="width: 100%">
-			            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
-			                <tbody>
-			                    <tr>
-			                        <td style="width:8px" width="8"></td>
-			                        <td>
-			                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
-			                                <img src="'.$logo.'" style="width: 140px;">
-			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-			                                    <p>Dear customer,</p>
-			                                    The following are the properties that Estate Cambodia would like to share and you may review for your interest: 
-			                                    <ul style="list-style: none; text-align: left;">
-		                                            <li>- Property ID: P'.$pro->pid.'</li>
-		                                            <li>- Property Title: '.$pro->property_name.'</li>
-		                                            <li>- Price: '.$pro->price.'$</li>
-		                                            <li>- Type: '.$property_type.'</li>
-		                                            <li>- <img src="'.$iconloc.'" />Location: '.$pro->locationname.'</li>
-		                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$pro->pid.'/?name=browser">http://estatecambodia.com/detail/P'.$pro->pid.'</a>
-		                                            </li>
-		                                        </ul>
-			                                </div>
-			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);text-align:left; margin-bottom: 20px;">
-			                                	'.$pro->description.'
-			                                </div>
-			                                <div>
-			                                	'.$images.'
-			                                </div>
-			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
-			                                    <p>Best regards,</p>
-			                                    <p>Estate Cambodia Team</p>
-			                                </div>
-			                            </div>
-			                        </td>
-			                    </tr>
-			                </tbody>
-			            </table>
-			        </div>';
-			        $mail->MsgHTML($description);
-			        $mail->IsHTML(true);
-			        //$mail->Send();
-			        if($email->Send())
-			        	echo 'Send';
-			        else
-			        	echo 'No Send';
-			        $mail->ClearAddresses();
-				}
-
-
-			}
-	}
+	
 	function updatestatusimage($pid)
 	{
 		$imgstatus = $this->input->post('arr'); 
