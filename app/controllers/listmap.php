@@ -563,10 +563,16 @@ class Listmap extends CI_Controller {
 
             $img = $this->site->getImage($list->pid);
 
-            if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) 
-                $imgs =  base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); 
-            else 
-                $imgs = base_url('assets/upload/noimage.jpg');
+            // if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) 
+            //     $imgs =  base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); 
+            // else 
+            //     $imgs = base_url('assets/upload/noimage.jpg');
+
+            $imgs = base_url('assets/upload/noimage.jpg');
+            if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+            {
+                $imgs = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+            }
 
             $imglast = "";
             if($list->typeid == 1 || $list->typeid == 3 || $list->typeid == 6) //hotel,condo,commer unit

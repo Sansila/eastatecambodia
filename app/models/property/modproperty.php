@@ -61,7 +61,19 @@
         }
         function getImage($pid)
         {
-            $sql = $this->db->query("SELECT * FROM tblgallery as g WHERE g.pid = $pid ")->row();
+            $sql = $this->db->query("SELECT * FROM tblgallery as g 
+                                    WHERE g.pid = $pid 
+                                    AND (g.enable_pro_image = 1 OR g.enable_pro_image is null)
+                                    ")->row();
+            return $sql;
+        }
+        function getAllImage($pid)
+        {
+            $sql = $this->db->query("SELECT * FROM tblgallery as g 
+                                     WHERE g.pid = $pid 
+                                     AND (g.enable_pro_image = 1 OR g.enable_pro_image is null) 
+                                     LIMIT 3
+                                     ")->result();
             return $sql;
         }
         function setupdate($imgstatus)

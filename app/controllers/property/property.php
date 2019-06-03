@@ -944,13 +944,19 @@ class Property extends CI_Controller {
 			{
 				if($pro->lp_id == $loc || $pro->type_id == $cate || $pro->p_type == $status )
 				{
-					$img = $this->pro->getImage($pid);
-		        	$images = '';
+					$imgs = $this->pro->getAllImage($pid);
 		        	$property_type = '';
-		        	if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url)))
-		        		$images = base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
-		        	else
-		        		$images = base_url('assets/upload/noimage.jpg');
+		        	$images = '';
+		        	
+		        	foreach ($imgs as $img) {
+		        		$img_path = base_url('assets/upload/noimage.jpg');
+		        		if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+						{
+							$img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+						}
+
+						$images.= '<img style="width:100%;" src="'.$img_path.'" alt="" />';
+		        	}
 
 		        	if($pro->p_type == 1)
 						$property_type = "Sale";
@@ -958,46 +964,6 @@ class Property extends CI_Controller {
 						$property_type = "Rent";
 					if($pro->p_type == 3)
 						$property_type = "Rent & Sale";
-
-					$iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
-		        	$list.= '<div class="item  col-xs-4 col-lg-4" style="width: 299px; height:550px; border: 1px solid; float: left; margin: 10px;">
-	                        <div class="thumbnail" style=";padding: 0px;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;">
-	                            <img class="group list-group-image" src="'.$images.'" alt="" style="float: left; margin-bottom: 10px;" width="300" height="187"/>
-	                            <div style="padding:0px 10px 7px 10px;color: white; background: #d84949;">
-	                                	P'.$pro->pid.' | '.$pro->typename.' | '.$property_type.'
-	                            </div>
-	                            <div class="caption" style="padding: 10px; ">
-	                                <h4 class="group inner list-group-item-heading" style="height:43px; overflow: hidden;     margin-top: 3px;">
-	                                	<a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="text-decoration: none;">
-	                                    '.$pro->property_name.'
-	                                    </a>
-	                                </h4>
-	                                <div style="font-size:12px;">
-			                            <img src="'.$iconloc.'" />'.$pro->locationname.'
-			                        </div>
-	                                <div class="group inner list-group-item-text" style="margin: 0 0 11px; height:160px; overflow:hidden; font-size:12px;">
-	                                	'.$pro->description.'
-	                                </div>
-	                                <div class="row">
-	                                    <div class="col-xs-12 col-md-6" style="width: 160px;float: left;">
-	                                        <p class="lead" style="color: #d84949;">
-	                                            $'.$pro->price.'
-	                                        </p>
-	                                    </div>
-	                                    <div class="col-xs-12 col-md-6" style="width: 110px;float: left;text-align: center;border: 1px solid;background: #d84949;color: white; height: 30px; margin-top: 12px;">
-	                                        <p class="lead" style="margin-top: 6px;">
-	                                            <a href="'.site_url('site/site/detail/'.$pro->pid.'?name=browser').'" style="color:white; text-decoration: none;">
-	                                                Details
-	                                            </a>
-	                                        </p>
-	                                    </div>
-	                                    <p style="clear: both;"></p>
-	                                </div>
-	                            </div>
-	                        </div>
-	                   	</div>
-	                   	';
-			        $list.="</div><div style='clear: both;'></div></div>";
 
 			        require('phpmailer/class.phpmailer.php');
 			        $mail = new PHPMailer();
@@ -1010,9 +976,11 @@ class Property extends CI_Controller {
 			        $mail->Mailer   = "smtp";
 			        $mail->WordWrap   = 80;
 			        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-			        $mail->Subject = "Estate Cambodia - Customer looking for properties";
+			        $mail->Subject = "Estate Cambodia - Property Information Sharing";
 			        $mail->AddAddress($email);
+
 			        $logo = "http://estatecambodia.com/assets/img/logo.png";
+			        $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
 			        $description = '<div style="width: 100%">
 			            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
 			                <tbody>
@@ -1023,8 +991,22 @@ class Property extends CI_Controller {
 			                                <img src="'.$logo.'" style="width: 140px;">
 			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
 			                                    <p>Dear customer,</p>
-			                                    <p>The following are the properties that Estate Cambodia would like to share and you may review for your interest: </p>
-			                                    '.$list.'
+			                                    The following are the properties that Estate Cambodia would like to share and you may review for your interest: 
+			                                    <ul style="list-style: none; text-align: left;">
+		                                            <li>- Property ID: P'.$pro->pid.'</li>
+		                                            <li>- Property Title: '.$pro->property_name.'</li>
+		                                            <li>- Price: '.$pro->price.'$</li>
+		                                            <li>- Type: '.$property_type.'</li>
+		                                            <li>- <img src="'.$iconloc.'" />Location: '.$pro->locationname.'</li>
+		                                            <li>- Link: <a href="http://estatecambodia.com/site/site/detail/'.$pro->pid.'/?name=browser">http://estatecambodia.com/detail/P'.$pro->pid.'</a>
+		                                            </li>
+		                                        </ul>
+			                                </div>
+			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);text-align:left; margin-bottom: 20px;">
+			                                	'.$pro->description.'
+			                                </div>
+			                                <div>
+			                                	'.$images.'
 			                                </div>
 			                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
 			                                    <p>Best regards,</p>
@@ -1040,7 +1022,6 @@ class Property extends CI_Controller {
 			        $mail->IsHTML(true);
 			        $mail->Send();
 			        $mail->ClearAddresses();
-
 				}
 			}
 	}

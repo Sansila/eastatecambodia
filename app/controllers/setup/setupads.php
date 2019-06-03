@@ -10,12 +10,14 @@ class SetupAds extends CI_Controller {
 		$this->load->model('setup/ModSetupAds','ads');
 		$this->thead=array("No"=>'no',
 							"Photos"=>"image",
+							 "Page"=>'Page',
 							 "Banner Name"=>'adstitle',
 							 "Location Banner"=>'category',
 							 "Action"=>'Action'							 	
 							);
 		$this->theadkh=array("លេខរាង"=>'លេខរាង',
 							"រូបភាព"=>"រូបភាព",
+							 "ផេក"=>'ផេក',
 							 "ឈ្មោះផ្សព្វផ្សាយ"=>'ឈ្មោះផ្សព្វផ្សាយ',
 							 "ទីតាំង​ផ្សព្វផ្សាយ"=>'ទីតាំង​ផ្សព្វផ្សាយ',
 							 "កំណត់"=>'កំណត់'							 	
@@ -103,10 +105,17 @@ class SetupAds extends CI_Controller {
 		$where='';
 		$adstitle=$this->input->post('adstitle');
 		$menu_id=$this->input->post('storeid');
+		$slidepage = $this->input->post('slidepage');
+
+		if($slidepage != "")
+		{
+			$where.=" AND page='$slidepage' ";
+		}
 		if($menu_id!='')
 		{
 			$where.=" AND banner_location='$menu_id'";
 		}
+
 		$sql="SELECT * FROM tblbanner WHERE  title LIKE '%$adstitle%' {$where}";
 		$table='';
 		$pagina='';
@@ -125,6 +134,7 @@ class SetupAds extends CI_Controller {
 			$img_path=base_url('assets/upload/no_image.jpg');
 			if(file_exists(FCPATH."assets/upload/banner/thumb/".$row->banner_id.'.png'))
                 $img_path=base_url("assets/upload/banner/thumb/".$row->banner_id.'.png');
+            	$bannerlog = '';
             	if($row->banner_location == 1)
                 {
                     $bannerlog = 'First';
@@ -137,9 +147,23 @@ class SetupAds extends CI_Controller {
                 }elseif ($row->banner_location == 4) {
                     $bannerlog = 'Four';
                 }
+                $page = 'Slide Banner';
+                if($row->page == "home")
+                {
+                    $page = 'Home Page';
+                }elseif($row->page == "detail")
+                {
+                    $page = 'Details Page';
+                }elseif($row->page == "map")
+                {
+                    $page = 'Map Page';
+                }elseif ($row->page == "newsdetail") {
+                    $page = 'NewsDetail Page';
+                }
 			$table.= "<tr>
 				 <td class='no' style='text-align:center;'>".$i."</td>
 				 <td class='image' style='text-align:center;'><img style='height:45px; width:auto' src='".$img_path."' /></td>
+				 <td class='adstitle'>".$page."</td>
 				 <td class='adstitle'>".$row->title."</td>
 				 <td class='adstitle'>".$bannerlog."</td>	
 				 

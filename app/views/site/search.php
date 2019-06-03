@@ -1217,7 +1217,7 @@
 														$have_img = true;
 													}
 											?>
-											<img aly="" class="img-responsive" src="<?php $img_path; ?>"/>
+											<img aly="" class="img-responsive" src="<?php echo $img_path; ?>"/>
 											<?php 
 												}
 											?>

@@ -580,7 +580,7 @@
 	series.name = "Income";
 	series.columns.template.fillOpacity = 1;
 	series.columns.template.strokeOpacity = 0;
-	series.tooltipText = "{cate}: {valueX.value}";
+	//series.tooltipText = "{cate}: {valueX.value}";
 
 	//create line
 	var lineSeries = chart.series.push(new am4charts.LineSeries());
@@ -637,7 +637,7 @@
 	series1.name = "Income";
 	series1.columns.template.fillOpacity = 1;
 	series1.columns.template.strokeOpacity = 0;
-	series1.tooltipText = "{cate}: {valueX.value}";
+	//series1.tooltipText = "{cate}: {valueX.value}";
 
 	//create line
 	var lineSeries1 = chart1.series.push(new am4charts.LineSeries());

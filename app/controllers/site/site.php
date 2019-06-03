@@ -1569,10 +1569,16 @@ class Site extends CI_Controller {
 
             $img = $this->site->getImage($list->pid);
 
-            if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) 
-                $imgs =  base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); 
-            else 
-                $imgs = base_url('assets/upload/noimage.jpg');
+            // if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url))) 
+            //     $imgs =  base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url); 
+            // else 
+            //     $imgs = base_url('assets/upload/noimage.jpg');
+
+            $img_path = base_url('assets/upload/noimage.jpg');
+            if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+            {
+                $img_path = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+            }
 
             $arr[] = array($list->property_name,
                            $list->address,
@@ -1580,7 +1586,7 @@ class Site extends CI_Controller {
                            (float)$list->latitude,
                            (float)$list->longtitude,
                            $detail,
-                           $imgs,
+                           $img_path,
                            "",
                            $type
                           );

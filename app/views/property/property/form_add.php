@@ -984,8 +984,8 @@
                 if(status == 'insert'){
                     sendnitificationemail(pid,location,cate,types,arr,tag);
                 }else if(status == 'update'){
-                    updatestatusimage(pid,arr);
-                    //sendnitificationemail(pid,location,cate,types,arr,tag);
+                    //updatestatusimage(pid,arr);
+                    sendnitificationemail(pid,location,cate,types,arr,tag);
                 }
             },
             error: function(data){

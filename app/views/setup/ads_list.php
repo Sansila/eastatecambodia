@@ -67,6 +67,15 @@
 										<th></th>
 										<th></th>
 										<th>
+											<select id='location_id' class='form-control' onchange="getdata(1);">
+		                                        <option value=''>Select Page</option>
+		                                        <option value='home'>Home Page</option>
+		                                        <option value='detail'>Details Page</option>
+		                                        <option value='map'>Map Page</option>
+		                                        <option value='newsdetail'>NewsDetail Page</option>
+		                                    </select>
+										</th>
+										<th>
 											<input type='text' onkeyup="getdata(1);" class='form-control input-sm' id='s_adstitle'/> 
 										</th>
 										<th >
@@ -241,6 +250,7 @@
 		var p="<?PHP echo $p?>";
 		var adstitle=$('#s_adstitle').val();
 		var storeid=$('#s_storeid').val();
+		var slidepage = $('#location_id').val();
 
 		var perpage=$('#perpage').val();
 		$.ajax({
@@ -253,7 +263,8 @@
 			'perpage':perpage,
 			'adstitle':adstitle,
 			'storeid':storeid,
-			'page':page
+			'page':page,
+			'slidepage':slidepage
 		},
 		success:function(data) {
 			console.log(data);

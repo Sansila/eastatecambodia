@@ -402,10 +402,16 @@ class Customer extends CI_Controller {
         	$img = $this->cust->getImage($pro->pid);
         	$images = '';
         	$property_type = '';
-        	if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url)))
-        		$images = base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
-        	else
-        		$images = base_url('assets/upload/noimage.jpg');
+        	// if(@ file_get_contents(base_url('assets/upload/property/'.$img->pid.'_'.$img->url)))
+        	// 	$images = base_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+        	// else
+        	// 	$images = base_url('assets/upload/noimage.jpg');
+
+        	$images = base_url('assets/upload/noimage.jpg');
+            if(file_exists(FCPATH.'assets/upload/property/thumb/'.$img->pid.'_'.$img->url))
+            {
+                $images = site_url('assets/upload/property/thumb/'.$img->pid.'_'.$img->url);
+            }
 
         	if($pro->p_type == 1)
 				$property_type = "Sale";
