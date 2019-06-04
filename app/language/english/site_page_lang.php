@@ -267,6 +267,8 @@
   $lang['join_title'] = "Join Us";
   $lang['join_business'] = "Business Name";
   $lang['join_message_false'] = "Your has been join failed";
+  $lang['join_image'] = "Image";
+  $lang['join_location'] = "Address";
   // Site Search 
   $lang['search_page_result'] = "SEARCH RESULT";
   $lang['search_page_order'] = "Order";

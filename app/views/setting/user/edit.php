@@ -68,16 +68,19 @@
 									<td>
 										<select name='cborole' id='cborole' class="form-control ">
 											<?php
+											$sel = '';
 											foreach ($this->role->getallrole() as $role_row) {
 												if(isset($query->roleid))
 												{
-											?>
-												<option value='<?php echo $role_row->roleid; ?>' <?php if($query->roleid==$role_row->roleid) echo 'selected';?>> <?php echo $role_row->role ; ?></option>
-											<?php 
+													if($query->roleid==$role_row->roleid)
+														 $sel = 'selected';
+
+													echo "<option value='".$role_row->roleid."' ".$sel." >".$role_row->role."</option>";
 												}else{
-											?>
-												<option value='<?php echo $role_row->roleid; ?>'> <?php echo $role_row->role ; ?></option>
-											<?php
+													$select = '';
+													if($role_row->is_default == 1)
+														$select = "selected";
+													echo "<option value='".$role_row->roleid."' ".$select." >".$role_row->role."</option>";
 												}
 											}
 											?>
@@ -130,6 +133,24 @@
 		                                        }
 		                                    ?>
 		                                </select>
+									</td>
+									<td><label for="emailField">Group Name</label></td>
+									<td> : </td>
+									<td>
+										<select class="form-control select2-single" id="txtgroup" name="txtgroup">
+		                                    <option value="0">Please Select</option>
+		                                    <?php
+		                                        $location=$this->db->query("SELECT * FROM tblgroupuser where is_active='1' ORDER BY groupid DESC ")->result();
+		                                        $sel = '';
+		                                        foreach ($location as $group) {
+		                                        	if($query->group_id == $group->groupid)
+		                                        		$sel ='selected';
+		                                    ?>
+		                                    <option <?php echo $sel;?> value="<?php echo $group->groupid;?>"><?php echo $group->groupname;?></option>
+		                                    <?php 
+		                                        }
+		                                    ?>
+		                                </select>	
 									</td>
 								</tr>
 								

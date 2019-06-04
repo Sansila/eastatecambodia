@@ -434,6 +434,11 @@ class Modsite extends CI_Model {
                                  ")->result();
         return $sql;
     }
+    function getAddressForJoin()
+    {
+        $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 AND parent_id = 0 ")->result();
+        return $sql;
+    }
 }
 
 

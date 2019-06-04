@@ -57,7 +57,7 @@
 </style>
 
 <div id="content-header" class="mini">
-  <h1>Customer</h1>
+  <h1>Add Requirement</h1>
   <ul class="mini-stats box-3"></ul>
 </div>
 <?php
@@ -66,7 +66,7 @@
 ?>
 <div id="breadcrumb">
   <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
-  <a href='#' class="current"><?php if(isset($row->location_id)) echo 'Edit Group Customer'; else echo "Customer";?></a>
+  <a href='#' class="current"><?php if(isset($row->requireid)) echo 'Edit Requirement'; else echo "Add Requirement";?></a>
 </div>
 
 <div class="col-sm-6" style="text-align: center">
@@ -84,7 +84,7 @@
           <span class="icon">
             <i class="fa fa-align-justify"></i>
           </span>
-          <h5>Customer</h5>
+          <h5>Add Requirement</h5>
           <h5 class="result_text" style='color:red;'></h5>
         </div>
 
@@ -187,7 +187,7 @@
                     <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
                     <div>
                       <input type="number" id="min_price" oninput="validity.valid||(value='0');" class="price-range-field" value="<?php echo isset($row->min_price)?"$row->min_price":"0"; ?>" />
-                      <input type="number" id="max_price" oninput="validity.valid||(value='10000');" class="price-range-field" value="<?php echo isset($row->max_price)?"$row->max_price":"10000"; ?>" />
+                      <input type="number" id="max_price" oninput="validity.valid||(value='10000000');" class="price-range-field" value="<?php echo isset($row->max_price)?"$row->max_price":"10000000"; ?>" />
                     </div>
                 </div>
               </div>
@@ -198,7 +198,7 @@
                   <div id="slider-range-size" class="price-filter-range-size" name="rangeInput-size"></div>
                   <div>
                     <input type="number" id="min_size" oninput="validity.valid||(value='0');" class="price-range-field" />
-                    <input type="number" id="max_size" oninput="validity.valid||(value='100000');" class="price-range-field" />
+                    <input type="number" id="max_size" oninput="validity.valid||(value='10000000');" class="price-range-field" />
                   </div>
                 </div>
               </div>
@@ -421,8 +421,8 @@
     range: true,
     orientation: "horizontal",
     min: 0,
-    max: 10000,
-    values: [<?php echo isset($row->min_price)?"$row->min_price":"0"; ?>, <?php echo isset($row->max_price)?"$row->max_price":"10000"; ?>],
+    max: 10000000,
+    values: [<?php echo isset($row->min_price)?"$row->min_price":"0"; ?>, <?php echo isset($row->max_price)?"$row->max_price":"10000000"; ?>],
     step: 100,
 
     slide: function (event, ui) {
@@ -480,8 +480,8 @@
   range: true,
   orientation: "horizontal",
   min: 0,
-  max: 100000,
-  values: [<?php echo isset($row->min_size)?"$row->min_size":"0"; ?>, <?php echo isset($row->max_size)?"$row->max_size":"100000"; ?>],
+  max: 10000000,
+  values: [<?php echo isset($row->min_size)?"$row->min_size":"0"; ?>, <?php echo isset($row->max_size)?"$row->max_size":"10000000"; ?>],
   step: 100,
 
   slide: function (event, ui) {

@@ -96,6 +96,7 @@
                                         p.p_type,
                                         p.housesize,
                                         p.property_tag,
+                                        p.match_property,
                                         l.propertylocationid,
                                         l.locationname,
                                         pt.typeid,
@@ -106,6 +107,7 @@
                                     INNER JOIN tblpropertytype as pt
                                     ON p.type_id = pt.typeid
                                     WHERE p.p_status = 1 
+                                    AND p.match_property = 1
                                     AND p.pid = $pid
                                     AND l.propertylocationid = $loc
                                     AND pt.typeid = $cate

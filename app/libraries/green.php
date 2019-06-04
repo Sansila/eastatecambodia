@@ -655,9 +655,10 @@
 		    return $_SERVER ['REMOTE_ADDR'];
 		}
 		function savelastlogin($userid){
+			date_default_timezone_set("Asia/Bangkok");
 			$date=date('Y-m-d H:i:s');
 			$ip=$this->getuserip();
-			$this->runSQL("UPDATE admin_user SET last_visit='".$date."', last_visit_ip='".$ip."'");
+			$this->runSQL("UPDATE admin_user SET last_visit='$date', last_visit_ip='$ip' WHERE userid = '$userid' ");
 		}
 		#===================== Create sub location ==========================
 		function lineages($field_name,$field_value,$parent_field,$parent_value,$table){

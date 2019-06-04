@@ -35,6 +35,7 @@ class user extends CI_Controller {
 		$new_pwd=$this->input->post('new_pwd');
 		$is_pwd=$this->input->post('is_pwd');
 		$userid=$this->session->userdata('userid');
+
 		$msg='';
 		$data=array('last_name'=>$last_name,
 					'first_name'=>$first_name,
@@ -203,6 +204,7 @@ class user extends CI_Controller {
 		$phone=$this->input->post('txtphone');
 		$gender=$this->input->post('gender');
 		$address=$this->input->post('address');
+		$groupid = $this->input->post('txtgroup');
 		//print_r($store);
 		if($count!=0){
 			$data1['error']='This username and your email has been created before Please choose other username ';
@@ -228,7 +230,8 @@ class user extends CI_Controller {
 					'address'=>$address,
 					'created_date'=>$creat_date,
 					'is_admin'=>$admin,
-					'is_active'=>1
+					'is_active'=>1,
+					'group_id'=> $groupid,
 				);
 			$this->db->insert('admin_user',$data);
 			$id=$this->db->insert_id();			
@@ -256,6 +259,8 @@ class user extends CI_Controller {
 		$address=$this->input->post('address');
 		$approve = $this->input->post('txtapprove');
 		$modify_date=date('Y-m-d H:i:s');
+		$groupid = $this->input->post('txtgroup');
+
 		$count=$this->user->getuservalidateup($username,$email,$userid);
 
 		if($count!=0){
@@ -288,6 +293,7 @@ class user extends CI_Controller {
 					'is_active'=>1,
 					'modified_date' => $modify_date,
 					'modified_by' => $this->session->userdata('userid'),
+					'group_id'=> $groupid,
 				);
 			}else{
 					$datas=array(
@@ -303,6 +309,7 @@ class user extends CI_Controller {
 					'is_active'=>1,
 					'modified_date'=> $modify_date,
 					'modified_by' => $this->session->userdata('userid'),
+					'group_id'=> $groupid,
 				);
 			}
 			$this->db->where('userid',$userid);

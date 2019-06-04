@@ -50,7 +50,7 @@ class Site extends CI_Controller {
         $query = " SELECT * FROM tblproperty as p
                 left join tblpropertytype as pt on p.type_id = pt.typeid 
                 -- left join tblgallery as g on p.pid = g.pid
-                WHERE p.p_status = 1  AND p.pro_level <> 1 ORDER BY p.create_date desc,p.pid desc ";
+                WHERE p.p_status = 1  AND p.pro_level <> 1 ORDER BY p.create_date desc, p.pid desc ";
 
         $config['total_rows'] = count($this->db->query($query)->result());
         $this->pagination->initialize($config);

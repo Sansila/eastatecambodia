@@ -46,6 +46,7 @@
 								<th class='col-xs-1'>First Name</th>
 								<th class='col-xs-1'>Last Name </th>
 								<th class='col-xs-1'>User Name</th>
+								<th class='col-xs-2'>Phone</th>
 								<th class='col-xs-2'>Email</th>
 								<th class='col-xs-1'>Role</th>
 								<th class='col-xs-1'>Last Visited</th>
@@ -57,6 +58,7 @@
 								<td><input class='form-control input-sm' id='txts_fname' type='text' onkeyup='search(event);' value='' name='txts_fname'/></td>
 								<td><input class='form-control input-sm' id='txts_lname' type='text' onkeyup='search(event);' value='' name='txts_lname'/></td>
 								<td><input class='form-control input-sm' id='txts_uname' type='text' onkeyup='search(event);' value='' name='txts_uname'/></td>
+								<td></td>
 								<td><input class='form-control input-sm' id='txts_email' type='text' onkeyup='search(event);' value='' name='txts_email'/></td>
 								<td>
 									<select class="form-control input-sm" id='cbos_role'name='cbos_role' onchange='search(event);'>
@@ -83,6 +85,7 @@
 											<td>$row->first_name</td>
 											<td>$row->last_name</td>
 											<td>$row->user_name</td>
+											<td>$row->phone</td>
 											<td>$row->email</td>
 											<td>$row->role</td>
 											<td>".date("d-m-Y", strtotime($row->last_visit))."</td>

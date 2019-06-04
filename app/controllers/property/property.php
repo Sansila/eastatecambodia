@@ -515,7 +515,10 @@ class Property extends CI_Controller {
 	function renew($pid)
 	{
 		$date = date('Y-m-d');
-		$this->db->query("UPDATE tblproperty SET create_date = '$date' WHERE pid='$pid'");
+		$data = array(
+			'create_date' => $date,
+		);
+		$this->db->where('pid',$pid)->update('tblproperty',$data);
 		
 		$data['idfield']=$this->idfield;		
 		$data['thead']=	$this->thead;
@@ -926,12 +929,12 @@ class Property extends CI_Controller {
 					$pro = $this->pro->getPropertyForMatch($pid,$loc,$cate,$status,$min_price,$max_price,$min_size,$max_size);
 				}
 
-				if($pro != ""){
+				if($pro){
 
 					$property_type = '';
 		        	$images = '';
 
-					$imgs = $this->pro->getAllImage($pid);
+					$imgs = $this->pro->getAllImage($pro->pid);
 
 		        	if($imgs)
 		        	{
@@ -955,7 +958,7 @@ class Property extends CI_Controller {
 						$property_type = "Rent & Sale";
 
 			        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-			        $mail->Subject = "Estate Cambodia - Property Information Sharing";
+			        $mail->Subject = "Estate Cambodia - ".$pro->property_name;
 			        $mail->AddAddress($cust->email);
 
 			        $logo = "http://estatecambodia.com/assets/img/logo.png";

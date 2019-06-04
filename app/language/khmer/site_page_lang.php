@@ -266,6 +266,8 @@
     $lang['join_title'] = "ចូលរួមជាមួយយើង";
     $lang['join_business'] = "ឈ្មោះអាជីវកម្ម";
     $lang['join_message_false'] = "ការចូលរួមរបស់អ្នកបានបរាជ័យ";
+    $lang['join_image'] = "រូបភាព";
+    $lang['join_location'] = "អាស័យដ្ឋាន";
     // Site Search 
     $lang['search_page_result'] = "លទ្ធផលស្វែងរក";
     $lang['search_page_order'] = "តាមលំដាប់";

@@ -223,7 +223,7 @@
                             <div class="col-lg-4"> 
                                 <div class="col-md-12">
                                     <select class="form-control select2-single input-sm required" id="location_id" name="location_id">
-                                        <option value="0">Please Select</option>
+                                        <option value="">Please Select</option>
                                         <?php
                                             $location=$this->db->query("SELECT * FROM tblpropertylocation where status='1' ORDER BY lineage asc")->result();
                                             foreach ($location as $menu) {
@@ -1025,7 +1025,9 @@
                 }, 1000);
             },
             error: function(data){
-
+                setTimeout(function(){ 
+                    location.reload();
+                }, 1000);
             }
         });
     }

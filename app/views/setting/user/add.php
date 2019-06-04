@@ -96,6 +96,21 @@
                                     ?>
                                 </select>
 							</td>
+							<td><label for="emailField">Group Name</label></td>
+							<td> : </td>
+							<td>
+								<select class="form-control select2-single" id="txtgroup" name="txtgroup">
+                                    <option value="0">Please Select</option>
+                                    <?php
+                                        $location=$this->db->query("SELECT * FROM tblgroupuser where is_active='1' ORDER BY groupid DESC ")->result();
+                                        foreach ($location as $group) {
+                                    ?>
+                                    <option value="<?php echo $group->groupid;?>"><?php echo $group->groupname;?></option>
+                                    <?php 
+                                        }
+                                    ?>
+                                </select>	
+							</td>
 						</tr>
 						
 						<tr>
