@@ -356,12 +356,11 @@
             if(data.requireid!='' && data.requireid!=null){
               toasmsg('success',data.msg);
               setTimeout(function(){
-                location.href='<?php echo site_url("customer/list_requirement?m=".$m.'&p='.$p) ?>';
+                location.href='<?php //echo site_url("customer/list_requirement?m=".$m.'&p='.$p) ?>';
               },1000);
             }else{
               toasmsg('error',data.msg);
             }
-            $('#basic_validate')[0].reset();
           }
         })
       }

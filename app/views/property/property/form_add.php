@@ -526,8 +526,8 @@
                         <div class="col-lg-11">
                             <div class="card-header" id="headingTwo">
                               <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="text-decoration: none;">
-                                  <p>
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="text-decoration: none; white-space: normal;">
+                                  
                                     <b> 
                                         <span>
                                             <img src="<?php echo site_url('assets/img/plus.png')?>">
@@ -536,7 +536,7 @@
                                             <?php echo $this->lang->line('p_moreinfo')?>
                                         </span>
                                     </b>
-                                </p>
+                                
                                 </button>
                               </h5>
                             </div>
