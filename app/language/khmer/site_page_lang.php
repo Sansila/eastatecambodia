@@ -122,6 +122,7 @@
     $lang['lo_lang'] = "ជ្រើសរើសភាសា";
     $lang['lo_lang_en'] = "ភាសាអង់គ្លេស";
     $lang['lo_lang_kh'] = "ភាសាខ្មែរ";
+    $lang['lo_message'] = "ឈ្មោះអ្នកប្រើឬលេខសម្ងាត់មិនត្រឹមត្រូវ";
     // Property analysis
     $lang['an_header'] = "ការវិភាគអចលនទ្រព្យ";
     $lang['an_header_view'] = "វិភាគការមើលអចលនទ្រព្យ";

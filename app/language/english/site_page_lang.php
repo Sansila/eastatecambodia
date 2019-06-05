@@ -123,6 +123,7 @@
   $lang['lo_lang'] = "Language(ជ្រើសរើសភាសា)";
   $lang['lo_lang_en'] = "English(ភាសាអងគ្លេស)";
   $lang['lo_lang_kh'] = "Khmer(ភាសាខ្មែរ)";
+  $lang['lo_message'] = "Invalide Username or Password.";
   // Property analysis
   $lang['an_header'] = "Property Analysis";
   $lang['an_header_view'] = "Property View Analysis";

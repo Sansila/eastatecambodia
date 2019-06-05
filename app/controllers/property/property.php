@@ -301,9 +301,17 @@ class Property extends CI_Controller {
 		$price = $this->input->post('price');
 		$project = $this->input->post('project');
 
-		$where = "";
+		$where = ""; $is_admin = "";
 		$var = $this->session->all_userdata();
 		$user = $var['userid'];
+
+		$groupadmin = $this->db->query("SELECT * FROM tblgroupuser WHERE is_active = 1 AND is_admin_group = $user ")->row();
+
+		if($groupadmin)
+			$is_admin = " OR u.group_id = ".$groupadmin->groupid;
+		else
+			$is_admin = "";
+
 
 		$role = $this->session->userdata('roleid');
 		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $role ")->row();
@@ -311,7 +319,8 @@ class Property extends CI_Controller {
 		if($rol->is_admin == 1 || $rol->is_admin == 2)
 			$where.= "";
 		else
-			$where.= " AND pl.agent_id = '$user' ";
+			$where.= " AND pl.agent_id = '$user'".$is_admin;
+
 		if($p_type !="")
 			$where.= " AND pt.typeid = '$p_type' ";
 		// if($s_name !="")
@@ -357,6 +366,7 @@ class Property extends CI_Controller {
 					 pl.projectid,
 					 u.userid,
 					 u.user_name,
+					 u.group_id,
 					 l.propertylocationid,
 					 l.lineage,
 					 pro.projectid,
@@ -370,7 +380,10 @@ class Property extends CI_Controller {
 		on pl.lp_id = l.propertylocationid
 		left join tblproject as pro
 		on pl.projectid = pro.projectid
-		WHERE pl.p_status <> 0 {$where} AND CONCAT(pl.property_name,pl.pid) LIKE '%$s_name%'  order by pl.create_date DESC";
+		WHERE pl.p_status <> 0 {$where} 
+		AND CONCAT(pl.property_name,pl.pid) LIKE '%$s_name%'  
+		order by pl.create_date DESC";
+
 		$table='';
 		$pagina='';
 		$paging=$this->green->ajax_pagination(count($this->db->query($sql)->result()),site_url("menu/getdata"),$perpage);

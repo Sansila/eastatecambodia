@@ -11,6 +11,8 @@
 <?php
 	$m = $this->input->get('m');
 	$p = $this->input->get('p');
+  if(isset($groupid))
+	   $row = $this->guser->getGroupByID($groupid);
 ?>
 <div id="breadcrumb">
   <a href="" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i><?php echo $this->lang->line('home')?></a>
@@ -51,7 +53,7 @@
 	              <label class='col-lg-2 control-label'>Remark</label>
 	              <div class="col-lg-4"> 
 	                <div class="col-md-12">
-	                  	<textarea class="form-control" name="txtremark" id="txtremark"></textarea>
+	                  	<textarea class="form-control" name="txtremark" id="txtremark"><?php echo isset($row->remark)?"$row->remark":"";?></textarea>
 	                </div>
 	              </div>
 	            </div>
@@ -65,7 +67,10 @@
 		                  	<?php 
 		                  		$alluser = $this->guser->getAllUser();
 		                  		foreach ($alluser as $user) {
-		                  			echo '<option value="'.$user->userid.'">'.$user->user_name.'</option>';
+		                  			$sel = '';
+		                  			if($user->userid == $row->is_admin_group)
+		                  				$sel = 'selected';
+		                  			echo '<option '.$sel.' value="'.$user->userid.'">'.$user->user_name.'</option>';
 		                  		}
 		                  	?>
 		                </select>
@@ -151,9 +156,9 @@
             var formdata = new FormData(form);
             if(data.groupid!='' && data.groupid!=null){
               toasmsg('success',data.msg);
-              // setTimeout(function(){
-              //   location.href='<?php echo site_url("customer/viewgroup?m=".$m.'&p='.$p) ?>';
-              // },500);
+              setTimeout(function(){
+                location.href='<?php echo site_url("groupuser/view?m=".$m.'&p='.$p) ?>';
+              },500);
             }else{
               toasmsg('error',data.msg);
             }

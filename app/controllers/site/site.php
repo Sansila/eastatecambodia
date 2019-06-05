@@ -1173,6 +1173,8 @@ class Site extends CI_Controller {
             $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
             $mail->Subject = "Estate Cambodia - Joining Us";
             $mail->AddAddress($email);
+            $mail->AddCC('info@estatecambodia.com');
+            $mail->AddCC('estatecambodia168.dev@gmail.com');
             $logo = "http://estatecambodia.com/assets/img/logo.png";
             $description = '<div style="width: 100%">
                 <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">

@@ -17,4 +17,9 @@
 	        }
 	        return $groupid;
     	}
+    	function getGroupByID($groupid)
+    	{
+    		$sql = $this->db->query("SELECT * FROM tblgroupuser WHERE groupid = $groupid AND is_active = 1 ")->row();
+    		return $sql;
+    	}
     }

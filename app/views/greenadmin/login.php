@@ -199,6 +199,16 @@
 				<div class="forget_pwd">
 					<a href="<?php echo site_url('forgetpassword/enteremail')?>"><?php echo $this->lang->line('lo_forget')?></a>
 				</div>
+				<?php 
+					$hide = 'hide';
+					if(isset($_GET['err']))
+						$hide = '';
+				?>
+				<div class="alert alert-danger <?php echo $hide?>" role="alert">
+				  	<?php 
+				  		echo $this->lang->line('lo_message');
+				  	?>
+				</div>
 			</form><!-- /form -->
 			
 		</div><!-- /card-container -->
@@ -238,5 +248,8 @@
 					window.location = url;
 				}
 			});
+			setTimeout(function(){
+				$('.alert-danger').addClass('hide');
+			},2000);
 		</script>
 </html>

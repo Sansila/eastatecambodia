@@ -99,7 +99,7 @@
 				}
 					
 			}else{
-				$this->green->goToPage(site_url('greenadmin/login'));
+				$this->green->goToPage(site_url('greenadmin/login?err=incorrect'));
 			}
 								
 		}  

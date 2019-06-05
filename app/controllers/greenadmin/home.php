@@ -556,11 +556,20 @@ class Home extends CI_Controller {
 	function getViewByChannel($gdate)
 	{
 		$where = ""; $date = date('Y-m-d');
+		$var = $this->session->all_userdata();
+		$user = $var['userid'];
+		$role = $this->session->userdata('roleid');
+		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $role ")->row();
+
 		if($gdate == 1)
 			$where.= "tblvisitor.date_create = '$date' ";
 		else{
 			$where.= "(tblvisitor.date_create >= date_sub(now(), interval $gdate DAY))";
 		}
+		if($rol->is_admin == 1 || $rol->is_admin == 2)
+			$where.= "";
+		else
+			$where.= " AND tblproperty.agent_id = $user";
 		$sql = $this->db->query("SELECT
 									    tblvisitor.view_from AS 'year',
 									    COUNT(*) AS income

@@ -102,6 +102,29 @@ h3{
 .optday option{
   color: #999999;
 }
+h3{
+  padding-left: 15px;
+  background: #64b5de;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: normal;
+}
+.vp{
+  background: #c862de;
+  color: white;
+}
+.vp:hover{
+  color: white;
+}
+.unlink{
+  text-align: right;
+}
+.unlink:hover{
+  cursor: inherit;
+}
 </style>
 <!-- HTML -->
 <?php 

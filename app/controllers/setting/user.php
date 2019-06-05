@@ -6,7 +6,7 @@ class user extends CI_Controller {
 		parent::__construct();
 		$this->load->model('setting/usermodel','user');
 		$this->load->model('setting/rolemodel','role');
-		$this->load->library('pagination');	
+		$this->load->library('pagination');
 		$this->load->helper(array('form', 'url'));	
 	}
 	public function index()
