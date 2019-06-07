@@ -118,7 +118,7 @@ h3{
                   <a href="<?php echo site_url($gmod->link).'?m='.$gmod->moduleid.'&p='.$gmod->pageid?>" type="button" class="<?php echo $class?>">
                       <?php 
                           if($this->session->userdata('site_lang') == "khmer")
-                            echo 'View '.$gmod->page_namekh;
+                            echo $this->lang->line('dashboard_top_view').' '.$gmod->page_namekh;
                           else
                             echo $gmod->page_name; 
                         ?>
@@ -167,21 +167,21 @@ h3{
       <div class="col-sm-6">
         <h3 style="padding-left: 15px;">
           <select class="optday" id="txtshowby">
-            <option value="1">Today</option>
-            <option value="2">Yesterday</option>
-            <option value="3">Last 3 days</option>
-            <option value="7">Last 7 days</option>
-            <option value="15">Last 15 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="60">Last 60 days</option>
-            <option value="90">Last 90 days</option>
+            <option value="1"><?php echo $this->lang->line('dashboard_channel_today')?></option>
+            <option value="2"><?php echo $this->lang->line('dashboard_channel_yesteray')?></option>
+            <option value="3"><?php echo $this->lang->line('dashboard_channel_3today')?></option>
+            <option value="7"><?php echo $this->lang->line('dashboard_channel_7today')?></option>
+            <option value="15"><?php echo $this->lang->line('dashboard_channel_15today')?></option>
+            <option value="30"><?php echo $this->lang->line('dashboard_channel_30today')?></option>
+            <option value="60"><?php echo $this->lang->line('dashboard_channel_60today')?></option>
+            <option value="90"><?php echo $this->lang->line('dashboard_channel_90today')?></option>
           </select>
-          View analytics by Channel
+          <?php echo $this->lang->line('dashboard_view_channel')?>
         </h3>                  
         <div id="chartdivchannel"></div>
       </div>
       <div class="col-sm-6">
-        <h3 style="padding-left: 15px;">Property Status</h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('dashboard_prop_status')?></h3>
         <div id="chartpropertystatus"></div>
       </div>
     </div>
@@ -193,24 +193,25 @@ h3{
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <h3 style="padding-left: 15px;">Top 15 Property View</h3>
+        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('dashboard_top_15')?></h3>
         <div class="chartdivcatd">
           <div class="wrapper">
             <div class="clearfix" id="main_content_outer">
                 <div id="main_content">
                     <div class="form-group" style="border-top: none; border-bottom: none;">
-                        <label class='col-lg-2 control-label' style="text-align: right;padding-top: 10px;">Last</label>
+                        <label class='col-lg-2 control-label' style="text-align: right;padding-top: 10px;"><?php echo $this->lang->line('dashboard_view_last')?></label>
                         <div class="col-lg-5"> 
                             <div class="col-md-12">
                                 <select class="form-control" onchange="getdata(1);" id="txtshowby">
-                                  <option value="1">1 day</option>
-                                  <option value="2">2 day</option>
-                                  <option value="3">3 day</option>
-                                  <option value="5">5 day</option>
-                                  <option value="7">7 day</option>
-                                  <option value="15">15 day</option>
-                                  <option value="30">30 day</option>
-                                  <option value="60">60 day</option>
+                                  <option value="1"><?php echo $this->lang->line('dashboard_channel_today')?></option>
+                                  <option value="2"><?php echo $this->lang->line('dashboard_channel_yesteray')?></option>
+                                  <option value="3"><?php echo $this->lang->line('dashboard_channel_3today')?></option>
+                                  <option value="5"><?php echo $this->lang->line('dashboard_channel_5today')?></option>
+                                  <option value="7"><?php echo $this->lang->line('dashboard_channel_7today')?></option>
+                                  <option value="15"><?php echo $this->lang->line('dashboard_channel_15today')?></option>
+                                  <option value="30"><?php echo $this->lang->line('dashboard_channel_30today')?></option>
+                                  <option value="60"><?php echo $this->lang->line('dashboard_channel_60today')?></option>
+                                  <option value="90"><?php echo $this->lang->line('dashboard_channel_90today')?></option>
                                 </select>
                             </div>                   
                         </div>

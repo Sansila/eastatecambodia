@@ -979,37 +979,39 @@
                 console.log("success");
                 console.log(data);
                 $('#myModal').modal('hide');
-                if(status == 'insert'){
-                    sendnitificationemail(pid,location,cate,types,arr,tag);
-                }else if(status == 'update'){
-                    updatestatusimage(pid,arr);
-                    //sendnitificationemail(pid,location,cate,types,arr,tag);
-                }
+                // if(status == 'insert'){
+                //     updatestatusimage(pid,arr);
+                // }
+                // if(status == 'update'){
+                //     updatestatusimage(pid,arr);
+                // }
+                updatestatusimage(pid,arr);
             },
             error: function(data){
-                console.log("error");
-                console.log(data);
+                setTimeout(function(){ 
+                    location.reload();
+                }, 1000);
             }
         });
        
     } 
-    function sendnitificationemail(pid,location,cate,types,arr,tag)
-    {
-        $.ajax({
-            url:"<?PHP echo site_url('property/property/checkcustomerfindproperty');?>/"+pid+'/'+location+'/'+cate+'/'+types,
-            type:"POST",
-            data:{
-                tag: tag
-            },
-            async:false,
-            success:function(data){
-                updatestatusimage(pid,arr);
-            },
-            error: function(data){
+    // function sendnitificationemail(pid,location,cate,types,arr,tag)
+    // {
+    //     $.ajax({
+    //         url:"<?PHP //echo site_url('property/property/checkcustomerfindproperty');?>/"+pid+'/'+location+'/'+cate+'/'+types,
+    //         type:"POST",
+    //         data:{
+    //             tag: tag
+    //         },
+    //         async:false,
+    //         success:function(data){
+    //             updatestatusimage(pid,arr);
+    //         },
+    //         error: function(data){
 
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
     function updatestatusimage(pid,arr)
     {
         $.ajax({

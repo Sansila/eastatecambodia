@@ -209,7 +209,8 @@
               <label class='col-lg-2 control-label'>Description</label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
-                  <input type="text"  class="form-control input-sm " value='<?php echo isset($row->description)?"$row->description":""; ?>' id="txtdescription">
+                  <!-- <input type="text"  class="form-control input-sm " value='' id="txtdescription"> -->
+                  <textarea class="form-control" id="txtdescription" style="height: 150px;"><?php echo isset($row->description)?"$row->description":""; ?></textarea>
                 </div>
               </div>
               <label class='col-lg-2 control-label'>Property Tag</label>
@@ -243,6 +244,28 @@
               </div>
             </div>
             <div class="form-group">
+              <div class="col-lg-2">
+                  <label class='custom-control custom-checkbox' style="margin-right: 12px; margin-top: 5px;">
+                      <input type='checkbox' class='custom-control-input txt-match' name="is_send" id="is_send">
+                      <span class='custom-control-indicator'></span>
+                  </label>
+              </div>
+              <label class='col-lg-3 control-label' style="text-align: left;">Share requirement to other agents</label>
+              <label class='col-lg-2 control-label'>User - Group</label>
+                <div class="col-lg-4">
+                  <select class="form-control" name="txtsendtouser" id="txtsendtouser">
+                    <option value="">select</option>
+                    <?php 
+                      $group_user = $this->cust->getGroupUser();
+                      foreach ($group_user as $guser) {
+                        echo '<option value="'.$guser->groupid.'">'.$guser->groupname.'</option>';
+                      }
+                    ?>
+                    <option value="all">All</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
               <label class="col-lg-2 control-label"></label>                      
               <div class="col-md-10">
                 <div class="col-lg-1">
@@ -250,7 +273,7 @@
                 </div>
                 <div class="col-lg-1">
                   <button id="cancel" name="cancel" type="button" class="btn btn-danger"><?php echo $this->lang->line('mn_cancel')?></button>
-                </div>
+                </div> 
               </div>
             </div>
           </form>                
@@ -332,6 +355,9 @@
         var is_active=0;
         if($('#is_active').is(':checked'))
           is_active=1;
+        var is_send = 0;
+        if($('#is_send').is(':checked'))
+          is_send = 1;
         $.ajax({
           url:url,
           type:"POST",
@@ -347,9 +373,11 @@
             maxprice: $('#max_price').val(),
             minsize: $('#min_size').val(),
             maxsize: $('#max_size').val(),
-            description:$("#txtdescription").val(),
-            propertytag:$("#txtproperty").val(),
+            description: $("#txtdescription").val(),
+            propertytag: $("#txtproperty").val(),
             is_active:is_active,
+            groupuser: $("#txtsendtouser").val(),
+            is_send: is_send
           },
           success:function(data) {
             var formdata = new FormData(form);

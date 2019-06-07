@@ -173,16 +173,16 @@ h3{
       <div class="col-sm-6">
         <h3 style="padding-left: 15px;">
           <select class="optday" id="txtshowby">
-            <option value="1">Today</option>
-            <option value="2">Yesterday</option>
-            <option value="3">Last 3 days</option>
-            <option value="7">Last 7 days</option>
-            <option value="15">Last 15 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="60">Last 60 days</option>
-            <option value="90">Last 90 days</option>
-          </select>
-          View analytics by Channel
+                <option value="1"><?php echo $this->lang->line('dashboard_channel_today')?></option>
+                <option value="2"><?php echo $this->lang->line('dashboard_channel_yesteray')?></option>
+                <option value="3"><?php echo $this->lang->line('dashboard_channel_3today')?></option>
+                <option value="7"><?php echo $this->lang->line('dashboard_channel_7today')?></option>
+                <option value="15"><?php echo $this->lang->line('dashboard_channel_15today')?></option>
+                <option value="30"><?php echo $this->lang->line('dashboard_channel_30today')?></option>
+                <option value="60"><?php echo $this->lang->line('dashboard_channel_60today')?></option>
+                <option value="90"><?php echo $this->lang->line('dashboard_channel_90today')?></option>
+              </select>
+              <?php echo $this->lang->line('dashboard_view_channel')?>
         </h3>                  
         <div id="chartdivchannel"></div>
       </div>

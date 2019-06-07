@@ -181,6 +181,16 @@
 			<p class="title-header">Estatecambodia</p>
 			<img id="profile-img" class="profile-img-card" src="<?php echo base_url('assets/images/avatar_2x.png') ?>" />
 			<p id="profile-name" class="profile-name-card"></p>
+			<?php 
+				$hide = 'hide';
+				if(isset($_GET['err']))
+					$hide = '';
+			?>
+			<div class="alert alert-danger <?php echo $hide?>" role="alert">
+			  	<?php 
+			  		echo $this->lang->line('lo_message');
+			  	?>
+			</div>
 			<form class="form-signin" action="<?php echo site_url('greenadmin/login/getLogin')?>" method="post">
 				<span id="reauth-email" class="reauth-email"></span>
 				<input type="text" name="user_name" id="inputEmail" class="form-control" placeholder="<?php echo $this->lang->line('lo_name')?>" required autofocus>
@@ -198,16 +208,6 @@
 				<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"><?php echo $this->lang->line('lo_login')?></button>
 				<div class="forget_pwd">
 					<a href="<?php echo site_url('forgetpassword/enteremail')?>"><?php echo $this->lang->line('lo_forget')?></a>
-				</div>
-				<?php 
-					$hide = 'hide';
-					if(isset($_GET['err']))
-						$hide = '';
-				?>
-				<div class="alert alert-danger <?php echo $hide?>" role="alert">
-				  	<?php 
-				  		echo $this->lang->line('lo_message');
-				  	?>
 				</div>
 			</form><!-- /form -->
 			

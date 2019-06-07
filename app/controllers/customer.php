@@ -12,6 +12,7 @@ class Customer extends CI_Controller {
         $this->load->model("Modcutomer","cust");
         $this->load->helper(array('form', 'url'));
         $this->load->helper("url");
+        $this->load->library('mylibrary');
 
 		$this->theads=array("No"=>'no',
 							 "Group Name"=>'Group Name',
@@ -586,6 +587,8 @@ class Customer extends CI_Controller {
 		$desc = $this->input->post('description');
 		$is_active = $this->input->post('is_active');
 		$propertytag = $this->input->post('propertytag');
+		$groupuser = $this->input->post('groupuser');
+		$is_send = $this->input->post('is_send');
 
 		$loc = '';
 		$cate = '';
@@ -593,6 +596,9 @@ class Customer extends CI_Controller {
         $num = count($location); 
         $numcat = count($category); 
         $numtag = count($propertytag);
+        $loctname = '';
+        $catename = '';
+        $status = '';
 
         if($location !="")
         {
@@ -627,6 +633,16 @@ class Customer extends CI_Controller {
 	        	}
 	        }
         }
+        if($type !="")
+        {
+        	if($type == 1)
+        		$status = "Sale";
+        	if($type == 2)
+        		$status = "Rent";
+        }
+
+        $catename = $this->cust->getNameCategory($cate);
+        $loctname = $this->cust->getNameLocation($loc);
         
         $data = array(
         	'customerid' => $customer, 
@@ -654,10 +670,95 @@ class Customer extends CI_Controller {
 			$msg="Customer Require Has Updated...!";
 		else
 			$msg="Customer Require Has Created...!";
+
+		$url = site_url('customer/sendrequirement_toagentcy');
+		$param = array(
+						'groupid' => $groupuser,
+						'category' => $catename,
+						'location' => $loctname,
+						'price' => $minprice.' - '.$maxprice,
+						'size' => $minsize.' - '.$maxsize,
+						'status' => $status,
+						'description' => $desc,
+					  );
+		if($is_send == 1)
+			$this->mylibrary->do_in_background($url, $param);
 		
 		$arr=array('msg'=>$msg,'requireid'=>$require);
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
+	}
+	function sendrequirement_toagentcy()
+	{
+		require('phpmailer/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = TRUE;
+        $mail->SMTPSecure = "ssl";
+        $mail->Port     = 465;
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->WordWrap   = 80;
+
+		$groupid = $this->input->post('groupid');
+        $category = $this->input->post('category');
+        $location = $this->input->post('location');
+        $price = $this->input->post('price');
+        $size = $this->input->post('size');
+        $status = $this->input->post('status');
+        $desc = $this->input->post('description');
+
+        $getgroup = $this->cust->getAllUserIngroup($groupid);
+
+        if($getgroup)
+        {
+	        foreach ($getgroup as $allgroupt) {
+	        	$mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+		        $mail->Subject = "Estate Cambodia - Customer Requirement";
+		        $mail->addBCC($allgroupt->email);
+
+		        $logo = "http://estatecambodia.com/assets/img/logo.png";
+		        $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
+		        $description = '<div style="width: 100%">
+		            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
+		                <tbody>
+		                    <tr>
+		                        <td style="width:8px" width="8"></td>
+		                        <td>
+		                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
+		                                <img src="'.$logo.'" style="width: 140px;">
+		                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+		                                    <p>Dear Agent,</p>
+                                    		We have the requirement from customer let see this below: 
+		                                    <ul style="list-style: none; text-align: left;">
+		                                    	<li>- Status: '.$status.'</li>
+                                        		<li>- Type: '.$category.'</li>
+	                                            <li>- Price: '.$price.'$</li>
+	                                            <li>- Size: '.$size.'<sup>m2</sup></li>
+	                                            <li>- <img src="'.$iconloc.'" />Location: '.$location.'</li>
+	                                        </ul>
+		                                </div>
+		                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+		                                	'.$desc.'
+		                                </div>
+		                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
+		                                    <p>Best regards,</p>
+		                                    <p>Estate Cambodia Team</p>
+		                                </div>
+		                            </div>
+		                        </td>
+		                    </tr>
+		                </tbody>
+		            </table>
+		        </div>';
+		        $mail->MsgHTML($description);
+		        $mail->IsHTML(true);
+		        $mail->Send();
+		        $mail->ClearAddresses();
+	        }
+	    }
+
 	}
 	function list_requirement()
 	{

@@ -176,4 +176,68 @@ class Modcutomer extends CI_Model {
         $sql = $this->db->query("SELECT * FROM tblrequirement WHERE is_active = 1 AND requireid = $rid ")->row();
         return $sql;
     }
+    function getGroupUser()
+    {
+        $sql = $this->db->query("SELECT * FROM tblgroupuser where is_active = 1 ")->result();
+        return $sql;
+    }
+    function getNameCategory($cate)
+    {
+        $cate = trim($cate, ',');
+        $arr = explode(',', $cate);
+        $num = count($arr);
+        $where = " AND (";
+        $i = 0;
+        foreach ($arr as $cid) {
+            $or = "OR";
+            if(++$i == $num)
+            {
+                $or = "";
+            }
+            $where.= " typeid = $cid $or";
+        }
+        $where.= ")";
+        $sql = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1 {$where} ")->result();
+        $categoryname = '';
+        foreach ($sql as $cname) {
+           $categoryname.= $cname->typename;
+        }
+
+        return $categoryname;
+    }
+    function getNameLocation($loc)
+    {
+        $loc = trim($loc, ',');
+        $arr = explode(',', $loc);
+        $num = count($arr);
+        $where = " AND (";
+        $i = 0;
+        foreach ($arr as $lid) {
+            $or = "OR";
+            if(++$i == $num)
+            {
+                $or = "";
+            }
+            $where.= " propertylocationid = $lid $or";
+        }
+        $where.= ")";
+        $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 {$where} ")->result();
+        $locationname = '';
+        foreach ($sql as $lname) {
+           $locationname.= $lname->locationname;
+        }
+
+        return $locationname;
+    }
+    function getAllUserIngroup($groupid)
+    {
+        $where = "";
+        if($groupid == "all")
+            $where.= "";
+        else
+            $where.= " AND group_id = $groupid ";
+
+        $sql = $this->db->query("SELECT * FROM admin_user WHERE is_active = 1 {$where}")->result();
+        return $sql;
+    }
 }

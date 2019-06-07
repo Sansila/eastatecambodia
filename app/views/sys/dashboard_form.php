@@ -87,19 +87,18 @@
 				<ul class="mini-stats box-3">
 					<a>
 						<li class="list_post">
-							<div class="left sparkline_bar_good"><span>Post And View Property</span></div>
+							<div class="left sparkline_bar_good"><span><?php echo $this->lang->line('dashboard_post_view')?></span></div>
 							<div class="right">
-								<strong>last 7</strong>
-								days 
+								<?php echo $this->lang->line('dashboard_post_last')?>
 							</div>
 						</li>
 					</a>
 					<a>
 						<li class="ListCustomer_view">
-							<div class="left sparkline_bar_good"><span>Customer Find Property</span></div>
+							<div class="left sparkline_bar_good"><span><?php echo $this->lang->line('dashboard_find_prop')?></span></div>
 							<div class="right">
 								<strong><?php echo $counter_finder;?></strong>
-								finder
+								<?php echo $this->lang->line('dashboard_post_finder')?>
 							</div>
 						</li>
 					</a>
@@ -157,11 +156,11 @@
  	<div class="chart_post_property">
  		<div class="row">
       		<div class="col-sm-6">
- 				<h3 style="padding-left: 15px;">Property Post Analysis The Last 7 Days</h3>
+ 				<h3 style="padding-left: 15px;"><?php echo $this->lang->line('dashboard_post_7day')?></h3>
  				<div id="chartdiv"></div>
  			</div>
  			<div class="col-sm-6">
-		 		<h3 style="padding-left: 15px;">Property View Analysis The Last 7 Days</h3>
+		 		<h3 style="padding-left: 15px;"><?php echo $this->lang->line('dashboard_view_7day')?></h3>
 		 		<div id="chartdivview"></div>
 		 	</div>
 	 	</div>
@@ -169,21 +168,21 @@
 		    <div class="col-sm-6">
 		        <h3 style="padding-left: 15px;">
 		          <select class="optday" id="txtshowby">
-		            <option value="1">Today</option>
-		            <option value="2">Yesterday</option>
-		            <option value="3">Last 3 days</option>
-		            <option value="7">Last 7 days</option>
-		            <option value="15">Last 15 days</option>
-		            <option value="30">Last 30 days</option>
-		            <option value="60">Last 60 days</option>
-		            <option value="90">Last 90 days</option>
+		            <option value="1"><?php echo $this->lang->line('dashboard_channel_today')?></option>
+		            <option value="2"><?php echo $this->lang->line('dashboard_channel_yesteray')?></option>
+		            <option value="3"><?php echo $this->lang->line('dashboard_channel_3today')?></option>
+		            <option value="7"><?php echo $this->lang->line('dashboard_channel_7today')?></option>
+		            <option value="15"><?php echo $this->lang->line('dashboard_channel_15today')?></option>
+		            <option value="30"><?php echo $this->lang->line('dashboard_channel_30today')?></option>
+		            <option value="60"><?php echo $this->lang->line('dashboard_channel_60today')?></option>
+		            <option value="90"><?php echo $this->lang->line('dashboard_channel_90today')?></option>
 		          </select>
-		          View analytics by Channel
+		          <?php echo $this->lang->line('dashboard_view_channel')?>
 		        </h3>                  
 		        <div id="chartdivchannel"></div>
 		    </div>
 		    <div class="col-sm-6">
-		    	<h3>Property Status</h3>
+		    	<h3><?php echo $this->lang->line('dashboard_prop_status')?></h3>
 		    	<div id="chartpropertystatus"></div>
 		    </div>
 	 	</div>
@@ -218,14 +217,14 @@
 									<table class="table table-bordered table-striped table-hover">
 										<thead>
 											<tr>
-												<th>No</th>
-												<th>Customer Name</th>
-												<th>Phone</th>
-												<th>Email</th>
-												<th>Address</th>
-												<th>Property Category</th>
-												<th>Property Type</th>
-												<th>Action</th>
+												<th><?php echo $this->lang->line('dashboard_cust_no')?></th>
+												<th><?php echo $this->lang->line('dashboard_cust_name')?></th>
+												<th><?php echo $this->lang->line('dashboard_cust_phone')?></th>
+												<th><?php echo $this->lang->line('dashboard_cust_email')?></th>
+												<th><?php echo $this->lang->line('dashboard_cust_address')?></th>
+												<th><?php echo $this->lang->line('dashboard_cust_category')?></th>
+												<th><?php echo $this->lang->line('dashboard_cust_type')?></th>
+												<th><?php echo $this->lang->line('dashboard_cust_action')?></th>
 											</tr>
 											<tr class='remove_tag'>
 												<th></th>
@@ -453,8 +452,8 @@
 	</div>
 	<div class="List_user hide">
 		<div id="breadcrumb">
-			<a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
-			<a href="#" class="current">User Managment</a>
+			<a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> <?php echo $this->lang->line('home')?></a>
+			<a href="#" class="current"><?php echo $this->lang->line('cl_title')?></a>
 		</div><br>
 
 		<!-- </div> -->
@@ -484,13 +483,13 @@
 									<table class="table table-bordered table-striped table-hover">
 										<thead>
 											<thead>
-												<th class='col-xs-1'>No</th>
-												<th class='col-xs-1'>First Name</th>
-												<th class='col-xs-1'>Last Name </th>
-												<th class='col-xs-1'>User Name</th>
-												<th class='col-xs-2'>Email</th>
-												<th class='col-xs-1'>Created Date</th>
-												<th class='col-xs-1'>Action</th>
+												<th class='col-xs-1'><?php echo $this->lang->line('dashboard_cust_no')?></th>
+												<th class='col-xs-1'><?php echo $this->lang->line('dashboard_user_first')?></th>
+												<th class='col-xs-1'><?php echo $this->lang->line('dashboard_user_last')?></th>
+												<th class='col-xs-1'><?php echo $this->lang->line('dashboard_user_name')?></th>
+												<th class='col-xs-2'><?php echo $this->lang->line('dashboard_cust_email')?></th>
+												<th class='col-xs-1'><?php echo $this->lang->line('dashboard_user_create_date')?></th>
+												<th class='col-xs-1'><?php echo $this->lang->line('dashboard_cust_action')?></th>
 											</thead>
 											<tr class='remove_tag'>
 												<td></td>

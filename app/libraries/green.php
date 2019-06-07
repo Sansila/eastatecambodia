@@ -235,7 +235,7 @@
 										WHERE
 											is_active = 1											
 										{$where}										
-										ORDER BY moduleid,`order`																				
+										-- ORDER BY moduleid,`order`																				
 									");				
 			}else{
 				$where.=" AND roleid = '".$this->roleid."'";							
@@ -286,7 +286,7 @@
 										WHERE
 											is_active = 1											
 										{$where}
-										ORDER BY moduleid,`order`										
+										-- ORDER BY moduleid,`order`										
 									");
 			$this->pageinfos=$arrPages;
 		}

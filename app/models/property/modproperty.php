@@ -116,4 +116,36 @@
                                     AND (p.housesize BETWEEN $min_size AND $max_size) ")->row();
             return $sql;
         }
+        function getCustomerRequirement()
+        {
+            $userid = $this->session->userdata('userid');
+            $roleid = $this->session->userdata('roleid');
+            $where = '';
+            $rol = $this->db->query("SELECT * FROM z_role WHERE roleid = $roleid ")->row();
+            if($rol->is_admin != 1 || $rol->is_admin != 2)
+                $where.= " AND r.userid = $userid ";
+            else
+                $where.= "";
+            $customer = $this->db->query("SELECT r.requireid,
+                                             r.customerid,
+                                             r.category,
+                                             r.location,
+                                             r.min_price,
+                                             r.max_price,
+                                             r.min_size,
+                                             r.max_size,
+                                             r.type,
+                                             r.is_active,
+                                             r.remark,
+                                             r.userid,
+                                             c.customerid,
+                                             c.notify_property,
+                                             c.email
+                                      FROM tblcustomer c
+                                      INNER JOIN tblrequirement r
+                                      ON r.customerid = c.customerid
+                                      WHERE r.is_active = 1 
+                                      AND c.notify_property = 1 {$where}")->result();
+            return $customer;
+        }
     }

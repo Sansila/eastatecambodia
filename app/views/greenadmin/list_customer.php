@@ -67,13 +67,21 @@
 								<thead>
 									<tr>
 									<?php 
-										foreach($thead as $th=>$val){
-					           				if($th=='Action')
-					           					echo "<th class='remove_tag'>".$th."</th>";
-					           				else
-					           					echo "<th class='sort $val no_wrap' onclick='sort(event);' rel='$val'>".$th."</th>";								
-					           			}
+										// foreach($thead as $th=>$val){
+					     //       				if($th=='Action')
+					     //       					echo "<th class='remove_tag'>".$th."</th>";
+					     //       				else
+					     //       					echo "<th class='sort $val no_wrap' onclick='sort(event);' rel='$val'>".$th."</th>";								
+					     //       			}
 									?>
+										<th><?php echo $this->lang->line('dashboard_cust_no')?></th>
+										<th><?php echo $this->lang->line('dashboard_cust_name')?></th>
+										<th><?php echo $this->lang->line('dashboard_cust_phone')?></th>
+										<th><?php echo $this->lang->line('dashboard_cust_email')?></th>
+										<th><?php echo $this->lang->line('dashboard_cust_address')?></th>
+										<th><?php echo $this->lang->line('dashboard_cust_category')?></th>
+										<th><?php echo $this->lang->line('dashboard_cust_type')?></th>
+										<th><?php echo $this->lang->line('dashboard_cust_action')?></th>
 									</tr>
 									<tr class='remove_tag'>
 										<th></th>
