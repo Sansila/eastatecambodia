@@ -13859,7 +13859,8 @@ input.range {
 }
 
 .search-location .search-field .selectize-control {
-    width: calc(100% - 50px);
+    /*width: calc(100% - 50px);*/
+    width: calc(100%);
     border: 0;
     padding-left: 0
 }

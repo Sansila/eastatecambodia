@@ -730,7 +730,7 @@ class Customer extends CI_Controller {
 		                                <img src="'.$logo.'" style="width: 140px;">
 		                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
 		                                    <p>Dear Agent,</p>
-                                    		We have the requirement from customer let see this below: 
+                                    		We have the requirement from customer, let see this below: 
 		                                    <ul style="list-style: none; text-align: left;">
 		                                    	<li>- Status: '.$status.'</li>
                                         		<li>- Type: '.$category.'</li>

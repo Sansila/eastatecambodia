@@ -200,7 +200,7 @@ class Modcutomer extends CI_Model {
         $sql = $this->db->query("SELECT * FROM tblpropertytype WHERE type_status = 1 {$where} ")->result();
         $categoryname = '';
         foreach ($sql as $cname) {
-           $categoryname.= $cname->typename;
+           $categoryname.= $cname->typename.', ';
         }
 
         return $categoryname;
@@ -224,7 +224,7 @@ class Modcutomer extends CI_Model {
         $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 {$where} ")->result();
         $locationname = '';
         foreach ($sql as $lname) {
-           $locationname.= $lname->locationname;
+           $locationname.= $lname->locationname.', ';
         }
 
         return $locationname;

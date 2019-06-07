@@ -250,9 +250,8 @@
                       <span class='custom-control-indicator'></span>
                   </label>
               </div>
-              <label class='col-lg-3 control-label' style="text-align: left;">Share requirement to other agents</label>
-              <label class='col-lg-2 control-label'>User - Group</label>
-                <div class="col-lg-4">
+              <label class='col-lg-3 control-label' style="text-align: left;">Share requirement to other agents - Group</label>
+                <div class="col-lg-3">
                   <select class="form-control" name="txtsendtouser" id="txtsendtouser">
                     <option value="">select</option>
                     <?php 
