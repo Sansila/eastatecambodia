@@ -304,6 +304,8 @@
   $lang['join_message_false'] = "Your has been join failed";
   $lang['join_image'] = "Image";
   $lang['join_location'] = "Address";
+  $lang['join_password'] = "Password";
+  $lang['join_confirm_password'] = "Confirm Password";
   // Site Search 
   $lang['search_page_result'] = "SEARCH RESULT";
   $lang['search_page_order'] = "Order";

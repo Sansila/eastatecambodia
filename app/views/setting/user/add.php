@@ -58,9 +58,15 @@
 							<td> : </td>
 							<td>
 								<select name='cborole' id='cborole' class="form-control ">
+									<option value="">select</option>
 									<?php
+									$sel = '';
 									foreach ($this->role->getallrole() as $role_row) {
-										echo "<option value='$role_row->roleid'>$role_row->role</option>";
+										if($role_row->is_default == 1)
+											$sel = "selected";
+										else
+											$sel = "";
+										echo "<option value='$role_row->roleid' ".$sel.">$role_row->role</option>";
 									}
 									?>
 								</select>

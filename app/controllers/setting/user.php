@@ -125,6 +125,7 @@ class user extends CI_Controller {
 									<td>$row->first_name</td>
 									<td>$row->last_name</td>
 									<td>$row->user_name</td>
+									<td>$row->phone</td>
 									<td>$row->email</td>
 									<td>$row->role</td>
 									<td>".date("d-m-Y", strtotime($row->last_visit))."</td>

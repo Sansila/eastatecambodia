@@ -303,6 +303,8 @@
     $lang['join_message_false'] = "ការចូលរួមរបស់អ្នកបានបរាជ័យ";
     $lang['join_image'] = "រូបភាព";
     $lang['join_location'] = "អាស័យដ្ឋាន";
+    $lang['join_password'] = "ពាក្យសម្ងាត់";
+    $lang['join_confirm_password'] = "បញ្ជាក់ពាក្យសម្ងាត់";
     // Site Search 
     $lang['search_page_result'] = "លទ្ធផលស្វែងរក";
     $lang['search_page_order'] = "តាមលំដាប់";

@@ -73,15 +73,12 @@
 												if(isset($query->roleid))
 												{
 													if($query->roleid==$role_row->roleid)
-														 $sel = 'selected';
-
+														$sel = 'selected';
+													else
+														$sel = "";
 													echo "<option value='".$role_row->roleid."' ".$sel." >".$role_row->role."</option>";
-												}else{
-													$select = '';
-													if($role_row->is_default == 1)
-														$select = "selected";
-													echo "<option value='".$role_row->roleid."' ".$select." >".$role_row->role."</option>";
 												}
+
 											}
 											?>
 										</select>

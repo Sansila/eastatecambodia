@@ -439,6 +439,11 @@ class Modsite extends CI_Model {
         $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 AND parent_id = 0 ")->result();
         return $sql;
     }
+    function getRoleIsDefault()
+    {
+        $sql = $this->db->query("SELECT * FROM z_role WHERE is_active = 1 AND is_default = 1 ")->row();
+        return $sql->roleid;
+    }
 }
 
 

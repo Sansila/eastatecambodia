@@ -117,8 +117,8 @@
 					}
 				?>
 				<div class="txt-header"><h3><?php echo $this->lang->line('join_title')?></h3></div>
-				<div class="lead pgl-bg-light">
-			        <form enctype="multipart/form-data" method="post" action="<?php echo site_url('site/site/savejoin')?>">
+				<div class="lead pgl-bg-light" style="padding: 45px 50px">
+			        <form enctype="multipart/form-data" method="post" action="<?php echo site_url('site/site/savejoin')?>" oninput='txtconfirmpassword.setCustomValidity(txtconfirmpassword.value != txtpassword.value ? "Passwords do not match." : "")'>
 		                <!-- <h3>Post Property</h3> -->
 		               <div class="row">
 		                    <div class="col-md-6">
@@ -131,7 +131,7 @@
 		                        <div class="form-group">
 		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_email')?></label>
 	                                <div class="col-lg-8">
-	                                    <input type="text" name="txtEmail" class="form-control txtName" value="" />      
+	                                    <input type="email" name="txtEmail" class="form-control txtName" value="" />      
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
@@ -141,7 +141,7 @@
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('join_business')?> <span class="text-danger">*</span></label>
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('join_business')?> </label>
 	                                <div class="col-lg-8">
 	                                    <input type="text" name="txtBusiness" class="form-control txtName" value="" />
 	                                </div>
@@ -163,8 +163,8 @@
 		                    </div>
 		                    <div class="col-md-6">
 		                    	<div class="form-group">
-		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_gender')?> <span class="text-danger">*</span></label>
-	                                <div class="col-lg-9">
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_gender')?> <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
 	                                    <select class="form-control txtName" required style="max-width: 100%;" name="txtgender">
 	                                    	<option value=""><?php echo $this->lang->line('help_us_select');?></option>
 	                                    	<option value="Male"><?php echo $this->lang->line('help_us_male')?></option>
@@ -179,14 +179,22 @@
 	                                </div>
 		                        </div> -->
 		                        <div class="form-group">
-		                            <label class='col-lg-3 control-label'><?php echo $this->lang->line('help_us_description')?></label>
-	                                <div class="col-lg-9">
+		                            <label class='col-lg-4 control-label'><?php echo $this->lang->line('help_us_description')?></label>
+	                                <div class="col-lg-8">
 	                                    <textarea name="txtRemark" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>       
+	                                </div>
+	                                <label class='col-lg-4 control-label'><?php echo $this->lang->line('join_password')?> <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <input type="password" name="txtpassword" required class="form-control txtName" value="" /> 
+	                                </div>
+	                                <label class='col-lg-4 control-label'><?php echo $this->lang->line('join_confirm_password')?> <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                    <input type="password" class="form-control txtName" name="txtconfirmpassword" value="" />      
 	                                </div>
 		                        </div>
 		                        <div class="form-group">
-		                        	<label class='col-lg-3 control-label'><?php echo $this->lang->line('join_image')?> <span class="text-danger">*</span></label>
-		                        	<div class="col-lg-9">
+		                        	<label class='col-lg-4 control-label'><?php echo $this->lang->line('join_image')?> <span class="text-danger">*</span></label>
+		                        	<div class="col-lg-8">
 				                        <div style='border:0px solid #CCCCCC; text-align:center; width:200px; margin:0 auto;'>
 											<img src="<?php echo base_url('assets/upload/No_person.jpg') ?>" id="uploadPreview" style='width:120px; height:150px; margin-bottom:15px'>
 											<input id="uploadImage" accept="image/gif, image/jpeg, image/jpg, image/png" type="file" name="userfile" onchange="PreviewImage();" required="" style="opacity: 0; margin-top: -50px;"/>

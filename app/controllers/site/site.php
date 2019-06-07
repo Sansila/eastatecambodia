@@ -1140,7 +1140,10 @@ class Site extends CI_Controller {
         $address = $this->input->post('txtAddress');
         $remark = $this->input->post('txtRemark');
         $gender = $this->input->post('txtgender');
+        $password = $this->input->post('txtconfirmpassword');
         $date = Date('y-m-d H:i:s');
+
+        $getroleid = $this->site->getRoleIsDefault();
 
         $data = array(
             'user_name' => $name,
@@ -1155,6 +1158,8 @@ class Site extends CI_Controller {
             'is_active' => 0,
             'type_post' => 'join',
             'gender' => $gender,
+            'password' => md5($password),
+            'roleid' => $getroleid
         );
 
         $join = $this->site->savejoin($data);
@@ -1399,7 +1404,7 @@ class Site extends CI_Controller {
             if($check->p_type == 3)
                 $type = "Sale and Rent";
             $mail->Subject = "Estate Cambodia P".$check->pid." - ".$check->property_name;
-            $mail->AddAddress($check->email);
+            $mail->addBCC($check->email);
             if($check->ccemail != "")
                 $mail->AddCC($check->ccemail);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
