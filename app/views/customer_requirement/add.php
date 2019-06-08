@@ -91,7 +91,7 @@
         <div class="widget-content nopadding">
           <form enctype="multipart/form-data" name="basic_validate" id="basic_validate" method="POST" action="" class="form-horizontal basic_validate">
             <div class="form-group">
-              <label class='col-lg-2 control-label'>Customer Name</label>
+              <label class='col-lg-2 control-label'>Customer Name <span class="text-danger">*</span></label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <select class="form-control required" name="txtcustomer" id="txtcustomer">
@@ -111,7 +111,7 @@
                   <input type="text"  class="form-control input-sm hide" value='<?php echo isset($row->requireid)?"$row->requireid":""; ?>' id="txtrequireid" name="txtrequireid">
                 </div>
               </div>
-              <label class='col-lg-2 control-label'>Property Category</label>
+              <label class='col-lg-2 control-label'>Property Category <span class="text-danger">*</span></label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <select class="form-control select2-category txtcategory required" name="txtcategory" id="txtcategory" multiple="">
@@ -135,7 +135,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class='col-lg-2 control-label'>Property Location</label>
+              <label class='col-lg-2 control-label'>Property Location <span class="text-danger">*</span></label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <select class="form-control required select2-single txtlocation" id="txtlocation" multiple="multiple" name="txtlocation">
@@ -160,7 +160,7 @@
                     </select>
                 </div>
               </div>
-              <label class='col-lg-2 control-label'>Property Status</label>
+              <label class='col-lg-2 control-label'>Property Status <span class="text-danger">*</span></label>
               <div class="col-lg-4"> 
                 <div class="col-md-12">
                   <select class="form-control required" name="txttype" id="txttype">
@@ -250,7 +250,7 @@
                       <span class='custom-control-indicator'></span>
                   </label>
               </div>
-              <label class='col-lg-3 control-label' style="text-align: left;">Share requirement to other agents - Group</label>
+              <label class='col-lg-4 control-label' style="text-align: left;">Share requirement to other agents - Group</label>
                 <div class="col-lg-3">
                   <select class="form-control" name="txtsendtouser" id="txtsendtouser">
                     <option value="">select</option>

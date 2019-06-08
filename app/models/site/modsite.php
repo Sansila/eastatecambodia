@@ -259,11 +259,15 @@ class Modsite extends CI_Model {
     function getListSponsored($pid,$lp_id,$p_type,$level)
     {
         $sponsored = $this->db->query("SELECT * FROM tblproperty as p
-            left join tblpropertytype as pt on p.type_id = pt.typeid
-            WHERE p.p_status = 1 AND p.pro_level = $level 
-            AND p.lp_id = $lp_id AND p.p_type = $p_type 
-            AND p.pid <> $pid
-            ORDER BY p.create_date desc,p.pid desc limit 5")->result();
+                                     left join tblpropertytype as pt on p.type_id = pt.typeid
+                                     WHERE p.p_status = 1 
+                                     AND (p.pro_level = $level OR p.pro_level = 1)
+                                     AND p.lp_id = $lp_id 
+                                     AND p.p_type = $p_type 
+                                     AND p.pid <> $pid
+                                     ORDER BY p.create_date desc,p.pid desc 
+                                     limit 5
+                                    ")->result();
         return $sponsored;
     }
     function getPropertyCategory()
