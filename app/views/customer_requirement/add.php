@@ -267,11 +267,11 @@
             <div class="form-group">
               <label class="col-lg-2 control-label"></label>                      
               <div class="col-md-10">
-                <div class="col-lg-1">
-                  <button id="save" name="save" type="submit" class="btn btn-primary"><?php echo $this->lang->line('mn_save')?></button>
+                <div class="col-lg-4">
+                  <button id="save" name="save" type="submit" class="btn btn-primary" style="width: 100%"><?php echo $this->lang->line('mn_save')?></button>
                 </div>
-                <div class="col-lg-1">
-                  <button id="cancel" name="cancel" type="button" class="btn btn-danger"><?php echo $this->lang->line('mn_cancel')?></button>
+                <div class="col-lg-4">
+                  <button id="cancel" name="cancel" type="button" class="btn btn-danger" style="width: 100%"><?php echo $this->lang->line('mn_cancel')?></button>
                 </div> 
               </div>
             </div>

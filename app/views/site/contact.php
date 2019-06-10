@@ -97,7 +97,7 @@ if(isset($_POST['button']))
     $mail->Host     = "smtp.gmail.com";
     $mail->Mailer   = "smtp";
     $mail->SetFrom($_POST["customer_mail"], $_POST["name"]);
-    $mail->AddAddress("estatecambodia168.dev@gmail.com");
+    $mail->AddAddress("estatecambodia.dev168@gmail.com");
     $mail->AddCC("vireak.cambodia@gmail.com");  
     $mail->AddCC($_POST["owner"]);  
     $mail->Subject = "Contact From Customer";

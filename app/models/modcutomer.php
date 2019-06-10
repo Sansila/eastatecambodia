@@ -237,7 +237,7 @@ class Modcutomer extends CI_Model {
         else
             $where.= " AND group_id = $groupid ";
 
-        $sql = $this->db->query("SELECT * FROM admin_user WHERE is_active = 1 {$where}")->result();
+        $sql = $this->db->query("SELECT email FROM admin_user WHERE is_active = 1 {$where}")->result();
         return $sql;
     }
 }

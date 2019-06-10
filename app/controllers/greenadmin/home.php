@@ -445,12 +445,10 @@ class Home extends CI_Controller {
 		$this->load->view('greenadmin/property_most_view',$data);
 		$this->load->view('greenadmin/footer');
 	}
-	function getdata_proview()
+	function getdata_proview($perdate)
 	{
-		$perpage=$this->input->post('perpage');
-		$s_name=$this->input->post('s_name');
-		$perdate = $this->input->post('perdate');
-		$userid = ""; $user = "";
+		$userid = ""; 
+		$user = "";
 		$roleid = $this->session->userdata('roleid');
 		$rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
 		if($rol->is_admin == 1 || $rol->is_admin == 2){
@@ -463,12 +461,9 @@ class Home extends CI_Controller {
 
 		$where = "";
 		$date = Date('Y-m-d');
-		if($perdate == 1)
-			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
-		else if($perdate > 1)
-			$where.= " AND (v.date_create between (CURDATE() - INTERVAL $perdate DAY) and CURDATE()) $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
-		else
-			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid ORDER BY total_pro DESC LIMIT 15";
+		
+		if($perdate != "")
+			$where.= " AND (v.date_create >= date_sub(now(), interval $perdate DAY)) $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
 		
 		$sql="SELECT 
 			count(*) as total_pro,
@@ -521,7 +516,6 @@ class Home extends CI_Controller {
 			$i++;	 
 		}
 		$arr['data']=$table;
-		//$arr['pagina']=$paging;
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
 	}

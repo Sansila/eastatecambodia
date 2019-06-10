@@ -935,7 +935,7 @@ class Site extends CI_Controller {
         $mail->Host     = "smtp.gmail.com";
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
-        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+        $mail->SetFrom("estatecambodia.dev168@gmail.com", "Estate Cambodia");
         $mail->Subject = "Estate Cambodia - Submit";
         $mail->AddAddress($email);
         $logo = "http://estatecambodia.com/assets/img/logo.png";
@@ -1175,11 +1175,10 @@ class Site extends CI_Controller {
             $mail->Host     = "smtp.gmail.com";
             $mail->Mailer   = "smtp";
             $mail->WordWrap   = 80;
-            $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+            $mail->SetFrom("estatecambodia.dev168@gmail.com", "Estate Cambodia");
             $mail->Subject = "Estate Cambodia - Joining Us";
             $mail->AddAddress($email);
             $mail->AddCC('info@estatecambodia.com');
-            $mail->AddCC('estatecambodia168.dev@gmail.com');
             $logo = "http://estatecambodia.com/assets/img/logo.png";
             $description = '<div style="width: 100%">
                 <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
@@ -1320,7 +1319,7 @@ class Site extends CI_Controller {
             $mail->Host     = "smtp.gmail.com";
             $mail->Mailer   = "smtp";
             $mail->WordWrap   = 80;
-            $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+            $mail->SetFrom("estatecambodia.dev168@gmail.com", "Estate Cambodia");
             $mail->Subject = "state Cambodia - Property Inquiry";
             $mail->AddAddress($email);
             $logo = "http://estatecambodia.com/assets/img/logo.png";
@@ -1371,7 +1370,7 @@ class Site extends CI_Controller {
         $mail->Host     = "smtp.gmail.com";
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
-        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+        $mail->SetFrom("estatecambodia.dev168@gmail.com", "Estate Cambodia");
         $data = $this->db->query("SELECT 
                                         p.pid,
                                         p.agent_id,
@@ -1404,7 +1403,7 @@ class Site extends CI_Controller {
             if($check->p_type == 3)
                 $type = "Sale and Rent";
             $mail->Subject = "Estate Cambodia P".$check->pid." - ".$check->property_name;
-            $mail->addBCC($check->email);
+            $mail->AddAddress($check->email);
             if($check->ccemail != "")
                 $mail->AddCC($check->ccemail);
             $logo = "http://estatecambodia.com/assets/img/logo.png";

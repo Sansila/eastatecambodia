@@ -665,24 +665,43 @@ class Customer extends CI_Controller {
         	'date_modify' => date('Y-m-d H:i:s')
         );
         $msg='';
+
+        // $getgroup = $this->cust->getAllUserIngroup($groupuser);
+        // $allemail = '';
+
+        // 	$i = 0;
+        // 	$num = count($getgroup);
+	       //  foreach ($getgroup as $allgroupt) {
+	       //  	$comma = ",";
+        //         if(++$i == $num)
+        //         {
+        //             $comma = "";
+        //         }
+	       //  	$allemail.= $allgroupt->email.''.$comma;
+	       //  }
+
+	       //  print_r($allemail); die();
+
 		$require = $this->cust->saverequire($data,$data1,$data2,$requireid);
-		if($requireid == $require)
+		if($requireid == $require){
 			$msg="Customer Require Has Updated...!";
-		else
+		}else{
 			$msg="Customer Require Has Created...!";
 
-		$url = site_url('customer/sendrequirement_toagentcy');
-		$param = array(
-						'groupid' => $groupuser,
-						'category' => $catename,
-						'location' => $loctname,
-						'price' => $minprice.' - '.$maxprice,
-						'size' => $minsize.' - '.$maxsize,
-						'status' => $status,
-						'description' => $desc,
-					  );
-		if($is_send == 1)
-			$this->mylibrary->do_in_background($url, $param);
+			$url = site_url('customer/sendrequirement_toagentcy');
+			$param = array(
+							'groupid' => $groupuser,
+							'category' => $catename,
+							'location' => $loctname,
+							'price' => $minprice.' - '.$maxprice,
+							'size' => $minsize.' - '.$maxsize,
+							'status' => $status,
+							'description' => $desc,
+						  );
+			//print_r($param); die();
+			if($is_send == 1)
+				$this->mylibrary->do_in_background($url, $param);
+		}
 		
 		$arr=array('msg'=>$msg,'requireid'=>$require);
 		header("Content-type:text/x-json");
@@ -690,6 +709,15 @@ class Customer extends CI_Controller {
 	}
 	function sendrequirement_toagentcy()
 	{
+		$groupid = $this->input->post('groupid');
+        $category = $this->input->post('category');
+        $location = $this->input->post('location');
+        $price = $this->input->post('price');
+        $size = $this->input->post('size');
+        $status = $this->input->post('status');
+        $desc = $this->input->post('description');
+        $getgroup = $this->cust->getAllUserIngroup($groupid);
+
 		require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -700,64 +728,50 @@ class Customer extends CI_Controller {
         $mail->Host     = "smtp.gmail.com";
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
-
-		$groupid = $this->input->post('groupid');
-        $category = $this->input->post('category');
-        $location = $this->input->post('location');
-        $price = $this->input->post('price');
-        $size = $this->input->post('size');
-        $status = $this->input->post('status');
-        $desc = $this->input->post('description');
-
-        $getgroup = $this->cust->getAllUserIngroup($groupid);
-
-        if($getgroup)
-        {
-	        foreach ($getgroup as $allgroupt) {
-	        	$mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-		        $mail->Subject = "Estate Cambodia - Customer Requirement";
-		        $mail->addBCC($allgroupt->email);
-
-		        $logo = "http://estatecambodia.com/assets/img/logo.png";
-		        $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
-		        $description = '<div style="width: 100%">
-		            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
-		                <tbody>
-		                    <tr>
-		                        <td style="width:8px" width="8"></td>
-		                        <td>
-		                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
-		                                <img src="'.$logo.'" style="width: 140px;">
-		                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-		                                    <p>Dear Agent,</p>
-                                    		We have the requirement from customer, let see this below: 
-		                                    <ul style="list-style: none; text-align: left;">
-		                                    	<li>- Status: '.$status.'</li>
-                                        		<li>- Type: '.$category.'</li>
-	                                            <li>- Price: '.$price.'$</li>
-	                                            <li>- Size: '.$size.'<sup>m2</sup></li>
-	                                            <li>- <img src="'.$iconloc.'" />Location: '.$location.'</li>
-	                                        </ul>
-		                                </div>
-		                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
-		                                	'.$desc.'
-		                                </div>
-		                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
-		                                    <p>Best regards,</p>
-		                                    <p>Estate Cambodia Team</p>
-		                                </div>
-		                            </div>
-		                        </td>
-		                    </tr>
-		                </tbody>
-		            </table>
-		        </div>';
-		        $mail->MsgHTML($description);
-		        $mail->IsHTML(true);
-		        $mail->Send();
-		        $mail->ClearAddresses();
-	        }
-	    }
+        $mail->SetFrom("sansila.dev@gmail.com", "Estate Cambodia");
+    	$mail->Subject = "Estate Cambodia - Customer Requirement";
+    	$mail->AddAddress('sansila.dev@gmail.com');		
+        foreach ($getgroup as $allgroupt) {
+        	//$mail->AddBCC($allgroupt->email);
+        }
+	    $logo = "http://estatecambodia.com/assets/img/logo.png";
+        $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
+        $description = '<div style="width: 100%">
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
+                <tbody>
+                    <tr>
+                        <td style="width:8px" width="8"></td>
+                        <td>
+                            <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;height: auto;">
+                                <img src="'.$logo.'" style="width: 140px;">
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                    <p>Dear Agents / Partners,</p>
+                            		We have the requirement from customer, please find the following requirement below: 
+                                    <ul style="list-style: none; text-align: left;">
+                                    	<li>- Status: '.$status.'</li>
+                                		<li>- Type: '.$category.'</li>
+                                        <li>- Price: '.$price.'$</li>
+                                        <li>- Size: '.$size.'<sup>m2</sup></li>
+                                        <li>- <img src="'.$iconloc.'" />Location: '.$location.'</li>
+                                    </ul>
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                	'.$desc.'
+                                </div>
+                                <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left"> 
+                                    <p>Best regards,</p>
+                                    <p>Estate Cambodia Team</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>';
+        $mail->MsgHTML($description);
+        $mail->IsHTML(true);
+        $mail->Send();
+        $mail->ClearAddresses();
 
 	}
 	function list_requirement()

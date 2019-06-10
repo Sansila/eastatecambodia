@@ -202,7 +202,7 @@ h3{
                         <label class='col-lg-2 control-label' style="text-align: right;padding-top: 10px;"><?php echo $this->lang->line('dashboard_view_last')?></label>
                         <div class="col-lg-5"> 
                             <div class="col-md-12">
-                                <select class="form-control" onchange="getdata(1);" id="txtshowby">
+                                <select class="form-control txtshowby" id="txtshowby">
                                   <option value="1"><?php echo $this->lang->line('dashboard_channel_today')?></option>
                                   <option value="2"><?php echo $this->lang->line('dashboard_channel_yesteray')?></option>
                                   <option value="3"><?php echo $this->lang->line('dashboard_channel_3today')?></option>
@@ -219,13 +219,6 @@ h3{
                   <div class="row">
                       <div class="col-sm-12">
                         <div class="widget-box table-responsive">
-                            <div class="widget-title no_wrap hide" id='top-bar'>
-                              <span class="icon">
-                                <i class="fa fa-th"></i>
-                              </span>
-                                <h5>Property View List</h5>
-                              <div style="text-align: right; width:130px; float:right"></div>          
-                            </div>
                             <div class="img-show hide">
                               <img src="<?php echo site_url('assets/img/ld.gif')?>" style="position: absolute;z-index: 9999; width: 100px; left: 50%;">
                             </div>
@@ -250,32 +243,30 @@ h3{
 </div>
 
 <script type="text/javascript">
-    $(function(){ 
-      getdata(1); 
-    })
-    function getdata(page){
-      var url="<?php echo site_url('greenadmin/home/getdata_proview')?>";
-      $('.img-show').removeClass('hide');
-      var perdate = $('#txtshowby').val();
-      $.ajax({
-        url:url,
-        type:"POST",
-        datatype:"Json",
-        async:false,
-        data:{
-            'page':page,
-            'perdate': perdate
-          },
-        success:function(data) {
-          $(".list").html(data.data); console.log(data);
-          setTimeout(function(){
-            $('.img-show').addClass('hide');
-          },2000);
-        }
-      });
-    }
-</script>
-<script type="text/javascript">
+
+
+  var perdate = 1;
+  gettopproperty(perdate); 
+  $('.txtshowby').change(function(){
+      gettopproperty($(this).val()); 
+  });
+
+  function gettopproperty(perdate){
+    $(".list").html('');
+    var url="<?php echo site_url('greenadmin/home/getdata_proview')?>/"+perdate;
+    $('.img-show').removeClass('hide');
+    $.ajax({
+      url:url,
+      type:"GET",
+      datatype:"Json",
+      success:function(data){
+        $(".list").html(data.data);
+        setTimeout(function(){
+          $('.img-show').addClass('hide');
+        },2000);
+      }
+    });
+  }
 
   am4core.useTheme(am4themes_animated);
 
