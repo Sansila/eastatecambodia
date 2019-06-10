@@ -122,13 +122,15 @@ h3{
       <div class="col-sm-12">
          <h3 style="padding-left: 15px;">
           <select class="optday" id="txtshowby">
-            <option value="1">Today</option>
-            <option value="3">Last 3 days</option>
-            <option value="7">Last 7 days</option>
-            <option value="15">Last 15 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="60">Last 60 days</option>
-            <option value="90">Last 90 days</option>
+            <option <?php if($perday == 1) echo "selected"; else echo ""; ?> value="1">Today</option>
+            <option <?php if($perday == 2) echo "selected"; else echo ""; ?> value="2">Yesterday</option>
+            <option <?php if($perday == 3) echo "selected"; else echo ""; ?> value="3">Last 3 days</option>
+            <option <?php if($perday == 5) echo "selected"; else echo ""; ?> value="5">Last 5 days</option>
+            <option <?php if($perday == 7) echo "selected"; else echo ""; ?> value="7">Last 7 days</option>
+            <option <?php if($perday == 15) echo "selected"; else echo ""; ?> value="15">Last 15 days</option>
+            <option <?php if($perday == 30) echo "selected"; else echo ""; ?> value="30">Last 30 days</option>
+            <option <?php if($perday == 60) echo "selected"; else echo ""; ?> value="60">Last 60 days</option>
+            <option <?php if($perday == 90) echo "selected"; else echo ""; ?> value="90">Last 90 days</option>
           </select>
           Property Analysis By Channel: <?php echo 'P'.$id?></h3>
         <div id="chartdivchannel"></div>
@@ -250,7 +252,7 @@ function createSeries2(field, name) {
 createSeries2("income", "Income");
 
 
-var gdate = 1;
+var gdate = '<?php echo $perday?>';
 getchannel(gdate);
 
 $('.optday').change(function(){

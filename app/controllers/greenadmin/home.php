@@ -462,8 +462,12 @@ class Home extends CI_Controller {
 		$where = "";
 		$date = Date('Y-m-d');
 		
-		if($perdate != "")
+		if($perdate == 1)
+		{
+			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
+		}else{
 			$where.= " AND (v.date_create >= date_sub(now(), interval $perdate DAY)) $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
+		}
 		
 		$sql="SELECT 
 			count(*) as total_pro,
@@ -509,7 +513,7 @@ class Home extends CI_Controller {
 				 	<a target='_blank' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>".$this->lang->line('dashboard_top_detail')."</a>
 				 </td>
 				 <td class='no' style='width:10%;text-align: center;'>
-				 	<a href='".site_url('property/property/analysis/'.$row->pid)."'>".$this->lang->line('dashboard_top_analysis')."</a>
+				 	<a href='".site_url('property/property/analysis/'.$row->pid).'/'.$perdate."'>".$this->lang->line('dashboard_top_analysis')."</a>
 				 </td>
 				 <td class='no' style='width:10%;text-align: center;'>".$row->total_pro." ".$this->lang->line('dashboard_top_view')."</td>";
 			$table.= "</tr>";										 

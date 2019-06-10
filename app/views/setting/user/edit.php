@@ -150,7 +150,23 @@
 		                                </select>	
 									</td>
 								</tr>
-								
+								<tr>
+									<td><label for="emailField">Get Requirement</label></td>
+									<td> : </td>
+									<td class='control-group'>
+										<?php
+											$sel ="";
+											if($query->get_requirement == 1)
+												$sel = "selected";
+											else
+												$sel = "";
+										?>
+										<select class="form-control" id="getrequire" name="getrequire">
+		                                    <option value="0">Please Select</option>
+		                                    <option <?php echo $sel;?> value="1">Recieve</option>
+		                                </select>
+									</td>
+								</tr>
 								<tr>
 									<td></td>
 									<td></td>

@@ -206,6 +206,7 @@ class user extends CI_Controller {
 		$gender=$this->input->post('gender');
 		$address=$this->input->post('address');
 		$groupid = $this->input->post('txtgroup');
+		$get_require = $this->input->post('getrequire');
 		//print_r($store);
 		if($count!=0){
 			$data1['error']='This username and your email has been created before Please choose other username ';
@@ -233,6 +234,7 @@ class user extends CI_Controller {
 					'is_admin'=>$admin,
 					'is_active'=>1,
 					'group_id'=> $groupid,
+					'get_requirement' => $get_require,
 				);
 			$this->db->insert('admin_user',$data);
 			$id=$this->db->insert_id();			
@@ -261,6 +263,7 @@ class user extends CI_Controller {
 		$approve = $this->input->post('txtapprove');
 		$modify_date=date('Y-m-d H:i:s');
 		$groupid = $this->input->post('txtgroup');
+		$get_require = $this->input->post('getrequire');
 
 		$count=$this->user->getuservalidateup($username,$email,$userid);
 
@@ -295,6 +298,7 @@ class user extends CI_Controller {
 					'modified_date' => $modify_date,
 					'modified_by' => $this->session->userdata('userid'),
 					'group_id'=> $groupid,
+					'get_requirement' => $get_require,
 				);
 			}else{
 					$datas=array(
@@ -311,6 +315,7 @@ class user extends CI_Controller {
 					'modified_date'=> $modify_date,
 					'modified_by' => $this->session->userdata('userid'),
 					'group_id'=> $groupid,
+					'get_requirement' => $get_require,
 				);
 			}
 			$this->db->where('userid',$userid);

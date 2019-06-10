@@ -920,10 +920,11 @@ class Property extends CI_Controller {
 	{
 		$this->db->where('pid',$pid)->delete('tblproperty');
 	}
-	function analysis($id)
+	function analysis($id,$perday)
 	{
 		$data['page_header']="New Property";
 		$data['id'] = $id;
+		$data['perday'] = $perday;
 		$data['pname'] = $this->pro->getPropertyName($id);			
 		$this->parser->parse('greenadmin/header', $data);
 		$this->parser->parse('property/property/analysis',$data);

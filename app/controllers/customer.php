@@ -666,22 +666,6 @@ class Customer extends CI_Controller {
         );
         $msg='';
 
-        // $getgroup = $this->cust->getAllUserIngroup($groupuser);
-        // $allemail = '';
-
-        // 	$i = 0;
-        // 	$num = count($getgroup);
-	       //  foreach ($getgroup as $allgroupt) {
-	       //  	$comma = ",";
-        //         if(++$i == $num)
-        //         {
-        //             $comma = "";
-        //         }
-	       //  	$allemail.= $allgroupt->email.''.$comma;
-	       //  }
-
-	       //  print_r($allemail); die();
-
 		$require = $this->cust->saverequire($data,$data1,$data2,$requireid);
 		if($requireid == $require){
 			$msg="Customer Require Has Updated...!";
@@ -697,8 +681,9 @@ class Customer extends CI_Controller {
 							'size' => $minsize.' - '.$maxsize,
 							'status' => $status,
 							'description' => $desc,
+							'requireid' => $require,
 						  );
-			//print_r($param); die();
+
 			if($is_send == 1)
 				$this->mylibrary->do_in_background($url, $param);
 		}
@@ -709,6 +694,7 @@ class Customer extends CI_Controller {
 	}
 	function sendrequirement_toagentcy()
 	{
+		$requireid = $this->input->post('requireid');
 		$groupid = $this->input->post('groupid');
         $category = $this->input->post('category');
         $location = $this->input->post('location');
@@ -721,19 +707,21 @@ class Customer extends CI_Controller {
 		require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
+        $mail->SMTPDebug = 2;
         $mail->SMTPAuth = TRUE;
-        $mail->SMTPSecure = "ssl";
-        $mail->Port     = 465;
+        $mail->SMTPSecure = "tls";
+        $mail->Port     = 587;
         $mail->Host     = "smtp.gmail.com";
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
-        $mail->SetFrom("sansila.dev@gmail.com", "Estate Cambodia");
-    	$mail->Subject = "Estate Cambodia - Customer Requirement";
-    	$mail->AddAddress('sansila.dev@gmail.com');		
+        $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+    	$mail->Subject = "Estate Cambodia - Customer Requirement - RequirementID: ".$requireid;
+    	$mail->AddAddress("estatecambodia168.dev@gmail.com", "Estate Cambodia");	
+
         foreach ($getgroup as $allgroupt) {
-        	//$mail->AddBCC($allgroupt->email);
+        	$mail->AddBCC($allgroupt->email, $allgroupt->user_name);
         }
+
 	    $logo = "http://estatecambodia.com/assets/img/logo.png";
         $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
         $description = '<div style="width: 100%">
