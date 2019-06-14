@@ -672,7 +672,7 @@ class Customer extends CI_Controller {
 		}else{
 			$msg="Customer Require Has Created...!";
 
-			$url = site_url('customer/sendrequirement_toagentcy');
+			$url = site_url('customer/sendrequirement_to_agentcy');
 			$param = array(
 							'groupid' => $groupuser,
 							'category' => $catename,
@@ -692,7 +692,7 @@ class Customer extends CI_Controller {
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
 	}
-	function sendrequirement_toagentcy()
+	function sendrequirement_to_agentcy()
 	{
 		$requireid = $this->input->post('requireid');
 		$groupid = $this->input->post('groupid');
@@ -702,7 +702,8 @@ class Customer extends CI_Controller {
         $size = $this->input->post('size');
         $status = $this->input->post('status');
         $desc = $this->input->post('description');
-        $getgroup = $this->cust->getAllUserIngroup($groupid);
+
+		$slideloop = $this->cust->getAllUserIngroup($groupid);
 
 		require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
@@ -716,13 +717,11 @@ class Customer extends CI_Controller {
         $mail->WordWrap   = 80;
         $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
     	$mail->Subject = "Estate Cambodia - Customer Requirement - RequirementID: ".$requireid;
-    	$mail->AddAddress("estatecambodia168.dev@gmail.com", "Estate Cambodia");	
-
-        foreach ($getgroup as $allgroupt) {
-        	$mail->AddBCC($allgroupt->email, $allgroupt->user_name);
-        }
-
-	    $logo = "http://estatecambodia.com/assets/img/logo.png";
+    	$mail->AddAddress("info@estatecambodia.com", "Estate Cambodia");	
+    	foreach ($slideloop as $email) {
+			$mail->AddBCC($email->email);
+		}
+    	$logo = "http://estatecambodia.com/assets/img/logo.png";
         $iconloc = "http://estatecambodia.com/assets/img/placeholder.png";
         $description = '<div style="width: 100%">
             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0 auto;">
@@ -756,11 +755,11 @@ class Customer extends CI_Controller {
                 </tbody>
             </table>
         </div>';
-        $mail->MsgHTML($description);
+
+		$mail->MsgHTML($description);
         $mail->IsHTML(true);
         $mail->Send();
-        $mail->ClearAddresses();
-
+		$mail->ClearAddresses();
 	}
 	function list_requirement()
 	{

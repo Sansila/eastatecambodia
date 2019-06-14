@@ -43,12 +43,12 @@ class usermodel extends CI_Model {
 		$config['page_query_string']=TRUE;
 		$config['num_link']=3;
 		//$this->db->where('is_active',0);
-		$config['total_rows']=$this->db->where('is_active',0)->get('admin_user')->num_rows();
+		$config['total_rows']=$this->db->where('is_active',2)->get('admin_user')->num_rows();
 		$this->pagination->initialize($config);
 		$this->db->select('*');
 		$this->db->from('admin_user u');
 		$this->db->join('z_role r','u.roleid=r.roleid','left');
-		$this->db->where('u.is_active',0);
+		$this->db->where('u.is_active',2);
 		$this->db->where('u.type_post IS NOT NULL', NULL, FALSE);
 		$this->db->order_by("u.userid", "desc"); 
 		$this->db->limit($config['per_page'],$per_page);
@@ -134,7 +134,7 @@ class usermodel extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('admin_user u');
 		$this->db->join('z_role r','u.roleid=r.roleid','left');
-		$this->db->where('u.is_active',0);
+		$this->db->where('u.is_active',2);
 		$this->db->where('u.userid',$id);
 		$this->db->order_by("u.userid", "desc"); 
 		$query=$this->db->get();

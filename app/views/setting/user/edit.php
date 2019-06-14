@@ -156,7 +156,7 @@
 									<td class='control-group'>
 										<?php
 											$sel ="";
-											if($query->get_requirement == 1)
+											if(isset($query->get_requirement))
 												$sel = "selected";
 											else
 												$sel = "";
