@@ -31,10 +31,15 @@
     $lang['dashboard_channel_30today'] = "30 ថ្ងៃចុងក្រោយ";
     $lang['dashboard_channel_60today'] = "60 ថ្ងៃចុងក្រោយ";
     $lang['dashboard_channel_90today'] = "90 ថ្ងៃចុងក្រោយ";
+    $lang['dashboard_channel_show_15'] = "បង្ហាញចំនួន 15";
+    $lang['dashboard_channel_show_25'] = "បង្ហាញចំនួន 25";
+    $lang['dashboard_channel_show_50'] = "បង្ហាញចំនួន 50";
+    $lang['dashboard_channel_show_100'] = "បង្ហាញចំនួន 100";
+    $lang['dashboard_channel_show_all'] = "បង្ហាញទាំងអស់";
     $lang['dashboard_prop_status'] = "ប្រភេទអចលនទ្រព្យ";
     $lang['dashboard_post_last'] = "<strong>7</strong> ថ្ងៃចុងក្រោយ";
     $lang['dashboard_post_finder'] = "ស្វែងរក";
-    $lang['dashboard_top_15'] = "មើល 15 អចលនទ្រព្យ";
+    $lang['dashboard_top_15'] = "អចលនទ្រព្យ";
     $lang['dashboard_view_last'] = "មើលចុងក្រោយ";
     $lang['dashboard_top_detail'] = "សេចក្ដីលម្អិត";
     $lang['dashboard_top_analysis'] = "មើលការវិភាគ";

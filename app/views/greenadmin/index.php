@@ -206,12 +206,12 @@ h3{
               <option value="60"><?php echo $this->lang->line('dashboard_channel_60today')?></option>
               <option value="90"><?php echo $this->lang->line('dashboard_channel_90today')?></option>
             </select>
-            <select class="txtshowall optday" id="txtshowall">
-              <option value="15">Show top 15</option>
-              <option value="25">Show top 25</option>
-              <option value="50">Show top 50</option>
-              <option value="100">Show top 100</option>
-              <option value="all">All</option>
+            <select class="txtshowall optday" id="txtshowall" style="float: none;">
+              <option value="15"><?php echo $this->lang->line('dashboard_channel_show_15')?></option>
+              <option value="25"><?php echo $this->lang->line('dashboard_channel_show_25')?></option>
+              <option value="50"><?php echo $this->lang->line('dashboard_channel_show_50')?></option>
+              <option value="100"><?php echo $this->lang->line('dashboard_channel_show_100')?></option>
+              <option value="all"><?php echo $this->lang->line('dashboard_channel_show_all')?></option>
             </select>
 
           </h3>

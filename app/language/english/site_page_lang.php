@@ -31,10 +31,15 @@
   $lang['dashboard_channel_30today'] = "Last 30 days";
   $lang['dashboard_channel_60today'] = "Last 60 days";
   $lang['dashboard_channel_90today'] = "Last 90 days";
+  $lang['dashboard_channel_show_15'] = "Top 15";
+  $lang['dashboard_channel_show_25'] = "Top 25";
+  $lang['dashboard_channel_show_50'] = "Top 50";
+  $lang['dashboard_channel_show_100'] = "Top 100";
+  $lang['dashboard_channel_show_all'] = "All";
   $lang['dashboard_prop_status'] = "Property Status";
   $lang['dashboard_post_last'] = "<strong>last 7</strong> days";
   $lang['dashboard_post_finder'] = "finder";
-  $lang['dashboard_top_15'] = "Top 15 Property View";
+  $lang['dashboard_top_15'] = "Property View";
   $lang['dashboard_view_last'] = "Last";
   $lang['dashboard_top_detail'] = "Details";
   $lang['dashboard_top_analysis'] = "View Analysis";
