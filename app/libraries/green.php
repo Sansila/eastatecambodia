@@ -199,7 +199,8 @@
 											z_module.module_name,
 											z_module.module_namekh,
 											z_module.sort_mod,
-											z_module.mod_position
+											z_module.mod_position,
+											z_module.icon
 											FROM
 											z_module											
 											WHERE

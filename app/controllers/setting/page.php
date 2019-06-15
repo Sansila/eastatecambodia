@@ -113,7 +113,7 @@ class page extends CI_Controller {
 					'created_by'=>1,
 					'created_date'=>date('Y-m-d H:i:s'),
 					'is_active'=>1,
-					//'order'=>$max_order
+					'icon'=> $this->input->post('txticon')
 				);
 
 			$this->db->insert('z_page',$data);
@@ -165,7 +165,8 @@ class page extends CI_Controller {
 					'is_export'=>$is_export,
 					'created_by'=>1,
 					'created_date'=>date('Y-m-d H:i:s'),
-					'is_active'=>1
+					'is_active'=>1,
+					'icon'=> $this->input->post('txticon')
 				);
 			$this->db->where('pageid',$pageid);
 			$this->db->update('z_page',$data);

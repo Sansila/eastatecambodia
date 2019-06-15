@@ -445,7 +445,7 @@ class Home extends CI_Controller {
 		$this->load->view('greenadmin/property_most_view',$data);
 		$this->load->view('greenadmin/footer');
 	}
-	function getdata_proview($perdate)
+	function getdata_proview($perdate,$showby)
 	{
 		$userid = ""; 
 		$user = "";
@@ -461,12 +461,21 @@ class Home extends CI_Controller {
 
 		$where = "";
 		$date = Date('Y-m-d');
+		$limit = "";
+
+		if($showby !="")
+		{
+			if($showby == "all")
+				$limit.= "";
+			else
+				$limit.= " LIMIT $showby";
+		}
 		
 		if($perdate == 1)
 		{
-			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
+			$where.= " AND v.date_create = '$date' $user GROUP BY v.pid  ORDER BY total_pro DESC $limit";
 		}else{
-			$where.= " AND (v.date_create >= date_sub(now(), interval $perdate DAY)) $user GROUP BY v.pid  ORDER BY total_pro DESC LIMIT 15";
+			$where.= " AND (v.date_create >= date_sub(now(), interval $perdate DAY)) $user GROUP BY v.pid  ORDER BY total_pro DESC $limit";
 		}
 		
 		$sql="SELECT 
@@ -508,6 +517,7 @@ class Home extends CI_Controller {
 				$type = "Rent & Sale";
 			
 			$table.= "<tr>
+				 <td class='no'>".$i."</td>
 				 <td class='no'>P".$row->pid." - ".$row->property_name." - $".$row->price."</td>
 				 <td class='no' style='width:10%;text-align: center;'>
 				 	<a target='_blank' href='".site_url('site/site/detail/'.$row->pid.'/?text='.$row->property_name.'&name=browser')."'>".$this->lang->line('dashboard_top_detail')."</a>

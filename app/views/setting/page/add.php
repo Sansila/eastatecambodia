@@ -66,6 +66,14 @@
 								
 							</tr>
 							<tr>
+								<td><label for="emailField">Icon</label></td>
+								<td> : </td>
+								<td class='control-group'>
+									<input type="text" name="txticon" class="form-control" id="txticon" placeholder="Enter Icon Name">
+								</td>
+								
+							</tr>
+							<tr>
 								<td></td>
 								<td></td>
 								<td colspan='2'>

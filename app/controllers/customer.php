@@ -717,7 +717,8 @@ class Customer extends CI_Controller {
         $mail->WordWrap   = 80;
         $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
     	$mail->Subject = "Estate Cambodia - Customer Requirement - RequirementID: ".$requireid;
-    	$mail->AddAddress("info@estatecambodia.com", "Estate Cambodia");	
+    	$mail->AddAddress("info@estatecambodia.com", "Estate Cambodia");
+    	$mail->AddCC("estatecambodia168.dev@gmail.com", "Estate Cambodia");	
     	foreach ($slideloop as $email) {
 			$mail->AddBCC($email->email);
 		}

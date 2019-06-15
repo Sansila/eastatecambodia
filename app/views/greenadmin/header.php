@@ -50,7 +50,7 @@
 					else 
 						$mod = $row['module_name'];
 	    			$menu.='<li class="submenu '.$classMe.'">
-	    		                <a href="#"><i class="fa fa-flask"></i><span>'.$mod.'</span><i class="arrow fa fa-chevron-right"></i></a>';					
+	    		                <a href="#"><i class="fa '.$row['icon'].'"></i><span>'.$mod.'</span><i class="arrow fa fa-chevron-right"></i></a>';					
 	    					if(count($pages)>0){
 	    						if(isset($pages[$row['moduleid']])){
 	    							$page_mod=$pages[$row['moduleid']];

@@ -193,12 +193,33 @@ h3{
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <h3 style="padding-left: 15px;"><?php echo $this->lang->line('dashboard_top_15')?></h3>
+        <h3 style="padding-left: 15px;">
+          <?php echo $this->lang->line('dashboard_top_15')?>
+            <select class="txtshowby optday" id="txtshowby">
+              <option value="1"><?php echo $this->lang->line('dashboard_channel_today')?></option>
+              <option value="2"><?php echo $this->lang->line('dashboard_channel_yesteray')?></option>
+              <option value="3"><?php echo $this->lang->line('dashboard_channel_3today')?></option>
+              <option value="5"><?php echo $this->lang->line('dashboard_channel_5today')?></option>
+              <option value="7"><?php echo $this->lang->line('dashboard_channel_7today')?></option>
+              <option value="15"><?php echo $this->lang->line('dashboard_channel_15today')?></option>
+              <option value="30"><?php echo $this->lang->line('dashboard_channel_30today')?></option>
+              <option value="60"><?php echo $this->lang->line('dashboard_channel_60today')?></option>
+              <option value="90"><?php echo $this->lang->line('dashboard_channel_90today')?></option>
+            </select>
+            <select class="txtshowall optday" id="txtshowall">
+              <option value="15">Show top 15</option>
+              <option value="25">Show top 25</option>
+              <option value="50">Show top 50</option>
+              <option value="100">Show top 100</option>
+              <option value="all">All</option>
+            </select>
+
+          </h3>
         <div class="chartdivcatd">
           <div class="wrapper">
             <div class="clearfix" id="main_content_outer">
                 <div id="main_content">
-                    <div class="form-group" style="border-top: none; border-bottom: none;">
+                    <div class="form-group" style="border-top: none; border-bottom: none; display: none;">
                         <label class='col-lg-2 control-label' style="text-align: right;padding-top: 10px;"><?php echo $this->lang->line('dashboard_view_last')?></label>
                         <div class="col-lg-5"> 
                             <div class="col-md-12">
@@ -244,16 +265,22 @@ h3{
 
 <script type="text/javascript">
 
-
+  var showby = $('.txtshowall').val();
   var perdate = 1;
-  gettopproperty(perdate); 
+  gettopproperty(perdate,showby); 
   $('.txtshowby').change(function(){
-      gettopproperty($(this).val()); 
+      var showby = $('.txtshowall').val();
+      gettopproperty($(this).val(),showby); 
   });
 
-  function gettopproperty(perdate){
+  $('.txtshowall').change(function(){
+      var perdate = $('.txtshowby').val();
+      gettopproperty(perdate,$(this).val());
+  });
+
+  function gettopproperty(perdate,showby){
     $(".list").html('');
-    var url="<?php echo site_url('greenadmin/home/getdata_proview')?>/"+perdate;
+    var url="<?php echo site_url('greenadmin/home/getdata_proview')?>/"+perdate+"/"+showby;
     $('.img-show').removeClass('hide');
     $.ajax({
       url:url,
