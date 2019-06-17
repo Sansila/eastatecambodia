@@ -172,7 +172,7 @@
 			</div>
 		
 			<div id="user-nav">
-	            <ul class="btn-group">
+	            <ul class="btn-group" style="margin: 5px 0px 0px 0px;">
 	            	<li class="btn">
 	            		<a href="<?php echo base_url('en'); ?>">
 	            			<img src="<?php echo site_url('assets/img/en.png')?>"​ width="13">
@@ -193,9 +193,9 @@
 	                        </li>
 	                        <li><a href="<?php echo site_url("setting/setting/changepwd")?>"><i class="fa fa-key fa-fw"></i> <?php echo $this->lang->line('ch_pwd')?></a>
 	                        </li>
-	                        <li class="divider"></li>
-	                        <li><a href="<?php echo site_url("setting/setting")?>"><i class="fa fa-gear fa-fw"></i> <?php echo $this->lang->line('setting');?></a>
-	                        </li>
+	                        <!-- <li class="divider"></li> -->
+	                        <!-- <li><a href="<?php echo site_url("setting/setting")?>"><i class="fa fa-gear fa-fw"></i> <?php echo $this->lang->line('setting');?></a>
+	                        </li> -->
 	                        <?php //}?>	                        
 	                    </ul>
 	                    <!-- /.dropdown-user -->
