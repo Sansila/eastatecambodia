@@ -8,7 +8,7 @@ class usermodel extends CI_Model {
 		if(isset($_GET['per_page']))
 		$per_page=$_GET['per_page'];
 		$config['base_url']=site_url("setting/user/index?");
-		$config['per_page']=10;
+		$config['per_page']=20;
 		$config['full_tag_open'] = '<li>';
 		$config['full_tag_close'] = '</li>';
 		$config['cur_tag_open'] = '<a><u>';
@@ -141,27 +141,32 @@ class usermodel extends CI_Model {
 		
 		return $query->row();
 	}
-	function searchuser($f_name,$l_name,$u_name,$email,$roleid){
+	function searchuser($f_name,$l_name,$u_name,$email,$roleid,$phone,$require){
 		$per_page='';
 		if(isset($_GET['per_page']))
 		$per_page=$_GET['per_page'];
-		 $config['base_url']=site_url("setting/user/search?f_name=$f_name&l_name=$l_name&u_name=$u_name&email=$email&roleid=$roleid");
-		 $config['per_page']=10;
-		 $config['full_tag_open'] = '<li>';
-		 $config['full_tag_close'] = '</li>';
-		 $config['cur_tag_open'] = '<a><u>';
-		 $config['cur_tag_close'] = '</u></a>';
-		 $config['page_query_string']=TRUE;
-		 $config['num_link']=3;
-		 $this->db->like('first_name',$f_name);
-		 $this->db->like('last_name',$l_name);
-		 $this->db->like('user_name',$u_name);
-		 $this->db->like('email',$email);
-		 if($roleid!=0)
-		 	$this->db->where('roleid',$roleid);	
-		 $this->db->where('is_active',1);
-		 $config['total_rows']=$this->db->get('admin_user')->num_rows();
-		 $this->pagination->initialize($config);
+		$config['base_url']=site_url("setting/user/search?f_name=$f_name&l_name=$l_name&u_name=$u_name&email=$email&roleid=$roleid&phone=$phone&require=$require");
+		$config['per_page']=20;
+		$config['full_tag_open'] = '<li>';
+		$config['full_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<a><u>';
+		$config['cur_tag_close'] = '</u></a>';
+		$config['page_query_string']=TRUE;
+		$config['num_link']=3;
+		$this->db->like('first_name',$f_name);
+		$this->db->like('last_name',$l_name);
+		$this->db->like('user_name',$u_name);
+		$this->db->like('email',$email);
+		$this->db->like('phone',$phone);
+		if($roleid !=0)
+			$this->db->where('roleid',$roleid);
+		if($require == 0)
+			$this->db->where('(get_requirement = 0 OR get_requirement IS NULL )',NULL, FALSE);
+		if($require == 1)
+			$this->db->where('get_requirement',$require);	
+		$this->db->where('is_active',1);
+		$config['total_rows']=$this->db->get('admin_user')->num_rows();
+		$this->pagination->initialize($config);
 		$this->db->select('*');
 		$this->db->from('admin_user u');
 		$this->db->join('z_role r','u.roleid=r.roleid','inner');
@@ -169,10 +174,15 @@ class usermodel extends CI_Model {
 		$this->db->like('u.last_name',$l_name);
 		$this->db->like('u.user_name',$u_name);
 		$this->db->like('u.email',$email);
+		$this->db->like('u.phone',$phone);
 		//$this->db->like('u.schoolid',$school);
 		//$this->db->like('u.year',$year);	
-		if($roleid!=0)
+		if($roleid !=0)
 			$this->db->where('u.roleid',$roleid);	
+		if($require == 0)
+			$this->db->where('(u.get_requirement = 0 OR u.get_requirement IS NULL )',NULL, FALSE);
+		if($require == 1)
+			$this->db->where('u.get_requirement',$require);
 		$this->db->where('u.is_active',1);
 		$this->db->order_by("u.userid", "desc"); 
 		$this->db->limit($config['per_page'],$per_page);

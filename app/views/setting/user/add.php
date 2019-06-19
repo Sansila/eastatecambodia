@@ -123,8 +123,8 @@
 							<td> : </td>
 							<td class='control-group'>
 								<select class="form-control" id="getrequire" name="getrequire">
-                                    <option value="0">Please Select</option>
-                                    <option value="1">Recieve</option>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
                                 </select>
 							</td>
 						</tr>

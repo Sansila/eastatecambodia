@@ -51,6 +51,7 @@
 								<th class='col-xs-1'>Role</th>
 								<th class='col-xs-1'>Last Visited</th>
 								<th class='col-xs-1'>Created Date</th>
+								<th class='col-xs-1'>Get Requirement</th>
 								<th class='col-xs-1'>Action</th>
 							</thead>
 							<tbody>
@@ -58,7 +59,7 @@
 								<td><input class='form-control input-sm' id='txts_fname' type='text' onkeyup='search(event);' value='' name='txts_fname'/></td>
 								<td><input class='form-control input-sm' id='txts_lname' type='text' onkeyup='search(event);' value='' name='txts_lname'/></td>
 								<td><input class='form-control input-sm' id='txts_uname' type='text' onkeyup='search(event);' value='' name='txts_uname'/></td>
-								<td></td>
+								<td><input class='form-control input-sm' id='txts_phone' type='text' onkeyup='search(event);' value='' name='txts_phone'/></td>
 								<td><input class='form-control input-sm' id='txts_email' type='text' onkeyup='search(event);' value='' name='txts_email'/></td>
 								<td>
 									<select class="form-control input-sm" id='cbos_role'name='cbos_role' onchange='search(event);'>
@@ -73,12 +74,23 @@
 								</td>
 								<td></td>
 								<td></td>
+								<td> 
+									<select class="form-control input-sm" name="txtrequire" id="txtrequire" onchange='search(event);'>
+										<option value="">Select</option>
+										<option value="1">Yes</option>
+										<option value="0">No</option>
+									</select>
+								</td>
 								<td></td>
 							</tbody>
 							<tbody id='listbody'>
 							<?php
-							 $i=1;
+							 $i=1; $req = '';
 								foreach ($query as $row) {
+									if($row->get_requirement == 1)
+										$req = "Yes";
+									else
+										$req = "No";
 									echo "
 										<tr>
 											<td align='center'>$i</td>
@@ -89,7 +101,9 @@
 											<td>$row->email</td>
 											<td>$row->role</td>
 											<td>".date("d-m-Y", strtotime($row->last_visit))."</td>
-											<td>".date("d-m-Y", strtotime($row->created_date))."</td>";
+											<td>".date("d-m-Y", strtotime($row->created_date))."</td>
+											<td>".$req."</td>
+											";
 											echo "<td align='right' class='no_wrap'>";
 											if($row->is_admin!='1'){
 												echo "<a>
@@ -127,10 +141,20 @@
 				var email=jQuery('#txts_email').val();
 				var roleid=jQuery('#cbos_role').val();
 				var u_name=jQuery('#txts_uname').val();
+				var phone=jQuery('#txts_phone').val();
+				var require=jQuery('#txtrequire').val();
 				//alert('f_name:'+f_name+"l_name"+l_name+"email:"+email+"roleid:"+roleid+"u_name:"+u_name+"schoolid:"+schoolid+"year:"+year);
 				$.ajax({
 							url:"<?php echo base_url(); ?>setting/user/search",    
-							data: {'f_name':f_name,'l_name':l_name,'email':email,'roleid':roleid,'u_name':u_name},
+							data: {
+								'f_name':f_name,
+								'l_name':l_name,
+								'email':email,
+								'roleid':roleid,
+								'u_name':u_name,
+								'phone':phone,
+								'require': require
+							},
 							type: "POST",
 							success: function(data){
                                //alert(data);

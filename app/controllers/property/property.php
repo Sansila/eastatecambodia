@@ -454,6 +454,7 @@ class Property extends CI_Controller {
 		$avialable_pro = $this->input->post('avialable_pro');
 		$price = $this->input->post('price');
 		$project = $this->input->post('project');
+		$firstcharater = "";
 
 		$where = ""; $is_admin = "";
 		$var = $this->session->all_userdata();
@@ -497,6 +498,14 @@ class Property extends CI_Controller {
 			$where .= " AND pl.price LIKE '%$price%' ";
 		if($project !="")
 			$where.= " AND pro.projectid = $project ";
+		if($s_name !="")
+			$firstcharater = $s_name[0];
+		if($firstcharater == "p" || $firstcharater == "P"){
+			$str = substr($s_name,1);
+			$where.= "AND CONCAT(pl.property_name,pl.pid) LIKE '%$str%' ";
+		}else{
+			$where.= "AND CONCAT(pl.property_name,pl.pid) LIKE '%$s_name%' ";
+		}
 
 		$sql="SELECT pl.pid,
 					 pl.property_name,
@@ -534,8 +543,7 @@ class Property extends CI_Controller {
 		on pl.lp_id = l.propertylocationid
 		left join tblproject as pro
 		on pl.projectid = pro.projectid
-		WHERE pl.p_status <> 0 {$where} 
-		AND CONCAT(pl.property_name,pl.pid) LIKE '%$s_name%'  
+		WHERE pl.p_status <> 0 {$where}  
 		order by pl.create_date DESC";
 
 		$table='';

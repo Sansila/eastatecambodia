@@ -162,8 +162,8 @@
 												$sel = "";
 										?>
 										<select class="form-control" id="getrequire" name="getrequire">
-		                                    <option value="0">Please Select</option>
-		                                    <option <?php echo $sel;?> value="1">Recieve</option>
+		                                    <option value="0">No</option>
+		                                    <option <?php echo $sel;?> value="1">Yes</option>
 		                                </select>
 									</td>
 								</tr>

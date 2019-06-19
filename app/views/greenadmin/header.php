@@ -172,7 +172,7 @@
 			</div>
 		
 			<div id="user-nav">
-	            <ul class="btn-group" style="margin: 5px 0px 0px 0px;">
+	            <ul class="btn-group" style="margin: 5px 0px 0px 0px !important;">
 	            	<li class="btn">
 	            		<a href="<?php echo base_url('en'); ?>">
 	            			<img src="<?php echo site_url('assets/img/en.png')?>"​ width="13">

@@ -107,6 +107,8 @@ class user extends CI_Controller {
 		$u_name=$this->input->post('u_name');
 		$email=$this->input->post('email');
 		$roleid=$this->input->post('roleid');
+		$phone=$this->input->post('phone');
+		$require=$this->input->post('require');
 			//$schoolid=$_GET['schoolid'];
 			//$year=$_GET['year'];
 		// $data['query']=$this->user->searchuser($f_name,$l_name,$u_name,$email,$roleid);
@@ -115,10 +117,14 @@ class user extends CI_Controller {
 		// $this->load->view('setting/user/view',$data);
 		// $this->load->view('greenadmin/footer');
 	
-		$query=$this->user->searchuser($f_name,$l_name,$u_name,$email,$roleid);
+		$query=$this->user->searchuser($f_name,$l_name,$u_name,$email,$roleid,$phone,$require);
 			
-			 $i=1;
+			 $i=1; $req = '';
 			foreach ($query as $row) {
+				if($row->get_requirement == 1)
+					$req = "Yes";
+				else
+					$req = "No";
 				echo "
 								<tr>
 									<td align='center'>$i</td>
@@ -129,7 +135,9 @@ class user extends CI_Controller {
 									<td>$row->email</td>
 									<td>$row->role</td>
 									<td>".date("d-m-Y", strtotime($row->last_visit))."</td>
-									<td>".date("d-m-Y", strtotime($row->created_date))."</td>";
+									<td>".date("d-m-Y", strtotime($row->created_date))."</td>
+									<td>".$req."</td>
+									";
 									if($row->is_admin!='1')
 										echo "<td align='center'><a><img rel='$row->userid' onclick='deleteuser(event);' src='".base_url('assets/images/icons/delete.png')."'/></a> <a><img  rel='$row->userid' onclick='updateuser(event);' src='".base_url('assets/images/icons/edit.png')."'/></a></td>";
 									else

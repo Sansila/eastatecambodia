@@ -716,7 +716,7 @@ class Customer extends CI_Controller {
         $mail->Mailer   = "smtp";
         $mail->WordWrap   = 80;
         $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
-    	$mail->Subject = "Estate Cambodia - Customer Requirement - RequirementID: ".$requireid;
+    	$mail->Subject = "Customer Requirement - ID: ".$requireid." - Estate Cambodia";
     	$mail->AddAddress("info@estatecambodia.com", "Estate Cambodia");
     	$mail->AddCC("estatecambodia168.dev@gmail.com", "Estate Cambodia");	
     	foreach ($slideloop as $email) {
@@ -734,13 +734,14 @@ class Customer extends CI_Controller {
                                 <img src="'.$logo.'" style="width: 140px;">
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
                                     <p>Dear Agents / Partners,</p>
+                                    យើងមានតំរូវការអចលទព្យ ដែលមានលកខណ្ឌដូចខាងក្រោម:
                             		We have the requirement from customer, please find the following requirement below: 
                                     <ul style="list-style: none; text-align: left;">
-                                    	<li>- Status: '.$status.'</li>
-                                		<li>- Type: '.$category.'</li>
-                                        <li>- Price: '.$price.'$</li>
-                                        <li>- Size: '.$size.'<sup>m2</sup></li>
-                                        <li>- <img src="'.$iconloc.'" />Location: '.$location.'</li>
+                                    	<li>- ប្រភេទ​ Status: '.$status.'</li>
+                                		<li>- ផ្នែក​​ Type: '.$category.'</li>
+                                        <li>- តំលៃ Budget: '.$price.'$</li>
+                                        <li>- ទំហំ Size: '.$size.'<sup>m2</sup></li>
+                                        <li>- ទីតាំង <img src="'.$iconloc.'" />Location: '.$location.'</li>
                                     </ul>
                                 </div>
                                 <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:12px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
