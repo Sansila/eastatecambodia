@@ -351,7 +351,7 @@ function createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,ca
                     park_last: park_last,
                     features: features,
                     return_feature: return_feature,
-                    agent:agent
+                    agent: agent
                 },
                 success:function(locations) {
                     var i;
@@ -386,13 +386,13 @@ function createHomepageGoogleMapBySearch(_latitude,_longitude,status,location,ca
                         boxText.innerHTML =
                             '<div class="property_grid">' +
                                 '<div class="img_area">' +
-                                    '<a href="'+ locations[i][5] +'" class="d-block">' +
+                                    '<a target="_blank" href="'+ locations[i][5] +'" class="d-block">' +
                                     '<img src="' + locations[i][6] + '" alt="" width="200" height="100">' +
                                     '</a>' +
                                     '<div class="sale_amount"> <span class="m-price">' + locations[i][2] + '</span><span class="m-type">' + locations[i][8] + '</span></div>' +
                                 '</div>' +
                                 '<div class="property-text p-3 module line-clamp">' +
-                                    '<a href="'+ locations[i][5] +'" class="d-block">' +
+                                    '<a target="_blank" href="'+ locations[i][5] +'" class="d-block">' +
                                     '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1em; font-size:12px; height: 46px;">' + locations[i][0] + '</h5>' +
                                     '</a>' +
                                     '<span><i class="fa fa-map-marker text_primary" aria-hidden="true"></i> ' + locations[i][1] + '</span>' +
@@ -542,13 +542,13 @@ function createHomepageGoogleMapByCategory(_latitude,_longitude,status,location,
                         boxText.innerHTML =
                             '<div class="property_grid">' +
                                 '<div class="img_area">' +
-                                    '<a href="'+ locations[i][5] +'" class="d-block">' +
+                                    '<a target="_blank" href="'+ locations[i][5] +'" class="d-block">' +
                                     '<img src="' + locations[i][6] + '" alt="" width="200" height="100">' +
                                     '</a>' +
                                     '<div class="sale_amount"><span class="m-price">' + locations[i][2] + '</span> <span class="m-type">' + locations[i][8] + '</span></div>' +
                                 '</div>' +
                                 '<div class="property-text p-3 module line-clamp">' +
-                                    '<a href="'+ locations[i][5] +'" class="d-block">' +
+                                    '<a target="_blank" href="'+ locations[i][5] +'" class="d-block">' +
                                     '<h5 class="property-title pb-2 module line-clamp" style="font-weight:100; line-height: 1em; font-size:12px; height: 46px;">' + locations[i][0] + '</h5>' +
                                     '</a>' +
                                     // '<span><i class="fa fa-map-marker text_primary" aria-hidden="true"></i> ' + locations[i][1] + '</span>' +

@@ -5,8 +5,8 @@
 	$firstprice = ''; 
 	$lastprice = ''; 
 	$available = ''; 
-	$order =''; 
-	$sort=''; 
+	$order = ''; 
+	$sort = ''; 
     $return_cats = ''; 
     $return_locs = '';
     $activelist = ''; 
