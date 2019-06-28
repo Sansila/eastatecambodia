@@ -1199,7 +1199,7 @@
 														$have_img = true;
 													}
 											?>
-												<video style="height: 176px;" class="img-responsive" controls>
+												<video style="height: 174px;" class="img-responsive" controls>
 												  	<source src="<?php echo $img_path;?>">
 												</video>
 											<?php 
@@ -1287,7 +1287,7 @@
 														$have_img = true;
 													}
 											?>
-												<video style="height: 176px;" class="img-responsive" controls>
+												<video style="height: 174px;" class="img-responsive" controls>
 												  	<source src="<?php echo $img_path;?>">
 												</video>
 											<?php 

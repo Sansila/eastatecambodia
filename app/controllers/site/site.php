@@ -71,12 +71,18 @@ class Site extends CI_Controller {
         if(isset($_GET['name']))
             $name = $_GET['name'];
 
+        $available = $this->site->getPropertyByID($pid);
+        //var_dump($available); die();
+        if($available)
+            $data['detail'] = $available;
+        else
+            redirect(site_url('my404'));
+
         $datas['name'] = $name;
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
         $datas['sitetype'] = "property";
         $data['profile'] = $this->site->getSiteprofile();
-        $data['detail'] = $this->site->getPropertyByID($pid);
         $data['image'] = $this->site->getImageByID($pid);
         $data['imagelimit'] = $this->site->getImageLimitByID($pid);
         $data['type'] = $this->site->getPropertyType();

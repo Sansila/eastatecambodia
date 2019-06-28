@@ -434,7 +434,7 @@ class Modsite extends CI_Model {
                                  AND p_status = 1
                                  GROUP BY property_tag 
                                  ORDER BY totaltag DESC
-                                 LIMIT 5
+                                 LIMIT 8
                                  ")->result();
         return $sql;
     }
