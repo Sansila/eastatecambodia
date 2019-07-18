@@ -552,6 +552,7 @@ class Property extends CI_Controller {
 		$i=1;
 		$limit=" LIMIT {$paging['start']}, {$paging['limit']}";
 		$sql.=" {$limit}";
+		
 		$this->green->setActiveRole($this->session->userdata('roleid'));
         $this->green->setActiveModule($this->input->post('m'));
         $this->green->setActivePage($this->input->post('p')); 
