@@ -160,12 +160,12 @@ class usermodel extends CI_Model {
 		$this->db->like('phone',$phone);
 		if($roleid !=0)
 			$this->db->where('roleid',$roleid);
-		if($require == 0)
-			$this->db->where('(get_requirement = 0 OR get_requirement IS NULL )',NULL, FALSE);
-		if($require == 1)
+		if($require != ""){
 			$this->db->where('get_requirement',$require);	
+		}
 		$this->db->where('is_active',1);
 		$config['total_rows']=$this->db->get('admin_user')->num_rows();
+
 		$this->pagination->initialize($config);
 		$this->db->select('*');
 		$this->db->from('admin_user u');
@@ -174,15 +174,12 @@ class usermodel extends CI_Model {
 		$this->db->like('u.last_name',$l_name);
 		$this->db->like('u.user_name',$u_name);
 		$this->db->like('u.email',$email);
-		$this->db->like('u.phone',$phone);
-		//$this->db->like('u.schoolid',$school);
-		//$this->db->like('u.year',$year);	
+		$this->db->like('u.phone',$phone);	
 		if($roleid !=0)
 			$this->db->where('u.roleid',$roleid);	
-		if($require == 0)
-			$this->db->where('(u.get_requirement = 0 OR u.get_requirement IS NULL )',NULL, FALSE);
-		if($require == 1)
+		if($require != ""){
 			$this->db->where('u.get_requirement',$require);
+		}
 		$this->db->where('u.is_active',1);
 		$this->db->order_by("u.userid", "desc"); 
 		$this->db->limit($config['per_page'],$per_page);
