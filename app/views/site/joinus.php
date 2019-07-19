@@ -118,7 +118,7 @@
 				?>
 				<div class="txt-header"><h3><?php echo $this->lang->line('join_title')?></h3></div>
 				<div class="lead pgl-bg-light" style="padding: 45px 50px">
-			        <form enctype="multipart/form-data" method="post" action="<?php echo site_url('site/site/savejoin')?>" oninput='txtconfirmpassword.setCustomValidity(txtconfirmpassword.value != txtpassword.value ? "Passwords do not match." : "")'>
+			        <form enctype="multipart/form-data" method="post" action="<?php echo site_url('site/site/savejoin')?>" oninput='txtconfirmpassword.setCustomValidity(txtconfirmpassword.value != txtpassword.value ? "Passwords do not match." : ""); txtcaptcha_confirm.setCustomValidity(txtcaptcha_confirm.value != txtcaptcha.value ? "Text do not match." : "");'>
 		                <!-- <h3>Post Property</h3> -->
 		               <div class="row">
 		                    <div class="col-md-6">
@@ -159,6 +159,16 @@
 	                                    	?>
 	                                    </select>      
 	                                </div>
+	                                <label class='col-lg-4 control-label'>Verify <span class="text-danger">*</span></label>
+	                                <div class="col-lg-8">
+	                                	<a class="image_captcha">
+	                                    	<?php echo $captcha;?>  
+	                                	</a>
+	                                    <a class="refresh" style="padding-left: 30px;"><img src="<?php echo base_url('/assets/img/refresh.png')?>" width="30" height="30"></a>
+	                                    <div style="padding-top: 10px;"></div>
+	                                    <input type="text" name="txtcaptcha" required class="form-control txtName txtcaptcha hide" value="<?php echo $captchatext;?>" /> 
+	                                    <input type="text" name="txtcaptcha_confirm" required class="form-control txtName" value="" />     
+	                                </div>
 		                        </div>
 		                    </div>
 		                    <div class="col-md-6">
@@ -184,10 +194,13 @@
 	                                    <textarea name="txtRemark" class="form-control txtMsg" style="width: 100%; height: 95px;"></textarea>       
 	                                </div>
 	                                <label class='col-lg-4 control-label'><?php echo $this->lang->line('join_password')?> <span class="text-danger">*</span></label>
+
 	                                <div class="col-lg-8">
 	                                    <input type="password" name="txtpassword" required class="form-control txtName" value="" /> 
 	                                </div>
+
 	                                <label class='col-lg-4 control-label'><?php echo $this->lang->line('join_confirm_password')?> <span class="text-danger">*</span></label>
+
 	                                <div class="col-lg-8">
 	                                    <input type="password" class="form-control txtName" name="txtconfirmpassword" value="" />      
 	                                </div>
@@ -233,4 +246,17 @@
              document.getElementById("uploadPreview").style.backgroundImage = "none";
         };
     };
+    $('.refresh').click(function(){
+    	$.ajax({
+    		type: 'POST',
+    		url: '<?php echo base_url()?>site/site/refresh_captcha',
+    		success: function(data){
+    			if(data)
+    			{
+    				$('.image_captcha').html(data.image);
+    				$('.txtcaptcha').val(data.captchatext);
+    			}
+    		}
+    	});
+    });
 </script>

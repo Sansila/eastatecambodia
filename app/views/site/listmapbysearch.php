@@ -1411,6 +1411,16 @@
 		<div class="homepage-map">
 			<div id="map"></div>
 		</div>
+        <div style="margin-top: 30px"></div>
+        <aside class="block ">
+            <ul class="list-inline tagclouds">
+                <?php 
+                    foreach ($tags as $tag) {
+                        echo '<li style="padding-left:5px;"><a href="'.site_url('listmap/searchmap?available=0&q='.$tag->property_tag.'&list_type=lists&order=Desc').'">'.$tag->property_tag.'</a></li>';
+                    }
+                ?>
+            </ul>
+        </aside>
 		<div style="margin-top: 30px"></div>
         <div style="margin-bottom: 30px;">
             <a class="img-link">

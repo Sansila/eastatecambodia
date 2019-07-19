@@ -438,6 +438,16 @@ class Modsite extends CI_Model {
                                  ")->result();
         return $sql;
     }
+    function getAllPropertyTag()
+    {
+        $sql = $this->db->query("SELECT property_tag, p_status, count(property_tag) as totaltag FROM tblproperty
+                                 WHERE property_tag !='' 
+                                 AND p_status = 1
+                                 GROUP BY property_tag 
+                                 ORDER BY totaltag DESC
+                                 ")->result();
+        return $sql;
+    }
     function getAddressForJoin()
     {
         $sql = $this->db->query("SELECT * FROM tblpropertylocation WHERE status = 1 AND parent_id = 0 ")->result();

@@ -21,7 +21,7 @@ class Listmap extends CI_Controller {
         $datas['menu'] = $this->site->get_menu();
         $data['slide'] = $this->site->getSlide();
         $data['typecate'] = $this->site->getPropertyType();
-        
+        $data['tags'] = $this->site->getAllPropertyTag();
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/listmapbysearch',$data);
         $this->load->view('site/contain/footer',$datas);
@@ -311,6 +311,7 @@ class Listmap extends CI_Controller {
         $data['slide'] = $this->site->getSlide();
         $data['typecate'] = $this->site->getPropertyType();
         $data['id'] = $id;
+        $data['tags'] = $this->site->getAllPropertyTag();
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/listmapbycategory',$data);
         $this->load->view('site/contain/footer',$datas);

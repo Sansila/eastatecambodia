@@ -263,7 +263,7 @@
   $lang['search_looking_for'] = "Looking For";
   // Site Home Page
   $lang['home_page_post'] = "POST PROPERTY";
-  $lang['home_page_join'] = "JOIN US";
+  $lang['home_page_join'] = "JOIN US FREE";
   $lang['home_page_hot'] = "HOT PROPERTIES";
   $lang['home_page_recent'] = "RECENT PROPERTIES";
   $lang['home_page_project'] = "NEW PROJECT";
@@ -304,7 +304,7 @@
   $lang['footer_property'] = "Properties";
   $lang['footer_contact'] = "Contact detail";
   // Site Join Us
-  $lang['join_title'] = "Join Us";
+  $lang['join_title'] = "Join Us Free";
   $lang['join_business'] = "Business Name";
   $lang['join_message_false'] = "Your has been join failed";
   $lang['join_image'] = "Image";

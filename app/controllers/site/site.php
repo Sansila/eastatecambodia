@@ -5,10 +5,12 @@ class Site extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->library('pagination');
+        $this->load->library('form_validation');
         // $this->load->library('encrypt');
         $this->load->helper(array('form', 'url'));
         $this->load->model("site/modsite","site");
         date_default_timezone_set("Asia/Bangkok");
+
     }
     public function index()
     {   
@@ -868,6 +870,20 @@ class Site extends CI_Controller {
     }
     function join()
     {
+        $this->load->helper('captcha');
+
+        $vals = array(
+            'img_path'  => './captcha/',
+            'img_url'   => base_url().'captcha/',
+            'img_width' => '150',
+            'img_height' => 30,
+            'expiration' => 7200
+            );
+
+        $cap = create_captcha($vals);
+        $data['captcha'] = $cap['image'];
+        $data['captchatext'] = $cap['word'];
+
         $datas['name'] = "";
         $datas['profile'] = $this->site->getSiteprofile();
         $datas['menu'] = $this->site->get_menu();
@@ -875,6 +891,22 @@ class Site extends CI_Controller {
         $this->load->view('site/contain/header',$datas);
         $this->load->view('site/joinus',$data);
         $this->load->view('site/contain/footer',$datas);
+    }
+    function refresh_captcha()
+    {
+        $this->load->helper('captcha');
+        $vals = array(
+            'img_path'  => './captcha/',
+            'img_url'   => base_url().'captcha/',
+            'img_width' => '150',
+            'img_height' => 30,
+            'expiration' => 7200
+            );
+
+        $cap = create_captcha($vals);
+        $data = array('captchatext' => $cap['word'], 'image' => $cap['image']);
+        header("Content-type:text/x-json");
+        echo json_encode($data);
     }
     function save()
     {
