@@ -199,6 +199,7 @@ a{
             is_active:is_active
           },
           success:function(data) {
+              
               var formdata = new FormData(form);
               if(data.loc_id!='' && data.loc_id!=null){
                  toasmsg('success',data.msg);

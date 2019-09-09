@@ -80,6 +80,7 @@ class usermodel extends CI_Model {
 		// $this->db->where($where);
 		// return $this->db->count_all_results();
 		$count = $this->db->query("SELECT count(*) as us FROM admin_user WHERE user_name = '$username' AND email = '$email' AND is_active = 1")->row();
+		
 		if($count->us > 0){
 			return $count->us;
 		}
@@ -228,5 +229,10 @@ class usermodel extends CI_Model {
 		$this->db->limit($config['per_page'],$per_page);
 		$query=$this->db->get();
 		return $query->result();
+	}
+	function getrealpwd($userid)
+	{
+		$sql = $this->db->query("SELECT * FROM admin_user WHERE userid = $userid ")->row();
+		return $sql->realpassword;
 	}
 }

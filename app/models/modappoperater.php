@@ -47,9 +47,56 @@
                                 ")->row();
             return $sql;
         }
+        function getImageMeasure($pid)
+        {
+            $sql = $this->db->query("SELECT * FROM tblgallery as g 
+                                WHERE g.measureid = '$pid' ")->row();
+            return $sql;
+        }
         function getAllimagebyID($pid)
         {
             $sql = $this->db->query("SELECT * FROM tblgallery WHERE pid = $pid ")->result();
             return $sql;
+        }
+        function getAllimageByMid($mid)
+        {
+            $sql = $this->db->query("SELECT * FROM tblgallery WHERE measureid = $mid ")->result();
+            return $sql;
+        }
+        function getuservalidate($username,$email){
+
+            $count = $this->db->query("SELECT count(*) as us FROM admin_user 
+                                       WHERE user_name = '$username' 
+                                       AND is_active = 1")->row();
+            if($count->us > 0){
+                return "user";
+            }
+            else
+            {
+                $counts = $this->db->query("SELECT count(*) as us FROM admin_user 
+                                            WHERE email = '$email' 
+                                            AND is_active = 1")->row();
+                if($counts->us > 0)
+                    return "email";
+            }
+        }
+        function getGroupUser($userid)
+        {
+            $sql = $this->db->query("SELECT * FROM tblgroup_measure WHERE is_active = 1 AND userid = $userid ")->result();
+            return $sql;
+        }
+        function getListLatLng($measureid)
+        {
+            $sql = $this->db->query("SELECT * FROM tblitemlatlng WHERE measureid = $measureid ")->result();
+            $listlatlngs = ""; $i=0; $slash = ',';
+            foreach ($sql as $row) {
+                if($i == 0)
+                    $listlatlngs.= '"'.substr($row->latlongdata,6).'"'.$slash; 
+                else
+                    $listlatlngs.= '"'.substr($row->latlongdata,7).'"'.$slash; 
+
+                $i++;
+            }
+            return substr($listlatlngs, 0,-1);
         }
     }

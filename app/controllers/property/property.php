@@ -376,7 +376,7 @@ class Property extends CI_Controller {
         $config2['source_image'] = $this->upload->upload_path.$this->upload->file_name;
         $config2['new_image'] = './assets/upload/property/thumb';
         $config2['maintain_ratio'] = false;
-        $config2['create_thumb'] = "$pid".'_'.str_replace(" ", "_", $imagename);
+        $config2['create_thumb'] = "$pid".str_replace(" ", "_", $imagename);
         $config2['thumb_marker'] = false;
         $config2['height'] = 564;
 		$config2['width'] = 848;
@@ -995,7 +995,7 @@ class Property extends CI_Controller {
 									INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
 									WHERE
 									    {$where}
-									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser') 
+									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser' OR tblvisitor.view_from = '') 
 									    AND tblproperty.p_status = 1 AND tblproperty.pid = $id
 									GROUP BY
 									    tblvisitor.view_from
@@ -1006,10 +1006,10 @@ class Property extends CI_Controller {
 		$i = 1;
 		$nameyear = "";
 		foreach ($sql as $row) {
-			// if($row->year == null || $row->year == 'browser')
-			// 	$nameyear = "browser";
-			// else
-			$nameyear = $row->year;
+			if($row->year == "")
+				$nameyear = "Other";
+			else
+				$nameyear = $row->year;
 			$data[] = array('country' => $nameyear,
 							'value' => $row->income);
 			$i++;

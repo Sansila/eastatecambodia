@@ -56,31 +56,60 @@ class user extends CI_Controller {
 		header("Content-type:text/x-json");
 		echo json_encode($msg);
 	}
-	function do_upload($id)
+	function do_upload($id,$file)
 	{
-		if($id=='')
-			$id=$this->session->userdata('userid');
-		if(!file_exists('./assets/upload/adminuser/')){
+		$this->load->library('upload');
+		if($file != "")
+		{
+			$this->upload->initialize($this->set_upload_options($id,$file));
+	        if ( ! $this->upload->do_upload()){
+				$error = array('error' => $this->upload->display_errors());			
+			}else{	
+				$this->creatthumb($id,$file);
+			}
+		}else{
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+	}
+	function creatthumb($id,$imagename){
+		$data = array('upload_data' => $this->upload->data());
+	 	$config2['image_library'] = 'gd2';
+        $config2['source_image'] = $this->upload->upload_path.$this->upload->file_name;
+        $config2['new_image'] = './assets/upload/adminuser/thumb';
+        $config2['maintain_ratio'] = false;
+        $config2['create_thumb'] = "$id.png";
+        $config2['thumb_marker'] = false;
+        $config2['height'] = 145;
+		$config2['width'] = 135;
+		$config2['quality'] = 100;
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config2); 
+        if ( ! $this->image_lib->resize()){
+        	echo $this->image_lib->display_errors();
+		}else{
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+		
+	}
+
+	private function set_upload_options($id,$imagename)
+	{   
+	    if(!file_exists('./assets/upload/adminuser/')){
 		    if(mkdir('./assets/upload/adminuser/',0755,true)){
 		        return true;
 		    }
+	    	if(mkdir('./assets/upload/adminuser/thumb',0755,true)){
+		        return true;
+		    }
 		}
-		$config['upload_path'] ='./assets/upload/adminuser/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg|';
-		$config['file_name']  = "$id.png";
-		$config['overwrite']=true;
-		$config['file_type']='image/png';
-		$this->load->library('upload', $config);
+	    $config = array();
+	    $config['upload_path'] = './assets/upload/adminuser/';
+	    $config['allowed_types'] = 'gif|jpg|png|jpeg|mpeg|mpg|mp4|mpe|qt|avi|mov';
+	    $config['max_size']      = '0';
+	    $config['file_name']  	 = "$id.png";
+		$config['overwrite']	 = true;
 
-		if ( ! $this->upload->do_upload('userfile'))
-		{
-			$error = array('error' => $this->upload->display_errors());
-			redirect($_SERVER['HTTP_REFERER']);		
-		}
-		else
-		{				
-			redirect($_SERVER['HTTP_REFERER']);
-		}
+	    return $config;
 	}
 	function edit($id){
 		$data1['query']=$this->user->getuserrow($id);
@@ -205,6 +234,7 @@ class user extends CI_Controller {
 		$l_name=$this->input->post('txtl_name');
 		$username=$this->input->post('txtu_name');
 		$pwd=md5($this->input->post('txtpwd'));
+		$password=$this->input->post('txtpwd');
 		$email=$this->input->post('txtemail');
 		$role=$this->input->post('cborole');
 		$schlevel=$this->input->post('schlevelid');
@@ -215,6 +245,7 @@ class user extends CI_Controller {
 		$address=$this->input->post('address');
 		$groupid = $this->input->post('txtgroup');
 		$get_require = $this->input->post('getrequire');
+		$file = $_FILES['userfile']['name'];
 		//print_r($store);
 		if($count!=0){
 			$data1['error']='This username and your email has been created before Please choose other username ';
@@ -243,10 +274,11 @@ class user extends CI_Controller {
 					'is_active'=>1,
 					'group_id'=> $groupid,
 					'get_requirement' => $get_require,
+					'realpassword' => $password
 				);
 			$this->db->insert('admin_user',$data);
 			$id=$this->db->insert_id();			
-			$this->do_upload($id);
+			$this->do_upload($id, $file);
 		}
 		
 	}
@@ -260,8 +292,8 @@ class user extends CI_Controller {
 		$f_name=$this->input->post('txtf_name');
 		$l_name=$this->input->post('txtl_name');
 		$username=$this->input->post('txtu_name');
-		$realpwd=$this->input->post('txtpwd');
 		$pwd=md5($this->input->post('txtpwd'));
+		$password=$this->input->post('txtpwd');
 		$email=$this->input->post('txtemail');
 		$role=$this->input->post('cborole');
 		$store=$this->input->post('cbostore');
@@ -272,6 +304,9 @@ class user extends CI_Controller {
 		$modify_date=date('Y-m-d H:i:s');
 		$groupid = $this->input->post('txtgroup');
 		$get_require = $this->input->post('getrequire');
+		$file = $_FILES['userfile']['name'];
+
+		$realpwd=$this->user->getrealpwd($userid);
 
 		$count=$this->user->getuservalidateup($username,$email,$userid);
 
@@ -307,6 +342,7 @@ class user extends CI_Controller {
 					'modified_by' => $this->session->userdata('userid'),
 					'group_id'=> $groupid,
 					'get_requirement' => $get_require,
+					'realpassword' => $password
 				);
 			}else{
 					$datas=array(
@@ -329,8 +365,7 @@ class user extends CI_Controller {
 			$this->db->where('userid',$userid);
 			$this->db->update('admin_user',$datas);
 
-			//$this->do_upload($userid);
-			$this->sendEmail($username,$realpwd,$email,$approve,$userid);
+			$this->sendEmail($username,$realpwd,$email,$approve,$userid,$file);
 		}
 	}
 	
@@ -338,7 +373,8 @@ class user extends CI_Controller {
 		$data=array('is_active'=>0);
 		$this->db->where('userid',$id);
 		$this->db->update('admin_user',$data);
-		unlink('./assets/upload/'.$id.'.png');
+		unlink('./assets/upload/adminuser/'.$id.'.png');
+		unlink('./assets/upload/adminuser/thumb/'.$id.'.png');
 		redirect('setting/user/');
 	}
 	function delete_user($id)
@@ -346,7 +382,7 @@ class user extends CI_Controller {
 		$this->db->where('userid',$id);
 		$this->db->delete('admin_user');
 	}
-	function sendEmail($username,$realpwd,$email,$approve,$userid)
+	function sendEmail($username,$realpwd,$email,$approve,$userid,$file)
 	{
 		require('phpmailer/class.phpmailer.php');
         $mail = new PHPMailer();
@@ -405,8 +441,11 @@ class user extends CI_Controller {
         $mail->IsHTML(true);
         if(!$mail->Send()){
             echo "<p class='error'>Problem in Sending Mail.</p>";
+        }else
+        {
+        	$this->do_upload($userid, $file);
         }
-        $this->do_upload($userid);
+        //$this->do_upload($userid);
 	}
 }
 

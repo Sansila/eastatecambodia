@@ -108,6 +108,25 @@
                         </div>
 
 
+                        <div class="form-group">
+                            <label class='col-lg-2 control-label'>Get Notification</label>
+                            <div class="col-lg-5"> 
+                                <div class="col-md-12">
+                                    <select class="form-control" id="group_user">
+                                        <option value="0">Please Group User</option>
+                                        <?php
+                                            $group = $this->db->query("SELECT * FROM tblgroupuser where is_active = 1 ")->result();
+                                            foreach ($group as $row) {
+                                                echo '<option value="'.$row->groupid.'">'.$row->groupname.'</option>';
+                                            }    
+                                        ?>
+                                    </select>
+                                </div>                   
+                            </div>
+                            
+                        </div>
+
+
 
                         <div class="form-group">
                             <label class='col-lg-2 control-label'>Content</label>
@@ -271,7 +290,7 @@
                 }
               })
         $(this).closest('.saouy').remove();
-    })
+    });
     function uploads(article_id,formdata,msg){
         //alert(visitid+'/'+familyid);
         $.ajax({

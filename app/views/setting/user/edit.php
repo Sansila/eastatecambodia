@@ -1,10 +1,12 @@
 <?php
-	$pict_path=base_url('assets/upload/no_image.jpg');
+	$pict_path = base_url('assets/upload/no_image.jpg');
 	if(isset($query->userid))
 	{
-	    if(file_exists(FCPATH."/assets/upload/adminuser/".$query->userid.".png")){       
-	        $pict_path=base_url("assets/upload/adminuser/".$query->userid.".png");
+	    if(file_exists(FCPATH."/assets/upload/adminuser/thumb/".$query->userid.".png")){       
+	        $pict_path = base_url("assets/upload/adminuser/thumb/".$query->userid.".png");
 	    }
+	}else{
+		$pict_path = base_url('assets/upload/no_image.jpg');
 	}
 ?>
 

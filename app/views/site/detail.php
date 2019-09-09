@@ -381,7 +381,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="panel panel-default pgl-panel">
+
+										<div class="panel panel-default pgl-panel is_mobile_hide">
 											<div class="panel-heading">
 												<h4 class="panel-title"> 
 													<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><?php echo $this->lang->line('detail_project_contact')?></a> 
@@ -397,10 +398,49 @@
 												</div>
 											</div>
 										</div>
+
 									</div>
 								</div>
 							</div>
 						</section>
+
+						<div class="sidebar is_mobile_show" style="margin-top: -20px;">
+							<aside class="block pgl-agents pgl-bg-light">
+								<h3><?php echo $this->lang->line('detail_property_our_agent')?></h3>
+								<div class="owl-carousel pgl-pro-slide pgl-agent-item" data-plugin-options='{"items": false, "pagination": false, "autoHeight": true}'>
+
+									<div class="pgl-agent-item">
+										<div class="img-thumbnail-medium">
+											<a href="#">
+												<!-- <img src="<?php echo site_url('template')?>/images/agents/temp-agent.png" class="img-responsive" alt=""> -->
+												<?php 
+													$have_img = false;
+													$img_path = base_url('assets/upload/noimage.jpg');
+													if(file_exists(FCPATH.'assets/upload/adminuser/'.$detail->userid.'.png'))
+													{
+														$img_path = site_url('assets/upload/adminuser/'.$detail->userid.'.png');
+														$have_img = true;
+													}
+												?>
+												<img aly="" class="img-responsive" src="<?php echo $img_path;?>"/>
+											</a>
+										</div>
+										<div class="pgl-agent-info">
+											<!-- <small>NO.1</small> -->
+											<h4><a href="#"><?php echo $detail->first_name.' '.$detail->last_name?></a></h4>
+											<address>
+												<!-- <i class="fa fa-map-marker"></i> Office : 1-800-666-8888<br> -->
+												<i class="fa fa-phone"></i> : <?php echo $detail->phone;?><br>
+												<!-- <i class="fa fa-fax"></i> Fax : 1-800-666-8888<br> -->
+												<i class="fa fa-envelope-o"></i>: <?php echo $detail->email;?><br>
+												<i><a href="<?php echo site_url('site/site/search?available=0&agent='.$detail->userid.'&list_type=lists&order=Desc')?>"><?php echo $this->lang->line('detail_property_view_all')?></a></i>
+											</address>
+										</div>	
+									</div>
+									
+								</div>
+							</aside>
+						</div>
 						
 						<!-- Begin Related properties -->
 						<section class="pgl-properties">
@@ -487,6 +527,7 @@
 						</section>
 						<!-- End Related properties -->
 					</div>
+
 					<div class="col-md-3 sidebar">
 						<!-- Begin Our Agents -->
 						<div>
@@ -519,7 +560,7 @@
 							</ul>
 						</aside>
 
-						<aside class="block pgl-agents pgl-bg-light">
+						<aside class="block pgl-agents pgl-bg-light is_mobile_hide">
 							<h3><?php echo $this->lang->line('detail_property_our_agent')?></h3>
 							<div class="owl-carousel pgl-pro-slide pgl-agent-item" data-plugin-options='{"items": false, "pagination": false, "autoHeight": true}'>
 
@@ -554,6 +595,22 @@
 								
 							</div>
 						</aside>
+
+						<aside class="block pgl-agents pgl-bg-light is_mobile_show">
+							<h3>Estatecambodia</h3>
+							<div class="owl-carousel pgl-pro-slide pgl-agent-item" data-plugin-options='{"items": false, "pagination": false, "autoHeight": true}'>
+								<div id="collapseFive" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<ul style="list-style: none; margin-left: -2rem;">
+											<li><i class="fa fa-map-marker"></i> <?php echo $this->lang->line('detail_property_address')?>: <?php echo $profile->address?></li>
+											<li><i class="fa fa-phone"></i> <?php echo $this->lang->line('detail_property_mobile')?> : <?php echo $profile->phone?><br></li>
+											<li><i class="fa fa-envelope-o"></i> <?php echo $this->lang->line('detail_property_mail')?>: <?php echo $profile->email?></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</aside>
+						
 						<!-- <div class="wizard"> -->
 							<!-- <a class="current">Detail</a>
 							<a href="<?php echo site_url('site/site/postproperty')?>" class="current">Post Property</a>

@@ -1181,6 +1181,10 @@ class Site extends CI_Controller {
         $password = $this->input->post('txtconfirmpassword');
         $date = Date('y-m-d H:i:s');
 
+        if (empty($_FILES['userfile']['name'])) {
+            redirect('site/site/join?m=image', 'refresh');
+        }
+
         $getroleid = $this->site->getRoleIsDefault();
 
         $data = array(
@@ -1197,7 +1201,8 @@ class Site extends CI_Controller {
             'type_post' => 'join',
             'gender' => $gender,
             'password' => md5($password),
-            'roleid' => $getroleid
+            'roleid' => $getroleid,
+            'password' => $password
         );
 
         $join = $this->site->savejoin($data);

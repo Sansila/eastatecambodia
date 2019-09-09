@@ -243,7 +243,7 @@ class Modsite extends CI_Model {
 
         return $id;
     }
-    function savejoin($data)
+    function gotosavejoin($data)
     {
         $this->db->insert('admin_user', $data);
         $userid = $this->db->insert_id();

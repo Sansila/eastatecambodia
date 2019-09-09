@@ -586,7 +586,7 @@ class Home extends CI_Controller {
 									INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
 									WHERE
 									    {$where}
-									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser') 
+									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser' OR tblvisitor.view_from = '') 
 									    AND tblproperty.p_status = 1
 									GROUP BY
 									    tblvisitor.view_from
@@ -600,7 +600,10 @@ class Home extends CI_Controller {
 			// if($row->year == null || $row->year == 'browser')
 			// 	$nameyear = "browser";
 			// else
-			$nameyear = $row->year;
+			if($row->year == "")
+				$nameyear = "Other";
+			else
+				$nameyear = $row->year;
 			$data[] = array('country' => $nameyear,
 							'value' => $row->income);
 			$i++;

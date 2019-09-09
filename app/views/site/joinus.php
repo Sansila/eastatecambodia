@@ -115,6 +115,15 @@
 					</div>
 				<?php
 					}
+
+					if($m == "image")
+					{
+				?>
+					<div class="alert alert-danger" role="alert">
+					  	Please browse your profile image.
+					</div>
+				<?php
+					}
 				?>
 				<div class="txt-header"><h3><?php echo $this->lang->line('join_title')?></h3></div>
 				<div class="lead pgl-bg-light" style="padding: 45px 50px">

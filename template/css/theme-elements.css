@@ -1964,3 +1964,6 @@ hr {
 .m-b-6 {
   margin-bottom: 60px !important;
 }
+.is_mobile_show{
+  display: none;
+}

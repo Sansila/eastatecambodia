@@ -3,7 +3,12 @@
   h1, h2 {
     font-size: 2.142em;
   }
-
+  .is_mobile_show{
+    display: block;
+  }
+  .is_mobile_hide{
+    display: none;
+  }
   /* line 8, ../sass/theme-responsive.scss */
   .properties-listing .pgl-property-thumb .property-thumb-info-content {
     height: auto;
@@ -51,13 +56,24 @@
   .pgl-testimonials-full .testimonial {
     padding-top: 10px;
   }
+  .is_mobile_show{
+    display: block;
+  }
+  .is_mobile_hide{
+    display: none;
+  }
 }
 @media (max-width: 992px) {
   /* line 58, ../sass/theme-responsive.scss */
   .pgl-navbar-main {
     z-index: 100;
   }
-
+  .is_mobile_show{
+    display: block;
+  }
+  .is_mobile_hide{
+    display: none;
+  }
   /* line 61, ../sass/theme-responsive.scss */
   .navbar-header {
     float: none;
@@ -224,7 +240,12 @@
     margin-left: 0;
     margin-right: 0;
   }
-
+  .is_mobile_show{
+    display: block;
+  }
+  .is_mobile_hide{
+    display: none;
+  }
   /* line 204, ../sass/theme-responsive.scss */
   .navbar-collapse .navbar-nav > li > a {
     padding-bottom: 15px;
@@ -311,6 +332,12 @@
   .hide-from-destop{
     display: block !important;
   }
+  .is_mobile_show{
+    display: block;
+  }
+  .is_mobile_hide{
+    display: none;
+  }
   /* line 24, ../sass/theme.scss */
   .logo {
     background: #d84949;
@@ -371,6 +398,12 @@
 @media (max-width: 480px) {
   .hide-from-destop{
     display: block !important;
+  }
+  .is_mobile_show{
+    display: block;
+  }
+  .is_mobile_hide{
+    display: none;
   }
   /* line 24, ../sass/theme.scss */
   .logo {

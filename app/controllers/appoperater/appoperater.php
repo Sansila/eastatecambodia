@@ -226,6 +226,7 @@ class Appoperater extends CI_Controller {
 			$where.= " AND pl.agent_id = '$userid'";
 
 		$sql = $this->db->query("SELECT 
+								count(*) as total_pro,
 								pl.pid,
 								pl.agent_id,
 								pl.type_id,
@@ -245,11 +246,16 @@ class Appoperater extends CI_Controller {
 								pl.p_type,
 								pl.property_tag,
 								pl.housesize,
-								l.locationname
+								l.locationname,
+								v.pid,
+								v.date_create
 							FROM tblproperty pl
 							INNER JOIN tblpropertylocation l
 							ON pl.lp_id = l.propertylocationid
+							INNER JOIN tblvisitor as v 
+							ON v.pid = pl.pid 
 							WHERE pl.p_status = 1  AND pl.pro_level <> 1 {$where} 
+							GROUP BY v.pid
 							order by pl.create_date DESC, pl.pid desc
 							LIMIT $offset, $limit ")->result();
 
@@ -304,7 +310,8 @@ class Appoperater extends CI_Controller {
 						'owner' => $row->relative_owner,
 						'p_type' => $type,
 						'type' => $row->p_type,
-						'userid' => (int)$row->agent_id
+						'userid' => (int)$row->agent_id,
+						'view' => (int)$row->total_pro
 					  );
 		}
 
@@ -451,7 +458,7 @@ class Appoperater extends CI_Controller {
 									INNER JOIN tblvisitor ON tblproperty.pid = tblvisitor.pid
 									WHERE
 									    {$where}
-									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser') 
+									    AND (tblvisitor.view_from = 'facebook' OR tblvisitor.view_from = 'telegram' OR tblvisitor.view_from = 'whatsapp' OR tblvisitor.view_from = 'line' OR tblvisitor.view_from = 'browser' OR tblvisitor.view_from = '') 
 									    AND tblproperty.p_status = 1
 									GROUP BY
 									    tblvisitor.view_from
@@ -462,7 +469,10 @@ class Appoperater extends CI_Controller {
 		$i = 1;
 		$nameyear = ""; $total = "";
 		foreach ($sql as $row) {
-			$nameyear = $row->year;
+			if($row->year == "")
+				$nameyear = "Other";
+			else
+				$nameyear = $row->year;
 			$data[] = array('name' => $nameyear,
 							'value' => (int)$row->income,
 						);
@@ -475,8 +485,6 @@ class Appoperater extends CI_Controller {
 	{
 		$userid = ""; 
 		$user = "";
-		// $roleid = $this->session->userdata('roleid');
-		// $rol = $this->db->query("SELECT * FROM `z_role` WHERE `roleid` = $roleid ")->row();
 		$perdate = $_GET['_pdate'];
 		$showby = $_GET['_showby'];
 		$username = $_GET['_user'];
@@ -560,5 +568,488 @@ class Appoperater extends CI_Controller {
 		
 		header("Content-type:text/x-json");
 		echo json_encode($arr);
+	}
+	function signupuser()
+	{
+		$creat_date=date('Y-m-d H:i:s');
+		$firstname = $_POST["firstname"];
+	    $lastname = $_POST["lastname"];
+	    $username = $_POST["username"];
+	    $gender = $_POST["gender"];
+	    $email = $_POST["email"];
+	    $phone = $_POST["phone"];
+	    $address = $_POST["address"];
+	    $password = $_POST["password"];
+	    $image = $_POST["image"];
+
+	    $count=$this->app->getuservalidate($username,$email);
+
+	    $is_message = "";
+	    
+	    $data=array(
+			'first_name' => $firstname,
+			'last_name' => $lastname,
+			'user_name' => $username,
+			'password' => md5($password),
+			'email' => $email,
+			'phone' => $phone,
+			'gender' => $gender,
+			'roleid'=> 24,
+			'address' => $address,
+			'created_date'=>$creat_date,
+			'is_admin' => 0,
+			'is_active'=>2,
+			'group_id'=> 0,
+			'get_requirement' => 0,
+			'type_post' => 'join',
+			'realpassword' => $password
+		);
+
+	    if($count == "user"){
+	    	echo $is_message = 'Username is already created.';
+		}else if($count == "email"){
+			echo $is_message = 'Email is already created.';
+		}else{
+			$this->db->insert('admin_user',$data);
+			$id=$this->db->insert_id();
+
+			require('phpmailer/class.phpmailer.php');
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+            $mail->SMTPDebug = 0;
+            $mail->SMTPAuth = TRUE;
+            $mail->SMTPSecure = "ssl";
+            $mail->Port     = 465;
+            $mail->Host     = "smtp.gmail.com";
+            $mail->Mailer   = "smtp";
+            $mail->WordWrap   = 80;
+            $mail->SetFrom("estatecambodia168.dev@gmail.com", "Estate Cambodia");
+            $mail->Subject = "Estate Cambodia - Joining Us";
+            $mail->AddAddress($email);
+            $mail->AddCC('info@estatecambodia.com');
+            $logo = "http://estatecambodia.com/assets/img/logo.png";
+            $description = '<div style="width: 100%">
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 640px; margin: 0 auto;">
+                    <tbody>
+                        <tr>
+                            <td style="width:8px" width="8"></td>
+                            <td>
+                                <div align="center" class="" style="border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px; padding:20px;">
+                                    <img src="'.$logo.'" style="width: 140px;">
+                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:center">
+                                        Thank you for joining us, Our team will review soon.
+                                    </div>
+                                    <div style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left">
+                                        <p>Best regards,</p>
+                                        <p>Estate Cambodia Team</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width:8px" width="8"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>';
+
+            $mail->MsgHTML($description);
+            $mail->IsHTML(true);
+            if(!$mail->Send()){
+                echo "<p class='error'>Problem in Sending Mail.</p>";
+            }else{
+            	$this->convertimage($id,$image);
+            }
+		}
+	}
+	function convertimage($id,$img)
+	{
+		define('UPLOAD_DIR', './assets/upload/adminuser/');
+		$img = str_replace('data:image/png;base64,', '', $img);
+		$img = str_replace(' ', '+', $img);
+		$data = base64_decode($img);
+		$file = UPLOAD_DIR . $id.'.png';
+		$success = file_put_contents($file, $data);
+		$success ? $file : 'Unable to save the file.';
+
+		$this->profileimagetoresize($id,$file);
+	}
+	function profileimagetoresize($id,$file)
+	{	
+		$this->load->library('upload');
+      	$config2['image_library'] = 'gd2';
+        $config2['source_image'] = $file;
+        $config2['new_image'] = './assets/upload/adminuser/thumb';
+        $config2['maintain_ratio'] = false;
+        $config2['create_thumb'] = "anc.jpg";
+        $config2['thumb_marker'] = false;
+        $config2['height'] = 145;
+		$config2['width'] = 135;
+		$config2['quality'] = 100;
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config2); 
+
+        if ( ! $this->image_lib->resize()){
+        	echo $this->image_lib->display_errors();
+		}else{
+			echo $is_message = 'success';
+		}
+	}
+	function renew($pid)
+	{
+		$date = date('Y-m-d');
+		$data = array(
+			'create_date' => $date,
+		);
+		$reset = $this->db->where('pid',$pid)->update('tblproperty',$data);
+
+		if($reset)
+			echo "success";
+		else
+			echo "false";
+	}
+	function getgroupuser()
+	{
+		$username = $_GET['_user'];
+		$userid = $this->app->getUserid($username);
+		$group = $this->app->getGroupUser($userid);
+
+		$data = array();
+		foreach ($group as $row) {
+			$data[] = array('groupid' => (int)$row->groupm_id,
+							'groupname' => $row->groupm_name
+							);
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function savemeasure()
+	{
+		$currentpoint = "";
+		$date = date('Y-m-d H:i:s');
+		$username = $_POST["username"];
+		$getuserid = $this->app->getUserid($username);
+       	$measurename = $_POST["measurename"];
+       	$description = $_POST["description"];
+       	$pointer = $_POST["pointer"];
+       	$groupid = $_POST["groupid"];
+       	$pain = $_POST['pain'];
+       	$meter = $_POST['meter'];
+       	$area = $_POST['area'];
+       	$poinlatlng = $_POST['poinlatlng'];
+       	$pointmarker = $_POST['pointmarker'];
+
+       	if($pointmarker !="")
+       		$currentpoint = $pointmarker;
+       	else
+       		$currentpoint = $poinlatlng;
+
+       	$lastpoint =  substr($pointer, 1, -1);
+
+       	$lastpoint = trim($lastpoint,'),');
+       	$arr = explode('),', $lastpoint);
+
+       	$data = array(
+       		'group_id' => $groupid,
+       		'userid' => $getuserid,
+       		'measure_name' => $measurename,
+       		'description' => $description,
+       		'date_create' => $date,
+       		'latandlong' => substr($currentpoint, 7, -1),
+       		'pain' => $pain,
+       		'distance' => $meter,
+       		'area' => $area,
+       		'is_active' => 1
+       	);
+
+       	$save = $this->db->insert('tblmeasure', $data);
+       	$mid = $this->db->insert_id();
+
+       	if($save)
+       	{
+       		if($pointer != "")
+       		{
+       			$numItems = count($arr);
+	       		$latlng = ""; $j = 0;
+	       		foreach ($arr as $p) {
+		       		$latlng = $p.')';
+		       		$this->saveitem_measure($latlng, $mid);
+		       		if(++$j === $numItems) {
+					    echo $mid;
+					}
+		       	}
+	       }else{
+	       		echo  $mid;
+	       }
+       	}
+	}
+	function saveitem_measure($latlng, $mid)
+	{
+		$data = array(
+			'measureid' => $mid,
+			'latlongdata' => $latlng
+		);
+		$this->db->insert('tblitemlatlng', $data);
+	}
+	function saveimagemeasure()
+	{
+		$img = $_POST["filesource"];
+        $mid = $_POST["mid"];
+		
+		define('UPLOAD_DIR', './assets/upload/measure/');
+		$img = str_replace('data:image/png;base64,', '', $img);
+		$img = str_replace(' ', '+', $img);
+		$data = base64_decode($img);
+		$file = UPLOAD_DIR . $mid .'_'. uniqid() . '.jpg';
+		$success = file_put_contents($file, $data);
+		$success ? $file : 'Unable to save the file.';
+		
+		$this->getimagetoresize_measure($mid,$file);
+	}
+	function getimagetoresize_measure($mid,$file)
+	{	
+		$this->load->library('upload');
+      	$config2['image_library'] = 'gd2';
+        $config2['source_image'] = $file;
+        $config2['new_image'] = './assets/upload/measure/thumb';
+        $config2['maintain_ratio'] = false;
+        $config2['create_thumb'] = "anc.jpg";
+        $config2['thumb_marker'] = false;
+        $config2['height'] = 95;
+		$config2['width'] = 170;
+		$config2['quality'] = 100;
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config2); 
+        if ( ! $this->image_lib->resize()){
+        	echo $this->image_lib->display_errors();
+		}else{
+			$this->saveimag_measure($mid,$file);
+		}
+	}
+	function saveimag_measure($mid,$file)
+	{
+		$countid = strlen($mid);
+		$cutstring = (25 + $countid); // count to cut path image with a slash
+		$imagename = substr($file,$cutstring);
+		$date=date('Y-m-d H:i:s');
+		//$user=$this->session->userdata('user_name');
+		$count=$this->db->query("SELECT count(*) as count FROM tblgallery where measureid='$mid' AND url='$imagename'")->row()->count;
+		if($count==0){
+			$data=array('measureid'=>$mid,
+						'url'=>$imagename,
+						'gallery_type'=>'0');
+			$insert = $this->db->insert('tblgallery',$data);
+			if($insert)
+				echo "success";
+		}
+	}
+	function savegroupmeasure()
+	{
+		$groupid = $_POST['groupid'];
+		$groupname = $_POST['groupname'];
+		$user = $_POST['username'];
+		$userid = $this->app->getUserid($user);
+
+		$data = array(
+			'groupm_name' => $groupname,
+			'userid' => $userid,
+			'is_active' => 1
+		);
+		if($groupid == 0)
+		{
+			$insert = $this->db->insert('tblgroup_measure',$data);
+			if($insert)
+				echo "success";
+		}else{
+			$update = $this->db->where("groupm_id",$groupid)->update('tblgroup_measure',$data);
+			if($update)
+				echo "success";
+		}
+		
+	}
+	function deletemeasuregroup($id)
+	{
+		$sql = $this->db->where("groupm_id",$id)->delete('tblgroup_measure');
+		if($sql)
+			echo "success";
+	}
+	function getmeasurelist()
+	{
+		$where = '';
+		$offset = $_GET['_start'];
+		$limit  = $_GET['_limit'];
+		$type = $_GET['_item'];
+		$group = $_GET['_group'];
+		$user = $_GET['_user'];
+		$measuretype = $_GET['_measure'];
+
+		$userid = $this->app->getUserid($user);
+
+		if($group != 0)
+			$where.= " AND m.group_id = $group ";
+		if($userid !="")
+			$where.= " AND m.userid = $userid ";
+		if($measuretype != "all" && $measuretype != "")
+			$where.= " AND m.pain = $measuretype ";
+
+		$sql = $this->db->query("SELECT 
+								m.measureid,
+								m.group_id,
+								m.userid,
+								m.measure_name,
+								m.latandlong,
+								m.distance,
+								m.area,
+								m.pain,
+								m.is_active,
+								m.description,
+								gm.groupm_id,
+								gm.groupm_name
+							FROM tblmeasure m
+							INNER JOIN tblgroup_measure gm
+							ON m.group_id = gm.groupm_id
+							WHERE m.is_active = 1 {$where}
+							order by m.measureid DESC
+							LIMIT $offset, $limit ")->result();
+
+		$data = array();
+		foreach ($sql as $row) {
+			$listlatlng = $this->app->getListLatLng($row->measureid);
+			$img = $this->app->getImageMeasure($row->measureid);
+			if($img){
+				if(file_exists(FCPATH.'assets/upload/measure/thumb/'.$row->measureid.'_'.$img->url))
+				{
+					$img_path = $row->measureid.'_'.$img->url;
+				}else{
+					$img_path = 'noimage.jpg';
+				}
+			}else{
+				$img_path = 'noimage.jpg';
+			}
+
+			$data[] = array(
+						'mid' => (int)$row->measureid,
+						'mname' => $row->measure_name,
+						'groupname' => $row->groupm_name,
+						'distance' => $row->distance,
+						'area' => $row->area,
+						'image' => $img_path,
+						'listlatlng' => $listlatlng,
+						'latlng' => $row->latandlong,
+						'pain' => (int)$row->pain,
+						'groupid' => (int)$row->group_id,
+						'description' => $row->description
+					  );
+		}
+
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function deletemeasureitem($id)
+	{
+		$delete = $this->db->where('measureid',$id)->delete('tblmeasure');
+		if($delete)
+			echo "success";
+	}
+	function getlisttoshowoncurrentmap()
+	{
+		$user = $_GET['_user'];
+		$userid = $this->app->getUserid($user);
+		// don't forget add condition user
+		$measure = $this->db->query("SELECT 
+									 	m.measureid,
+										m.group_id,
+										m.userid,
+										m.measure_name,
+										m.latandlong,
+										m.distance,
+										m.area,
+										m.pain,
+										m.description,
+										m.is_active,
+										gm.groupm_id,
+										gm.groupm_name
+									FROM tblmeasure m
+									INNER JOIN tblgroup_measure gm
+									ON m.group_id = gm.groupm_id
+									WHERE m.is_active = 1 AND m.userid = $userid ")->result();
+		$data = array();
+		foreach ($measure as $row) {
+			$getitemlatlng = $this->app->getListLatLng($row->measureid);
+
+			$data[] = array(
+						'measureid' => (int)$row->measureid,
+						'title' => $row->measure_name,
+						'distance' => $row->distance,
+						'area' => $row->area,
+						'desc' => $row->description,
+						'group' => $row->groupm_name,
+						'pointtype' => (int)$row->pain,
+						'curlatlng' => $row->latandlong,
+						'itemlatlng' => $getitemlatlng,
+						'groupid' => (int)$row->groupm_id
+						);
+		}
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function editmeasure()
+	{
+		$measureid = $_POST['measureid'];
+		$measuretitle = $_POST['measurename'];
+		$desc = $_POST['description'];
+		$groupid = $_POST['groupid'];
+
+		$data = array(
+			'measure_name' => $measuretitle,
+			'description' => $desc,
+			'group_id' => $groupid
+		);
+
+		$update = $this->db->where('measureid', $measureid)->update('tblmeasure', $data);
+
+		if($update)
+			echo $measureid;
+	}
+	function getListImageMeasure($mid)
+	{
+		$allimage = $this->app->getAllimageByMid($mid);
+
+		$data = array(); $img_path = "";
+		if($allimage)
+		{
+			foreach ($allimage as $img) {
+
+				if(file_exists(FCPATH.'assets/upload/measure/thumb/'.$img->measureid.'_'.$img->url))
+				{
+					$img_path = $img->measureid.'_'.$img->url;
+				}else{
+					$img_path = 'noimage.jpg';
+				}
+
+				$data[] = array(
+							'imgid' => (int)$img->gallery_id,
+							'imagename' => $img_path,
+							'url' => site_url('assets/upload/measure/thumb/'),
+						  );
+			}
+		}else{
+			$data[] = array(
+							'imgid' => (int)0,
+							'imagename' => 'noimage.jpg',
+							'url' => site_url('assets/upload/measure/thumb/'),
+						  );
+		}
+
+		header("Content-type:text/x-json");
+		echo json_encode($data);
+	}
+	function removeimgbymid($mid)
+	{
+		$row=$this->db->where('gallery_id',$mid)->get('tblgallery')->row();
+		unlink("./assets/upload/measure/thumb/".$row->measureid.'_'.$row->url);
+		unlink("./assets/upload/measure/".$row->measureid.'_'.$row->url);
+		$delete = $this->db->where('gallery_id',$mid)->delete('tblgallery');
+
+		if($delete)
+			echo "success";
 	}
 }
