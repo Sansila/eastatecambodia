@@ -1170,7 +1170,7 @@ class Site extends CI_Controller {
     }
     function savejoin()
     {
-        
+        $file;
         $name = $this->input->post('txtName');
         $phone = $this->input->post('txtPhone');
         $email = $this->input->post('txtEmail');
@@ -1183,6 +1183,9 @@ class Site extends CI_Controller {
 
         if (empty($_FILES['userfile']['name'])) {
             redirect('site/site/join?m=image', 'refresh');
+        }else
+        {
+            $file = $_FILES['userfile']['name'];
         }
 
         $getroleid = $this->site->getRoleIsDefault();
@@ -1205,7 +1208,7 @@ class Site extends CI_Controller {
             'password' => $password
         );
 
-        $join = $this->site->savejoin($data);
+        $join = $this->site->gotosavejoin($data);
 
         if($join){
             require('phpmailer/class.phpmailer.php');
@@ -1251,27 +1254,83 @@ class Site extends CI_Controller {
             if(!$mail->Send()){
                 echo "<p class='error'>Problem in Sending Mail.</p>";
             }else{
-                $config['upload_path'] ='./assets/upload/adminuser/';
-                $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['file_name']  = "$join.png";
-                $config['overwrite']=true;
-                $config['file_type']='image/png';
+                // $config['upload_path'] ='./assets/upload/adminuser/';
+                // $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                // $config['file_name']  = "$join.png";
+                // $config['overwrite']=true;
+                // $config['file_type']='image/png';
 
-                $this->load->library('upload', $config);
+                // $this->load->library('upload', $config);
 
-                if ( ! $this->upload->do_upload('userfile'))
-                {
-                    $error = array('error' => $this->upload->display_errors());
-                    redirect('site/site/message?m=success', 'refresh');         
-                }
-                else
-                {               
-                    redirect('site/site/message?m=success', 'refresh');
-                }
+                // if ( ! $this->upload->do_upload('userfile'))
+                // {
+                //     $error = array('error' => $this->upload->display_errors());
+                //     redirect('site/site/message?m=success', 'refresh');         
+                // }
+                // else
+                // {               
+                //     redirect('site/site/message?m=success', 'refresh');
+                // }
+                $this->do_upload_join($join,$file);
             }       
         }else{
             redirect('site/site/join?m=error', 'refresh');
         }
+    }
+    function do_upload_join($id,$file)
+    {
+        $this->load->library('upload');
+        if($file != "")
+        {
+            $this->upload->initialize($this->set_upload_options_join($id,$file));
+            if ( ! $this->upload->do_upload()){
+                $error = array('error' => $this->upload->display_errors());         
+            }else{  
+                $this->creatthumb_join($id,$file);
+            }
+        }else{
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+    }
+    function creatthumb_join($id,$imagename){
+        $data = array('upload_data' => $this->upload->data());
+        $config2['image_library'] = 'gd2';
+        $config2['source_image'] = $this->upload->upload_path.$this->upload->file_name;
+        $config2['new_image'] = './assets/upload/adminuser/thumb';
+        $config2['maintain_ratio'] = false;
+        $config2['create_thumb'] = "$id.png";
+        $config2['thumb_marker'] = false;
+        $config2['height'] = 145;
+        $config2['width'] = 135;
+        $config2['quality'] = 100;
+        $this->load->library('image_lib');
+        $this->image_lib->initialize($config2); 
+        if ( ! $this->image_lib->resize()){
+            echo $this->image_lib->display_errors();
+            redirect('site/site/message?m=success', 'refresh');
+        }else{
+            redirect('site/site/message?m=success', 'refresh');
+        }
+        
+    }
+    function set_upload_options_join($id,$imagename)
+    {   
+        if(!file_exists('./assets/upload/adminuser/')){
+            if(mkdir('./assets/upload/adminuser/',0755,true)){
+                return true;
+            }
+            if(mkdir('./assets/upload/adminuser/thumb',0755,true)){
+                return true;
+            }
+        }
+        $config = array();
+        $config['upload_path'] = './assets/upload/adminuser/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|mpeg|mpg|mp4|mpe|qt|avi|mov';
+        $config['max_size']      = '0';
+        $config['file_name']     = "$id.png";
+        $config['overwrite']     = true;
+
+        return $config;
     }
     function saveipaddress()
     {
